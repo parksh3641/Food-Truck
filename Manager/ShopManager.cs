@@ -505,9 +505,9 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case ItemType.DefDestroyTicket:
-                if(playerDataBase.Coin >= 5000000)
+                if(playerDataBase.Coin >= 1000000)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, 5000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, 1000000);
 
                     playerDataBase.DefDestroyTicket += 1;
 
@@ -539,7 +539,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[1].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 500000);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
@@ -575,10 +575,10 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
                 break;
             case 1:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 5500000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 3300000);
                 break;
             case 2:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 12000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 5500000);
                 break;
         }
 

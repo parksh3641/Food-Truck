@@ -15,6 +15,13 @@ public class AdmobReward : MonoBehaviour
     string adUnitId;
 
     public ShopManager shopManager;
+    PlayerDataBase playerDataBase;
+
+    private void Awake()
+    {
+        if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
+    }
+
 
     void Start()
     {
@@ -72,31 +79,43 @@ public class AdmobReward : MonoBehaviour
 
     public void ShowAd(int number)
     {
-        const string rewardMsg =
-            "Rewarded ad rewarded the user. Type: {0}, amount: {1}.";
-
-        if (rewardedAd != null && rewardedAd.CanShowAd())
+        if (playerDataBase.RemoveAds)
         {
-            rewardedAd.Show((Reward reward) =>
+            switch (number)
             {
-                Debug.Log("Ad Watch Success!");
-
-                switch(number)
-                {
-                    case 0:
-                        shopManager.SuccessWatchAd();
-                        break;
-                }
-
-                //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
-            });
+                case 0:
+                    shopManager.SuccessWatchAd();
+                    break;
+            }
         }
         else
         {
-            //SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-            //NotionManager.instance.UseNotion(NotionType.CancelWatchAd);
+            const string rewardMsg =
+                "Rewarded ad rewarded the user. Type: {0}, amount: {1}.";
 
-            LoadRewardedAd();
+            if (rewardedAd != null && rewardedAd.CanShowAd())
+            {
+                rewardedAd.Show((Reward reward) =>
+                {
+                    Debug.Log("Ad Watch Success!");
+
+                    switch (number)
+                    {
+                        case 0:
+                            shopManager.SuccessWatchAd();
+                            break;
+                    }
+
+                //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
+            });
+            }
+            else
+            {
+                //SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                //NotionManager.instance.UseNotion(NotionType.CancelWatchAd);
+
+                LoadRewardedAd();
+            }
         }
     }
 

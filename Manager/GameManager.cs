@@ -170,6 +170,11 @@ public class GameManager : MonoBehaviour
         CheckFoodState();
 
         isDelay_Camera = true;
+
+        if(playerDataBase.RemoveAds)
+        {
+            GoogleAdsManager.instance.admobBanner.DestroyAd();
+        }
     }
 
     public void CheckInternet()
@@ -539,7 +544,14 @@ public class GameManager : MonoBehaviour
         {
             adCount = 0;
 
-            GoogleAdsManager.instance.admobScreen.ShowAd();
+            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor || playerDataBase.RemoveAds)
+            {
+
+            }
+            else
+            {
+                GoogleAdsManager.instance.admobScreen.ShowAd();
+            }
         }
 
         isDelay = true;
@@ -815,6 +827,13 @@ public class GameManager : MonoBehaviour
 #endif
 
         CloseAppReview();
+    }
+
+    public void FeedBack()
+    {
+        FirebaseAnalytics.LogEvent("FeedBack");
+
+        Application.OpenURL("https://forms.gle/RtZM83MWko6aJR5c6");
     }
 
     void WaitDelay()

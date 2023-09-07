@@ -67,6 +67,11 @@ public class AdmobScreen : MonoBehaviour
 
     public void ShowAd() //±¤°í º¸±â
     {
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor)
+        {
+            return;
+        }
+
         if (interstitialAd != null && interstitialAd.CanShowAd())
         {
             Debug.Log("Showing interstitial ad.");

@@ -18,6 +18,8 @@ public class LocalizationManager : MonoBehaviour
     public Font koreanFont;
     public Font normalFont;
 
+    public OptionManager optionManager;
+
     public LocalizationDataBase localizationDataBase;
 
     public List<LocalizationContent> localizationContentList = new List<LocalizationContent>();
@@ -416,8 +418,11 @@ public class LocalizationManager : MonoBehaviour
             }
         }
 
-        SoundManager.instance.PlaySFX(GameSfxType.Success);
-        NotionManager.instance.UseNotion(NotionType.SuccessLanguage);
+        if (optionManager.optionView.activeInHierarchy)
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Success);
+            NotionManager.instance.UseNotion(NotionType.SuccessLanguage);
+        }
 
         //FirebaseAnalytics.LogEvent(type.ToString());
 

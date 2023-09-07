@@ -70,7 +70,9 @@ public enum GameSfxType
     Wrong,
     Sell,
     GetMoney,
-    Success
+    Success,
+    Screen_In,
+    Screen_Out
 }
 
 public enum TruckType

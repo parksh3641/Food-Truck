@@ -87,6 +87,8 @@ public class CameraController : MonoBehaviour
 
         isA = true;
 
+        SoundManager.instance.PlaySFX(GameSfxType.Screen_Out);
+
         Debug.Log("Go To A Point");
     }
 
@@ -95,6 +97,8 @@ public class CameraController : MonoBehaviour
         if (isA || isB) return;
 
         isB = true;
+
+        SoundManager.instance.PlaySFX(GameSfxType.Screen_In);
 
         Debug.Log("Go To B Point");
     }

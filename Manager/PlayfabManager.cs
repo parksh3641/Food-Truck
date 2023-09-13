@@ -846,6 +846,22 @@ public class PlayfabManager : MonoBehaviour
                        case "DonutMaxValue":
                            playerDataBase.DonutMaxValue = statistics.Value;
                            break;
+                       case "Portion1":
+                           playerDataBase.Portion1 = statistics.Value;
+                           break;
+                       case "Portion2":
+                           playerDataBase.Portion2 = statistics.Value;
+                           break;
+                       case "Portion3":
+                           playerDataBase.Portion3 = statistics.Value;
+                           break;
+                       case "Portion4":
+                           playerDataBase.Portion4 = statistics.Value;
+                           break;
+
+
+
+
                        case "Normal":
                            playerDataBase.Normal = statistics.Value;
                            break;

@@ -167,5 +167,11 @@ public enum NotionType
     SuccessWatchAd,
     SuccessReward,
     CancelPurchase,
-    CancelWatchAd
+    CancelWatchAd,
+    FeverNotion,
+    LowPortion,
+    UsePortionNotion1,
+    UsePortionNotion2,
+    UsePortionNotion3,
+    UsePortionNotion4
 }

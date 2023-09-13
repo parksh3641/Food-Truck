@@ -31,10 +31,18 @@ public class GameManager : MonoBehaviour
     [Title("Upgrade")]
     public GameObject mainUI;
     public GameObject inGameUI;
-
     public GameObject languageUI;
-
     public GameObject nextFoodUI;
+
+
+    [Space]
+    [Title("Portion")]
+    public Text portionText1, portionText2, portionText3, portionText4;
+    public Image portionFillamount1, portionFillamount2, portionFillamount3, portionFillamount4;
+    private bool portion1, portion2, portion3, portion4;
+    private int portionTime = 30;
+    private int portionPlus = 1;
+
 
     public Text titleText;
     public Text needText;
@@ -44,10 +52,26 @@ public class GameManager : MonoBehaviour
     public Text defTicketText;
     public GameObject checkMark;
 
+    [Space]
+    [Title("Fever")]
+    public Image feverFillamount;
+
+    public GameObject feverEffect;
+    public GameObject backButton;
+
+    private int feverCount = 0;
+    private int feverMaxCount = 100;
+    private int feverTime = 30;
+    private int feverPlus = 3;
+
+    private bool feverMode = false;
+
 
     public int need = 0;
     public int price = 0;
     public float success = 0;
+    private float successPortion = 0;
+    private float successFever = 0;
 
     public int level = 0;
     public int nextLevel = 0;
@@ -75,8 +99,12 @@ public class GameManager : MonoBehaviour
 
     UpgradeFood upgradeFood;
 
-    public UpgradeDataBase upgradeDataBase;
-    public PlayerDataBase playerDataBase;
+    public ParticleSystem levelUpParticle;
+    public ParticleSystem bombPartice;
+
+
+    UpgradeDataBase upgradeDataBase;
+    PlayerDataBase playerDataBase;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
 
@@ -110,6 +138,25 @@ public class GameManager : MonoBehaviour
         isDef = false;
 
         checkMark.SetActive(false);
+
+        feverMode = false;
+        feverCount = 0;
+        feverFillamount.fillAmount = 0;
+
+        feverEffect.SetActive(false);
+
+        levelUpParticle.gameObject.SetActive(false);
+        bombPartice.gameObject.SetActive(false);
+
+        portion1 = false;
+        portion2 = false;
+        portion3 = false;
+        portion4 = false;
+
+        portionFillamount1.fillAmount = 0;
+        portionFillamount2.fillAmount = 0;
+        portionFillamount3.fillAmount = 0;
+        portionFillamount4.fillAmount = 0;
     }
 
     private void Start()
@@ -213,6 +260,8 @@ public class GameManager : MonoBehaviour
         CheckDefTicket();
 
         cameraController.GoToB();
+
+        CheckPortion();
     }
 
     public void GameStop()
@@ -290,10 +339,40 @@ public class GameManager : MonoBehaviour
     public void UpgradeInitialize()
     {
         need = upgradeFood.GetNeed(level);
-        price = upgradeFood.GetPrice(level); ;
+        price = upgradeFood.GetPrice(level);
         success = upgradeFood.GetSuccess(level) + ((int)GameStateManager.instance.TruckType * 0.5f);
 
-        if(success >= 100)
+        if(portion1)
+        {
+            need -= (int)(need * 0.3f);
+        }
+
+        if (portion2)
+        {
+            price += (int)(price * 0.3f);
+        }
+
+        if(portion3)
+        {
+            successPortion = portionPlus;
+        }
+        else
+        {
+            successPortion = 0;
+        }
+
+        if (feverMode)
+        {
+            successFever = feverPlus;
+        }
+        else
+        {
+            successFever = 0;
+        }
+
+        success += successPortion + successFever;
+
+        if (success >= 100)
         {
             success = 100;
         }
@@ -301,7 +380,29 @@ public class GameManager : MonoBehaviour
         titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) + "  +" + (level + 1);
         successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success + "%";
         needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(need);
-        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(price);
+
+        if (successPortion >0 || successFever > 0)
+        {
+            successText.text += " (+" + (successPortion + successFever) + " %)";
+        }
+
+        if(portion1)
+        {
+            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + " (-30%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
+        }
+        else
+        {
+            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(need);
+        }
+
+        if(portion2)
+        {
+            priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice") + " (+30%)</size>\n" + MoneyUnitString.ToCurrencyString(price);
+        }
+        else
+        {
+            priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(price);
+        }
 
         if (GameStateManager.instance.Developer) success = 100;
 
@@ -467,6 +568,10 @@ public class GameManager : MonoBehaviour
 
                             nextLevel++;
                             CheckFoodState();
+
+                            levelUpParticle.gameObject.SetActive(false);
+                            levelUpParticle.gameObject.SetActive(true);
+                            levelUpParticle.Play();
                         }
                         else
                         {
@@ -490,6 +595,10 @@ public class GameManager : MonoBehaviour
                         NotionManager.instance.UseNotion(NotionType.DefDestroyNotion);
                         return;
                     }
+
+                    bombPartice.gameObject.SetActive(false);
+                    bombPartice.gameObject.SetActive(true);
+                    bombPartice.Play();
 
                     level = 0;
                     nextLevel = 0;
@@ -540,7 +649,7 @@ public class GameManager : MonoBehaviour
 
         adCount += 1;
 
-        if (adCount >= 50)
+        if (adCount >= 150)
         {
             adCount = 0;
 
@@ -554,8 +663,66 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (!feverMode)
+        {
+            feverCount += 1;
+
+            CheckFever();
+        }
+
         isDelay = true;
         Invoke("WaitDelay", 0.2f);
+    }
+
+    void CheckFever()
+    {
+        feverFillamount.fillAmount = feverCount * 1.0f / feverMaxCount * 1.0f;
+
+        if (feverCount >= feverMaxCount)
+        {
+            feverMode = true;
+
+            feverEffect.SetActive(true);
+            backButton.SetActive(false);
+
+            successText.color = Color.red;
+
+            UpgradeInitialize();
+
+            StartCoroutine(FeverCoroution());
+
+            NotionManager.instance.UseNotion(NotionType.FeverNotion);
+        }
+    }
+
+    IEnumerator FeverCoroution()
+    {
+        float currentTime = 0f;
+
+        while(currentTime < feverTime)
+        {
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / feverTime);
+
+            fillAmount = Mathf.Clamp01(fillAmount);
+
+            feverFillamount.fillAmount = fillAmount;
+
+            currentTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        feverMode = false;
+
+        feverCount = 0;
+        feverFillamount.fillAmount = 0;
+
+        successText.color = Color.green;
+
+        UpgradeInitialize();
+
+        feverEffect.SetActive(false);
+        backButton.SetActive(true);
     }
 
     IEnumerator MaxLevelUpgradeSuccess()
@@ -744,9 +911,216 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void CheckPortion()
+    {
+        if(playerDataBase.Portion1 == 0)
+        {
+            portionText1.text = "-";
+        }
+        else
+        {
+            portionText1.text = playerDataBase.Portion1.ToString();
+        }
 
+        if (playerDataBase.Portion2 == 0)
+        {
+            portionText2.text = "-";
+        }
+        else
+        {
+            portionText2.text = playerDataBase.Portion2.ToString();
+        }
 
+        if (playerDataBase.Portion3 == 0)
+        {
+            portionText3.text = "-";
+        }
+        else
+        {
+            portionText3.text = playerDataBase.Portion3.ToString();
+        }
 
+        if (playerDataBase.Portion4 == 0)
+        {
+            portionText4.text = "-";
+        }
+        else
+        {
+            portionText4.text = playerDataBase.Portion4.ToString();
+        }
+    }
+
+    public void UseSources(int number)
+    {
+        switch(number)
+        {
+            case 0:
+                if(!portion1)
+                {
+                    if(playerDataBase.Portion1 > 0)
+                    {
+                        portion1 = true;
+
+                        need -= (int)(need * 0.3f);
+                        needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + " (-30%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
+
+                        playerDataBase.Portion1 -= 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+
+                        StartCoroutine(PortionCoroution1());
+
+                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion1);
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        NotionManager.instance.UseNotion(NotionType.LowPortion);
+                    }
+                }               
+                break;
+            case 1:
+                if (!portion2)
+                {
+                    if (playerDataBase.Portion2 > 0)
+                    {
+                        portion2 = true;
+
+                        price += (int)(price * 0.3f);
+                        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice") + " (+30%)</size>\n" + MoneyUnitString.ToCurrencyString(price);
+
+                        playerDataBase.Portion2 -= 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+
+                        StartCoroutine(PortionCoroution2());
+
+                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion2);
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        NotionManager.instance.UseNotion(NotionType.LowPortion);
+                    }
+                }
+                break;
+            case 2:
+                if (!portion3)
+                {
+                    if (playerDataBase.Portion3 > 0)
+                    {
+                        portion3 = true;
+
+                        playerDataBase.Portion3 -= 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+
+                        UpgradeInitialize();
+
+                        StartCoroutine(PortionCoroution3());
+
+                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion3);
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        NotionManager.instance.UseNotion(NotionType.LowPortion);
+                    }
+                }
+                break;
+            case 3:
+                if (!feverMode)
+                {
+                    if (playerDataBase.Portion4 > 0)
+                    {
+                        playerDataBase.Portion4 -= 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+
+                        feverCount += (int)(feverMaxCount * 0.5f);
+
+                        CheckFever();
+
+                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion4);
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        NotionManager.instance.UseNotion(NotionType.LowPortion);
+                    }
+                }
+                break;
+        }
+
+        CheckPortion();
+    }
+
+    IEnumerator PortionCoroution1()
+    {
+        float currentTime = 0f;
+
+        while (currentTime < portionTime)
+        {
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portionTime);
+
+            fillAmount = Mathf.Clamp01(fillAmount);
+
+            portionFillamount1.fillAmount = fillAmount;
+
+            currentTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        portion1 = false;
+        portionFillamount1.fillAmount = 0;
+
+        need = upgradeFood.GetNeed(level);
+        needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(need);
+    }
+
+    IEnumerator PortionCoroution2()
+    {
+        float currentTime = 0f;
+
+        while (currentTime < portionTime)
+        {
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portionTime);
+
+            fillAmount = Mathf.Clamp01(fillAmount);
+
+            portionFillamount2.fillAmount = fillAmount;
+
+            currentTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        portion2 = false;
+        portionFillamount2.fillAmount = 0;
+
+        price = upgradeFood.GetPrice(level);
+        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(price);
+    }
+
+    IEnumerator PortionCoroution3()
+    {
+        float currentTime = 0f;
+
+        while (currentTime < portionTime)
+        {
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portionTime);
+
+            fillAmount = Mathf.Clamp01(fillAmount);
+
+            portionFillamount3.fillAmount = fillAmount;
+
+            currentTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        portion3 = false;
+        portionFillamount3.fillAmount = 0;
+
+        UpgradeInitialize();
+    }
 
     public void OpenLoginView()
     {

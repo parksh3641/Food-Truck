@@ -68,6 +68,17 @@ public class PlayerDataBase : ScriptableObject
     private int sushi = 0;
 
     [Space]
+    [Title("Portion")]
+    [SerializeField]
+    private int portion1 = 0;
+    [SerializeField]
+    private int portion2 = 0;
+    [SerializeField]
+    private int portion3 = 0;
+    [SerializeField]
+    private int portion4 = 0;
+
+    [Space]
     [Title("Reset")]
     public string attendanceDay = "";
     public int attendanceCount = 0;
@@ -340,6 +351,54 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Portion1
+    {
+        get
+        {
+            return portion1;
+        }
+        set
+        {
+            portion1 = value;
+        }
+    }
+
+    public int Portion2
+    {
+        get
+        {
+            return portion2;
+        }
+        set
+        {
+            portion2 = value;
+        }
+    }
+
+    public int Portion3
+    {
+        get
+        {
+            return portion3;
+        }
+        set
+        {
+            portion3 = value;
+        }
+    }
+
+    public int Portion4
+    {
+        get
+        {
+            return portion4;
+        }
+        set
+        {
+            portion4 = value;
+        }
+    }
+
     public string AttendanceDay
     {
         get
@@ -543,6 +602,11 @@ public class PlayerDataBase : ScriptableObject
         noodles = 0;
         pizza = 0;
         sushi = 0;
+
+        portion1 = 0;
+        portion2 = 0;
+        portion3 = 0;
+        portion4 = 0;
 
         attendanceDay = "";
         attendanceCount = 0;

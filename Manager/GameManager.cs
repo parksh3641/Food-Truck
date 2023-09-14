@@ -13,9 +13,14 @@ public class GameManager : MonoBehaviour
     public CameraController cameraController;
 
     public Text goldText;
-    public Text versionText;
-
     public Text signText;
+
+    public GameObject coupon;
+    public GameObject deleteAccount;
+
+    [Space]
+    [Title("Truck")]
+    public Animator[] mainTruckArray;
 
     [Space]
     [Title("Food")]
@@ -49,6 +54,7 @@ public class GameManager : MonoBehaviour
     public Text priceText;
     public Text successText;
 
+    public GameObject defTicketObj;
     public Text defTicketText;
     public GameObject checkMark;
 
@@ -58,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject feverEffect;
     public GameObject backButton;
+    public GameObject settingButton;
 
     private int feverCount = 0;
     private int feverMaxCount = 100;
@@ -157,6 +164,8 @@ public class GameManager : MonoBehaviour
         portionFillamount2.fillAmount = 0;
         portionFillamount3.fillAmount = 0;
         portionFillamount4.fillAmount = 0;
+
+        defTicketObj.SetActive(false);
     }
 
     private void Start()
@@ -221,6 +230,22 @@ public class GameManager : MonoBehaviour
         if(playerDataBase.RemoveAds)
         {
             GoogleAdsManager.instance.admobBanner.DestroyAd();
+        }
+
+        PlayfabManager.instance.GetTitleInternalData("Coupon", CheckCoupon);
+    }
+
+    void CheckCoupon(bool check)
+    {
+        if(check)
+        {
+            coupon.SetActive(true);
+            deleteAccount.SetActive(false);
+        }
+        else
+        {
+            coupon.SetActive(false);
+            deleteAccount.SetActive(true);
         }
     }
 
@@ -383,7 +408,7 @@ public class GameManager : MonoBehaviour
 
         if (successPortion >0 || successFever > 0)
         {
-            successText.text += " (+" + (successPortion + successFever) + " %)";
+            successText.text += " (+" + (successPortion + successFever) + "%)";
         }
 
         if(portion1)
@@ -411,6 +436,8 @@ public class GameManager : MonoBehaviour
             successText.text = LocalizationManager.instance.GetString("MaxLevel");
             needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n-";
         }
+
+        CheckDefTicket();
     }
 
     void CheckFoodState()
@@ -450,26 +477,50 @@ public class GameManager : MonoBehaviour
             case FoodType.Hamburger:
                 hamburgerArray[nextLevel].gameObject.SetActive(true);
                 hamburgerArray[nextLevel].Initialize(GameStateManager.instance.HamburgerLevel - (5 * nextLevel));
+                if(feverMode)
+                {
+                    hamburgerArray[nextLevel].FeverOn();
+                }
                 break;
             case FoodType.Sandwich:
                 sandwichArray[nextLevel].gameObject.SetActive(true);
                 sandwichArray[nextLevel].Initialize(GameStateManager.instance.SandwichLevel - (5 * nextLevel));
+                if (feverMode)
+                {
+                    sandwichArray[nextLevel].FeverOn();
+                }
                 break;
             case FoodType.SnackLab:
                 snackLabArray[nextLevel].gameObject.SetActive(true);
                 snackLabArray[nextLevel].Initialize(GameStateManager.instance.SnackLabLevel - (5 * nextLevel));
+                if (feverMode)
+                {
+                    snackLabArray[nextLevel].FeverOn();
+                }
                 break;
             case FoodType.Drink:
                 drinkArray[nextLevel].gameObject.SetActive(true);
                 drinkArray[nextLevel].Initialize(GameStateManager.instance.DrinkLevel - (5 * nextLevel));
+                if (feverMode)
+                {
+                    drinkArray[nextLevel].FeverOn();
+                }
                 break;
             case FoodType.Pizza:
                 pizzaArray[nextLevel].gameObject.SetActive(true);
                 pizzaArray[nextLevel].Initialize(GameStateManager.instance.PizzaLevel - (5 * nextLevel));
+                if (feverMode)
+                {
+                    pizzaArray[nextLevel].FeverOn();
+                }
                 break;
             case FoodType.Donut:
                 donutArray[nextLevel].gameObject.SetActive(true);
                 donutArray[nextLevel].Initialize(GameStateManager.instance.DonutLevel - (5 * nextLevel));
+                if (feverMode)
+                {
+                    donutArray[nextLevel].FeverOn();
+                }
                 break;
         }
     }
@@ -663,7 +714,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (!feverMode)
+        if (!feverMode && level + 1 < upgradeFood.maxLevel)
         {
             feverCount += 1;
 
@@ -684,6 +735,7 @@ public class GameManager : MonoBehaviour
 
             feverEffect.SetActive(true);
             backButton.SetActive(false);
+            settingButton.SetActive(false);
 
             successText.color = Color.red;
 
@@ -691,12 +743,70 @@ public class GameManager : MonoBehaviour
 
             StartCoroutine(FeverCoroution());
 
+            SoundManager.instance.PlaySFX(GameSfxType.Fever_In);
+            SoundManager.instance.PlayFever();
             NotionManager.instance.UseNotion(NotionType.FeverNotion);
         }
     }
 
     IEnumerator FeverCoroution()
     {
+        for (int i = 0; i < hamburgerArray.Length; i++)
+        {
+            if(hamburgerArray[i].gameObject.activeInHierarchy)
+            {
+                hamburgerArray[i].FeverOn();
+            }
+        }
+
+        for (int i = 0; i < sandwichArray.Length; i++)
+        {
+            if (sandwichArray[i].gameObject.activeInHierarchy)
+            {
+                sandwichArray[i].FeverOn();
+            }
+        }
+
+        for (int i = 0; i < snackLabArray.Length; i++)
+        {
+            if (snackLabArray[i].gameObject.activeInHierarchy)
+            {
+                snackLabArray[i].FeverOn();
+            }
+        }
+
+        for (int i = 0; i < drinkArray.Length; i++)
+        {
+            if (drinkArray[i].gameObject.activeInHierarchy)
+            {
+                drinkArray[i].FeverOn();
+            }
+        }
+
+        for (int i = 0; i < pizzaArray.Length; i++)
+        {
+            if (pizzaArray[i].gameObject.activeInHierarchy)
+            {
+                pizzaArray[i].FeverOn();
+            }
+        }
+
+        for (int i = 0; i < donutArray.Length; i++)
+        {
+            if (donutArray[i].gameObject.activeInHierarchy)
+            {
+                donutArray[i].FeverOn();
+            }
+        }
+
+        for(int i = 0; i < mainTruckArray.Length; i ++)
+        {
+            if(mainTruckArray[i].gameObject.activeInHierarchy)
+            {
+                mainTruckArray[i].enabled = true;
+            }
+        }
+
         float currentTime = 0f;
 
         while(currentTime < feverTime)
@@ -723,6 +833,65 @@ public class GameManager : MonoBehaviour
 
         feverEffect.SetActive(false);
         backButton.SetActive(true);
+        settingButton.SetActive(true);
+
+        SoundManager.instance.StopFever();
+
+        for (int i = 0; i < hamburgerArray.Length; i++)
+        {
+            if (hamburgerArray[i].gameObject.activeInHierarchy)
+            {
+                hamburgerArray[i].FeverOff();
+            }
+        }
+
+        for (int i = 0; i < sandwichArray.Length; i++)
+        {
+            if (sandwichArray[i].gameObject.activeInHierarchy)
+            {
+                sandwichArray[i].FeverOff();
+            }
+        }
+
+        for (int i = 0; i < snackLabArray.Length; i++)
+        {
+            if (snackLabArray[i].gameObject.activeInHierarchy)
+            {
+                snackLabArray[i].FeverOff();
+            }
+        }
+
+        for (int i = 0; i < drinkArray.Length; i++)
+        {
+            if (drinkArray[i].gameObject.activeInHierarchy)
+            {
+                drinkArray[i].FeverOff();
+            }
+        }
+
+        for (int i = 0; i < pizzaArray.Length; i++)
+        {
+            if (pizzaArray[i].gameObject.activeInHierarchy)
+            {
+                pizzaArray[i].FeverOff();
+            }
+        }
+
+        for (int i = 0; i < donutArray.Length; i++)
+        {
+            if (donutArray[i].gameObject.activeInHierarchy)
+            {
+                donutArray[i].FeverOff();
+            }
+        }
+
+        for (int i = 0; i < mainTruckArray.Length; i++)
+        {
+            if (mainTruckArray[i].gameObject.activeInHierarchy)
+            {
+                mainTruckArray[i].enabled = false;
+            }
+        }
     }
 
     IEnumerator MaxLevelUpgradeSuccess()
@@ -870,12 +1039,24 @@ public class GameManager : MonoBehaviour
 
     public void CheckDefTicket()
     {
-        defTicketText.text = playerDataBase.DefDestroyTicket + "/1";
+        if(level >= 10)
+        {
+            defTicketObj.SetActive(true);
 
-        if(playerDataBase.DefDestroyTicket <= 0)
+            defTicketText.text = playerDataBase.DefDestroyTicket + "/1";
+
+            if (playerDataBase.DefDestroyTicket <= 0)
+            {
+                isDef = false;
+                checkMark.SetActive(false);
+            }
+        }
+        else
         {
             isDef = false;
             checkMark.SetActive(false);
+
+            defTicketObj.SetActive(false);
         }
     }
 
@@ -890,9 +1071,14 @@ public class GameManager : MonoBehaviour
 
     public void SetDefTicket()
     {
-        if(!isDef)
+        if (level + 1 >= upgradeFood.maxLevel)
         {
-            if(playerDataBase.DefDestroyTicket > 0)
+            return;
+        }
+
+        if (!isDef)
+        {
+            if (playerDataBase.DefDestroyTicket > 0)
             {
                 isDef = true;
             }
@@ -961,19 +1147,23 @@ public class GameManager : MonoBehaviour
                     {
                         portion1 = true;
 
-                        need -= (int)(need * 0.3f);
-                        needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + " (-30%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
+                        if (level + 1 < upgradeFood.maxLevel)
+                        {
+                            need -= (int)(need * 0.3f);
+                            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + " (-30%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
+                        }
 
                         playerDataBase.Portion1 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
 
                         StartCoroutine(PortionCoroution1());
 
+                        SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion1);
                     }
                     else
                     {
-                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
                 }               
@@ -993,11 +1183,12 @@ public class GameManager : MonoBehaviour
 
                         StartCoroutine(PortionCoroution2());
 
+                        SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion2);
                     }
                     else
                     {
-                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
                 }
@@ -1016,11 +1207,12 @@ public class GameManager : MonoBehaviour
 
                         StartCoroutine(PortionCoroution3());
 
+                        SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion3);
                     }
                     else
                     {
-                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
                 }
@@ -1037,11 +1229,12 @@ public class GameManager : MonoBehaviour
 
                         CheckFever();
 
+                        SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion4);
                     }
                     else
                     {
-                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
                 }
@@ -1071,8 +1264,11 @@ public class GameManager : MonoBehaviour
         portion1 = false;
         portionFillamount1.fillAmount = 0;
 
-        need = upgradeFood.GetNeed(level);
-        needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(need);
+        if (level + 1 < upgradeFood.maxLevel)
+        {
+            need = upgradeFood.GetNeed(level);
+            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(need);
+        }
     }
 
     IEnumerator PortionCoroution2()

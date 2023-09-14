@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource musicAudio;
 
+    public AudioClip musicFever;
+
     public AudioClip[] musicArray;
 
     public AudioSource[] sfxAudio;
@@ -67,5 +69,19 @@ public class SoundManager : MonoBehaviour
                 sfxAudio[i].Play();
             }
         }
+    }
+
+    public void PlayFever()
+    {
+        musicAudio.Stop();
+        musicAudio.clip = musicFever;
+        musicAudio.Play();
+    }
+
+    public void StopFever()
+    {
+        musicAudio.Stop();
+        musicAudio.clip = musicArray[Random.Range(0, musicArray.Length)];
+        musicAudio.Play();
     }
 }

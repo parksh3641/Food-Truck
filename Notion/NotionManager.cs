@@ -173,5 +173,8 @@ public enum NotionType
     UsePortionNotion1,
     UsePortionNotion2,
     UsePortionNotion3,
-    UsePortionNotion4
+    UsePortionNotion4,
+    CouponNotion1,
+    CouponNotion2,
+    CouponNotion3
 }

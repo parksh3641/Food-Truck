@@ -11,6 +11,13 @@ public class FoodContent : MonoBehaviour
     public float posY = 0;
     public float posZ = 0;
 
+    public Rotation rotation;
+
+    private void Awake()
+    {
+        rotation = GetComponent<Rotation>();
+    }
+
     private void OnEnable()
     {
         if(saveSize == 0)
@@ -54,14 +61,20 @@ public class FoodContent : MonoBehaviour
     public void LevelUp()
     {
         transform.localScale = new Vector3(posX += size, posY += size, posZ += size);
-
-        Debug.Log("???? ??");
     }
 
     public void LevelReset()
     {
         transform.localScale = new Vector3(saveSize, saveSize, saveSize);
+    }
 
-        Debug.Log("???? ??????");
+    public void FeverOn()
+    {
+        rotation.rotationSpeed = 60;
+    }
+
+    public void FeverOff()
+    {
+        rotation.rotationSpeed = 30;
     }
 }

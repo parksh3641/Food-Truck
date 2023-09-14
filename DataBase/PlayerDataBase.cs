@@ -9,31 +9,22 @@ public class PlayerDataBase : ScriptableObject
     [Title("Player")]
     [SerializeField]
     private int coin = 0;
-
     [SerializeField]
     private int crystal = 0;
-
     [SerializeField]
     private int defDestroyTicket = 0;
-
     [SerializeField]
     private int nextFoodNumber = 0;
-
     [SerializeField]
     private int hamburgerMaxValue = 0;
-
     [SerializeField]
     private int sandwichMaxValue = 0;
-
     [SerializeField]
     private int snackLabMaxValue = 0;
-
     [SerializeField]
     private int drinkMaxValue = 0;
-
     [SerializeField]
     private int pizzaMaxValue = 0;
-
     [SerializeField]
     private int donutMaxValue = 0;
 
@@ -42,28 +33,20 @@ public class PlayerDataBase : ScriptableObject
     [Title("Truck")]
     [SerializeField]
     private int chips = 0;
-
     [SerializeField]
     private int donut = 0;
-
     [SerializeField]
     private int hamburger = 0;
-
     [SerializeField]
     private int hotdog = 0;
-
     [SerializeField]
     private int icecream = 0;
-
     [SerializeField]
     private int lemonade = 0;
-
     [SerializeField]
     private int noodles = 0;
-
     [SerializeField]
     private int pizza = 0;
-
     [SerializeField]
     private int sushi = 0;
 
@@ -77,6 +60,18 @@ public class PlayerDataBase : ScriptableObject
     private int portion3 = 0;
     [SerializeField]
     private int portion4 = 0;
+
+    [Space]
+    [Title("Coupon")]
+    [SerializeField]
+    private int coupon1 = 0;
+    [SerializeField]
+    private int coupon2 = 0;
+    [SerializeField]
+    private int coupon3 = 0;
+    [SerializeField]
+    private int coupon4 = 0;
+
 
     [Space]
     [Title("Reset")]
@@ -396,6 +391,54 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             portion4 = value;
+        }
+    }
+
+    public int Coupon1
+    {
+        get
+        {
+            return coupon1;
+        }
+        set
+        {
+            coupon1 = value;
+        }
+    }
+
+    public int Coupon2
+    {
+        get
+        {
+            return coupon2;
+        }
+        set
+        {
+            coupon2 = value;
+        }
+    }
+
+    public int Coupon3
+    {
+        get
+        {
+            return coupon3;
+        }
+        set
+        {
+            coupon3 = value;
+        }
+    }
+
+    public int Coupon4
+    {
+        get
+        {
+            return coupon4;
+        }
+        set
+        {
+            coupon4 = value;
         }
     }
 

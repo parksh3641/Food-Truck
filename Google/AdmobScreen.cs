@@ -135,7 +135,5 @@ public class AdmobScreen : MonoBehaviour
 
             LoadInterstitialAd();
         };
-
-        Debug.Log("999");
     }
 }

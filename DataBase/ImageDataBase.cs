@@ -11,6 +11,8 @@ public class ImageDataBase : ScriptableObject
 
     public Sprite[] itemArray;
 
+    public Sprite[] rewardArray;
+
     public Sprite[] GetFoodChangeArray()
     {
         return foodChangeArray;
@@ -24,5 +26,10 @@ public class ImageDataBase : ScriptableObject
     public Sprite[] GetItemArray()
     {
         return itemArray;
+    }
+
+    public Sprite[] GetRewardArray()
+    {
+        return rewardArray;
     }
 }

@@ -72,7 +72,10 @@ public enum GameSfxType
     GetMoney,
     Success,
     Screen_In,
-    Screen_Out
+    Screen_Out,
+    Fever_In,
+    UseSources,
+    NotSources
 }
 
 public enum TruckType
@@ -135,4 +138,14 @@ public enum TruckEffect
     SellPriceUp,
     TargetPerentUp,
     PercentUp
+}
+
+public enum RewardType
+{
+    Gold,
+    DefDestroyTicket,
+    Portion1,
+    Portion2,
+    Portion3,
+    Portion4,
 }

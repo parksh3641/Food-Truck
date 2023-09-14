@@ -505,12 +505,11 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case ItemType.DefDestroyTicket:
-                if(playerDataBase.Coin >= 1000000)
+                if(playerDataBase.Coin >= 5000000)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, 1000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, 5000000);
 
                     playerDataBase.DefDestroyTicket += 1;
-
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);

@@ -858,10 +858,18 @@ public class PlayfabManager : MonoBehaviour
                        case "Portion4":
                            playerDataBase.Portion4 = statistics.Value;
                            break;
-
-
-
-
+                       case "Coupon1":
+                           playerDataBase.Coupon1 = statistics.Value;
+                           break;
+                       case "Coupon2":
+                           playerDataBase.Coupon2 = statistics.Value;
+                           break;
+                       case "Coupon3":
+                           playerDataBase.Coupon3 = statistics.Value;
+                           break;
+                       case "Coupon4":
+                           playerDataBase.Coupon4 = statistics.Value;
+                           break;
                        case "Normal":
                            playerDataBase.Normal = statistics.Value;
                            break;
@@ -1150,7 +1158,18 @@ public class PlayfabManager : MonoBehaviour
         PlayFabServerAPI.GetTitleInternalData(new PlayFab.ServerModels.GetTitleDataRequest(),
             result =>
             {
-                if (name.Equals("AOSVersion") || name.Equals("IOSVersion"))
+                if (name.Equals("CheckVersion"))
+                {
+                    if (result.Data[name].Equals("ON"))
+                    {
+                        action?.Invoke(true);
+                    }
+                    else
+                    {
+                        action?.Invoke(false);
+                    }
+                }
+                else if (name.Equals("AOSVersion") || name.Equals("IOSVersion"))
                 {
                     if (result.Data[name].Equals(Application.version))
                     {
@@ -1161,7 +1180,7 @@ public class PlayfabManager : MonoBehaviour
                         action?.Invoke(false);
                     }
                 }
-                else
+                else if(name.Equals("Coupon"))
                 {
                     if (result.Data[name].Equals("ON"))
                     {

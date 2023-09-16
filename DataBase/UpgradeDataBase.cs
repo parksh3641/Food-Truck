@@ -31,49 +31,58 @@ public class UpgradeFood
 
         if (level >= 30)
         {
-            price = level * level * 19200;
+            price = level * level * 25600;
         }
         else if (level >= 25)
         {
-            price = level * level * 9600;
+            price = level * level * 12800;
         }
         else if (level >= 20)
         {
-            price = level * level * 4800;
+            price = level * level * 6400;
         }
         else if (level >= 15)
         {
-            price = level * level * 2400;
+            price = level * level * 3200;
         }
         else if (level >= 10)
         {
-            price = level * level * 1200;
+            price = level * level * 1600;
         }
         else if(level >= 5)
         {
-            price = level * level * 600;
+            price = level * level * 800;
         }
         else
         {
-            price = level * level * 300;
+            price = level * level * 400;
         }
 
         return price;
     }
 
-    public int GetSuccess(int level)
+    public float GetSuccess(int level)
     {
         //return priceList[level].success;
 
-        int percent = 0;
+        float percent = 0;
 
-        if(level >= 10)
+        if(level >= 79)
+        {
+            percent = 1 - ((level - 79) * 0.1f);
+        }
+        else if (level >= 10)
         {
             percent = 70 - (level - 10);
         }
         else
         {
             percent = 100 - (level * 3);
+        }
+
+        if(percent <= 0.1f)
+        {
+            percent = 0.1f;
         }
 
         return percent;

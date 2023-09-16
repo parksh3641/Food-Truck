@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
 
     public AudioSource musicAudio;
+    public AudioSource musicAudio2;
 
     public AudioClip musicFever;
 
@@ -24,6 +25,8 @@ public class SoundManager : MonoBehaviour
         if (GameStateManager.instance.Music)
         {
             PlayGameBGM();
+
+            musicAudio2.Play();
         }
     }
 
@@ -50,11 +53,20 @@ public class SoundManager : MonoBehaviour
     public void PlayBGM()
     {
         musicAudio.volume = 1;
+
+        if(!musicAudio.isPlaying)
+        {
+            StartCoroutine(PlayList());
+        }
+
+        musicAudio2.Play();
     }
 
     public void StopBGM()
     {
         musicAudio.volume = 0;
+
+        musicAudio2.Stop();
     }
 
     public void PlaySFX(GameSfxType type)

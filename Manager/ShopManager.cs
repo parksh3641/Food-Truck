@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ShopManager : MonoBehaviour
 {
@@ -95,7 +96,7 @@ public class ShopManager : MonoBehaviour
         dailyShopCountText.text = "";
         StartCoroutine(DailyShopTimer());
 
-        shopRectTransform.sizeDelta = new Vector2(0, -999);
+        shopRectTransform.anchoredPosition = new Vector2(0, -9999);
     }
 
     public void OpenShopView()
@@ -136,6 +137,16 @@ public class ShopManager : MonoBehaviour
             {
                 shopContents[1].SetLocked(false);
             }
+
+            if (!GameStateManager.instance.DailyAdsReward2)
+            {
+                shopContents[6].SetLocked(false);
+            }
+
+            if(playerDataBase.RemoveAds)
+            {
+                shopContents[7].gameObject.SetActive(false);
+            }
         }
         else
         {
@@ -174,6 +185,11 @@ public class ShopManager : MonoBehaviour
         shopContents[3].Initialize(ItemType.GoldShop1, BuyType.Rm, this);
         shopContents[4].Initialize(ItemType.GoldShop2, BuyType.Rm, this);
         shopContents[5].Initialize(ItemType.GoldShop3, BuyType.Rm, this);
+        shopContents[6].Initialize(ItemType.AdReward_Potion, BuyType.Ad, this);
+        shopContents[7].Initialize(ItemType.RemoveAds, BuyType.Rm, this);
+        shopContents[8].Initialize(ItemType.PortionSet1, BuyType.Rm, this);
+        shopContents[9].Initialize(ItemType.PortionSet2, BuyType.Rm, this);
+        shopContents[10].Initialize(ItemType.PortionSet3, BuyType.Rm, this);
     }
 
     void TruckInitialize()
@@ -492,22 +508,22 @@ public class ShopManager : MonoBehaviour
 
                 shopContents[0].SetLocked(true);
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 100000);
+                int random = Random.Range(100000, 200001);
+
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, random);
 
                 SoundManager.instance.PlaySFX(GameSfxType.Success);
                 NotionManager.instance.UseNotion(NotionType.SuccessReward);
 
                 break;
             case ItemType.AdReward_Gold:
-                if (GameStateManager.instance.DailyAdsReward) return;
-
-                GoogleAdsManager.instance.admobReward.ShowAd(0);
+                GoogleAdsManager.instance.admobReward_Gold.ShowAd(0);
 
                 break;
             case ItemType.DefDestroyTicket:
-                if(playerDataBase.Coin >= 5000000)
+                if (playerDataBase.Coin >= 1000000)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, 5000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, 1000000);
 
                     playerDataBase.DefDestroyTicket += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
@@ -520,6 +536,23 @@ public class ShopManager : MonoBehaviour
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.LowCoin);
                 }
+                break;
+            case ItemType.GoldShop1:
+                break;
+            case ItemType.GoldShop2:
+                break;
+            case ItemType.GoldShop3:
+                break;
+            case ItemType.AdReward_Potion:
+                GoogleAdsManager.instance.admobReward_Portion.ShowAd(1);
+                break;
+            case ItemType.RemoveAds:
+                break;
+            case ItemType.PortionSet1:
+                break;
+            case ItemType.PortionSet2:
+                break;
+            case ItemType.PortionSet3:
                 break;
         }
 
@@ -542,6 +575,22 @@ public class ShopManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
+    }
+
+    public void SuccessWatchAd_Portion()
+    {
+        GameStateManager.instance.DailyAdsReward2 = true;
+
+        shopContents[6].SetLocked(true);
+
+        int random2 = Random.Range(1, 3);
+
+        playerDataBase.Portion1 += random2;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessReward);
     }
 
     IEnumerator DailyShopTimer()
@@ -572,18 +621,81 @@ public class ShopManager : MonoBehaviour
         {
             case 0:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
+
+                SoundManager.instance.PlaySFX(GameSfxType.GetMoney);
+                NotionManager.instance.UseNotion(NotionType.SuccessBuy);
                 break;
             case 1:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 3300000);
+
+                SoundManager.instance.PlaySFX(GameSfxType.GetMoney);
+                NotionManager.instance.UseNotion(NotionType.SuccessBuy);
                 break;
             case 2:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 5500000);
+
+                SoundManager.instance.PlaySFX(GameSfxType.GetMoney);
+                NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                break;
+            case 3:
+                PlayfabManager.instance.PurchaseRemoveAd();
+
+                shopContents[7].gameObject.SetActive(false);
+
+                SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                break;
+            case 4:
+                playerDataBase.Portion1 += 10;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+
+                playerDataBase.Portion2 += 10;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+
+                playerDataBase.Portion3 += 10;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+
+                playerDataBase.Portion4 += 10;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+
+
+                SoundManager.instance.PlaySFX(GameSfxType.Success);
+                NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                break;
+            case 5:
+                playerDataBase.Portion1 += 25;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+
+                playerDataBase.Portion2 += 25;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+
+                playerDataBase.Portion3 += 25;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+
+                playerDataBase.Portion4 += 25;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+
+
+                SoundManager.instance.PlaySFX(GameSfxType.Success);
+                NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                break;
+            case 6:
+                playerDataBase.Portion1 += 50;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+
+                playerDataBase.Portion2 += 50;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+
+                playerDataBase.Portion3 += 50;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+
+                playerDataBase.Portion4 += 50;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+
+
+                SoundManager.instance.PlaySFX(GameSfxType.Success);
+                NotionManager.instance.UseNotion(NotionType.SuccessBuy);
                 break;
         }
-
-        SoundManager.instance.PlaySFX(GameSfxType.GetMoney);
-
-        NotionManager.instance.UseNotion(NotionType.SuccessBuy);
     }
 
     public void Failed()

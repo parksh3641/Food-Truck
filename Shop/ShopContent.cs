@@ -12,6 +12,7 @@ public class ShopContent : MonoBehaviour
 
     public LocalizationContent titleText;
     public Text rewardText;
+    public LocalizationContent infoText;
 
     public GameObject buyFreeObj;
     public GameObject[] buyRmObj;
@@ -82,7 +83,7 @@ public class ShopContent : MonoBehaviour
         switch (itemType)
         {
             case ItemType.DailyReward:
-                rewardText.text = MoneyUnitString.ToCurrencyString(100000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(100000) + " ~ " + MoneyUnitString.ToCurrencyString(200000);
                 break;
             case ItemType.AdReward_Gold:
                 rewardText.text = MoneyUnitString.ToCurrencyString(500000);
@@ -90,7 +91,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
 
-                buyCoinText.text = MoneyUnitString.ToCurrencyString(5000000);
+                buyCoinText.text = MoneyUnitString.ToCurrencyString(1000000);
 
                 titleText.plusText = " x1";
                 break;
@@ -122,8 +123,48 @@ public class ShopContent : MonoBehaviour
                 buyRmText[2].ReLoad();
                 break;
             case ItemType.AdReward_Potion:
+                rewardText.text = "1 ~ 2";
                 break;
-            case ItemType.AdReward_DefDestroyTicket:
+            case ItemType.RemoveAds:
+                lockedObj.SetActive(false);
+
+                buyRmObj[3].SetActive(true);
+                buyRmText[3].localizationName = itemType + "_Price";
+                buyRmText[3].ReLoad();
+
+                break;
+            case ItemType.PortionSet1:
+                lockedObj.SetActive(false);
+
+                buyRmObj[4].SetActive(true);
+                buyRmText[4].localizationName = itemType + "_Price";
+                buyRmText[4].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+
+                break;
+            case ItemType.PortionSet2:
+                lockedObj.SetActive(false);
+
+                buyRmObj[5].SetActive(true);
+                buyRmText[5].localizationName = itemType + "_Price";
+                buyRmText[5].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+
+                break;
+            case ItemType.PortionSet3:
+                lockedObj.SetActive(false);
+
+                buyRmObj[6].SetActive(true);
+                buyRmText[6].localizationName = itemType + "_Price";
+                buyRmText[6].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+
                 break;
         }
 

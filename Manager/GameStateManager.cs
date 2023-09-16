@@ -37,6 +37,7 @@ public class GameStateManager : MonoBehaviour
         public bool music = true;
         public bool sfx = true;
         public bool vibration = true;
+        public bool effect = true;
         public bool record = false;
         public bool appReview = false;
         public bool developer = false;
@@ -58,6 +59,11 @@ public class GameStateManager : MonoBehaviour
         public int adCount = 0;
         public bool dailyReward = false;
         public bool dailyAdsReward = false;
+        public bool dailyAdsReward2 = false;
+
+        [Space]
+        [Title("Bankruptcy")]
+        public int bankruptcy = 0;
     }
 
     #region Data
@@ -199,6 +205,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.vibration = value;
+            SaveFile();
+        }
+    }
+
+    public bool Effect
+    {
+        get
+        {
+            return gameSettings.effect;
+        }
+        set
+        {
+            gameSettings.effect = value;
             SaveFile();
         }
     }
@@ -394,6 +413,32 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.dailyAdsReward = value;
+            SaveFile();
+        }
+    }
+
+    public bool DailyAdsReward2
+    {
+        get
+        {
+            return gameSettings.dailyAdsReward2;
+        }
+        set
+        {
+            gameSettings.dailyAdsReward2 = value;
+            SaveFile();
+        }
+    }
+
+    public int Bankruptcy
+    {
+        get
+        {
+            return gameSettings.bankruptcy;
+        }
+        set
+        {
+            gameSettings.bankruptcy = value;
             SaveFile();
         }
     }

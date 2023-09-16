@@ -14,13 +14,17 @@ public class RankingManager : MonoBehaviour
 
     public GameObject rankingView;
 
-    public Text titleText;
+    public LocalizationContent infoText;
+
+    [Space]
+    [Title("TopMenu")]
+    public Image[] topMenuImgArray;
+    public Sprite[] topMenuSpriteArray;
 
     public RankContent rankContentPrefab;
     public RankContent myRankContent;
     public RectTransform rankContentParent;
 
-    private int openNumber = 0;
     private bool isDelay = false;
 
     private int timerMinutes = 0;
@@ -28,6 +32,8 @@ public class RankingManager : MonoBehaviour
     private float timermilliseconds = 0;
 
     private int record = 0;
+
+    private int topNumber = 0;
 
     private string recordStr = "";
 
@@ -57,19 +63,19 @@ public class RankingManager : MonoBehaviour
         rankingView.SetActive(false);
 
         rankContentParent.anchoredPosition = new Vector2(0, -9999);
+
+        topNumber = -1;
     }
 
     public void OpenRanking()
     {
         if(!rankingView.activeSelf)
         {
-            if (NetworkConnect.instance.CheckConnectInternet())
+            rankingView.SetActive(true);
+
+            if(topNumber == -1)
             {
-                ChangeRankingView(GameStateManager.instance.LevelType);
-            }
-            else
-            {
-                NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+                ChangeTopToggle(0);
             }
         }
         else
@@ -81,33 +87,47 @@ public class RankingManager : MonoBehaviour
         }
     }
 
-    public void ChangeRankingView(LevelType type)
+    public void ChangeTopToggle(int number)
+    {
+        if (topNumber == number) return;
+
+        topNumber = number;
+
+        for (int i = 0; i < topMenuImgArray.Length; i++)
+        {
+            topMenuImgArray[i].sprite = topMenuSpriteArray[0];
+        }
+
+        topMenuImgArray[number].sprite = topMenuSpriteArray[1];
+
+        switch(number)
+        {
+            case 0:
+                ChangeRankingView(RankingType.GourmetLevel);
+
+                infoText.localizationName = "Ranking1_Info";
+                break;
+            case 1:
+                ChangeRankingView(RankingType.DonutLevel);
+
+                infoText.localizationName = "Ranking2_Info";
+                break;
+            case 2:
+                ChangeRankingView(RankingType.UpgradeCount);
+
+                infoText.localizationName = "Ranking3_Info";
+                break;
+        }
+
+        infoText.ReLoad();
+
+    }
+
+    public void ChangeRankingView(RankingType type)
     {
         rankingView.SetActive(true);
 
         isDelay = true;
-
-        //switch (type)
-        //{
-        //    case LevelType.Easy:
-        //        titleText.text = LocalizationManager.instance.GetString("Game1");
-        //        break;
-        //    case LevelType.Normal:
-        //        titleText.text = LocalizationManager.instance.GetString("Game2");
-        //        break;
-        //    case LevelType.Hard:
-        //        titleText.text = LocalizationManager.instance.GetString("Game3");
-        //        break;
-        //    case LevelType.Crazy:
-        //        titleText.text = LocalizationManager.instance.GetString("Game4");
-        //        break;
-        //    case LevelType.Insane:
-        //        titleText.text = LocalizationManager.instance.GetString("Game5");
-        //        break;
-        //    default:
-        //        titleText.text = LocalizationManager.instance.GetString("Classic");
-        //        break;
-        //}
 
         PlayfabManager.instance.GetLeaderboarder(type.ToString(), SetRanking);
     }
@@ -136,38 +156,11 @@ public class RankingManager : MonoBehaviour
 
             if (player.StatValue != 0)
             {
-                if(GameStateManager.instance.LevelType != scoreLevel)
-                {
-                    record = 3600000 - player.StatValue;
-
-                    timerMinutes = (record / 60000);
-                    timerSeconds = (record % 60000) / 1000;
-                    timermilliseconds = int.Parse(record.ToString().Substring(Mathf.Max(record.ToString().Length - 3, 0)));
-
-                    if (timerMinutes >= 1)
-                    {
-                        recordStr = timerMinutes.ToString("D2") + ":" + timerSeconds.ToString("D2") + ".<size=11>" + timermilliseconds.ToString("000") + "</size>";
-                    }
-                    else
-                    {
-                        recordStr = timerSeconds.ToString("D2") + ".<size=11>" + timermilliseconds.ToString("000") + "</size>";
-                    }
-                }
-                else
-                {
-                    recordStr = player.StatValue.ToString();
-                }
+                recordStr = player.StatValue.ToString();
             }
             else
             {
-                if (GameStateManager.instance.LevelType != scoreLevel)
-                {
-                    recordStr = "00:00.<size=11>000</size>";
-                }
-                else
-                {
-                    recordStr = "0";
-                }
+                recordStr = "0";
             }
 
             if (player.DisplayName == null)
@@ -218,59 +211,26 @@ public class RankingManager : MonoBehaviour
     {
         int number = 0;
 
-        switch (openNumber)
+        switch (topNumber)
         {
             case 0:
-                number = playerDataBase.Easy;
+                number = playerDataBase.GourmetLevel;
                 break;
             case 1:
-                number = playerDataBase.Normal;
+                number = playerDataBase.DonutLevel;
                 break;
             case 2:
-                number = playerDataBase.Hard;
-                break;
-            case 3:
-                number = playerDataBase.Crazy;
-                break;
-            case 4:
-                number = playerDataBase.Insane;
+                number = playerDataBase.UpgradeCount;
                 break;
         }
 
         if (number != 0)
         {
-            if (GameStateManager.instance.LevelType != scoreLevel)
-            {
-                record = 3600000 - number;
-
-                timerMinutes = (record / 36000);
-                timerSeconds = (record % 36000) / 1000;
-                timermilliseconds = int.Parse(record.ToString().Substring(Mathf.Max(record.ToString().Length - 3, 0)));
-
-                if (timerMinutes >= 1)
-                {
-                    recordStr = timerMinutes.ToString("D2") + ":" + timerSeconds.ToString("D2") + ".<size=11>" + timermilliseconds.ToString("000") + "</size>";
-                }
-                else
-                {
-                    recordStr = timerSeconds.ToString("D2") + ".<size=11>" + timermilliseconds.ToString("000") + "</size>";
-                }
-            }
-            else
-            {
-                recordStr = number.ToString();
-            }
+            recordStr = number.ToString();
         }
         else
         {
-            if (GameStateManager.instance.LevelType != scoreLevel)
-            {
-                recordStr = "00:00.<size=11>000</size>";
-            }
-            else
-            {
-                recordStr = "0";
-            }
+            recordStr = "0";
         }
 
         myRankContent.InitState(999, code, GameStateManager.instance.NickName, recordStr, true);

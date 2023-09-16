@@ -20,6 +20,10 @@ public class OptionManager : MonoBehaviour
     public LocalizationContent vibrationText;
 
     [Space]
+    [Title("Effect")]
+    public LocalizationContent effectText;
+
+    [Space]
     public SoundManager soundManager;
 
     private void Awake()
@@ -38,6 +42,7 @@ public class OptionManager : MonoBehaviour
             OnBGM();
             OnSFX();
             OnVibration();
+            OnEffect();
         }
         else
         {
@@ -99,6 +104,20 @@ public class OptionManager : MonoBehaviour
         OnVibration();
     }
 
+    public void EffectOnOff()
+    {
+        if (GameStateManager.instance.Effect)
+        {
+            GameStateManager.instance.Effect = false;
+        }
+        else
+        {
+            GameStateManager.instance.Effect = true;
+        }
+
+        OnEffect();
+    }
+
     public void OnBGM()
     {
         if (GameStateManager.instance.Music)
@@ -142,6 +161,20 @@ public class OptionManager : MonoBehaviour
         {
             vibrationText.localizationName = "OFF";
             vibrationText.ReLoad();
+        }
+    }
+
+    public void OnEffect()
+    {
+        if (GameStateManager.instance.Effect)
+        {
+            effectText.localizationName = "ON";
+            effectText.ReLoad();
+        }
+        else
+        {
+            effectText.localizationName = "OFF";
+            effectText.ReLoad();
         }
     }
 }

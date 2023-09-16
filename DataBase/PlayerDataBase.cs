@@ -27,6 +27,12 @@ public class PlayerDataBase : ScriptableObject
     private int pizzaMaxValue = 0;
     [SerializeField]
     private int donutMaxValue = 0;
+    [SerializeField]
+    private int gourmetLevel = 0;
+    [SerializeField]
+    private int donutLevel = 0;
+    [SerializeField]
+    private int upgradeCount = 0;
 
 
     [Space]
@@ -235,6 +241,42 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             donutMaxValue = value;
+        }
+    }
+
+    public int GourmetLevel
+    {
+        get
+        {
+            return gourmetLevel;
+        }
+        set
+        {
+            gourmetLevel = value;
+        }
+    }
+
+    public int DonutLevel
+    {
+        get
+        {
+            return donutLevel;
+        }
+        set
+        {
+            donutLevel = value;
+        }
+    }
+
+    public int UpgradeCount
+    {
+        get
+        {
+            return upgradeCount;
+        }
+        set
+        {
+            upgradeCount = value;
         }
     }
 
@@ -635,6 +677,10 @@ public class PlayerDataBase : ScriptableObject
         drinkMaxValue = 0;
         pizzaMaxValue = 0;
         donutMaxValue = 0;
+
+        gourmetLevel = 0;
+        donutLevel = 0;
+        upgradeCount = 0;
 
         chips = 0;
         donut = 0;

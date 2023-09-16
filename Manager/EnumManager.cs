@@ -28,6 +28,13 @@ public enum LevelType
     Insane,
 }
 
+public enum RankingType
+{
+    GourmetLevel,
+    DonutLevel,
+    UpgradeCount
+}
+
 public enum LanguageType
 {
     Default = 0,
@@ -101,7 +108,10 @@ public enum ItemType
     GoldShop2,
     GoldShop3,
     AdReward_Potion,
-    AdReward_DefDestroyTicket
+    RemoveAds,
+    PortionSet1,
+    PortionSet2,
+    PortionSet3
 }
 
 public enum BuyType

@@ -54,6 +54,11 @@ public class FoodContent : MonoBehaviour
 
     public void Initialize(int number)
     {
+        if (number >= 5)
+        {
+            number = 5;
+        }
+
         transform.localScale = new Vector3(posX += (size * number), posY += (size * number), posZ += (size * number));
     }
 

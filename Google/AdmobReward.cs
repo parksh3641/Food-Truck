@@ -86,6 +86,9 @@ public class AdmobReward : MonoBehaviour
                 case 0:
                     shopManager.SuccessWatchAd();
                     break;
+                case 1:
+                    shopManager.SuccessWatchAd_Portion();
+                    break;
             }
         }
         else
@@ -103,6 +106,9 @@ public class AdmobReward : MonoBehaviour
                     {
                         case 0:
                             shopManager.SuccessWatchAd();
+                            break;
+                        case 1:
+                            shopManager.SuccessWatchAd_Portion();
                             break;
                     }
 

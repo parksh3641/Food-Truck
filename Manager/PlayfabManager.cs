@@ -870,18 +870,27 @@ public class PlayfabManager : MonoBehaviour
                        case "Coupon4":
                            playerDataBase.Coupon4 = statistics.Value;
                            break;
-                       case "Normal":
-                           playerDataBase.Normal = statistics.Value;
+                       case "GourmetLevel":
+                           playerDataBase.GourmetLevel = statistics.Value;
                            break;
-                       case "Hard":
-                           playerDataBase.Hard = statistics.Value;
+                       case "DonutLevel":
+                           playerDataBase.DonutLevel = statistics.Value;
                            break;
-                       case "Crazy":
-                           playerDataBase.Crazy = statistics.Value;
+                       case "UpgradeCount":
+                           playerDataBase.UpgradeCount = statistics.Value;
                            break;
-                       case "Insane":
-                           playerDataBase.Insane = statistics.Value;
-                           break;
+                           //case "Normal":
+                           //    playerDataBase.Normal = statistics.Value;
+                           //    break;
+                           //case "Hard":
+                           //    playerDataBase.Hard = statistics.Value;
+                           //    break;
+                           //case "Crazy":
+                           //    playerDataBase.Crazy = statistics.Value;
+                           //    break;
+                           //case "Insane":
+                           //    playerDataBase.Insane = statistics.Value;
+                           //    break;
                    }
                }
 
@@ -1392,6 +1401,8 @@ public class PlayfabManager : MonoBehaviour
 
         playerDataBase.RemoveAds = true;
 
+        GoogleAdsManager.instance.admobBanner.DestroyAd();
+
         NotionManager.instance.UseNotion(NotionType.SuccessRemoveAds);
     }
 
@@ -1485,7 +1496,7 @@ public class PlayfabManager : MonoBehaviour
     {
         if (isDelay) return;
 
-        UpdateAddCurrency(MoneyType.Coin, 100000);
+        UpdateAddCurrency(MoneyType.Coin, 10000000);
 
         isDelay = true;
         Invoke("WaitDelay", 0.2f);

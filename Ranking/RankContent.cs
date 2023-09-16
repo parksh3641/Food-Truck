@@ -32,9 +32,9 @@ public class RankContent : MonoBehaviour
         else
         {
             indexRankImg.enabled = false;
+            indexText.text = index.ToString();
         }
 
-        indexText.text = index.ToString();
         nickNameText.text = nickName;
         countryImg.sprite = Resources.Load<Sprite>("Country/" + country);
         scoreText.text = score.ToString();

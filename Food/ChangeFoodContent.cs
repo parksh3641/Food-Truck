@@ -15,10 +15,6 @@ public class ChangeFoodContent : MonoBehaviour
 
     public ChangeFoodManager changeFoodManager;
 
-    private void Awake()
-    {
-
-    }
 
     public void Initialize(FoodType type, Sprite sp, ChangeFoodManager manager)
     {

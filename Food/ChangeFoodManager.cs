@@ -6,6 +6,8 @@ public class ChangeFoodManager : MonoBehaviour
 {
     public GameObject changeFoodView;
 
+    public GameObject alarmObj;
+
     public ChangeFoodContent changeFoodContent;
 
     public RectTransform changeFoodContentTransform;
@@ -27,6 +29,8 @@ public class ChangeFoodManager : MonoBehaviour
         foodChangeArray = imageDataBase.GetFoodChangeArray();
 
         changeFoodView.SetActive(false);
+
+        alarmObj.SetActive(false);
     }
 
     private void Start()
@@ -56,6 +60,8 @@ public class ChangeFoodManager : MonoBehaviour
         else
         {
             changeFoodView.SetActive(false);
+
+            alarmObj.SetActive(false);
         }
     }
 

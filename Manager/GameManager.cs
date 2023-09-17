@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject coupon;
     public GameObject deleteAccount;
 
+    public GameObject changeFoodAlarmObj;
+
     [Space]
     [Title("Truck")]
     public Animator[] mainTruckArray;
@@ -436,15 +438,16 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.Developer) success = 100;
 
-        if (level + 1 >= upgradeFood.maxLevel)
-        {
-            successText.text = LocalizationManager.instance.GetString("MaxLevel");
-            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n-";
-        }
-
         CheckDefTicket();
 
         CheckBankruptcy();
+
+        if (level + 1 >= upgradeFood.maxLevel)
+        {
+            defTicketObj.SetActive(false);
+            successText.text = LocalizationManager.instance.GetString("MaxLevel");
+            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n-";
+        }
     }
 
     void CheckFoodState()
@@ -953,8 +956,9 @@ public class GameManager : MonoBehaviour
                     playerDataBase.NextFoodNumber += 1;
 
                     nextFoodUI.SetActive(true);
-
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                    changeFoodAlarmObj.SetActive(true);
                 }
                 break;
             case FoodType.Sandwich:
@@ -969,8 +973,9 @@ public class GameManager : MonoBehaviour
                 if (playerDataBase.SandwichMaxValue == 1)
                 {
                     playerDataBase.NextFoodNumber += 1;
-
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                    changeFoodAlarmObj.SetActive(true);
                 }
                 break;
             case FoodType.SnackLab:
@@ -985,8 +990,9 @@ public class GameManager : MonoBehaviour
                 if (playerDataBase.SnackLabMaxValue == 1)
                 {
                     playerDataBase.NextFoodNumber += 1;
-
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                    changeFoodAlarmObj.SetActive(true);
                 }
                 break;
             case FoodType.Drink:
@@ -1001,8 +1007,9 @@ public class GameManager : MonoBehaviour
                 if (playerDataBase.DrinkMaxValue == 1)
                 {
                     playerDataBase.NextFoodNumber += 1;
-
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                    changeFoodAlarmObj.SetActive(true);
                 }
                 break;
             case FoodType.Pizza:
@@ -1017,8 +1024,9 @@ public class GameManager : MonoBehaviour
                 if (playerDataBase.PizzaMaxValue == 1)
                 {
                     playerDataBase.NextFoodNumber += 1;
-
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                    changeFoodAlarmObj.SetActive(true);
                 }
                 break;
             case FoodType.Donut:
@@ -1033,8 +1041,9 @@ public class GameManager : MonoBehaviour
                 if (playerDataBase.DonutMaxValue == 1)
                 {
                     playerDataBase.NextFoodNumber += 1;
-
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                    changeFoodAlarmObj.SetActive(true);
                 }
                 break;
         }
@@ -1092,7 +1101,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckDefTicket()
     {
-        if(level >= 14)
+        if(level >= 15)
         {
             defTicketObj.SetActive(true);
 

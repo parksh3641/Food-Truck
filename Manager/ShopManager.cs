@@ -640,7 +640,7 @@ public class ShopManager : MonoBehaviour
             case 3:
                 PlayfabManager.instance.PurchaseRemoveAd();
 
-                shopContents[7].gameObject.SetActive(false);
+                Invoke("ContentDelay", 0.5f);
 
                 SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                 break;
@@ -696,6 +696,11 @@ public class ShopManager : MonoBehaviour
                 NotionManager.instance.UseNotion(NotionType.SuccessBuy);
                 break;
         }
+    }
+
+    void ContentDelay()
+    {
+        shopContents[7].gameObject.SetActive(false);
     }
 
     public void Failed()

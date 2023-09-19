@@ -410,6 +410,37 @@ public class GameManager : MonoBehaviour
         }
 
         titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) + "  +" + (level + 1);
+
+        if(level >= 29)
+        {
+            titleText.color = Color.red;
+        }
+        else if(level >= 24)
+        {
+            titleText.color = Color.green;
+        }
+        else if (level >= 19)
+        {
+            titleText.color = Color.yellow;
+        }
+        else if (level >= 14)
+        {
+            titleText.color = new Color(1, 0, 1);
+        }
+        else if (level >= 9)
+        {
+            titleText.color = Color.blue;
+        }
+        else if (level >= 4)
+        {
+            titleText.color = new Color(1, 150 / 255f, 0);
+        }
+        else
+        {
+            titleText.color = Color.white;
+        }
+
+
         successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success + "%";
         needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(need);
 
@@ -680,19 +711,19 @@ public class GameManager : MonoBehaviour
                         Handheld.Vibrate();
                     }
 
+                    if (GameStateManager.instance.Effect)
+                    {
+                        bombPartice.gameObject.SetActive(false);
+                        bombPartice.gameObject.SetActive(true);
+                        bombPartice.Play();
+                    }
+
                     if (isDef)
                     {
                         UseDefTicket();
 
                         NotionManager.instance.UseNotion(NotionType.DefDestroyNotion);
                         return;
-                    }
-
-                    if (GameStateManager.instance.Effect)
-                    {
-                        bombPartice.gameObject.SetActive(false);
-                        bombPartice.gameObject.SetActive(true);
-                        bombPartice.Play();
                     }
 
                     level = 0;
@@ -721,7 +752,6 @@ public class GameManager : MonoBehaviour
                     }
 
                     CheckFoodState();
-
                     UpgradeInitialize();
 
                     SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
@@ -1101,7 +1131,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckDefTicket()
     {
-        if(level >= 15)
+        if(level >= 15 && level + 1 < upgradeFood.maxLevel)
         {
             defTicketObj.SetActive(true);
 

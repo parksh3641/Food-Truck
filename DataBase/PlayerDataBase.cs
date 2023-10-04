@@ -697,6 +697,11 @@ public class PlayerDataBase : ScriptableObject
         portion3 = 0;
         portion4 = 0;
 
+        coupon1 = 0;
+        coupon2 = 0;
+        coupon3 = 0;
+        coupon4 = 0;
+
         attendanceDay = "";
         attendanceCount = 0;
         attendanceCheck = false;

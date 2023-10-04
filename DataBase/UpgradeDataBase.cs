@@ -31,31 +31,31 @@ public class UpgradeFood
 
         if (level >= 30)
         {
-            price = level * level * 25600;
+            price = level * level * 38400;
         }
         else if (level >= 25)
         {
-            price = level * level * 12800;
+            price = level * level * 19200;
         }
         else if (level >= 20)
         {
-            price = level * level * 6400;
+            price = level * level * 9600;
         }
         else if (level >= 15)
         {
-            price = level * level * 3200;
+            price = level * level * 4800;
         }
         else if (level >= 10)
         {
-            price = level * level * 1600;
+            price = level * level * 2400;
         }
         else if(level >= 5)
         {
-            price = level * level * 800;
+            price = level * level * 1200;
         }
         else
         {
-            price = level * level * 400;
+            price = level * level * 600;
         }
 
         return price;

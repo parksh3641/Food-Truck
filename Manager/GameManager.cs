@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
     public GameObject feverEffect;
     public GameObject backButton;
 
+    public Text feverText;
+
     private int feverCount = 0;
     private int feverMaxCount = 100;
     private int feverTime = 30;
@@ -88,6 +90,8 @@ public class GameManager : MonoBehaviour
     public bool isDelay_Camera = false;
     public bool isDelay = false;
     public bool isDef = false;
+
+    public bool nextFood = false;
 
     [Space]
     [Title("Bankruptcy")]
@@ -195,12 +199,18 @@ public class GameManager : MonoBehaviour
         {
             OpenLoginView();
         }
+
+#if !UNITY_EDITOR
+            GameStateManager.instance.Developer = false;
+#endif
     }
 
     public void SuccessLogin()
     {
         checkInternet.SetActive(false);
         loginView.SetActive(false);
+
+        feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " 0%";
 
         switch (GameStateManager.instance.FoodType)
         {
@@ -283,6 +293,8 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(true);
         languageUI.SetActive(false);
 
+        nextFood = false;
+
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
 
         //nextLevel = GameStateManager.instance.Level / 5;
@@ -328,6 +340,8 @@ public class GameManager : MonoBehaviour
     public void ChangeFood(FoodType type)
     {
         if (GameStateManager.instance.FoodType == type) return;
+
+        nextFood = false;
 
         GameStateManager.instance.FoodType = type;
 
@@ -409,7 +423,7 @@ public class GameManager : MonoBehaviour
             success = 100;
         }
 
-        titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) + "  +" + (level + 1);
+        titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) + "  +" + (level + 1) + " / " + upgradeFood.maxLevel;
 
         if(level >= 29)
         {
@@ -429,7 +443,7 @@ public class GameManager : MonoBehaviour
         }
         else if (level >= 9)
         {
-            titleText.color = Color.blue;
+            titleText.color = new Color(0, 150 / 255f, 1);
         }
         else if (level >= 4)
         {
@@ -678,10 +692,121 @@ public class GameManager : MonoBehaviour
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
 
-                        StartCoroutine(MaxLevelUpgradeSuccess());
+                        MaxLevelUpgradeSuccess();
                     }
                     else
                     {
+                        if(level + 1 >= 10)
+                        {
+                            switch (GameStateManager.instance.FoodType)
+                            {
+                                case FoodType.Hamburger:
+                                    if(playerDataBase.NextFoodNumber == 0 && !nextFood)
+                                    {
+                                        nextFood = true;
+
+                                        playerDataBase.HamburgerMaxValue += 1;
+                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("HamburgerMaxValue", playerDataBase.HamburgerMaxValue);
+
+                                        if (playerDataBase.HamburgerMaxValue == 1)
+                                        {
+                                            playerDataBase.NextFoodNumber += 1;
+
+                                            nextFoodUI.SetActive(true);
+                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                            changeFoodAlarmObj.SetActive(true);
+                                        }
+                                    }
+                                    break;
+                                case FoodType.Sandwich:
+                                    if(playerDataBase.NextFoodNumber == 1 && !nextFood)
+                                    {
+                                        nextFood = true;
+
+                                        playerDataBase.SandwichMaxValue += 1;
+                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.SandwichMaxValue);
+
+                                        if (playerDataBase.SandwichMaxValue == 1)
+                                        {
+                                            playerDataBase.NextFoodNumber += 1;
+                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                            changeFoodAlarmObj.SetActive(true);
+                                        }
+                                    }
+                                    break;
+                                case FoodType.SnackLab:
+                                    if (playerDataBase.NextFoodNumber == 2 && !nextFood)
+                                    {
+                                        nextFood = true;
+
+                                        playerDataBase.SnackLabMaxValue += 1;
+                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.SnackLabMaxValue);
+
+                                        if (playerDataBase.SnackLabMaxValue == 1)
+                                        {
+                                            playerDataBase.NextFoodNumber += 1;
+                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                            changeFoodAlarmObj.SetActive(true);
+                                        }
+                                    }
+                                    break;
+                                case FoodType.Drink:
+                                    if (playerDataBase.NextFoodNumber == 3 && !nextFood)
+                                    {
+                                        nextFood = true;
+
+                                        playerDataBase.DrinkMaxValue += 1;
+                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.DrinkMaxValue);
+
+                                        if (playerDataBase.DrinkMaxValue == 1)
+                                        {
+                                            playerDataBase.NextFoodNumber += 1;
+                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                            changeFoodAlarmObj.SetActive(true);
+                                        }
+                                    }
+                                    break;
+                                case FoodType.Pizza:
+                                    if (playerDataBase.NextFoodNumber == 4 && !nextFood)
+                                    {
+                                        nextFood = true;
+
+                                        playerDataBase.PizzaMaxValue += 1;
+                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.PizzaMaxValue);
+
+                                        if (playerDataBase.PizzaMaxValue == 1)
+                                        {
+                                            playerDataBase.NextFoodNumber += 1;
+                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                            changeFoodAlarmObj.SetActive(true);
+                                        }
+                                    }
+                                    break;
+                                case FoodType.Donut:
+                                    if (playerDataBase.NextFoodNumber == 5 && !nextFood)
+                                    {
+                                        nextFood = true;
+
+                                        playerDataBase.DonutMaxValue += 1;
+                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
+
+                                        if (playerDataBase.DonutMaxValue == 1)
+                                        {
+                                            playerDataBase.NextFoodNumber += 1;
+                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                            changeFoodAlarmObj.SetActive(true);
+                                        }
+                                    }
+                                    break;
+                            }
+                        }
+
                         if ((level + 1) % 5 == 0)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
@@ -804,6 +929,8 @@ public class GameManager : MonoBehaviour
     void CheckFever()
     {
         feverFillamount.fillAmount = feverCount * 1.0f / feverMaxCount * 1.0f;
+
+        feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " " + ((feverCount * 1.0f / feverMaxCount * 1.0f) * 100) + "%";
 
         if (feverCount >= feverMaxCount)
         {
@@ -968,113 +1095,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator MaxLevelUpgradeSuccess()
+    void MaxLevelUpgradeSuccess()
     {
         switch (GameStateManager.instance.FoodType)
         {
             case FoodType.Hamburger:
-                playerDataBase.HamburgerMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("HamburgerMaxValue", playerDataBase.HamburgerMaxValue);
-
                 playerDataBase.GourmetLevel += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
 
-                yield return waitForSeconds;
-
-                if (playerDataBase.HamburgerMaxValue == 1)
-                {
-                    playerDataBase.NextFoodNumber += 1;
-
-                    nextFoodUI.SetActive(true);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                    changeFoodAlarmObj.SetActive(true);
-                }
                 break;
             case FoodType.Sandwich:
-                playerDataBase.SandwichMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.SandwichMaxValue);
-
                 playerDataBase.GourmetLevel += 10;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
 
-                yield return waitForSeconds;
-
-                if (playerDataBase.SandwichMaxValue == 1)
-                {
-                    playerDataBase.NextFoodNumber += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                    changeFoodAlarmObj.SetActive(true);
-                }
                 break;
             case FoodType.SnackLab:
-                playerDataBase.SnackLabMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.SnackLabMaxValue);
-
                 playerDataBase.GourmetLevel += 100;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
 
-                yield return waitForSeconds;
-
-                if (playerDataBase.SnackLabMaxValue == 1)
-                {
-                    playerDataBase.NextFoodNumber += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                    changeFoodAlarmObj.SetActive(true);
-                }
                 break;
             case FoodType.Drink:
-                playerDataBase.DrinkMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.DrinkMaxValue);
-
                 playerDataBase.GourmetLevel += 150;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
 
-                yield return waitForSeconds;
-
-                if (playerDataBase.DrinkMaxValue == 1)
-                {
-                    playerDataBase.NextFoodNumber += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                    changeFoodAlarmObj.SetActive(true);
-                }
                 break;
             case FoodType.Pizza:
-                playerDataBase.PizzaMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.PizzaMaxValue);
-
                 playerDataBase.GourmetLevel += 150;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
 
-                yield return waitForSeconds;
-
-                if (playerDataBase.PizzaMaxValue == 1)
-                {
-                    playerDataBase.NextFoodNumber += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                    changeFoodAlarmObj.SetActive(true);
-                }
                 break;
             case FoodType.Donut:
-                playerDataBase.DonutMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
-
                 //playerDataBase.GourmetLevel += 10000;
                 //PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
 
-                yield return waitForSeconds;
-
-                if (playerDataBase.DonutMaxValue == 1)
-                {
-                    playerDataBase.NextFoodNumber += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                    changeFoodAlarmObj.SetActive(true);
-                }
                 break;
         }
 
@@ -1092,6 +1145,8 @@ public class GameManager : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }
+
+        nextFood = false;
 
         level = 0;
         nextLevel = 0;
@@ -1485,7 +1540,7 @@ public class GameManager : MonoBehaviour
 #if UNITY_ANDROID || UNITY_EDITOR
         Application.OpenURL("https://play.google.com/store/apps/details?id=com.whilili.foodtruck");
 #elif UNITY_IOS
-        Application.OpenURL("https://play.google.com/store/apps/details?id=com.whilili.foodtruck");
+        Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
 #endif
 
         CloseAppReview();

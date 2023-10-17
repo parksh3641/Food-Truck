@@ -68,8 +68,6 @@ public class NickNameManager : MonoBehaviour
             return;
         }
 
-        string Check = Regex.Replace(inputField.text, @"[^a-zA-Z0-9가-힣]", "", RegexOptions.Singleline);
-
         for (int i = 0; i < lines.Length; i++)
         {
             if (inputField.text.Contains(lines[i]))
@@ -78,6 +76,8 @@ public class NickNameManager : MonoBehaviour
                 return;
             }
         }
+
+        string Check = Regex.Replace(inputField.text, @"[^a-zA-Z0-9가-힣]", "", RegexOptions.Singleline);
 
         if (inputField.text.Equals(Check) == true)
         {

@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem levelUpParticle;
     public ParticleSystem bombPartice;
 
+    public TutorialManager tutorialManager;
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
@@ -250,6 +251,11 @@ public class GameManager : MonoBehaviour
         }
 
         PlayfabManager.instance.GetTitleInternalData("Coupon", CheckCoupon);
+
+        if(!GameStateManager.instance.Tutorial)
+        {
+            tutorialManager.TutorialStart();
+        }
     }
 
     void CheckCoupon(bool check)
@@ -1015,6 +1021,8 @@ public class GameManager : MonoBehaviour
         {
             float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / feverTime);
 
+            feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " " + (fillAmount * 100).ToString("N0") + "%";
+
             fillAmount = Mathf.Clamp01(fillAmount);
 
             feverFillamount.fillAmount = fillAmount;
@@ -1186,7 +1194,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckDefTicket()
     {
-        if(level >= 15 && level + 1 < upgradeFood.maxLevel)
+        if(level >= 10 && level + 1 < upgradeFood.maxLevel)
         {
             defTicketObj.SetActive(true);
 

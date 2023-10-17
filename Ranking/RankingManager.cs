@@ -103,17 +103,17 @@ public class RankingManager : MonoBehaviour
         switch(number)
         {
             case 0:
-                ChangeRankingView(RankingType.GourmetLevel);
+                ChangeRankingView(RankingType.UpgradeCount);
 
                 infoText.localizationName = "Ranking1_Info";
                 break;
             case 1:
-                ChangeRankingView(RankingType.DonutLevel);
+                ChangeRankingView(RankingType.GourmetLevel);
 
                 infoText.localizationName = "Ranking2_Info";
                 break;
             case 2:
-                ChangeRankingView(RankingType.UpgradeCount);
+                ChangeRankingView(RankingType.DonutLevel);
 
                 infoText.localizationName = "Ranking3_Info";
                 break;

@@ -29,6 +29,11 @@ public class TutorialManager : MonoBehaviour
 
     public void TutorialStart()
     {
+        Invoke("Wait", 2f);
+    }
+
+    void Wait()
+    {
         tutorialView.SetActive(true);
 
         talkIndex = 0;
@@ -45,10 +50,13 @@ public class TutorialManager : MonoBehaviour
 
         switch (number)
         {
-            case 3:
+            case 4:
                 tutorialView.SetActive(false);
 
-                nameManager.nickNameView.SetActive(true);
+                if (GameStateManager.instance.NickName.Length > 15)
+                {
+                    nameManager.nickNameView.SetActive(true);
+                }
 
                 GameStateManager.instance.Tutorial = true;
                 break;

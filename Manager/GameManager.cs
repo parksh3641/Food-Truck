@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public Text goldText;
     public Text signText;
 
+    public GameObject privacypolicyView;
+
     public GameObject coupon;
     public GameObject deleteAccount;
 
@@ -129,6 +131,8 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
         if (upgradeDataBase == null) upgradeDataBase = Resources.Load("UpgradeDataBase") as UpgradeDataBase;
 
@@ -178,6 +182,8 @@ public class GameManager : MonoBehaviour
         defTicketObj.SetActive(false);
 
         bankruptcyView.SetActive(false);
+
+        privacypolicyView.SetActive(false);
     }
 
     private void Start()
@@ -204,6 +210,11 @@ public class GameManager : MonoBehaviour
 #if !UNITY_EDITOR
             GameStateManager.instance.Developer = false;
 #endif
+
+        if (!GameStateManager.instance.Privacypolicy)
+        {
+            privacypolicyView.SetActive(true);
+        }
     }
 
     public void SuccessLogin()
@@ -1559,6 +1570,28 @@ public class GameManager : MonoBehaviour
         FirebaseAnalytics.LogEvent("FeedBack");
 
         Application.OpenURL("https://forms.gle/RtZM83MWko6aJR5c6");
+    }
+
+    public void OpenPrivacypolicyURL()
+    {
+        Application.OpenURL("https://sites.google.com/view/whilili-privacypolicy");
+    }
+
+    public void OpenTermsURL()
+    {
+        Application.OpenURL("https://sites.google.com/view/whilili-terms");
+    }
+
+    public void Agree()
+    {
+        GameStateManager.instance.Privacypolicy = true;
+
+        privacypolicyView.SetActive(false);
+    }
+
+    public void Decline()
+    {
+        Application.Quit();
     }
 
     void WaitDelay()

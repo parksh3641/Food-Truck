@@ -65,6 +65,8 @@ public class GameStateManager : MonoBehaviour
         [Title("Bankruptcy")]
         public int bankruptcy = 0;
         public bool tutorial = false;
+
+        public bool privacypolicy = false;
     }
 
     #region Data
@@ -453,6 +455,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.tutorial = value;
+            SaveFile();
+        }
+    }
+
+    public bool Privacypolicy
+    {
+        get
+        {
+            return gameSettings.privacypolicy;
+        }
+        set
+        {
+            gameSettings.privacypolicy = value;
             SaveFile();
         }
     }

@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
         checkInternet.SetActive(false);
         loginView.SetActive(false);
 
-        feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " 0%";
+        feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " : 0%";
 
         switch (GameStateManager.instance.FoodType)
         {
@@ -440,7 +440,7 @@ public class GameManager : MonoBehaviour
             success = 100;
         }
 
-        titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) + "  +" + (level + 1) + " / " + upgradeFood.maxLevel;
+        titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) + " ( +" + (level + 1) + " / " + upgradeFood.maxLevel +" )";
 
         if(level >= 29)
         {
@@ -947,7 +947,7 @@ public class GameManager : MonoBehaviour
     {
         feverFillamount.fillAmount = feverCount * 1.0f / feverMaxCount * 1.0f;
 
-        feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " " + ((feverCount * 1.0f / feverMaxCount * 1.0f) * 100) + "%";
+        feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " : " + ((feverCount * 1.0f / feverMaxCount * 1.0f) * 100) + "%";
 
         if (feverCount >= feverMaxCount)
         {
@@ -1032,7 +1032,7 @@ public class GameManager : MonoBehaviour
         {
             float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / feverTime);
 
-            feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " " + (fillAmount * 100).ToString("N0") + "%";
+            feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " : " + (fillAmount * 100).ToString("N0") + "%";
 
             fillAmount = Mathf.Clamp01(fillAmount);
 
@@ -1490,7 +1490,7 @@ public class GameManager : MonoBehaviour
         {
             loginView.SetActive(true);
 
-            loginButtonArray[0].SetActive(false);
+            loginButtonArray[0].SetActive(true);
             loginButtonArray[1].SetActive(false);
             loginButtonArray[2].SetActive(false);
 

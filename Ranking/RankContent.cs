@@ -37,7 +37,7 @@ public class RankContent : MonoBehaviour
 
         nickNameText.text = nickName;
         countryImg.sprite = Resources.Load<Sprite>("Country/" + country);
-        scoreText.text = score.ToString();
+        scoreText.text = MoneyUnitString.ToCurrencyString((int.Parse(score)));
 
 
         if (index == 999)

@@ -38,7 +38,7 @@ public class ChangeFoodManager : MonoBehaviour
         for (int i = 0; i < System.Enum.GetValues(typeof(FoodType)).Length; i++)
         {
             ChangeFoodContent monster = Instantiate(changeFoodContent);
-            monster.transform.parent = changeFoodContentTransform;
+            monster.transform.SetParent(changeFoodContentTransform);
             monster.transform.position = Vector3.zero;
             monster.transform.rotation = Quaternion.identity;
             monster.transform.localScale = Vector3.one;

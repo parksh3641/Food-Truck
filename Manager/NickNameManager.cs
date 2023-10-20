@@ -50,8 +50,6 @@ public class NickNameManager : MonoBehaviour
 
             nickNameView.SetActive(true);
             closeButton.SetActive(true);
-
-            SoundManager.instance.PlaySFX(GameSfxType.Click);
         }
         else
         {

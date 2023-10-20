@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class ShopManager : MonoBehaviour
 {
     public GameObject shopView;
+    public GameObject truckShopView;
 
     [Space]
     [Title("TopMenu")]
@@ -76,6 +77,7 @@ public class ShopManager : MonoBehaviour
         if (truckDataBase == null) truckDataBase = Resources.Load("TruckDataBase") as TruckDataBase;
 
         shopView.SetActive(false);
+        truckShopView.SetActive(false);
     }
 
     private void Start()
@@ -154,6 +156,20 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void OpenTruckShopView()
+    {
+        if (!truckShopView.activeInHierarchy)
+        {
+            truckShopView.SetActive(true);
+
+            TruckInitialize();
+        }
+        else
+        {
+            truckShopView.SetActive(false);
+        }
+    }
+
     public void ChangeTopToggle(int number)
     {
         if (index == number) return;
@@ -163,7 +179,7 @@ public class ShopManager : MonoBehaviour
         for(int i = 0; i < topMenuImgArray.Length; i ++)
         {
             topMenuImgArray[i].sprite = topMenuSpriteArray[0];
-            shopArray[i].gameObject.SetActive(false);
+            //shopArray[i].gameObject.SetActive(false);
         }
 
         topMenuImgArray[number].sprite = topMenuSpriteArray[1];

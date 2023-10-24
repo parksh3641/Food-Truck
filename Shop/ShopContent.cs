@@ -123,7 +123,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[2].ReLoad();
                 break;
             case ItemType.AdReward_Potion:
-                rewardText.text = "1 ~ 2";
+                rewardText.text = "";
                 break;
             case ItemType.RemoveAds:
                 lockedObj.SetActive(false);
@@ -165,6 +165,9 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
+                break;
+            case ItemType.DailyReward_Portion:
+                rewardText.text = "";
                 break;
         }
 

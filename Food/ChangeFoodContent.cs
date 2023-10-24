@@ -28,16 +28,9 @@ public class ChangeFoodContent : MonoBehaviour
         titleText.ReLoad();
     }
 
-    public void SetLevel(int level)
+    public void SetLevel(int level, int max)
     {
-        if (level == 0)
-        {
-            titleText.plusText = "";
-        }
-        else
-        {
-            titleText.plusText = " +" + (level + 1).ToString();
-        }
+        titleText.plusText = "\n( +" + (level + 1).ToString() + " / " + max.ToString() + " )";
 
         titleText.ReLoad();
     }

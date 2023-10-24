@@ -10,6 +10,9 @@ public class StateManager : MonoBehaviour
 
     public GameManager gameManager;
     public ResetManager resetManager;
+    public LockManager lockManager;
+    public ChestBoxManager chestBoxManager;
+    public QuestManager questManager;
 
     private void Awake()
     {
@@ -42,5 +45,10 @@ public class StateManager : MonoBehaviour
         fadeInOut.FadeIn();
         gameManager.Initialize();
         resetManager.Initialize();
+        lockManager.Initialize();
+        chestBoxManager.Initialize();
+        questManager.Initialize();
+
+        Debug.Log("Load Complete!");
     }
 }

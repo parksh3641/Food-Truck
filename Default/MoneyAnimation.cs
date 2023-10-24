@@ -8,6 +8,7 @@ public class MoneyAnimation : MonoBehaviour
 {
     public Text myMoneyText;
 
+    public GameObject plusMoneyObj;
     public Text plusMoneyText;
 
     public Transform plusMoneyStartTransform;
@@ -43,7 +44,7 @@ public class MoneyAnimation : MonoBehaviour
             moneyPrefabList.Add(monster);
         }
 
-        plusMoneyText.gameObject.SetActive(false);
+        plusMoneyObj.SetActive(false);
     }
 
     [Button]
@@ -59,8 +60,8 @@ public class MoneyAnimation : MonoBehaviour
         //gold = playerDataBase.Coin;
         //myMoneyText.text = MoneyUnitString.ToCurrencyString(gold);
 
-        plusMoneyText.gameObject.SetActive(false);
-        plusMoneyText.gameObject.SetActive(true);
+        plusMoneyObj.SetActive(false);
+        plusMoneyObj.SetActive(true);
         plusMoneyText.text = "+" + MoneyUnitString.ToCurrencyString(target);
 
         StartCoroutine(PlusMoneyCoroution(target));
@@ -152,6 +153,6 @@ public class MoneyAnimation : MonoBehaviour
 
         //myMoneyText.text = MoneyUnitString.ToCurrencyString(gold + max);
 
-        plusMoneyText.gameObject.SetActive(false);
+        plusMoneyObj.gameObject.SetActive(false);
     }
 }

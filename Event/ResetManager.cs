@@ -15,6 +15,8 @@ public class ResetManager : MonoBehaviour
     DateTime serverTime;
     DateTime nextMondey;
 
+    public ShopManager shopManager;
+
     //public AttendanceManager attendanceManager;
     //public EventManager eventManager;
 
@@ -54,7 +56,11 @@ public class ResetManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceDay", int.Parse(playerDataBase.AttendanceDay));
 
             GameStateManager.instance.DailyReward = false;
+            GameStateManager.instance.DailyReward_Portion = false;
             GameStateManager.instance.DailyAdsReward = false;
+            GameStateManager.instance.DailyAdsReward2 = false;
+
+            GameStateManager.instance.ChestBoxCount = 0;
 
             if (playerDataBase.AttendanceCheck)
             {
@@ -72,6 +78,8 @@ public class ResetManager : MonoBehaviour
                 {
                     Debug.Log("다음 출석 체크 보상 오픈");
                 }
+
+                shopManager.SetAlarm();
 
                 //attendanceManager.OnSetAlarm();
             }
@@ -96,7 +104,11 @@ public class ResetManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceDay", int.Parse(playerDataBase.AttendanceDay));
 
                 GameStateManager.instance.DailyReward = false;
+                GameStateManager.instance.DailyReward_Portion = false;
                 GameStateManager.instance.DailyAdsReward = false;
+                GameStateManager.instance.DailyAdsReward2 = false;
+
+                GameStateManager.instance.ChestBoxCount = 0;
 
                 if (playerDataBase.AttendanceCheck)
                 {
@@ -114,6 +126,8 @@ public class ResetManager : MonoBehaviour
                     {
                         Debug.Log("다음 출석 체크 보상 오픈");
                     }
+
+                    shopManager.SetAlarm();
 
                     //attendanceManager.OnSetAlarm();
                 }

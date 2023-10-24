@@ -31,6 +31,7 @@ public class Notion : MonoBehaviour
     void OnEnable()
     {
         tween.Kill();
+        DOTween.ToAlpha(() => txt.color, color => txt.color = color, 1, 0);
         second_speed_down = second_speed;
         which = trans.localPosition;
         scale = plus_scale;

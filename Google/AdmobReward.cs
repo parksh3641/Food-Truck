@@ -15,6 +15,8 @@ public class AdmobReward : MonoBehaviour
     string adUnitId;
 
     public ShopManager shopManager;
+    public ChestBoxManager chestBoxManager;
+
     PlayerDataBase playerDataBase;
 
     private void Awake()
@@ -89,6 +91,9 @@ public class AdmobReward : MonoBehaviour
                 case 1:
                     shopManager.SuccessWatchAd_Portion();
                     break;
+                case 2:
+                    chestBoxManager.SuccessWatchAd();
+                    break;
             }
         }
         else
@@ -109,6 +114,9 @@ public class AdmobReward : MonoBehaviour
                             break;
                         case 1:
                             shopManager.SuccessWatchAd_Portion();
+                            break;
+                        case 2:
+                            chestBoxManager.SuccessWatchAd();
                             break;
                     }
 

@@ -56,8 +56,11 @@ public class GameStateManager : MonoBehaviour
         [Title("Ads")]
         public bool removeAds = false;
         public bool adActive = false;
-        public int adCount = 0;
+        public int adCount = 200;
+        public int chestBoxCount = 0;
+        public int chestBoxCoolTime = 120;
         public bool dailyReward = false;
+        public bool dailyReward_Portion = false;
         public bool dailyAdsReward = false;
         public bool dailyAdsReward2 = false;
 
@@ -394,6 +397,33 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public int ChestBoxCount
+    {
+        get
+        {
+            return gameSettings.chestBoxCount;
+        }
+        set
+        {
+            gameSettings.chestBoxCount = value;
+            SaveFile();
+        }
+    }
+
+    public int ChestBoxCoolTime
+    {
+        get
+        {
+            return gameSettings.chestBoxCoolTime;
+        }
+        set
+        {
+            gameSettings.chestBoxCoolTime = value;
+            SaveFile();
+        }
+    }
+
+
     public bool DailyReward
     {
         get
@@ -403,6 +433,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.dailyReward = value;
+            SaveFile();
+        }
+    }
+
+    public bool DailyReward_Portion
+    {
+        get
+        {
+            return gameSettings.dailyReward_Portion;
+        }
+        set
+        {
+            gameSettings.dailyReward_Portion = value;
             SaveFile();
         }
     }
@@ -489,12 +532,11 @@ public class GameStateManager : MonoBehaviour
             if (!string.IsNullOrEmpty(stjs))
             {
                 gameSettings = JsonUtility.FromJson<GameSettings>(stjs);
+                gameSettings.adCount = 200;
             }
             else
             {
                 gameSettings = new GameSettings();
-                gameSettings.dailyReward = false;
-                gameSettings.dailyAdsReward = false;
             }
         }
         catch (Exception e)

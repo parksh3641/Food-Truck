@@ -67,17 +67,17 @@ public class UpgradeFood
 
         float percent = 0;
 
-        if(level >= 89)
+        if(level >= 90)
         {
-            percent = 1 - ((level - 89) * 0.1f);
+            percent = 40 - ((level - 90) * 0.1f);
         }
-        else if (level >= 10)
+        else if (level >= 30)
         {
-            percent = 80 - (level - 10);
+            percent = 70 - ((level - 30) - 0.5f);
         }
         else
         {
-            percent = 100 - (level * 2);
+            percent = 100 - (level * 1);
         }
 
         if(percent <= 0.1f)

@@ -655,7 +655,7 @@ public class PlayfabManager : MonoBehaviour
 
         GetPlayerNickName();
 
-        //yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
 
         //yield return GetCatalog();
 
@@ -825,6 +825,9 @@ public class PlayfabManager : MonoBehaviour
                        case "DefDestroyTicket":
                            playerDataBase.DefDestroyTicket = statistics.Value;
                            break;
+                       case "LockTutorial":
+                           playerDataBase.LockTutorial = statistics.Value;
+                           break;
                        case "NextFoodNumber":
                            playerDataBase.NextFoodNumber = statistics.Value;
                            break;
@@ -845,6 +848,27 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "DonutMaxValue":
                            playerDataBase.DonutMaxValue = statistics.Value;
+                           break;
+                       case "SellCount":
+                           playerDataBase.SellCount = statistics.Value;
+                           break;
+                       case "UseSources":
+                           playerDataBase.UseSources = statistics.Value;
+                           break;
+                       case "OpenChestBox":
+                           playerDataBase.OpenChestBox = statistics.Value;
+                           break;
+                       case "QuestCount":
+                           playerDataBase.QuestCount = statistics.Value;
+                           break;
+                       case "Skill1":
+                           playerDataBase.Skill1 = statistics.Value;
+                           break;
+                       case "Skill2":
+                           playerDataBase.Skill2 = statistics.Value;
+                           break;
+                       case "Skill3":
+                           playerDataBase.Skill3 = statistics.Value;
                            break;
                        case "Portion1":
                            playerDataBase.Portion1 = statistics.Value;

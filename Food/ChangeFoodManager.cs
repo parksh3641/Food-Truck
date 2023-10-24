@@ -20,11 +20,13 @@ public class ChangeFoodManager : MonoBehaviour
 
     PlayerDataBase playerDataBase;
     ImageDataBase imageDataBase;
+    UpgradeDataBase upgradeDataBase;
 
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
         if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
+        if (upgradeDataBase == null) upgradeDataBase = Resources.Load("UpgradeDataBase") as UpgradeDataBase;
 
         foodChangeArray = imageDataBase.GetFoodChangeArray();
 
@@ -72,12 +74,12 @@ public class ChangeFoodManager : MonoBehaviour
             changeFoodContentList[i].Locked();
         }
 
-        changeFoodContentList[0].SetLevel(GameStateManager.instance.HamburgerLevel);
-        changeFoodContentList[1].SetLevel(GameStateManager.instance.SandwichLevel);
-        changeFoodContentList[2].SetLevel(GameStateManager.instance.SnackLabLevel);
-        changeFoodContentList[3].SetLevel(GameStateManager.instance.DrinkLevel);
-        changeFoodContentList[4].SetLevel(GameStateManager.instance.PizzaLevel);
-        changeFoodContentList[5].SetLevel(GameStateManager.instance.DonutLevel);
+        changeFoodContentList[0].SetLevel(GameStateManager.instance.HamburgerLevel, upgradeDataBase.GetMaxLevel(FoodType.Hamburger));
+        changeFoodContentList[1].SetLevel(GameStateManager.instance.SandwichLevel, upgradeDataBase.GetMaxLevel(FoodType.Sandwich));
+        changeFoodContentList[2].SetLevel(GameStateManager.instance.SnackLabLevel, upgradeDataBase.GetMaxLevel(FoodType.SnackLab));
+        changeFoodContentList[3].SetLevel(GameStateManager.instance.DrinkLevel, upgradeDataBase.GetMaxLevel(FoodType.Drink));
+        changeFoodContentList[4].SetLevel(GameStateManager.instance.PizzaLevel, upgradeDataBase.GetMaxLevel(FoodType.Pizza));
+        changeFoodContentList[5].SetLevel(GameStateManager.instance.DonutLevel, upgradeDataBase.GetMaxLevel(FoodType.Donut));
 
 
 

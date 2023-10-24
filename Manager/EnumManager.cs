@@ -82,7 +82,9 @@ public enum GameSfxType
     Screen_Out,
     Fever_In,
     UseSources,
-    NotSources
+    NotSources,
+    ChestBox,
+    QuestReward
 }
 
 public enum TruckType
@@ -111,7 +113,8 @@ public enum ItemType
     RemoveAds,
     PortionSet1,
     PortionSet2,
-    PortionSet3
+    PortionSet3,
+    DailyReward_Portion
 }
 
 public enum BuyType
@@ -158,4 +161,26 @@ public enum RewardType
     Portion2,
     Portion3,
     Portion4,
+    PortionSet
+}
+
+public enum QuestType
+{
+    HamburgerMaxValue,
+    SandwichMaxValue,
+    SnackLabMaxValue,
+    DrinkMaxValue,
+    PizzaMaxValue,
+    UpgradeCount,
+    SellCount,
+    UseSources,
+    OpenChestBox,
+    DonutLevel
+}
+
+public enum SkillType
+{
+    Skill1,
+    Skill2,
+    Skill3,
 }

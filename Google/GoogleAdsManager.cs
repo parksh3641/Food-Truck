@@ -11,6 +11,8 @@ public class GoogleAdsManager : MonoBehaviour
     public AdmobReward admobReward_Gold;
     public AdmobReward admobReward_Portion;
     public AdmobScreen admobScreen;
+    public AdmobReward admobReward_ChestBoxGold;
+    public AdmobReward admobReward_ChestBoxSources;
 
     private void Awake()
     {

@@ -176,5 +176,6 @@ public enum NotionType
     UsePortionNotion4,
     CouponNotion1,
     CouponNotion2,
-    CouponNotion3
+    CouponNotion3,
+    QuestNotion
 }

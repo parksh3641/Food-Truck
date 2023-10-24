@@ -61,7 +61,6 @@ public class NickNameManager : MonoBehaviour
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }

@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -10,6 +11,9 @@ public class ShopManager : MonoBehaviour
 {
     public GameObject shopView;
     public GameObject truckShopView;
+
+    public GameObject alarm;
+    public GameObject dailyAlarm;
 
     [Space]
     [Title("TopMenu")]
@@ -78,6 +82,9 @@ public class ShopManager : MonoBehaviour
 
         shopView.SetActive(false);
         truckShopView.SetActive(false);
+
+        alarm.SetActive(false);
+        dailyAlarm.SetActive(false);
     }
 
     private void Start()
@@ -99,6 +106,12 @@ public class ShopManager : MonoBehaviour
         StartCoroutine(DailyShopTimer());
 
         shopRectTransform.anchoredPosition = new Vector2(0, -9999);
+    }
+
+    public void SetAlarm()
+    {
+        alarm.SetActive(true);
+        dailyAlarm.SetActive(true);
     }
 
     public void OpenShopView()
@@ -126,29 +139,9 @@ public class ShopManager : MonoBehaviour
             if (index == - 1)
             {
                 ChangeTopToggle(0);
-
-                ItemInitialize();
             }
 
-            if (!GameStateManager.instance.DailyReward)
-            {
-                shopContents[0].SetLocked(false);
-            }
-
-            if (!GameStateManager.instance.DailyAdsReward)
-            {
-                shopContents[1].SetLocked(false);
-            }
-
-            if (!GameStateManager.instance.DailyAdsReward2)
-            {
-                shopContents[6].SetLocked(false);
-            }
-
-            if(playerDataBase.RemoveAds)
-            {
-                shopContents[7].gameObject.SetActive(false);
-            }
+            FirebaseAnalytics.LogEvent("OpenShop");
         }
         else
         {
@@ -163,6 +156,8 @@ public class ShopManager : MonoBehaviour
             truckShopView.SetActive(true);
 
             TruckInitialize();
+
+            FirebaseAnalytics.LogEvent("OpenSpeicalShop");
         }
         else
         {
@@ -179,33 +174,59 @@ public class ShopManager : MonoBehaviour
         for(int i = 0; i < topMenuImgArray.Length; i ++)
         {
             topMenuImgArray[i].sprite = topMenuSpriteArray[0];
-            //shopArray[i].gameObject.SetActive(false);
+            shopArray[i].gameObject.SetActive(false);
         }
 
         topMenuImgArray[number].sprite = topMenuSpriteArray[1];
-        shopArray[number].gameObject.SetActive(true);
+        shopArray[number].gameObject.SetActive(true); 
 
         switch(number)
         {
-            case 1:
-                TruckInitialize();
-                break;
-        }    
-    }
+            case 0:
+                shopContents[0].Initialize(ItemType.DailyReward, BuyType.Free, this);
+                shopContents[1].Initialize(ItemType.AdReward_Gold, BuyType.Ad, this);
+                shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
+                shopContents[6].Initialize(ItemType.AdReward_Potion, BuyType.Ad, this);
+                shopContents[7].Initialize(ItemType.RemoveAds, BuyType.Rm, this);
+                shopContents[11].Initialize(ItemType.DailyReward_Portion, BuyType.Free, this);
 
-    void ItemInitialize()
-    {
-        shopContents[0].Initialize(ItemType.DailyReward, BuyType.Free, this);
-        shopContents[1].Initialize(ItemType.AdReward_Gold, BuyType.Ad, this);
-        shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
-        shopContents[3].Initialize(ItemType.GoldShop1, BuyType.Rm, this);
-        shopContents[4].Initialize(ItemType.GoldShop2, BuyType.Rm, this);
-        shopContents[5].Initialize(ItemType.GoldShop3, BuyType.Rm, this);
-        shopContents[6].Initialize(ItemType.AdReward_Potion, BuyType.Ad, this);
-        shopContents[7].Initialize(ItemType.RemoveAds, BuyType.Rm, this);
-        shopContents[8].Initialize(ItemType.PortionSet1, BuyType.Rm, this);
-        shopContents[9].Initialize(ItemType.PortionSet2, BuyType.Rm, this);
-        shopContents[10].Initialize(ItemType.PortionSet3, BuyType.Rm, this);
+                if (!GameStateManager.instance.DailyReward)
+                {
+                    shopContents[0].SetLocked(false);
+                }
+
+                if (!GameStateManager.instance.DailyReward_Portion)
+                {
+                    shopContents[11].SetLocked(false);
+                }
+
+                if (!GameStateManager.instance.DailyAdsReward)
+                {
+                    shopContents[1].SetLocked(false);
+                }
+
+                if (!GameStateManager.instance.DailyAdsReward2)
+                {
+                    shopContents[6].SetLocked(false);
+                }
+
+                if (playerDataBase.RemoveAds)
+                {
+                    shopContents[7].gameObject.SetActive(false);
+                }
+                break;
+            case 1:
+                shopContents[8].Initialize(ItemType.PortionSet1, BuyType.Rm, this);
+                shopContents[9].Initialize(ItemType.PortionSet2, BuyType.Rm, this);
+                shopContents[10].Initialize(ItemType.PortionSet3, BuyType.Rm, this);
+
+                break;
+            case 2:
+                shopContents[3].Initialize(ItemType.GoldShop1, BuyType.Rm, this);
+                shopContents[4].Initialize(ItemType.GoldShop2, BuyType.Rm, this);
+                shopContents[5].Initialize(ItemType.GoldShop3, BuyType.Rm, this);
+                break;
+        }
     }
 
     void TruckInitialize()
@@ -379,7 +400,6 @@ public class ShopManager : MonoBehaviour
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }
@@ -510,7 +530,6 @@ public class ShopManager : MonoBehaviour
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }
@@ -570,6 +589,37 @@ public class ShopManager : MonoBehaviour
                 break;
             case ItemType.PortionSet3:
                 break;
+            case ItemType.DailyReward_Portion:
+
+                if (GameStateManager.instance.DailyReward_Portion) return;
+
+                GameStateManager.instance.DailyReward_Portion = true;
+
+                shopContents[11].SetLocked(true);
+
+                switch(Random.Range(0, 4))
+                {
+                    case 0:
+                        playerDataBase.Portion1 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+                        break;
+                    case 1:
+                        playerDataBase.Portion2 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+                        break;
+                    case 2:
+                        playerDataBase.Portion3 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+                        break;
+                    case 3:
+                        playerDataBase.Portion4 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                        break;
+                }
+
+                SoundManager.instance.PlaySFX(GameSfxType.Success);
+                NotionManager.instance.UseNotion(NotionType.SuccessReward);
+                break;
         }
 
         isDelay = true;
@@ -583,6 +633,9 @@ public class ShopManager : MonoBehaviour
 
     public void SuccessWatchAd()
     {
+        alarm.SetActive(false);
+        dailyAlarm.SetActive(false);
+
         GameStateManager.instance.DailyAdsReward = true;
 
         shopContents[1].SetLocked(true);
@@ -599,11 +652,15 @@ public class ShopManager : MonoBehaviour
 
         shopContents[6].SetLocked(true);
 
-        int random2 = Random.Range(1, 3);
-
-        playerDataBase.Portion1 += random2;
+        playerDataBase.Portion1 += 1;
+        playerDataBase.Portion2 += 1;
+        playerDataBase.Portion3 += 1;
+        playerDataBase.Portion4 += 1;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

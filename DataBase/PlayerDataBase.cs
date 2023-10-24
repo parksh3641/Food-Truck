@@ -14,6 +14,10 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int defDestroyTicket = 0;
     [SerializeField]
+    private int lockTutorial = 0;
+
+    [Space]
+    [SerializeField]
     private int nextFoodNumber = 0;
     [SerializeField]
     private int hamburgerMaxValue = 0;
@@ -33,7 +37,23 @@ public class PlayerDataBase : ScriptableObject
     private int donutLevel = 0;
     [SerializeField]
     private int upgradeCount = 0;
+    [SerializeField]
+    private int sellCount = 0;
+    [SerializeField]
+    private int useSources = 0;
+    [SerializeField]
+    private int openChestBox = 0;
+    [SerializeField]
+    private int questCount = 0;
 
+    [Space]
+    [Title("Skill")]
+    [SerializeField]
+    private int skill1 = 0;
+    [SerializeField]
+    private int skill2 = 0;
+    [SerializeField]
+    private int skill3 = 0;
 
     [Space]
     [Title("Truck")]
@@ -160,6 +180,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int LockTutorial
+    {
+        get
+        {
+            return lockTutorial;
+        }
+        set
+        {
+            lockTutorial = value;
+        }
+    }
+
     public int NextFoodNumber
     {
         get
@@ -277,6 +309,90 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             upgradeCount = value;
+        }
+    }
+
+    public int SellCount
+    {
+        get
+        {
+            return sellCount;
+        }
+        set
+        {
+            sellCount = value;
+        }
+    }
+
+    public int UseSources
+    {
+        get
+        {
+            return useSources;
+        }
+        set
+        {
+            useSources = value;
+        }
+    }
+
+    public int OpenChestBox
+    {
+        get
+        {
+            return openChestBox;
+        }
+        set
+        {
+            openChestBox = value;
+        }
+    }
+
+    public int QuestCount
+    {
+        get
+        {
+            return questCount;
+        }
+        set
+        {
+            questCount = value;
+        }
+    }
+
+    public int Skill1
+    {
+        get
+        {
+            return skill1;
+        }
+        set
+        {
+            skill1 = value;
+        }
+    }
+
+    public int Skill2
+    {
+        get
+        {
+            return skill2;
+        }
+        set
+        {
+            skill2 = value;
+        }
+    }
+
+    public int Skill3
+    {
+        get
+        {
+            return skill3;
+        }
+        set
+        {
+            skill3 = value;
         }
     }
 
@@ -669,18 +785,26 @@ public class PlayerDataBase : ScriptableObject
         coin = 0;
         crystal = 0;
         defDestroyTicket = 0;
-
+        lockTutorial = 0;
         nextFoodNumber = 0;
+
         hamburgerMaxValue = 0;
         sandwichMaxValue = 0;
         snackLabMaxValue = 0;
         drinkMaxValue = 0;
         pizzaMaxValue = 0;
         donutMaxValue = 0;
-
         gourmetLevel = 0;
         donutLevel = 0;
         upgradeCount = 0;
+        sellCount = 0;
+        useSources = 0;
+        openChestBox = 0;
+        questCount = 0;
+
+        skill1 = 0;
+        skill2 = 0;
+        skill3 = 0;
 
         chips = 0;
         donut = 0;

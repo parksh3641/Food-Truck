@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
 using System;
@@ -9,6 +10,8 @@ using UnityEngine.UI;
 public class RankingManager : MonoBehaviour
 {
     public static RankingManager instance;
+
+    public GameObject alarm;
 
     private LevelType scoreLevel = LevelType.Insane;
 
@@ -65,6 +68,8 @@ public class RankingManager : MonoBehaviour
         rankContentParent.anchoredPosition = new Vector2(0, -9999);
 
         topNumber = -1;
+
+        alarm.SetActive(true);
     }
 
     public void OpenRanking()
@@ -73,10 +78,14 @@ public class RankingManager : MonoBehaviour
         {
             rankingView.SetActive(true);
 
-            if(topNumber == -1)
+            alarm.SetActive(false);
+
+            if (topNumber == -1)
             {
                 ChangeTopToggle(0);
             }
+
+            FirebaseAnalytics.LogEvent("OpenRanking");
         }
         else
         {

@@ -54,6 +54,12 @@ public class PlayerDataBase : ScriptableObject
     private int skill2 = 0;
     [SerializeField]
     private int skill3 = 0;
+    [SerializeField]
+    private int skill4 = 0;
+    [SerializeField]
+    private int skill5 = 0;
+    [SerializeField]
+    private int skill6 = 0;
 
     [Space]
     [Title("Truck")]
@@ -75,6 +81,29 @@ public class PlayerDataBase : ScriptableObject
     private int pizza = 0;
     [SerializeField]
     private int sushi = 0;
+
+    [Space]
+    [Title("Animal")]
+    [SerializeField]
+    private int colobus = 0;
+    [SerializeField]
+    private int gecko = 0;
+    [SerializeField]
+    private int herring = 0;
+    [SerializeField]
+    private int muskrat = 0;
+    [SerializeField]
+    private int pudu = 0;
+    [SerializeField]
+    private int sparrow = 0;
+    [SerializeField]
+    private int squid = 0;
+    [SerializeField]
+    private int taipan = 0;
+
+
+
+
 
     [Space]
     [Title("Portion")]
@@ -143,6 +172,8 @@ public class PlayerDataBase : ScriptableObject
 
     [SerializeField]
     private bool removeAds = false;
+    [SerializeField]
+    private bool goldX2 = false;
 
     public int Coin
     {
@@ -396,6 +427,42 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Skill4
+    {
+        get
+        {
+            return skill4;
+        }
+        set
+        {
+            skill4 = value;
+        }
+    }
+
+    public int Skill5
+    {
+        get
+        {
+            return skill5;
+        }
+        set
+        {
+            skill5 = value;
+        }
+    }
+
+    public int Skill6
+    {
+        get
+        {
+            return skill6;
+        }
+        set
+        {
+            skill6 = value;
+        }
+    }
+
     public int ChipsTruck
     {
         get
@@ -501,6 +568,102 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             sushi = value;
+        }
+    }
+
+    public int ColobusAnimal
+    {
+        get
+        {
+            return colobus;
+        }
+        set
+        {
+            colobus = value;
+        }
+    }
+
+    public int GeckoAnimal
+    {
+        get
+        {
+            return gecko;
+        }
+        set
+        {
+            gecko = value;
+        }
+    }
+
+    public int HerringAnimal
+    {
+        get
+        {
+            return herring;
+        }
+        set
+        {
+            herring = value;
+        }
+    }
+
+    public int MuskratAnimal
+    {
+        get
+        {
+            return muskrat;
+        }
+        set
+        {
+            muskrat = value;
+        }
+    }
+
+    public int PuduAnimal
+    {
+        get
+        {
+            return pudu;
+        }
+        set
+        {
+            pudu = value;
+        }
+    }
+
+    public int SparrowAnimal
+    {
+        get
+        {
+            return sparrow;
+        }
+        set
+        {
+            sparrow = value;
+        }
+    }
+
+    public int SquidAnimal
+    {
+        get
+        {
+            return squid;
+        }
+        set
+        {
+            squid = value;
+        }
+    }
+
+    public int TaipanAnimal
+    {
+        get
+        {
+            return taipan;
+        }
+        set
+        {
+            taipan = value;
         }
     }
 
@@ -780,8 +943,23 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public bool GoldX2
+    {
+        get
+        {
+            return goldX2;
+        }
+        set
+        {
+            goldX2 = value;
+        }
+    }
+
     public void Initialize()
     {
+        removeAds = false;
+        goldX2 = false;
+
         coin = 0;
         crystal = 0;
         defDestroyTicket = 0;
@@ -805,6 +983,9 @@ public class PlayerDataBase : ScriptableObject
         skill1 = 0;
         skill2 = 0;
         skill3 = 0;
+        skill4 = 0;
+        skill5 = 0;
+        skill6 = 0;
 
         chips = 0;
         donut = 0;
@@ -815,6 +996,15 @@ public class PlayerDataBase : ScriptableObject
         noodles = 0;
         pizza = 0;
         sushi = 0;
+
+        colobus = 0;
+        gecko = 0;
+        herring = 0;
+        muskrat = 0;
+        pudu = 0;
+        sparrow = 0;
+        squid = 0;
+        taipan = 0;
 
         portion1 = 0;
         portion2 = 0;
@@ -848,8 +1038,6 @@ public class PlayerDataBase : ScriptableObject
         //hard_Offline = PlayerPrefs.GetInt("Hard_Offline");
         //crazy_Offline = PlayerPrefs.GetInt("Crazy_Offline");
         //insane_Offline = PlayerPrefs.GetInt("Insane_Offline");
-
-        removeAds = false;
     }
 
     public bool CheckCharacter(TruckType type)
@@ -927,5 +1115,79 @@ public class PlayerDataBase : ScriptableObject
                 NoodlesTruck = 1;
                 break;
         }
+    }
+
+    public int GetTruckNumber()
+    {
+        int count = 0;
+
+        if(ChipsTruck > 0)
+        {
+            count += 1;
+        }
+
+        if (DonutTruck > 0)
+        {
+            count += 1;
+        }
+
+        if (HamburgerTruck > 0)
+        {
+            count += 1;
+        }
+
+        if (IcecreamTruck > 0)
+        {
+            count += 1;
+        }
+
+        if (LemonadeTruck > 0)
+        {
+            count += 1;
+        }
+
+        return count;
+    }
+
+    public int GetAnimalNumber()
+    {
+        int count = 0;
+
+        if(GeckoAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if(HerringAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if(MuskratAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if(PuduAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if(SparrowAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if(SquidAnimal > 0)
+        {
+            count += 1;
+        }
+        
+        if(TaipanAnimal > 0)
+        {
+            count += 1;
+        }
+
+        return count;
     }
 }

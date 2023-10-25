@@ -33,7 +33,6 @@ public class GameStateManager : MonoBehaviour
         [Space]
         [Title("Game Setting")]
         public LevelType levelType = LevelType.Easy;
-        public TruckType truckType = TruckType.Bread;
         public bool music = true;
         public bool sfx = true;
         public bool vibration = true;
@@ -45,6 +44,8 @@ public class GameStateManager : MonoBehaviour
         [Space]
         [Title("InGame")]
         public FoodType foodType = FoodType.Hamburger;
+        public TruckType truckType = TruckType.Bread;
+        public AnimalType animalType = AnimalType.Colobus;
         public int hamburgerLevel = 0;
         public int sandwichLevel = 0;
         public int snackLabLevel = 0;
@@ -172,6 +173,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.truckType = value;
+            SaveFile();
+        }
+    }
+
+    public AnimalType AnimalType
+    {
+        get
+        {
+            return gameSettings.animalType;
+        }
+        set
+        {
+            gameSettings.animalType = value;
             SaveFile();
         }
     }

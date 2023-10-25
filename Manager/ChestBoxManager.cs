@@ -17,6 +17,7 @@ public class ChestBoxManager : MonoBehaviour
     private int goalCount = 0;
 
     public QuestManager questManager;
+    public GameManager gameManager;
 
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
@@ -37,12 +38,9 @@ public class ChestBoxManager : MonoBehaviour
 
         if (GameStateManager.instance.ChestBoxCount >= 20) return;
 
-        GameStateManager.instance.ChestBoxCount += 1;
-
         goalCount = GameStateManager.instance.ChestBoxCoolTime;
 
         count = 0;
-
         StartCoroutine(TimerCoroution());
     }
 
@@ -64,9 +62,17 @@ public class ChestBoxManager : MonoBehaviour
 
     void SetChestBox()
     {
-        chestBoxIcon.SetActive(true);
+        if(playerDataBase.LockTutorial >= 2)
+        {
+            chestBoxIcon.SetActive(true);
 
-        SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
+            SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
+        }
+        else
+        {
+            count = 0;
+            StartCoroutine(TimerCoroution());
+        }
     }
 
     public void OpenChestBox()
@@ -125,10 +131,14 @@ public class ChestBoxManager : MonoBehaviour
         playerDataBase.OpenChestBox += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
 
+        gameManager.CheckPortion();
+
         questManager.CheckGoal();
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+        GameStateManager.instance.ChestBoxCount += 1;
 
         Initialize();
     }
@@ -162,10 +172,14 @@ public class ChestBoxManager : MonoBehaviour
         playerDataBase.OpenChestBox += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
 
+        gameManager.CheckPortion();
+
         questManager.CheckGoal();
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+        GameStateManager.instance.ChestBoxCount += 1;
 
         Initialize();
     }

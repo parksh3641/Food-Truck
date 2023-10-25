@@ -101,6 +101,18 @@ public enum TruckType
     Sushi
 }
 
+public enum AnimalType
+{
+    Colobus,
+    Gecko,
+    Herring,
+    Muskrat,
+    Pudu,
+    Sparrow,
+    Squid,
+    Taipan
+}
+
 public enum ItemType
 {
     DailyReward,
@@ -114,7 +126,8 @@ public enum ItemType
     PortionSet1,
     PortionSet2,
     PortionSet3,
-    DailyReward_Portion
+    DailyReward_Portion,
+    GoldX2
 }
 
 public enum BuyType
@@ -144,13 +157,11 @@ public enum FoodType
     Donut
 }
 
-public enum TruckEffect
+public enum PassiveEffect
 {
     None,
-    UpgradeCostDown,
-    SellPriceUp,
-    TargetPerentUp,
-    PercentUp
+    UpgradePercentUp,
+    DefDestroyPercentUp
 }
 
 public enum RewardType
@@ -183,4 +194,7 @@ public enum SkillType
     Skill1,
     Skill2,
     Skill3,
+    Skill4,
+    Skill5,
+    Skill6
 }

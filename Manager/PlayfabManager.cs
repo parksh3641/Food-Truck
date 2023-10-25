@@ -684,6 +684,11 @@ public class PlayfabManager : MonoBehaviour
             yield return null;
         }
 
+        if (playerDataBase.RemoveAds)
+        {
+            GoogleAdsManager.instance.admobBanner.DestroyAd();
+        }
+
         StateManager.instance.Initialize();
     }
 
@@ -720,6 +725,11 @@ public class PlayfabManager : MonoBehaviour
                     if (list.ItemId.Equals("RemoveAds"))
                     {
                         playerDataBase.RemoveAds = true;
+                    }
+
+                    if (list.ItemId.Equals("GoldX2"))
+                    {
+                        playerDataBase.GoldX2 = true;
                     }
 
                     if (list.ItemId.Equals("Chips"))
@@ -765,6 +775,41 @@ public class PlayfabManager : MonoBehaviour
                     if (list.ItemId.Equals("Sushi"))
                     {
                         playerDataBase.SushiTruck = 1;
+                    }
+
+                    if (list.ItemId.Equals("Gecko"))
+                    {
+                        playerDataBase.GeckoAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Herring"))
+                    {
+                        playerDataBase.HerringAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Muskrat"))
+                    {
+                        playerDataBase.MuskratAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Pudu"))
+                    {
+                        playerDataBase.PuduAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Sparrow"))
+                    {
+                        playerDataBase.SparrowAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Squid"))
+                    {
+                        playerDataBase.SquidAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Taipan"))
+                    {
+                        playerDataBase.TaipanAnimal = 1;
                     }
                 }
             }
@@ -868,6 +913,15 @@ public class PlayfabManager : MonoBehaviour
                            playerDataBase.Skill2 = statistics.Value;
                            break;
                        case "Skill3":
+                           playerDataBase.Skill3 = statistics.Value;
+                           break;
+                       case "Skill4":
+                           playerDataBase.Skill3 = statistics.Value;
+                           break;
+                       case "Skill5":
+                           playerDataBase.Skill3 = statistics.Value;
+                           break;
+                       case "Skill6":
                            playerDataBase.Skill3 = statistics.Value;
                            break;
                        case "Portion1":
@@ -1430,6 +1484,16 @@ public class PlayfabManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.SuccessRemoveAds);
     }
 
+    public void PurchaseGoldX2()
+    {
+        itemList.Clear();
+        itemList.Add("GoldX2");
+
+        GrantItemToUser("Shop", itemList);
+
+        playerDataBase.GoldX2 = true;
+    }
+
     public void RestorePurchases()
     {
         if (isDelay) return;
@@ -1450,6 +1514,11 @@ public class PlayfabManager : MonoBehaviour
                     if (list.ItemId.Equals("RemoveAds"))
                     {
                         playerDataBase.RemoveAds = true;
+                    }
+
+                    if (list.ItemId.Equals("GoldX2"))
+                    {
+                        playerDataBase.GoldX2 = true;
                     }
 
                     if (list.ItemId.Equals("Chips"))
@@ -1495,6 +1564,41 @@ public class PlayfabManager : MonoBehaviour
                     if (list.ItemId.Equals("Sushi"))
                     {
                         playerDataBase.SushiTruck = 1;
+                    }
+
+                    if (list.ItemId.Equals("Gecko"))
+                    {
+                        playerDataBase.GeckoAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Herring"))
+                    {
+                        playerDataBase.HerringAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Muskrat"))
+                    {
+                        playerDataBase.MuskratAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Pudu"))
+                    {
+                        playerDataBase.PuduAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Sparrow"))
+                    {
+                        playerDataBase.SparrowAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Squid"))
+                    {
+                        playerDataBase.SquidAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Taipan"))
+                    {
+                        playerDataBase.TaipanAnimal = 1;
                     }
                 }
             }

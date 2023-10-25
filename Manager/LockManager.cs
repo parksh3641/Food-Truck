@@ -15,6 +15,7 @@ public class LockManager : MonoBehaviour
 
     private int level = 0;
 
+    public GameManager gameManager;
 
     PlayerDataBase playerDataBase;
 
@@ -99,6 +100,20 @@ public class LockManager : MonoBehaviour
                 lockIcon[2].SetActive(true);
                 lockIcon[3].SetActive(true);
                 lockIcon[4].SetActive(true);
+
+                playerDataBase.Portion1 += 5;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+
+                playerDataBase.Portion2 += 5;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+
+                playerDataBase.Portion3 += 5;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+
+                playerDataBase.Portion4 += 5;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+
+                gameManager.CheckPortion();
 
                 break;
             case 3:

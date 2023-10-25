@@ -177,5 +177,7 @@ public enum NotionType
     CouponNotion1,
     CouponNotion2,
     CouponNotion3,
-    QuestNotion
+    QuestNotion,
+    ChangeAnimalNotion,
+    NotPurchaseNotion
 }

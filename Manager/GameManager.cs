@@ -51,8 +51,6 @@ public class GameManager : MonoBehaviour
     public Text portionText1, portionText2, portionText3, portionText4;
     public Image portionFillamount1, portionFillamount2, portionFillamount3, portionFillamount4;
     private bool portion1, portion2, portion3, portion4;
-    private int portionTime = 30;
-    private int portionPlus = 1;
 
     public Text titleText;
     public Text needText;
@@ -74,20 +72,29 @@ public class GameManager : MonoBehaviour
     public Text feverText;
 
     private float feverCount = 0;
-    private float feverMaxCount = 150;
+    private float feverMaxCount = 250;
     private float feverTime = 30;
-    private float feverPlus = 5;
-
-    private bool feverMode = false;
+    private float feverPlus = 3;
 
     private float defDestroy = 0;
     private float defDestroyPlus = 100;
 
     public int need = 0;
-    public int price = 0;
+    private float needPlus = 0;
+
+    public int sellPrice = 0;
+    private float sellPricePlus = 0;
+
     public float success = 0;
     private float successPortion = 0;
     private float successFever = 0;
+    private float successTruck = 0;
+
+    private float portion1Time = 30;
+    private float portion2Time = 30;
+    private float portion3Time = 30;
+
+    private int portionPlus = 1;
 
     public int level = 0;
     public int nextLevel = 0;
@@ -99,6 +106,8 @@ public class GameManager : MonoBehaviour
     public bool isDef = false;
 
     public bool nextFood = false;
+
+    private bool feverMode = false;
 
     [Space]
     [Title("Bankruptcy")]
@@ -265,11 +274,6 @@ public class GameManager : MonoBehaviour
 
         isDelay_Camera = true;
 
-        if(playerDataBase.RemoveAds)
-        {
-            GoogleAdsManager.instance.admobBanner.DestroyAd();
-        }
-
         PlayfabManager.instance.GetTitleInternalData("Coupon", CheckCoupon);
 
         if(!GameStateManager.instance.Tutorial)
@@ -322,11 +326,39 @@ public class GameManager : MonoBehaviour
 
         nextFood = false;
 
+        successTruck = 0;
+        defDestroy = 0;
+
+        if(GameStateManager.instance.TruckType > TruckType.Bread)
+        {
+            successTruck = (float)GameStateManager.instance.TruckType * 0.5f;
+        }
+
+        if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
+        {
+            defDestroy = (float)GameStateManager.instance.AnimalType * 2f;
+        }
+
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
 
         feverTime = 30 + (30 * (0.01f * (playerDataBase.Skill1 + 1)));
         feverMaxCount = 150 - (150 * (0.01f * (playerDataBase.Skill2 + 1)));
         feverPlus = 5 + (5 * (0.01f * (playerDataBase.Skill3 + 1)));
+
+        portion1Time = 30 + (30 * (0.01f * (playerDataBase.Skill4 + 1)));
+        portion2Time = 30 + (30 * (0.01f * (playerDataBase.Skill5 + 1)));
+        portion3Time = 30 + (30 * (0.01f * (playerDataBase.Skill6 + 1)));
+
+        needPlus = 0;
+        needPlus += playerDataBase.GetTruckNumber();
+
+        sellPricePlus = 0;
+        sellPricePlus += playerDataBase.GetAnimalNumber();
+
+        if(playerDataBase.GoldX2)
+        {
+            sellPricePlus += 100;
+        }
 
         UpgradeInitialize();
 
@@ -405,17 +437,17 @@ public class GameManager : MonoBehaviour
     public void UpgradeInitialize()
     {
         need = upgradeFood.GetNeed(level);
-        price = upgradeFood.GetPrice(level);
-        success = upgradeFood.GetSuccess(level) + ((int)GameStateManager.instance.TruckType * 0.5f);
+        sellPrice = upgradeFood.GetPrice(level);
+        success = upgradeFood.GetSuccess(level);
 
-        if (portion1)
+        if (needPlus > 0)
         {
-            need -= (int)(need * 0.3f);
+            need -= Mathf.CeilToInt((need * (0.01f * needPlus)));
         }
 
-        if (portion2)
+        if (sellPricePlus > 0)
         {
-            price += (int)(price * 0.3f);
+            sellPrice += Mathf.CeilToInt((sellPrice * (0.01f * sellPricePlus)));
         }
 
         if (portion3)
@@ -434,13 +466,6 @@ public class GameManager : MonoBehaviour
         else
         {
             successFever = 0;
-        }
-
-        success += successPortion + successFever;
-
-        if (success >= 100)
-        {
-            success = 100;
         }
 
         titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) + " ( +" + (level + 1) + " / " + upgradeFood.maxLevel +" )";
@@ -474,34 +499,46 @@ public class GameManager : MonoBehaviour
             titleText.color = Color.white;
         }
 
+        success += successPortion + successFever + successTruck;
 
-        successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success + "%";
-        needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(need);
-
-        if (successPortion > 0 || successFever > 0)
+        if (success >= 100)
         {
-            successText.text += " (+" + (successPortion + successFever) + "%)";
-        }
-
-        if (portion1)
-        {
-            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + " (-30%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
-        }
-        else
-        {
-            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(need);
-        }
-
-        if (portion2)
-        {
-            priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice") + " (+30%)</size>\n" + MoneyUnitString.ToCurrencyString(price);
-        }
-        else
-        {
-            priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(price);
+            success = 100;
         }
 
         if (GameStateManager.instance.Developer) success = 100;
+
+        successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success + "%";
+
+        if (successPortion > 0 || successFever > 0 || successTruck > 0)
+        {
+            successText.text += " (+" + (successPortion + successFever + successTruck) + "%)";
+        }
+
+        success += successPortion + successFever + successTruck;
+
+        needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice");
+
+        if(needPlus > 0)
+        {
+            needText.text += " (-" + (needPlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
+        }
+        else
+        {
+            needText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(need);
+        }
+
+        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice");
+
+
+        if (sellPricePlus > 0)
+        {
+            priceText.text += " (+" + (sellPricePlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+        }
+        else
+        {
+            priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+        }
 
         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
 
@@ -727,122 +764,122 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        if(level + 1 >= 10)
-                        {
-                            switch (GameStateManager.instance.FoodType)
-                            {
-                                case FoodType.Hamburger:
-                                    //if(playerDataBase.NextFoodNumber == 0 && !nextFood)
-                                    //{
-                                    //    nextFood = true;
+                        //if(level + 1 >= 10)
+                        //{
+                        //    switch (GameStateManager.instance.FoodType)
+                        //    {
+                        //        case FoodType.Hamburger:
+                        //            if (playerDataBase.NextFoodNumber == 0 && !nextFood)
+                        //            {
+                        //                nextFood = true;
 
-                                    //    playerDataBase.HamburgerMaxValue += 1;
-                                    //    PlayfabManager.instance.UpdatePlayerStatisticsInsert("HamburgerMaxValue", playerDataBase.HamburgerMaxValue);
+                        //                playerDataBase.HamburgerMaxValue += 1;
+                        //                PlayfabManager.instance.UpdatePlayerStatisticsInsert("HamburgerMaxValue", playerDataBase.HamburgerMaxValue);
 
-                                    //    if (playerDataBase.HamburgerMaxValue == 1)
-                                    //    {
-                                    //        playerDataBase.NextFoodNumber += 1;
+                        //                if (playerDataBase.HamburgerMaxValue == 1)
+                        //                {
+                        //                    playerDataBase.NextFoodNumber += 1;
 
-                                    //        nextFoodUI.SetActive(true);
-                                    //        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+                        //                    nextFoodUI.SetActive(true);
+                        //                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
-                                    //        changeFoodAlarmObj.SetActive(true);
-                                    //    }
-                                    //}
-                                    break;
-                                case FoodType.Sandwich:
-                                    if(playerDataBase.NextFoodNumber == 1 && !nextFood)
-                                    {
-                                        nextFood = true;
+                        //                    changeFoodAlarmObj.SetActive(true);
+                        //                }
+                        //            }
+                        //            break;
+                        //        case FoodType.Sandwich:
+                        //            if(playerDataBase.NextFoodNumber == 1 && !nextFood)
+                        //            {
+                        //                nextFood = true;
 
-                                        playerDataBase.SandwichMaxValue += 1;
-                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.SandwichMaxValue);
+                        //                playerDataBase.SandwichMaxValue += 1;
+                        //                PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.SandwichMaxValue);
 
-                                        if (playerDataBase.SandwichMaxValue == 1)
-                                        {
-                                            playerDataBase.NextFoodNumber += 1;
-                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+                        //                if (playerDataBase.SandwichMaxValue == 1)
+                        //                {
+                        //                    playerDataBase.NextFoodNumber += 1;
+                        //                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
-                                            lockManager.UnLocked(2);
+                        //                    lockManager.UnLocked(2);
 
-                                            changeFoodAlarmObj.SetActive(true);
-                                        }
-                                    }
-                                    break;
-                                case FoodType.SnackLab:
-                                    if (playerDataBase.NextFoodNumber == 2 && !nextFood)
-                                    {
-                                        nextFood = true;
+                        //                    changeFoodAlarmObj.SetActive(true);
+                        //                }
+                        //            }
+                        //            break;
+                        //        case FoodType.SnackLab:
+                        //            if (playerDataBase.NextFoodNumber == 2 && !nextFood)
+                        //            {
+                        //                nextFood = true;
 
-                                        playerDataBase.SnackLabMaxValue += 1;
-                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.SnackLabMaxValue);
+                        //                playerDataBase.SnackLabMaxValue += 1;
+                        //                PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.SnackLabMaxValue);
 
-                                        if (playerDataBase.SnackLabMaxValue == 1)
-                                        {
-                                            playerDataBase.NextFoodNumber += 1;
-                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+                        //                if (playerDataBase.SnackLabMaxValue == 1)
+                        //                {
+                        //                    playerDataBase.NextFoodNumber += 1;
+                        //                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
-                                            lockManager.UnLocked(3);
+                        //                    lockManager.UnLocked(3);
 
-                                            changeFoodAlarmObj.SetActive(true);
-                                        }
-                                    }
-                                    break;
-                                case FoodType.Drink:
-                                    if (playerDataBase.NextFoodNumber == 3 && !nextFood)
-                                    {
-                                        nextFood = true;
+                        //                    changeFoodAlarmObj.SetActive(true);
+                        //                }
+                        //            }
+                        //            break;
+                        //        case FoodType.Drink:
+                        //            if (playerDataBase.NextFoodNumber == 3 && !nextFood)
+                        //            {
+                        //                nextFood = true;
 
-                                        playerDataBase.DrinkMaxValue += 1;
-                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.DrinkMaxValue);
+                        //                playerDataBase.DrinkMaxValue += 1;
+                        //                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.DrinkMaxValue);
 
-                                        if (playerDataBase.DrinkMaxValue == 1)
-                                        {
-                                            playerDataBase.NextFoodNumber += 1;
-                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+                        //                if (playerDataBase.DrinkMaxValue == 1)
+                        //                {
+                        //                    playerDataBase.NextFoodNumber += 1;
+                        //                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
-                                            lockManager.UnLocked(4);
+                        //                    lockManager.UnLocked(4);
 
-                                            changeFoodAlarmObj.SetActive(true);
-                                        }
-                                    }
-                                    break;
-                                case FoodType.Pizza:
-                                    if (playerDataBase.NextFoodNumber == 4 && !nextFood)
-                                    {
-                                        nextFood = true;
+                        //                    changeFoodAlarmObj.SetActive(true);
+                        //                }
+                        //            }
+                        //            break;
+                        //        case FoodType.Pizza:
+                        //            if (playerDataBase.NextFoodNumber == 4 && !nextFood)
+                        //            {
+                        //                nextFood = true;
 
-                                        playerDataBase.PizzaMaxValue += 1;
-                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.PizzaMaxValue);
+                        //                playerDataBase.PizzaMaxValue += 1;
+                        //                PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.PizzaMaxValue);
 
-                                        if (playerDataBase.PizzaMaxValue == 1)
-                                        {
-                                            playerDataBase.NextFoodNumber += 1;
-                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+                        //                if (playerDataBase.PizzaMaxValue == 1)
+                        //                {
+                        //                    playerDataBase.NextFoodNumber += 1;
+                        //                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
-                                            changeFoodAlarmObj.SetActive(true);
-                                        }
-                                    }
-                                    break;
-                                case FoodType.Donut:
-                                    if (playerDataBase.NextFoodNumber == 5 && !nextFood)
-                                    {
-                                        nextFood = true;
+                        //                    changeFoodAlarmObj.SetActive(true);
+                        //                }
+                        //            }
+                        //            break;
+                        //        case FoodType.Donut:
+                        //            if (playerDataBase.NextFoodNumber == 5 && !nextFood)
+                        //            {
+                        //                nextFood = true;
 
-                                        playerDataBase.DonutMaxValue += 1;
-                                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
+                        //                playerDataBase.DonutMaxValue += 1;
+                        //                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
 
-                                        if (playerDataBase.DonutMaxValue == 1)
-                                        {
-                                            playerDataBase.NextFoodNumber += 1;
-                                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+                        //                if (playerDataBase.DonutMaxValue == 1)
+                        //                {
+                        //                    playerDataBase.NextFoodNumber += 1;
+                        //                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
-                                            changeFoodAlarmObj.SetActive(true);
-                                        }
-                                    }
-                                    break;
-                            }
-                        }
+                        //                    changeFoodAlarmObj.SetActive(true);
+                        //                }
+                        //            }
+                        //            break;
+                        //    }
+                        //}
 
                         if ((level + 1) % 5 == 0)
                         {
@@ -955,11 +992,7 @@ public class GameManager : MonoBehaviour
         {
             adCount = 0;
 
-            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor || playerDataBase.RemoveAds)
-            {
-
-            }
-            else
+            if(!playerDataBase.RemoveAds)
             {
                 GoogleAdsManager.instance.admobScreen.ShowAd();
             }
@@ -1189,6 +1222,21 @@ public class GameManager : MonoBehaviour
                 playerDataBase.SandwichMaxValue += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.SandwichMaxValue);
 
+                if (playerDataBase.NextFoodNumber == 1 && !nextFood)
+                {
+                    nextFood = true;
+
+                    if (playerDataBase.SandwichMaxValue == 1)
+                    {
+                        playerDataBase.NextFoodNumber += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                        lockManager.UnLocked(2);
+
+                        changeFoodAlarmObj.SetActive(true);
+                    }
+                }
+
                 break;
             case FoodType.SnackLab:
                 playerDataBase.GourmetLevel += 100;
@@ -1196,6 +1244,21 @@ public class GameManager : MonoBehaviour
 
                 playerDataBase.SnackLabMaxValue += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.SnackLabMaxValue);
+
+                if (playerDataBase.NextFoodNumber == 2 && !nextFood)
+                {
+                    nextFood = true;
+
+                    if (playerDataBase.SnackLabMaxValue == 1)
+                    {
+                        playerDataBase.NextFoodNumber += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                        lockManager.UnLocked(3);
+
+                        changeFoodAlarmObj.SetActive(true);
+                    }
+                }
 
                 break;
             case FoodType.Drink:
@@ -1205,6 +1268,21 @@ public class GameManager : MonoBehaviour
                 playerDataBase.DrinkMaxValue += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.DrinkMaxValue);
 
+                if (playerDataBase.NextFoodNumber == 3 && !nextFood)
+                {
+                    nextFood = true;
+
+                    if (playerDataBase.DrinkMaxValue == 1)
+                    {
+                        playerDataBase.NextFoodNumber += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                        lockManager.UnLocked(4);
+
+                        changeFoodAlarmObj.SetActive(true);
+                    }
+                }
+
                 break;
             case FoodType.Pizza:
                 playerDataBase.GourmetLevel += 150;
@@ -1213,6 +1291,19 @@ public class GameManager : MonoBehaviour
                 playerDataBase.PizzaMaxValue += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.PizzaMaxValue);
 
+                if (playerDataBase.NextFoodNumber == 4 && !nextFood)
+                {
+                    nextFood = true;
+
+                    if (playerDataBase.PizzaMaxValue == 1)
+                    {
+                        playerDataBase.NextFoodNumber += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                        changeFoodAlarmObj.SetActive(true);
+                    }
+                }
+
                 break;
             case FoodType.Donut:
                 playerDataBase.GourmetLevel += 100000;
@@ -1220,6 +1311,22 @@ public class GameManager : MonoBehaviour
 
                 playerDataBase.DonutMaxValue += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
+
+                if (playerDataBase.NextFoodNumber == 5 && !nextFood)
+                {
+                    nextFood = true;
+
+                    playerDataBase.DonutMaxValue += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
+
+                    if (playerDataBase.DonutMaxValue == 1)
+                    {
+                        playerDataBase.NextFoodNumber += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                        changeFoodAlarmObj.SetActive(true);
+                    }
+                }
 
                 break;
         }
@@ -1277,12 +1384,12 @@ public class GameManager : MonoBehaviour
 
         CheckFoodState();
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, price);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, sellPrice);
 
         myMoneyPlusText.gameObject.SetActive(false);
         myMoneyPlusText.gameObject.SetActive(true);
         myMoneyPlusText.color = Color.green;
-        myMoneyPlusText.text = "+" + MoneyUnitString.ToCurrencyString(price);
+        myMoneyPlusText.text = "+" + MoneyUnitString.ToCurrencyString(sellPrice);
 
         UpgradeInitialize();
 
@@ -1374,7 +1481,7 @@ public class GameManager : MonoBehaviour
         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
     }
 
-    void CheckPortion()
+    public void CheckPortion()
     {
         if(playerDataBase.Portion1 == 0)
         {
@@ -1426,10 +1533,22 @@ public class GameManager : MonoBehaviour
                     {
                         portion1 = true;
 
+                        needPlus += 30;
+
+                        need -= (int)(need * (0.01f * needPlus));
+
                         if (level + 1 < upgradeFood.maxLevel)
                         {
-                            need -= (int)(need * 0.3f);
-                            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + " (-30%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
+                            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice");
+
+                            if (needPlus > 0)
+                            {
+                                needText.text += " (-" + (needPlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
+                            }
+                            else
+                            {
+                                needText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(need);
+                            }
                         }
 
                         playerDataBase.Portion1 -= 1;
@@ -1457,8 +1576,20 @@ public class GameManager : MonoBehaviour
                     {
                         portion2 = true;
 
-                        price += (int)(price * 0.3f);
-                        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice") + " (+30%)</size>\n" + MoneyUnitString.ToCurrencyString(price);
+                        sellPricePlus += 30;
+
+                        sellPrice += (int)(sellPrice * (0.01f * sellPricePlus));
+
+                        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice");
+
+                        if (sellPricePlus > 0)
+                        {
+                            priceText.text += " (+" + (sellPricePlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+                        }
+                        else
+                        {
+                            priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+                        }
 
                         playerDataBase.Portion2 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
@@ -1539,9 +1670,9 @@ public class GameManager : MonoBehaviour
     {
         float currentTime = 0f;
 
-        while (currentTime < portionTime)
+        while (currentTime < portion1Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portionTime);
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion1Time);
 
             fillAmount = Mathf.Clamp01(fillAmount);
 
@@ -1555,10 +1686,22 @@ public class GameManager : MonoBehaviour
         portion1 = false;
         portionFillamount1.fillAmount = 0;
 
+        needPlus -= 30;
+
+        need -= (int)(need * (0.01f * needPlus));
+
         if (level + 1 < upgradeFood.maxLevel)
         {
-            need = upgradeFood.GetNeed(level);
-            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(need);
+            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice");
+
+            if (needPlus > 0)
+            {
+                needText.text += " (-" + (needPlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
+            }
+            else
+            {
+                needText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(need);
+            }
         }
     }
 
@@ -1566,9 +1709,9 @@ public class GameManager : MonoBehaviour
     {
         float currentTime = 0f;
 
-        while (currentTime < portionTime)
+        while (currentTime < portion2Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portionTime);
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion2Time);
 
             fillAmount = Mathf.Clamp01(fillAmount);
 
@@ -1582,17 +1725,29 @@ public class GameManager : MonoBehaviour
         portion2 = false;
         portionFillamount2.fillAmount = 0;
 
-        price = upgradeFood.GetPrice(level);
-        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice") + "</size>\n" + MoneyUnitString.ToCurrencyString(price);
+        sellPricePlus -= 30;
+
+        sellPrice += (int)(sellPrice * (0.01f * sellPricePlus));
+
+        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice");
+
+        if (sellPricePlus > 0)
+        {
+            priceText.text += " (+" + (sellPricePlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+        }
+        else
+        {
+            priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+        }
     }
 
     IEnumerator PortionCoroution3()
     {
         float currentTime = 0f;
 
-        while (currentTime < portionTime)
+        while (currentTime < portion3Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portionTime);
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion3Time);
 
             fillAmount = Mathf.Clamp01(fillAmount);
 

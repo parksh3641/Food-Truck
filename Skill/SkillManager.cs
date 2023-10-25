@@ -7,12 +7,16 @@ public class SkillManager : MonoBehaviour
 {
     public GameObject skillView;
 
+    public RectTransform skillGrid;
+
     public SkillContent[] skillContents;
 
 
     private void Awake()
     {
         skillView.SetActive(false);
+
+        skillGrid.anchoredPosition = new Vector2(0, -9999);
     }
 
 

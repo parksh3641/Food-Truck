@@ -20,7 +20,10 @@ public class SkillContent : MonoBehaviour
 
     private int skill1Value = 1;
     private int skill2Value = -1;
-    private int skill3Value = +1;
+    private int skill3Value = 1;
+    private int skill4Value = 1;
+    private int skill5Value = 1;
+    private int skill6Value = 1;
 
     private int price = 500000;
 
@@ -52,7 +55,7 @@ public class SkillContent : MonoBehaviour
 
                 nowValueText.text = (skill1Value * (playerDataBase.Skill1 + 1)).ToString() + "%";
 
-                if(playerDataBase.Skill1 < 19)
+                if (playerDataBase.Skill1 < 19)
                 {
                     nextValueText.text = (skill1Value * (playerDataBase.Skill1 + 2)).ToString() + "%";
                     goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill1 + 1) * price);
@@ -96,6 +99,54 @@ public class SkillContent : MonoBehaviour
                     goldText.text = "-";
                 }
                 break;
+            case SkillType.Skill4:
+                levelText.text = "Lv. " + (playerDataBase.Skill4 + 1) + " / 20";
+
+                nowValueText.text = (skill3Value * (playerDataBase.Skill4 + 1)).ToString() + "%";
+
+                if (playerDataBase.Skill4 < 19)
+                {
+                    nextValueText.text = (skill4Value * (playerDataBase.Skill4 + 2)).ToString() + "%";
+                    goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill4 + 1) * price);
+                }
+                else
+                {
+                    nextValueText.text = "-";
+                    goldText.text = "-";
+                }
+                break;
+            case SkillType.Skill5:
+                levelText.text = "Lv. " + (playerDataBase.Skill5 + 1) + " / 20";
+
+                nowValueText.text = (skill5Value * (playerDataBase.Skill5 + 1)).ToString() + "%";
+
+                if (playerDataBase.Skill5 < 19)
+                {
+                    nextValueText.text = (skill5Value * (playerDataBase.Skill5 + 2)).ToString() + "%";
+                    goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill5 + 1) * price);
+                }
+                else
+                {
+                    nextValueText.text = "-";
+                    goldText.text = "-";
+                }
+                break;
+            case SkillType.Skill6:
+                levelText.text = "Lv. " + (playerDataBase.Skill6 + 1) + " / 20";
+
+                nowValueText.text = (skill6Value * (playerDataBase.Skill6 + 1)).ToString() + "%";
+
+                if (playerDataBase.Skill6 < 19)
+                {
+                    nextValueText.text = (skill6Value * (playerDataBase.Skill6 + 2)).ToString() + "%";
+                    goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill6 + 1) * price);
+                }
+                else
+                {
+                    nextValueText.text = "-";
+                    goldText.text = "-";
+                }
+                break;
         }
     }
 
@@ -112,7 +163,7 @@ public class SkillContent : MonoBehaviour
         {
             case SkillType.Skill1:
 
-                if(playerDataBase.Skill1 < 19)
+                if (playerDataBase.Skill1 < 19)
                 {
                     if (playerDataBase.Coin >= ((playerDataBase.Skill1 + 1) * price))
                     {
@@ -176,6 +227,84 @@ public class SkillContent : MonoBehaviour
 
                         playerDataBase.Skill3 += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Skill3", playerDataBase.Skill3);
+
+                        SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+                        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    }
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
+                }
+                break;
+            case SkillType.Skill4:
+                if (playerDataBase.Skill4 < 19)
+                {
+                    if (playerDataBase.Coin >= ((playerDataBase.Skill4 + 1) * price))
+                    {
+                        PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, ((playerDataBase.Skill4 + 1) * price));
+
+                        playerDataBase.Skill4 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Skill4", playerDataBase.Skill4);
+
+                        SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+                        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    }
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
+                }
+                break;
+            case SkillType.Skill5:
+                if (playerDataBase.Skill5 < 19)
+                {
+                    if (playerDataBase.Coin >= ((playerDataBase.Skill5 + 1) * price))
+                    {
+                        PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, ((playerDataBase.Skill5 + 1) * price));
+
+                        playerDataBase.Skill5 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Skill5", playerDataBase.Skill5);
+
+                        SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+                        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    }
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
+                }
+                break;
+            case SkillType.Skill6:
+                if (playerDataBase.Skill6 < 19)
+                {
+                    if (playerDataBase.Coin >= ((playerDataBase.Skill6 + 1) * price))
+                    {
+                        PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, ((playerDataBase.Skill6 + 1) * price));
+
+                        playerDataBase.Skill6 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Skill6", playerDataBase.Skill6);
 
                         SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
                         NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);

@@ -8,13 +8,11 @@ using UnityEngine;
 public class TruckInfo
 {
     public TruckType truckType = TruckType.Bread;
-
     public int price = 1000;
 
-    public TruckEffect truckEffect = TruckEffect.None;
+    [Space]
+    public PassiveEffect passiveEffect = PassiveEffect.UpgradePercentUp;
     public float effectNumber = 0;
-
-
 }
 
 

@@ -280,6 +280,33 @@ public class GameManager : MonoBehaviour
         {
             tutorialManager.TutorialStart();
         }
+
+        if(playerDataBase.FirstReward == 0)
+        {
+            playerDataBase.FirstReward = 1;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("FreeReward", 1);
+
+            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
+
+            StartCoroutine(FirstDelay());
+        }
+    }
+    IEnumerator FirstDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        playerDataBase.Portion1 += 5;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+
+        playerDataBase.Portion2 += 5;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+
+        playerDataBase.Portion3 += 5;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+
+        playerDataBase.Portion4 += 5;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+
     }
 
     void CheckCoupon(bool check)

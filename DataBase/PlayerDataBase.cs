@@ -15,6 +15,8 @@ public class PlayerDataBase : ScriptableObject
     private int defDestroyTicket = 0;
     [SerializeField]
     private int lockTutorial = 0;
+    [SerializeField]
+    private int firstReward = 0;
 
     [Space]
     [SerializeField]
@@ -220,6 +222,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             lockTutorial = value;
+        }
+    }
+
+    public int FirstReward
+    {
+        get
+        {
+            return firstReward;
+        }
+        set
+        {
+            firstReward = value;
         }
     }
 
@@ -965,6 +979,7 @@ public class PlayerDataBase : ScriptableObject
         defDestroyTicket = 0;
         lockTutorial = 0;
         nextFoodNumber = 0;
+        FirstReward = 0;
 
         hamburgerMaxValue = 0;
         sandwichMaxValue = 0;

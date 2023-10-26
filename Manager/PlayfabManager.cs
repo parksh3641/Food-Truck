@@ -87,6 +87,8 @@ public class PlayfabManager : MonoBehaviour
 
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
+        playerDataBase.Initialize();
+
 #if UNITY_ANDROID
         GoogleActivate();
 #elif UNITY_IOS
@@ -651,8 +653,6 @@ public class PlayfabManager : MonoBehaviour
 
         Debug.Log("Load Data...");
 
-        playerDataBase.Initialize();
-
         GetPlayerNickName();
 
         yield return new WaitForSeconds(0.5f);
@@ -848,6 +848,9 @@ public class PlayfabManager : MonoBehaviour
                        //case "":
                        //    string text = statistics.Value.ToString();
                        //    break;
+                       case "FirstReward":
+                           playerDataBase.FirstReward = statistics.Value;
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;

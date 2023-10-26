@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
     public Text feverText;
 
     private float feverCount = 0;
-    private float feverMaxCount = 250;
+    private float feverMaxCount = 200;
     private float feverTime = 30;
     private float feverPlus = 3;
 
@@ -341,13 +341,13 @@ public class GameManager : MonoBehaviour
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
 
-        feverTime = 30 + (30 * (0.01f * (playerDataBase.Skill1 + 1)));
-        feverMaxCount = 150 - (150 * (0.01f * (playerDataBase.Skill2 + 1)));
-        feverPlus = 5 + (5 * (0.01f * (playerDataBase.Skill3 + 1)));
+        feverTime = 30 + (30 * (0.001f * (playerDataBase.Skill1 + 1)));
+        feverMaxCount = 200 - (200 * (0.001f * (playerDataBase.Skill2 + 1)));
+        feverPlus = 3 + (3 * (0.001f * (playerDataBase.Skill3 + 1)));
 
-        portion1Time = 30 + (30 * (0.01f * (playerDataBase.Skill4 + 1)));
-        portion2Time = 30 + (30 * (0.01f * (playerDataBase.Skill5 + 1)));
-        portion3Time = 30 + (30 * (0.01f * (playerDataBase.Skill6 + 1)));
+        portion1Time = 30 + (30 * (0.001f * (playerDataBase.Skill4 + 1)));
+        portion2Time = 30 + (30 * (0.001f * (playerDataBase.Skill5 + 1)));
+        portion3Time = 30 + (30 * (0.001f * (playerDataBase.Skill6 + 1)));
 
         needPlus = 0;
         needPlus += playerDataBase.GetTruckNumber();
@@ -986,17 +986,17 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        adCount += 1;
+        //adCount += 1;
 
-        if (adCount >= GameStateManager.instance.AdCount)
-        {
-            adCount = 0;
+        //if (adCount >= GameStateManager.instance.AdCount)
+        //{
+        //    adCount = 0;
 
-            if(!playerDataBase.RemoveAds)
-            {
-                GoogleAdsManager.instance.admobScreen.ShowAd();
-            }
-        }
+        //    if(!playerDataBase.RemoveAds)
+        //    {
+        //        GoogleAdsManager.instance.admobScreen.ShowAd();
+        //    }
+        //}
 
         if (feverFillamount.gameObject.activeInHierarchy)
         {
@@ -1457,6 +1457,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.LowItemNotion);
                 return;
             }

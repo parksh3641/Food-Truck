@@ -75,13 +75,13 @@ public class TutorialManager : MonoBehaviour
         if (!talkSkip)
         {
             talkSkip = true;
-
-            SoundManager.instance.PlaySFX(GameSfxType.Click);
         }
         else
         {
             talkIndex++;
             Initialize(talkIndex);
+
+            SoundManager.instance.PlaySFX(GameSfxType.Click);
         }
     }
 

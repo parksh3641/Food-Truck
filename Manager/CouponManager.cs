@@ -109,6 +109,9 @@ public class CouponManager : MonoBehaviour
                     receiveContents[2].Initialize(RewardType.Portion2, 5);
                     receiveContents[3].Initialize(RewardType.Portion3, 5);
                     receiveContents[4].Initialize(RewardType.Portion4, 5);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Success);
+                    NotionManager.instance.UseNotion(NotionType.SuccessReward);
                 }
                 else
                 {
@@ -146,6 +149,9 @@ public class CouponManager : MonoBehaviour
                     receiveContents[2].Initialize(RewardType.Portion2, 5);
                     receiveContents[3].Initialize(RewardType.Portion3, 5);
                     receiveContents[4].Initialize(RewardType.Portion4, 5);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Success);
+                    NotionManager.instance.UseNotion(NotionType.SuccessReward);
                 }
                 else
                 {
@@ -183,6 +189,9 @@ public class CouponManager : MonoBehaviour
                     receiveContents[2].Initialize(RewardType.Portion2, 5);
                     receiveContents[3].Initialize(RewardType.Portion3, 5);
                     receiveContents[4].Initialize(RewardType.Portion4, 5);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Success);
+                    NotionManager.instance.UseNotion(NotionType.SuccessReward);
                 }
                 else
                 {
@@ -220,6 +229,9 @@ public class CouponManager : MonoBehaviour
                     receiveContents[2].Initialize(RewardType.Portion2, 10);
                     receiveContents[3].Initialize(RewardType.Portion3, 10);
                     receiveContents[4].Initialize(RewardType.Portion4, 10);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Success);
+                    NotionManager.instance.UseNotion(NotionType.SuccessReward);
                 }
                 else
                 {

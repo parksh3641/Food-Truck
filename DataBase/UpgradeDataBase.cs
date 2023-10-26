@@ -29,33 +29,49 @@ public class UpgradeFood
     {
         int price = 0;
 
-        if (level >= 30)
+        if (level >= 99)
         {
-            price = level * level * 38400;
+            price = level * level * 80000;
         }
-        else if (level >= 25)
+        else if (level >= 89)
+        {
+            price = level * level * 70000;
+        }
+        else if (level >= 79)
+        {
+            price = level * level * 60000;
+        }
+        else if (level >= 69)
+        {
+            price = level * level * 51200;
+        }
+        else if (level >= 59)
+        {
+            price = level * level * 25600;
+        }
+        else if (level >= 49)
         {
             price = level * level * 19200;
         }
-        else if (level >= 20)
+        else if (level >= 39)
         {
-            price = level * level * 9600;
+            price = level * level * 12800;
         }
-        else if (level >= 15)
+        else if (level >= 29)
         {
-            price = level * level * 4800;
+            price = level * level * 6400;
         }
-        else if (level >= 10)
+        else if (level >= 19)
         {
-            price = level * level * 2400;
+            price = level * level * 3200;
         }
-        else if(level >= 5)
+        else if(level >= 9)
         {
-            price = level * level * 1200;
+            price = level * level * 1600;
         }
         else
         {
-            price = level * level * 600;
+            price = level * level * 800;
         }
 
         return price;

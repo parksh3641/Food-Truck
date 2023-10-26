@@ -7,6 +7,8 @@ public class ChestBoxManager : MonoBehaviour
 {
     private RewardType rewardType = RewardType.Gold;
 
+    public GameObject ingameUI;
+
     public GameObject chestBoxView;
 
     public GameObject chestBoxIcon;
@@ -53,7 +55,10 @@ public class ChestBoxManager : MonoBehaviour
         }
         else
         {
-            count += 1;
+            if(ingameUI.activeInHierarchy)
+            {
+                count += 1;
+            }
         }
 
         yield return waitForSeconds;

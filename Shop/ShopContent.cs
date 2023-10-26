@@ -20,10 +20,12 @@ public class ShopContent : MonoBehaviour
 
     public GameObject buyAdObj;
     public GameObject buyCoinObj;
-
     public GameObject lockedObj;
 
     public Text buyCoinText;
+
+    public GameObject bestObj;
+    public Text bestText;
 
 
     Sprite[] itemArray;
@@ -62,8 +64,10 @@ public class ShopContent : MonoBehaviour
         {
             buyRmObj[i].SetActive(false);
         }
+
         buyAdObj.SetActive(false);
         buyCoinObj.SetActive(false);
+        bestObj.SetActive(false);
 
         switch (buyType)
         {
@@ -112,6 +116,10 @@ public class ShopContent : MonoBehaviour
                 buyRmObj[1].SetActive(true);
                 buyRmText[1].localizationName = itemType + "_Price";
                 buyRmText[1].ReLoad();
+
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
+
                 break;
             case ItemType.GoldShop3:
                 lockedObj.SetActive(false);
@@ -154,6 +162,9 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
+
                 break;
             case ItemType.PortionSet3:
                 lockedObj.SetActive(false);
@@ -175,6 +186,11 @@ public class ShopContent : MonoBehaviour
                 buyRmObj[7].SetActive(true);
                 buyRmText[7].localizationName = itemType + "_Price";
                 buyRmText[7].ReLoad();
+
+                rewardText.text = "200%";
+
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
                 break;
         }
 

@@ -18,14 +18,16 @@ public class SkillContent : MonoBehaviour
 
     public Text goldText;
 
-    private int skill1Value = 1;
-    private int skill2Value = -1;
-    private int skill3Value = 1;
-    private int skill4Value = 1;
-    private int skill5Value = 1;
-    private int skill6Value = 1;
+    private int maxLevel = 200;
 
-    private int price = 500000;
+    private float skill1Value = 0.1f;
+    private float skill2Value = -0.1f;
+    private float skill3Value = 0.1f;
+    private float skill4Value = 0.1f;
+    private float skill5Value = 0.1f;
+    private float skill6Value = 0.1f;
+
+    private int price = 50000;
 
 
     Sprite[] skillArray;
@@ -51,11 +53,11 @@ public class SkillContent : MonoBehaviour
         switch (skillType)
         {
             case SkillType.Skill1:
-                levelText.text = "Lv. " + (playerDataBase.Skill1 + 1) + " / 20";
+                levelText.text = "Lv. " + (playerDataBase.Skill1 + 1) + " / " + maxLevel.ToString();
 
                 nowValueText.text = (skill1Value * (playerDataBase.Skill1 + 1)).ToString() + "%";
 
-                if (playerDataBase.Skill1 < 19)
+                if (playerDataBase.Skill1 < maxLevel - 1)
                 {
                     nextValueText.text = (skill1Value * (playerDataBase.Skill1 + 2)).ToString() + "%";
                     goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill1 + 1) * price);
@@ -68,11 +70,11 @@ public class SkillContent : MonoBehaviour
 
                 break;
             case SkillType.Skill2:
-                levelText.text = "Lv. " + (playerDataBase.Skill2 + 1) + " / 20";
+                levelText.text = "Lv. " + (playerDataBase.Skill2 + 1) + " / " + maxLevel.ToString();
 
                 nowValueText.text = (skill2Value * (playerDataBase.Skill2 + 1)).ToString() + "%";
 
-                if (playerDataBase.Skill2 < 19)
+                if (playerDataBase.Skill2 < maxLevel - 1)
                 {
                     nextValueText.text = (skill2Value * (playerDataBase.Skill2 + 2)).ToString() + "%";
                     goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill2 + 1) * price);
@@ -84,11 +86,11 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill3:
-                levelText.text = "Lv. " + (playerDataBase.Skill3 + 1) + " / 20";
+                levelText.text = "Lv. " + (playerDataBase.Skill3 + 1) + " / " + maxLevel.ToString();
 
                 nowValueText.text = (skill3Value * (playerDataBase.Skill3 + 1)).ToString() + "%";
 
-                if (playerDataBase.Skill3 < 19)
+                if (playerDataBase.Skill3 < maxLevel - 1)
                 {
                     nextValueText.text = (skill3Value * (playerDataBase.Skill3 + 2)).ToString() + "%";
                     goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill3 + 1) * price);
@@ -100,11 +102,11 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill4:
-                levelText.text = "Lv. " + (playerDataBase.Skill4 + 1) + " / 20";
+                levelText.text = "Lv. " + (playerDataBase.Skill4 + 1) + " / " + maxLevel.ToString();
 
                 nowValueText.text = (skill3Value * (playerDataBase.Skill4 + 1)).ToString() + "%";
 
-                if (playerDataBase.Skill4 < 19)
+                if (playerDataBase.Skill4 < maxLevel - 1)
                 {
                     nextValueText.text = (skill4Value * (playerDataBase.Skill4 + 2)).ToString() + "%";
                     goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill4 + 1) * price);
@@ -116,11 +118,11 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill5:
-                levelText.text = "Lv. " + (playerDataBase.Skill5 + 1) + " / 20";
+                levelText.text = "Lv. " + (playerDataBase.Skill5 + 1) + " / " + maxLevel.ToString();
 
                 nowValueText.text = (skill5Value * (playerDataBase.Skill5 + 1)).ToString() + "%";
 
-                if (playerDataBase.Skill5 < 19)
+                if (playerDataBase.Skill5 < maxLevel - 1)
                 {
                     nextValueText.text = (skill5Value * (playerDataBase.Skill5 + 2)).ToString() + "%";
                     goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill5 + 1) * price);
@@ -132,11 +134,11 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill6:
-                levelText.text = "Lv. " + (playerDataBase.Skill6 + 1) + " / 20";
+                levelText.text = "Lv. " + (playerDataBase.Skill6 + 1) + " / " + maxLevel.ToString();
 
                 nowValueText.text = (skill6Value * (playerDataBase.Skill6 + 1)).ToString() + "%";
 
-                if (playerDataBase.Skill6 < 19)
+                if (playerDataBase.Skill6 < maxLevel - 1)
                 {
                     nextValueText.text = (skill6Value * (playerDataBase.Skill6 + 2)).ToString() + "%";
                     goldText.text = MoneyUnitString.ToCurrencyString((playerDataBase.Skill6 + 1) * price);
@@ -163,7 +165,7 @@ public class SkillContent : MonoBehaviour
         {
             case SkillType.Skill1:
 
-                if (playerDataBase.Skill1 < 19)
+                if (playerDataBase.Skill1 < maxLevel - 1)
                 {
                     if (playerDataBase.Coin >= ((playerDataBase.Skill1 + 1) * price))
                     {
@@ -191,7 +193,7 @@ public class SkillContent : MonoBehaviour
                 break;
             case SkillType.Skill2:
 
-                if (playerDataBase.Skill2 < 19)
+                if (playerDataBase.Skill2 < maxLevel - 1)
                 {
                     if (playerDataBase.Coin >= ((playerDataBase.Skill2 + 1) * price))
                     {
@@ -219,7 +221,7 @@ public class SkillContent : MonoBehaviour
                 break;
             case SkillType.Skill3:
 
-                if (playerDataBase.Skill3 < 19)
+                if (playerDataBase.Skill3 < maxLevel - 1)
                 {
                     if (playerDataBase.Coin >= ((playerDataBase.Skill3 + 1) * price))
                     {
@@ -245,7 +247,7 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill4:
-                if (playerDataBase.Skill4 < 19)
+                if (playerDataBase.Skill4 < maxLevel - 1)
                 {
                     if (playerDataBase.Coin >= ((playerDataBase.Skill4 + 1) * price))
                     {
@@ -271,7 +273,7 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill5:
-                if (playerDataBase.Skill5 < 19)
+                if (playerDataBase.Skill5 < maxLevel - 1)
                 {
                     if (playerDataBase.Coin >= ((playerDataBase.Skill5 + 1) * price))
                     {
@@ -297,7 +299,7 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill6:
-                if (playerDataBase.Skill6 < 19)
+                if (playerDataBase.Skill6 < maxLevel - 1)
                 {
                     if (playerDataBase.Coin >= ((playerDataBase.Skill6 + 1) * price))
                     {

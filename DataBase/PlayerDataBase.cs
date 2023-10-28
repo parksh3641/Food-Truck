@@ -103,8 +103,51 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int taipan = 0;
 
+    [Space]
+    [Title("Butterfly")]
+    [SerializeField]
+    private int butterfly1 = 0;
+    [SerializeField]
+    private int butterfly2 = 0;
+    [SerializeField]
+    private int butterfly3 = 0;
+    [SerializeField]
+    private int butterfly4 = 0;
+    [SerializeField]
+    private int butterfly5 = 0;
+    [SerializeField]
+    private int butterfly6 = 0;
+    [SerializeField]
+    private int butterfly7 = 0;
+    [SerializeField]
+    private int butterfly8 = 0;
+    [SerializeField]
+    private int butterfly9 = 0;
+    [SerializeField]
+    private int butterfly10 = 0;
 
-
+    [Space]
+    [Title("Island")]
+    [SerializeField]
+    private int island1 = 0;
+    [SerializeField]
+    private int island2 = 0;
+    [SerializeField]
+    private int island3 = 0;
+    [SerializeField]
+    private int island4 = 0;
+    [SerializeField]
+    private int island5 = 0;
+    [SerializeField]
+    private int island6 = 0;
+    [SerializeField]
+    private int island7 = 0;
+    [SerializeField]
+    private int island8 = 0;
+    [SerializeField]
+    private int island9 = 0;
+    [SerializeField]
+    private int island10 = 0;
 
 
     [Space]
@@ -681,6 +724,246 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Butterfly1
+    {
+        get
+        {
+            return butterfly1;
+        }
+        set
+        {
+            butterfly1 = value;
+        }
+    }
+
+    public int Butterfly2
+    {
+        get
+        {
+            return butterfly2;
+        }
+        set
+        {
+            butterfly2 = value;
+        }
+    }
+
+    public int Butterfly3
+    {
+        get
+        {
+            return butterfly3;
+        }
+        set
+        {
+            butterfly3 = value;
+        }
+    }
+
+    public int Butterfly4
+    {
+        get
+        {
+            return butterfly4;
+        }
+        set
+        {
+            butterfly4 = value;
+        }
+    }
+
+    public int Butterfly5
+    {
+        get
+        {
+            return butterfly5;
+        }
+        set
+        {
+            butterfly5 = value;
+        }
+    }
+
+    public int Butterfly6
+    {
+        get
+        {
+            return butterfly6;
+        }
+        set
+        {
+            butterfly6 = value;
+        }
+    }
+
+    public int Butterfly7
+    {
+        get
+        {
+            return butterfly7;
+        }
+        set
+        {
+            butterfly7 = value;
+        }
+    }
+
+    public int Butterfly8
+    {
+        get
+        {
+            return butterfly8;
+        }
+        set
+        {
+            butterfly8 = value;
+        }
+    }
+
+    public int Butterfly9
+    {
+        get
+        {
+            return butterfly9;
+        }
+        set
+        {
+            butterfly9 = value;
+        }
+    }
+
+    public int Butterfly10
+    {
+        get
+        {
+            return butterfly10;
+        }
+        set
+        {
+            butterfly10 = value;
+        }
+    }
+
+    public int Island1
+    {
+        get
+        {
+            return island1;
+        }
+        set
+        {
+            island1 = value;
+        }
+    }
+
+    public int Island2
+    {
+        get
+        {
+            return island2;
+        }
+        set
+        {
+            island2 = value;
+        }
+    }
+
+    public int Island3
+    {
+        get
+        {
+            return island3;
+        }
+        set
+        {
+            island3 = value;
+        }
+    }
+
+    public int Island4
+    {
+        get
+        {
+            return island4;
+        }
+        set
+        {
+            island4 = value;
+        }
+    }
+
+    public int Island5
+    {
+        get
+        {
+            return island5;
+        }
+        set
+        {
+            island5 = value;
+        }
+    }
+
+    public int Island6
+    {
+        get
+        {
+            return island6;
+        }
+        set
+        {
+            island6 = value;
+        }
+    }
+
+    public int Island7
+    {
+        get
+        {
+            return island7;
+        }
+        set
+        {
+            island7 = value;
+        }
+    }
+
+    public int Island8
+    {
+        get
+        {
+            return island8;
+        }
+        set
+        {
+            island8 = value;
+        }
+    }
+
+    public int Island9
+    {
+        get
+        {
+            return island9;
+        }
+        set
+        {
+            island9 = value;
+        }
+    }
+
+    public int Island10
+    {
+        get
+        {
+            return island10;
+        }
+        set
+        {
+            island10 = value;
+        }
+    }
+
     public int Portion1
     {
         get
@@ -1021,6 +1304,28 @@ public class PlayerDataBase : ScriptableObject
         squid = 0;
         taipan = 0;
 
+        butterfly1 = 0;
+        butterfly2 = 0;
+        butterfly3 = 0;
+        butterfly4 = 0;
+        butterfly5 = 0;
+        butterfly6 = 0;
+        butterfly7 = 0;
+        butterfly8 = 0;
+        butterfly9 = 0;
+        butterfly10 = 0;
+
+        island1 = 0;
+        island2 = 0;
+        island3 = 0;
+        island4 = 0;
+        island5 = 0;
+        island6 = 0;
+        island7 = 0;
+        island8 = 0;
+        island9 = 0;
+        island10 = 0;
+
         portion1 = 0;
         portion2 = 0;
         portion3 = 0;
@@ -1199,6 +1504,48 @@ public class PlayerDataBase : ScriptableObject
         }
         
         if(TaipanAnimal > 0)
+        {
+            count += 1;
+        }
+
+        return count;
+    }
+
+    public int GetButterflyNumber()
+    {
+        int count = 0;
+
+        if (GeckoAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if (HerringAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if (MuskratAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if (PuduAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if (SparrowAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if (SquidAnimal > 0)
+        {
+            count += 1;
+        }
+
+        if (TaipanAnimal > 0)
         {
             count += 1;
         }

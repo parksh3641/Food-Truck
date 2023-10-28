@@ -161,7 +161,9 @@ public enum PassiveEffect
 {
     None,
     UpgradePercentUp,
-    DefDestroyPercentUp
+    DefDestroyPercentUp,
+    SellPriceX2Up,
+    SellPricePercentUp
 }
 
 public enum RewardType
@@ -197,4 +199,32 @@ public enum SkillType
     Skill4,
     Skill5,
     Skill6
+}
+
+public enum ButterflyType
+{
+    Butterfly1,
+    Butterfly2,
+    Butterfly3,
+    Butterfly4,
+    Butterfly5,
+    Butterfly6,
+    Butterfly7,
+    Butterfly8,
+    Butterfly9,
+    Butterfly10,
+}
+
+public enum IslandType
+{
+    Island1,
+    Island2,
+    Island3,
+    Island4,
+    Island5,
+    Island6,
+    Island7,
+    Island8,
+    Island9,
+    Island10,
 }

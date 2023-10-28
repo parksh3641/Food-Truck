@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
     public FoodContent[] pizzaArray;
     public FoodContent[] donutArray;
 
+    [Space]
+    [Title("Animal")]
+    public Animator[] animalAnimator;
 
     [Space]
     [Title("Upgrade")]
@@ -131,6 +134,7 @@ public class GameManager : MonoBehaviour
 
     UpgradeFood upgradeFood;
 
+    public ParticleSystem lightParticle;
     public ParticleSystem levelUpParticle;
     public ParticleSystem bombPartice;
 
@@ -140,6 +144,10 @@ public class GameManager : MonoBehaviour
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
+    TruckDataBase truckDataBase;
+    AnimalDataBase animalDataBase;
+    ButterflyDataBase butterflyDataBase;
+    IslandDataBase islandDataBase;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
 
@@ -151,6 +159,10 @@ public class GameManager : MonoBehaviour
 
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
         if (upgradeDataBase == null) upgradeDataBase = Resources.Load("UpgradeDataBase") as UpgradeDataBase;
+        if (truckDataBase == null) truckDataBase = Resources.Load("TruckDataBase") as TruckDataBase;
+        if (animalDataBase == null) animalDataBase = Resources.Load("AnimalDataBase") as AnimalDataBase;
+        if (butterflyDataBase == null) butterflyDataBase = Resources.Load("ButterflyDataBase") as ButterflyDataBase;
+        if (islandDataBase == null) islandDataBase = Resources.Load("IslandDataBase") as IslandDataBase;
 
         //versionText.text = "v" + Application.version;
 
@@ -200,6 +212,8 @@ public class GameManager : MonoBehaviour
         privacypolicyView.SetActive(false);
 
         myMoneyPlusText.gameObject.SetActive(false);
+
+        lightParticle.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -246,27 +260,52 @@ public class GameManager : MonoBehaviour
         {
             case FoodType.Hamburger:
                 level = GameStateManager.instance.HamburgerLevel;
-                nextLevel = GameStateManager.instance.HamburgerLevel / 5;
+                nextLevel = (GameStateManager.instance.HamburgerLevel + 1) / 5;
+
+                if (hamburgerArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.Sandwich:
                 level = GameStateManager.instance.SandwichLevel;
-                nextLevel = GameStateManager.instance.SandwichLevel / 5;
+                nextLevel = (GameStateManager.instance.SandwichLevel + 1) / 5;
+
+                if (sandwichArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.SnackLab:
                 level = GameStateManager.instance.SnackLabLevel;
-                nextLevel = GameStateManager.instance.SnackLabLevel / 5;
+                nextLevel = (GameStateManager.instance.SnackLabLevel + 1) / 5;
+
+                if (snackLabArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.Drink:
                 level = GameStateManager.instance.DrinkLevel;
-                nextLevel = GameStateManager.instance.DrinkLevel / 5;
+                nextLevel = (GameStateManager.instance.DrinkLevel + 1) / 5;
+
+                if (drinkArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.Pizza:
                 level = GameStateManager.instance.PizzaLevel;
-                nextLevel = GameStateManager.instance.PizzaLevel / 5;
+                nextLevel = (GameStateManager.instance.PizzaLevel + 1) / 5;
+
+                if (pizzaArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.Donut:
                 level = GameStateManager.instance.DonutLevel;
-                nextLevel = GameStateManager.instance.DonutLevel / 5;
+                nextLevel = (GameStateManager.instance.DonutLevel + 1) / 5;
                 break;
         }
 
@@ -284,7 +323,7 @@ public class GameManager : MonoBehaviour
         if(playerDataBase.FirstReward == 0)
         {
             playerDataBase.FirstReward = 1;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("FreeReward", 1);
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
 
             PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
 
@@ -296,17 +335,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         playerDataBase.Portion1 += 5;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-
         playerDataBase.Portion2 += 5;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-
         playerDataBase.Portion3 += 5;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-
         playerDataBase.Portion4 += 5;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
+        CheckPortion();
     }
 
     void CheckCoupon(bool check)
@@ -358,12 +396,12 @@ public class GameManager : MonoBehaviour
 
         if(GameStateManager.instance.TruckType > TruckType.Bread)
         {
-            successTruck = (float)GameStateManager.instance.TruckType * 0.5f;
+            successTruck = truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
         }
 
         if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
         {
-            defDestroy = (float)GameStateManager.instance.AnimalType * 2f;
+            defDestroy = animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType);
         }
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
@@ -414,6 +452,8 @@ public class GameManager : MonoBehaviour
         signText.text = GameStateManager.instance.NickName;
 
         RenewalVC();
+
+        SuccessLogin();
     }
 
     public void ChangeFood(FoodType type)
@@ -430,27 +470,52 @@ public class GameManager : MonoBehaviour
         {
             case FoodType.Hamburger:
                 level = GameStateManager.instance.HamburgerLevel;
-                nextLevel = GameStateManager.instance.HamburgerLevel / 5;
+                nextLevel = (GameStateManager.instance.HamburgerLevel + 1) / 5;
+
+                if (hamburgerArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.Sandwich:
                 level = GameStateManager.instance.SandwichLevel;
-                nextLevel = GameStateManager.instance.SandwichLevel / 5;
+                nextLevel = (GameStateManager.instance.SandwichLevel + 1) / 5;
+
+                if (sandwichArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.SnackLab:
                 level = GameStateManager.instance.SnackLabLevel;
-                nextLevel = GameStateManager.instance.SnackLabLevel / 5;
+                nextLevel = (GameStateManager.instance.SnackLabLevel + 1) / 5;
+
+                if (snackLabArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.Drink:
                 level = GameStateManager.instance.DrinkLevel;
-                nextLevel = GameStateManager.instance.DrinkLevel / 5;
+                nextLevel = (GameStateManager.instance.DrinkLevel + 1) / 5;
+
+                if (drinkArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.Pizza:
                 level = GameStateManager.instance.PizzaLevel;
-                nextLevel = GameStateManager.instance.PizzaLevel / 5;
+                nextLevel = (GameStateManager.instance.PizzaLevel + 1) / 5;
+
+                if (pizzaArray.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
                 break;
             case FoodType.Donut:
                 level = GameStateManager.instance.DonutLevel;
-                nextLevel = GameStateManager.instance.DonutLevel / 5;
+                nextLevel = (GameStateManager.instance.DonutLevel + 1) / 5;
                 break;
         }
 
@@ -766,17 +831,15 @@ public class GameManager : MonoBehaviour
                         case FoodType.Donut:
                             GameStateManager.instance.DonutLevel = level;
 
-#if !UNITY_EDITOR
-                            if(playerDataBase.DonutLevel < level)
+                            if (playerDataBase.DonutLevel < level)
                             {
                                 playerDataBase.DonutLevel = level + 1;
-
+#if !UNITY_EDITOR
                                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutLevel", playerDataBase.DonutLevel);
+#endif
                             }
 
-#endif
-
-                            break;
+                                break;
                     }
 
                     CheckFoodLevelUp();
@@ -1066,6 +1129,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FeverCoroution()
     {
+        for (int i = 0; i < animalAnimator.Length; i++)
+        {
+            animalAnimator[i].SetBool("YummyTime", true);
+        }
+
         for (int i = 0; i < hamburgerArray.Length; i++)
         {
             if(hamburgerArray[i].gameObject.activeInHierarchy)
@@ -1122,6 +1190,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        lightParticle.gameObject.SetActive(true);
+
         feverText.enabled = false;
 
         float currentTime = 0f;
@@ -1141,6 +1211,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        lightParticle.gameObject.SetActive(false);
+
         feverMode = false;
 
         feverCount = 0;
@@ -1157,6 +1229,11 @@ public class GameManager : MonoBehaviour
         backButton.SetActive(true);
 
         SoundManager.instance.StopFever();
+
+        for (int i = 0; i < animalAnimator.Length; i++)
+        {
+            animalAnimator[i].SetBool("YummyTime", false);
+        }
 
         for (int i = 0; i < hamburgerArray.Length; i++)
         {
@@ -1438,6 +1515,12 @@ public class GameManager : MonoBehaviour
                 if (isDef)
                 {
                     defDestroy -= defDestroyPlus;
+
+                    if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
+                    {
+                        defDestroy = (float)GameStateManager.instance.AnimalType * 2f;
+                    }
+
                     defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
                 }
 
@@ -1450,6 +1533,12 @@ public class GameManager : MonoBehaviour
             if(isDef)
             {
                 defDestroy -= defDestroyPlus;
+
+                if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
+                {
+                    defDestroy = (float)GameStateManager.instance.AnimalType * 2f;
+                }
+
                 defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
             }
 
@@ -1496,6 +1585,11 @@ public class GameManager : MonoBehaviour
         else
         {
             defDestroy -= defDestroyPlus;
+
+            if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
+            {
+                defDestroy = (float)GameStateManager.instance.AnimalType * 2f;
+            }
 
             isDef = false;
             checkMark.SetActive(false);

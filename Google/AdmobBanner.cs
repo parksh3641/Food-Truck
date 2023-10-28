@@ -28,7 +28,7 @@ public class AdmobBanner : MonoBehaviour
         adUnitId = "unexpected_platform";
 #endif
 
-        LoadAd();
+        //LoadAd();
     }
 
     public void LoadAd() //±¤°í ·Îµå

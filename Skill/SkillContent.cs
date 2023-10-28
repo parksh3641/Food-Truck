@@ -21,13 +21,13 @@ public class SkillContent : MonoBehaviour
     private int maxLevel = 200;
 
     private float skill1Value = 0.1f;
-    private float skill2Value = -0.1f;
+    private float skill2Value = 0.1f;
     private float skill3Value = 0.1f;
     private float skill4Value = 0.1f;
     private float skill5Value = 0.1f;
     private float skill6Value = 0.1f;
 
-    private int price = 50000;
+    private int price = 10000;
 
 
     Sprite[] skillArray;

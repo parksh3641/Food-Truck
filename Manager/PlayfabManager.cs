@@ -573,11 +573,6 @@ public class PlayfabManager : MonoBehaviour
 
         GameStateManager.instance.PlayfabId = result.PlayFabId;
 
-        if(GameManager.instance != null)
-        {
-            GameManager.instance.SuccessLogin();
-        }
-
         StartCoroutine(LoadDataCoroutine());
     }
 
@@ -655,7 +650,7 @@ public class PlayfabManager : MonoBehaviour
 
         GetPlayerNickName();
 
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
 
         //yield return GetCatalog();
 
@@ -810,6 +805,106 @@ public class PlayfabManager : MonoBehaviour
                     if (list.ItemId.Equals("Taipan"))
                     {
                         playerDataBase.TaipanAnimal = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly1"))
+                    {
+                        playerDataBase.Butterfly1 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly2"))
+                    {
+                        playerDataBase.Butterfly2 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly3"))
+                    {
+                        playerDataBase.Butterfly3 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly4"))
+                    {
+                        playerDataBase.Butterfly4 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly5"))
+                    {
+                        playerDataBase.Butterfly5 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly6"))
+                    {
+                        playerDataBase.Butterfly6 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly7"))
+                    {
+                        playerDataBase.Butterfly7 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly8"))
+                    {
+                        playerDataBase.Butterfly8 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly9"))
+                    {
+                        playerDataBase.Butterfly9 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly10"))
+                    {
+                        playerDataBase.Butterfly10 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island1"))
+                    {
+                        playerDataBase.Island1 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island2"))
+                    {
+                        playerDataBase.Island2 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island3"))
+                    {
+                        playerDataBase.Island3 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island4"))
+                    {
+                        playerDataBase.Island4 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island5"))
+                    {
+                        playerDataBase.Island5 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island6"))
+                    {
+                        playerDataBase.Island6 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island7"))
+                    {
+                        playerDataBase.Island7 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island8"))
+                    {
+                        playerDataBase.Island8 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island9"))
+                    {
+                        playerDataBase.Island9 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Island10"))
+                    {
+                        playerDataBase.Island10 = 1;
                     }
                 }
             }
@@ -1501,116 +1596,7 @@ public class PlayfabManager : MonoBehaviour
     {
         if (isDelay) return;
 
-        PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(), result =>
-        {
-            var Inventory = result.Inventory;
-
-            if (Inventory != null)
-            {
-                for (int i = 0; i < Inventory.Count; i++)
-                {
-                    inventoryList.Add(Inventory[i]);
-                }
-
-                foreach (ItemInstance list in inventoryList)
-                {
-                    if (list.ItemId.Equals("RemoveAds"))
-                    {
-                        playerDataBase.RemoveAds = true;
-                    }
-
-                    if (list.ItemId.Equals("GoldX2"))
-                    {
-                        playerDataBase.GoldX2 = true;
-                    }
-
-                    if (list.ItemId.Equals("Chips"))
-                    {
-                        playerDataBase.ChipsTruck = 1;
-                    }
-
-                    if (list.ItemId.Equals("Donut"))
-                    {
-                        playerDataBase.DonutTruck = 1;
-                    }
-
-                    if (list.ItemId.Equals("Hamburger"))
-                    {
-                        playerDataBase.HamburgerTruck = 1;
-                    }
-
-                    if (list.ItemId.Equals("Hotdog"))
-                    {
-                        playerDataBase.HotdogTruck = 1;
-                    }
-
-                    if (list.ItemId.Equals("Icecream"))
-                    {
-                        playerDataBase.IcecreamTruck = 1;
-                    }
-
-                    if (list.ItemId.Equals("Lemonade"))
-                    {
-                        playerDataBase.LemonadeTruck = 1;
-                    }
-
-                    if (list.ItemId.Equals("Noodles"))
-                    {
-                        playerDataBase.NoodlesTruck = 1;
-                    }
-
-                    if (list.ItemId.Equals("Pizza"))
-                    {
-                        playerDataBase.PizzaTruck = 1;
-                    }
-
-                    if (list.ItemId.Equals("Sushi"))
-                    {
-                        playerDataBase.SushiTruck = 1;
-                    }
-
-                    if (list.ItemId.Equals("Gecko"))
-                    {
-                        playerDataBase.GeckoAnimal = 1;
-                    }
-
-                    if (list.ItemId.Equals("Herring"))
-                    {
-                        playerDataBase.HerringAnimal = 1;
-                    }
-
-                    if (list.ItemId.Equals("Muskrat"))
-                    {
-                        playerDataBase.MuskratAnimal = 1;
-                    }
-
-                    if (list.ItemId.Equals("Pudu"))
-                    {
-                        playerDataBase.PuduAnimal = 1;
-                    }
-
-                    if (list.ItemId.Equals("Sparrow"))
-                    {
-                        playerDataBase.SparrowAnimal = 1;
-                    }
-
-                    if (list.ItemId.Equals("Squid"))
-                    {
-                        playerDataBase.SquidAnimal = 1;
-                    }
-
-                    if (list.ItemId.Equals("Taipan"))
-                    {
-                        playerDataBase.TaipanAnimal = 1;
-                    }
-                }
-            }
-            else
-            {
-                return;
-            }
-
-        }, DisplayPlayfabError);
+        GetUserInventory();
 
         NotionManager.instance.UseNotion(NotionType.RestorePurchasesNotion);
 

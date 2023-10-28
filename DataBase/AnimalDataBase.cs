@@ -35,4 +35,20 @@ public class AnimalDataBase : ScriptableObject
 
         return animal;
     }
+
+    public float GetAnimalEffect(AnimalType type)
+    {
+        float number = 0;
+
+        for (int i = 0; i < animalInfoList.Count; i++)
+        {
+            if (animalInfoList[i].animalType.Equals(type))
+            {
+                number = animalInfoList[i].effectNumber;
+                break;
+            }
+        }
+
+        return number;
+    }
 }

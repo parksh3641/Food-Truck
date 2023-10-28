@@ -406,6 +406,8 @@ public class GameManager : MonoBehaviour
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
 
+        feverCount = GameStateManager.instance.FeverCount;
+
         feverTime = 30 + (30 * (0.001f * (playerDataBase.Skill1 + 1)));
         feverMaxCount = 200 - (200 * (0.001f * (playerDataBase.Skill2 + 1)));
         feverPlus = 3 + (3 * (0.001f * (playerDataBase.Skill3 + 1)));
@@ -437,6 +439,8 @@ public class GameManager : MonoBehaviour
     public void GameStop()
     {
         if (!isDelay_Camera) return;
+
+        GameStateManager.instance.FeverCount = feverCount;
 
         isDelay_Camera = false;
 
@@ -1194,6 +1198,9 @@ public class GameManager : MonoBehaviour
 
         feverText.enabled = false;
 
+        feverCount = 0;
+        GameStateManager.instance.FeverCount = 0;
+
         float currentTime = 0f;
 
         while(currentTime < feverTime)
@@ -1215,7 +1222,6 @@ public class GameManager : MonoBehaviour
 
         feverMode = false;
 
-        feverCount = 0;
         feverFillamount.fillAmount = 0;
 
         feverText.enabled = true;

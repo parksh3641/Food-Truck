@@ -52,6 +52,7 @@ public class GameStateManager : MonoBehaviour
         public int drinkLevel = 0;
         public int pizzaLevel = 0;
         public int donutLevel = 0;
+        public float feverCount = 0;
 
         [Space]
         [Title("Ads")]
@@ -368,6 +369,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.donutLevel = value;
+            SaveFile();
+        }
+    }
+
+    public float FeverCount
+    {
+        get
+        {
+            return gameSettings.feverCount;
+        }
+        set
+        {
+            gameSettings.feverCount = value;
             SaveFile();
         }
     }

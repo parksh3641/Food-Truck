@@ -31,7 +31,7 @@ public enum LevelType
 public enum RankingType
 {
     GourmetLevel,
-    DonutLevel,
+    QuestCount,
     UpgradeCount
 }
 
@@ -87,6 +87,30 @@ public enum GameSfxType
     QuestReward
 }
 
+public enum CharacterType
+{
+    Character1,
+    Character2,
+    Character3,
+    Character4,
+    Character5,
+    Character6,
+    Character7,
+    Character8,
+    Character9,
+    Character10,
+    Character11,
+    Character12,
+    Character13,
+    Character14,
+    Character15,
+    Character16,
+    Character17,
+    Character18,
+    Character19,
+    Character20,
+}
+
 public enum TruckType
 {
     Bread,
@@ -113,6 +137,38 @@ public enum AnimalType
     Taipan
 }
 
+public enum ButterflyType
+{
+    Butterfly1,
+    Butterfly2,
+    Butterfly3,
+    Butterfly4,
+    Butterfly5,
+    Butterfly6,
+    Butterfly7,
+    Butterfly8,
+    Butterfly9,
+    Butterfly10,
+    Butterfly11,
+    Butterfly12,
+    Butterfly13,
+    Butterfly14,
+    Butterfly15,
+    Butterfly16,
+    Butterfly17,
+    Butterfly18,
+    Butterfly19,
+    Butterfly20,
+    Butterfly21,
+    Butterfly22,
+    Butterfly23,
+    Butterfly24,
+    Butterfly25,
+    Butterfly26,
+    Butterfly27,
+    Butterfly28,
+}
+
 public enum ItemType
 {
     DailyReward,
@@ -121,7 +177,7 @@ public enum ItemType
     GoldShop1,
     GoldShop2,
     GoldShop3,
-    AdReward_Potion,
+    AdReward_Portion,
     RemoveAds,
     PortionSet1,
     PortionSet2,
@@ -154,7 +210,8 @@ public enum FoodType
     SnackLab,
     Drink,
     Pizza,
-    Donut
+    Donut,
+    Fries
 }
 
 public enum PassiveEffect
@@ -163,7 +220,7 @@ public enum PassiveEffect
     UpgradePercentUp,
     DefDestroyPercentUp,
     SellPriceX2Up,
-    SellPricePercentUp
+    SellPricePercentUp,
 }
 
 public enum RewardType
@@ -188,7 +245,7 @@ public enum QuestType
     SellCount,
     UseSources,
     OpenChestBox,
-    DonutLevel
+    FeverModeCount
 }
 
 public enum SkillType
@@ -200,21 +257,6 @@ public enum SkillType
     Skill5,
     Skill6
 }
-
-public enum ButterflyType
-{
-    Butterfly1,
-    Butterfly2,
-    Butterfly3,
-    Butterfly4,
-    Butterfly5,
-    Butterfly6,
-    Butterfly7,
-    Butterfly8,
-    Butterfly9,
-    Butterfly10,
-}
-
 public enum IslandType
 {
     Island1,

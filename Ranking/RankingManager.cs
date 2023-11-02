@@ -122,7 +122,7 @@ public class RankingManager : MonoBehaviour
                 infoText.localizationName = "Ranking2_Info";
                 break;
             case 2:
-                ChangeRankingView(RankingType.DonutLevel);
+                ChangeRankingView(RankingType.QuestCount);
 
                 infoText.localizationName = "Ranking3_Info";
                 break;
@@ -226,7 +226,7 @@ public class RankingManager : MonoBehaviour
                 number = playerDataBase.GourmetLevel;
                 break;
             case 1:
-                number = playerDataBase.DonutLevel;
+                number = playerDataBase.QuestCount;
                 break;
             case 2:
                 number = playerDataBase.UpgradeCount;

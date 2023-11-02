@@ -90,12 +90,12 @@ public class ShopContent : MonoBehaviour
                 rewardText.text = MoneyUnitString.ToCurrencyString(100000) + " ~ " + MoneyUnitString.ToCurrencyString(200000);
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = MoneyUnitString.ToCurrencyString(2000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(3000000);
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
 
-                buyCoinText.text = MoneyUnitString.ToCurrencyString(1000000);
+                buyCoinText.text = MoneyUnitString.ToCurrencyString(10000000);
 
                 titleText.plusText = " x1";
                 break;
@@ -130,8 +130,12 @@ public class ShopContent : MonoBehaviour
                 buyRmText[2].localizationName = itemType + "_Price";
                 buyRmText[2].ReLoad();
                 break;
-            case ItemType.AdReward_Potion:
+            case ItemType.AdReward_Portion:
                 rewardText.text = "";
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+
                 break;
             case ItemType.RemoveAds:
                 lockedObj.SetActive(false);
@@ -179,6 +183,9 @@ public class ShopContent : MonoBehaviour
                 break;
             case ItemType.DailyReward_Portion:
                 rewardText.text = "";
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
                 break;
             case ItemType.GoldX2:
                 lockedObj.SetActive(false);
@@ -187,7 +194,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[7].localizationName = itemType + "_Price";
                 buyRmText[7].ReLoad();
 
-                rewardText.text = "200%";
+                rewardText.text = "+50%";
 
                 bestObj.SetActive(true);
                 bestText.text = "BEST";

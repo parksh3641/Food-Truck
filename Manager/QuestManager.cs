@@ -77,8 +77,8 @@ public class QuestManager : MonoBehaviour
             case QuestType.OpenChestBox:
                 value = playerDataBase.OpenChestBox;
                 break;
-            case QuestType.DonutLevel:
-                value = playerDataBase.DonutLevel;
+            case QuestType.FeverModeCount:
+                value = playerDataBase.FeverModeCount;
                 break;
         }
 

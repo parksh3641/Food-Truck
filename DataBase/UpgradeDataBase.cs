@@ -22,7 +22,7 @@ public class UpgradeFood
     public int GetNeed(int level)
     {
         //return priceList[level].need;
-        return (level + 1) * (level + 1) * 100;
+        return (level + 1) * (level + 1) * 50;
     }
 
     public int GetPrice(int level)
@@ -31,47 +31,47 @@ public class UpgradeFood
 
         if (level >= 99)
         {
-            price = level * level * 60000;
+            price = level * level * 12800;
         }
         else if (level >= 89)
         {
-            price = level * level * 51200;
+            price = level * level * 9600;
         }
         else if (level >= 79)
         {
-            price = level * level * 38400;
+            price = level * level * 8400;
         }
         else if (level >= 69)
         {
-            price = level * level * 25600;
+            price = level * level * 7200;
         }
         else if (level >= 59)
         {
-            price = level * level * 19200;
+            price = level * level * 6000;
         }
         else if (level >= 49)
         {
-            price = level * level * 12800;
+            price = level * level * 4800;
         }
         else if (level >= 39)
         {
-            price = level * level * 9600;
+            price = level * level * 3200;
         }
         else if (level >= 29)
         {
-            price = level * level * 6400;
+            price = level * level * 1600;
         }
         else if (level >= 19)
         {
-            price = level * level * 3200;
+            price = level * level * 1200;
         }
         else if(level >= 9)
         {
-            price = level * level * 1600;
+            price = level * level * 800;
         }
         else
         {
-            price = level * level * 800;
+            price = level * level * 400;
         }
 
         return price;
@@ -83,23 +83,25 @@ public class UpgradeFood
 
         float percent = 0;
 
-        if(level >= 90)
-        {
-            percent = 40 - ((level - 90) * 0.1f);
-        }
-        else if (level >= 30)
-        {
-            percent = 70 - ((level - 30) - 0.5f);
-        }
-        else
-        {
-            percent = 100 - (level * 1);
-        }
+        //if(level >= 90)
+        //{
+        //    percent = 40 - ((level - 90) * 0.1f);
+        //}
+        //else if (level >= 30)
+        //{
+        //    percent = 70 - ((level - 30) - 0.5f);
+        //}
+        //else
+        //{
+        //    percent = 100 - (level * 1);
+        //}
 
-        if(percent <= 0.1f)
-        {
-            percent = 0.1f;
-        }
+        //if(percent <= 0.1f)
+        //{
+        //    percent = 0.1f;
+        //}
+
+        percent = 100 - (level * 1);
 
         return percent;
     }

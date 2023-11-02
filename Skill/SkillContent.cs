@@ -23,11 +23,13 @@ public class SkillContent : MonoBehaviour
     private float skill1Value = 0.1f;
     private float skill2Value = 0.1f;
     private float skill3Value = 0.1f;
-    private float skill4Value = 0.1f;
-    private float skill5Value = 0.1f;
-    private float skill6Value = 0.1f;
+    private float skill4Value = 0.2f;
+    private float skill5Value = 0.2f;
+    private float skill6Value = 0.2f;
 
-    private int price = 10000;
+    private int price = 5000;
+
+    bool isDelay = false;
 
 
     Sprite[] skillArray;
@@ -42,6 +44,8 @@ public class SkillContent : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         skillArray = imageDataBase.GetSkillArray();
+
+        isDelay = false;
     }
 
     public void Initialize()
@@ -104,7 +108,7 @@ public class SkillContent : MonoBehaviour
             case SkillType.Skill4:
                 levelText.text = "Lv. " + (playerDataBase.Skill4 + 1) + " / " + maxLevel.ToString();
 
-                nowValueText.text = (skill3Value * (playerDataBase.Skill4 + 1)).ToString() + "%";
+                nowValueText.text = (skill4Value * (playerDataBase.Skill4 + 1)).ToString() + "%";
 
                 if (playerDataBase.Skill4 < maxLevel - 1)
                 {
@@ -160,6 +164,9 @@ public class SkillContent : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }
+
+        if (isDelay) return;
+
 
         switch (skillType)
         {
@@ -328,5 +335,13 @@ public class SkillContent : MonoBehaviour
 
         Initialize();
 
+        isDelay = true;
+        Invoke("Delay", 0.2f);
+
+    }
+
+    void Delay()
+    {
+        isDelay = false;
     }
 }

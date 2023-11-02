@@ -19,6 +19,50 @@ public class PlayerDataBase : ScriptableObject
     private int firstReward = 0;
 
     [Space]
+    [Title("Character")]
+    [SerializeField]
+    private int character1 = 0;
+    [SerializeField]
+    private int character2 = 0;
+    [SerializeField]
+    private int character3 = 0;
+    [SerializeField]
+    private int character4 = 0;
+    [SerializeField]
+    private int character5 = 0;
+    [SerializeField]
+    private int character6 = 0;
+    [SerializeField]
+    private int character7 = 0;
+    [SerializeField]
+    private int character8 = 0;
+    [SerializeField]
+    private int character9 = 0;
+    [SerializeField]
+    private int character10 = 0;
+    [SerializeField]
+    private int character11 = 0;
+    [SerializeField]
+    private int character12 = 0;
+    [SerializeField]
+    private int character13 = 0;
+    [SerializeField]
+    private int character14 = 0;
+    [SerializeField]
+    private int character15 = 0;
+    [SerializeField]
+    private int character16 = 0;
+    [SerializeField]
+    private int character17 = 0;
+    [SerializeField]
+    private int character18 = 0;
+    [SerializeField]
+    private int character19 = 0;
+    [SerializeField]
+    private int character20 = 0;
+
+    [Space]
+    [Title("Food")]
     [SerializeField]
     private int nextFoodNumber = 0;
     [SerializeField]
@@ -34,34 +78,11 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int donutMaxValue = 0;
     [SerializeField]
+    private int friesMaxValue = 0;
+    [SerializeField]
     private int gourmetLevel = 0;
     [SerializeField]
-    private int donutLevel = 0;
-    [SerializeField]
     private int upgradeCount = 0;
-    [SerializeField]
-    private int sellCount = 0;
-    [SerializeField]
-    private int useSources = 0;
-    [SerializeField]
-    private int openChestBox = 0;
-    [SerializeField]
-    private int questCount = 0;
-
-    [Space]
-    [Title("Skill")]
-    [SerializeField]
-    private int skill1 = 0;
-    [SerializeField]
-    private int skill2 = 0;
-    [SerializeField]
-    private int skill3 = 0;
-    [SerializeField]
-    private int skill4 = 0;
-    [SerializeField]
-    private int skill5 = 0;
-    [SerializeField]
-    private int skill6 = 0;
 
     [Space]
     [Title("Truck")]
@@ -125,6 +146,42 @@ public class PlayerDataBase : ScriptableObject
     private int butterfly9 = 0;
     [SerializeField]
     private int butterfly10 = 0;
+    [SerializeField]
+    private int butterfly11 = 0;
+    [SerializeField]
+    private int butterfly12 = 0;
+    [SerializeField]
+    private int butterfly13 = 0;
+    [SerializeField]
+    private int butterfly14 = 0;
+    [SerializeField]
+    private int butterfly15 = 0;
+    [SerializeField]
+    private int butterfly16 = 0;
+    [SerializeField]
+    private int butterfly17 = 0;
+    [SerializeField]
+    private int butterfly18 = 0;
+    [SerializeField]
+    private int butterfly19 = 0;
+    [SerializeField]
+    private int butterfly20 = 0;
+    [SerializeField]
+    private int butterfly21 = 0;
+    [SerializeField]
+    private int butterfly22 = 0;
+    [SerializeField]
+    private int butterfly23 = 0;
+    [SerializeField]
+    private int butterfly24 = 0;
+    [SerializeField]
+    private int butterfly25 = 0;
+    [SerializeField]
+    private int butterfly26 = 0;
+    [SerializeField]
+    private int butterfly27 = 0;
+    [SerializeField]
+    private int butterfly28 = 0;
 
     [Space]
     [Title("Island")]
@@ -149,6 +206,34 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int island10 = 0;
 
+    [Space]
+    [Title("Quest")]
+    [SerializeField]
+    private int sellCount = 0;
+    [SerializeField]
+    private int useSources = 0;
+    [SerializeField]
+    private int openChestBox = 0;
+    [SerializeField]
+    private int feverModeCount = 0;
+    [SerializeField]
+    private int questCount = 0;
+
+    [Space]
+    [Title("Skill")]
+    [SerializeField]
+    private int skill1 = 0;
+    [SerializeField]
+    private int skill2 = 0;
+    [SerializeField]
+    private int skill3 = 0;
+    [SerializeField]
+    private int skill4 = 0;
+    [SerializeField]
+    private int skill5 = 0;
+    [SerializeField]
+    private int skill6 = 0;
+
 
     [Space]
     [Title("Portion")]
@@ -160,6 +245,8 @@ public class PlayerDataBase : ScriptableObject
     private int portion3 = 0;
     [SerializeField]
     private int portion4 = 0;
+    [SerializeField]
+    private int portion5 = 0;
 
     [Space]
     [Title("Coupon")]
@@ -280,6 +367,246 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Character1
+    {
+        get
+        {
+            return character1;
+        }
+        set
+        {
+            character1 = value;
+        }
+    }
+
+    public int Character2
+    {
+        get
+        {
+            return character2;
+        }
+        set
+        {
+            character2 = value;
+        }
+    }
+
+    public int Character3
+    {
+        get
+        {
+            return character3;
+        }
+        set
+        {
+            character3 = value;
+        }
+    }
+
+    public int Character4
+    {
+        get
+        {
+            return character4;
+        }
+        set
+        {
+            character4 = value;
+        }
+    }
+
+    public int Character5
+    {
+        get
+        {
+            return character5;
+        }
+        set
+        {
+            character5 = value;
+        }
+    }
+
+    public int Character6
+    {
+        get
+        {
+            return character6;
+        }
+        set
+        {
+            character6 = value;
+        }
+    }
+
+    public int Character7
+    {
+        get
+        {
+            return character7;
+        }
+        set
+        {
+            character7 = value;
+        }
+    }
+
+    public int Character8
+    {
+        get
+        {
+            return character8;
+        }
+        set
+        {
+            character8 = value;
+        }
+    }
+
+    public int Character9
+    {
+        get
+        {
+            return character9;
+        }
+        set
+        {
+            character9 = value;
+        }
+    }
+
+    public int Character10
+    {
+        get
+        {
+            return character10;
+        }
+        set
+        {
+            character10 = value;
+        }
+    }
+
+    public int Character11
+    {
+        get
+        {
+            return character11;
+        }
+        set
+        {
+            character11 = value;
+        }
+    }
+
+    public int Character12
+    {
+        get
+        {
+            return character12;
+        }
+        set
+        {
+            character12 = value;
+        }
+    }
+
+    public int Character13
+    {
+        get
+        {
+            return character13;
+        }
+        set
+        {
+            character13 = value;
+        }
+    }
+
+    public int Character14
+    {
+        get
+        {
+            return character14;
+        }
+        set
+        {
+            character14 = value;
+        }
+    }
+
+    public int Character15
+    {
+        get
+        {
+            return character15;
+        }
+        set
+        {
+            character15 = value;
+        }
+    }
+
+    public int Character16
+    {
+        get
+        {
+            return character16;
+        }
+        set
+        {
+            character16 = value;
+        }
+    }
+
+    public int Character17
+    {
+        get
+        {
+            return character17;
+        }
+        set
+        {
+            character17 = value;
+        }
+    }
+
+    public int Character18
+    {
+        get
+        {
+            return character18;
+        }
+        set
+        {
+            character18 = value;
+        }
+    }
+
+    public int Character19
+    {
+        get
+        {
+            return character19;
+        }
+        set
+        {
+            character19 = value;
+        }
+    }
+
+    public int Character20
+    {
+        get
+        {
+            return character20;
+        }
+        set
+        {
+            character20 = value;
+        }
+    }
+
     public int NextFoodNumber
     {
         get
@@ -364,6 +691,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int FriesMaxValue
+    {
+        get
+        {
+            return friesMaxValue;
+        }
+        set
+        {
+            friesMaxValue = value;
+        }
+    }
+
     public int GourmetLevel
     {
         get
@@ -373,18 +712,6 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             gourmetLevel = value;
-        }
-    }
-
-    public int DonutLevel
-    {
-        get
-        {
-            return donutLevel;
-        }
-        set
-        {
-            donutLevel = value;
         }
     }
 
@@ -433,6 +760,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             openChestBox = value;
+        }
+    }
+
+    public int FeverModeCount
+    {
+        get
+        {
+            return feverModeCount;
+        }
+        set
+        {
+            feverModeCount = value;
         }
     }
 
@@ -844,6 +1183,222 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Butterfly11
+    {
+        get
+        {
+            return butterfly11;
+        }
+        set
+        {
+            butterfly11 = value;
+        }
+    }
+
+    public int Butterfly12
+    {
+        get
+        {
+            return butterfly12;
+        }
+        set
+        {
+            butterfly12 = value;
+        }
+    }
+
+    public int Butterfly13
+    {
+        get
+        {
+            return butterfly13;
+        }
+        set
+        {
+            butterfly13 = value;
+        }
+    }
+
+    public int Butterfly14
+    {
+        get
+        {
+            return butterfly14;
+        }
+        set
+        {
+            butterfly14 = value;
+        }
+    }
+
+    public int Butterfly15
+    {
+        get
+        {
+            return butterfly15;
+        }
+        set
+        {
+            butterfly15 = value;
+        }
+    }
+
+    public int Butterfly16
+    {
+        get
+        {
+            return butterfly16;
+        }
+        set
+        {
+            butterfly16 = value;
+        }
+    }
+
+    public int Butterfly17
+    {
+        get
+        {
+            return butterfly17;
+        }
+        set
+        {
+            butterfly17 = value;
+        }
+    }
+
+    public int Butterfly18
+    {
+        get
+        {
+            return butterfly18;
+        }
+        set
+        {
+            butterfly18 = value;
+        }
+    }
+
+    public int Butterfly19
+    {
+        get
+        {
+            return butterfly19;
+        }
+        set
+        {
+            butterfly19 = value;
+        }
+    }
+
+    public int Butterfly20
+    {
+        get
+        {
+            return butterfly20;
+        }
+        set
+        {
+            butterfly20 = value;
+        }
+    }
+
+    public int Butterfly21
+    {
+        get
+        {
+            return butterfly21;
+        }
+        set
+        {
+            butterfly21 = value;
+        }
+    }
+
+    public int Butterfly22
+    {
+        get
+        {
+            return butterfly22;
+        }
+        set
+        {
+            butterfly22 = value;
+        }
+    }
+
+    public int Butterfly23
+    {
+        get
+        {
+            return butterfly23;
+        }
+        set
+        {
+            butterfly23 = value;
+        }
+    }
+
+    public int Butterfly24
+    {
+        get
+        {
+            return butterfly24;
+        }
+        set
+        {
+            butterfly24 = value;
+        }
+    }
+
+    public int Butterfly25
+    {
+        get
+        {
+            return butterfly25;
+        }
+        set
+        {
+            butterfly25 = value;
+        }
+    }
+
+    public int Butterfly26
+    {
+        get
+        {
+            return butterfly26;
+        }
+        set
+        {
+            butterfly26 = value;
+        }
+    }
+
+    public int Butterfly27
+    {
+        get
+        {
+            return butterfly27;
+        }
+        set
+        {
+            butterfly27 = value;
+        }
+    }
+
+    public int Butterfly28
+    {
+        get
+        {
+            return butterfly28;
+        }
+        set
+        {
+            butterfly28 = value;
+        }
+    }
+
     public int Island1
     {
         get
@@ -1009,6 +1564,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             portion4 = value;
+        }
+    }
+
+    public int Portion5
+    {
+        get
+        {
+            return portion5;
+        }
+        set
+        {
+            portion5 = value;
         }
     }
 
@@ -1270,20 +1837,28 @@ public class PlayerDataBase : ScriptableObject
         drinkMaxValue = 0;
         pizzaMaxValue = 0;
         donutMaxValue = 0;
-        gourmetLevel = 0;
-        donutLevel = 0;
-        upgradeCount = 0;
-        sellCount = 0;
-        useSources = 0;
-        openChestBox = 0;
-        questCount = 0;
+        friesMaxValue = 0;
 
-        skill1 = 0;
-        skill2 = 0;
-        skill3 = 0;
-        skill4 = 0;
-        skill5 = 0;
-        skill6 = 0;
+        character1 = 0;
+        character2 = 0;
+        character3 = 0;
+        character4 = 0;
+        character5 = 0;
+        character6 = 0;
+        character7 = 0;
+        character8 = 0;
+        character9 = 0;
+        character10 = 0;
+        character11 = 0;
+        character12 = 0;
+        character13 = 0;
+        character14 = 0;
+        character15 = 0;
+        character16 = 0;
+        character17 = 0;
+        character18 = 0;
+        character19 = 0;
+        character20 = 0;
 
         chips = 0;
         donut = 0;
@@ -1314,6 +1889,24 @@ public class PlayerDataBase : ScriptableObject
         butterfly8 = 0;
         butterfly9 = 0;
         butterfly10 = 0;
+        butterfly11 = 0;
+        butterfly12 = 0;
+        butterfly13 = 0;
+        butterfly14 = 0;
+        butterfly15 = 0;
+        butterfly16 = 0;
+        butterfly17 = 0;
+        butterfly18 = 0;
+        butterfly19 = 0;
+        butterfly20 = 0;
+        butterfly21 = 0;
+        butterfly22 = 0;
+        butterfly23 = 0;
+        butterfly24 = 0;
+        butterfly25 = 0;
+        butterfly26 = 0;
+        butterfly27 = 0;
+        butterfly28 = 0;
 
         island1 = 0;
         island2 = 0;
@@ -1326,10 +1919,26 @@ public class PlayerDataBase : ScriptableObject
         island9 = 0;
         island10 = 0;
 
+        gourmetLevel = 0;
+        upgradeCount = 0;
+        sellCount = 0;
+        useSources = 0;
+        openChestBox = 0;
+        feverModeCount = 0;
+        questCount = 0;
+
+        skill1 = 0;
+        skill2 = 0;
+        skill3 = 0;
+        skill4 = 0;
+        skill5 = 0;
+        skill6 = 0;
+
         portion1 = 0;
         portion2 = 0;
         portion3 = 0;
         portion4 = 0;
+        portion5 = 0;
 
         coupon1 = 0;
         coupon2 = 0;

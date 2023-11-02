@@ -36,7 +36,10 @@ public class ShopManager : MonoBehaviour
     public ShopContent[] shopContents;
 
     [Space]
-    [Title("Truck")]
+    public GameObject mainCharacter;
+    public GameObject[] mainCharacterArray;
+    public GameObject[] shopCharacterArray;
+
     public GameObject mainTruck;
     public GameObject[] mainTruckArray;
     public GameObject[] shopTruckArray;
@@ -45,28 +48,22 @@ public class ShopManager : MonoBehaviour
     public GameObject[] mainAnimalArray;
     public GameObject[] shopAnimalArray;
 
+    public GameObject mainButterfly;
+    public GameObject[] mainButterflyArray;
+    public GameObject[] shopButterflyArray;
+
     public GameObject buyToCoinButton;
+    public GameObject buyToCrystalButton;
     public GameObject selectObj;
-
-    public GameObject buyRmTruck;
-    public GameObject[] buyRmObj;
-    public LocalizationContent[] buyRmText;
-
-    public GameObject buyRmAnimal;
-    public GameObject[] buyRmAnimalObj;
-    public LocalizationContent[] buyRmAnimalText;
 
     public Text selectText;
     public Text priceText;
+    public Text crystalText;
 
     public LocalizationContent titleText;
     public LocalizationContent effectText;
     public Text passiveText;
     public LocalizationContent infoText;
-
-
-
-
 
     public Text dailyShopCountText;
 
@@ -78,16 +75,20 @@ public class ShopManager : MonoBehaviour
     private int index = -1;
     private int speicalIndex = -1;
 
+    private int characterIndex = 0;
     private int truckIndex = 0;
     private int animalIndex = 0;
+    private int butterflyIndex = 0;
 
     bool hold = false;
     bool buy = false;
     bool isDelay = false;
     bool isTimer = false;
 
+    CharacterInfo characterInfo = new CharacterInfo();
     TruckInfo truckInfo = new TruckInfo();
     AnimalInfo animalInfo = new AnimalInfo();
+    ButterflyInfo butterflyInfo = new ButterflyInfo();
 
     List<string> itemList = new List<string>();
 
@@ -96,14 +97,20 @@ public class ShopManager : MonoBehaviour
     public ResetManager resetManager;
 
     PlayerDataBase playerDataBase;
+
+    CharacterDataBase characterDataBase;
     TruckDataBase truckDataBase;
     AnimalDataBase animalDataBase;
+    ButterflyDataBase butterflyDataBase;
 
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
+
+        if (characterDataBase == null) characterDataBase = Resources.Load("CharacterDataBase") as CharacterDataBase;
         if (truckDataBase == null) truckDataBase = Resources.Load("TruckDataBase") as TruckDataBase;
         if (animalDataBase == null) animalDataBase = Resources.Load("AnimalDataBase") as AnimalDataBase;
+        if (butterflyDataBase == null) butterflyDataBase = Resources.Load("ButterflyDataBase") as ButterflyDataBase;
 
         shopView.SetActive(false);
         speicalShopView.SetActive(false);
@@ -124,6 +131,11 @@ public class ShopManager : MonoBehaviour
         //    speicalShopArray[i].SetActive(false);
         //}
 
+        for (int i = 0; i < mainCharacterArray.Length; i++)
+        {
+            mainCharacterArray[i].SetActive(false);
+        }
+
         for (int i = 0; i < mainTruckArray.Length; i ++)
         {
             mainTruckArray[i].SetActive(false);
@@ -134,8 +146,15 @@ public class ShopManager : MonoBehaviour
             mainAnimalArray[i].SetActive(false);
         }
 
+        for (int i = 0; i < mainButterflyArray.Length; i++)
+        {
+            mainButterflyArray[i].SetActive(false);
+        }
+
+        mainCharacterArray[(int)GameStateManager.instance.CharacterType].SetActive(true);
         mainTruckArray[(int)GameStateManager.instance.TruckType].SetActive(true);
         mainAnimalArray[(int)GameStateManager.instance.AnimalType].SetActive(true);
+        mainButterflyArray[(int)GameStateManager.instance.ButterflyType].SetActive(true);
 
         isTimer = true;
         dailyShopCountText.text = "";
@@ -206,7 +225,7 @@ public class ShopManager : MonoBehaviour
                 shopContents[0].Initialize(ItemType.DailyReward, BuyType.Free, this);
                 shopContents[1].Initialize(ItemType.AdReward_Gold, BuyType.Ad, this);
                 shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
-                shopContents[6].Initialize(ItemType.AdReward_Potion, BuyType.Ad, this);
+                shopContents[6].Initialize(ItemType.AdReward_Portion, BuyType.Ad, this);
                 shopContents[7].Initialize(ItemType.RemoveAds, BuyType.Rm, this);
                 shopContents[11].Initialize(ItemType.DailyReward_Portion, BuyType.Free, this);
                 shopContents[12].Initialize(ItemType.GoldX2, BuyType.Rm, this);
@@ -289,7 +308,7 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case ItemType.DefDestroyTicket:
-                if (playerDataBase.Coin >= 1000000)
+                if (playerDataBase.Coin >= 10000000)
                 {
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, 1000000);
 
@@ -311,7 +330,7 @@ public class ShopManager : MonoBehaviour
                 break;
             case ItemType.GoldShop3:
                 break;
-            case ItemType.AdReward_Potion:
+            case ItemType.AdReward_Portion:
                 GoogleAdsManager.instance.admobReward_Portion.ShowAd(1);
                 break;
             case ItemType.RemoveAds:
@@ -330,7 +349,7 @@ public class ShopManager : MonoBehaviour
 
                 shopContents[11].SetLocked(true);
 
-                switch(Random.Range(0, 4))
+                switch(Random.Range(0, 5))
                 {
                     case 0:
                         playerDataBase.Portion1 += 1;
@@ -347,6 +366,10 @@ public class ShopManager : MonoBehaviour
                     case 3:
                         playerDataBase.Portion4 += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                        break;
+                    case 4:
+                        playerDataBase.Portion5 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
                         break;
                 }
 
@@ -373,7 +396,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[1].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 2000000);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 3000000);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
@@ -431,6 +454,24 @@ public class ShopManager : MonoBehaviour
             {
                 ChangeSpeicalTopToggle(0);
             }
+            else
+            {
+                switch (speicalIndex)
+                {
+                    case 0:
+                        shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                        break;
+                    case 1:
+                        shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                        break;
+                    case 2:
+                        shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                        break;
+                    case 3:
+                        shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 0, 0);
+                        break;
+                }
+            }
 
             FirebaseAnalytics.LogEvent("OpenSpeicalShop");
         }
@@ -449,33 +490,322 @@ public class ShopManager : MonoBehaviour
         for (int i = 0; i < speicalTopMenuImgArray.Length; i++)
         {
             speicalTopMenuImgArray[i].sprite = speicalTopMenuSpriteArray[0];
-            //speicalShopArray[i].gameObject.SetActive(false);
         }
 
         speicalTopMenuImgArray[number].sprite = speicalTopMenuSpriteArray[1];
-        //speicalShopArray[number].gameObject.SetActive(true);
 
+        mainCharacter.SetActive(false);
         mainTruck.SetActive(false);
         mainAnimal.SetActive(false);
-
-        buyRmTruck.SetActive(false);
-        buyRmAnimal.SetActive(false);
+        mainButterfly.SetActive(false);
 
         switch (number)
         {
             case 0:
-                TruckInitialize();
+                CharacterInitialize();
                 break;
             case 1:
+                TruckInitialize();
+                break;
+            case 2:
                 AnimalInitialize();
                 break;
+            case 3:
+                ButterflyInitialize();
+                break;
+        }
+    }
+
+
+    void CharacterInitialize()
+    {
+        mainCharacter.SetActive(true);
+
+        for (int i = 0; i < shopCharacterArray.Length; i++)
+        {
+            shopCharacterArray[i].gameObject.SetActive(false);
+        }
+
+        shopCharacterArray[characterIndex].gameObject.SetActive(true);
+        shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+        characterInfo = characterDataBase.GetCharacterInfo(CharacterType.Character1 + characterIndex);
+
+        titleText.localizationName =  "Character" + (characterIndex + 1);
+        passiveText.text = "";
+
+        if (characterIndex == 0)
+        {
+            effectText.localizationName = "None";
+            effectText.plusText = "";
+            //passiveText.text = "";
+        }
+        else
+        {
+            effectText.localizationName = characterInfo.passiveEffect.ToString();
+            effectText.plusText = " : +" + characterInfo.effectNumber.ToString() + "%";
+            //passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NeedPrice") + " -1%";
+        }
+
+        infoText.localizationName = "Character" + (characterIndex + 1) + "_Info";
+
+        titleText.ReLoad();
+        effectText.ReLoad();
+        infoText.ReLoad();
+
+        priceText.text = MoneyUnitString.ToCurrencyString(characterInfo.price);
+        crystalText.text = MoneyUnitString.ToCurrencyString(characterInfo.crystal);
+
+        hold = false;
+        buy = false;
+
+        switch (characterInfo.characterType)
+        {
+            case CharacterType.Character1:
+                hold = true;
+                break;
+            case CharacterType.Character2:
+                if (playerDataBase.Character2 >= 1)
+                {
+                    hold = true;
+                }
+
+                buy = true;
+
+                break;
+            case CharacterType.Character3:
+                if (playerDataBase.Character3 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character2 >= 1)
+                {
+                    buy = true;
+                }
+
+                break;
+            case CharacterType.Character4:
+                if (playerDataBase.Character4 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character3 >= 1)
+                {
+                    buy = true;
+                }
+
+                break;
+            case CharacterType.Character5:
+                if (playerDataBase.Character5 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character4 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character6:
+                if (playerDataBase.Character6 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character5 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character7:
+                if (playerDataBase.Character7 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character6 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character8:
+                if (playerDataBase.Character8 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character7 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character9:
+                if (playerDataBase.Character9 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character8 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character10:
+                if (playerDataBase.Character10 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character9 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character11:
+                if (playerDataBase.Character11 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character10 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character12:
+                if (playerDataBase.Character12 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character11 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character13:
+                if (playerDataBase.Character13 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character12 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character14:
+                if (playerDataBase.Character14 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character13 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character15:
+                if (playerDataBase.Character15 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character14 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character16:
+                if (playerDataBase.Character16 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character15 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character17:
+                if (playerDataBase.Character17 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character16 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character18:
+                if (playerDataBase.Character18 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character17 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character19:
+                if (playerDataBase.Character19 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character18 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case CharacterType.Character20:
+                if (playerDataBase.Character20 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Character19 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+        }
+
+        if (hold)
+        {
+            selectObj.SetActive(true);
+            buyToCoinButton.SetActive(false);
+            buyToCrystalButton.SetActive(false);
+
+            if (GameStateManager.instance.CharacterType.Equals(characterInfo.characterType))
+            {
+                selectText.text = LocalizationManager.instance.GetString("Selected");
+            }
+            else
+            {
+                selectText.text = LocalizationManager.instance.GetString("Select");
+            }
+        }
+        else
+        {
+            selectObj.SetActive(false);
+            buyToCoinButton.SetActive(true);
+            buyToCrystalButton.SetActive(true);
+
+            if (!buy)
+            {
+                priceText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
         }
     }
 
     void TruckInitialize()
     {
         mainTruck.SetActive(true);
-        buyRmTruck.SetActive(true);
 
         for (int i = 0; i < shopTruckArray.Length; i++)
         {
@@ -483,23 +813,24 @@ public class ShopManager : MonoBehaviour
         }
 
         shopTruckArray[truckIndex].gameObject.SetActive(true);
-        shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 220, 0);
+        shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
         truckInfo = truckDataBase.GetTruckInfo(TruckType.Bread + truckIndex);
 
         titleText.localizationName = (TruckType.Bread + truckIndex).ToString() + "Truck";
+        passiveText.text = "";
 
         if (truckIndex == 0)
         {
             effectText.localizationName = "None";
             effectText.plusText = "";
-            passiveText.text = "";
+            //passiveText.text = "";
         }
         else
         {
             effectText.localizationName = truckInfo.passiveEffect.ToString();
             effectText.plusText = " : +" + truckInfo.effectNumber.ToString() + "%";
-            passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NeedPrice") + " -1%";
+            //passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NeedPrice") + " -1%";
         }
 
         infoText.localizationName = (TruckType.Bread + truckIndex) + "TruckInfo";
@@ -509,6 +840,7 @@ public class ShopManager : MonoBehaviour
         infoText.ReLoad();
 
         priceText.text = MoneyUnitString.ToCurrencyString(truckInfo.price);
+        crystalText.text = MoneyUnitString.ToCurrencyString(truckInfo.crystal);
 
         hold = false;
         buy = false;
@@ -629,11 +961,7 @@ public class ShopManager : MonoBehaviour
         {
             selectObj.SetActive(true);
             buyToCoinButton.SetActive(false);
-
-            for (int i = 0; i < buyRmObj.Length; i++)
-            {
-                buyRmObj[i].SetActive(false);
-            }
+            buyToCrystalButton.SetActive(false);
 
             if (GameStateManager.instance.TruckType.Equals(truckInfo.truckType))
             {
@@ -648,22 +976,11 @@ public class ShopManager : MonoBehaviour
         {
             selectObj.SetActive(false);
             buyToCoinButton.SetActive(true);
+            buyToCrystalButton.SetActive(true);
 
             if (!buy)
             {
                 priceText.text = LocalizationManager.instance.GetString("NotPurchase");
-            }
-
-            if (truckIndex > 0)
-            {
-                for (int i = 0; i < buyRmObj.Length; i++)
-                {
-                    buyRmObj[i].SetActive(false);
-                }
-
-                buyRmObj[truckIndex - 1].SetActive(true);
-                buyRmText[truckIndex - 1].localizationName = truckInfo.truckType + "_Price";
-                buyRmText[truckIndex - 1].ReLoad();
             }
         }
     }
@@ -671,7 +988,6 @@ public class ShopManager : MonoBehaviour
     void AnimalInitialize()
     {
         mainAnimal.SetActive(true);
-        buyRmAnimal.SetActive(true);
 
         for (int i = 0; i < shopAnimalArray.Length; i++)
         {
@@ -684,18 +1000,19 @@ public class ShopManager : MonoBehaviour
         animalInfo = animalDataBase.GetAnimalInfo(AnimalType.Colobus + animalIndex);
 
         titleText.localizationName = (AnimalType.Colobus + animalIndex).ToString();
+        passiveText.text = "";
 
         if (animalIndex == 0)
         {
             effectText.localizationName = "None";
             effectText.plusText = "";
-            passiveText.text = "";
+            //passiveText.text = "";
         }
         else
         {
             effectText.localizationName = animalInfo.passiveEffect.ToString();
             effectText.plusText = " : +" + animalInfo.effectNumber.ToString() + "%";
-            passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NowPrice") + " +1%";
+            //passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NowPrice") + " +1%";
         }
 
         infoText.localizationName = (AnimalType.Colobus + animalIndex) + "Info";
@@ -705,6 +1022,7 @@ public class ShopManager : MonoBehaviour
         infoText.ReLoad();
 
         priceText.text = MoneyUnitString.ToCurrencyString(animalInfo.price);
+        crystalText.text = MoneyUnitString.ToCurrencyString(animalInfo.crystal);
 
         hold = false;
         buy = false;
@@ -802,11 +1120,7 @@ public class ShopManager : MonoBehaviour
         {
             selectObj.SetActive(true);
             buyToCoinButton.SetActive(false);
-
-            for (int i = 0; i < buyRmAnimalObj.Length; i++)
-            {
-                buyRmAnimalObj[i].SetActive(false);
-            }
+            buyToCrystalButton.SetActive(false);
 
             if (GameStateManager.instance.AnimalType.Equals(animalInfo.animalType))
             {
@@ -821,22 +1135,382 @@ public class ShopManager : MonoBehaviour
         {
             selectObj.SetActive(false);
             buyToCoinButton.SetActive(true);
+            buyToCrystalButton.SetActive(true);
 
             if (!buy)
             {
                 priceText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
+        }
+    }
 
-            if (animalIndex > 0)
-            {
-                for (int i = 0; i < buyRmAnimalObj.Length; i++)
+    void ButterflyInitialize()
+    {
+        mainButterfly.SetActive(true);
+
+        for (int i = 0; i < shopButterflyArray.Length; i++)
+        {
+            shopButterflyArray[i].gameObject.SetActive(false);
+        }
+
+        shopButterflyArray[butterflyIndex].gameObject.SetActive(true);
+        shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+        butterflyInfo = butterflyDataBase.GetButterflyInfo(ButterflyType.Butterfly1 + butterflyIndex);
+
+        titleText.localizationName = "Butterfly" + (butterflyIndex + 1);
+        passiveText.text = "";
+
+        if (characterIndex == 0)
+        {
+            effectText.localizationName = "None";
+            effectText.plusText = "";
+            //passiveText.text = "";
+        }
+        else
+        {
+            effectText.localizationName = butterflyInfo.passiveEffect.ToString();
+            effectText.plusText = " : +" + butterflyInfo.effectNumber.ToString() + "%";
+            //passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NeedPrice") + " -1%";
+        }
+
+        infoText.localizationName = "Butterfly" + (butterflyIndex + 1) + "_Info";
+
+        titleText.ReLoad();
+        effectText.ReLoad();
+        infoText.ReLoad();
+
+        priceText.text = MoneyUnitString.ToCurrencyString(butterflyInfo.price);
+        crystalText.text = MoneyUnitString.ToCurrencyString(butterflyInfo.crystal);
+
+        hold = false;
+        buy = false;
+
+        switch (butterflyInfo.butterflyType)
+        {
+            case ButterflyType.Butterfly1:
+                hold = true;
+                break;
+            case ButterflyType.Butterfly2:
+                if (playerDataBase.Butterfly2 >= 1)
                 {
-                    buyRmAnimalObj[i].SetActive(false);
+                    hold = true;
                 }
 
-                buyRmAnimalObj[animalIndex - 1].SetActive(true);
-                buyRmAnimalText[animalIndex - 1].localizationName = animalInfo.animalType + "_Price";
-                buyRmAnimalText[animalIndex - 1].ReLoad();
+                buy = true;
+                break;
+            case ButterflyType.Butterfly3:
+                if (playerDataBase.Butterfly3 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly2 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly4:
+                if (playerDataBase.Butterfly4 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly3 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly5:
+                if (playerDataBase.Butterfly5 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly4 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly6:
+                if (playerDataBase.Butterfly6 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly5 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly7:
+                if (playerDataBase.Butterfly7 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly6 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly8:
+                if (playerDataBase.Butterfly8 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly7 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly9:
+                if (playerDataBase.Butterfly9 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly8 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly10:
+                if (playerDataBase.Butterfly10 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly9 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly11:
+                if (playerDataBase.Butterfly11 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly10 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly12:
+                if (playerDataBase.Butterfly12 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly11 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly13:
+                if (playerDataBase.Butterfly13 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly12 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly14:
+                if (playerDataBase.Butterfly14 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly13 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly15:
+                if (playerDataBase.Butterfly15 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly14 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly16:
+                if (playerDataBase.Butterfly16 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly15 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly17:
+                if (playerDataBase.Butterfly17 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly16 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly18:
+                if (playerDataBase.Butterfly18 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly17 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly19:
+                if (playerDataBase.Butterfly19 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly18 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly20:
+                if (playerDataBase.Butterfly20 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly19 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly21:
+                if (playerDataBase.Butterfly21 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly20 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly22:
+                if (playerDataBase.Butterfly22 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly21 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly23:
+                if (playerDataBase.Butterfly23 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly22 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly24:
+                if (playerDataBase.Butterfly24 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly23 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly25:
+                if (playerDataBase.Butterfly25 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly24 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly26:
+                if (playerDataBase.Butterfly26 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly25 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly27:
+                if (playerDataBase.Butterfly27 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly26 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ButterflyType.Butterfly28:
+                if (playerDataBase.Butterfly28 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Butterfly27 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+        }
+
+        if (hold)
+        {
+            selectObj.SetActive(true);
+            buyToCoinButton.SetActive(false);
+            buyToCrystalButton.SetActive(false);
+
+            if (GameStateManager.instance.CharacterType.Equals(characterInfo.characterType))
+            {
+                selectText.text = LocalizationManager.instance.GetString("Selected");
+            }
+            else
+            {
+                selectText.text = LocalizationManager.instance.GetString("Select");
+            }
+        }
+        else
+        {
+            selectObj.SetActive(false);
+            buyToCoinButton.SetActive(true);
+            buyToCrystalButton.SetActive(true);
+
+            if (!buy)
+            {
+                priceText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
         }
     }
@@ -847,6 +1521,14 @@ public class ShopManager : MonoBehaviour
         switch(speicalIndex)
         {
             case 0:
+                if (characterIndex + 1 < shopCharacterArray.Length)
+                {
+                    characterIndex += 1;
+
+                    CharacterInitialize();
+                }
+                break;
+            case 1:
                 if (truckIndex + 1 < shopTruckArray.Length)
                 {
                     truckIndex += 1;
@@ -854,12 +1536,20 @@ public class ShopManager : MonoBehaviour
                     TruckInitialize();
                 }
                 break;
-            case 1:
+            case 2:
                 if (animalIndex + 1 < shopAnimalArray.Length)
                 {
                     animalIndex += 1;
 
                     AnimalInitialize();
+                }
+                break;
+            case 3:
+                if (butterflyIndex + 1 < shopButterflyArray.Length)
+                {
+                    butterflyIndex += 1;
+
+                    ButterflyInitialize();
                 }
                 break;
         }
@@ -870,6 +1560,14 @@ public class ShopManager : MonoBehaviour
         switch (speicalIndex)
         {
             case 0:
+                if (characterIndex - 1 >= 0)
+                {
+                    characterIndex -= 1;
+
+                    CharacterInitialize();
+                }
+                break;
+            case 1:
                 if (truckIndex - 1 >= 0)
                 {
                     truckIndex -= 1;
@@ -877,12 +1575,20 @@ public class ShopManager : MonoBehaviour
                     TruckInitialize();
                 }
                 break;
-            case 1:
+            case 2:
                 if (animalIndex - 1 >= 0)
                 {
                     animalIndex -= 1;
 
                     AnimalInitialize();
+                }
+                break;
+            case 3:
+                if (butterflyIndex - 1 >= 0)
+                {
+                    butterflyIndex -= 1;
+
+                    ButterflyInitialize();
                 }
                 break;
         }
@@ -893,6 +1599,23 @@ public class ShopManager : MonoBehaviour
         switch(speicalIndex)
         {
             case 0:
+                if (GameStateManager.instance.CharacterType == characterInfo.characterType)
+                {
+                    return;
+                }
+
+                GameStateManager.instance.CharacterType = characterInfo.characterType;
+
+                for (int i = 0; i < mainCharacterArray.Length; i++)
+                {
+                    mainCharacterArray[i].SetActive(false);
+                }
+
+                mainCharacterArray[(int)GameStateManager.instance.CharacterType].SetActive(true);
+
+                NotionManager.instance.UseNotion(NotionType.ChangeCharacterNotion);
+                break;
+            case 1:
                 if (GameStateManager.instance.TruckType == truckInfo.truckType)
                 {
                     return;
@@ -909,7 +1632,7 @@ public class ShopManager : MonoBehaviour
 
                 NotionManager.instance.UseNotion(NotionType.ChangeTruckNotion);
                 break;
-            case 1:
+            case 2:
                 if (GameStateManager.instance.AnimalType == animalInfo.animalType)
                 {
                     return;
@@ -926,6 +1649,23 @@ public class ShopManager : MonoBehaviour
 
                 NotionManager.instance.UseNotion(NotionType.ChangeAnimalNotion);
                 break;
+            case 3:
+                if (GameStateManager.instance.ButterflyType == butterflyInfo.butterflyType)
+                {
+                    return;
+                }
+
+                GameStateManager.instance.ButterflyType = butterflyInfo.butterflyType;
+
+                for (int i = 0; i < mainButterflyArray.Length; i++)
+                {
+                    mainButterflyArray[i].SetActive(false);
+                }
+
+                mainButterflyArray[(int)GameStateManager.instance.ButterflyType].SetActive(true);
+
+                NotionManager.instance.UseNotion(NotionType.ChangeButterflyNotion);
+                break;
         }
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
@@ -933,7 +1673,7 @@ public class ShopManager : MonoBehaviour
         selectText.text = LocalizationManager.instance.GetString("Selected");
     }
 
-    public void BuyTruckToCoin()
+    public void BuyItem(int number)
     {
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
@@ -952,120 +1692,373 @@ public class ShopManager : MonoBehaviour
         switch(speicalIndex)
         {
             case 0:
-                if (playerDataBase.Coin >= truckInfo.price)
+                switch (number)
                 {
-                    itemList.Clear();
-                    itemList.Add(truckInfo.truckType.ToString());
+                    case 0:
+                        if (playerDataBase.Coin < characterInfo.price)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
 
-                    PlayfabManager.instance.GrantItemToUser("Truck", itemList);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, truckInfo.price);
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, characterInfo.price);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < characterInfo.crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
 
-                    switch (truckInfo.truckType)
-                    {
-                        case TruckType.Bread:
-                            break;
-                        case TruckType.Chips:
-                            playerDataBase.ChipsTruck = 1;
-                            break;
-                        case TruckType.Donut:
-                            playerDataBase.DonutTruck = 1;
-                            break;
-                        case TruckType.Hamburger:
-                            playerDataBase.HamburgerTruck = 1;
-                            break;
-                        case TruckType.Hotdog:
-                            playerDataBase.HotdogTruck = 1;
-                            break;
-                        case TruckType.Icecream:
-                            playerDataBase.IcecreamTruck = 1;
-                            break;
-                        case TruckType.Lemonade:
-                            playerDataBase.LemonadeTruck = 1;
-                            break;
-                        case TruckType.Noodles:
-                            playerDataBase.NoodlesTruck = 1;
-                            break;
-                        case TruckType.Pizza:
-                            playerDataBase.PizzaTruck = 1;
-                            break;
-                        case TruckType.Sushi:
-                            playerDataBase.SushiTruck = 1;
-                            break;
-                    }
-
-                    selectObj.SetActive(true);
-                    buyToCoinButton.SetActive(false);
-                    selectText.text = LocalizationManager.instance.GetString("Select");
-
-                    for (int i = 0; i < buyRmObj.Length; i++)
-                    {
-                        buyRmObj[i].SetActive(false);
-                    }
-
-                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, characterInfo.crystal);
+                        }
+                        break;
                 }
-                else
+
+                itemList.Clear();
+                itemList.Add(characterInfo.characterType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Character", itemList);
+
+                switch (characterInfo.characterType)
                 {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    case CharacterType.Character1:
+                        break;
+                    case CharacterType.Character2:
+                        playerDataBase.Character2 = 1;
+                        break;
+                    case CharacterType.Character3:
+                        playerDataBase.Character3 = 1;
+                        break;
+                    case CharacterType.Character4:
+                        playerDataBase.Character4 = 1;
+                        break;
+                    case CharacterType.Character5:
+                        playerDataBase.Character5 = 1;
+                        break;
+                    case CharacterType.Character6:
+                        playerDataBase.Character6 = 1;
+                        break;
+                    case CharacterType.Character7:
+                        playerDataBase.Character7 = 1;
+                        break;
+                    case CharacterType.Character8:
+                        playerDataBase.Character8 = 1;
+                        break;
+                    case CharacterType.Character9:
+                        playerDataBase.Character9 = 1;
+                        break;
+                    case CharacterType.Character10:
+                        playerDataBase.Character10 = 1;
+                        break;
+                    case CharacterType.Character11:
+                        playerDataBase.Character11 = 1;
+                        break;
+                    case CharacterType.Character12:
+                        playerDataBase.Character12 = 1;
+                        break;
+                    case CharacterType.Character13:
+                        playerDataBase.Character13 = 1;
+                        break;
+                    case CharacterType.Character14:
+                        playerDataBase.Character14 = 1;
+                        break;
+                    case CharacterType.Character15:
+                        playerDataBase.Character15 = 1;
+                        break;
+                    case CharacterType.Character16:
+                        playerDataBase.Character16 = 1;
+                        break;
+                    case CharacterType.Character17:
+                        playerDataBase.Character17 = 1;
+                        break;
+                    case CharacterType.Character18:
+                        playerDataBase.Character18 = 1;
+                        break;
+                    case CharacterType.Character19:
+                        playerDataBase.Character19 = 1;
+                        break;
+                    case CharacterType.Character20:
+                        playerDataBase.Character20 = 1;
+                        break;
                 }
+
                 break;
             case 1:
-                if (playerDataBase.Coin >= animalInfo.price)
+                switch(number)
                 {
-                    itemList.Clear();
-                    itemList.Add(animalInfo.animalType.ToString());
+                    case 0:
+                        if (playerDataBase.Coin < truckInfo.price)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
 
-                    PlayfabManager.instance.GrantItemToUser("Animal", itemList);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, animalInfo.price);
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, truckInfo.price);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < truckInfo.crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
 
-                    switch (animalInfo.animalType)
-                    {
-                        case AnimalType.Colobus:
-                            break;
-                        case AnimalType.Gecko:
-                            playerDataBase.GeckoAnimal = 1;
-                            break;
-                        case AnimalType.Herring:
-                            playerDataBase.HerringAnimal = 1;
-                            break;
-                        case AnimalType.Muskrat:
-                            playerDataBase.MuskratAnimal = 1;
-                            break;
-                        case AnimalType.Pudu:
-                            playerDataBase.PuduAnimal = 1;
-                            break;
-                        case AnimalType.Sparrow:
-                            playerDataBase.SparrowAnimal = 1;
-                            break;
-                        case AnimalType.Squid:
-                            playerDataBase.SquidAnimal = 1;
-                            break;
-                        case AnimalType.Taipan:
-                            playerDataBase.TaipanAnimal = 1;
-                            break;
-                    }
-
-                    selectObj.SetActive(true);
-                    buyToCoinButton.SetActive(false);
-                    selectText.text = LocalizationManager.instance.GetString("Select");
-
-                    for (int i = 0; i < buyRmAnimalObj.Length; i++)
-                    {
-                        buyRmAnimalObj[i].SetActive(false);
-                    }
-
-                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, truckInfo.crystal);
+                        }
+                        break;
                 }
-                else
+
+                itemList.Clear();
+                itemList.Add(truckInfo.truckType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Truck", itemList);
+
+                switch (truckInfo.truckType)
                 {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    case TruckType.Bread:
+                        break;
+                    case TruckType.Chips:
+                        playerDataBase.ChipsTruck = 1;
+                        break;
+                    case TruckType.Donut:
+                        playerDataBase.DonutTruck = 1;
+                        break;
+                    case TruckType.Hamburger:
+                        playerDataBase.HamburgerTruck = 1;
+                        break;
+                    case TruckType.Hotdog:
+                        playerDataBase.HotdogTruck = 1;
+                        break;
+                    case TruckType.Icecream:
+                        playerDataBase.IcecreamTruck = 1;
+                        break;
+                    case TruckType.Lemonade:
+                        playerDataBase.LemonadeTruck = 1;
+                        break;
+                    case TruckType.Noodles:
+                        playerDataBase.NoodlesTruck = 1;
+                        break;
+                    case TruckType.Pizza:
+                        playerDataBase.PizzaTruck = 1;
+                        break;
+                    case TruckType.Sushi:
+                        playerDataBase.SushiTruck = 1;
+                        break;
                 }
+
+                break;
+            case 2:
+                switch (number)
+                {
+                    case 0:
+                        if (playerDataBase.Coin < animalInfo.price)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, animalInfo.price);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < animalInfo.crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, animalInfo.crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(animalInfo.animalType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Animal", itemList);
+
+                switch (animalInfo.animalType)
+                {
+                    case AnimalType.Colobus:
+                        break;
+                    case AnimalType.Gecko:
+                        playerDataBase.GeckoAnimal = 1;
+                        break;
+                    case AnimalType.Herring:
+                        playerDataBase.HerringAnimal = 1;
+                        break;
+                    case AnimalType.Muskrat:
+                        playerDataBase.MuskratAnimal = 1;
+                        break;
+                    case AnimalType.Pudu:
+                        playerDataBase.PuduAnimal = 1;
+                        break;
+                    case AnimalType.Sparrow:
+                        playerDataBase.SparrowAnimal = 1;
+                        break;
+                    case AnimalType.Squid:
+                        playerDataBase.SquidAnimal = 1;
+                        break;
+                    case AnimalType.Taipan:
+                        playerDataBase.TaipanAnimal = 1;
+                        break;
+                }
+
+                break;
+            case 3:
+                switch (number)
+                {
+                    case 0:
+                        if (playerDataBase.Coin < butterflyInfo.price)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, butterflyInfo.price);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < butterflyInfo.crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, butterflyInfo.crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(butterflyInfo.butterflyType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Butterfly", itemList);
+
+                switch (butterflyInfo.butterflyType)
+                {
+                    case ButterflyType.Butterfly1:
+                        break;
+                    case ButterflyType.Butterfly2:
+                        playerDataBase.Butterfly2 = 1;
+                        break;
+                    case ButterflyType.Butterfly3:
+                        playerDataBase.Butterfly3 = 1;
+                        break;
+                    case ButterflyType.Butterfly4:
+                        playerDataBase.Butterfly4 = 1;
+                        break;
+                    case ButterflyType.Butterfly5:
+                        playerDataBase.Butterfly5 = 1;
+                        break;
+                    case ButterflyType.Butterfly6:
+                        playerDataBase.Butterfly6 = 1;
+                        break;
+                    case ButterflyType.Butterfly7:
+                        playerDataBase.Butterfly7 = 1;
+                        break;
+                    case ButterflyType.Butterfly8:
+                        playerDataBase.Butterfly8 = 1;
+                        break;
+                    case ButterflyType.Butterfly9:
+                        playerDataBase.Butterfly9 = 1;
+                        break;
+                    case ButterflyType.Butterfly10:
+                        playerDataBase.Butterfly10 = 1;
+                        break;
+                    case ButterflyType.Butterfly11:
+                        playerDataBase.Butterfly11 = 1;
+                        break;
+                    case ButterflyType.Butterfly12:
+                        playerDataBase.Butterfly12 = 1;
+                        break;
+                    case ButterflyType.Butterfly13:
+                        playerDataBase.Butterfly13 = 1;
+                        break;
+                    case ButterflyType.Butterfly14:
+                        playerDataBase.Butterfly14 = 1;
+                        break;
+                    case ButterflyType.Butterfly15:
+                        playerDataBase.Butterfly15 = 1;
+                        break;
+                    case ButterflyType.Butterfly16:
+                        playerDataBase.Butterfly16 = 1;
+                        break;
+                    case ButterflyType.Butterfly17:
+                        playerDataBase.Butterfly17 = 1;
+                        break;
+                    case ButterflyType.Butterfly18:
+                        playerDataBase.Butterfly18 = 1;
+                        break;
+                    case ButterflyType.Butterfly19:
+                        playerDataBase.Butterfly19 = 1;
+                        break;
+                    case ButterflyType.Butterfly20:
+                        playerDataBase.Butterfly20 = 1;
+                        break;
+                    case ButterflyType.Butterfly21:
+                        playerDataBase.Butterfly21 = 1;
+                        break;
+                    case ButterflyType.Butterfly22:
+                        playerDataBase.Butterfly22 = 1;
+                        break;
+                    case ButterflyType.Butterfly23:
+                        playerDataBase.Butterfly23 = 1;
+                        break;
+                    case ButterflyType.Butterfly24:
+                        playerDataBase.Butterfly24 = 1;
+                        break;
+                    case ButterflyType.Butterfly25:
+                        playerDataBase.Butterfly25 = 1;
+                        break;
+                    case ButterflyType.Butterfly26:
+                        playerDataBase.Butterfly26 = 1;
+                        break;
+                    case ButterflyType.Butterfly27:
+                        playerDataBase.Butterfly27 = 1;
+                        break;
+                    case ButterflyType.Butterfly28:
+                        playerDataBase.Butterfly28 = 1;
+                        break;
+                }
+
                 break;
         }
+
+        selectObj.SetActive(true);
+        buyToCoinButton.SetActive(false);
+        buyToCrystalButton.SetActive(false);
+
+        selectText.text = LocalizationManager.instance.GetString("Select");
+
+        SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+        NotionManager.instance.UseNotion(NotionType.SuccessBuy);
     }
 
     public void BuyTruckToRm(int number)
@@ -1160,18 +2153,10 @@ public class ShopManager : MonoBehaviour
 
     void RmDelay()
     {
-        for (int i = 0; i < buyRmObj.Length; i++)
-        {
-            buyRmObj[i].SetActive(false);
-        }
-
-        for (int i = 0; i < buyRmAnimalObj.Length; i++)
-        {
-            buyRmAnimalObj[i].SetActive(false);
-        }
-
         selectObj.SetActive(true);
         buyToCoinButton.SetActive(false);
+        buyToCrystalButton.SetActive(false);
+
         selectText.text = LocalizationManager.instance.GetString("Select");
     }
 
@@ -1217,7 +2202,6 @@ public class ShopManager : MonoBehaviour
                 playerDataBase.Portion4 += 10;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
-
                 SoundManager.instance.PlaySFX(GameSfxType.Success);
                 NotionManager.instance.UseNotion(NotionType.SuccessBuy);
                 break;
@@ -1250,7 +2234,6 @@ public class ShopManager : MonoBehaviour
 
                 playerDataBase.Portion4 += 50;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
-
 
                 SoundManager.instance.PlaySFX(GameSfxType.Success);
                 NotionManager.instance.UseNotion(NotionType.SuccessBuy);

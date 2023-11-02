@@ -41,6 +41,8 @@ public class PlayfabManager : MonoBehaviour
     private bool inventoryData = false;
     private bool grantItemData = false;
 
+    private int value = 0;
+
     public NickNameManager nickNameManager;
     public GameManager gameManager;
     public MoneyAnimation moneyAnimation;
@@ -695,14 +697,14 @@ public class PlayfabManager : MonoBehaviour
             int gold = result.VirtualCurrency["GO"];
             int crystal = result.VirtualCurrency["ST"];
 
-            if (gold > 999999999)
+            if (gold > 2000000000)
             {
-                gold = 999999999;
+                gold = 2000000000;
             }
 
-            if (crystal > 1000000)
+            if (crystal > 10000)
             {
-                crystal = 1000000;
+                crystal = 10000;
             }
 
             playerDataBase.Coin = gold;
@@ -725,6 +727,106 @@ public class PlayfabManager : MonoBehaviour
                     if (list.ItemId.Equals("GoldX2"))
                     {
                         playerDataBase.GoldX2 = true;
+                    }
+
+                    if (list.ItemId.Equals("Character1"))
+                    {
+                        playerDataBase.Character1 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character2"))
+                    {
+                        playerDataBase.Character2 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character3"))
+                    {
+                        playerDataBase.Character3 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character4"))
+                    {
+                        playerDataBase.Character4 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character5"))
+                    {
+                        playerDataBase.Character5 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character6"))
+                    {
+                        playerDataBase.Character6 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character7"))
+                    {
+                        playerDataBase.Character7 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character8"))
+                    {
+                        playerDataBase.Character8 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character9"))
+                    {
+                        playerDataBase.Character9 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character10"))
+                    {
+                        playerDataBase.Character10 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character11"))
+                    {
+                        playerDataBase.Character11 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character12"))
+                    {
+                        playerDataBase.Character12 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character13"))
+                    {
+                        playerDataBase.Character13 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character14"))
+                    {
+                        playerDataBase.Character14 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character15"))
+                    {
+                        playerDataBase.Character15 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character16"))
+                    {
+                        playerDataBase.Character16 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character17"))
+                    {
+                        playerDataBase.Character17 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character18"))
+                    {
+                        playerDataBase.Character18 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character19"))
+                    {
+                        playerDataBase.Character19 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Character20"))
+                    {
+                        playerDataBase.Character20 = 1;
                     }
 
                     if (list.ItemId.Equals("Chips"))
@@ -855,6 +957,96 @@ public class PlayfabManager : MonoBehaviour
                     if (list.ItemId.Equals("Butterfly10"))
                     {
                         playerDataBase.Butterfly10 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly11"))
+                    {
+                        playerDataBase.Butterfly11 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly12"))
+                    {
+                        playerDataBase.Butterfly12 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly13"))
+                    {
+                        playerDataBase.Butterfly13 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly14"))
+                    {
+                        playerDataBase.Butterfly14 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly15"))
+                    {
+                        playerDataBase.Butterfly15 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly16"))
+                    {
+                        playerDataBase.Butterfly16 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly17"))
+                    {
+                        playerDataBase.Butterfly17 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly18"))
+                    {
+                        playerDataBase.Butterfly18 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly19"))
+                    {
+                        playerDataBase.Butterfly19 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly20"))
+                    {
+                        playerDataBase.Butterfly20 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly21"))
+                    {
+                        playerDataBase.Butterfly21 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly22"))
+                    {
+                        playerDataBase.Butterfly22 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly23"))
+                    {
+                        playerDataBase.Butterfly23 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly24"))
+                    {
+                        playerDataBase.Butterfly24 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly25"))
+                    {
+                        playerDataBase.Butterfly25 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly26"))
+                    {
+                        playerDataBase.Butterfly26 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly27"))
+                    {
+                        playerDataBase.Butterfly27 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Butterfly28"))
+                    {
+                        playerDataBase.Butterfly28 = 1;
                     }
 
                     if (list.ItemId.Equals("Island1"))
@@ -992,6 +1184,9 @@ public class PlayfabManager : MonoBehaviour
                        case "DonutMaxValue":
                            playerDataBase.DonutMaxValue = statistics.Value;
                            break;
+                       case "FriesMaxValue":
+                           playerDataBase.FriesMaxValue = statistics.Value;
+                           break;
                        case "SellCount":
                            playerDataBase.SellCount = statistics.Value;
                            break;
@@ -1000,6 +1195,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "OpenChestBox":
                            playerDataBase.OpenChestBox = statistics.Value;
+                           break;
+                       case "FeverModeCount":
+                           playerDataBase.FeverModeCount = statistics.Value;
                            break;
                        case "QuestCount":
                            playerDataBase.QuestCount = statistics.Value;
@@ -1014,13 +1212,13 @@ public class PlayfabManager : MonoBehaviour
                            playerDataBase.Skill3 = statistics.Value;
                            break;
                        case "Skill4":
-                           playerDataBase.Skill3 = statistics.Value;
+                           playerDataBase.Skill4 = statistics.Value;
                            break;
                        case "Skill5":
-                           playerDataBase.Skill3 = statistics.Value;
+                           playerDataBase.Skill5 = statistics.Value;
                            break;
                        case "Skill6":
-                           playerDataBase.Skill3 = statistics.Value;
+                           playerDataBase.Skill6 = statistics.Value;
                            break;
                        case "Portion1":
                            playerDataBase.Portion1 = statistics.Value;
@@ -1033,6 +1231,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Portion4":
                            playerDataBase.Portion4 = statistics.Value;
+                           break;
+                       case "Portion5":
+                           playerDataBase.Portion5 = statistics.Value;
                            break;
                        case "Coupon1":
                            playerDataBase.Coupon1 = statistics.Value;
@@ -1048,9 +1249,6 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "GourmetLevel":
                            playerDataBase.GourmetLevel = statistics.Value;
-                           break;
-                       case "DonutLevel":
-                           playerDataBase.DonutLevel = statistics.Value;
                            break;
                        case "UpgradeCount":
                            playerDataBase.UpgradeCount = statistics.Value;
@@ -1212,23 +1410,32 @@ public class PlayfabManager : MonoBehaviour
                 switch (type)
                 {
                     case MoneyType.Coin:
-                        //uiManager.goldAnimation.OnPlayMoneyAnimation(MoneyType.Coin, playerDataBase.Coin, number);
+
+                        if(playerDataBase.Coin + number >= 2000000000)
+                        {
+                            value = 2000000000 - playerDataBase.Coin + number;
+
+                            playerDataBase.Coin += value;
+                        }
+                        else
+                        {
+                            playerDataBase.Coin += number;
+                        }
+
                         playerDataBase.Coin += number;
+
+                        moneyAnimation.PlusMoney(number);
+
                         break;
                     case MoneyType.Crystal:
-                        //uiManager.goldAnimation.OnPlayMoneyAnimation(MoneyType.Crystal, playerDataBase.Crystal, number);
                         playerDataBase.Crystal += number;
                         break;
                 }
-
-                moneyAnimation.PlusMoney(number);
 
                 if (GameManager.instance != null)
                 {
                     GameManager.instance.RenewalVC();
                 }
-
-                //soundManager.PlaySFX(GameSfxType.GetMoney);
             }
             catch (Exception e)
             {

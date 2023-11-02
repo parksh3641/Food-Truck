@@ -110,23 +110,27 @@ public class ChestBoxManager : MonoBehaviour
 
                 break;
             case RewardType.PortionSet:
-                switch (Random.Range(0, 4))
+                switch (Random.Range(0, 5))
                 {
                     case 0:
-                        playerDataBase.Portion1 += Random.Range(1, 4);
+                        playerDataBase.Portion1 += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
                         break;
                     case 1:
-                        playerDataBase.Portion2 += Random.Range(1, 4);
+                        playerDataBase.Portion2 += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
                         break;
                     case 2:
-                        playerDataBase.Portion3 += Random.Range(1, 4);
+                        playerDataBase.Portion3 += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
                         break;
                     case 3:
-                        playerDataBase.Portion4 += Random.Range(1, 4);
+                        playerDataBase.Portion4 += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                        break;
+                    case 4:
+                        playerDataBase.Portion5 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
                         break;
                 }
 
@@ -158,19 +162,33 @@ public class ChestBoxManager : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 3000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 2000000);
 
                 break;
             case RewardType.PortionSet:
-                playerDataBase.Portion1 += 3;
-                playerDataBase.Portion2 += 3;
-                playerDataBase.Portion3 += 3;
-                playerDataBase.Portion4 += 3;
-
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                switch (Random.Range(0, 5))
+                {
+                    case 0:
+                        playerDataBase.Portion1 += 3;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+                        break;
+                    case 1:
+                        playerDataBase.Portion2 += 3;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+                        break;
+                    case 2:
+                        playerDataBase.Portion3 += 3;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+                        break;
+                    case 3:
+                        playerDataBase.Portion4 += 3;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                        break;
+                    case 4:
+                        playerDataBase.Portion5 += 3;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
+                        break;
+                }
                 break;
         }
 

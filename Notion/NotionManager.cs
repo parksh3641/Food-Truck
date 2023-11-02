@@ -179,5 +179,9 @@ public enum NotionType
     CouponNotion3,
     QuestNotion,
     ChangeAnimalNotion,
-    NotPurchaseNotion
+    NotPurchaseNotion,
+    SuccessSellX2,
+    UsePortionNotion5,
+    ChangeCharacterNotion,
+    ChangeButterflyNotion
 }

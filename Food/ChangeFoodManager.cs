@@ -80,7 +80,7 @@ public class ChangeFoodManager : MonoBehaviour
         changeFoodContentList[3].SetLevel(GameStateManager.instance.DrinkLevel, upgradeDataBase.GetMaxLevel(FoodType.Drink));
         changeFoodContentList[4].SetLevel(GameStateManager.instance.PizzaLevel, upgradeDataBase.GetMaxLevel(FoodType.Pizza));
         changeFoodContentList[5].SetLevel(GameStateManager.instance.DonutLevel, upgradeDataBase.GetMaxLevel(FoodType.Donut));
-
+        changeFoodContentList[6].SetLevel(GameStateManager.instance.FriesLevel, upgradeDataBase.GetMaxLevel(FoodType.Fries));
 
 
         changeFoodContentList[0].UnLock();
@@ -93,13 +93,6 @@ public class ChangeFoodManager : MonoBehaviour
         if (playerDataBase.SandwichMaxValue >= 1)
         {
             changeFoodContentList[2].UnLock();
-
-            if (!GameStateManager.instance.AppReview)
-            {
-                gameManager.OpenAppReview();
-
-                GameStateManager.instance.AppReview = true;
-            }
         }
 
         if (playerDataBase.SnackLabMaxValue >= 1)
@@ -115,12 +108,19 @@ public class ChangeFoodManager : MonoBehaviour
         if (playerDataBase.PizzaMaxValue >= 1)
         {
             changeFoodContentList[5].UnLock();
+
+            if (!GameStateManager.instance.AppReview)
+            {
+                gameManager.OpenAppReview();
+
+                GameStateManager.instance.AppReview = true;
+            }
         }
 
-        //if (playerDataBase.DonutMaxValue >= 1)
-        //{
-        //    changeFoodContentList[6].UnLock();
-        //}
+        if (playerDataBase.DonutMaxValue >= 1)
+        {
+            changeFoodContentList[6].UnLock();
+        }
     }
 
     public void ChangeFood(FoodType type)

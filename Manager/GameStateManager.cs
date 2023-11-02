@@ -44,14 +44,17 @@ public class GameStateManager : MonoBehaviour
         [Space]
         [Title("InGame")]
         public FoodType foodType = FoodType.Hamburger;
+        public CharacterType characterType = CharacterType.Character1;
         public TruckType truckType = TruckType.Bread;
         public AnimalType animalType = AnimalType.Colobus;
+        public ButterflyType butterflyType = ButterflyType.Butterfly1;
         public int hamburgerLevel = 0;
         public int sandwichLevel = 0;
         public int snackLabLevel = 0;
         public int drinkLevel = 0;
         public int pizzaLevel = 0;
         public int donutLevel = 0;
+        public int friesLevel = 0;
         public float feverCount = 0;
 
         [Space]
@@ -161,6 +164,45 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.levelType = value;
+            SaveFile();
+        }
+    }
+
+    public FoodType FoodType
+    {
+        get
+        {
+            return gameSettings.foodType;
+        }
+        set
+        {
+            gameSettings.foodType = value;
+            SaveFile();
+        }
+    }
+
+    public CharacterType CharacterType
+    {
+        get
+        {
+            return gameSettings.characterType;
+        }
+        set
+        {
+            gameSettings.characterType = value;
+            SaveFile();
+        }
+    }
+
+    public ButterflyType ButterflyType
+    {
+        get
+        {
+            return gameSettings.butterflyType;
+        }
+        set
+        {
+            gameSettings.butterflyType = value;
             SaveFile();
         }
     }
@@ -282,19 +324,6 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public FoodType FoodType
-    {
-        get
-        {
-            return gameSettings.foodType;
-        }
-        set
-        {
-            gameSettings.foodType = value;
-            SaveFile();
-        }
-    }
-
     public int HamburgerLevel
     {
         get
@@ -369,6 +398,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.donutLevel = value;
+            SaveFile();
+        }
+    }
+
+    public int FriesLevel
+    {
+        get
+        {
+            return gameSettings.friesLevel;
+        }
+        set
+        {
+            gameSettings.friesLevel = value;
             SaveFile();
         }
     }

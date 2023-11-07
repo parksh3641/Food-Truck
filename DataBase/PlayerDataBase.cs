@@ -1829,7 +1829,7 @@ public class PlayerDataBase : ScriptableObject
         defDestroyTicket = 0;
         lockTutorial = 0;
         nextFoodNumber = 0;
-        FirstReward = 0;
+        firstReward = 0;
 
         hamburgerMaxValue = 0;
         sandwichMaxValue = 0;

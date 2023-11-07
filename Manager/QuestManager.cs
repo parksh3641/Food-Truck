@@ -83,7 +83,7 @@ public class QuestManager : MonoBehaviour
         }
 
         questInfoText.text = LocalizationManager.instance.GetString("Quest" + ((playerDataBase.QuestCount % 10) + 1).ToString())
-    + " (" + value + "/" + questInfo.need * ((playerDataBase.QuestCount / 10) + 1) + ")";
+    + " (" + MoneyUnitString.ToCurrencyString(value) + "/" + MoneyUnitString.ToCurrencyString(questInfo.need * ((playerDataBase.QuestCount / 10) + 1)) + ")";
 
         if (value >= questInfo.need * ((playerDataBase.QuestCount / 10) + 1))
         {

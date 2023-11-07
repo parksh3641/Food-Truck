@@ -681,10 +681,10 @@ public class PlayfabManager : MonoBehaviour
             yield return null;
         }
 
-        if (playerDataBase.RemoveAds)
-        {
-            GoogleAdsManager.instance.admobBanner.DestroyAd();
-        }
+        //if (playerDataBase.RemoveAds)
+        //{
+        //    GoogleAdsManager.instance.admobBanner.DestroyAd();
+        //}
 
         StateManager.instance.Initialize();
     }
@@ -1406,7 +1406,6 @@ public class PlayfabManager : MonoBehaviour
                     GeneratePlayStreamEvent = true,
                 }, OnCloudUpdateStats, DisplayPlayfabError);
 
-
                 switch (type)
                 {
                     case MoneyType.Coin:
@@ -1421,8 +1420,6 @@ public class PlayfabManager : MonoBehaviour
                         {
                             playerDataBase.Coin += number;
                         }
-
-                        playerDataBase.Coin += number;
 
                         moneyAnimation.PlusMoney(number);
 
@@ -1512,7 +1509,7 @@ public class PlayfabManager : MonoBehaviour
 
             GameStateManager.instance.NickName = result.DisplayName;
 
-            gameManager.Initialize();
+            //gameManager.Initialize();
 
             successAction?.Invoke();
         }

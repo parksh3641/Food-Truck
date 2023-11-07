@@ -58,16 +58,17 @@ public class LockManager : MonoBehaviour
             menuIcon[2].SetActive(true);
             menuIcon[3].SetActive(true);
             menuIcon[4].SetActive(true);
+            menuIcon[5].SetActive(true);
         }
 
         if (playerDataBase.LockTutorial >= 3) //피버모드 해제
         {
-            menuIcon[5].SetActive(true);
+            menuIcon[6].SetActive(true);
         }
 
         if (playerDataBase.LockTutorial >= 4) //연구소 해제
         {
-            menuIcon[6].SetActive(true);
+            menuIcon[7].SetActive(true);
         }
     }
 
@@ -100,16 +101,17 @@ public class LockManager : MonoBehaviour
                 lockIcon[2].SetActive(true);
                 lockIcon[3].SetActive(true);
                 lockIcon[4].SetActive(true);
+                lockIcon[5].SetActive(true);
 
                 gameManager.CheckPortion();
 
                 break;
             case 3:
-                lockIcon[5].SetActive(true);
+                lockIcon[6].SetActive(true);
 
                 break;
             case 4:
-                lockIcon[6].SetActive(true);
+                lockIcon[7].SetActive(true);
 
                 break;
         }

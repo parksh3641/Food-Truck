@@ -602,8 +602,7 @@ public class GameStateManager : MonoBehaviour
             if (!string.IsNullOrEmpty(stjs))
             {
                 gameSettings = JsonUtility.FromJson<GameSettings>(stjs);
-                gameSettings.adCount = 200;
-                gameSettings.chestBoxCoolTime = 90;
+                gameSettings.chestBoxCoolTime = 60;
             }
             else
             {

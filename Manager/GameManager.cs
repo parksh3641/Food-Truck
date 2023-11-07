@@ -346,22 +346,10 @@ public class GameManager : MonoBehaviour
         {
             tutorialManager.TutorialStart();
         }
-
-        if(playerDataBase.FirstReward == 0)
-        {
-            playerDataBase.FirstReward = 1;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
-
-            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
-
-            StartCoroutine(FirstDelay());
-        }
     }
 
     IEnumerator FirstDelay()
     {
-        yield return new WaitForSeconds(0.5f);
-
         playerDataBase.Portion1 += 5;
         playerDataBase.Portion2 += 5;
         playerDataBase.Portion3 += 5;
@@ -369,6 +357,9 @@ public class GameManager : MonoBehaviour
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+
+        yield return new WaitForSeconds(0.5f);
+
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
@@ -474,9 +465,11 @@ public class GameManager : MonoBehaviour
 
         CheckDefTicket();
 
-        cameraController.GoToB();
-
         CheckPortion();
+
+        questManager.Initialize();
+
+        cameraController.GoToB();
     }
 
     public void GameStop()
@@ -498,7 +491,19 @@ public class GameManager : MonoBehaviour
     {
         signText.text = GameStateManager.instance.NickName;
 
-        RenewalVC();
+        if (playerDataBase.FirstReward == 0)
+        {
+            playerDataBase.FirstReward = 1;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
+
+            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
+
+            StartCoroutine(FirstDelay());
+        }
+        else
+        {
+            RenewalVC();
+        }
 
         SuccessLogin();
     }
@@ -1023,6 +1028,8 @@ public class GameManager : MonoBehaviour
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
 
+                        NotionManager.instance.UseNotion(NotionType.MaxLevel);
+
                         MaxLevelUpgradeSuccess();
                     }
                     else
@@ -1045,9 +1052,9 @@ public class GameManager : MonoBehaviour
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
                         }
-                    }
 
-                    NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+                        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+                    }
                 }
                 else
                 {

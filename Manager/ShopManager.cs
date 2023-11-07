@@ -1012,7 +1012,7 @@ public class ShopManager : MonoBehaviour
         {
             effectText.localizationName = animalInfo.passiveEffect.ToString();
             effectText.plusText = " : +" + animalInfo.effectNumber.ToString() + "%";
-            //passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NowPrice") + " +1%";
+            passiveText.text = LocalizationManager.instance.GetString("SellPriceX2Up_Info");
         }
 
         infoText.localizationName = (AnimalType.Colobus + animalIndex) + "Info";
@@ -1161,7 +1161,7 @@ public class ShopManager : MonoBehaviour
         titleText.localizationName = "Butterfly" + (butterflyIndex + 1);
         passiveText.text = "";
 
-        if (characterIndex == 0)
+        if (butterflyIndex == 0)
         {
             effectText.localizationName = "None";
             effectText.plusText = "";
@@ -1493,7 +1493,7 @@ public class ShopManager : MonoBehaviour
             buyToCoinButton.SetActive(false);
             buyToCrystalButton.SetActive(false);
 
-            if (GameStateManager.instance.CharacterType.Equals(characterInfo.characterType))
+            if (GameStateManager.instance.ButterflyType.Equals(butterflyInfo.butterflyType))
             {
                 selectText.text = LocalizationManager.instance.GetString("Selected");
             }
@@ -1682,11 +1682,14 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
-        if(!buy)
+        if (number == 0)
         {
-            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-            NotionManager.instance.UseNotion(NotionType.NotPurchaseNotion);
-            return;
+            if (!buy)
+            {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                NotionManager.instance.UseNotion(NotionType.NotPurchaseNotion);
+                return;
+            }
         }
 
         switch(speicalIndex)

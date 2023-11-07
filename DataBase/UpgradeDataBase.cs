@@ -59,19 +59,19 @@ public class UpgradeFood
         }
         else if (level >= 29)
         {
-            price = level * level * 1600;
+            price = level * level * 2400;
         }
         else if (level >= 19)
         {
-            price = level * level * 1200;
+            price = level * level * 1800;
         }
         else if(level >= 9)
         {
-            price = level * level * 800;
+            price = level * level * 1200;
         }
         else
         {
-            price = level * level * 400;
+            price = level * level * 600;
         }
 
         return price;

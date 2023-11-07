@@ -38,6 +38,18 @@ public class GameManager : MonoBehaviour
     public FoodContent[] friesArray;
 
     [Space]
+    [Title("Candy")]
+    public FoodContent[] candy1Array;
+    public FoodContent[] candy2Array;
+    public FoodContent[] candy3Array;
+    public FoodContent[] candy4Array;
+    public FoodContent[] candy5Array;
+    public FoodContent[] candy6Array;
+    public FoodContent[] candy7Array;
+    public FoodContent[] candy8Array;
+    public FoodContent[] candy9Array;
+
+    [Space]
     [Title("Animal")]
     public Animator[] characterAnimator;
     public Animator[] animalAnimator;
@@ -79,7 +91,7 @@ public class GameManager : MonoBehaviour
     public Text feverText;
 
     private float feverCount = 0;
-    private float feverMaxCount = 400;
+    private float feverMaxCount = 300;
     private float feverTime = 30;
     private float feverPlus = 3;
 
@@ -109,7 +121,7 @@ public class GameManager : MonoBehaviour
     public int level = 0;
     public int nextLevel = 0;
 
-    private int adCount = 0;
+    private int maxLevel = 0;
 
     public bool isDelay_Camera = false;
     public bool isDelay = false;
@@ -118,6 +130,9 @@ public class GameManager : MonoBehaviour
     public bool nextFood = false;
 
     private bool feverMode = false;
+
+    private int nowUpgradeCount = 0;
+    private int nowSellCount = 0;
 
     [Space]
     [Title("Bankruptcy")]
@@ -140,6 +155,7 @@ public class GameManager : MonoBehaviour
     public GameObject checkInternet;
 
     UpgradeFood upgradeFood;
+    UpgradeCandy upgradeCandy;
 
     public ParticleSystem lightParticle;
     public ParticleSystem levelUpParticle;
@@ -156,10 +172,9 @@ public class GameManager : MonoBehaviour
     TruckDataBase truckDataBase;
     AnimalDataBase animalDataBase;
     ButterflyDataBase butterflyDataBase;
-
     IslandDataBase islandDataBase;
 
-    WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
+    WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
 
     private void Awake()
     {
@@ -279,60 +294,151 @@ public class GameManager : MonoBehaviour
 
         feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  0%";
 
-        switch (GameStateManager.instance.FoodType)
+        switch (GameStateManager.instance.IslandType)
         {
-            case FoodType.Hamburger:
-                level = GameStateManager.instance.HamburgerLevel;
-                nextLevel = (GameStateManager.instance.HamburgerLevel + 1) / 5;
-
-                if (hamburgerArray.Length - 1 < nextLevel)
+            case IslandType.Island1:
+                switch (GameStateManager.instance.FoodType)
                 {
-                    nextLevel -= 1;
+                    case FoodType.Hamburger:
+                        level = GameStateManager.instance.HamburgerLevel;
+                        nextLevel = (GameStateManager.instance.HamburgerLevel + 1) / 5;
+
+                        if (hamburgerArray.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case FoodType.Sandwich:
+                        level = GameStateManager.instance.SandwichLevel;
+                        nextLevel = (GameStateManager.instance.SandwichLevel + 1) / 5;
+
+                        if (sandwichArray.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case FoodType.SnackLab:
+                        level = GameStateManager.instance.SnackLabLevel;
+                        nextLevel = (GameStateManager.instance.SnackLabLevel + 1) / 5;
+
+                        if (snackLabArray.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case FoodType.Drink:
+                        level = GameStateManager.instance.DrinkLevel;
+                        nextLevel = (GameStateManager.instance.DrinkLevel + 1) / 5;
+
+                        if (drinkArray.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case FoodType.Pizza:
+                        level = GameStateManager.instance.PizzaLevel;
+                        nextLevel = (GameStateManager.instance.PizzaLevel + 1) / 5;
+
+                        if (pizzaArray.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case FoodType.Donut:
+                        level = GameStateManager.instance.DonutLevel;
+                        nextLevel = (GameStateManager.instance.DonutLevel + 1) / 5;
+                        break;
+                    case FoodType.Fries:
+                        level = GameStateManager.instance.FriesLevel;
+                        nextLevel = (GameStateManager.instance.FriesLevel + 1) / 5;
+                        break;
                 }
                 break;
-            case FoodType.Sandwich:
-                level = GameStateManager.instance.SandwichLevel;
-                nextLevel = (GameStateManager.instance.SandwichLevel + 1) / 5;
-
-                if (sandwichArray.Length - 1 < nextLevel)
+            case IslandType.Island2:
+                switch (GameStateManager.instance.CandyType)
                 {
-                    nextLevel -= 1;
-                }
-                break;
-            case FoodType.SnackLab:
-                level = GameStateManager.instance.SnackLabLevel;
-                nextLevel = (GameStateManager.instance.SnackLabLevel + 1) / 5;
+                    case CandyType.Candy1:
+                        level = GameStateManager.instance.Candy1Level;
+                        nextLevel = (GameStateManager.instance.Candy1Level + 1) / 5;
 
-                if (snackLabArray.Length - 1 < nextLevel)
-                {
-                    nextLevel -= 1;
-                }
-                break;
-            case FoodType.Drink:
-                level = GameStateManager.instance.DrinkLevel;
-                nextLevel = (GameStateManager.instance.DrinkLevel + 1) / 5;
+                        if (candy1Array.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case CandyType.Candy2:
+                        level = GameStateManager.instance.Candy2Level;
+                        nextLevel = (GameStateManager.instance.Candy2Level + 1) / 5;
 
-                if (drinkArray.Length - 1 < nextLevel)
-                {
-                    nextLevel -= 1;
-                }
-                break;
-            case FoodType.Pizza:
-                level = GameStateManager.instance.PizzaLevel;
-                nextLevel = (GameStateManager.instance.PizzaLevel + 1) / 5;
+                        if (candy2Array.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case CandyType.Candy3:
+                        level = GameStateManager.instance.Candy3Level;
+                        nextLevel = (GameStateManager.instance.Candy3Level + 1) / 5;
 
-                if (pizzaArray.Length - 1 < nextLevel)
-                {
-                    nextLevel -= 1;
+                        if (candy3Array.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case CandyType.Candy4:
+                        level = GameStateManager.instance.Candy4Level;
+                        nextLevel = (GameStateManager.instance.Candy4Level + 1) / 5;
+
+                        if (candy4Array.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case CandyType.Candy5:
+                        level = GameStateManager.instance.Candy5Level;
+                        nextLevel = (GameStateManager.instance.Candy5Level + 1) / 5;
+
+                        if (candy5Array.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case CandyType.Candy6:
+                        level = GameStateManager.instance.Candy6Level;
+                        nextLevel = (GameStateManager.instance.Candy6Level + 1) / 5;
+
+                        if (candy6Array.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case CandyType.Candy7:
+                        level = GameStateManager.instance.Candy7Level;
+                        nextLevel = (GameStateManager.instance.Candy7Level + 1) / 5;
+
+                        if (candy7Array.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case CandyType.Candy8:
+                        level = GameStateManager.instance.Candy8Level;
+                        nextLevel = (GameStateManager.instance.Candy8Level + 1) / 5;
+
+                        if (candy8Array.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
+                    case CandyType.Candy9:
+                        level = GameStateManager.instance.Candy9Level;
+                        nextLevel = (GameStateManager.instance.Candy9Level + 1) / 5;
+
+                        if (candy9Array.Length - 1 < nextLevel)
+                        {
+                            nextLevel -= 1;
+                        }
+                        break;
                 }
-                break;
-            case FoodType.Donut:
-                level = GameStateManager.instance.DonutLevel;
-                nextLevel = (GameStateManager.instance.DonutLevel + 1) / 5;
-                break;
-            case FoodType.Fries:
-                level = GameStateManager.instance.FriesLevel;
-                nextLevel = (GameStateManager.instance.FriesLevel + 1) / 5;
                 break;
         }
 
@@ -421,11 +527,15 @@ public class GameManager : MonoBehaviour
         if (GameStateManager.instance.CharacterType > CharacterType.Character1)
         {
             successPlus = characterDataBase.GetCharacterEffect(GameStateManager.instance.CharacterType);
+
+            successPlus += playerDataBase.Skill7 * 0.1f;
         }
 
         if (GameStateManager.instance.TruckType > TruckType.Bread)
         {
             sellPricePlus = truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
+
+            sellPricePlus += playerDataBase.Skill8 * 0.1f;
         }
 
         if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
@@ -436,29 +546,30 @@ public class GameManager : MonoBehaviour
         if (GameStateManager.instance.ButterflyType > ButterflyType.Butterfly1)
         {
             defDestroy = butterflyDataBase.GetButterflyEffect(GameStateManager.instance.ButterflyType);
+
+            sellPricePlus += playerDataBase.Skill9 * 0.1f;
         }
 
+        needPlus += playerDataBase.Skill10 * 0.2f;
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
+        upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
 
         feverCount = GameStateManager.instance.FeverCount;
 
-        CheckFever();
-
         feverTime = 30 + (30 * (0.001f * (playerDataBase.Skill1 + 1)));
-        feverMaxCount = 200 - (200 * (0.001f * (playerDataBase.Skill2 + 1)));
+        feverMaxCount = 300 - (300 * (0.001f * (playerDataBase.Skill2 + 1)));
         feverPlus = 3 + (3 * (0.001f * (playerDataBase.Skill3 + 1)));
+
+        CheckFever();
 
         portion1Time = 30 + (30 * (0.001f * (playerDataBase.Skill4 + 1)));
         portion2Time = 30 + (30 * (0.001f * (playerDataBase.Skill5 + 1)));
         portion3Time = 30 + (30 * (0.001f * (playerDataBase.Skill6 + 1)));
 
-        //needPlus += playerDataBase.GetTruckNumber();
-        //sellPricePlus += playerDataBase.GetAnimalNumber();
-
         if(playerDataBase.GoldX2)
         {
-            sellPricePlus += 50;
+            sellPricePlus += 100;
         }
 
         UpgradeInitialize();
@@ -470,6 +581,31 @@ public class GameManager : MonoBehaviour
         questManager.Initialize();
 
         cameraController.GoToB();
+
+        nowUpgradeCount = playerDataBase.UpgradeCount;
+        nowSellCount = playerDataBase.SellCount;
+        StartCoroutine(ServerCoroution());
+    }
+
+    IEnumerator ServerCoroution()
+    {
+        yield return waitForSeconds;
+
+        if (playerDataBase.UpgradeCount > nowUpgradeCount)
+        {
+            nowUpgradeCount = playerDataBase.UpgradeCount;
+
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
+        }
+
+        if (playerDataBase.SellCount > nowSellCount)
+        {
+            nowSellCount = playerDataBase.SellCount;
+
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("SellCount", playerDataBase.SellCount);
+        }
+
+        StartCoroutine(ServerCoroution());
     }
 
     public void GameStop()
@@ -485,6 +621,8 @@ public class GameManager : MonoBehaviour
         languageUI.SetActive(true);
 
         cameraController.GoToA();
+
+        StopAllCoroutines();
     }
 
     public void Initialize()
@@ -508,9 +646,30 @@ public class GameManager : MonoBehaviour
         SuccessLogin();
     }
 
+    public void ChangeIsland(IslandType type)
+    {
+        GameStateManager.instance.IslandType = type;
+
+        switch (GameStateManager.instance.IslandType)
+        {
+            case IslandType.Island1:
+                ChangeFood(GameStateManager.instance.FoodType);
+                break;
+            case IslandType.Island2:
+                ChangeCandy(GameStateManager.instance.CandyType);
+                break;
+        }
+
+        NotionManager.instance.UseNotion(NotionType.ChangeIslandNotion);
+
+        CheckFoodState();
+
+        UpgradeInitialize();
+    }
+
     public void ChangeFood(FoodType type)
     {
-        if (GameStateManager.instance.FoodType == type) return;
+        NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
 
         nextFood = false;
 
@@ -584,11 +743,129 @@ public class GameManager : MonoBehaviour
         Debug.Log(GameStateManager.instance.FoodType.ToString() + " Level Up");
     }
 
+    public void ChangeCandy(CandyType type)
+    {
+        NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
+
+        nextFood = false;
+
+        GameStateManager.instance.CandyType = type;
+
+        upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
+
+        switch (GameStateManager.instance.CandyType)
+        {
+            case CandyType.Candy1:
+                level = GameStateManager.instance.Candy1Level;
+                nextLevel = (GameStateManager.instance.Candy1Level + 1) / 5;
+
+                if (candy1Array.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
+                break;
+            case CandyType.Candy2:
+                level = GameStateManager.instance.Candy2Level;
+                nextLevel = (GameStateManager.instance.Candy2Level + 1) / 5;
+
+                if (candy2Array.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
+                break;
+            case CandyType.Candy3:
+                level = GameStateManager.instance.Candy3Level;
+                nextLevel = (GameStateManager.instance.Candy3Level + 1) / 5;
+
+                if (candy3Array.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
+                break;
+            case CandyType.Candy4:
+                level = GameStateManager.instance.Candy4Level;
+                nextLevel = (GameStateManager.instance.Candy4Level + 1) / 5;
+
+                if (candy4Array.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
+                break;
+            case CandyType.Candy5:
+                level = GameStateManager.instance.Candy5Level;
+                nextLevel = (GameStateManager.instance.Candy5Level + 1) / 5;
+
+                if (candy5Array.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
+                break;
+            case CandyType.Candy6:
+                level = GameStateManager.instance.Candy6Level;
+                nextLevel = (GameStateManager.instance.Candy6Level + 1) / 5;
+
+                if (candy6Array.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
+                break;
+            case CandyType.Candy7:
+                level = GameStateManager.instance.Candy7Level;
+                nextLevel = (GameStateManager.instance.Candy7Level + 1) / 5;
+
+                if (candy7Array.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
+                break;
+            case CandyType.Candy8:
+                level = GameStateManager.instance.Candy8Level;
+                nextLevel = (GameStateManager.instance.Candy8Level + 1) / 5;
+
+                if (candy8Array.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
+                break;
+            case CandyType.Candy9:
+                level = GameStateManager.instance.Candy9Level;
+                nextLevel = (GameStateManager.instance.Candy9Level + 1) / 5;
+
+                if (candy9Array.Length - 1 < nextLevel)
+                {
+                    nextLevel -= 1;
+                }
+                break;
+        }
+
+        CheckFoodState();
+
+        UpgradeInitialize();
+
+        Debug.Log(GameStateManager.instance.CandyType.ToString() + " Level Up");
+    }
+
     public void UpgradeInitialize()
     {
-        need = upgradeFood.GetNeed(level);
-        sellPrice = upgradeFood.GetPrice(level);
-        success = upgradeFood.GetSuccess(level);
+        switch (GameStateManager.instance.IslandType)
+        {
+            case IslandType.Island1:
+                need = upgradeFood.GetNeed(level);
+                sellPrice = upgradeFood.GetPrice(level);
+                success = upgradeFood.GetSuccess(level);
+
+                maxLevel = upgradeFood.maxLevel;
+
+                break;
+            case IslandType.Island2:
+                need = upgradeCandy.GetNeed(level);
+                sellPrice = upgradeCandy.GetPrice(level);
+                success = upgradeCandy.GetSuccess(level);
+
+                maxLevel = upgradeCandy.maxLevel;
+
+                break;
+        }
 
         if (needPlus > 0)
         {
@@ -618,9 +895,19 @@ public class GameManager : MonoBehaviour
             successFever = 0;
         }
 
-        titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) + " ( +" + (level + 1) + " / " + upgradeFood.maxLevel +" )";
+        switch (GameStateManager.instance.IslandType)
+        {
+            case IslandType.Island1:
+                titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) +
+    " ( +" + (level + 1) + " / " + maxLevel + " )";
+                break;
+            case IslandType.Island2:
+                titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.CandyType.ToString()) +
+    " ( +" + (level + 1) + " / " + maxLevel + " )";
+                break;
+        }
 
-        if(level >= 29)
+        if (level >= 29)
         {
             titleText.color = Color.red;
         }
@@ -671,7 +958,7 @@ public class GameManager : MonoBehaviour
 
         if(needPlus > 0)
         {
-            needText.text += " (-" + (needPlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
+            needText.text += " (-" + (needPlus.ToString("N1")) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
         }
         else
         {
@@ -683,7 +970,7 @@ public class GameManager : MonoBehaviour
 
         if (sellPricePlus > 0)
         {
-            priceText.text += " (+" + (sellPricePlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+            priceText.text += " (+" + sellPricePlus.ToString("N1") + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
         }
         else
         {
@@ -696,7 +983,7 @@ public class GameManager : MonoBehaviour
 
         CheckBankruptcy();
 
-        if (level + 1 >= upgradeFood.maxLevel)
+        if (level + 1 >= maxLevel)
         {
             defTicketObj.SetActive(false);
             successText.text = LocalizationManager.instance.GetString("MaxLevel");
@@ -741,140 +1028,348 @@ public class GameManager : MonoBehaviour
             friesArray[i].gameObject.SetActive(false);
         }
 
-        switch (GameStateManager.instance.FoodType)
+        for (int i = 0; i < candy1Array.Length; i++)
         {
-            case FoodType.Hamburger:
-                if (hamburgerArray.Length - 1 < nextLevel)
-                {
-                    hamburgerArray[hamburgerArray.Length - 1].gameObject.SetActive(true);
-                    hamburgerArray[hamburgerArray.Length - 1].Initialize(5);
-                }
-                else
-                {
-                    hamburgerArray[nextLevel].gameObject.SetActive(true);
-                    hamburgerArray[nextLevel].Initialize(GameStateManager.instance.HamburgerLevel - (5 * nextLevel));
-                }
+            candy1Array[i].gameObject.SetActive(false);
+        }
 
-                if (feverMode)
+        for (int i = 0; i < candy2Array.Length; i++)
+        {
+            candy2Array[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < candy3Array.Length; i++)
+        {
+            candy3Array[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < candy4Array.Length; i++)
+        {
+            candy4Array[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < candy5Array.Length; i++)
+        {
+            candy5Array[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < candy6Array.Length; i++)
+        {
+            candy6Array[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < candy7Array.Length; i++)
+        {
+            candy7Array[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < candy8Array.Length; i++)
+        {
+            candy8Array[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < candy9Array.Length; i++)
+        {
+            candy9Array[i].gameObject.SetActive(false);
+        }
+
+        switch (GameStateManager.instance.IslandType)
+        {
+            case IslandType.Island1:
+                switch (GameStateManager.instance.FoodType)
                 {
-                    hamburgerArray[nextLevel].FeverOn();
+                    case FoodType.Hamburger:
+                        if (hamburgerArray.Length - 1 < nextLevel)
+                        {
+                            hamburgerArray[hamburgerArray.Length - 1].gameObject.SetActive(true);
+                            hamburgerArray[hamburgerArray.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            hamburgerArray[nextLevel].gameObject.SetActive(true);
+                            hamburgerArray[nextLevel].Initialize(GameStateManager.instance.HamburgerLevel - (5 * nextLevel));
+                        }
+
+                        if (feverMode)
+                        {
+                            hamburgerArray[nextLevel].FeverOn();
+                        }
+                        break;
+                    case FoodType.Sandwich:
+                        if (sandwichArray.Length - 1 < nextLevel)
+                        {
+                            sandwichArray[sandwichArray.Length - 1].gameObject.SetActive(true);
+                            sandwichArray[sandwichArray.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            sandwichArray[nextLevel].gameObject.SetActive(true);
+                            sandwichArray[nextLevel].Initialize(GameStateManager.instance.SandwichLevel - (5 * nextLevel));
+                        }
+
+                        if (feverMode)
+                        {
+                            sandwichArray[nextLevel].FeverOn();
+                        }
+                        break;
+                    case FoodType.SnackLab:
+                        if (snackLabArray.Length - 1 < nextLevel)
+                        {
+                            snackLabArray[snackLabArray.Length - 1].gameObject.SetActive(true);
+                            snackLabArray[snackLabArray.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            snackLabArray[nextLevel].gameObject.SetActive(true);
+                            snackLabArray[nextLevel].Initialize(GameStateManager.instance.SnackLabLevel - (5 * nextLevel));
+                        }
+
+                        if (feverMode)
+                        {
+                            snackLabArray[nextLevel].FeverOn();
+                        }
+                        break;
+                    case FoodType.Drink:
+                        if (drinkArray.Length - 1 < nextLevel)
+                        {
+                            drinkArray[drinkArray.Length - 1].gameObject.SetActive(true);
+                            drinkArray[drinkArray.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            drinkArray[nextLevel].gameObject.SetActive(true);
+                            drinkArray[nextLevel].Initialize(GameStateManager.instance.DrinkLevel - (5 * nextLevel));
+                        }
+
+                        if (feverMode)
+                        {
+                            drinkArray[nextLevel].FeverOn();
+                        }
+                        break;
+                    case FoodType.Pizza:
+                        if (pizzaArray.Length - 1 < nextLevel)
+                        {
+                            pizzaArray[pizzaArray.Length - 1].gameObject.SetActive(true);
+                            pizzaArray[pizzaArray.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            pizzaArray[nextLevel].gameObject.SetActive(true);
+                            pizzaArray[nextLevel].Initialize(GameStateManager.instance.PizzaLevel - (5 * nextLevel));
+                        }
+
+                        if (feverMode)
+                        {
+                            pizzaArray[nextLevel].FeverOn();
+                        }
+
+                        break;
+                    case FoodType.Donut:
+                        if (donutArray.Length - 1 < nextLevel)
+                        {
+                            donutArray[donutArray.Length - 1].gameObject.SetActive(true);
+                            donutArray[donutArray.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            donutArray[nextLevel].gameObject.SetActive(true);
+                            donutArray[nextLevel].Initialize(GameStateManager.instance.DonutLevel - (5 * nextLevel));
+                        }
+
+                        if (feverMode)
+                        {
+                            if (donutArray.Length - 1 < nextLevel)
+                            {
+                                donutArray[donutArray.Length - 1].FeverOn();
+                            }
+                            else
+                            {
+                                donutArray[nextLevel].FeverOn();
+                            }
+                        }
+                        break;
+                    case FoodType.Fries:
+                        if (friesArray.Length - 1 < nextLevel)
+                        {
+                            friesArray[friesArray.Length - 1].gameObject.SetActive(true);
+                            friesArray[friesArray.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            friesArray[nextLevel].gameObject.SetActive(true);
+                            friesArray[nextLevel].Initialize(GameStateManager.instance.FriesLevel - (5 * nextLevel));
+                        }
+
+                        if (feverMode)
+                        {
+                            if (friesArray.Length - 1 < nextLevel)
+                            {
+                                friesArray[friesArray.Length - 1].FeverOn();
+                            }
+                            else
+                            {
+                                friesArray[0].FeverOn();
+                            }
+                        }
+                        break;
                 }
                 break;
-            case FoodType.Sandwich:
-                if (sandwichArray.Length - 1 < nextLevel)
+            case IslandType.Island2:
+                switch (GameStateManager.instance.CandyType)
                 {
-                    sandwichArray[sandwichArray.Length - 1].gameObject.SetActive(true);
-                    sandwichArray[sandwichArray.Length - 1].Initialize(5);
-                }
-                else
-                {
-                    sandwichArray[nextLevel].gameObject.SetActive(true);
-                    sandwichArray[nextLevel].Initialize(GameStateManager.instance.SandwichLevel - (5 * nextLevel));
-                }
+                    case CandyType.Candy1:
+                        if (candy1Array.Length - 1 < nextLevel)
+                        {
+                            candy1Array[candy1Array.Length - 1].gameObject.SetActive(true);
+                            candy1Array[candy1Array.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            candy1Array[nextLevel].gameObject.SetActive(true);
+                            candy1Array[nextLevel].Initialize(GameStateManager.instance.Candy1Level - (5 * nextLevel));
+                        }
 
-                if (feverMode)
-                {
-                    sandwichArray[nextLevel].FeverOn();
-                }
-                break;
-            case FoodType.SnackLab:
-                if (snackLabArray.Length - 1 < nextLevel)
-                {
-                    snackLabArray[snackLabArray.Length - 1].gameObject.SetActive(true);
-                    snackLabArray[snackLabArray.Length - 1].Initialize(5);
-                }
-                else
-                {
-                    snackLabArray[nextLevel].gameObject.SetActive(true);
-                    snackLabArray[nextLevel].Initialize(GameStateManager.instance.SnackLabLevel - (5 * nextLevel));
-                }
+                        if (feverMode)
+                        {
+                            candy1Array[nextLevel].FeverOn();
+                        }
+                        break;
+                    case CandyType.Candy2:
+                        if (candy2Array.Length - 1 < nextLevel)
+                        {
+                            candy2Array[candy1Array.Length - 1].gameObject.SetActive(true);
+                            candy2Array[candy1Array.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            candy2Array[nextLevel].gameObject.SetActive(true);
+                            candy2Array[nextLevel].Initialize(GameStateManager.instance.Candy2Level - (5 * nextLevel));
+                        }
 
-                if (feverMode)
-                {
-                    snackLabArray[nextLevel].FeverOn();
-                }
-                break;
-            case FoodType.Drink:
-                if (drinkArray.Length - 1 < nextLevel)
-                {
-                    drinkArray[drinkArray.Length - 1].gameObject.SetActive(true);
-                    drinkArray[drinkArray.Length - 1].Initialize(5);
-                }
-                else
-                {
-                    drinkArray[nextLevel].gameObject.SetActive(true);
-                    drinkArray[nextLevel].Initialize(GameStateManager.instance.DrinkLevel - (5 * nextLevel));
-                }
+                        if (feverMode)
+                        {
+                            candy2Array[nextLevel].FeverOn();
+                        }
+                        break;
+                    case CandyType.Candy3:
+                        if (candy3Array.Length - 1 < nextLevel)
+                        {
+                            candy3Array[candy1Array.Length - 1].gameObject.SetActive(true);
+                            candy3Array[candy1Array.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            candy3Array[nextLevel].gameObject.SetActive(true);
+                            candy3Array[nextLevel].Initialize(GameStateManager.instance.Candy3Level - (5 * nextLevel));
+                        }
 
-                if (feverMode)
-                {
-                    drinkArray[nextLevel].FeverOn();
-                }
-                break;
-            case FoodType.Pizza:
-                if (pizzaArray.Length - 1 < nextLevel)
-                {
-                    pizzaArray[pizzaArray.Length - 1].gameObject.SetActive(true);
-                    pizzaArray[pizzaArray.Length - 1].Initialize(5);
-                }
-                else
-                {
-                    pizzaArray[nextLevel].gameObject.SetActive(true);
-                    pizzaArray[nextLevel].Initialize(GameStateManager.instance.PizzaLevel - (5 * nextLevel));
-                }
+                        if (feverMode)
+                        {
+                            candy3Array[nextLevel].FeverOn();
+                        }
+                        break;
+                    case CandyType.Candy4:
+                        if (candy4Array.Length - 1 < nextLevel)
+                        {
+                            candy4Array[candy1Array.Length - 1].gameObject.SetActive(true);
+                            candy4Array[candy1Array.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            candy4Array[nextLevel].gameObject.SetActive(true);
+                            candy4Array[nextLevel].Initialize(GameStateManager.instance.Candy4Level - (5 * nextLevel));
+                        }
 
-                if (feverMode)
-                {
-                    pizzaArray[nextLevel].FeverOn();
-                }
+                        if (feverMode)
+                        {
+                            candy4Array[nextLevel].FeverOn();
+                        }
+                        break;
+                    case CandyType.Candy5:
+                        if (candy5Array.Length - 1 < nextLevel)
+                        {
+                            candy5Array[candy1Array.Length - 1].gameObject.SetActive(true);
+                            candy5Array[candy1Array.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            candy5Array[nextLevel].gameObject.SetActive(true);
+                            candy5Array[nextLevel].Initialize(GameStateManager.instance.Candy5Level - (5 * nextLevel));
+                        }
 
-                break;
-            case FoodType.Donut:
-                if (donutArray.Length - 1 < nextLevel)
-                {
-                    donutArray[donutArray.Length - 1].gameObject.SetActive(true);
-                    donutArray[donutArray.Length - 1].Initialize(5);
-                }
-                else
-                {
-                    donutArray[nextLevel].gameObject.SetActive(true);
-                    donutArray[nextLevel].Initialize(GameStateManager.instance.DonutLevel - (5 * nextLevel));
-                }
+                        if (feverMode)
+                        {
+                            candy5Array[nextLevel].FeverOn();
+                        }
+                        break;
+                    case CandyType.Candy6:
+                        if (candy6Array.Length - 1 < nextLevel)
+                        {
+                            candy6Array[candy1Array.Length - 1].gameObject.SetActive(true);
+                            candy6Array[candy1Array.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            candy6Array[nextLevel].gameObject.SetActive(true);
+                            candy6Array[nextLevel].Initialize(GameStateManager.instance.Candy6Level - (5 * nextLevel));
+                        }
 
-                if (feverMode)
-                {
-                    if (donutArray.Length - 1 < nextLevel)
-                    {
-                        donutArray[donutArray.Length - 1].FeverOn();
-                    }
-                    else
-                    {
-                        donutArray[nextLevel].FeverOn();
-                    }
-                }
-                break;
-            case FoodType.Fries:
-                if (friesArray.Length - 1 < nextLevel)
-                {
-                    friesArray[friesArray.Length - 1].gameObject.SetActive(true);
-                    friesArray[friesArray.Length - 1].Initialize(5);
-                }
-                else
-                {
-                    friesArray[nextLevel].gameObject.SetActive(true);
-                    friesArray[nextLevel].Initialize(GameStateManager.instance.FriesLevel - (5 * nextLevel));
-                }
+                        if (feverMode)
+                        {
+                            candy1Array[nextLevel].FeverOn();
+                        }
+                        break;
+                    case CandyType.Candy7:
+                        if (candy7Array.Length - 1 < nextLevel)
+                        {
+                            candy7Array[candy1Array.Length - 1].gameObject.SetActive(true);
+                            candy7Array[candy1Array.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            candy7Array[nextLevel].gameObject.SetActive(true);
+                            candy7Array[nextLevel].Initialize(GameStateManager.instance.Candy7Level - (5 * nextLevel));
+                        }
 
-                if (feverMode)
-                {
-                    if (friesArray.Length - 1 < nextLevel)
-                    {
-                        friesArray[friesArray.Length - 1].FeverOn();
-                    }
-                    else
-                    {
-                        friesArray[0].FeverOn();
-                    }
+                        if (feverMode)
+                        {
+                            candy7Array[nextLevel].FeverOn();
+                        }
+                        break;
+                    case CandyType.Candy8:
+                        if (candy8Array.Length - 1 < nextLevel)
+                        {
+                            candy8Array[candy1Array.Length - 1].gameObject.SetActive(true);
+                            candy8Array[candy1Array.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            candy8Array[nextLevel].gameObject.SetActive(true);
+                            candy8Array[nextLevel].Initialize(GameStateManager.instance.Candy8Level - (5 * nextLevel));
+                        }
+
+                        if (feverMode)
+                        {
+                            candy8Array[nextLevel].FeverOn();
+                        }
+                        break;
+                    case CandyType.Candy9:
+                        if (candy9Array.Length - 1 < nextLevel)
+                        {
+                            candy9Array[candy1Array.Length - 1].gameObject.SetActive(true);
+                            candy9Array[candy1Array.Length - 1].Initialize(5);
+                        }
+                        else
+                        {
+                            candy9Array[nextLevel].gameObject.SetActive(true);
+                            candy9Array[nextLevel].Initialize(GameStateManager.instance.Candy9Level - (5 * nextLevel));
+                        }
+
+                        if (feverMode)
+                        {
+                            candy9Array[nextLevel].FeverOn();
+                        }
+                        break;
                 }
                 break;
         }
@@ -882,76 +1377,177 @@ public class GameManager : MonoBehaviour
 
     void CheckFoodLevelUp()
     {
-        switch (GameStateManager.instance.FoodType)
+        switch (GameStateManager.instance.IslandType)
         {
-            case FoodType.Hamburger:
-                if (hamburgerArray.Length - 1 < nextLevel)
+            case IslandType.Island1:
+                switch (GameStateManager.instance.FoodType)
                 {
+                    case FoodType.Hamburger:
+                        if (hamburgerArray.Length - 1 < nextLevel)
+                        {
 
-                }
-                else
-                {
-                    hamburgerArray[nextLevel].LevelUp();
+                        }
+                        else
+                        {
+                            hamburgerArray[nextLevel].LevelUp();
+                        }
+                        break;
+                    case FoodType.Sandwich:
+                        if (sandwichArray.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            sandwichArray[nextLevel].LevelUp();
+                        }
+                        break;
+                    case FoodType.SnackLab:
+                        if (snackLabArray.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            snackLabArray[nextLevel].LevelUp();
+                        }
+                        break;
+                    case FoodType.Drink:
+                        if (drinkArray.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            drinkArray[nextLevel].LevelUp();
+                        }
+                        break;
+                    case FoodType.Pizza:
+                        if (pizzaArray.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            pizzaArray[nextLevel].LevelUp();
+                        }
+                        break;
+                    case FoodType.Donut:
+                        if (donutArray.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            donutArray[nextLevel].LevelUp();
+                        }
+                        break;
+                    case FoodType.Fries:
+                        if (friesArray.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            friesArray[nextLevel].LevelUp();
+                        }
+                        break;
                 }
                 break;
-            case FoodType.Sandwich:
-                if (sandwichArray.Length - 1 < nextLevel)
-                {
+            case IslandType.Island2:
 
-                }
-                else
+                switch (GameStateManager.instance.CandyType)
                 {
-                    sandwichArray[nextLevel].LevelUp();
-                }
-                break;
-            case FoodType.SnackLab:
-                if (snackLabArray.Length - 1 < nextLevel)
-                {
+                    case CandyType.Candy1:
+                        if (candy1Array.Length - 1 < nextLevel)
+                        {
 
-                }
-                else
-                {
-                    snackLabArray[nextLevel].LevelUp();
-                }
-                break;
-            case FoodType.Drink:
-                if (drinkArray.Length - 1 < nextLevel)
-                {
+                        }
+                        else
+                        {
+                            candy1Array[nextLevel].LevelUp();
+                        }
+                        break;
+                    case CandyType.Candy2:
+                        if (candy2Array.Length - 1 < nextLevel)
+                        {
 
-                }
-                else
-                {
-                    drinkArray[nextLevel].LevelUp();
-                }
-                break;
-            case FoodType.Pizza:
-                if (pizzaArray.Length - 1 < nextLevel)
-                {
+                        }
+                        else
+                        {
+                            candy2Array[nextLevel].LevelUp();
+                        }
+                        break;
+                    case CandyType.Candy3:
+                        if (candy3Array.Length - 1 < nextLevel)
+                        {
 
-                }
-                else
-                {
-                    pizzaArray[nextLevel].LevelUp();
-                }
-                break;
-            case FoodType.Donut:
-                if (donutArray.Length - 1 < nextLevel)
-                {
+                        }
+                        else
+                        {
+                            candy3Array[nextLevel].LevelUp();
+                        }
+                        break;
+                    case CandyType.Candy4:
+                        if (candy4Array.Length - 1 < nextLevel)
+                        {
 
-                }
-                else
-                {
-                    donutArray[nextLevel].LevelUp();
-                }
-                break;
-            case FoodType.Fries:
-                if (friesArray.Length - 1 < nextLevel)
-                {
+                        }
+                        else
+                        {
+                            candy4Array[nextLevel].LevelUp();
+                        }
+                        break;
+                    case CandyType.Candy5:
+                        if (candy5Array.Length - 1 < nextLevel)
+                        {
 
-                }
-                else
-                {
-                    friesArray[nextLevel].LevelUp();
+                        }
+                        else
+                        {
+                            candy5Array[nextLevel].LevelUp();
+                        }
+                        break;
+                    case CandyType.Candy6:
+                        if (candy6Array.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            candy6Array[nextLevel].LevelUp();
+                        }
+                        break;
+                    case CandyType.Candy7:
+                        if (candy7Array.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            candy7Array[nextLevel].LevelUp();
+                        }
+                        break;
+                    case CandyType.Candy8:
+                        if (candy8Array.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            candy8Array[nextLevel].LevelUp();
+                        }
+                        break;
+                    case CandyType.Candy9:
+                        if (candy9Array.Length - 1 < nextLevel)
+                        {
+
+                        }
+                        else
+                        {
+                            candy9Array[nextLevel].LevelUp();
+                        }
+                        break;
                 }
                 break;
         }
@@ -968,33 +1564,45 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (level + 1 < upgradeFood.maxLevel)
+        if (level + 1 >= maxLevel)
         {
-            if(playerDataBase.Coin >= need)
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.MaxLevel);
+            return;
+        }
+
+        if (playerDataBase.Coin < need)
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.LowCoin);
+            return;
+        }
+
+        PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, need);
+
+        myMoneyPlusText.gameObject.SetActive(false);
+        myMoneyPlusText.gameObject.SetActive(true);
+        myMoneyPlusText.color = Color.red;
+        myMoneyPlusText.text = "-" + MoneyUnitString.ToCurrencyString(need);
+
+        float random = Random.Range(0, 100f);
+
+        if (random >= 100 - success)
+        {
+            if (isDef)
             {
-                PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, need);
+                UseDefTicket();
+            }
 
-                myMoneyPlusText.gameObject.SetActive(false);
-                myMoneyPlusText.gameObject.SetActive(true);
-                myMoneyPlusText.color = Color.red;
-                myMoneyPlusText.text = "-" + MoneyUnitString.ToCurrencyString(need);
+            level += 1;
 
-                float random = Random.Range(0, 100f);
+            playerDataBase.UpgradeCount += 1;
 
-                if(random >= 100 - success)
-                {
-                    if (isDef)
-                    {
-                        UseDefTicket();
-                    }
+            questManager.CheckGoal();
 
-                    level += 1;
-
-                    playerDataBase.UpgradeCount += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
-
-                    questManager.CheckGoal();
-
+            switch (GameStateManager.instance.IslandType)
+            {
+                case IslandType.Island1:
                     switch (GameStateManager.instance.FoodType)
                     {
                         case FoodType.Hamburger:
@@ -1019,90 +1627,127 @@ public class GameManager : MonoBehaviour
                             GameStateManager.instance.FriesLevel = level;
                             break;
                     }
-
-                    CheckFoodLevelUp();
-
-                    UpgradeInitialize();
-
-                    if(level + 1 >= upgradeFood.maxLevel)
+                    break;
+                case IslandType.Island2:
+                    switch (GameStateManager.instance.CandyType)
                     {
-                        SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
-
-                        NotionManager.instance.UseNotion(NotionType.MaxLevel);
-
-                        MaxLevelUpgradeSuccess();
+                        case CandyType.Candy1:
+                            GameStateManager.instance.Candy1Level = level;
+                            break;
+                        case CandyType.Candy2:
+                            GameStateManager.instance.Candy2Level = level;
+                            break;
+                        case CandyType.Candy3:
+                            GameStateManager.instance.Candy3Level = level;
+                            break;
+                        case CandyType.Candy4:
+                            GameStateManager.instance.Candy4Level = level;
+                            break;
+                        case CandyType.Candy5:
+                            GameStateManager.instance.Candy5Level = level;
+                            break;
+                        case CandyType.Candy6:
+                            GameStateManager.instance.Candy6Level = level;
+                            break;
+                        case CandyType.Candy7:
+                            GameStateManager.instance.Candy7Level = level;
+                            break;
+                        case CandyType.Candy8:
+                            GameStateManager.instance.Candy8Level = level;
+                            break;
+                        case CandyType.Candy9:
+                            GameStateManager.instance.Candy9Level = level;
+                            break;
                     }
-                    else
+                    break;
+            }
+
+            CheckFoodLevelUp();
+
+            UpgradeInitialize();
+
+            if (level + 1 >= maxLevel)
+            {
+                SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
+
+                NotionManager.instance.UseNotion(NotionType.MaxLevel);
+
+                MaxLevelUpgradeSuccess();
+            }
+            else
+            {
+                if ((level + 1) % 5 == 0)
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
+
+                    nextLevel++;
+                    CheckFoodState();
+
+                    if (GameStateManager.instance.Effect)
                     {
-                        if ((level + 1) % 5 == 0)
-                        {
-                            SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-
-                            nextLevel++;
-                            CheckFoodState();
-
-                            if (GameStateManager.instance.Effect)
-                            {
-                                levelUpParticle.gameObject.SetActive(false);
-                                levelUpParticle.gameObject.SetActive(true);
-                                levelUpParticle.Play();
-                            }
-                        }
-                        else
-                        {
-                            SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
-                        }
-
-                        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+                        levelUpParticle.gameObject.SetActive(false);
+                        levelUpParticle.gameObject.SetActive(true);
+                        levelUpParticle.Play();
                     }
                 }
                 else
                 {
-                    if(GameStateManager.instance.Vibration)
-                    {
-                        Handheld.Vibrate();
-                    }
+                    SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+                }
 
-                    if (GameStateManager.instance.Effect)
-                    {
-                        bombPartice.gameObject.SetActive(false);
-                        bombPartice.gameObject.SetActive(true);
-                        bombPartice.Play();
-                    }
+                NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+            }
+        }
+        else
+        {
+            if (GameStateManager.instance.Vibration)
+            {
+                Handheld.Vibrate();
+            }
 
-                    if (isDef)
+            if (GameStateManager.instance.Effect)
+            {
+                bombPartice.gameObject.SetActive(false);
+                bombPartice.gameObject.SetActive(true);
+                bombPartice.Play();
+            }
+
+            if (isDef)
+            {
+                UseDefTicket();
+
+                NotionManager.instance.UseNotion(NotionType.DefDestroyNotion);
+                return;
+            }
+            else
+            {
+                if (defDestroy > 0)
+                {
+                    if (defDestroy >= Random.Range(0, 100))
                     {
-                        UseDefTicket();
+                        if (level >= 29)
+                        {
+                            level -= 1;
+
+                            CheckFoodLevelUp();
+
+                            UpgradeInitialize();
+                        }
 
                         NotionManager.instance.UseNotion(NotionType.DefDestroyNotion);
+
                         return;
                     }
-                    else
-                    {
-                        if (defDestroy > 0)
-                        {
-                            if (defDestroy >= Random.Range(0, 100))
-                            {
-                                if(level >= 29)
-                                {
-                                    level -= 1;
-
-                                    CheckFoodLevelUp();
-
-                                    UpgradeInitialize();
-                                }
-
-                                NotionManager.instance.UseNotion(NotionType.DefDestroyNotion);
-
-                                return;
-                            }
-                        }
-                    }
+                }
+            }
 
 
-                    level = 0;
-                    nextLevel = 0;
+            level = 0;
+            nextLevel = 0;
 
+            switch (GameStateManager.instance.IslandType)
+            {
+                case IslandType.Island1:
                     switch (GameStateManager.instance.FoodType)
                     {
                         case FoodType.Hamburger:
@@ -1128,44 +1773,51 @@ public class GameManager : MonoBehaviour
                             break;
                     }
 
-                    CheckFoodState();
-                    UpgradeInitialize();
-
-                    SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
-                    NotionManager.instance.UseNotion(NotionType.FailUpgrade);
-                }
+                    break;
+                case IslandType.Island2:
+                    switch (GameStateManager.instance.CandyType)
+                    {
+                        case CandyType.Candy1:
+                            GameStateManager.instance.Candy1Level = 0;
+                            break;
+                        case CandyType.Candy2:
+                            GameStateManager.instance.Candy2Level = 0;
+                            break;
+                        case CandyType.Candy3:
+                            GameStateManager.instance.Candy3Level = 0;
+                            break;
+                        case CandyType.Candy4:
+                            GameStateManager.instance.Candy4Level = 0;
+                            break;
+                        case CandyType.Candy5:
+                            GameStateManager.instance.Candy5Level = 0;
+                            break;
+                        case CandyType.Candy6:
+                            GameStateManager.instance.Candy6Level = 0;
+                            break;
+                        case CandyType.Candy7:
+                            GameStateManager.instance.Candy7Level = 0;
+                            break;
+                        case CandyType.Candy8:
+                            GameStateManager.instance.Candy8Level = 0;
+                            break;
+                        case CandyType.Candy9:
+                            GameStateManager.instance.Candy9Level = 0;
+                            break;
+                    }
+                    break;
             }
-            else
-            {
-                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                NotionManager.instance.UseNotion(NotionType.LowCoin);
 
-                return;
-            }
+            CheckFoodState();
+            UpgradeInitialize();
+
+            SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
+            NotionManager.instance.UseNotion(NotionType.FailUpgrade);
         }
-        else
-        {
-            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-            NotionManager.instance.UseNotion(NotionType.MaxLevel);
-
-            return;
-        }
-
-        //adCount += 1;
-
-        //if (adCount >= GameStateManager.instance.AdCount)
-        //{
-        //    adCount = 0;
-
-        //    if(!playerDataBase.RemoveAds)
-        //    {
-        //        GoogleAdsManager.instance.admobScreen.ShowAd();
-        //    }
-        //}
 
         if (feverFillamount.gameObject.activeInHierarchy)
         {
-            if (!feverMode && level + 1 < upgradeFood.maxLevel)
+            if (!feverMode && level + 1 < maxLevel)
             {
                 feverCount += 1;
 
@@ -1180,7 +1832,7 @@ public class GameManager : MonoBehaviour
     void CheckFever()
     {
         feverFillamount.fillAmount = feverCount * 1.0f / feverMaxCount * 1.0f;
-        feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  " + ((feverCount * 1.0f / feverMaxCount * 1.0f) * 100).ToString("N1") + "%";
+        feverText.text = LocalizationManager.instance.GetString("FeverGauge") + " : " + ((feverCount * 1.0f / feverMaxCount * 1.0f) * 100).ToString("N1") + "%";
 
         if (feverCount >= feverMaxCount)
         {
@@ -1207,68 +1859,146 @@ public class GameManager : MonoBehaviour
         animalAnimator[(int)GameStateManager.instance.AnimalType].SetBool("YummyTime", true);
         butterflyAnimator[(int)GameStateManager.instance.ButterflyType].SetBool("YummyTime", true);
 
-        for (int i = 0; i < hamburgerArray.Length; i++)
+        for (int i = 0; i < mainTruckArray.Length; i++)
         {
-            if(hamburgerArray[i].gameObject.activeInHierarchy)
-            {
-                hamburgerArray[i].FeverOn();
-            }
-        }
-
-        for (int i = 0; i < sandwichArray.Length; i++)
-        {
-            if (sandwichArray[i].gameObject.activeInHierarchy)
-            {
-                sandwichArray[i].FeverOn();
-            }
-        }
-
-        for (int i = 0; i < snackLabArray.Length; i++)
-        {
-            if (snackLabArray[i].gameObject.activeInHierarchy)
-            {
-                snackLabArray[i].FeverOn();
-            }
-        }
-
-        for (int i = 0; i < drinkArray.Length; i++)
-        {
-            if (drinkArray[i].gameObject.activeInHierarchy)
-            {
-                drinkArray[i].FeverOn();
-            }
-        }
-
-        for (int i = 0; i < pizzaArray.Length; i++)
-        {
-            if (pizzaArray[i].gameObject.activeInHierarchy)
-            {
-                pizzaArray[i].FeverOn();
-            }
-        }
-
-        for (int i = 0; i < donutArray.Length; i++)
-        {
-            if (donutArray[i].gameObject.activeInHierarchy)
-            {
-                donutArray[i].FeverOn();
-            }
-        }
-
-        for (int i = 0; i < friesArray.Length; i++)
-        {
-            if (friesArray[i].gameObject.activeInHierarchy)
-            {
-                friesArray[i].FeverOn();
-            }
-        }
-
-        for (int i = 0; i < mainTruckArray.Length; i ++)
-        {
-            if(mainTruckArray[i].gameObject.activeInHierarchy)
+            if (mainTruckArray[i].gameObject.activeInHierarchy)
             {
                 mainTruckArray[i].enabled = true;
             }
+        }
+
+        switch (GameStateManager.instance.IslandType)
+        {
+            case IslandType.Island1:
+                for (int i = 0; i < hamburgerArray.Length; i++)
+                {
+                    if (hamburgerArray[i].gameObject.activeInHierarchy)
+                    {
+                        hamburgerArray[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < sandwichArray.Length; i++)
+                {
+                    if (sandwichArray[i].gameObject.activeInHierarchy)
+                    {
+                        sandwichArray[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < snackLabArray.Length; i++)
+                {
+                    if (snackLabArray[i].gameObject.activeInHierarchy)
+                    {
+                        snackLabArray[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < drinkArray.Length; i++)
+                {
+                    if (drinkArray[i].gameObject.activeInHierarchy)
+                    {
+                        drinkArray[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < pizzaArray.Length; i++)
+                {
+                    if (pizzaArray[i].gameObject.activeInHierarchy)
+                    {
+                        pizzaArray[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < donutArray.Length; i++)
+                {
+                    if (donutArray[i].gameObject.activeInHierarchy)
+                    {
+                        donutArray[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < friesArray.Length; i++)
+                {
+                    if (friesArray[i].gameObject.activeInHierarchy)
+                    {
+                        friesArray[i].FeverOn();
+                    }
+                }
+                break;
+            case IslandType.Island2:
+                for(int i = 0; i < candy1Array.Length; i ++)
+                {
+                    if (candy1Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy1Array[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < candy2Array.Length; i++)
+                {
+                    if (candy2Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy2Array[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < candy3Array.Length; i++)
+                {
+                    if (candy3Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy3Array[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < candy4Array.Length; i++)
+                {
+                    if (candy4Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy4Array[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < candy5Array.Length; i++)
+                {
+                    if (candy5Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy5Array[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < candy6Array.Length; i++)
+                {
+                    if (candy6Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy6Array[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < candy7Array.Length; i++)
+                {
+                    if (candy7Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy7Array[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < candy8Array.Length; i++)
+                {
+                    if (candy8Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy8Array[i].FeverOn();
+                    }
+                }
+
+                for (int i = 0; i < candy9Array.Length; i++)
+                {
+                    if (candy9Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy9Array[i].FeverOn();
+                    }
+                }
+                break;
         }
 
         if (GameStateManager.instance.Effect)
@@ -1325,62 +2055,6 @@ public class GameManager : MonoBehaviour
         animalAnimator[(int)GameStateManager.instance.AnimalType].SetBool("YummyTime", false);
         butterflyAnimator[(int)GameStateManager.instance.ButterflyType].SetBool("YummyTime", false);
 
-        for (int i = 0; i < hamburgerArray.Length; i++)
-        {
-            if (hamburgerArray[i].gameObject.activeInHierarchy)
-            {
-                hamburgerArray[i].FeverOff();
-            }
-        }
-
-        for (int i = 0; i < sandwichArray.Length; i++)
-        {
-            if (sandwichArray[i].gameObject.activeInHierarchy)
-            {
-                sandwichArray[i].FeverOff();
-            }
-        }
-
-        for (int i = 0; i < snackLabArray.Length; i++)
-        {
-            if (snackLabArray[i].gameObject.activeInHierarchy)
-            {
-                snackLabArray[i].FeverOff();
-            }
-        }
-
-        for (int i = 0; i < drinkArray.Length; i++)
-        {
-            if (drinkArray[i].gameObject.activeInHierarchy)
-            {
-                drinkArray[i].FeverOff();
-            }
-        }
-
-        for (int i = 0; i < pizzaArray.Length; i++)
-        {
-            if (pizzaArray[i].gameObject.activeInHierarchy)
-            {
-                pizzaArray[i].FeverOff();
-            }
-        }
-
-        for (int i = 0; i < donutArray.Length; i++)
-        {
-            if (donutArray[i].gameObject.activeInHierarchy)
-            {
-                donutArray[i].FeverOff();
-            }
-        }
-
-        for (int i = 0; i < friesArray.Length; i++)
-        {
-            if (friesArray[i].gameObject.activeInHierarchy)
-            {
-                friesArray[i].FeverOff();
-            }
-        }
-
         for (int i = 0; i < mainTruckArray.Length; i++)
         {
             if (mainTruckArray[i].gameObject.activeInHierarchy)
@@ -1388,171 +2062,501 @@ public class GameManager : MonoBehaviour
                 mainTruckArray[i].enabled = false;
             }
         }
-    }
 
-    void MaxLevelUpgradeSuccess()
-    {
-        switch (GameStateManager.instance.FoodType)
+        switch (GameStateManager.instance.IslandType)
         {
-            case FoodType.Hamburger:
-                playerDataBase.GourmetLevel += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
-
-                playerDataBase.HamburgerMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("HamburgerMaxValue", playerDataBase.HamburgerMaxValue);
-
-                if (playerDataBase.NextFoodNumber == 0 && !nextFood)
+            case IslandType.Island1:
+                for (int i = 0; i < hamburgerArray.Length; i++)
                 {
-                    nextFood = true;
-
-                    if (playerDataBase.HamburgerMaxValue == 1)
+                    if (hamburgerArray[i].gameObject.activeInHierarchy)
                     {
-                        playerDataBase.NextFoodNumber += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+                        hamburgerArray[i].FeverOff();
+                    }
+                }
 
-                        lockManager.UnLocked(1);
+                for (int i = 0; i < sandwichArray.Length; i++)
+                {
+                    if (sandwichArray[i].gameObject.activeInHierarchy)
+                    {
+                        sandwichArray[i].FeverOff();
+                    }
+                }
 
-                        changeFoodAlarmObj.SetActive(true);
+                for (int i = 0; i < snackLabArray.Length; i++)
+                {
+                    if (snackLabArray[i].gameObject.activeInHierarchy)
+                    {
+                        snackLabArray[i].FeverOff();
+                    }
+                }
+
+                for (int i = 0; i < drinkArray.Length; i++)
+                {
+                    if (drinkArray[i].gameObject.activeInHierarchy)
+                    {
+                        drinkArray[i].FeverOff();
+                    }
+                }
+
+                for (int i = 0; i < pizzaArray.Length; i++)
+                {
+                    if (pizzaArray[i].gameObject.activeInHierarchy)
+                    {
+                        pizzaArray[i].FeverOff();
+                    }
+                }
+
+                for (int i = 0; i < donutArray.Length; i++)
+                {
+                    if (donutArray[i].gameObject.activeInHierarchy)
+                    {
+                        donutArray[i].FeverOff();
+                    }
+                }
+
+                for (int i = 0; i < friesArray.Length; i++)
+                {
+                    if (friesArray[i].gameObject.activeInHierarchy)
+                    {
+                        friesArray[i].FeverOff();
                     }
                 }
 
                 break;
-            case FoodType.Sandwich:
-                playerDataBase.GourmetLevel += 10;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
-
-                playerDataBase.SandwichMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.SandwichMaxValue);
-
-                if (playerDataBase.NextFoodNumber == 1 && !nextFood)
+            case IslandType.Island2:
+                for (int i = 0; i < candy1Array.Length; i++)
                 {
-                    nextFood = true;
-
-                    if (playerDataBase.SandwichMaxValue == 1)
+                    if (candy1Array[i].gameObject.activeInHierarchy)
                     {
-                        playerDataBase.NextFoodNumber += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                        lockManager.UnLocked(2);
-
-                        changeFoodAlarmObj.SetActive(true);
+                        candy1Array[i].FeverOff();
                     }
                 }
 
-                break;
-            case FoodType.SnackLab:
-                playerDataBase.GourmetLevel += 100;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
-
-                playerDataBase.SnackLabMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.SnackLabMaxValue);
-
-                if (playerDataBase.NextFoodNumber == 2 && !nextFood)
+                for (int i = 0; i < candy2Array.Length; i++)
                 {
-                    nextFood = true;
-
-                    if (playerDataBase.SnackLabMaxValue == 1)
+                    if (candy2Array[i].gameObject.activeInHierarchy)
                     {
-                        playerDataBase.NextFoodNumber += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                        lockManager.UnLocked(3);
-
-                        changeFoodAlarmObj.SetActive(true);
+                        candy2Array[i].FeverOff();
                     }
                 }
 
-                break;
-            case FoodType.Drink:
-                playerDataBase.GourmetLevel += 150;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
-
-                playerDataBase.DrinkMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.DrinkMaxValue);
-
-                if (playerDataBase.NextFoodNumber == 3 && !nextFood)
+                for (int i = 0; i < candy3Array.Length; i++)
                 {
-                    nextFood = true;
-
-                    if (playerDataBase.DrinkMaxValue == 1)
+                    if (candy3Array[i].gameObject.activeInHierarchy)
                     {
-                        playerDataBase.NextFoodNumber += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                        lockManager.UnLocked(4);
-
-                        changeFoodAlarmObj.SetActive(true);
+                        candy3Array[i].FeverOff();
                     }
                 }
 
-                break;
-            case FoodType.Pizza:
-                playerDataBase.GourmetLevel += 150;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
-
-                playerDataBase.PizzaMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.PizzaMaxValue);
-
-                if (playerDataBase.NextFoodNumber == 4 && !nextFood)
+                for (int i = 0; i < candy4Array.Length; i++)
                 {
-                    nextFood = true;
-
-                    if (playerDataBase.PizzaMaxValue == 1)
+                    if (candy4Array[i].gameObject.activeInHierarchy)
                     {
-                        playerDataBase.NextFoodNumber += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                        changeFoodAlarmObj.SetActive(true);
+                        candy4Array[i].FeverOff();
                     }
                 }
 
-                break;
-            case FoodType.Donut:
-                playerDataBase.GourmetLevel += 200;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
-
-                playerDataBase.DonutMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
-
-                if (playerDataBase.NextFoodNumber == 5 && !nextFood)
+                for (int i = 0; i < candy5Array.Length; i++)
                 {
-                    nextFood = true;
-
-                    if (playerDataBase.DonutMaxValue == 1)
+                    if (candy5Array[i].gameObject.activeInHierarchy)
                     {
-                        playerDataBase.NextFoodNumber += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                        changeFoodAlarmObj.SetActive(true);
+                        candy5Array[i].FeverOff();
                     }
                 }
 
-                break;
-            case FoodType.Fries:
-                playerDataBase.GourmetLevel += 250;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
-
-                playerDataBase.FriesMaxValue += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("FriesMaxValue", playerDataBase.FriesMaxValue);
-
-                if (playerDataBase.NextFoodNumber == 6 && !nextFood)
+                for (int i = 0; i < candy6Array.Length; i++)
                 {
-                    nextFood = true;
-
-                    if (playerDataBase.FriesMaxValue == 1)
+                    if (candy6Array[i].gameObject.activeInHierarchy)
                     {
-                        playerDataBase.NextFoodNumber += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+                        candy6Array[i].FeverOff();
+                    }
+                }
 
-                        changeFoodAlarmObj.SetActive(true);
+                for (int i = 0; i < candy7Array.Length; i++)
+                {
+                    if (candy7Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy7Array[i].FeverOff();
+                    }
+                }
+
+                for (int i = 0; i < candy8Array.Length; i++)
+                {
+                    if (candy8Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy8Array[i].FeverOff();
+                    }
+                }
+
+                for (int i = 0; i < candy9Array.Length; i++)
+                {
+                    if (candy9Array[i].gameObject.activeInHierarchy)
+                    {
+                        candy9Array[i].FeverOff();
                     }
                 }
                 break;
         }
+    }
+
+    void MaxLevelUpgradeSuccess()
+    {
+        switch (GameStateManager.instance.IslandType)
+        {
+            case IslandType.Island1:
+                switch (GameStateManager.instance.FoodType)
+                {
+                    case FoodType.Hamburger:
+                        playerDataBase.GourmetLevel += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.HamburgerMaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("HamburgerMaxValue", playerDataBase.HamburgerMaxValue);
+
+                        if (playerDataBase.NextFoodNumber == 0 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.HamburgerMaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                lockManager.UnLocked(1);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+
+                        break;
+                    case FoodType.Sandwich:
+                        playerDataBase.GourmetLevel += 10;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.SandwichMaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.SandwichMaxValue);
+
+                        if (playerDataBase.NextFoodNumber == 1 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.SandwichMaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                lockManager.UnLocked(2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+
+                        break;
+                    case FoodType.SnackLab:
+                        playerDataBase.GourmetLevel += 50;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.SnackLabMaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.SnackLabMaxValue);
+
+                        if (playerDataBase.NextFoodNumber == 2 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.SnackLabMaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                lockManager.UnLocked(3);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+
+                        break;
+                    case FoodType.Drink:
+                        playerDataBase.GourmetLevel += 100;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.DrinkMaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.DrinkMaxValue);
+
+                        if (playerDataBase.NextFoodNumber == 3 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.DrinkMaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                lockManager.UnLocked(4);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+
+                        break;
+                    case FoodType.Pizza:
+                        playerDataBase.GourmetLevel += 150;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.PizzaMaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.PizzaMaxValue);
+
+                        if (playerDataBase.NextFoodNumber == 4 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.PizzaMaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+
+                        break;
+                    case FoodType.Donut:
+                        playerDataBase.GourmetLevel += 200;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.DonutMaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
+
+                        if (playerDataBase.NextFoodNumber == 5 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.DonutMaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+
+                        break;
+                    case FoodType.Fries:
+                        playerDataBase.GourmetLevel += 250;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.FriesMaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FriesMaxValue", playerDataBase.FriesMaxValue);
+
+                        if (playerDataBase.NextFoodNumber == 6 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.FriesMaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+                                playerDataBase.IslandNumber = 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
+
+                                lockManager.UnLocked(5);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                }
+                Debug.Log(GameStateManager.instance.FoodType + " : Max Level!");
+                break;
+            case IslandType.Island2:
+                switch (GameStateManager.instance.CandyType)
+                {
+                    case CandyType.Candy1:
+                        playerDataBase.GourmetLevel += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.Candy1MaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy1MaxValue", playerDataBase.Candy1MaxValue);
+
+                        if (playerDataBase.NextFoodNumber2 == 0 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.Candy1MaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber2 += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                    case CandyType.Candy2:
+                        playerDataBase.GourmetLevel += 10;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.Candy2MaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy2MaxValue", playerDataBase.Candy2MaxValue);
+
+                        if (playerDataBase.NextFoodNumber2 == 1 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.Candy2MaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber2 += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                    case CandyType.Candy3:
+                        playerDataBase.GourmetLevel += 50;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.Candy3MaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy3MaxValue", playerDataBase.Candy3MaxValue);
+
+                        if (playerDataBase.NextFoodNumber2 == 2 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.Candy3MaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber2 += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                    case CandyType.Candy4:
+                        playerDataBase.GourmetLevel += 100;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.Candy4MaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy4MaxValue", playerDataBase.Candy4MaxValue);
+
+                        if (playerDataBase.NextFoodNumber2 == 3 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.Candy4MaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber2 += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                    case CandyType.Candy5:
+                        playerDataBase.GourmetLevel += 150;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.Candy5MaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy5MaxValue", playerDataBase.Candy5MaxValue);
+
+                        if (playerDataBase.NextFoodNumber2 == 4 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.Candy5MaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber2 += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                    case CandyType.Candy6:
+                        playerDataBase.GourmetLevel += 200;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.Candy6MaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy6MaxValue", playerDataBase.Candy6MaxValue);
+
+                        if (playerDataBase.NextFoodNumber2 == 5 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.Candy6MaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber2 += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                    case CandyType.Candy7:
+                        playerDataBase.GourmetLevel += 250;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.Candy7MaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy7MaxValue", playerDataBase.Candy7MaxValue);
+
+                        if (playerDataBase.NextFoodNumber2 == 6 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.Candy7MaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber2 += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                    case CandyType.Candy8:
+                        playerDataBase.GourmetLevel += 300;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.Candy8MaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy8MaxValue", playerDataBase.Candy8MaxValue);
+
+                        if (playerDataBase.NextFoodNumber2 == 7 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.Candy8MaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber2 += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                    case CandyType.Candy9:
+                        playerDataBase.GourmetLevel += 350;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
+
+                        playerDataBase.Candy9MaxValue += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy9MaxValue", playerDataBase.Candy9MaxValue);
+
+                        if (playerDataBase.NextFoodNumber2 == 0 && !nextFood)
+                        {
+                            nextFood = true;
+
+                            if (playerDataBase.Candy9MaxValue == 1)
+                            {
+                                playerDataBase.NextFoodNumber2 += 1;
+                                PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
+                                changeFoodAlarmObj.SetActive(true);
+                            }
+                        }
+                        break;
+                }
+                Debug.Log(GameStateManager.instance.CandyType + " : Max Level!");
+                break;
+        }
 
         questManager.CheckGoal();
-
-        Debug.Log(GameStateManager.instance.FoodType + " : Max Level!");
     }
 
     public void SellButton()
@@ -1569,7 +2573,6 @@ public class GameManager : MonoBehaviour
         if(level >= 9)
         {
             playerDataBase.SellCount += 1;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("SellCount", playerDataBase.SellCount);
 
             questManager.CheckGoal();
         }
@@ -1579,28 +2582,66 @@ public class GameManager : MonoBehaviour
         level = 0;
         nextLevel = 0;
 
-        switch (GameStateManager.instance.FoodType)
+        switch (GameStateManager.instance.IslandType)
         {
-            case FoodType.Hamburger:
-                GameStateManager.instance.HamburgerLevel = 0;
+            case IslandType.Island1:
+                switch (GameStateManager.instance.FoodType)
+                {
+                    case FoodType.Hamburger:
+                        GameStateManager.instance.HamburgerLevel = 0;
+                        break;
+                    case FoodType.Sandwich:
+                        GameStateManager.instance.SandwichLevel = 0;
+                        break;
+                    case FoodType.SnackLab:
+                        GameStateManager.instance.SnackLabLevel = 0;
+                        break;
+                    case FoodType.Drink:
+                        GameStateManager.instance.DrinkLevel = 0;
+                        break;
+                    case FoodType.Pizza:
+                        GameStateManager.instance.PizzaLevel = 0;
+                        break;
+                    case FoodType.Donut:
+                        GameStateManager.instance.DonutLevel = 0;
+                        break;
+                    case FoodType.Fries:
+                        GameStateManager.instance.FriesLevel = 0;
+                        break;
+                }
+
                 break;
-            case FoodType.Sandwich:
-                GameStateManager.instance.SandwichLevel = 0;
-                break;
-            case FoodType.SnackLab:
-                GameStateManager.instance.SnackLabLevel = 0;
-                break;
-            case FoodType.Drink:
-                GameStateManager.instance.DrinkLevel = 0;
-                break;
-            case FoodType.Pizza:
-                GameStateManager.instance.PizzaLevel = 0;
-                break;
-            case FoodType.Donut:
-                GameStateManager.instance.DonutLevel = 0;
-                break;
-            case FoodType.Fries:
-                GameStateManager.instance.FriesLevel = 0;
+            case IslandType.Island2:
+                switch (GameStateManager.instance.CandyType)
+                {
+                    case CandyType.Candy1:
+                        GameStateManager.instance.Candy1Level = 0;
+                        break;
+                    case CandyType.Candy2:
+                        GameStateManager.instance.Candy2Level = 0;
+                        break;
+                    case CandyType.Candy3:
+                        GameStateManager.instance.Candy3Level = 0;
+                        break;
+                    case CandyType.Candy4:
+                        GameStateManager.instance.Candy4Level = 0;
+                        break;
+                    case CandyType.Candy5:
+                        GameStateManager.instance.Candy5Level = 0;
+                        break;
+                    case CandyType.Candy6:
+                        GameStateManager.instance.Candy6Level = 0;
+                        break;
+                    case CandyType.Candy7:
+                        GameStateManager.instance.Candy7Level = 0;
+                        break;
+                    case CandyType.Candy8:
+                        GameStateManager.instance.Candy8Level = 0;
+                        break;
+                    case CandyType.Candy9:
+                        GameStateManager.instance.Candy9Level = 0;
+                        break;
+                }
                 break;
         }
 
@@ -1608,7 +2649,7 @@ public class GameManager : MonoBehaviour
 
         if(sellPriceX2 > 0)
         {
-            if(sellPriceX2 >= Random.Range(0f,1f))
+            if(sellPriceX2 >= Random.Range(0f, 100f))
             {
                 sellPrice = sellPrice + (int)(sellPrice * 0.15f);
 
@@ -1638,7 +2679,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckDefTicket()
     {
-        if(level >= 10 && level + 1 < upgradeFood.maxLevel)
+        if(level >= 10 && level + 1 < maxLevel)
         {
             defTicketObj.SetActive(true);
 
@@ -1694,7 +2735,7 @@ public class GameManager : MonoBehaviour
 
     public void SetDefTicket()
     {
-        if (level + 1 >= upgradeFood.maxLevel)
+        if (level + 1 >= maxLevel)
         {
             return;
         }
@@ -1802,7 +2843,7 @@ public class GameManager : MonoBehaviour
 
                         need -= (int)(need * (0.01f * needPlus));
 
-                        if (level + 1 < upgradeFood.maxLevel)
+                        if (level + 1 < maxLevel)
                         {
                             needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice");
 
@@ -1849,7 +2890,7 @@ public class GameManager : MonoBehaviour
 
                         if (sellPricePlus > 0)
                         {
-                            priceText.text += " (+" + (sellPricePlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+                            priceText.text += " (+" + sellPricePlus.ToString("N1") + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
                         }
                         else
                         {
@@ -1983,7 +3024,7 @@ public class GameManager : MonoBehaviour
 
         need -= (int)(need * (0.01f * needPlus));
 
-        if (level + 1 < upgradeFood.maxLevel)
+        if (level + 1 < maxLevel)
         {
             needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice");
 
@@ -2080,6 +3121,58 @@ public class GameManager : MonoBehaviour
         defDestroy -= 20;
         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
     }
+
+
+    public void OnBuff(int number)
+    {
+        if(number == 0)
+        {
+            sellPricePlus += 50;
+
+            priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice");
+
+            if (sellPricePlus > 0)
+            {
+                priceText.text += " (+" + sellPricePlus.ToString("N1") + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+            }
+            else
+            {
+                priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+            }
+        }
+        else
+        {
+            defDestroy += 20;
+
+            defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+        }
+    }
+
+    public void OffBuff(int number)
+    {
+        if (number == 0)
+        {
+            sellPricePlus -= 50;
+
+            priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice");
+
+            if (sellPricePlus > 0)
+            {
+                priceText.text += " (+" + sellPricePlus.ToString("N1") + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+            }
+            else
+            {
+                priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
+            }
+        }
+        else
+        {
+            defDestroy -= 20;
+
+            defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+        }
+    }
+
 
     public void OpenLoginView()
     {

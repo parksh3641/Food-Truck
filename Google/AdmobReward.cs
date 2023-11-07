@@ -16,6 +16,7 @@ public class AdmobReward : MonoBehaviour
 
     public ShopManager shopManager;
     public ChestBoxManager chestBoxManager;
+    public BuffManager buffManager;
 
     PlayerDataBase playerDataBase;
 
@@ -94,6 +95,9 @@ public class AdmobReward : MonoBehaviour
                 case 2:
                     chestBoxManager.SuccessWatchAd();
                     break;
+                case 3:
+                    buffManager.SuccessWatchAd();
+                    break;
             }
         }
         else
@@ -117,6 +121,9 @@ public class AdmobReward : MonoBehaviour
                             break;
                         case 2:
                             chestBoxManager.SuccessWatchAd();
+                            break;
+                        case 3:
+                            buffManager.SuccessWatchAd();
                             break;
                     }
 

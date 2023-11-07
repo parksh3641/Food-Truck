@@ -87,7 +87,7 @@ public class ShopContent : MonoBehaviour
         switch (itemType)
         {
             case ItemType.DailyReward:
-                rewardText.text = MoneyUnitString.ToCurrencyString(100000) + " ~ " + MoneyUnitString.ToCurrencyString(200000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(500000) + " ~ " + MoneyUnitString.ToCurrencyString(1000000);
                 break;
             case ItemType.AdReward_Gold:
                 rewardText.text = MoneyUnitString.ToCurrencyString(3000000);
@@ -194,7 +194,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[7].localizationName = itemType + "_Price";
                 buyRmText[7].ReLoad();
 
-                rewardText.text = "+50%";
+                rewardText.text = "+100%";
 
                 bestObj.SetActive(true);
                 bestText.text = "BEST";

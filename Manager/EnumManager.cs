@@ -214,6 +214,19 @@ public enum FoodType
     Fries
 }
 
+public enum CandyType
+{
+    Candy1,
+    Candy2,
+    Candy3,
+    Candy4,
+    Candy5,
+    Candy6,
+    Candy7,
+    Candy8,
+    Candy9,
+}
+
 public enum PassiveEffect
 {
     None,
@@ -231,7 +244,8 @@ public enum RewardType
     Portion2,
     Portion3,
     Portion4,
-    PortionSet
+    PortionSet,
+    Crystal
 }
 
 public enum QuestType
@@ -255,18 +269,15 @@ public enum SkillType
     Skill3,
     Skill4,
     Skill5,
-    Skill6
+    Skill6,
+    Skill7,
+    Skill8,
+    Skill9,
+    Skill10,
+    Skill11
 }
 public enum IslandType
 {
     Island1,
     Island2,
-    Island3,
-    Island4,
-    Island5,
-    Island6,
-    Island7,
-    Island8,
-    Island9,
-    Island10,
 }

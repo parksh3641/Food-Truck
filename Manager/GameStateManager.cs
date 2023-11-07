@@ -43,11 +43,12 @@ public class GameStateManager : MonoBehaviour
 
         [Space]
         [Title("InGame")]
+        public IslandType islandType = IslandType.Island1;
         public FoodType foodType = FoodType.Hamburger;
-        public CharacterType characterType = CharacterType.Character1;
-        public TruckType truckType = TruckType.Bread;
-        public AnimalType animalType = AnimalType.Colobus;
-        public ButterflyType butterflyType = ButterflyType.Butterfly1;
+        public CandyType candyType = CandyType.Candy1;
+
+        [Space]
+        [Title("Level")]
         public int hamburgerLevel = 0;
         public int sandwichLevel = 0;
         public int snackLabLevel = 0;
@@ -55,7 +56,28 @@ public class GameStateManager : MonoBehaviour
         public int pizzaLevel = 0;
         public int donutLevel = 0;
         public int friesLevel = 0;
+
+        [Space]
+        public int candy1Level = 0;
+        public int candy2Level = 0;
+        public int candy3Level = 0;
+        public int candy4Level = 0;
+        public int candy5Level = 0;
+        public int candy6Level = 0;
+        public int candy7Level = 0;
+        public int candy8Level = 0;
+        public int candy9Level = 0;
+
+        [Space]
+        [Title("Save")]
         public float feverCount = 0;
+
+        [Space]
+        [Title("Equip")]
+        public CharacterType characterType = CharacterType.Character1;
+        public TruckType truckType = TruckType.Bread;
+        public AnimalType animalType = AnimalType.Colobus;
+        public ButterflyType butterflyType = ButterflyType.Butterfly1;
 
         [Space]
         [Title("Ads")]
@@ -154,6 +176,19 @@ public class GameStateManager : MonoBehaviour
             SaveFile();
         }
     }
+    public IslandType IslandType
+    {
+        get
+        {
+            return gameSettings.islandType;
+        }
+        set
+        {
+            gameSettings.islandType = value;
+            SaveFile();
+        }
+    }
+
 
     public LevelType LevelType
     {
@@ -177,6 +212,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.foodType = value;
+            SaveFile();
+        }
+    }
+
+    public CandyType CandyType
+    {
+        get
+        {
+            return gameSettings.candyType;
+        }
+        set
+        {
+            gameSettings.candyType = value;
             SaveFile();
         }
     }
@@ -411,6 +459,123 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.friesLevel = value;
+            SaveFile();
+        }
+    }
+
+    public int Candy1Level
+    {
+        get
+        {
+            return gameSettings.candy1Level;
+        }
+        set
+        {
+            gameSettings.candy1Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Candy2Level
+    {
+        get
+        {
+            return gameSettings.candy2Level;
+        }
+        set
+        {
+            gameSettings.candy2Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Candy3Level
+    {
+        get
+        {
+            return gameSettings.candy3Level;
+        }
+        set
+        {
+            gameSettings.candy3Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Candy4Level
+    {
+        get
+        {
+            return gameSettings.candy4Level;
+        }
+        set
+        {
+            gameSettings.candy4Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Candy5Level
+    {
+        get
+        {
+            return gameSettings.candy5Level;
+        }
+        set
+        {
+            gameSettings.candy5Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Candy6Level
+    {
+        get
+        {
+            return gameSettings.candy6Level;
+        }
+        set
+        {
+            gameSettings.candy6Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Candy7Level
+    {
+        get
+        {
+            return gameSettings.candy7Level;
+        }
+        set
+        {
+            gameSettings.candy7Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Candy8Level
+    {
+        get
+        {
+            return gameSettings.candy8Level;
+        }
+        set
+        {
+            gameSettings.candy8Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Candy9Level
+    {
+        get
+        {
+            return gameSettings.candy9Level;
+        }
+        set
+        {
+            gameSettings.candy9Level = value;
             SaveFile();
         }
     }

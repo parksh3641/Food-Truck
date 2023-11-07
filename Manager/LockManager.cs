@@ -66,9 +66,16 @@ public class LockManager : MonoBehaviour
             menuIcon[6].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 4) //楷备家 秦力
+        if (playerDataBase.LockTutorial >= 4) //楷备家, 漂喊 楷备家 秦力
         {
             menuIcon[7].SetActive(true);
+            menuIcon[8].SetActive(true);
+        }
+
+        if (playerDataBase.LockTutorial >= 5) //级 捞悼, 券积 秦力
+        {
+            menuIcon[9].SetActive(true);
+            menuIcon[10].SetActive(true);
         }
     }
 
@@ -112,6 +119,12 @@ public class LockManager : MonoBehaviour
                 break;
             case 4:
                 lockIcon[7].SetActive(true);
+                lockIcon[8].SetActive(true);
+
+                break;
+            case 5:
+                lockIcon[9].SetActive(true);
+                lockIcon[10].SetActive(true);
 
                 break;
         }

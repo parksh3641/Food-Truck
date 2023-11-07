@@ -17,6 +17,8 @@ public class PlayerDataBase : ScriptableObject
     private int lockTutorial = 0;
     [SerializeField]
     private int firstReward = 0;
+    [SerializeField]
+    private int islandNumber = 0;
 
     [Space]
     [Title("Character")]
@@ -64,8 +66,6 @@ public class PlayerDataBase : ScriptableObject
     [Space]
     [Title("Food")]
     [SerializeField]
-    private int nextFoodNumber = 0;
-    [SerializeField]
     private int hamburgerMaxValue = 0;
     [SerializeField]
     private int sandwichMaxValue = 0;
@@ -80,9 +80,31 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int friesMaxValue = 0;
     [SerializeField]
-    private int gourmetLevel = 0;
+    private int nextFoodNumber = 0;
+
+    [Space]
+    [Title("Candy")]
     [SerializeField]
-    private int upgradeCount = 0;
+    private int candy1MaxValue = 0;
+    [SerializeField]
+    private int candy2MaxValue = 0;
+    [SerializeField]
+    private int candy3MaxValue = 0;
+    [SerializeField]
+    private int candy4MaxValue = 0;
+    [SerializeField]
+    private int candy5MaxValue = 0;
+    [SerializeField]
+    private int candy6MaxValue = 0;
+    [SerializeField]
+    private int candy7MaxValue = 0;
+    [SerializeField]
+    private int candy8MaxValue = 0;
+    [SerializeField]
+    private int candy9MaxValue = 0;
+    [SerializeField]
+    private int nextFoodNumber2 = 0;
+
 
     [Space]
     [Title("Truck")]
@@ -207,7 +229,11 @@ public class PlayerDataBase : ScriptableObject
     private int island10 = 0;
 
     [Space]
-    [Title("Quest")]
+    [Title("Count")]
+    [SerializeField]
+    private int gourmetLevel = 0;
+    [SerializeField]
+    private int upgradeCount = 0;
     [SerializeField]
     private int sellCount = 0;
     [SerializeField]
@@ -218,6 +244,10 @@ public class PlayerDataBase : ScriptableObject
     private int feverModeCount = 0;
     [SerializeField]
     private int questCount = 0;
+    [SerializeField]
+    private int reincarnationCount = 0;
+    [SerializeField]
+    private int buffCount = 0;
 
     [Space]
     [Title("Skill")]
@@ -233,7 +263,16 @@ public class PlayerDataBase : ScriptableObject
     private int skill5 = 0;
     [SerializeField]
     private int skill6 = 0;
-
+    [SerializeField]
+    private int skill7 = 0;
+    [SerializeField]
+    private int skill8 = 0;
+    [SerializeField]
+    private int skill9 = 0;
+    [SerializeField]
+    private int skill10 = 0;
+    [SerializeField]
+    private int skill11 = 0;
 
     [Space]
     [Title("Portion")]
@@ -364,6 +403,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             firstReward = value;
+        }
+    }
+
+    public int IslandNumber
+    {
+        get
+        {
+            return islandNumber;
+        }
+        set
+        {
+            islandNumber = value;
         }
     }
 
@@ -703,6 +754,126 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int NextFoodNumber2
+    {
+        get
+        {
+            return nextFoodNumber2;
+        }
+        set
+        {
+            nextFoodNumber2 = value;
+        }
+    }
+
+    public int Candy1MaxValue
+    {
+        get
+        {
+            return candy1MaxValue;
+        }
+        set
+        {
+            candy1MaxValue = value;
+        }
+    }
+
+    public int Candy2MaxValue
+    {
+        get
+        {
+            return candy2MaxValue;
+        }
+        set
+        {
+            candy2MaxValue = value;
+        }
+    }
+
+    public int Candy3MaxValue
+    {
+        get
+        {
+            return candy3MaxValue;
+        }
+        set
+        {
+            candy3MaxValue = value;
+        }
+    }
+
+    public int Candy4MaxValue
+    {
+        get
+        {
+            return candy4MaxValue;
+        }
+        set
+        {
+            candy4MaxValue = value;
+        }
+    }
+
+    public int Candy5MaxValue
+    {
+        get
+        {
+            return candy5MaxValue;
+        }
+        set
+        {
+            candy5MaxValue = value;
+        }
+    }
+
+    public int Candy6MaxValue
+    {
+        get
+        {
+            return candy6MaxValue;
+        }
+        set
+        {
+            candy6MaxValue = value;
+        }
+    }
+
+    public int Candy7MaxValue
+    {
+        get
+        {
+            return candy7MaxValue;
+        }
+        set
+        {
+            candy7MaxValue = value;
+        }
+    }
+
+    public int Candy8MaxValue
+    {
+        get
+        {
+            return candy8MaxValue;
+        }
+        set
+        {
+            candy8MaxValue = value;
+        }
+    }
+
+    public int Candy9MaxValue
+    {
+        get
+        {
+            return candy9MaxValue;
+        }
+        set
+        {
+            candy9MaxValue = value;
+        }
+    }
+
     public int GourmetLevel
     {
         get
@@ -787,6 +958,30 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int ReincarnationCount
+    {
+        get
+        {
+            return reincarnationCount;
+        }
+        set
+        {
+            reincarnationCount = value;
+        }
+    }
+
+    public int BuffCount
+    {
+        get
+        {
+            return buffCount;
+        }
+        set
+        {
+            buffCount = value;
+        }
+    }
+
     public int Skill1
     {
         get
@@ -856,6 +1051,65 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             skill6 = value;
+        }
+    }
+
+    public int Skill7
+    {
+        get
+        {
+            return skill7;
+        }
+        set
+        {
+            skill7 = value;
+        }
+    }
+
+    public int Skill8
+    {
+        get
+        {
+            return skill8;
+        }
+        set
+        {
+            skill8 = value;
+        }
+    }
+    public int Skill9
+    {
+        get
+        {
+            return skill9;
+        }
+        set
+        {
+            skill9 = value;
+        }
+    }
+
+    public int Skill10
+    {
+        get
+        {
+            return skill10;
+        }
+        set
+        {
+            skill10 = value;
+        }
+    }
+
+    public int Skill11
+    {
+        get
+        {
+            return skill11;
+        }
+        set
+        {
+            skill11 = value;
         }
     }
 
@@ -1828,9 +2082,10 @@ public class PlayerDataBase : ScriptableObject
         crystal = 0;
         defDestroyTicket = 0;
         lockTutorial = 0;
-        nextFoodNumber = 0;
         firstReward = 0;
+        islandNumber = 0;
 
+        nextFoodNumber = 0;
         hamburgerMaxValue = 0;
         sandwichMaxValue = 0;
         snackLabMaxValue = 0;
@@ -1838,6 +2093,17 @@ public class PlayerDataBase : ScriptableObject
         pizzaMaxValue = 0;
         donutMaxValue = 0;
         friesMaxValue = 0;
+
+        nextFoodNumber2 = 0;
+        candy1MaxValue = 0;
+        candy2MaxValue = 0;
+        candy3MaxValue = 0;
+        candy4MaxValue = 0;
+        candy5MaxValue = 0;
+        candy6MaxValue = 0;
+        candy7MaxValue = 0;
+        candy8MaxValue = 0;
+        candy9MaxValue = 0;
 
         character1 = 0;
         character2 = 0;
@@ -1926,6 +2192,8 @@ public class PlayerDataBase : ScriptableObject
         openChestBox = 0;
         feverModeCount = 0;
         questCount = 0;
+        reincarnationCount = 0;
+        buffCount = 0;
 
         skill1 = 0;
         skill2 = 0;
@@ -1933,6 +2201,11 @@ public class PlayerDataBase : ScriptableObject
         skill4 = 0;
         skill5 = 0;
         skill6 = 0;
+        skill7 = 0;
+        skill8 = 0;
+        skill9 = 0;
+        skill10 = 0;
+        skill11 = 0;
 
         portion1 = 0;
         portion2 = 0;

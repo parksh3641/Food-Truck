@@ -13,8 +13,10 @@ public class ChangeFoodManager : MonoBehaviour
     public RectTransform changeFoodContentTransform;
 
     public List<ChangeFoodContent> changeFoodContentList = new List<ChangeFoodContent>();
+    public List<ChangeFoodContent> changeCandyList = new List<ChangeFoodContent>();
 
     Sprite[] foodChangeArray;
+    Sprite[] candyArray;
 
     public GameManager gameManager;
 
@@ -29,6 +31,7 @@ public class ChangeFoodManager : MonoBehaviour
         if (upgradeDataBase == null) upgradeDataBase = Resources.Load("UpgradeDataBase") as UpgradeDataBase;
 
         foodChangeArray = imageDataBase.GetFoodChangeArray();
+        candyArray = imageDataBase.GetCandyArray();
 
         changeFoodView.SetActive(false);
 
@@ -44,10 +47,23 @@ public class ChangeFoodManager : MonoBehaviour
             monster.transform.position = Vector3.zero;
             monster.transform.rotation = Quaternion.identity;
             monster.transform.localScale = Vector3.one;
-            monster.Initialize(FoodType.Hamburger + i, foodChangeArray[i], this);
+            monster.InitializeFood(FoodType.Hamburger + i, foodChangeArray[i], this);
             monster.gameObject.SetActive(true);
 
             changeFoodContentList.Add(monster);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(CandyType)).Length; i++)
+        {
+            ChangeFoodContent monster = Instantiate(changeFoodContent);
+            monster.transform.SetParent(changeFoodContentTransform);
+            monster.transform.position = Vector3.zero;
+            monster.transform.rotation = Quaternion.identity;
+            monster.transform.localScale = Vector3.one;
+            monster.InitializeCandy(CandyType.Candy1 + i, candyArray[i], this);
+            monster.gameObject.SetActive(true);
+
+            changeCandyList.Add(monster);
         }
     }
 
@@ -69,67 +85,154 @@ public class ChangeFoodManager : MonoBehaviour
 
     public void Initialize()
     {
-        for(int i = 0; i < changeFoodContentList.Count; i ++)
+        for (int i = 0; i < changeFoodContentList.Count; i++)
         {
-            changeFoodContentList[i].Locked();
+            changeFoodContentList[i].gameObject.SetActive(false);
         }
 
-        changeFoodContentList[0].SetLevel(GameStateManager.instance.HamburgerLevel, upgradeDataBase.GetMaxLevel(FoodType.Hamburger));
-        changeFoodContentList[1].SetLevel(GameStateManager.instance.SandwichLevel, upgradeDataBase.GetMaxLevel(FoodType.Sandwich));
-        changeFoodContentList[2].SetLevel(GameStateManager.instance.SnackLabLevel, upgradeDataBase.GetMaxLevel(FoodType.SnackLab));
-        changeFoodContentList[3].SetLevel(GameStateManager.instance.DrinkLevel, upgradeDataBase.GetMaxLevel(FoodType.Drink));
-        changeFoodContentList[4].SetLevel(GameStateManager.instance.PizzaLevel, upgradeDataBase.GetMaxLevel(FoodType.Pizza));
-        changeFoodContentList[5].SetLevel(GameStateManager.instance.DonutLevel, upgradeDataBase.GetMaxLevel(FoodType.Donut));
-        changeFoodContentList[6].SetLevel(GameStateManager.instance.FriesLevel, upgradeDataBase.GetMaxLevel(FoodType.Fries));
-
-
-        changeFoodContentList[0].UnLock();
-
-        if(playerDataBase.HamburgerMaxValue >= 1)
+        for (int i = 0; i < changeCandyList.Count; i++)
         {
-            changeFoodContentList[1].UnLock();
+            changeCandyList[i].gameObject.SetActive(false);
         }
 
-        if (playerDataBase.SandwichMaxValue >= 1)
+        switch (GameStateManager.instance.IslandType)
         {
-            changeFoodContentList[2].UnLock();
-        }
+            case IslandType.Island1:
+                for (int i = 0; i < changeFoodContentList.Count; i++)
+                {
+                    changeFoodContentList[i].gameObject.SetActive(true);
+                    changeFoodContentList[i].Locked();
+                }
 
-        if (playerDataBase.SnackLabMaxValue >= 1)
-        {
-            changeFoodContentList[3].UnLock();
-        }
+                changeFoodContentList[0].SetLevel(GameStateManager.instance.HamburgerLevel, upgradeDataBase.GetMaxLevel(FoodType.Hamburger));
+                changeFoodContentList[1].SetLevel(GameStateManager.instance.SandwichLevel, upgradeDataBase.GetMaxLevel(FoodType.Sandwich));
+                changeFoodContentList[2].SetLevel(GameStateManager.instance.SnackLabLevel, upgradeDataBase.GetMaxLevel(FoodType.SnackLab));
+                changeFoodContentList[3].SetLevel(GameStateManager.instance.DrinkLevel, upgradeDataBase.GetMaxLevel(FoodType.Drink));
+                changeFoodContentList[4].SetLevel(GameStateManager.instance.PizzaLevel, upgradeDataBase.GetMaxLevel(FoodType.Pizza));
+                changeFoodContentList[5].SetLevel(GameStateManager.instance.DonutLevel, upgradeDataBase.GetMaxLevel(FoodType.Donut));
+                changeFoodContentList[6].SetLevel(GameStateManager.instance.FriesLevel, upgradeDataBase.GetMaxLevel(FoodType.Fries));
 
-        if (playerDataBase.DrinkMaxValue >= 1)
-        {
-            changeFoodContentList[4].UnLock();
-        }
 
-        if (playerDataBase.PizzaMaxValue >= 1)
-        {
-            changeFoodContentList[5].UnLock();
+                changeFoodContentList[0].UnLock();
 
-            if (!GameStateManager.instance.AppReview)
-            {
-                gameManager.OpenAppReview();
+                if (playerDataBase.HamburgerMaxValue >= 1)
+                {
+                    changeFoodContentList[1].UnLock();
+                }
 
-                GameStateManager.instance.AppReview = true;
-            }
-        }
+                if (playerDataBase.SandwichMaxValue >= 1)
+                {
+                    changeFoodContentList[2].UnLock();
+                }
 
-        if (playerDataBase.DonutMaxValue >= 1)
-        {
-            changeFoodContentList[6].UnLock();
+                if (playerDataBase.SnackLabMaxValue >= 1)
+                {
+                    changeFoodContentList[3].UnLock();
+                }
+
+                if (playerDataBase.DrinkMaxValue >= 1)
+                {
+                    changeFoodContentList[4].UnLock();
+                }
+
+                if (playerDataBase.PizzaMaxValue >= 1)
+                {
+                    changeFoodContentList[5].UnLock();
+
+                    if (!GameStateManager.instance.AppReview)
+                    {
+                        gameManager.OpenAppReview();
+
+                        GameStateManager.instance.AppReview = true;
+                    }
+                }
+
+                if (playerDataBase.DonutMaxValue >= 1)
+                {
+                    changeFoodContentList[6].UnLock();
+                }
+
+                break;
+            case IslandType.Island2:
+                for (int i = 0; i < changeCandyList.Count; i++)
+                {
+                    changeCandyList[i].gameObject.SetActive(true);
+                    changeCandyList[i].Locked();
+                }
+
+                changeCandyList[0].SetLevel(GameStateManager.instance.Candy1Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy1));
+                changeCandyList[1].SetLevel(GameStateManager.instance.Candy2Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy2));
+                changeCandyList[2].SetLevel(GameStateManager.instance.Candy3Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy3));
+                changeCandyList[3].SetLevel(GameStateManager.instance.Candy4Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy4));
+                changeCandyList[4].SetLevel(GameStateManager.instance.Candy5Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy5));
+                changeCandyList[5].SetLevel(GameStateManager.instance.Candy6Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy6));
+                changeCandyList[6].SetLevel(GameStateManager.instance.Candy7Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy7));
+                changeCandyList[7].SetLevel(GameStateManager.instance.Candy8Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy8));
+                changeCandyList[8].SetLevel(GameStateManager.instance.Candy9Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy9));
+
+
+                changeCandyList[0].UnLock();
+
+                if (playerDataBase.Candy1MaxValue >= 1)
+                {
+                    changeCandyList[1].UnLock();
+                }
+
+                if (playerDataBase.Candy2MaxValue >= 1)
+                {
+                    changeCandyList[2].UnLock();
+                }
+
+                if (playerDataBase.Candy3MaxValue >= 1)
+                {
+                    changeCandyList[3].UnLock();
+                }
+
+                if (playerDataBase.Candy4MaxValue >= 1)
+                {
+                    changeCandyList[4].UnLock();
+                }
+
+                if (playerDataBase.Candy5MaxValue >= 1)
+                {
+                    changeCandyList[5].UnLock();
+                }
+
+                if (playerDataBase.Candy6MaxValue >= 1)
+                {
+                    changeCandyList[6].UnLock();
+                }
+
+                if (playerDataBase.Candy7MaxValue >= 1)
+                {
+                    changeCandyList[7].UnLock();
+                }
+
+                if (playerDataBase.Candy8MaxValue >= 1)
+                {
+                    changeCandyList[8].UnLock();
+                }
+
+                break;
         }
     }
 
     public void ChangeFood(FoodType type)
     {
+        if (GameStateManager.instance.FoodType == type) return;
+
         changeFoodView.SetActive(false);
 
         gameManager.ChangeFood(type);
+    }
 
-        NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
+    public void ChangeCandy(CandyType type)
+    {
+        if (GameStateManager.instance.CandyType == type) return;
+
+        changeFoodView.SetActive(false);
+
+        gameManager.ChangeCandy(type);
     }
 
 }

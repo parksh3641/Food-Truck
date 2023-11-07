@@ -46,6 +46,7 @@ public class PlayfabManager : MonoBehaviour
     public NickNameManager nickNameManager;
     public GameManager gameManager;
     public MoneyAnimation moneyAnimation;
+    public MoneyAnimation moneyAnimation2;
 
     List<string> itemList = new List<string>();
 
@@ -702,9 +703,9 @@ public class PlayfabManager : MonoBehaviour
                 gold = 2000000000;
             }
 
-            if (crystal > 10000)
+            if (crystal > 2000000000)
             {
-                crystal = 10000;
+                crystal = 2000000000;
             }
 
             playerDataBase.Coin = gold;
@@ -1138,6 +1139,9 @@ public class PlayfabManager : MonoBehaviour
                        case "FirstReward":
                            playerDataBase.FirstReward = statistics.Value;
                            break;
+                       case "IslandNumber":
+                           playerDataBase.IslandNumber = statistics.Value;
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;
@@ -1187,6 +1191,36 @@ public class PlayfabManager : MonoBehaviour
                        case "FriesMaxValue":
                            playerDataBase.FriesMaxValue = statistics.Value;
                            break;
+                       case "NextFoodNumber2":
+                           playerDataBase.NextFoodNumber2 = statistics.Value;
+                           break;
+                       case "Candy1MaxValue":
+                           playerDataBase.Candy1MaxValue = statistics.Value;
+                           break;
+                       case "Candy2MaxValue":
+                           playerDataBase.Candy2MaxValue = statistics.Value;
+                           break;
+                       case "Candy3MaxValue":
+                           playerDataBase.Candy3MaxValue = statistics.Value;
+                           break;
+                       case "Candy4MaxValue":
+                           playerDataBase.Candy4MaxValue = statistics.Value;
+                           break;
+                       case "Candy5MaxValue":
+                           playerDataBase.Candy5MaxValue = statistics.Value;
+                           break;
+                       case "Candy6MaxValue":
+                           playerDataBase.Candy6MaxValue = statistics.Value;
+                           break;
+                       case "Candy7MaxValue":
+                           playerDataBase.Candy7MaxValue = statistics.Value;
+                           break;
+                       case "Candy8MaxValue":
+                           playerDataBase.Candy8MaxValue = statistics.Value;
+                           break;
+                       case "Candy9MaxValue":
+                           playerDataBase.Candy9MaxValue = statistics.Value;
+                           break;
                        case "SellCount":
                            playerDataBase.SellCount = statistics.Value;
                            break;
@@ -1220,6 +1254,21 @@ public class PlayfabManager : MonoBehaviour
                        case "Skill6":
                            playerDataBase.Skill6 = statistics.Value;
                            break;
+                       case "Skill7":
+                           playerDataBase.Skill7 = statistics.Value;
+                           break;
+                       case "Skill8":
+                           playerDataBase.Skill8 = statistics.Value;
+                           break;
+                       case "Skill9":
+                           playerDataBase.Skill9 = statistics.Value;
+                           break;
+                       case "Skill10":
+                           playerDataBase.Skill10 = statistics.Value;
+                           break;
+                       case "Skill11":
+                           playerDataBase.Skill11 = statistics.Value;
+                           break;
                        case "Portion1":
                            playerDataBase.Portion1 = statistics.Value;
                            break;
@@ -1252,6 +1301,12 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "UpgradeCount":
                            playerDataBase.UpgradeCount = statistics.Value;
+                           break;
+                       case "ReincarnationCount":
+                           playerDataBase.ReincarnationCount = statistics.Value;
+                           break;
+                       case "BuffCount":
+                           playerDataBase.BuffCount = statistics.Value;
                            break;
                            //case "Normal":
                            //    playerDataBase.Normal = statistics.Value;
@@ -1425,7 +1480,19 @@ public class PlayfabManager : MonoBehaviour
 
                         break;
                     case MoneyType.Crystal:
-                        playerDataBase.Crystal += number;
+
+                        if (playerDataBase.Crystal + number >= 2000000000)
+                        {
+                            value = 2000000000 - playerDataBase.Crystal + number;
+
+                            playerDataBase.Crystal += value;
+                        }
+                        else
+                        {
+                            playerDataBase.Crystal += number;
+                        }
+
+                        moneyAnimation2.PlusMoney(number);
                         break;
                 }
 

@@ -6,21 +6,47 @@ using UnityEngine.UI;
 public class ChangeFoodContent : MonoBehaviour
 {
     public FoodType foodType = FoodType.Hamburger;
+    public CandyType candyType = CandyType.Candy1;
 
     public Image icon;
-
     public LocalizationContent titleText;
-
     public GameObject lockedObj;
 
-    public ChangeFoodManager changeFoodManager;
+    public Image background;
+
+    Color foodColor = new Color(206 / 255f, 141 / 255f, 1);
+    Color candyColor = new Color(247 / 255f, 160 / 255f, 0);
+
+    private int index = 0;
+
+    ChangeFoodManager changeFoodManager;
 
 
-    public void Initialize(FoodType type, Sprite sp, ChangeFoodManager manager)
+    public void InitializeFood(FoodType type, Sprite sp, ChangeFoodManager manager)
     {
+        index = 0;
+
         foodType = type;
 
         icon.sprite = sp;
+
+        background.color = foodColor;
+
+        changeFoodManager = manager;
+
+        titleText.localizationName = type.ToString();
+        titleText.ReLoad();
+    }
+
+    public void InitializeCandy(CandyType type, Sprite sp, ChangeFoodManager manager)
+    {
+        index = 1;
+
+        candyType = type;
+
+        icon.sprite = sp;
+
+        background.color = candyColor;
 
         changeFoodManager = manager;
 
@@ -47,6 +73,13 @@ public class ChangeFoodContent : MonoBehaviour
 
     public void OnClick()
     {
-        changeFoodManager.ChangeFood(foodType);
+        if (index == 0)
+        {
+            changeFoodManager.ChangeFood(foodType);
+        }
+        else
+        {
+            changeFoodManager.ChangeCandy(candyType);
+        }
     }
 }

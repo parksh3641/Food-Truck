@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class ChestBoxManager : MonoBehaviour
 
     private int count = 0;
     private int goalCount = 0;
+    private int random = 0;
 
     public QuestManager questManager;
     public GameManager gameManager;
@@ -86,18 +88,27 @@ public class ChestBoxManager : MonoBehaviour
 
         chestBoxArray[0].SetActive(false);
         chestBoxArray[1].SetActive(false);
+        chestBoxArray[2].SetActive(false);
 
-        if (Random.Range(0, 2) == 0)
+        random = Random.Range(0, 10);
+
+        if (random >= 7)
         {
             rewardType = RewardType.Gold;
 
             chestBoxArray[0].SetActive(true);
         }
-        else
+        else if (random >= 1)
         {
             rewardType = RewardType.PortionSet;
 
             chestBoxArray[1].SetActive(true);
+        }
+        else
+        {
+            rewardType = RewardType.Crystal;
+
+            chestBoxArray[2].SetActive(true);
         }
     }
 
@@ -106,7 +117,7 @@ public class ChestBoxManager : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 300000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 200000);
 
                 break;
             case RewardType.PortionSet:
@@ -134,6 +145,9 @@ public class ChestBoxManager : MonoBehaviour
                         break;
                 }
 
+                break;
+            case RewardType.Crystal:
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 5);
                 break;
         }
 
@@ -169,26 +183,29 @@ public class ChestBoxManager : MonoBehaviour
                 switch (Random.Range(0, 5))
                 {
                     case 0:
-                        playerDataBase.Portion1 += 3;
+                        playerDataBase.Portion1 += 10;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
                         break;
                     case 1:
-                        playerDataBase.Portion2 += 3;
+                        playerDataBase.Portion2 += 10;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
                         break;
                     case 2:
-                        playerDataBase.Portion3 += 3;
+                        playerDataBase.Portion3 += 10;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
                         break;
                     case 3:
-                        playerDataBase.Portion4 += 3;
+                        playerDataBase.Portion4 += 10;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
                         break;
                     case 4:
-                        playerDataBase.Portion5 += 3;
+                        playerDataBase.Portion5 += 10;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
                         break;
                 }
+                break;
+            case RewardType.Crystal:
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
                 break;
         }
 
@@ -203,6 +220,8 @@ public class ChestBoxManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
 
         GameStateManager.instance.ChestBoxCount += 1;
+
+        FirebaseAnalytics.LogEvent("ChestBox");
 
         Initialize();
     }

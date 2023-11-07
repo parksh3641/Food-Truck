@@ -53,12 +53,15 @@ public class MoneyAnimation : MonoBehaviour
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000);
     }
 
+    [Button]
+    void PlusCrystal()
+    {
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
+    }
+
     public void PlusMoney(int target)
     {
         StopAllCoroutines();
-
-        //gold = playerDataBase.Coin;
-        //myMoneyText.text = MoneyUnitString.ToCurrencyString(gold);
 
         plusMoneyObj.SetActive(false);
         plusMoneyObj.SetActive(true);
@@ -76,82 +79,6 @@ public class MoneyAnimation : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2.0f);
-
-        //max = 0;
-
-        //while (max < target)
-        //{
-        //    if (max + 100000000 < target)
-        //    {
-        //        max += 100000000;
-        //    }
-        //    else
-        //    {
-        //        if (max + 10000000 < target)
-        //        {
-        //            max += 10000000;
-        //        }
-        //        else
-        //        {
-        //            if (max + 1000000 < target)
-        //            {
-        //                max += 1000000;
-        //            }
-        //            else
-        //            {
-        //                if (max + 100000 < target)
-        //                {
-        //                    max += 100000;
-        //                }
-        //                else
-        //                {
-        //                    if (max + 10000 < target)
-        //                    {
-        //                        max += 10000;
-        //                    }
-        //                    else
-        //                    {
-        //                        if (max + 10000 < target)
-        //                        {
-        //                            max += 10000;
-        //                        }
-        //                        else
-        //                        {
-        //                            if (max + 1000 < target)
-        //                            {
-        //                                max += 1000;
-        //                            }
-        //                            else
-        //                            {
-        //                                if (max + 100 < target)
-        //                                {
-        //                                    max += 100;
-        //                                }
-        //                                else
-        //                                {
-        //                                    if (max + 10 < target)
-        //                                    {
-        //                                        max += 10;
-        //                                    }
-        //                                    else
-        //                                    {
-        //                                        max += 1;
-        //                                    }
-        //                                }
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    myMoneyText.text = MoneyUnitString.ToCurrencyString(gold + max);
-
-        //    yield return waitForSeconds2;
-        //}
-
-        //myMoneyText.text = MoneyUnitString.ToCurrencyString(gold + max);
 
         plusMoneyObj.gameObject.SetActive(false);
     }

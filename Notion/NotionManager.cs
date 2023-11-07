@@ -183,5 +183,6 @@ public enum NotionType
     SuccessSellX2,
     UsePortionNotion5,
     ChangeCharacterNotion,
-    ChangeButterflyNotion
+    ChangeButterflyNotion,
+    ChangeIslandNotion
 }

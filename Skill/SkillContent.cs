@@ -74,12 +74,12 @@ public class SkillContent : MonoBehaviour
         switch (skillType)
         {
             case SkillType.Skill1:
-                level = playerDataBase.Skill1 + 1;
-                nowValue = skill1Value * (playerDataBase.Skill1 + 1);
+                level = playerDataBase.Skill1;
+                nowValue = skill1Value * playerDataBase.Skill1;
 
                 if (playerDataBase.Skill1 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill1Value * (playerDataBase.Skill1 + 2)).ToString() + "%";
+                    nextValueText.text = (skill1Value * (playerDataBase.Skill1 + 1)).ToString() + "%";
 
                     if (moneyType == MoneyType.Coin)
                     {
@@ -98,12 +98,12 @@ public class SkillContent : MonoBehaviour
 
                 break;
             case SkillType.Skill2:
-                level = playerDataBase.Skill2 + 1;
-                nowValue = skill2Value * (playerDataBase.Skill2 + 1);
+                level = playerDataBase.Skill2;
+                nowValue = skill2Value * playerDataBase.Skill2;
 
                 if (playerDataBase.Skill2 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill2Value * (playerDataBase.Skill2 + 2)).ToString() + "%";
+                    nextValueText.text = (skill2Value * (playerDataBase.Skill2 + 1)).ToString() + "%";
 
                     if (moneyType == MoneyType.Coin)
                     {
@@ -121,12 +121,12 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill3:
-                level = playerDataBase.Skill3 + 1;
-                nowValue = skill3Value * (playerDataBase.Skill3 + 1);
+                level = playerDataBase.Skill3;
+                nowValue = skill3Value * playerDataBase.Skill3;
 
                 if (playerDataBase.Skill3 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill3Value * (playerDataBase.Skill3 + 2)).ToString() + "%";
+                    nextValueText.text = (skill3Value * (playerDataBase.Skill3 + 1)).ToString() + "%";
 
                     if (moneyType == MoneyType.Coin)
                     {
@@ -144,12 +144,12 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill4:
-                level = playerDataBase.Skill4 + 1;
-                nowValue = skill4Value * (playerDataBase.Skill4 + 1);
+                level = playerDataBase.Skill4;
+                nowValue = skill4Value * playerDataBase.Skill4;
 
                 if (playerDataBase.Skill4 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill4Value * (playerDataBase.Skill4 + 2)).ToString() + "%";
+                    nextValueText.text = (skill4Value * (playerDataBase.Skill4 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.Coin)
                     {
                         value = (playerDataBase.Skill4 + 1) * priceGold;
@@ -166,12 +166,12 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill5:
-                level = playerDataBase.Skill5 + 1;
-                nowValue = skill5Value * (playerDataBase.Skill5 + 1);
+                level = playerDataBase.Skill5;
+                nowValue = skill5Value * playerDataBase.Skill5;
 
                 if (playerDataBase.Skill5 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill5Value * (playerDataBase.Skill5 + 2)).ToString() + "%";
+                    nextValueText.text = (skill5Value * (playerDataBase.Skill5 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.Coin)
                     {
                         value = (playerDataBase.Skill5 + 1) * priceGold;
@@ -188,12 +188,12 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill6:
-                level = playerDataBase.Skill6 + 1;
-                nowValue = skill6Value * (playerDataBase.Skill6 + 1);
+                level = playerDataBase.Skill6;
+                nowValue = skill6Value * playerDataBase.Skill6;
 
                 if (playerDataBase.Skill6 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill6Value * (playerDataBase.Skill6 + 2)).ToString() + "%";
+                    nextValueText.text = (skill6Value * (playerDataBase.Skill6 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.Coin)
                     {
                         value = (playerDataBase.Skill6 + 1) * priceGold;
@@ -210,12 +210,12 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill7:
-                level = playerDataBase.Skill7 + 1;
-                nowValue = skill7Value * (playerDataBase.Skill7 + 1);
+                level = playerDataBase.Skill7;
+                nowValue = skill7Value * playerDataBase.Skill7;
 
                 if (playerDataBase.Skill7 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill7Value * (playerDataBase.Skill7 + 2)).ToString() + "%";
+                    nextValueText.text = (skill7Value * (playerDataBase.Skill7 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.Coin)
                     {
                         value = (playerDataBase.Skill7 + 1) * priceGold;
@@ -232,12 +232,12 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill8:
-                level = playerDataBase.Skill8 + 1;
-                nowValue = skill8Value * (playerDataBase.Skill8 + 1);
+                level = playerDataBase.Skill8;
+                nowValue = skill8Value * playerDataBase.Skill8;
 
                 if (playerDataBase.Skill8 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill8Value * (playerDataBase.Skill8 + 2)).ToString() + "%";
+                    nextValueText.text = (skill8Value * (playerDataBase.Skill8 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.Coin)
                     {
                         value = (playerDataBase.Skill8 + 1) * priceGold;
@@ -254,12 +254,12 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill9:
-                level = playerDataBase.Skill9 + 1;
-                nowValue = skill9Value * (playerDataBase.Skill9 + 1);
+                level = playerDataBase.Skill9;
+                nowValue = skill9Value * playerDataBase.Skill9;
 
                 if (playerDataBase.Skill9 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill9Value * (playerDataBase.Skill9 + 2)).ToString() + "%";
+                    nextValueText.text = (skill9Value * (playerDataBase.Skill9 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.Coin)
                     {
                         value = (playerDataBase.Skill9 + 1) * priceGold;
@@ -276,12 +276,12 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill10:
-                level = playerDataBase.Skill10 + 1;
-                nowValue = skill10Value * (playerDataBase.Skill10 + 1);
+                level = playerDataBase.Skill10;
+                nowValue = skill10Value * playerDataBase.Skill10;
 
                 if (playerDataBase.Skill10 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill10Value * (playerDataBase.Skill10 + 2)).ToString() + "%";
+                    nextValueText.text = (skill10Value * (playerDataBase.Skill10 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.Coin)
                     {
                         value = (playerDataBase.Skill10 + 1) * priceGold;
@@ -298,12 +298,12 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill11:
-                level = playerDataBase.Skill11 + 1;
-                nowValue = skill11Value * (playerDataBase.Skill11 + 1);
+                level = playerDataBase.Skill11;
+                nowValue = skill11Value * playerDataBase.Skill11;
 
                 if (playerDataBase.Skill11 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill11Value * (playerDataBase.Skill11 + 2)).ToString() + "%";
+                    nextValueText.text = (skill11Value * (playerDataBase.Skill11 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.Coin)
                     {
                         value = (playerDataBase.Skill11 + 1) * priceGold;

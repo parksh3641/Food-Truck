@@ -17,6 +17,7 @@ public class AdmobReward : MonoBehaviour
     public ShopManager shopManager;
     public ChestBoxManager chestBoxManager;
     public BuffManager buffManager;
+    public ReincarnationManager reincarnationManager;
 
     PlayerDataBase playerDataBase;
 
@@ -98,6 +99,9 @@ public class AdmobReward : MonoBehaviour
                 case 3:
                     buffManager.SuccessWatchAd();
                     break;
+                case 4:
+                    reincarnationManager.SuccessWatchAd();
+                    break;
             }
         }
         else
@@ -124,6 +128,9 @@ public class AdmobReward : MonoBehaviour
                             break;
                         case 3:
                             buffManager.SuccessWatchAd();
+                            break;
+                        case 4:
+                            reincarnationManager.SuccessWatchAd();
                             break;
                     }
 

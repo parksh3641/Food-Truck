@@ -250,16 +250,10 @@ public enum RewardType
 
 public enum QuestType
 {
-    HamburgerMaxValue,
-    SandwichMaxValue,
-    SnackLabMaxValue,
-    DrinkMaxValue,
-    PizzaMaxValue,
     UpgradeCount,
     SellCount,
     UseSources,
     OpenChestBox,
-    FeverModeCount
 }
 
 public enum SkillType

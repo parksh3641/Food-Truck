@@ -16,6 +16,7 @@ public class GoogleAdsManager : MonoBehaviour
     public AdmobReward admobReward_ChestBoxCrystal;
     public AdmobReward admobReward_SellPriceTime;
     public AdmobReward admobReward_DefDestroyTime;
+    public AdmobReward admobReward_ReincarnationX2;
 
     private void Awake()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class QuestInfo
 {
-    public QuestType questType = QuestType.HamburgerMaxValue;
+    public QuestType questType = QuestType.UpgradeCount;
     public int need = 0;
 }
 

@@ -73,13 +73,13 @@ public class ChangeFoodManager : MonoBehaviour
         {
             changeFoodView.SetActive(true);
 
+            alarmObj.SetActive(false);
+
             Initialize();
         }
         else
         {
             changeFoodView.SetActive(false);
-
-            alarmObj.SetActive(false);
         }
     }
 

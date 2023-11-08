@@ -16,7 +16,8 @@ public class IslandManager : MonoBehaviour
 
     Sprite[] islandArray;
 
-    private float progress;
+    private float progressFood;
+    private float progressCandy;
 
     public GameManager gameManager;
 
@@ -81,60 +82,99 @@ public class IslandManager : MonoBehaviour
 
 
         changeIslandContentList[0].UnLock();
-        changeIslandContentList[0].SetLevel(1);
+
+        progressFood = 0;
+
+        if(playerDataBase.HamburgerMaxValue > 0)
+        {
+            progressFood += 1;
+        }
+
+        if (playerDataBase.SandwichMaxValue > 0)
+        {
+            progressFood += 1;
+        }
+
+        if (playerDataBase.SnackLabMaxValue > 0)
+        {
+            progressFood += 1;
+        }
+
+        if (playerDataBase.DrinkMaxValue > 0)
+        {
+            progressFood += 1;
+        }
+
+        if (playerDataBase.PizzaMaxValue > 0)
+        {
+            progressFood += 1;
+        }
+
+        if (playerDataBase.DonutMaxValue > 0)
+        {
+            progressFood += 1;
+        }
+
+        if (playerDataBase.FriesMaxValue > 0)
+        {
+            progressFood += 1;
+        }
+
+        changeIslandContentList[0].SetLevel(progressFood / 7);
+
 
         if (playerDataBase.IslandNumber >= 1)
         {
             changeIslandContentList[1].UnLock();
 
-            progress = 0;
+            progressCandy = 0;
 
             if (playerDataBase.Candy1MaxValue > 0)
             {
-                progress += 1;
+                progressCandy += 1;
             }
 
             if (playerDataBase.Candy2MaxValue > 0)
             {
-                progress += 1;
+                progressCandy += 1;
             }
 
             if (playerDataBase.Candy3MaxValue > 0)
             {
-                progress += 1;
+                progressCandy += 1;
             }
 
             if (playerDataBase.Candy4MaxValue > 0)
             {
-                progress += 1;
+                progressCandy += 1;
             }
 
             if (playerDataBase.Candy5MaxValue > 0)
             {
-                progress += 1;
+                progressCandy += 1;
             }
 
             if (playerDataBase.Candy6MaxValue > 0)
             {
-                progress += 1;
+                progressCandy += 1;
             }
 
             if (playerDataBase.Candy7MaxValue > 0)
             {
-                progress += 1;
+                progressCandy += 1;
             }
 
             if (playerDataBase.Candy8MaxValue > 0)
             {
-                progress += 1;
+                progressCandy += 1;
             }
 
             if (playerDataBase.Candy9MaxValue > 0)
             {
-                progress += 1;
+                progressCandy += 1;
             }
 
-            changeIslandContentList[1].SetLevel(progress / 9);
+            changeIslandContentList[1].SetLevel(progressCandy / 9);
         }
     }
 

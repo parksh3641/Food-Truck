@@ -40,6 +40,14 @@ public class TutorialManager : MonoBehaviour
         Initialize(talkIndex);
     }
 
+    public void Reincarnation()
+    {
+        tutorialView.SetActive(true);
+
+        talkIndex = 5;
+        Initialize(talkIndex);
+    }
+
     void Initialize(int number)
     {
         nextText.enabled = false;
@@ -59,6 +67,9 @@ public class TutorialManager : MonoBehaviour
                 }
 
                 GameStateManager.instance.Tutorial = true;
+                break;
+            case 6:
+                tutorialView.SetActive(false);
                 break;
         }
 

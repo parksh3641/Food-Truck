@@ -87,7 +87,7 @@ public class ShopContent : MonoBehaviour
         switch (itemType)
         {
             case ItemType.DailyReward:
-                rewardText.text = MoneyUnitString.ToCurrencyString(500000) + " ~ " + MoneyUnitString.ToCurrencyString(1000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(1000000);
                 break;
             case ItemType.AdReward_Gold:
                 rewardText.text = MoneyUnitString.ToCurrencyString(3000000);

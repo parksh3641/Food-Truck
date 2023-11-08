@@ -295,9 +295,7 @@ public class ShopManager : MonoBehaviour
 
                 shopContents[0].SetLocked(true);
 
-                int random = Random.Range(500000, 1000001);
-
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, random);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
 
                 SoundManager.instance.PlaySFX(GameSfxType.Success);
                 NotionManager.instance.UseNotion(NotionType.SuccessReward);

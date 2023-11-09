@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Rotation : MonoBehaviour
 {
-    public float rotationSpeed = 10f; // Adjust this value to control the rotation speed
+    public bool rotateY = false;
+
+    public float rotationSpeed = 10f;
 
     private void Update()
     {
-        // Rotate the object continuously on the y-axis
-        transform.Rotate(0f, -rotationSpeed * Time.deltaTime, 0f);
+        if(rotateY)
+        {
+            transform.Rotate(rotationSpeed * Time.deltaTime, 0, 0f);
+        }
+        else
+        {
+            transform.Rotate(0f, -rotationSpeed * Time.deltaTime, 0f);
+        }
     }
 }

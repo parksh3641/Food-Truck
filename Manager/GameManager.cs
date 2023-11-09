@@ -1279,8 +1279,8 @@ public class GameManager : MonoBehaviour
                     case CandyType.Candy2:
                         if (candy2Array.Length - 1 < nextLevel)
                         {
-                            candy2Array[candy1Array.Length - 1].gameObject.SetActive(true);
-                            candy2Array[candy1Array.Length - 1].Initialize(5);
+                            candy2Array[candy2Array.Length - 1].gameObject.SetActive(true);
+                            candy2Array[candy2Array.Length - 1].Initialize(5);
                         }
                         else
                         {
@@ -1303,8 +1303,8 @@ public class GameManager : MonoBehaviour
                     case CandyType.Candy3:
                         if (candy3Array.Length - 1 < nextLevel)
                         {
-                            candy3Array[candy1Array.Length - 1].gameObject.SetActive(true);
-                            candy3Array[candy1Array.Length - 1].Initialize(5);
+                            candy3Array[candy3Array.Length - 1].gameObject.SetActive(true);
+                            candy3Array[candy3Array.Length - 1].Initialize(5);
                         }
                         else
                         {
@@ -1327,8 +1327,8 @@ public class GameManager : MonoBehaviour
                     case CandyType.Candy4:
                         if (candy4Array.Length - 1 < nextLevel)
                         {
-                            candy4Array[candy1Array.Length - 1].gameObject.SetActive(true);
-                            candy4Array[candy1Array.Length - 1].Initialize(5);
+                            candy4Array[candy4Array.Length - 1].gameObject.SetActive(true);
+                            candy4Array[candy4Array.Length - 1].Initialize(5);
                         }
                         else
                         {
@@ -1351,8 +1351,8 @@ public class GameManager : MonoBehaviour
                     case CandyType.Candy5:
                         if (candy5Array.Length - 1 < nextLevel)
                         {
-                            candy5Array[candy1Array.Length - 1].gameObject.SetActive(true);
-                            candy5Array[candy1Array.Length - 1].Initialize(5);
+                            candy5Array[candy5Array.Length - 1].gameObject.SetActive(true);
+                            candy5Array[candy5Array.Length - 1].Initialize(5);
                         }
                         else
                         {
@@ -1375,8 +1375,8 @@ public class GameManager : MonoBehaviour
                     case CandyType.Candy6:
                         if (candy6Array.Length - 1 < nextLevel)
                         {
-                            candy6Array[candy1Array.Length - 1].gameObject.SetActive(true);
-                            candy6Array[candy1Array.Length - 1].Initialize(5);
+                            candy6Array[candy6Array.Length - 1].gameObject.SetActive(true);
+                            candy6Array[candy6Array.Length - 1].Initialize(5);
                         }
                         else
                         {
@@ -1399,8 +1399,8 @@ public class GameManager : MonoBehaviour
                     case CandyType.Candy7:
                         if (candy7Array.Length - 1 < nextLevel)
                         {
-                            candy7Array[candy1Array.Length - 1].gameObject.SetActive(true);
-                            candy7Array[candy1Array.Length - 1].Initialize(5);
+                            candy7Array[candy7Array.Length - 1].gameObject.SetActive(true);
+                            candy7Array[candy7Array.Length - 1].Initialize(5);
                         }
                         else
                         {
@@ -1423,8 +1423,8 @@ public class GameManager : MonoBehaviour
                     case CandyType.Candy8:
                         if (candy8Array.Length - 1 < nextLevel)
                         {
-                            candy8Array[candy1Array.Length - 1].gameObject.SetActive(true);
-                            candy8Array[candy1Array.Length - 1].Initialize(5);
+                            candy8Array[candy8Array.Length - 1].gameObject.SetActive(true);
+                            candy8Array[candy8Array.Length - 1].Initialize(5);
                         }
                         else
                         {
@@ -1447,8 +1447,8 @@ public class GameManager : MonoBehaviour
                     case CandyType.Candy9:
                         if (candy9Array.Length - 1 < nextLevel)
                         {
-                            candy9Array[candy1Array.Length - 1].gameObject.SetActive(true);
-                            candy9Array[candy1Array.Length - 1].Initialize(5);
+                            candy9Array[candy9Array.Length - 1].gameObject.SetActive(true);
+                            candy9Array[candy9Array.Length - 1].Initialize(5);
                         }
                         else
                         {

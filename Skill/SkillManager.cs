@@ -1,15 +1,25 @@
 using Firebase.Analytics;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillManager : MonoBehaviour
 {
     public GameObject skillView;
 
-    public LocalizationContent titleText;
+    [Space]
+    [Title("TopMenu")]
+    public Image[] topMenuImgArray;
+    public Sprite[] topMenuSpriteArray;
+
+    public GameObject[] skillArray;
 
     public RectTransform skillGrid;
+    public RectTransform skillGrid2;
+
+    private int index = -1;
 
     public SkillContent[] skillContents;
 
@@ -19,8 +29,10 @@ public class SkillManager : MonoBehaviour
         skillView.SetActive(false);
 
         skillGrid.anchoredPosition = new Vector2(0, -9999);
-    }
+        skillGrid2.anchoredPosition = new Vector2(0, -9999);
 
+        index = -1;
+    }
 
     public void OpenSkillView()
     {
@@ -28,29 +40,12 @@ public class SkillManager : MonoBehaviour
         {
             skillView.SetActive(true);
 
-            titleText.localizationName = "Skill";
-            titleText.ReLoad();
+            ChangeTopToggle(0);
 
-            Initialize(0);
-
-            FirebaseAnalytics.LogEvent("OpenSkill");
-        }
-        else
-        {
-            skillView.SetActive(false);
-        }
-    }
-
-    public void OpenSpeicalSkillView()
-    {
-        if (!skillView.activeInHierarchy)
-        {
-            skillView.SetActive(true);
-
-            titleText.localizationName = "SpecialLabs";
-            titleText.ReLoad();
-
-            Initialize(1);
+            for (int i = 0; i < skillContents.Length; i++)
+            {
+                skillContents[i].Initialize();
+            }
 
             FirebaseAnalytics.LogEvent("OpenSkill");
         }
@@ -60,32 +55,20 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    void Initialize(int number)
+    public void ChangeTopToggle(int number)
     {
-        for(int i = 0; i < skillContents.Length; i ++)
+        if (index == number) return;
+
+        index = number;
+
+        for (int i = 0; i < topMenuImgArray.Length; i++)
         {
-            skillContents[i].Initialize();
-            skillContents[i].gameObject.SetActive(false);
+            topMenuImgArray[i].sprite = topMenuSpriteArray[0];
+            skillArray[i].gameObject.SetActive(false);
         }
 
-        if(number == 0)
-        {
-            skillContents[0].gameObject.SetActive(true);
-            skillContents[1].gameObject.SetActive(true);
-            skillContents[2].gameObject.SetActive(true);
-            skillContents[3].gameObject.SetActive(true);
-            skillContents[4].gameObject.SetActive(true);
-            skillContents[5].gameObject.SetActive(true);
-        }
-        else
-        {
-            skillContents[6].gameObject.SetActive(true);
-            skillContents[7].gameObject.SetActive(true);
-            skillContents[8].gameObject.SetActive(true);
-            skillContents[9].gameObject.SetActive(true);
-            skillContents[10].gameObject.SetActive(true);
-        }
-
-        skillGrid.anchoredPosition = new Vector2(0, -9999);
+        topMenuImgArray[number].sprite = topMenuSpriteArray[1];
+        skillArray[number].gameObject.SetActive(true);
     }
 }
+

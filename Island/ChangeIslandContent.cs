@@ -54,12 +54,12 @@ public class ChangeIslandContent : MonoBehaviour
         switch (islandType)
         {
             case IslandType.Island1:
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : 100%";
+                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : 0%";
                 sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +0%";
 
                 break;
             case IslandType.Island2:
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : 95%";
+                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +5%";
                 sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +10%";
 
                 break;

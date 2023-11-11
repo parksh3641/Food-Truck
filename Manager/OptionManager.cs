@@ -34,6 +34,8 @@ public class OptionManager : MonoBehaviour
         languageView.SetActive(false);
 
         versionText.text = "v" + Application.version;
+
+        Time.timeScale = 1f;
     }
 
 
@@ -47,10 +49,14 @@ public class OptionManager : MonoBehaviour
             OnSFX();
             OnVibration();
             OnEffect();
+
+            Time.timeScale = 0f;
         }
         else
         {
             optionView.SetActive(false);
+
+            Time.timeScale = 1f;
         }
     }
 

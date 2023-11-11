@@ -84,7 +84,8 @@ public enum GameSfxType
     UseSources,
     NotSources,
     ChestBox,
-    QuestReward
+    QuestReward,
+    Shield,
 }
 
 public enum CharacterType

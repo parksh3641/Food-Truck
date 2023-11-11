@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject changeFoodAlarmObj;
 
+    public Image changeFoodImg;
+
     [Space]
     [Title("Truck")]
     public Animator[] mainTruckArray;
@@ -61,7 +63,6 @@ public class GameManager : MonoBehaviour
     public GameObject inGameUI;
     public GameObject languageUI;
 
-    //public Text myMoneyMinusText;
     public Text myMoneyPlusText;
 
 
@@ -91,8 +92,8 @@ public class GameManager : MonoBehaviour
     public Text feverText;
 
     private float feverCount = 0;
-    private float feverMaxCount = 300;
-    private float feverTime = 30;
+    private float feverMaxCount = 200;
+    private float feverTime = 15;
     private float feverPlus = 3;
 
     private float defDestroy = 0;
@@ -107,16 +108,12 @@ public class GameManager : MonoBehaviour
     private float sellPriceX2 = 0;
 
     public float success = 0;
-    private float successPortion = 0;
-    private float successFever = 0;
     private float successPlus = 0;
 
-    private float portion1Time = 30;
-    private float portion2Time = 30;
-    private float portion3Time = 30;
-    private float portion5Time = 30;
-
-    private int portionPlus = 1;
+    private float portion1Time = 15;
+    private float portion2Time = 15;
+    private float portion3Time = 15;
+    private float portion5Time = 15;
 
     public int level = 0;
     public int nextLevel = 0;
@@ -126,6 +123,8 @@ public class GameManager : MonoBehaviour
     public bool isDelay_Camera = false;
     public bool isDelay = false;
     public bool isDef = false;
+    private bool buff1 = false;
+    private bool buff2 = false;
 
     public bool nextFood = false;
 
@@ -157,6 +156,8 @@ public class GameManager : MonoBehaviour
     UpgradeFood upgradeFood;
     UpgradeCandy upgradeCandy;
 
+    Sprite[] islandArray;
+
     public ParticleSystem lightParticle;
     public ParticleSystem levelUpParticle;
     public ParticleSystem bombPartice;
@@ -167,12 +168,12 @@ public class GameManager : MonoBehaviour
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
-
     CharacterDataBase characterDataBase;
     TruckDataBase truckDataBase;
     AnimalDataBase animalDataBase;
     ButterflyDataBase butterflyDataBase;
     IslandDataBase islandDataBase;
+    ImageDataBase imageDataBase;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
 
@@ -189,8 +190,9 @@ public class GameManager : MonoBehaviour
         if (animalDataBase == null) animalDataBase = Resources.Load("AnimalDataBase") as AnimalDataBase;
         if (butterflyDataBase == null) butterflyDataBase = Resources.Load("ButterflyDataBase") as ButterflyDataBase;
         if (islandDataBase == null) islandDataBase = Resources.Load("IslandDataBase") as IslandDataBase;
+        if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
 
-        //versionText.text = "v" + Application.version;
+        islandArray = imageDataBase.GetIslandArray();
 
         goldText.text = "0";
         crystalText.text = "0";
@@ -293,6 +295,10 @@ public class GameManager : MonoBehaviour
         loginView.SetActive(false);
 
         feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  0%";
+
+        nowUpgradeCount = playerDataBase.UpgradeCount;
+        nowSellCount = playerDataBase.SellCount;
+        StartCoroutine(ServerCoroution());
 
         switch (GameStateManager.instance.IslandType)
         {
@@ -523,6 +529,8 @@ public class GameManager : MonoBehaviour
         sellPriceX2 = 0;
         defDestroy = 0;
 
+        changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
+
 
         if (GameStateManager.instance.CharacterType > CharacterType.Character1)
         {
@@ -549,7 +557,6 @@ public class GameManager : MonoBehaviour
         }
 
         sellPricePlus += playerDataBase.Skill9 * 0.2f;
-
         needPlus += playerDataBase.Skill10 * 0.3f;
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
@@ -557,20 +564,55 @@ public class GameManager : MonoBehaviour
 
         feverCount = GameStateManager.instance.FeverCount;
 
-        feverTime = 30 + (30 * (0.001f * (playerDataBase.Skill1 + 1)));
-        feverMaxCount = 300 - (300 * (0.001f * (playerDataBase.Skill2 + 1)));
+        feverTime = 15 + (15 * (0.001f * (playerDataBase.Skill1 + 1)));
+        feverMaxCount = 200 - (200 * (0.001f * (playerDataBase.Skill2 + 1)));
         feverPlus = 3 + (3 * (0.001f * (playerDataBase.Skill3 + 1)));
 
-        CheckFever();
+        portion1Time = 15 + (15 * (0.001f * (playerDataBase.Skill4 + 1)));
+        portion2Time = 15 + (15 * (0.001f * (playerDataBase.Skill5 + 1)));
+        portion3Time = 15 + (15 * (0.001f * (playerDataBase.Skill6 + 1)));
 
-        portion1Time = 30 + (30 * (0.001f * (playerDataBase.Skill4 + 1)));
-        portion2Time = 30 + (30 * (0.001f * (playerDataBase.Skill5 + 1)));
-        portion3Time = 30 + (30 * (0.001f * (playerDataBase.Skill6 + 1)));
-
-        if(playerDataBase.GoldX2)
+        if (playerDataBase.GoldX2)
         {
             sellPricePlus += 100;
         }
+
+        if (portion1)
+        {
+            needPlus += 30;
+        }
+
+        if (portion2)
+        {
+            sellPricePlus += 10;
+        }
+
+        if (portion3)
+        {
+            successPlus += 1;
+        }
+
+        if (feverMode)
+        {
+            successPlus += feverPlus;
+        }
+
+        if (portion5)
+        {
+            defDestroy += 20;
+        }
+
+        if (buff1)
+        {
+            sellPricePlus += 50;
+        }
+
+        if (buff2)
+        {
+            defDestroy += 20;
+        }
+
+        CheckFever();
 
         UpgradeInitialize();
 
@@ -581,10 +623,6 @@ public class GameManager : MonoBehaviour
         questManager.Initialize();
 
         cameraController.GoToB();
-
-        nowUpgradeCount = playerDataBase.UpgradeCount;
-        nowSellCount = playerDataBase.SellCount;
-        StartCoroutine(ServerCoroution());
     }
 
     IEnumerator ServerCoroution()
@@ -622,7 +660,7 @@ public class GameManager : MonoBehaviour
 
         cameraController.GoToA();
 
-        StopAllCoroutines();
+        //StopAllCoroutines();
     }
 
     public void Initialize()
@@ -877,24 +915,6 @@ public class GameManager : MonoBehaviour
             sellPrice += Mathf.CeilToInt((sellPrice * (0.01f * sellPricePlus)));
         }
 
-        if (portion3)
-        {
-            successPortion = portionPlus;
-        }
-        else
-        {
-            successPortion = 0;
-        }
-
-        if (feverMode)
-        {
-            successFever = feverPlus;
-        }
-        else
-        {
-            successFever = 0;
-        }
-
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
@@ -936,7 +956,7 @@ public class GameManager : MonoBehaviour
             titleText.color = Color.white;
         }
 
-        success += successPortion + successFever + successPlus;
+        success += successPlus;
 
         if (success >= 100)
         {
@@ -947,12 +967,10 @@ public class GameManager : MonoBehaviour
 
         successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success.ToString("N1") + "%";
 
-        if (successPortion > 0 || successFever > 0 || successPlus > 0)
+        if (successPlus > 0)
         {
-            successText.text += " (+" + (successPortion + successFever + successPlus).ToString("N1") + "%)";
+            successText.text += " (+" + (successPlus).ToString("N1") + "%)";
         }
-
-        success += successPortion + successFever + successPlus;
 
         needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice");
 
@@ -1803,13 +1821,6 @@ public class GameManager : MonoBehaviour
                 Handheld.Vibrate();
             }
 
-            if (GameStateManager.instance.Effect)
-            {
-                bombPartice.gameObject.SetActive(false);
-                bombPartice.gameObject.SetActive(true);
-                bombPartice.Play();
-            }
-
             if (isDef)
             {
                 UseDefTicket();
@@ -1832,11 +1843,20 @@ public class GameManager : MonoBehaviour
                             UpgradeInitialize();
                         }
 
+                        SoundManager.instance.PlaySFX(GameSfxType.Shield);
+
                         NotionManager.instance.UseNotion(NotionType.DefDestroyNotion);
 
                         return;
                     }
                 }
+            }
+
+            if (GameStateManager.instance.Effect)
+            {
+                bombPartice.gameObject.SetActive(false);
+                bombPartice.gameObject.SetActive(true);
+                bombPartice.Play();
             }
 
 
@@ -2105,6 +2125,10 @@ public class GameManager : MonoBehaviour
         }
 
         feverText.enabled = false;
+
+        successPlus += feverPlus;
+        successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success.ToString("N1") + "%";
+        successText.text += " (+" + (successPlus).ToString("N1") + "%)";
 
         feverCount = 0;
         GameStateManager.instance.FeverCount = 0;
@@ -2977,19 +3001,7 @@ public class GameManager : MonoBehaviour
                         portion2 = true;
 
                         sellPricePlus += 10;
-
-                        sellPrice += (int)(sellPrice * (0.01f * sellPricePlus));
-
-                        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice");
-
-                        if (sellPricePlus > 0)
-                        {
-                            priceText.text += " (+" + sellPricePlus.ToString("N1") + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
-                        }
-                        else
-                        {
-                            priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
-                        }
+                        UpgradeInitialize();
 
                         playerDataBase.Portion2 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
@@ -3016,13 +3028,15 @@ public class GameManager : MonoBehaviour
                     {
                         portion3 = true;
 
+                        successPlus += 1;
+                        successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success.ToString("N1") + "%";
+                        successText.text += " (+" + (successPlus).ToString("N1") + "%)";
+
                         playerDataBase.Portion3 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
 
                         playerDataBase.UseSources += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
-
-                        UpgradeInitialize();
 
                         StartCoroutine(PortionCoroution3());
 
@@ -3153,20 +3167,8 @@ public class GameManager : MonoBehaviour
         portion2 = false;
         portionFillamount2.fillAmount = 0;
 
-        sellPricePlus -= 30;
-
-        sellPrice += (int)(sellPrice * (0.01f * sellPricePlus));
-
-        priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice");
-
-        if (sellPricePlus > 0)
-        {
-            priceText.text += " (+" + (sellPricePlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
-        }
-        else
-        {
-            priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
-        }
+        sellPricePlus -= 10;
+        UpgradeInitialize();
     }
 
     IEnumerator PortionCoroution3()
@@ -3189,7 +3191,9 @@ public class GameManager : MonoBehaviour
         portion3 = false;
         portionFillamount3.fillAmount = 0;
 
-        UpgradeInitialize();
+        successPlus -= 1;
+        successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success.ToString("N1") + "%";
+        successText.text += " (+" + (successPlus).ToString("N1") + "%)";
     }
 
     IEnumerator PortionCoroution5()
@@ -3221,23 +3225,16 @@ public class GameManager : MonoBehaviour
     {
         if(number == 0)
         {
+            buff1 = true;
+
             sellPricePlus += 50;
-
-            priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice");
-
-            if (sellPricePlus > 0)
-            {
-                priceText.text += " (+" + sellPricePlus.ToString("N1") + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
-            }
-            else
-            {
-                priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
-            }
+            UpgradeInitialize();
         }
         else
         {
-            defDestroy += 20;
+            buff2 = true;
 
+            defDestroy += 20;
             defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
         }
     }
@@ -3246,23 +3243,16 @@ public class GameManager : MonoBehaviour
     {
         if (number == 0)
         {
+            buff1 = false;
+
             sellPricePlus -= 50;
-
-            priceText.text = "<size=45>" + LocalizationManager.instance.GetString("NowPrice");
-
-            if (sellPricePlus > 0)
-            {
-                priceText.text += " (+" + sellPricePlus.ToString("N1") + "%)</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
-            }
-            else
-            {
-                priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
-            }
+            UpgradeInitialize();
         }
         else
         {
-            defDestroy -= 20;
+            buff2 = false;
 
+            defDestroy -= 20;
             defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
         }
     }

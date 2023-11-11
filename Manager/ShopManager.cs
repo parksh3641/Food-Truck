@@ -61,6 +61,7 @@ public class ShopManager : MonoBehaviour
     public Text crystalText;
 
     public LocalizationContent titleText;
+    public LocalizationContent nameText;
     public LocalizationContent effectText;
     public Text passiveText;
     public LocalizationContent infoText;
@@ -406,10 +407,10 @@ public class ShopManager : MonoBehaviour
 
         shopContents[6].SetLocked(true);
 
-        playerDataBase.Portion1 += 2;
-        playerDataBase.Portion2 += 2;
-        playerDataBase.Portion3 += 2;
-        playerDataBase.Portion4 += 2;
+        playerDataBase.Portion1 += 3;
+        playerDataBase.Portion2 += 3;
+        playerDataBase.Portion3 += 3;
+        playerDataBase.Portion4 += 3;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
@@ -442,34 +443,39 @@ public class ShopManager : MonoBehaviour
         StartCoroutine(DailyShopTimer());
     }
 
-    public void OpenSpeicalShopView()
+    public void OpenSpeicalShopView(int number)
     {
         if (!speicalShopView.activeInHierarchy)
         {
             speicalShopView.SetActive(true);
 
-            if (speicalIndex == -1)
+            ChangeSpeicalTopToggle(number);
+
+            switch (number)
             {
-                ChangeSpeicalTopToggle(0);
+                case 0:
+                    titleText.localizationName = "ChangeCharacter";
+
+                    shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    break;
+                case 1:
+                    titleText.localizationName = "ChangeTruck";
+
+                    shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    break;
+                case 2:
+                    titleText.localizationName = "ChangeAnimal";
+
+                    shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    break;
+                case 3:
+                    titleText.localizationName = "ChangeButterfly";
+
+                    shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    break;
             }
-            else
-            {
-                switch (speicalIndex)
-                {
-                    case 0:
-                        shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
-                        break;
-                    case 1:
-                        shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
-                        break;
-                    case 2:
-                        shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
-                        break;
-                    case 3:
-                        shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        break;
-                }
-            }
+
+            titleText.ReLoad();
 
             FirebaseAnalytics.LogEvent("OpenSpeicalShop");
         }
@@ -529,7 +535,7 @@ public class ShopManager : MonoBehaviour
 
         characterInfo = characterDataBase.GetCharacterInfo(CharacterType.Character1 + characterIndex);
 
-        titleText.localizationName =  "Character" + (characterIndex + 1);
+        nameText.localizationName =  "Character" + (characterIndex + 1);
         passiveText.text = "";
 
         if (characterIndex == 0)
@@ -547,7 +553,7 @@ public class ShopManager : MonoBehaviour
 
         infoText.localizationName = "Character" + (characterIndex + 1) + "_Info";
 
-        titleText.ReLoad();
+        nameText.ReLoad();
         effectText.ReLoad();
         infoText.ReLoad();
 
@@ -815,7 +821,7 @@ public class ShopManager : MonoBehaviour
 
         truckInfo = truckDataBase.GetTruckInfo(TruckType.Bread + truckIndex);
 
-        titleText.localizationName = (TruckType.Bread + truckIndex).ToString() + "Truck";
+        nameText.localizationName = (TruckType.Bread + truckIndex).ToString() + "Truck";
         passiveText.text = "";
 
         if (truckIndex == 0)
@@ -833,7 +839,7 @@ public class ShopManager : MonoBehaviour
 
         infoText.localizationName = (TruckType.Bread + truckIndex) + "TruckInfo";
 
-        titleText.ReLoad();
+        nameText.ReLoad();
         effectText.ReLoad();
         infoText.ReLoad();
 
@@ -997,7 +1003,7 @@ public class ShopManager : MonoBehaviour
 
         animalInfo = animalDataBase.GetAnimalInfo(AnimalType.Colobus + animalIndex);
 
-        titleText.localizationName = (AnimalType.Colobus + animalIndex).ToString();
+        nameText.localizationName = (AnimalType.Colobus + animalIndex).ToString();
         passiveText.text = "";
 
         if (animalIndex == 0)
@@ -1015,7 +1021,7 @@ public class ShopManager : MonoBehaviour
 
         infoText.localizationName = (AnimalType.Colobus + animalIndex) + "Info";
 
-        titleText.ReLoad();
+        nameText.ReLoad();
         effectText.ReLoad();
         infoText.ReLoad();
 
@@ -1156,7 +1162,7 @@ public class ShopManager : MonoBehaviour
 
         butterflyInfo = butterflyDataBase.GetButterflyInfo(ButterflyType.Butterfly1 + butterflyIndex);
 
-        titleText.localizationName = "Butterfly" + (butterflyIndex + 1);
+        nameText.localizationName = "Butterfly" + (butterflyIndex + 1);
         passiveText.text = "";
 
         if (butterflyIndex == 0)
@@ -1172,9 +1178,9 @@ public class ShopManager : MonoBehaviour
             //passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NeedPrice") + " -1%";
         }
 
-        infoText.localizationName = "Butterfly" + (butterflyIndex + 1) + "_Info";
+        infoText.localizationName = " ";
 
-        titleText.ReLoad();
+        nameText.ReLoad();
         effectText.ReLoad();
         infoText.ReLoad();
 

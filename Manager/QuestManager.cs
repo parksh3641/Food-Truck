@@ -80,7 +80,7 @@ public class QuestManager : MonoBehaviour
 
         int gold = questDataBase.reward * ((playerDataBase.QuestCount / 4) + 1);
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, gold);
+        PlayfabManager.instance.UpdateAddGold(gold);
 
         NotionManager.instance.UseNotion(NotionType.QuestNotion);
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);

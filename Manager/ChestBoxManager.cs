@@ -92,13 +92,13 @@ public class ChestBoxManager : MonoBehaviour
 
         random = Random.Range(0, 10);
 
-        if (random >= 7)
+        if (random >= 8)
         {
             rewardType = RewardType.Gold;
 
             chestBoxArray[0].SetActive(true);
         }
-        else if (random >= 1)
+        else if (random >= 3)
         {
             rewardType = RewardType.PortionSet;
 
@@ -117,7 +117,7 @@ public class ChestBoxManager : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 200000);
+                PlayfabManager.instance.UpdateAddGold(200000);
 
                 break;
             case RewardType.PortionSet:
@@ -147,7 +147,7 @@ public class ChestBoxManager : MonoBehaviour
 
                 break;
             case RewardType.Crystal:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 5);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1);
                 break;
         }
 
@@ -176,7 +176,7 @@ public class ChestBoxManager : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 2000000);
+                PlayfabManager.instance.UpdateAddGold(2000000);
 
                 break;
             case RewardType.PortionSet:
@@ -205,7 +205,7 @@ public class ChestBoxManager : MonoBehaviour
                 }
                 break;
             case RewardType.Crystal:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
                 break;
         }
 

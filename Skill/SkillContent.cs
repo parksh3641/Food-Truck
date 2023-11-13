@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SkillContent : MonoBehaviour
 {
     public SkillType skillType = SkillType.Skill1;
-    public MoneyType moneyType = MoneyType.Coin;
+    public MoneyType moneyType = MoneyType.CoinA;
 
     public Image icon;
 
@@ -37,7 +37,7 @@ public class SkillContent : MonoBehaviour
     private float skill11Value = 2f;
 
     private int priceGold = 5000;
-    private int priceCrystal = 3;
+    private int priceCrystal = 1;
 
     private int maxLevelGold = 100;
     private int maxLevelCrystal = 100;
@@ -81,7 +81,7 @@ public class SkillContent : MonoBehaviour
                 {
                     nextValueText.text = (skill1Value * (playerDataBase.Skill1 + 1)).ToString() + "%";
 
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill1 + 1) * priceGold;
                     }
@@ -105,7 +105,7 @@ public class SkillContent : MonoBehaviour
                 {
                     nextValueText.text = (skill2Value * (playerDataBase.Skill2 + 1)).ToString() + "%";
 
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill2 + 1) * priceGold;
                     }
@@ -128,7 +128,7 @@ public class SkillContent : MonoBehaviour
                 {
                     nextValueText.text = (skill3Value * (playerDataBase.Skill3 + 1)).ToString() + "%";
 
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill3 + 1) * priceGold;
                     }
@@ -150,7 +150,7 @@ public class SkillContent : MonoBehaviour
                 if (playerDataBase.Skill4 < maxLevelGold - 1)
                 {
                     nextValueText.text = (skill4Value * (playerDataBase.Skill4 + 1)).ToString() + "%";
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill4 + 1) * priceGold;
                     }
@@ -172,7 +172,7 @@ public class SkillContent : MonoBehaviour
                 if (playerDataBase.Skill5 < maxLevelGold - 1)
                 {
                     nextValueText.text = (skill5Value * (playerDataBase.Skill5 + 1)).ToString() + "%";
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill5 + 1) * priceGold;
                     }
@@ -194,7 +194,7 @@ public class SkillContent : MonoBehaviour
                 if (playerDataBase.Skill6 < maxLevelGold - 1)
                 {
                     nextValueText.text = (skill6Value * (playerDataBase.Skill6 + 1)).ToString() + "%";
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill6 + 1) * priceGold;
                     }
@@ -216,7 +216,7 @@ public class SkillContent : MonoBehaviour
                 if (playerDataBase.Skill7 < maxLevelCrystal - 1)
                 {
                     nextValueText.text = (skill7Value * (playerDataBase.Skill7 + 1)).ToString() + "%";
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill7 + 1) * priceGold;
                     }
@@ -238,7 +238,7 @@ public class SkillContent : MonoBehaviour
                 if (playerDataBase.Skill8 < maxLevelCrystal - 1)
                 {
                     nextValueText.text = (skill8Value * (playerDataBase.Skill8 + 1)).ToString() + "%";
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill8 + 1) * priceGold;
                     }
@@ -260,7 +260,7 @@ public class SkillContent : MonoBehaviour
                 if (playerDataBase.Skill9 < maxLevelCrystal - 1)
                 {
                     nextValueText.text = (skill9Value * (playerDataBase.Skill9 + 1)).ToString() + "%";
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill9 + 1) * priceGold;
                     }
@@ -282,7 +282,7 @@ public class SkillContent : MonoBehaviour
                 if (playerDataBase.Skill10 < maxLevelCrystal - 1)
                 {
                     nextValueText.text = (skill10Value * (playerDataBase.Skill10 + 1)).ToString() + "%";
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill10 + 1) * priceGold;
                     }
@@ -304,7 +304,7 @@ public class SkillContent : MonoBehaviour
                 if (playerDataBase.Skill11 < maxLevelCrystal - 1)
                 {
                     nextValueText.text = (skill11Value * (playerDataBase.Skill11 + 1)).ToString() + "%";
-                    if (moneyType == MoneyType.Coin)
+                    if (moneyType == MoneyType.CoinA)
                     {
                         value = (playerDataBase.Skill11 + 1) * priceGold;
                     }
@@ -321,7 +321,7 @@ public class SkillContent : MonoBehaviour
                 break;
         }
 
-        if(moneyType == MoneyType.Coin)
+        if(moneyType == MoneyType.CoinA)
         {
             levelText.text = "Lv. " + level + " / " + maxLevelGold.ToString();
         }
@@ -332,7 +332,7 @@ public class SkillContent : MonoBehaviour
 
         nowValueText.text = nowValue.ToString() + "%";
 
-        if (moneyType == MoneyType.Coin)
+        if (moneyType == MoneyType.CoinA)
         {
             buttonGold.SetActive(true);
             buttonCrystal.SetActive(false);
@@ -451,11 +451,11 @@ public class SkillContent : MonoBehaviour
                 break;
         }
 
-        if (moneyType == MoneyType.Coin)
+        if (moneyType == MoneyType.CoinA)
         {
             if (playerDataBase.Coin >= value)
             {
-                PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, value);
+                PlayfabManager.instance.UpdateSubtractGold(value);
             }
             else
             {

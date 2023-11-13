@@ -85,7 +85,7 @@ public class CouponManager : MonoBehaviour
                     playerDataBase.Coupon1 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon1", 1);
 
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 5000000);
+                    PlayfabManager.instance.UpdateAddGold(5000000);
 
                     playerDataBase.Portion1 += 5;
                     playerDataBase.Portion2 += 5;
@@ -125,7 +125,7 @@ public class CouponManager : MonoBehaviour
                     playerDataBase.Coupon2 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon2", 1);
 
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
+                    PlayfabManager.instance.UpdateAddGold(1000000);
 
                     playerDataBase.Portion1 += 5;
                     playerDataBase.Portion2 += 5;
@@ -165,7 +165,7 @@ public class CouponManager : MonoBehaviour
                     playerDataBase.Coupon3 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon3", 1);
 
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 5000000);
+                    PlayfabManager.instance.UpdateAddGold(5000000);
 
                     playerDataBase.Portion1 += 5;
                     playerDataBase.Portion2 += 5;
@@ -205,7 +205,7 @@ public class CouponManager : MonoBehaviour
                     playerDataBase.Coupon4 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon4", 1);
 
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 10000000);
+                    PlayfabManager.instance.UpdateAddGold(10000000);
 
                     playerDataBase.Portion1 += 10;
                     playerDataBase.Portion2 += 10;

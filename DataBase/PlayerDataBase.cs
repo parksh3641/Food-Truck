@@ -8,7 +8,11 @@ public class PlayerDataBase : ScriptableObject
 {
     [Title("Player")]
     [SerializeField]
-    private int coin = 0;
+    private long coin = 0;
+    [SerializeField]
+    private long coinA = 0;
+    [SerializeField]
+    private long coinB = 0;
     [SerializeField]
     private int crystal = 0;
     [SerializeField]
@@ -346,7 +350,7 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private bool goldX2 = false;
 
-    public int Coin
+    public long Coin
     {
         get
         {
@@ -355,6 +359,30 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             coin = value;
+        }
+    }
+
+    public long CoinA
+    {
+        get
+        {
+            return coinA;
+        }
+        set
+        {
+            coinA = value;
+        }
+    }
+
+    public long CoinB
+    {
+        get
+        {
+            return coinB;
+        }
+        set
+        {
+            coinB = value;
         }
     }
 
@@ -2079,6 +2107,8 @@ public class PlayerDataBase : ScriptableObject
         goldX2 = false;
 
         coin = 0;
+        coinA = 0;
+        coinB = 0;
         crystal = 0;
         defDestroyTicket = 0;
         lockTutorial = 0;

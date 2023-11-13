@@ -50,7 +50,7 @@ public class MoneyAnimation : MonoBehaviour
     [Button]
     void PlusMoney()
     {
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000);
+        PlayfabManager.instance.UpdateAddGold(1000);
     }
 
     [Button]

@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public GameObject changeFoodAlarmObj;
 
     public Image changeFoodImg;
+    public Image islandImg;
+
+    public LocalizationContent islandText;
 
     [Space]
     [Title("Truck")]
@@ -294,6 +297,10 @@ public class GameManager : MonoBehaviour
         checkInternet.SetActive(false);
         loginView.SetActive(false);
 
+        islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
+        islandText.localizationName = GameStateManager.instance.IslandType.ToString();
+        islandText.ReLoad();
+
         feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  0%";
 
         nowUpgradeCount = playerDataBase.UpgradeCount;
@@ -507,6 +514,8 @@ public class GameManager : MonoBehaviour
 
     public void RenewalVC()
     {
+        playerDataBase.Coin = playerDataBase.CoinA + (playerDataBase.CoinB * 100000000);
+
         goldText.text = MoneyUnitString.ToCurrencyString(playerDataBase.Coin);
         crystalText.text = MoneyUnitString.ToCurrencyString(playerDataBase.Crystal);
     }
@@ -529,7 +538,7 @@ public class GameManager : MonoBehaviour
         sellPriceX2 = 0;
         defDestroy = 0;
 
-        changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
+        //changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
 
         if (GameStateManager.instance.CharacterType > CharacterType.Character1)
@@ -672,7 +681,7 @@ public class GameManager : MonoBehaviour
             playerDataBase.FirstReward = 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
 
-            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
+            PlayfabManager.instance.UpdateAddGold(1000000);
 
             StartCoroutine(FirstDelay());
         }
@@ -687,6 +696,10 @@ public class GameManager : MonoBehaviour
     public void ChangeIsland(IslandType type)
     {
         GameStateManager.instance.IslandType = type;
+
+        islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
+        islandText.localizationName = GameStateManager.instance.IslandType.ToString();
+        islandText.ReLoad();
 
         switch (GameStateManager.instance.IslandType)
         {
@@ -1694,7 +1707,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Coin, need);
+        PlayfabManager.instance.UpdateSubtractGold(need);
 
         myMoneyPlusText.gameObject.SetActive(false);
         myMoneyPlusText.gameObject.SetActive(true);
@@ -2783,7 +2796,7 @@ public class GameManager : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.SuccessSell);
         }
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, sellPrice);
+        PlayfabManager.instance.UpdateAddGold(sellPrice);
 
         myMoneyPlusText.gameObject.SetActive(false);
         myMoneyPlusText.gameObject.SetActive(true);
@@ -3061,7 +3074,7 @@ public class GameManager : MonoBehaviour
                         playerDataBase.UseSources += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
 
-                        feverCount += (feverMaxCount * 0.5f);
+                        feverCount += (feverMaxCount * 0.3f);
 
                         CheckFever();
 
@@ -3260,6 +3273,10 @@ public class GameManager : MonoBehaviour
 
     public void Reincarnation()
     {
+        islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
+        islandText.localizationName = GameStateManager.instance.IslandType.ToString();
+        islandText.ReLoad();
+
         CheckFoodState();
     }
 
@@ -3384,7 +3401,7 @@ public class GameManager : MonoBehaviour
     {
         if(GameStateManager.instance.HamburgerLevel <= 2 && GameStateManager.instance.SandwichLevel <= 2 && GameStateManager.instance.SnackLabLevel <= 2
             && GameStateManager.instance.DrinkLevel <= 2 && GameStateManager.instance.PizzaLevel <= 2 && GameStateManager.instance.DonutLevel <= 2
-            && playerDataBase.Coin < 1600)
+            && playerDataBase.Coin < 10000)
         {
             bankruptcyView.SetActive(true);
 
@@ -3405,11 +3422,11 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.Bankruptcy < 1)
         {
-            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 1000000);
+            PlayfabManager.instance.UpdateAddGold(1000000);
         }
         else
         {
-            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 100000);
+            PlayfabManager.instance.UpdateAddGold(100000);
         }
     }
 }

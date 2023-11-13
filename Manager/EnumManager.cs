@@ -9,8 +9,9 @@ public class EnumManager : MonoBehaviour
 
 public enum MoneyType
 {
-    Coin,
-    Crystal
+    CoinA,
+    Crystal,
+    CoinB
 }
 
 public enum ButtonType
@@ -184,7 +185,13 @@ public enum ItemType
     PortionSet2,
     PortionSet3,
     DailyReward_Portion,
-    GoldX2
+    GoldX2,
+    CrystalShop1,
+    CrystalShop2,
+    CrystalShop3,
+    CrystalShop4,
+    CrystalShop5,
+    CrystalShop6,
 }
 
 public enum BuyType
@@ -192,7 +199,8 @@ public enum BuyType
     Free,
     Rm,
     Ad,
-    Coin
+    Coin,
+    Crystal
 }
 
 public enum RankType
@@ -275,4 +283,6 @@ public enum IslandType
 {
     Island1,
     Island2,
+    Island3,
+    Island4,
 }

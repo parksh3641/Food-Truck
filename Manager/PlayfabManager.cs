@@ -41,7 +41,9 @@ public class PlayfabManager : MonoBehaviour
     private bool inventoryData = false;
     private bool grantItemData = false;
 
-    private int value = 0;
+    private long coin = 0;
+    private long coinA = 0;
+    private long coinB = 0;
 
     public NickNameManager nickNameManager;
     public GameManager gameManager;
@@ -695,12 +697,18 @@ public class PlayfabManager : MonoBehaviour
         PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(), result =>
         {
             var Inventory = result.Inventory;
-            int gold = result.VirtualCurrency["GO"];
+            int coinA = result.VirtualCurrency["GO"];
+            int coinB = result.VirtualCurrency["GA"];
             int crystal = result.VirtualCurrency["ST"];
 
-            if (gold > 2000000000)
+            if (coinA > 2000000000)
             {
-                gold = 2000000000;
+                coinA = 2000000000;
+            }
+
+            if (coinB > 2000000000)
+            {
+                coinB = 2000000000;
             }
 
             if (crystal > 2000000000)
@@ -708,7 +716,8 @@ public class PlayfabManager : MonoBehaviour
                 crystal = 2000000000;
             }
 
-            playerDataBase.Coin = gold;
+            playerDataBase.CoinA = coinA;
+            playerDataBase.CoinB = coinB;
             playerDataBase.Crystal = crystal;
 
             if (Inventory != null)
@@ -1436,17 +1445,86 @@ public class PlayfabManager : MonoBehaviour
         }
     }
 
+    public void UpdateAddGold(int number)
+    {
+        Debug.Log("°ñµå ´õÇÏ±â");
+
+        moneyAnimation.PlusMoney(number);
+
+        coin = playerDataBase.Coin;
+        coinA = playerDataBase.CoinA;
+        coinB = playerDataBase.CoinB;
+
+        coin += number;
+
+        coinB = coin / 100000000;
+        coinA = coin - (coinB * 100000000);
+
+        if (coinA > playerDataBase.CoinA)
+        {
+            UpdateAddCurrency(MoneyType.CoinA, (int)(coinA - playerDataBase.CoinA));
+        }
+        else
+        {
+            UpdateSubtractCurrency(MoneyType.CoinA, (int)(playerDataBase.CoinA - coinA));
+        }
+
+        if (coinB > playerDataBase.CoinB)
+        {
+            UpdateAddCurrency(MoneyType.CoinB, (int)(coinB - playerDataBase.CoinB));
+        }
+        else
+        {
+            UpdateSubtractCurrency(MoneyType.CoinB, (int)(playerDataBase.CoinB - coinB));
+        }
+    }
+
+    public void UpdateSubtractGold(int number)
+    {
+        Debug.Log("°ñµå »©±â");
+
+        coin = playerDataBase.Coin;
+        coinA = playerDataBase.CoinA;
+        coinB = playerDataBase.CoinB;
+
+        coin -= number;
+
+        coinB = coin / 100000000;
+        coinA = coin - (coinB * 100000000);
+
+        if (coinA > playerDataBase.CoinA)
+        {
+            UpdateAddCurrency(MoneyType.CoinA, (int)(coinA - playerDataBase.CoinA));
+        }
+        else
+        {
+            UpdateSubtractCurrency(MoneyType.CoinA, (int)(playerDataBase.CoinA - coinA));
+        }
+
+        if (coinB > playerDataBase.CoinB)
+        {
+            UpdateAddCurrency(MoneyType.CoinB, (int)(coinB - playerDataBase.CoinB));
+        }
+        else
+        {
+            UpdateSubtractCurrency(MoneyType.CoinB, (int)(playerDataBase.CoinB - coinB));
+        }
+    }
+
     public void UpdateAddCurrency(MoneyType type, int number)
     {
         string currentType = "";
 
         switch (type)
         {
-            case MoneyType.Coin:
+            case MoneyType.CoinA:
                 currentType = "GO";
                 break;
             case MoneyType.Crystal:
                 currentType = "ST";
+                break;
+            case MoneyType.CoinB:
+                currentType = "GA";
                 break;
         }
 
@@ -1463,43 +1541,21 @@ public class PlayfabManager : MonoBehaviour
 
                 switch (type)
                 {
-                    case MoneyType.Coin:
-
-                        if(playerDataBase.Coin + number >= 2000000000)
-                        {
-                            value = 2000000000 - playerDataBase.Coin + number;
-
-                            playerDataBase.Coin += value;
-                        }
-                        else
-                        {
-                            playerDataBase.Coin += number;
-                        }
-
-                        moneyAnimation.PlusMoney(number);
-
+                    case MoneyType.CoinA:
+                        playerDataBase.CoinA += number;
+    
                         break;
                     case MoneyType.Crystal:
-
-                        if (playerDataBase.Crystal + number >= 2000000000)
-                        {
-                            value = 2000000000 - playerDataBase.Crystal + number;
-
-                            playerDataBase.Crystal += value;
-                        }
-                        else
-                        {
-                            playerDataBase.Crystal += number;
-                        }
-
+                        playerDataBase.Crystal += number;
                         moneyAnimation2.PlusMoney(number);
+
+                        break;
+                    case MoneyType.CoinB:
+                        playerDataBase.CoinB += number;
                         break;
                 }
 
-                if (GameManager.instance != null)
-                {
-                    GameManager.instance.RenewalVC();
-                }
+                gameManager.RenewalVC();
             }
             catch (Exception e)
             {
@@ -1519,11 +1575,14 @@ public class PlayfabManager : MonoBehaviour
 
         switch (type)
         {
-            case MoneyType.Coin:
+            case MoneyType.CoinA:
                 currentType = "GO";
                 break;
             case MoneyType.Crystal:
                 currentType = "ST";
+                break;
+            case MoneyType.CoinB:
+                currentType = "GA";
                 break;
         }
 
@@ -1545,18 +1604,18 @@ public class PlayfabManager : MonoBehaviour
 
             switch (type)
             {
-                case MoneyType.Coin:
-                    playerDataBase.Coin -= number;
+                case MoneyType.CoinA:
+                    playerDataBase.CoinA -= number;
                     break;
                 case MoneyType.Crystal:
                     playerDataBase.Crystal -= number;
                     break;
+                case MoneyType.CoinB:
+                    playerDataBase.CoinB -= number;
+                    break;
             }
 
-            if (GameManager.instance != null)
-            {
-                GameManager.instance.RenewalVC();
-            }
+            gameManager.RenewalVC();
         }
         else
         {
@@ -1880,13 +1939,15 @@ public class PlayfabManager : MonoBehaviour
         isDelay = false;
     }
 
+    [Button]
     public void AddMoney()
     {
-        if (isDelay) return;
+        UpdateAddGold(50000000);
+    }
 
-        UpdateAddCurrency(MoneyType.Coin, 10000000);
-
-        isDelay = true;
-        Invoke("WaitDelay", 0.2f);
+    [Button]
+    public void MinusMoney()
+    {
+        UpdateSubtractGold(50000000);
     }
 }

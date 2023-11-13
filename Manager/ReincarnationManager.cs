@@ -55,7 +55,7 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.FriesMaxValue > 0)
         {
-            crystal += 300;
+            crystal += 100;
         }
 
         if(playerDataBase.Candy1MaxValue > 0)
@@ -75,32 +75,32 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.Candy4MaxValue > 0)
         {
-            crystal += 50;
+            crystal += 40;
         }
 
         if (playerDataBase.Candy5MaxValue > 0)
         {
-            crystal += 70;
+            crystal += 50;
         }
 
         if (playerDataBase.Candy6MaxValue > 0)
         {
-            crystal += 100;
+            crystal += 60;
         }
 
         if (playerDataBase.Candy7MaxValue > 0)
         {
-            crystal += 150;
+            crystal += 70;
         }
 
         if (playerDataBase.Candy8MaxValue > 0)
         {
-            crystal += 200;
+            crystal += 80;
         }
 
         if (playerDataBase.Candy9MaxValue > 0)
         {
-            crystal += 300;
+            crystal += 90;
         }
 
         crystal = crystal + (crystal * (0.01f * (playerDataBase.Skill11 * 1)));

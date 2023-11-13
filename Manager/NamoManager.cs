@@ -237,7 +237,7 @@ public class NamoManager : MonoBehaviour
 
 			UpdateRecord();
 
-			PlayfabManager.instance.UpdateAddCurrency(MoneyType.Coin, 100);
+			//PlayfabManager.instance.UpdateAddGold(100);
 		}
 		else
 		{

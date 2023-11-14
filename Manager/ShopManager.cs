@@ -1766,7 +1766,7 @@ public class ShopManager : MonoBehaviour
                 switch (number)
                 {
                     case 0:
-                        if (playerDataBase.Coin < characterInfo.price)
+                        if (playerDataBase.Coin < price_Gold)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCoin);
@@ -1866,7 +1866,7 @@ public class ShopManager : MonoBehaviour
                 switch(number)
                 {
                     case 0:
-                        if (playerDataBase.Coin < truckInfo.price)
+                        if (playerDataBase.Coin < price_Gold)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCoin);
@@ -1936,7 +1936,7 @@ public class ShopManager : MonoBehaviour
                 switch (number)
                 {
                     case 0:
-                        if (playerDataBase.Coin < animalInfo.price)
+                        if (playerDataBase.Coin < price_Gold)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCoin);
@@ -2000,7 +2000,7 @@ public class ShopManager : MonoBehaviour
                 switch (number)
                 {
                     case 0:
-                        if (playerDataBase.Coin < butterflyInfo.price)
+                        if (playerDataBase.Coin < price_Gold)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCoin);

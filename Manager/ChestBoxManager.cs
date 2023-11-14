@@ -147,7 +147,7 @@ public class ChestBoxManager : MonoBehaviour
 
                 break;
             case RewardType.Crystal:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3);
                 break;
         }
 

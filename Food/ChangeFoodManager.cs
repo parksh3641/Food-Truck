@@ -102,7 +102,10 @@ public class ChangeFoodManager : MonoBehaviour
                 {
                     changeFoodContentList[i].gameObject.SetActive(true);
                     changeFoodContentList[i].Locked();
+                    changeFoodContentList[i].UnSelected();
                 }
+
+                changeFoodContentList[(int)GameStateManager.instance.FoodType].Selected();
 
                 changeFoodContentList[0].SetLevel(GameStateManager.instance.HamburgerLevel, upgradeDataBase.GetMaxLevel(FoodType.Hamburger));
                 changeFoodContentList[1].SetLevel(GameStateManager.instance.SandwichLevel, upgradeDataBase.GetMaxLevel(FoodType.Sandwich));
@@ -158,7 +161,10 @@ public class ChangeFoodManager : MonoBehaviour
                 {
                     changeCandyList[i].gameObject.SetActive(true);
                     changeCandyList[i].Locked();
+                    changeCandyList[i].UnSelected();
                 }
+
+                changeCandyList[(int)GameStateManager.instance.CandyType].Selected();
 
                 changeCandyList[0].SetLevel(GameStateManager.instance.Candy1Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy1));
                 changeCandyList[1].SetLevel(GameStateManager.instance.Candy2Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Candy2));

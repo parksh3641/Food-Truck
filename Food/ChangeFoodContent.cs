@@ -11,6 +11,7 @@ public class ChangeFoodContent : MonoBehaviour
     public Image icon;
     public LocalizationContent titleText;
     public GameObject lockedObj;
+    public GameObject selectedObj;
 
     public Image background;
 
@@ -69,6 +70,16 @@ public class ChangeFoodContent : MonoBehaviour
     public void UnLock()
     {
         lockedObj.SetActive(false);
+    }
+
+    public void Selected()
+    {
+        selectedObj.SetActive(true);
+    }
+
+    public void UnSelected()
+    {
+        selectedObj.SetActive(false);
     }
 
     public void OnClick()

@@ -71,6 +71,11 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySFX(GameSfxType type)
     {
+        if(type.Equals(GameSfxType.Fever_In))
+        {
+            if (!GameStateManager.instance.Music) return;
+        }
+
         if (!GameStateManager.instance.Sfx) return;
 
         for (int i = 0; i < sfxAudio.Length; i++)

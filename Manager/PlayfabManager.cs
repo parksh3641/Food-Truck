@@ -1907,7 +1907,7 @@ public class PlayfabManager : MonoBehaviour
 
         playerDataBase.RemoveAds = true;
 
-        GoogleAdsManager.instance.admobBanner.DestroyAd();
+        //GoogleAdsManager.instance.admobBanner.DestroyAd();
 
         NotionManager.instance.UseNotion(NotionType.SuccessRemoveAds);
     }

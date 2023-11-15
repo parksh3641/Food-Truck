@@ -145,7 +145,7 @@ public class UpgradeCandy
             price = level * level * 600;
         }
 
-        return price + (price / 10);
+        return price;
     }
 
     public float GetSuccess(int level)

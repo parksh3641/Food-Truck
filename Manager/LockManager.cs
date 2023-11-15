@@ -69,13 +69,11 @@ public class LockManager : MonoBehaviour
         if (playerDataBase.LockTutorial >= 4) //연구소, 특별 연구소 해제
         {
             menuIcon[7].SetActive(true);
-            menuIcon[8].SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 5) //섬 이동, 환생 해제
         {
-            menuIcon[9].SetActive(true);
-            menuIcon[10].SetActive(true);
+            menuIcon[8].SetActive(true);
         }
     }
 
@@ -119,12 +117,10 @@ public class LockManager : MonoBehaviour
                 break;
             case 4:
                 lockIcon[7].SetActive(true);
-                lockIcon[8].SetActive(false);
 
                 break;
             case 5:
-                lockIcon[9].SetActive(true);
-                lockIcon[10].SetActive(true);
+                lockIcon[8].SetActive(true);
 
                 break;
         }

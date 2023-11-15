@@ -9,6 +9,8 @@ public class NickNameManager : MonoBehaviour
 {
     public GameObject nickNameView;
 
+    public Text signText;
+
     public GameObject closeButton;
 
     public InputField inputField;
@@ -119,6 +121,8 @@ public class NickNameManager : MonoBehaviour
     {
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SignNotion6);
+
+        signText.text = GameStateManager.instance.NickName;
 
         nickNameView.SetActive(false);
     }

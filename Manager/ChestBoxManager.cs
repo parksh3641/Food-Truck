@@ -84,6 +84,13 @@ public class ChestBoxManager : MonoBehaviour
 
     public void OpenChestBox()
     {
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
         chestBoxView.SetActive(true);
 
         chestBoxArray[0].SetActive(false);
@@ -147,7 +154,7 @@ public class ChestBoxManager : MonoBehaviour
 
                 break;
             case RewardType.Crystal:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1);
                 break;
         }
 

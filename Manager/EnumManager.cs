@@ -6,18 +6,17 @@ public class EnumManager : MonoBehaviour
 {
 
 }
+public enum GameType
+{
+    Story,
+    Rank
+}
 
 public enum MoneyType
 {
     CoinA,
     Crystal,
     CoinB
-}
-
-public enum ButtonType
-{
-    Normal,
-    Bomb
 }
 
 public enum LevelType
@@ -31,9 +30,8 @@ public enum LevelType
 
 public enum RankingType
 {
-    GourmetLevel,
-    QuestCount,
-    UpgradeCount
+    UpgradeCount,
+    TotalLevel,
 }
 
 public enum LanguageType
@@ -220,7 +218,8 @@ public enum FoodType
     Drink,
     Pizza,
     Donut,
-    Fries
+    Fries,
+    Ribs
 }
 
 public enum CandyType
@@ -234,6 +233,7 @@ public enum CandyType
     Candy7,
     Candy8,
     Candy9,
+    Chocolate
 }
 
 public enum PassiveEffect

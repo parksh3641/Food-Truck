@@ -97,7 +97,7 @@ public class BuffManager : MonoBehaviour
             if (buff1) return;
 
             buff1 = true;
-            buff1Time = time;
+            buff1Time = time / 2;
 
             buff1Obj.SetActive(true);
             StartCoroutine(Buff1Coroution());

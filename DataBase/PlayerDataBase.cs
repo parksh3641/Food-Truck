@@ -254,6 +254,19 @@ public class PlayerDataBase : ScriptableObject
     private int buffCount = 0;
 
     [Space]
+    [Title("Rank")]
+    [SerializeField]
+    private int rankLevel1 = 0;
+    [SerializeField]
+    private int rankLevel2 = 0;
+    [SerializeField]
+    private int rankLevel3 = 0;
+    [SerializeField]
+    private int rankLevel4 = 0;
+    [SerializeField]
+    private int totalLevel = 0;
+
+    [Space]
     [Title("Skill")]
     [SerializeField]
     private int skill1 = 0;
@@ -310,40 +323,6 @@ public class PlayerDataBase : ScriptableObject
     public bool attendanceCheck = false;
     [Space]
     public string nextMonday = "";
-
-
-    [Space]
-    [Title("Best Record Offline")]
-    [SerializeField]
-    private int easy_Offline = 0;
-
-    [SerializeField]
-    private int normal_Offline = 0;
-
-    [SerializeField]
-    private int hard_Offline = 0;
-
-    [SerializeField]
-    private int crazy_Offline = 0;
-
-    [SerializeField]
-    private int insane_Offline = 0;
-
-    [Title("Best Record _Online")]
-    [SerializeField]
-    private int easy = 0;
-
-    [SerializeField]
-    private int normal = 0;
-
-    [SerializeField]
-    private int hard = 0;
-
-    [SerializeField]
-    private int crazy = 0;
-
-    [SerializeField]
-    private int insane = 0;
 
     [SerializeField]
     private bool removeAds = false;
@@ -1007,6 +986,66 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             buffCount = value;
+        }
+    }
+
+    public int RankLevel1
+    {
+        get
+        {
+            return rankLevel1;
+        }
+        set
+        {
+            rankLevel1 = value;
+        }
+    }
+
+    public int RankLevel2
+    {
+        get
+        {
+            return rankLevel2;
+        }
+        set
+        {
+            rankLevel2 = value;
+        }
+    }
+
+    public int RankLevel3
+    {
+        get
+        {
+            return rankLevel3;
+        }
+        set
+        {
+            rankLevel3 = value;
+        }
+    }
+
+    public int RankLevel4
+    {
+        get
+        {
+            return rankLevel4;
+        }
+        set
+        {
+            rankLevel4 = value;
+        }
+    }
+
+    public int TotalLevel
+    {
+        get
+        {
+            return totalLevel;
+        }
+        set
+        {
+            totalLevel = value;
         }
     }
 
@@ -1957,126 +1996,6 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int Easy
-    {
-        get
-        {
-            return easy;
-        }
-        set
-        {
-            easy = value;
-        }
-    }
-
-    public int Normal
-    {
-        get
-        {
-            return normal;
-        }
-        set
-        {
-            normal = value;
-        }
-    }
-
-    public int Hard
-    {
-        get
-        {
-            return hard;
-        }
-        set
-        {
-            hard = value;
-        }
-    }
-
-    public int Crazy
-    {
-        get
-        {
-            return crazy;
-        }
-        set
-        {
-            crazy = value;
-        }
-    }
-
-    public int Insane
-    {
-        get
-        {
-            return insane;
-        }
-        set
-        {
-            insane = value;
-        }
-    }
-
-    public int Easy_Offline
-    {
-        get
-        {
-            return easy_Offline;
-        }
-        set
-        {
-            easy_Offline = value;
-        }
-    }
-
-    public int Normal_Offline
-    {
-        get
-        {
-            return normal_Offline;
-        }
-        set
-        {
-            normal_Offline = value;
-        }
-    }
-
-    public int Hard_Offline
-    {
-        get
-        {
-            return hard_Offline;
-        }
-        set
-        {
-            hard_Offline = value;
-        }
-    }
-
-    public int Crazy_Offline
-    {
-        get
-        {
-            return crazy_Offline;
-        }
-        set
-        {
-            crazy_Offline = value;
-        }
-    }
-
-    public int Insane_Offline
-    {
-        get
-        {
-            return insane_Offline;
-        }
-        set
-        {
-            insane_Offline = value;
-        }
-    }
-
     public bool RemoveAds
     {
         get
@@ -2252,18 +2171,6 @@ public class PlayerDataBase : ScriptableObject
         attendanceCount = 0;
         attendanceCheck = false;
         nextMonday = "";
-
-        easy_Offline = 0;
-        normal_Offline = 0;
-        hard_Offline = 0;
-        crazy_Offline = 0;
-        insane_Offline = 0;
-
-        easy = 0;
-        normal = 0;
-        hard = 0;
-        crazy = 0;
-        insane = 0;
 
         //easy_Offline = PlayerPrefs.GetInt("Easy_Offline");
         //normal_Offline = PlayerPrefs.GetInt("Normal_Offline");

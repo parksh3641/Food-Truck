@@ -9,6 +9,7 @@ public class ReincarnationManager : MonoBehaviour
 
     public Text crystalText;
     public Text countText;
+    public Text passiveText;
     public Text adText;
 
 
@@ -31,8 +32,6 @@ public class ReincarnationManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         reincarnationView.SetActive(false);
-
-
     }
 
     public void OpenReincarnationView()
@@ -102,6 +101,8 @@ public class ReincarnationManager : MonoBehaviour
         {
             crystal += 25;
         }
+
+        passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 2).ToString() + "%)";
 
         crystal = crystal + (crystal * (0.02f * (playerDataBase.Skill11 * 1)));
 

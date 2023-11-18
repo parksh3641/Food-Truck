@@ -96,7 +96,7 @@ public class ShopContent : MonoBehaviour
                 rewardText.text = MoneyUnitString.ToCurrencyString(1000000);
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = MoneyUnitString.ToCurrencyString(10000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(5000000);
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);

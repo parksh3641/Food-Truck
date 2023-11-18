@@ -34,10 +34,12 @@ public class OptionManager : MonoBehaviour
         languageView.SetActive(false);
 
         versionText.text = "v" + Application.version;
-
-        Time.timeScale = 1f;
     }
 
+    private void Start()
+    {
+        GameStateManager.instance.Pause = false;
+    }
 
     public void OpenOptionView()
     {
@@ -50,13 +52,13 @@ public class OptionManager : MonoBehaviour
             OnVibration();
             OnEffect();
 
-            Time.timeScale = 0f;
+            GameStateManager.instance.Pause = true;
         }
         else
         {
             optionView.SetActive(false);
 
-            Time.timeScale = 1f;
+            GameStateManager.instance.Pause = false;
         }
     }
 

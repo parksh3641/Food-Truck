@@ -117,15 +117,15 @@ public class RankingManager : MonoBehaviour
                 infoText.localizationName = "Ranking1_Info";
                 break;
             case 1:
-                ChangeRankingView(RankingType.GourmetLevel);
+                ChangeRankingView(RankingType.TotalLevel);
 
                 infoText.localizationName = "Ranking2_Info";
                 break;
-            case 2:
-                ChangeRankingView(RankingType.QuestCount);
+            //case 2:
+            //    ChangeRankingView(RankingType.TotalLevel);
 
-                infoText.localizationName = "Ranking3_Info";
-                break;
+            //    infoText.localizationName = "Ranking3_Info";
+            //    break;
         }
 
         infoText.ReLoad();

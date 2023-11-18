@@ -179,10 +179,7 @@ public class PlayfabManager : MonoBehaviour
 
     public void SuccessLogOut()
     {
-        GameStateManager.instance.PlayfabId = "";
-        GameStateManager.instance.CustomId = "";
-        GameStateManager.instance.AutoLogin = false;
-        GameStateManager.instance.Login = LoginType.None;
+        GameStateManager.instance.Initialize();
 
         isActive = false;
         isLogin = false;
@@ -1317,18 +1314,21 @@ public class PlayfabManager : MonoBehaviour
                        case "BuffCount":
                            playerDataBase.BuffCount = statistics.Value;
                            break;
-                           //case "Normal":
-                           //    playerDataBase.Normal = statistics.Value;
-                           //    break;
-                           //case "Hard":
-                           //    playerDataBase.Hard = statistics.Value;
-                           //    break;
-                           //case "Crazy":
-                           //    playerDataBase.Crazy = statistics.Value;
-                           //    break;
-                           //case "Insane":
-                           //    playerDataBase.Insane = statistics.Value;
-                           //    break;
+                       case "RankLevel1":
+                           playerDataBase.RankLevel1 = statistics.Value;
+                           break;
+                       case "RankLevel2":
+                           playerDataBase.RankLevel2 = statistics.Value;
+                           break;
+                       case "RankLevel3":
+                           playerDataBase.RankLevel3 = statistics.Value;
+                           break;
+                       case "RankLevel4":
+                           playerDataBase.RankLevel4 = statistics.Value;
+                           break;
+                       case "TotalLevel":
+                           playerDataBase.TotalLevel = statistics.Value;
+                           break;
                    }
                }
 
@@ -1447,8 +1447,6 @@ public class PlayfabManager : MonoBehaviour
 
     public void UpdateAddGold(int number)
     {
-        Debug.Log("∞ÒµÂ ¥ı«œ±‚");
-
         moneyAnimation.PlusMoney(number);
 
         coin = playerDataBase.Coin;
@@ -1481,8 +1479,6 @@ public class PlayfabManager : MonoBehaviour
 
     public void UpdateSubtractGold(int number)
     {
-        Debug.Log("∞ÒµÂ ª©±‚");
-
         coin = playerDataBase.Coin;
         coinA = playerDataBase.CoinA;
         coinB = playerDataBase.CoinB;

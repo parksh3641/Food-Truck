@@ -15,6 +15,9 @@ public class ShopManager : MonoBehaviour
     public GameObject alarm;
     public GameObject dailyAlarm;
 
+    public GameObject goldx2;
+    public GameObject removeAds;
+
     [Space]
     [Title("TopMenu")]
     public Image[] topMenuImgArray;
@@ -103,7 +106,6 @@ public class ShopManager : MonoBehaviour
     public ResetManager resetManager;
 
     PlayerDataBase playerDataBase;
-
     CharacterDataBase characterDataBase;
     TruckDataBase truckDataBase;
     AnimalDataBase animalDataBase;
@@ -309,7 +311,7 @@ public class ShopManager : MonoBehaviour
 
                 shopContents[0].SetLocked(true);
 
-                PlayfabManager.instance.UpdateAddGold(1000000);
+                PlayfabManager.instance.UpdateAddGold(5000000);
 
                 SoundManager.instance.PlaySFX(GameSfxType.Success);
                 NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -2312,11 +2314,15 @@ public class ShopManager : MonoBehaviour
     void ContentDelay()
     {
         shopContents[7].gameObject.SetActive(false);
+
+        removeAds.SetActive(true);
     }
 
     void ContentDelay2()
     {
         shopContents[12].gameObject.SetActive(false);
+
+        goldx2.SetActive(true);
     }
 
     public void Failed()

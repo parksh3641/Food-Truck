@@ -43,9 +43,12 @@ public class GameStateManager : MonoBehaviour
 
         [Space]
         [Title("InGame")]
+        public GameType gameType = GameType.Story;
         public IslandType islandType = IslandType.Island1;
         public FoodType foodType = FoodType.Hamburger;
         public CandyType candyType = CandyType.Candy1;
+
+        public int level = 0;
 
         [Space]
         [Title("Level")]
@@ -56,6 +59,7 @@ public class GameStateManager : MonoBehaviour
         public int pizzaLevel = 0;
         public int donutLevel = 0;
         public int friesLevel = 0;
+        public int ribsLevel = 0;
 
         [Space]
         public int candy1Level = 0;
@@ -67,6 +71,7 @@ public class GameStateManager : MonoBehaviour
         public int candy7Level = 0;
         public int candy8Level = 0;
         public int candy9Level = 0;
+        public int chocolateLevel = 0;
 
         [Space]
         [Title("Save")]
@@ -97,6 +102,7 @@ public class GameStateManager : MonoBehaviour
         public bool tutorial = false;
 
         public bool privacypolicy = false;
+        public bool pause = false;
     }
 
     #region Data
@@ -176,6 +182,20 @@ public class GameStateManager : MonoBehaviour
             SaveFile();
         }
     }
+
+    public GameType GameType
+    {
+        get
+        {
+            return gameSettings.gameType;
+        }
+        set
+        {
+            gameSettings.gameType = value;
+            SaveFile();
+        }
+    }
+
     public IslandType IslandType
     {
         get
@@ -188,7 +208,6 @@ public class GameStateManager : MonoBehaviour
             SaveFile();
         }
     }
-
 
     public LevelType LevelType
     {
@@ -372,6 +391,19 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public int Level
+    {
+        get
+        {
+            return gameSettings.level;
+        }
+        set
+        {
+            gameSettings.level = value;
+            SaveFile();
+        }
+    }
+
     public int HamburgerLevel
     {
         get
@@ -459,6 +491,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.friesLevel = value;
+            SaveFile();
+        }
+    }
+
+    public int RibsLevel
+    {
+        get
+        {
+            return gameSettings.ribsLevel;
+        }
+        set
+        {
+            gameSettings.ribsLevel = value;
             SaveFile();
         }
     }
@@ -576,6 +621,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.candy9Level = value;
+            SaveFile();
+        }
+    }
+
+    public int ChocolateLevel
+    {
+        get
+        {
+            return gameSettings.chocolateLevel;
+        }
+        set
+        {
+            gameSettings.chocolateLevel = value;
             SaveFile();
         }
     }
@@ -750,6 +808,19 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public bool Pause
+    {
+        get
+        {
+            return gameSettings.pause;
+        }
+        set
+        {
+            gameSettings.pause = value;
+            SaveFile();
+        }
+    }
+
     #endregion
 
     private void Awake()
@@ -758,6 +829,12 @@ public class GameStateManager : MonoBehaviour
 
         LoadData();
     }
+
+    public void Initialize()
+    {
+        gameSettings = new GameSettings();
+    }
+
     private void LoadData()
     {
         try

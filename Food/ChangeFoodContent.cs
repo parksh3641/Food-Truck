@@ -13,6 +13,8 @@ public class ChangeFoodContent : MonoBehaviour
     public GameObject lockedObj;
     public GameObject selectedObj;
 
+    public LocalizationContent lockedText;
+
     public Image background;
 
     Color foodColor = new Color(206 / 255f, 141 / 255f, 1);
@@ -37,6 +39,9 @@ public class ChangeFoodContent : MonoBehaviour
 
         titleText.localizationName = type.ToString();
         titleText.ReLoad();
+
+        lockedText.localizationName = "FoodLocked";
+        lockedText.ReLoad();
     }
 
     public void InitializeCandy(CandyType type, Sprite sp, ChangeFoodManager manager)
@@ -53,6 +58,16 @@ public class ChangeFoodContent : MonoBehaviour
 
         titleText.localizationName = type.ToString();
         titleText.ReLoad();
+
+        if(type == CandyType.Chocolate)
+        {
+            lockedText.localizationName = "RankLocked1";
+        }
+        else
+        {
+            lockedText.localizationName = "FoodLocked";
+        }
+        lockedText.ReLoad();
     }
 
     public void SetLevel(int level, int max)
@@ -86,11 +101,25 @@ public class ChangeFoodContent : MonoBehaviour
     {
         if (index == 0)
         {
-            changeFoodManager.ChangeFood(foodType);
+            if(foodType == FoodType.Ribs)
+            {
+                changeFoodManager.ChangeRankFood(foodType);
+            }
+            else
+            {
+                changeFoodManager.ChangeFood(foodType);
+            }
         }
         else
         {
-            changeFoodManager.ChangeCandy(candyType);
+            if(candyType == CandyType.Chocolate)
+            {
+                changeFoodManager.ChangeRankCandy(candyType);
+            }
+            else
+            {
+                changeFoodManager.ChangeCandy(candyType);
+            }
         }
     }
 }

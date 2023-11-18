@@ -40,6 +40,8 @@ public class ChestBoxManager : MonoBehaviour
         chestBoxIcon.SetActive(false);
         chestBoxView.SetActive(false);
 
+        GameStateManager.instance.Pause = false;
+
         if (GameStateManager.instance.ChestBoxCount >= 20) return;
 
         goalCount = GameStateManager.instance.ChestBoxCoolTime;
@@ -74,6 +76,8 @@ public class ChestBoxManager : MonoBehaviour
             chestBoxIcon.SetActive(true);
 
             SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
+
+            GameStateManager.instance.Pause = true;
         }
         else
         {

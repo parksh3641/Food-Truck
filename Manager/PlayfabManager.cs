@@ -1275,6 +1275,12 @@ public class PlayfabManager : MonoBehaviour
                        case "Skill11":
                            playerDataBase.Skill11 = statistics.Value;
                            break;
+                       case "Skill12":
+                           playerDataBase.Skill12 = statistics.Value;
+                           break;
+                       case "Skill13":
+                           playerDataBase.Skill13 = statistics.Value;
+                           break;
                        case "Portion1":
                            playerDataBase.Portion1 = statistics.Value;
                            break;

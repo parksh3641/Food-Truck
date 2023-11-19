@@ -34,7 +34,9 @@ public class SkillContent : MonoBehaviour
     private float skill8Value = 0.3f;
     private float skill9Value = 0.1f;
     private float skill10Value = 0.5f;
-    private float skill11Value = 2f;
+    private float skill11Value = 4f;
+    private float skill12Value = 1f;
+    private float skill13Value = 1f;
 
     private int priceGold = 50000;
     private int priceCrystal = 1;
@@ -319,9 +321,53 @@ public class SkillContent : MonoBehaviour
                     value = 0;
                 }
                 break;
+            case SkillType.Skill12:
+                level = playerDataBase.Skill12;
+                nowValue = skill12Value * playerDataBase.Skill12;
+
+                if (playerDataBase.Skill12 < maxLevelCrystal - 1)
+                {
+                    nextValueText.text = (skill12Value * (playerDataBase.Skill12 + 1)).ToString() + "%";
+                    if (moneyType == MoneyType.CoinA)
+                    {
+                        value = (playerDataBase.Skill12 + 1) * priceGold;
+                    }
+                    else
+                    {
+                        value = (playerDataBase.Skill12 + 1) * priceCrystal;
+                    }
+                }
+                else
+                {
+                    nextValueText.text = "-";
+                    value = 0;
+                }
+                break;
+            case SkillType.Skill13:
+                level = playerDataBase.Skill13;
+                nowValue = skill13Value * playerDataBase.Skill13;
+
+                if (playerDataBase.Skill13 < maxLevelCrystal - 1)
+                {
+                    nextValueText.text = (skill13Value * (playerDataBase.Skill13 + 1)).ToString() + "%";
+                    if (moneyType == MoneyType.CoinA)
+                    {
+                        value = (playerDataBase.Skill13 + 1) * priceGold;
+                    }
+                    else
+                    {
+                        value = (playerDataBase.Skill13 + 1) * priceCrystal;
+                    }
+                }
+                else
+                {
+                    nextValueText.text = "-";
+                    value = 0;
+                }
+                break;
         }
 
-        if(moneyType == MoneyType.CoinA)
+        if (moneyType == MoneyType.CoinA)
         {
             levelText.text = "Lv. " + level + " / " + maxLevelGold.ToString();
         }
@@ -449,6 +495,22 @@ public class SkillContent : MonoBehaviour
                     return;
                 }
                 break;
+            case SkillType.Skill12:
+                if (playerDataBase.Skill12 + 1 > maxLevelCrystal)
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
+                    return;
+                }
+                break;
+            case SkillType.Skill13:
+                if (playerDataBase.Skill13 + 1 > maxLevelCrystal)
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
+                    return;
+                }
+                break;
         }
 
         if (moneyType == MoneyType.CoinA)
@@ -534,6 +596,16 @@ public class SkillContent : MonoBehaviour
             case SkillType.Skill11:
                 playerDataBase.Skill11 += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Skill11", playerDataBase.Skill11);
+
+                break;
+            case SkillType.Skill12:
+                playerDataBase.Skill12 += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Skill11", playerDataBase.Skill12);
+
+                break;
+            case SkillType.Skill13:
+                playerDataBase.Skill13 += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Skill11", playerDataBase.Skill13);
 
                 break;
         }

@@ -21,6 +21,13 @@ public class UpgradeFood
 
     public int GetNeed(int level, int value)
     {
+        switch (GameStateManager.instance.GameType)
+        {
+            case GameType.Rank:
+                value /= 2;
+                break;
+        }
+
         return (level + 1) * (level + 1) * value;
     }
 
@@ -134,6 +141,13 @@ public class UpgradeCandy
 
     public int GetNeed(int level, int value)
     {
+        switch (GameStateManager.instance.GameType)
+        {
+            case GameType.Rank:
+                value /= 2;
+                break;
+        }
+
         return (level + 1) * (level + 1) * value;
     }
 

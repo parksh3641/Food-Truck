@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject levelView;
 
+    public Text titleText;
     public Text levelText;
     public Text expText;
     public Image expFillamount;
@@ -59,6 +60,7 @@ public class LevelManager : MonoBehaviour
 
         GameStateManager.instance.Level = level;
 
+        titleText.text = "Lv." + level.ToString();
         levelText.text = level.ToString();
 
         nowExp = levelDataBase.GetNowExp(playerDataBase.UpgradeCount);

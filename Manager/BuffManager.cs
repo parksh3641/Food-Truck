@@ -69,10 +69,14 @@ public class BuffManager : MonoBehaviour
             }
 
             infoText.ReLoad();
+
+            GameStateManager.instance.Pause = true;
         }
         else
         {
             buffView.SetActive(false);
+
+            GameStateManager.instance.Pause = false;
         }
     }
 

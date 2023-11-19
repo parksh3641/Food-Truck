@@ -52,6 +52,8 @@ public class IslandManager : MonoBehaviour
 
             changeIslandContentList.Add(monster);
         }
+
+        changeIslandContentTransform.anchoredPosition = new Vector2(0, -9999);
     }
 
     public void OpenChangeIslandView()

@@ -9,6 +9,8 @@ public class SkillManager : MonoBehaviour
 {
     public GameObject skillView;
 
+    public GameObject alarm;
+
     [Space]
     [Title("TopMenu")]
     public Image[] topMenuImgArray;
@@ -32,6 +34,8 @@ public class SkillManager : MonoBehaviour
         skillGrid2.anchoredPosition = new Vector2(0, -9999);
 
         index = -1;
+
+        alarm.SetActive(true);
     }
 
     public void OpenSkillView()
@@ -46,6 +50,8 @@ public class SkillManager : MonoBehaviour
             {
                 skillContents[i].Initialize();
             }
+
+            alarm.SetActive(false);
 
             FirebaseAnalytics.LogEvent("OpenSkill");
         }

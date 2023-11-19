@@ -59,6 +59,11 @@ public class LevelDataBase : ScriptableObject
 
     public int GetNextExp(int level)
     {
+        if(level > levelInfoList.Count - 1)
+        {
+            level = levelInfoList.Count - 1;
+        }
+
         return levelInfoList[level].needExp;
     }
 

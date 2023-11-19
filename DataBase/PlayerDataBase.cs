@@ -290,6 +290,10 @@ public class PlayerDataBase : ScriptableObject
     private int skill10 = 0;
     [SerializeField]
     private int skill11 = 0;
+    [SerializeField]
+    private int skill12 = 0;
+    [SerializeField]
+    private int skill13 = 0;
 
     [Space]
     [Title("Portion")]
@@ -1177,6 +1181,30 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             skill11 = value;
+        }
+    }
+
+    public int Skill12
+    {
+        get
+        {
+            return skill12;
+        }
+        set
+        {
+            skill12 = value;
+        }
+    }
+
+    public int Skill13
+    {
+        get
+        {
+            return skill13;
+        }
+        set
+        {
+            skill13 = value;
         }
     }
 
@@ -2144,6 +2172,12 @@ public class PlayerDataBase : ScriptableObject
         reincarnationCount = 0;
         buffCount = 0;
 
+        rankLevel1 = 0;
+        rankLevel2 = 0;
+        rankLevel3 = 0;
+        rankLevel4 = 0;
+        totalLevel = 0;
+
         skill1 = 0;
         skill2 = 0;
         skill3 = 0;
@@ -2155,6 +2189,8 @@ public class PlayerDataBase : ScriptableObject
         skill9 = 0;
         skill10 = 0;
         skill11 = 0;
+        skill12 = 0;
+        skill13 = 0;
 
         portion1 = 0;
         portion2 = 0;

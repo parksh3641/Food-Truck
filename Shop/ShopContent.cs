@@ -35,11 +35,13 @@ public class ShopContent : MonoBehaviour
     ShopManager shopManager;
 
     ImageDataBase imageDataBase;
+    PlayerDataBase playerDataBase;
 
 
     private void Awake()
     {
         if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
+        if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         itemArray = imageDataBase.GetItemArray();
 
@@ -101,16 +103,21 @@ public class ShopContent : MonoBehaviour
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
 
-                buyCoinText.text = MoneyUnitString.ToCurrencyString(10000000);
+                buyCoinText.text = MoneyUnitString.ToCurrencyString(50000000);
 
                 titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.DefDestroyTicket;
+                infoText.ReLoad();
+
                 break;
             case ItemType.GoldShop1:
                 lockedObj.SetActive(false);
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(1000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(10000000);
 
-                buyCrystalText.text = "60";
+                buyCrystalText.text = "200";
 
                 //buyRmObj[0].SetActive(true);
                 //buyRmText[0].localizationName = itemType + "_Price";
@@ -119,9 +126,9 @@ public class ShopContent : MonoBehaviour
             case ItemType.GoldShop2:
                 lockedObj.SetActive(false);
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(10000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(100000000);
 
-                buyCrystalText.text = "500";
+                buyCrystalText.text = "2,000";
 
                 //buyRmObj[1].SetActive(true);
                 //buyRmText[1].localizationName = itemType + "_Price";
@@ -131,9 +138,9 @@ public class ShopContent : MonoBehaviour
             case ItemType.GoldShop3:
                 lockedObj.SetActive(false);
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(100000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(1000000000);
 
-                buyCrystalText.text = "4,500";
+                buyCrystalText.text = "20,000";
 
                 //buyRmObj[2].SetActive(true);
                 //buyRmText[2].localizationName = itemType + "_Price";
@@ -265,6 +272,61 @@ public class ShopContent : MonoBehaviour
                 buyRmText[13].ReLoad();
 
                 rewardText.text = "14,000";
+                break;
+            case ItemType.Portion1:
+                lockedObj.SetActive(false);
+
+                buyCoinText.text = MoneyUnitString.ToCurrencyString(5000000);
+
+                titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.Portion1;
+                infoText.ReLoad();
+                break;
+            case ItemType.Portion2:
+                lockedObj.SetActive(false);
+
+                buyCoinText.text = MoneyUnitString.ToCurrencyString(5000000);
+
+                titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.Portion2;
+                infoText.ReLoad();
+                break;
+            case ItemType.Portion3:
+                lockedObj.SetActive(false);
+
+                buyCoinText.text = MoneyUnitString.ToCurrencyString(5000000);
+
+                titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.Portion3;
+                infoText.ReLoad();
+                break;
+            case ItemType.Portion4:
+                lockedObj.SetActive(false);
+
+                buyCoinText.text = MoneyUnitString.ToCurrencyString(5000000);
+
+                titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.Portion4;
+                infoText.ReLoad();
+                break;
+            case ItemType.Portion5:
+                lockedObj.SetActive(false);
+
+                buyCoinText.text = MoneyUnitString.ToCurrencyString(5000000);
+
+                titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.Portion5;
+                infoText.ReLoad();
                 break;
         }
 

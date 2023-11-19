@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour
     private float portion1Time = 15;
     private float portion2Time = 15;
     private float portion3Time = 15;
+    private float portion4Plus = 0;
     private float portion5Time = 15;
 
     public int level = 0;
@@ -172,6 +173,7 @@ public class GameManager : MonoBehaviour
     public TutorialManager tutorialManager;
     public LockManager lockManager;
     public QuestManager questManager;
+    public LevelManager levelManager;
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
@@ -254,6 +256,8 @@ public class GameManager : MonoBehaviour
         myMoneyPlusText.gameObject.SetActive(false);
 
         lightParticle.gameObject.SetActive(false);
+
+        myMoneyPlusText.gameObject.SetActive(false);
     }
 
     private void OnApplicationQuit()
@@ -269,16 +273,15 @@ public class GameManager : MonoBehaviour
     {
         if(GameStateManager.instance.AutoLogin)
         {
+            if(!NetworkConnect.instance.CheckConnectInternet())
+            {
+                checkInternet.SetActive(true);
+                return;
+            }
+
             if (!PlayfabManager.instance.isActive)
             {
-                if (NetworkConnect.instance.CheckConnectInternet())
-                {
-                    PlayfabManager.instance.Login();
-                }
-                else
-                {
-                    checkInternet.SetActive(true);
-                }
+                PlayfabManager.instance.Login();
             }
         }
         else
@@ -294,8 +297,6 @@ public class GameManager : MonoBehaviour
         {
             privacypolicyView.SetActive(true);
         }
-
-        myMoneyPlusText.gameObject.SetActive(false);
     }
 
     public void SuccessLogin()
@@ -337,6 +338,8 @@ public class GameManager : MonoBehaviour
         {
             tutorialManager.TutorialStart();
         }
+
+        levelManager.Initialize();
     }
 
     void CheckFood()
@@ -523,10 +526,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FirstDelay()
     {
-        playerDataBase.Portion1 += 5;
-        playerDataBase.Portion2 += 5;
-        playerDataBase.Portion3 += 5;
-        playerDataBase.Portion4 += 5;
+        playerDataBase.Portion1 += 10;
+        playerDataBase.Portion2 += 10;
+        playerDataBase.Portion3 += 10;
+        playerDataBase.Portion4 += 10;
+        playerDataBase.Portion5 += 10;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
@@ -535,6 +539,7 @@ public class GameManager : MonoBehaviour
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
 
         CheckPortion();
     }
@@ -625,6 +630,9 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(true);
         languageUI.SetActive(false);
 
+        isDef = false;
+        checkMark.SetActive(false);
+
         successPlus = 0;
         needPlus = 0;
         sellPricePlus = 0;
@@ -675,6 +683,8 @@ public class GameManager : MonoBehaviour
         portion1Time = 15 + (15 * (0.01f * (playerDataBase.Skill4 + 1)));
         portion2Time = 15 + (15 * (0.01f * (playerDataBase.Skill5 + 1)));
         portion3Time = 15 + (15 * (0.01f * (playerDataBase.Skill6 + 1)));
+        portion4Plus = (0.01f * playerDataBase.Skill12);
+        portion5Time = 15 + (15 * (0.01f * (playerDataBase.Skill13 + 1)));
 
         if (playerDataBase.GoldX2)
         {
@@ -785,6 +795,8 @@ public class GameManager : MonoBehaviour
 
         cameraController.GoToA();
 
+        levelManager.Initialize();
+
         //StopAllCoroutines();
     }
 
@@ -844,11 +856,6 @@ public class GameManager : MonoBehaviour
         CheckFood();
         CheckFoodState();
         UpgradeInitialize();
-
-        SoundManager.instance.PlaySFX(GameSfxType.Success);
-        NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
-
-        //Debug.Log(GameStateManager.instance.FoodType.ToString() + " Level Up");
     }
 
     public void ChangeCandy(CandyType type)
@@ -859,13 +866,7 @@ public class GameManager : MonoBehaviour
 
         CheckFood();
         CheckFoodState();
-
         UpgradeInitialize();
-
-        SoundManager.instance.PlaySFX(GameSfxType.Success);
-        NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
-
-        //Debug.Log(GameStateManager.instance.CandyType.ToString() + " Level Up");
     }
 
     public void UpgradeInitialize()
@@ -951,7 +952,11 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        if (level >= 29)
+        if (level >= 34)
+        {
+            titleText.color = Color.white;
+        }
+        else if (level >= 29)
         {
             titleText.color = Color.red;
         }
@@ -2869,7 +2874,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckDefTicket()
     {
-        if(level >= 10 && level + 1 < maxLevel)
+        if(level >= 5 && level + 1 < maxLevel)
         {
             defTicketObj.SetActive(true);
 
@@ -2881,12 +2886,7 @@ public class GameManager : MonoBehaviour
                 {
                     defDestroy -= defDestroyPlus;
 
-                    if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
-                    {
-                        defDestroy = (float)GameStateManager.instance.AnimalType * 2f;
-                    }
-
-                    defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+                    UpgradeInitialize();
                 }
 
                 isDef = false;
@@ -2899,12 +2899,7 @@ public class GameManager : MonoBehaviour
             {
                 defDestroy -= defDestroyPlus;
 
-                if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
-                {
-                    defDestroy = (float)GameStateManager.instance.AnimalType * 2f;
-                }
-
-                defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+                UpgradeInitialize();
             }
 
             isDef = false;
@@ -2934,7 +2929,12 @@ public class GameManager : MonoBehaviour
         {
             if (playerDataBase.DefDestroyTicket > 0)
             {
+                defDestroy += defDestroyPlus;
+
+                UpgradeInitialize();
+
                 isDef = true;
+                checkMark.SetActive(true);
             }
             else
             {
@@ -2942,28 +2942,21 @@ public class GameManager : MonoBehaviour
                 NotionManager.instance.UseNotion(NotionType.LowItemNotion);
                 return;
             }
-
-            defDestroy += defDestroyPlus;
-
-            checkMark.SetActive(true);
         }
         else
         {
             defDestroy -= defDestroyPlus;
 
-            if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
-            {
-                defDestroy = (float)GameStateManager.instance.AnimalType * 2f;
-            }
+            UpgradeInitialize();
 
             isDef = false;
             checkMark.SetActive(false);
         }
 
-        if(defDestroy >= 100)
-        {
-            defDestroy = 100;
-        }
+        //if(defDestroy >= 100)
+        //{
+        //    defDestroy = 100;
+        //}
 
         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
     }
@@ -3133,7 +3126,7 @@ public class GameManager : MonoBehaviour
                         playerDataBase.UseSources += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
 
-                        feverCount += (feverMaxCount * 0.3f);
+                        feverCount += (feverMaxCount * (0.25f + portion4Plus));
 
                         CheckFever();
 

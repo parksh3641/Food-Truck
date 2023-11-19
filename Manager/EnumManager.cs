@@ -190,6 +190,11 @@ public enum ItemType
     CrystalShop4,
     CrystalShop5,
     CrystalShop6,
+    Portion1,
+    Portion2,
+    Portion3,
+    Portion4,
+    Portion5,
 }
 
 public enum BuyType
@@ -277,7 +282,9 @@ public enum SkillType
     Skill8,
     Skill9,
     Skill10,
-    Skill11
+    Skill11,
+    Skill12,
+    Skill13
 }
 public enum IslandType
 {

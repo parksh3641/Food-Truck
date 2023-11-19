@@ -7,6 +7,8 @@ public class ReincarnationManager : MonoBehaviour
 {
     public GameObject reincarnationView;
 
+    public GameObject alarm;
+
     public Text crystalText;
     public Text countText;
     public Text passiveText;
@@ -32,6 +34,8 @@ public class ReincarnationManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         reincarnationView.SetActive(false);
+
+        alarm.SetActive(true);
     }
 
     public void OpenReincarnationView()
@@ -41,6 +45,8 @@ public class ReincarnationManager : MonoBehaviour
             reincarnationView.SetActive(true);
 
             Initialize();
+
+            alarm.SetActive(false);
         }
         else
         {
@@ -54,7 +60,7 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.FriesMaxValue > 0)
         {
-            crystal += 100;
+            crystal += 50;
         }
 
         if(playerDataBase.Candy1MaxValue > 0)
@@ -64,7 +70,7 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.Candy2MaxValue > 0)
         {
-            crystal += 10;
+            crystal += 5;
         }
 
         if (playerDataBase.Candy3MaxValue > 0)
@@ -74,7 +80,7 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.Candy4MaxValue > 0)
         {
-            crystal += 15;
+            crystal += 10;
         }
 
         if (playerDataBase.Candy5MaxValue > 0)
@@ -84,7 +90,7 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.Candy6MaxValue > 0)
         {
-            crystal += 20;
+            crystal += 15;
         }
 
         if (playerDataBase.Candy7MaxValue > 0)
@@ -94,7 +100,7 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.Candy8MaxValue > 0)
         {
-            crystal += 25;
+            crystal += 20;
         }
 
         if (playerDataBase.Candy9MaxValue > 0)
@@ -104,7 +110,7 @@ public class ReincarnationManager : MonoBehaviour
 
         passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 2).ToString() + "%)";
 
-        crystal = crystal + (crystal * (0.02f * (playerDataBase.Skill11 * 1)));
+        crystal = crystal + (crystal * (0.04f * (playerDataBase.Skill11 * 1)));
 
         crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
 

@@ -103,13 +103,13 @@ public class ChestBoxManager : MonoBehaviour
 
         random = Random.Range(0, 10);
 
-        if (random >= 8)
-        {
-            rewardType = RewardType.Gold;
+        //if (random >= 8)
+        //{
+        //    rewardType = RewardType.Gold;
 
-            chestBoxArray[0].SetActive(true);
-        }
-        else if (random >= 3)
+        //    chestBoxArray[0].SetActive(true);
+        //}
+        if (random >= 1)
         {
             rewardType = RewardType.PortionSet;
 

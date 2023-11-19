@@ -65,6 +65,8 @@ public class ChangeFoodManager : MonoBehaviour
 
             changeCandyList.Add(monster);
         }
+
+        changeFoodContentTransform.anchoredPosition = new Vector2(0, -9999);
     }
 
     public void OpenChangeFoodView()
@@ -315,6 +317,9 @@ public class ChangeFoodManager : MonoBehaviour
         changeFoodView.SetActive(false);
 
         gameManager.ChangeFood(type);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
     }
 
     public void ChangeRankFood(FoodType type)
@@ -326,6 +331,9 @@ public class ChangeFoodManager : MonoBehaviour
         changeFoodView.SetActive(false);
 
         gameManager.ChangeFood(type);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
     }
 
     public void ChangeCandy(CandyType type)
@@ -335,6 +343,9 @@ public class ChangeFoodManager : MonoBehaviour
         changeFoodView.SetActive(false);
 
         gameManager.ChangeCandy(type);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
     }
 
     public void ChangeRankCandy(CandyType type)
@@ -346,5 +357,8 @@ public class ChangeFoodManager : MonoBehaviour
         changeFoodView.SetActive(false);
 
         gameManager.ChangeCandy(type);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
     }
 }

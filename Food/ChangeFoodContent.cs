@@ -71,7 +71,7 @@ public class ChangeFoodContent : MonoBehaviour
         }
         lockedText.ReLoad();
 
-        proficiencyText.text = LocalizationManager.instance.GetString("Proficiency") + "Lv. 1";
+        proficiencyText.text = LocalizationManager.instance.GetString("Proficiency") + " Lv.1";
     }
 
     public void SetLevel(int level, int max)

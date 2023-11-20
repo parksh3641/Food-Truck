@@ -60,42 +60,42 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.FriesMaxValue > 0)
         {
-            crystal += 50;
+            crystal += 20;
         }
 
         if(playerDataBase.Candy1MaxValue > 0)
         {
-            crystal += 5;
+            crystal += 3;
         }
 
         if (playerDataBase.Candy2MaxValue > 0)
         {
-            crystal += 5;
+            crystal += 3;
         }
 
         if (playerDataBase.Candy3MaxValue > 0)
         {
-            crystal += 10;
+            crystal += 5;
         }
 
         if (playerDataBase.Candy4MaxValue > 0)
         {
-            crystal += 10;
+            crystal += 5;
         }
 
         if (playerDataBase.Candy5MaxValue > 0)
         {
-            crystal += 15;
+            crystal += 10;
         }
 
         if (playerDataBase.Candy6MaxValue > 0)
         {
-            crystal += 15;
+            crystal += 10;
         }
 
         if (playerDataBase.Candy7MaxValue > 0)
         {
-            crystal += 20;
+            crystal += 15;
         }
 
         if (playerDataBase.Candy8MaxValue > 0)

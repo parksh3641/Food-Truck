@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject rankLocked;
 
+    public GameObject testMode;
+
     [Space]
     [Title("Truck")]
     public Animator[] mainTruckArray;
@@ -350,6 +352,13 @@ public class GameManager : MonoBehaviour
         if(level > 4)
         {
             rankLocked.SetActive(false);
+        }
+
+        testMode.SetActive(false);
+
+        if(playerDataBase.TestAccount > 0)
+        {
+            testMode.SetActive(true);
         }
     }
 
@@ -893,16 +902,16 @@ public class GameManager : MonoBehaviour
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
-                need = upgradeFood.GetNeed(level, 400);
-                sellPrice = upgradeFood.GetPrice(level, 4000);
+                need = upgradeFood.GetNeed(level, 360);
+                sellPrice = upgradeFood.GetPrice(level, 2100);
                 success = upgradeFood.GetSuccess(level);
 
                 maxLevel = upgradeFood.maxLevel;
 
                 break;
             case IslandType.Island2:
-                need = upgradeCandy.GetNeed(level, 400);
-                sellPrice = upgradeCandy.GetPrice(level, 4000);
+                need = upgradeCandy.GetNeed(level, 360);
+                sellPrice = upgradeCandy.GetPrice(level, 2100);
                 sellPrice = sellPrice + (int)(sellPrice * 0.2f);
                 success = upgradeCandy.GetSuccess(level);
 
@@ -2159,6 +2168,8 @@ public class GameManager : MonoBehaviour
         if (feverCount >= feverMaxCount)
         {
             feverMode = true;
+
+            GameStateManager.instance.Pause = false;
 
             feverEffect.SetActive(true);
             backButton.SetActive(false);
@@ -3499,5 +3510,36 @@ public class GameManager : MonoBehaviour
         {
             PlayfabManager.instance.UpdateAddGold(100000);
         }
+    }
+
+    public void OpenAll()
+    {
+        playerDataBase.IslandNumber = 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
+    }
+
+    public void GetGold()
+    {
+        PlayfabManager.instance.UpdateAddGold(100000000);
+    }
+
+    public void GetCrystal()
+    {
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100000);
+    }
+
+    public void GetPortion()
+    {
+        playerDataBase.Portion1 += 100;
+        playerDataBase.Portion2 += 100;
+        playerDataBase.Portion3 += 100;
+        playerDataBase.Portion4 += 100;
+        playerDataBase.Portion5 += 100;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
     }
 }

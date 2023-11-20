@@ -23,6 +23,29 @@ public class PlayerDataBase : ScriptableObject
     private int firstReward = 0;
     [SerializeField]
     private int islandNumber = 0;
+    [SerializeField]
+    private int testAccount = 0;
+
+    [Space]
+    [Title("Count")]
+    [SerializeField]
+    private int gourmetLevel = 0;
+    [SerializeField]
+    private int upgradeCount = 0;
+    [SerializeField]
+    private int sellCount = 0;
+    [SerializeField]
+    private int useSources = 0;
+    [SerializeField]
+    private int openChestBox = 0;
+    [SerializeField]
+    private int feverModeCount = 0;
+    [SerializeField]
+    private int questCount = 0;
+    [SerializeField]
+    private int reincarnationCount = 0;
+    [SerializeField]
+    private int buffCount = 0;
 
     [Space]
     [Title("Character")]
@@ -233,27 +256,6 @@ public class PlayerDataBase : ScriptableObject
     private int island10 = 0;
 
     [Space]
-    [Title("Count")]
-    [SerializeField]
-    private int gourmetLevel = 0;
-    [SerializeField]
-    private int upgradeCount = 0;
-    [SerializeField]
-    private int sellCount = 0;
-    [SerializeField]
-    private int useSources = 0;
-    [SerializeField]
-    private int openChestBox = 0;
-    [SerializeField]
-    private int feverModeCount = 0;
-    [SerializeField]
-    private int questCount = 0;
-    [SerializeField]
-    private int reincarnationCount = 0;
-    [SerializeField]
-    private int buffCount = 0;
-
-    [Space]
     [Title("Rank")]
     [SerializeField]
     private int rankLevel1 = 0;
@@ -426,6 +428,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             islandNumber = value;
+        }
+    }
+
+    public int TestAccount
+    {
+        get
+        {
+            return testAccount;
+        }
+        set
+        {
+            testAccount = value;
         }
     }
 
@@ -2061,6 +2075,7 @@ public class PlayerDataBase : ScriptableObject
         lockTutorial = 0;
         firstReward = 0;
         islandNumber = 0;
+        testAccount = 0;
 
         nextFoodNumber = 0;
         hamburgerMaxValue = 0;

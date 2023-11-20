@@ -1148,6 +1148,9 @@ public class PlayfabManager : MonoBehaviour
                        case "IslandNumber":
                            playerDataBase.IslandNumber = statistics.Value;
                            break;
+                       case "TestAccount":
+                           playerDataBase.TestAccount = statistics.Value;
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;

@@ -127,7 +127,7 @@ public class ChangeFoodManager : MonoBehaviour
 
             changeCandyList[9].SetLevel(GameStateManager.instance.ChocolateLevel, upgradeDataBase.GetMaxLevelCandy(CandyType.Chocolate));
 
-            if (playerDataBase.IslandNumber > 0)
+            if (playerDataBase.IslandNumber > 0 || playerDataBase.RankLevel2 > 0)
             {
                 changeCandyList[9].UnLock();
             }

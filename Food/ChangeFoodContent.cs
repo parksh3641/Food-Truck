@@ -10,6 +10,8 @@ public class ChangeFoodContent : MonoBehaviour
 
     public Image icon;
     public LocalizationContent titleText;
+    public Text levelText;
+    public Text proficiencyText;
     public GameObject lockedObj;
     public GameObject selectedObj;
 
@@ -68,13 +70,13 @@ public class ChangeFoodContent : MonoBehaviour
             lockedText.localizationName = "FoodLocked";
         }
         lockedText.ReLoad();
+
+        proficiencyText.text = LocalizationManager.instance.GetString("Proficiency") + "Lv. 1";
     }
 
     public void SetLevel(int level, int max)
     {
-        titleText.plusText = "\n( +" + (level + 1).ToString() + " / " + max.ToString() + " )";
-
-        titleText.ReLoad();
+        levelText.text = "( " + (level + 1).ToString() + " / " + max.ToString() + " )";
     }
 
     public void Locked()

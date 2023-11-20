@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
 
     public LocalizationContent islandText;
 
+    public GameObject rankLocked;
+
     [Space]
     [Title("Truck")]
     public Animator[] mainTruckArray;
@@ -325,7 +327,7 @@ public class GameManager : MonoBehaviour
 
         nowUpgradeCount = playerDataBase.UpgradeCount;
         nowSellCount = playerDataBase.SellCount;
-        StartCoroutine(ServerCoroution());
+        StartCoroutine(DelayCoroution());
 
         CheckFood();
         CheckFoodState();
@@ -340,6 +342,15 @@ public class GameManager : MonoBehaviour
         }
 
         levelManager.Initialize();
+
+        rankLocked.SetActive(true);
+
+        int level = levelDataBase.GetLevel(playerDataBase.UpgradeCount);
+
+        if(level > 4)
+        {
+            rankLocked.SetActive(false);
+        }
     }
 
     void CheckFood()
@@ -581,6 +592,14 @@ public class GameManager : MonoBehaviour
 
     public void GameStart(int number)
     {
+        if(number == 1)
+        {
+            if(rankLocked.activeInHierarchy)
+            {
+                return;
+            }
+        }
+
         if (!isDelay_Camera) return;
 
         isDelay_Camera = false;
@@ -649,7 +668,7 @@ public class GameManager : MonoBehaviour
 
         successPlus += playerDataBase.Skill7 * 0.2f;
 
-        successPlus += levelDataBase.GetLevel(playerDataBase.UpgradeCount) * 0.2f;
+        successPlus += levelDataBase.GetLevel(playerDataBase.UpgradeCount) * 0.1f;
 
         if (GameStateManager.instance.TruckType > TruckType.Bread)
         {
@@ -680,11 +699,11 @@ public class GameManager : MonoBehaviour
         feverMaxCount = 400 - (400 * (0.003f * (playerDataBase.Skill2 + 1)));
         feverPlus = 3 + (3 * (0.005f * (playerDataBase.Skill3 + 1)));
 
-        portion1Time = 15 + (15 * (0.01f * (playerDataBase.Skill4 + 1)));
-        portion2Time = 15 + (15 * (0.01f * (playerDataBase.Skill5 + 1)));
-        portion3Time = 15 + (15 * (0.01f * (playerDataBase.Skill6 + 1)));
-        portion4Plus = (0.01f * playerDataBase.Skill12);
-        portion5Time = 15 + (15 * (0.01f * (playerDataBase.Skill13 + 1)));
+        portion1Time = 15 + (15 * (0.02f * (playerDataBase.Skill4 + 1)));
+        portion2Time = 15 + (15 * (0.02f * (playerDataBase.Skill5 + 1)));
+        portion3Time = 15 + (15 * (0.02f * (playerDataBase.Skill6 + 1)));
+        portion4Plus = (0.02f * playerDataBase.Skill12);
+        portion5Time = 15 + (15 * (0.02f * (playerDataBase.Skill13 + 1)));
 
         if (playerDataBase.GoldX2)
         {
@@ -737,8 +756,10 @@ public class GameManager : MonoBehaviour
         cameraController.GoToB();
     }
 
-    IEnumerator ServerCoroution()
+    IEnumerator DelayCoroution()
     {
+        levelManager.Initialize();
+
         yield return waitForSeconds;
 
         if (playerDataBase.UpgradeCount > nowUpgradeCount)
@@ -778,7 +799,7 @@ public class GameManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
         }
 
-        StartCoroutine(ServerCoroution());
+        StartCoroutine(DelayCoroution());
     }
 
     public void GameStop()
@@ -794,8 +815,6 @@ public class GameManager : MonoBehaviour
         languageUI.SetActive(true);
 
         cameraController.GoToA();
-
-        levelManager.Initialize();
 
         //StopAllCoroutines();
     }

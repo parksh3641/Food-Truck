@@ -44,6 +44,7 @@ public class ChangeIslandContent : MonoBehaviour
         islandManager = manager;
 
         titleText.localizationName = type.ToString();
+        titleText.plusText = " Lv.1";
         titleText.ReLoad();
     }
 

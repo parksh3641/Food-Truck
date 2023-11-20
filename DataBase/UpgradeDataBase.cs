@@ -4,14 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class UpgradeInfo
-{
-    public int need = 0;
-    public int price = 0;
-    public int success = 0;
-}
-
-[System.Serializable]
 public class UpgradeFood
 {
     public FoodType foodType = FoodType.Hamburger;

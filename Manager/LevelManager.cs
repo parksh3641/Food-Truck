@@ -32,11 +32,6 @@ public class LevelManager : MonoBehaviour
         levelView.SetActive(false);
     }
 
-    private void Start()
-    {
-
-    }
-
 
     public void OpenLevelView()
     {
@@ -71,6 +66,6 @@ public class LevelManager : MonoBehaviour
         expFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
 
         infoText.localizationName = "SuccessPercent";
-        infoText.plusText = " : +" + (level * 0.2f) + "%";
+        infoText.plusText = " : +" + (level * 0.1f) + "%";
     }
 }

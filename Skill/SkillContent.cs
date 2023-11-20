@@ -26,17 +26,17 @@ public class SkillContent : MonoBehaviour
     private float skill1Value = 1f;
     private float skill2Value = 0.3f;
     private float skill3Value = 0.5f;
-    private float skill4Value = 1f;
-    private float skill5Value = 1f;
-    private float skill6Value = 1f;
+    private float skill4Value = 2f;
+    private float skill5Value = 2f;
+    private float skill6Value = 2f;
+    private float skill12Value = 2f;
+    private float skill13Value = 2f;
 
     private float skill7Value = 0.2f;
     private float skill8Value = 0.3f;
     private float skill9Value = 0.1f;
     private float skill10Value = 0.5f;
     private float skill11Value = 4f;
-    private float skill12Value = 1f;
-    private float skill13Value = 1f;
 
     private int priceGold = 50000;
     private int priceCrystal = 1;

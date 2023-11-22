@@ -214,7 +214,7 @@ public class UpgradeCandy
             case GameType.Story:
                 if (level > 0)
                 {
-                    price = 96 - (level * 1);
+                    price = 98 - (level * 1);
                 }
                 else
                 {
@@ -224,7 +224,7 @@ public class UpgradeCandy
             case GameType.Rank:
                 if (level > 0)
                 {
-                    price = 96 - (level * 0.1f);
+                    price = 100 - (level * 0.1f);
                 }
                 else
                 {

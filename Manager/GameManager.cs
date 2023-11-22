@@ -31,8 +31,14 @@ public class GameManager : MonoBehaviour
 
     public LocalizationContent islandText;
 
+    public LocalizationContent bestRankLevelText;
     public GameObject rankLocked;
 
+    public GameObject notUpgrade;
+    public GameObject notSell;
+
+    public GameObject testModeButton;
+    public Text testModeText;
     public GameObject testMode;
 
     [Space]
@@ -178,6 +184,7 @@ public class GameManager : MonoBehaviour
     public LockManager lockManager;
     public QuestManager questManager;
     public LevelManager levelManager;
+    public ChangeFoodManager changeFoodManager;
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
@@ -194,6 +201,12 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+#if UNITY_ANDROID
+        Application.targetFrameRate = 60;
+#elif UNITY_IOS
+        Application.targetFrameRate = 90;
+#endif
 
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
@@ -252,16 +265,11 @@ public class GameManager : MonoBehaviour
         portionFillamount5.fillAmount = 0;
 
         defTicketObj.SetActive(false);
-
         bankruptcyView.SetActive(false);
-
         privacypolicyView.SetActive(false);
-
         myMoneyPlusText.gameObject.SetActive(false);
-
         lightParticle.gameObject.SetActive(false);
-
-        myMoneyPlusText.gameObject.SetActive(false);
+        testMode.SetActive(false);
     }
 
     private void OnApplicationQuit()
@@ -345,6 +353,10 @@ public class GameManager : MonoBehaviour
 
         levelManager.Initialize();
 
+        bestRankLevelText.localizationName = "Best";
+        bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel;
+        bestRankLevelText.ReLoad();
+
         rankLocked.SetActive(true);
 
         int level = levelDataBase.GetLevel(playerDataBase.UpgradeCount);
@@ -354,12 +366,21 @@ public class GameManager : MonoBehaviour
             rankLocked.SetActive(false);
         }
 
-        testMode.SetActive(false);
+        testModeButton.SetActive(false);
 
         if(playerDataBase.TestAccount > 0)
         {
-            testMode.SetActive(true);
+            testModeButton.SetActive(true);
+            testModeText.text = "개발자 모드 열기";
         }
+
+#if UNITY_EDITOR
+        testModeButton.SetActive(true);
+#endif
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Version", int.Parse(Application.version.Replace(".","")));
+
+        changeFoodManager.CheckProficiency();
     }
 
     void CheckFood()
@@ -669,14 +690,12 @@ public class GameManager : MonoBehaviour
 
         //changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
-
         if (GameStateManager.instance.CharacterType > CharacterType.Character1)
         {
             successPlus = characterDataBase.GetCharacterEffect(GameStateManager.instance.CharacterType);
         }
 
         successPlus += playerDataBase.Skill7 * 0.2f;
-
         successPlus += levelDataBase.GetLevel(playerDataBase.UpgradeCount) * 0.1f;
 
         if (GameStateManager.instance.TruckType > TruckType.Bread)
@@ -685,6 +704,8 @@ public class GameManager : MonoBehaviour
         }
 
         sellPricePlus += playerDataBase.Skill8 * 0.3f;
+        sellPricePlus += playerDataBase.Skill9 * 0.1f;
+        sellPricePlus += playerDataBase.Proficiency * 1;
 
         if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
         {
@@ -696,7 +717,6 @@ public class GameManager : MonoBehaviour
             defDestroy = butterflyDataBase.GetButterflyEffect(GameStateManager.instance.ButterflyType);
         }
 
-        sellPricePlus += playerDataBase.Skill9 * 0.1f;
         needPlus += playerDataBase.Skill10 * 0.5f;
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
@@ -704,15 +724,15 @@ public class GameManager : MonoBehaviour
 
         feverCount = GameStateManager.instance.FeverCount;
 
-        feverTime = 15 + (15 * (0.01f * (playerDataBase.Skill1 + 1)));
+        feverTime = 20 + (20 * (0.01f * (playerDataBase.Skill1 + 1)));
         feverMaxCount = 400 - (400 * (0.003f * (playerDataBase.Skill2 + 1)));
         feverPlus = 3 + (3 * (0.005f * (playerDataBase.Skill3 + 1)));
 
-        portion1Time = 15 + (15 * (0.02f * (playerDataBase.Skill4 + 1)));
-        portion2Time = 15 + (15 * (0.02f * (playerDataBase.Skill5 + 1)));
-        portion3Time = 15 + (15 * (0.02f * (playerDataBase.Skill6 + 1)));
-        portion4Plus = (0.02f * playerDataBase.Skill12);
-        portion5Time = 15 + (15 * (0.02f * (playerDataBase.Skill13 + 1)));
+        portion1Time = 15 + (15 * (0.01f * (playerDataBase.Skill4 + 1)));
+        portion2Time = 15 + (15 * (0.01f * (playerDataBase.Skill5 + 1)));
+        portion3Time = 15 + (15 * (0.01f * (playerDataBase.Skill6 + 1)));
+        portion4Plus = (0.01f * playerDataBase.Skill12);
+        portion5Time = 15 + (15 * (0.01f * (playerDataBase.Skill13 + 1)));
 
         if (playerDataBase.GoldX2)
         {
@@ -741,7 +761,7 @@ public class GameManager : MonoBehaviour
 
         if (portion5)
         {
-            defDestroy += 20;
+            defDestroy += 10;
         }
 
         if (buff1)
@@ -824,6 +844,19 @@ public class GameManager : MonoBehaviour
         languageUI.SetActive(true);
 
         cameraController.GoToA();
+
+        bestRankLevelText.localizationName = "Best";
+        bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel;
+        bestRankLevelText.ReLoad();
+
+        rankLocked.SetActive(true);
+
+        int level = levelDataBase.GetLevel(playerDataBase.UpgradeCount);
+
+        if (level > 4)
+        {
+            rankLocked.SetActive(false);
+        }
 
         //StopAllCoroutines();
     }
@@ -934,11 +967,11 @@ public class GameManager : MonoBehaviour
         {
             case IslandType.Island1:
                 titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.FoodType.ToString()) +
-    " ( +" + (level + 1) + " / " + maxLevel + " )";
+    " ( " + (level + 1) + " / " + maxLevel + " )";
                 break;
             case IslandType.Island2:
                 titleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.CandyType.ToString()) +
-    " ( +" + (level + 1) + " / " + maxLevel + " )";
+    " ( " + (level + 1) + " / " + maxLevel + " )";
                 break;
         }
 
@@ -951,14 +984,13 @@ public class GameManager : MonoBehaviour
                 switch (GameStateManager.instance.IslandType)
                 {
                     case IslandType.Island1:
-
                         if(GameStateManager.instance.RibsLevel > playerDataBase.RankLevel1)
                         {
                             highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.RibsLevel + 1);
                         }
                         else
                         {
-                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (playerDataBase.RankLevel1 + 1);
+                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + playerDataBase.RankLevel1;
                         }
 
                         break;
@@ -969,7 +1001,7 @@ public class GameManager : MonoBehaviour
                         }
                         else
                         {
-                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (playerDataBase.RankLevel2 + 1);
+                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + playerDataBase.RankLevel2;
                         }
                         break;
                     case IslandType.Island3:
@@ -1011,6 +1043,13 @@ public class GameManager : MonoBehaviour
         else
         {
             titleText.color = Color.white;
+        }
+
+        notSell.SetActive(false);
+
+        if(level == 0)
+        {
+            notSell.SetActive(true);
         }
 
         success += successPlus;
@@ -1058,8 +1097,11 @@ public class GameManager : MonoBehaviour
 
         CheckBankruptcy();
 
+        notUpgrade.SetActive(false);
+
         if (level + 1 >= maxLevel)
         {
+            notUpgrade.SetActive(true);
             defTicketObj.SetActive(false);
             successText.text = LocalizationManager.instance.GetString("MaxLevel");
             needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n-";
@@ -2157,7 +2199,7 @@ public class GameManager : MonoBehaviour
         }
 
         isDelay = true;
-        Invoke("WaitDelay", 0.3f);
+        Invoke("WaitDelay", 0.5f);
     }
 
     void CheckFever()
@@ -2175,6 +2217,9 @@ public class GameManager : MonoBehaviour
             backButton.SetActive(false);
 
             successText.color = Color.red;
+
+            successPlus += feverPlus;
+            defDestroy += 10;
 
             UpgradeInitialize();
 
@@ -2358,16 +2403,6 @@ public class GameManager : MonoBehaviour
 
         feverText.enabled = false;
 
-        success += feverPlus;
-
-        if (success >= 100)
-        {
-            success = 100;
-        }
-
-        successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success.ToString("N1") + "%";
-        successText.text += " (+" + (successPlus).ToString("N1") + "%)";
-
         feverCount = 0;
         GameStateManager.instance.FeverCount = 0;
 
@@ -2403,9 +2438,9 @@ public class GameManager : MonoBehaviour
 
         feverFillamount.fillAmount = 0;
 
-        success -= feverPlus;
-        successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success.ToString("N1") + "%";
-        successText.text += " (+" + (successPlus).ToString("N1") + "%)";
+        defDestroy -= 10;
+
+        successPlus -= feverPlus;
 
         feverText.enabled = true;
         feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  0%";
@@ -2594,8 +2629,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.HamburgerMaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("HamburgerMaxValue", playerDataBase.HamburgerMaxValue);
 
-                        if (playerDataBase.HamburgerMaxValue == 1)
+                        if (playerDataBase.NextFoodNumber == 0)
                         {
+                            playerDataBase.NextFoodNumber = 1;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
 
@@ -2606,8 +2644,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.SandwichMaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.SandwichMaxValue);
 
-                        if (playerDataBase.SandwichMaxValue == 1)
+                        if (playerDataBase.NextFoodNumber == 1)
                         {
+                            playerDataBase.NextFoodNumber = 2;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
 
@@ -2618,8 +2659,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.SnackLabMaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.SnackLabMaxValue);
 
-                        if (playerDataBase.SnackLabMaxValue == 1)
+                        if (playerDataBase.NextFoodNumber == 2)
                         {
+                            playerDataBase.NextFoodNumber = 3;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
 
@@ -2630,8 +2674,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.DrinkMaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.DrinkMaxValue);
 
-                        if (playerDataBase.DrinkMaxValue == 1)
+                        if (playerDataBase.NextFoodNumber == 3)
                         {
+                            playerDataBase.NextFoodNumber = 4;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
 
@@ -2642,8 +2689,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.PizzaMaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.PizzaMaxValue);
 
-                        if (playerDataBase.PizzaMaxValue == 1)
+                        if (playerDataBase.NextFoodNumber == 4)
                         {
+                            playerDataBase.NextFoodNumber = 5;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
 
@@ -2652,8 +2702,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.DonutMaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
 
-                        if (playerDataBase.DonutMaxValue == 1)
+                        if (playerDataBase.NextFoodNumber == 5)
                         {
+                            playerDataBase.NextFoodNumber = 6;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
 
@@ -2686,8 +2739,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Candy1MaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy1MaxValue", playerDataBase.Candy1MaxValue);
 
-                        if (playerDataBase.Candy1MaxValue == 1)
+                        if (playerDataBase.NextFoodNumber2 == 0)
                         {
+                            playerDataBase.NextFoodNumber2 = 1;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
 
@@ -2696,8 +2752,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Candy2MaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy2MaxValue", playerDataBase.Candy2MaxValue);
 
-                        if (playerDataBase.Candy2MaxValue == 1)
+                        if (playerDataBase.NextFoodNumber2 == 1)
                         {
+                            playerDataBase.NextFoodNumber2 = 2;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
 
@@ -2706,8 +2765,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Candy3MaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy3MaxValue", playerDataBase.Candy3MaxValue);
 
-                        if (playerDataBase.Candy3MaxValue == 1)
+                        if (playerDataBase.NextFoodNumber2 == 2)
                         {
+                            playerDataBase.NextFoodNumber2 = 3;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
                         break;
@@ -2715,8 +2777,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Candy4MaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy4MaxValue", playerDataBase.Candy4MaxValue);
 
-                        if (playerDataBase.Candy4MaxValue == 1)
+                        if (playerDataBase.NextFoodNumber2 == 3)
                         {
+                            playerDataBase.NextFoodNumber2 = 4;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
                         break;
@@ -2724,8 +2789,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Candy5MaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy5MaxValue", playerDataBase.Candy5MaxValue);
 
-                        if (playerDataBase.Candy5MaxValue == 1)
+                        if (playerDataBase.NextFoodNumber2 == 4)
                         {
+                            playerDataBase.NextFoodNumber2 = 5;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
                         break;
@@ -2733,8 +2801,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Candy6MaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy6MaxValue", playerDataBase.Candy6MaxValue);
 
-                        if (playerDataBase.Candy6MaxValue == 1)
+                        if (playerDataBase.NextFoodNumber2 == 5)
                         {
+                            playerDataBase.NextFoodNumber2 = 6;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
                         break;
@@ -2742,8 +2813,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Candy7MaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy7MaxValue", playerDataBase.Candy7MaxValue);
 
-                        if (playerDataBase.Candy7MaxValue == 1)
+                        if (playerDataBase.NextFoodNumber2 == 6)
                         {
+                            playerDataBase.NextFoodNumber2 = 7;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
                         break;
@@ -2751,8 +2825,11 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Candy8MaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy8MaxValue", playerDataBase.Candy8MaxValue);
 
-                        if (playerDataBase.Candy8MaxValue == 1)
+                        if (playerDataBase.NextFoodNumber2 == 7)
                         {
+                            playerDataBase.NextFoodNumber2 = 8;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+
                             changeFoodAlarmObj.SetActive(true);
                         }
                         break;
@@ -2778,6 +2855,7 @@ public class GameManager : MonoBehaviour
         }
 
         questManager.CheckGoal();
+        changeFoodManager.CheckProficiency();
     }
 
     public void SellButton()
@@ -3124,8 +3202,7 @@ public class GameManager : MonoBehaviour
                         portion3 = true;
 
                         successPlus += 1;
-                        successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success.ToString("N1") + "%";
-                        successText.text += " (+" + (successPlus).ToString("N1") + "%)";
+                        UpgradeInitialize();
 
                         playerDataBase.Portion3 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
@@ -3177,7 +3254,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion5 = true;
 
-                        defDestroy += 20;
+                        defDestroy += 10;
                         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
 
                         playerDataBase.Portion5 -= 1;
@@ -3287,8 +3364,7 @@ public class GameManager : MonoBehaviour
         portionFillamount3.fillAmount = 0;
 
         successPlus -= 1;
-        successText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + success.ToString("N1") + "%";
-        successText.text += " (+" + (successPlus).ToString("N1") + "%)";
+        UpgradeInitialize();
     }
 
     IEnumerator PortionCoroution5()
@@ -3311,7 +3387,7 @@ public class GameManager : MonoBehaviour
         portion5 = false;
         portionFillamount5.fillAmount = 0;
 
-        defDestroy -= 20;
+        defDestroy -= 10;
         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
     }
 
@@ -3481,8 +3557,12 @@ public class GameManager : MonoBehaviour
 
     void CheckBankruptcy()
     {
-        if(GameStateManager.instance.HamburgerLevel <= 2 && GameStateManager.instance.SandwichLevel <= 2 && GameStateManager.instance.SnackLabLevel <= 2
-            && GameStateManager.instance.DrinkLevel <= 2 && GameStateManager.instance.PizzaLevel <= 2 && GameStateManager.instance.DonutLevel <= 2
+        if(GameStateManager.instance.HamburgerLevel <= 1 && GameStateManager.instance.SandwichLevel <= 1 && GameStateManager.instance.SnackLabLevel <= 1
+            && GameStateManager.instance.DrinkLevel <= 1 && GameStateManager.instance.PizzaLevel <= 1 && GameStateManager.instance.DonutLevel <= 1
+            && GameStateManager.instance.FriesLevel <= 1 && GameStateManager.instance.Candy1Level <= 1 && GameStateManager.instance.Candy2Level <= 1
+            && GameStateManager.instance.Candy3Level <= 1 && GameStateManager.instance.Candy4Level <= 1 && GameStateManager.instance.Candy5Level <= 1
+            && GameStateManager.instance.Candy6Level <= 1 && GameStateManager.instance.Candy7Level <= 1 && GameStateManager.instance.Candy8Level <= 1
+            && GameStateManager.instance.Candy9Level <= 1
             && playerDataBase.Coin < 10000)
         {
             bankruptcyView.SetActive(true);
@@ -3512,10 +3592,51 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OpenAll()
+    public void OpenDeveloperMode()
     {
-        playerDataBase.IslandNumber = 1;
+        if(!testMode.activeInHierarchy)
+        {
+            testMode.SetActive(true);
+            testModeText.text = "개발자 모드 닫기";
+        }
+        else
+        {
+            testMode.SetActive(false);
+            testModeText.text = "개발자 모드 열기";
+        }
+    }
+
+
+    public void GetIsland()
+    {
+        playerDataBase.IslandNumber = 4;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
+    }
+
+    public void GetFood()
+    {
+        playerDataBase.NextFoodNumber = 10;
+        playerDataBase.NextFoodNumber2 = 10;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+    }
+
+    public void GetReceipe()
+    {
+        playerDataBase.Skill1 = 100;
+        playerDataBase.Skill2 = 100;
+        playerDataBase.Skill3 = 100;
+        playerDataBase.Skill4 = 100;
+        playerDataBase.Skill5 = 100;
+        playerDataBase.Skill6 = 100;
+        playerDataBase.Skill7 = 100;
+        playerDataBase.Skill8 = 100;
+        playerDataBase.Skill9 = 100;
+        playerDataBase.Skill10 = 100;
+        playerDataBase.Skill11 = 100;
+        playerDataBase.Skill12 = 100;
+        playerDataBase.Skill13 = 100;
     }
 
     public void GetGold()
@@ -3541,5 +3662,55 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
+    }
+
+    public void GetDefTicket()
+    {
+        playerDataBase.DefDestroyTicket += 100;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
+    }
+
+    public void GetUnLocked()
+    {
+        lockManager.UnLocked(5);
+    }
+
+    public void GetExp()
+    {
+        playerDataBase.UpgradeCount += 1000;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
+
+        rankLocked.SetActive(true);
+
+        int level = levelDataBase.GetLevel(playerDataBase.UpgradeCount);
+
+        if (level > 2)
+        {
+            rankLocked.SetActive(false);
+        }
+    }
+
+    public void PortionInfo(int number)
+    {
+        switch(number)
+        {
+            case 0:
+                NotionManager.instance.UseNotion(NotionType.PortionInfo1);
+                break;
+            case 1:
+                NotionManager.instance.UseNotion(NotionType.PortionInfo2);
+                break;
+            case 2:
+                NotionManager.instance.UseNotion(NotionType.PortionInfo3);
+                break;
+            case 3:
+                NotionManager.instance.UseNotion(NotionType.PortionInfo4);
+                break;
+            case 4:
+                NotionManager.instance.UseNotion(NotionType.PortionInfo5);
+                break;
+        }
     }
 }

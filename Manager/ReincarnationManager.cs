@@ -14,6 +14,8 @@ public class ReincarnationManager : MonoBehaviour
     public Text passiveText;
     public Text adText;
 
+    public GameObject lockedObj;
+
 
     private float crystal = 0;
 
@@ -58,54 +60,14 @@ public class ReincarnationManager : MonoBehaviour
     {
         crystal = 0;
 
-        if (playerDataBase.FriesMaxValue > 0)
-        {
-            crystal += 20;
-        }
+        lockedObj.SetActive(true);
 
-        if(playerDataBase.Candy1MaxValue > 0)
+        if (playerDataBase.IslandNumber > 0)
         {
-            crystal += 3;
-        }
+            crystal += 30;
+            crystal += playerDataBase.NextFoodNumber2 * 5;
 
-        if (playerDataBase.Candy2MaxValue > 0)
-        {
-            crystal += 3;
-        }
-
-        if (playerDataBase.Candy3MaxValue > 0)
-        {
-            crystal += 5;
-        }
-
-        if (playerDataBase.Candy4MaxValue > 0)
-        {
-            crystal += 5;
-        }
-
-        if (playerDataBase.Candy5MaxValue > 0)
-        {
-            crystal += 10;
-        }
-
-        if (playerDataBase.Candy6MaxValue > 0)
-        {
-            crystal += 10;
-        }
-
-        if (playerDataBase.Candy7MaxValue > 0)
-        {
-            crystal += 15;
-        }
-
-        if (playerDataBase.Candy8MaxValue > 0)
-        {
-            crystal += 20;
-        }
-
-        if (playerDataBase.Candy9MaxValue > 0)
-        {
-            crystal += 25;
+            lockedObj.SetActive(false);
         }
 
         passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 2).ToString() + "%)";
@@ -116,7 +78,7 @@ public class ReincarnationManager : MonoBehaviour
 
         countText.text = LocalizationManager.instance.GetString("Reincarnation_Count") + " : " + playerDataBase.ReincarnationCount;
 
-        adText.text = LocalizationManager.instance.GetString("Reincarnation_Ad") + "\n+" + MoneyUnitString.ToCurrencyString((int)crystal).ToString();
+        adText.text = LocalizationManager.instance.GetString("Reincarnation_Ad") + "\n+" + MoneyUnitString.ToCurrencyString((int)crystal * 2).ToString();
     }
 
     public void Free()
@@ -182,24 +144,6 @@ public class ReincarnationManager : MonoBehaviour
         GameStateManager.instance.Candy8Level = 0;
         GameStateManager.instance.Candy9Level = 0;
 
-        playerDataBase.HamburgerMaxValue = 0;
-        playerDataBase.SandwichMaxValue = 0;
-        playerDataBase.SnackLabMaxValue = 0;
-        playerDataBase.DrinkMaxValue = 0;
-        playerDataBase.PizzaMaxValue = 0;
-        playerDataBase.DonutMaxValue = 0;
-        playerDataBase.FriesMaxValue = 0;
-
-        playerDataBase.Candy1MaxValue = 0;
-        playerDataBase.Candy2MaxValue = 0;
-        playerDataBase.Candy3MaxValue = 0;
-        playerDataBase.Candy4MaxValue = 0;
-        playerDataBase.Candy5MaxValue = 0;
-        playerDataBase.Candy6MaxValue = 0;
-        playerDataBase.Candy7MaxValue = 0;
-        playerDataBase.Candy8MaxValue = 0;
-        playerDataBase.Candy9MaxValue = 0;
-
         playerDataBase.IslandNumber = 0;
         playerDataBase.ReincarnationCount += 1;
 
@@ -209,41 +153,9 @@ public class ReincarnationManager : MonoBehaviour
         gameManager.Reincarnation();
         tutorialManager.Reincarnation();
 
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("HamburgerMaxValue", playerDataBase.HamburgerMaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.SandwichMaxValue);
-
         yield return waitForSeconds;
 
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.SnackLabMaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.DrinkMaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.PizzaMaxValue);
-
-        yield return waitForSeconds;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.DonutMaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FriesMaxValue", playerDataBase.FriesMaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy1MaxValue", playerDataBase.Candy1MaxValue);
-
-        yield return waitForSeconds;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy2MaxValue", playerDataBase.Candy2MaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy3MaxValue", playerDataBase.Candy3MaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy4MaxValue", playerDataBase.Candy4MaxValue);
-
-        yield return waitForSeconds;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy5MaxValue", playerDataBase.Candy5MaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy6MaxValue", playerDataBase.Candy6MaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy7MaxValue", playerDataBase.Candy7MaxValue);
-
-        yield return waitForSeconds;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy8MaxValue", playerDataBase.Candy8MaxValue);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy9MaxValue", playerDataBase.Candy9MaxValue);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
-
-        yield return waitForSeconds;
-
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("ReincarnationCount", playerDataBase.ReincarnationCount);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber2);

@@ -184,5 +184,10 @@ public enum NotionType
     UsePortionNotion5,
     ChangeCharacterNotion,
     ChangeButterflyNotion,
-    ChangeIslandNotion
+    ChangeIslandNotion,
+    PortionInfo1,
+    PortionInfo2,
+    PortionInfo3,
+    PortionInfo4,
+    PortionInfo5
 }

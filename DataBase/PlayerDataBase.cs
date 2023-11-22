@@ -25,6 +25,8 @@ public class PlayerDataBase : ScriptableObject
     private int islandNumber = 0;
     [SerializeField]
     private int testAccount = 0;
+    [SerializeField]
+    private int proficiency = 0;
 
     [Space]
     [Title("Count")]
@@ -89,9 +91,11 @@ public class PlayerDataBase : ScriptableObject
     private int character19 = 0;
     [SerializeField]
     private int character20 = 0;
+    [SerializeField]
+    private int character21 = 0;
 
     [Space]
-    [Title("Food")]
+    [Title("Fast Food")]
     [SerializeField]
     private int hamburgerMaxValue = 0;
     [SerializeField]
@@ -443,6 +447,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Proficiency
+    {
+        get
+        {
+            return proficiency;
+        }
+        set
+        {
+            proficiency = value;
+        }
+    }
+
     public int Character1
     {
         get
@@ -680,6 +696,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             character20 = value;
+        }
+    }
+
+    public int Character21
+    {
+        get
+        {
+            return character21;
+        }
+        set
+        {
+            character21 = value;
         }
     }
 
@@ -2076,6 +2104,7 @@ public class PlayerDataBase : ScriptableObject
         firstReward = 0;
         islandNumber = 0;
         testAccount = 0;
+        proficiency = 0;
 
         nextFoodNumber = 0;
         hamburgerMaxValue = 0;
@@ -2117,6 +2146,7 @@ public class PlayerDataBase : ScriptableObject
         character18 = 0;
         character19 = 0;
         character20 = 0;
+        character21 = 0;
 
         chips = 0;
         donut = 0;

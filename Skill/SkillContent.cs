@@ -26,11 +26,11 @@ public class SkillContent : MonoBehaviour
     private float skill1Value = 1f;
     private float skill2Value = 0.3f;
     private float skill3Value = 0.5f;
-    private float skill4Value = 2f;
-    private float skill5Value = 2f;
-    private float skill6Value = 2f;
-    private float skill12Value = 2f;
-    private float skill13Value = 2f;
+    private float skill4Value = 1f;
+    private float skill5Value = 1f;
+    private float skill6Value = 1f;
+    private float skill12Value = 1f;
+    private float skill13Value = 1f;
 
     private float skill7Value = 0.2f;
     private float skill8Value = 0.3f;
@@ -38,8 +38,9 @@ public class SkillContent : MonoBehaviour
     private float skill10Value = 0.5f;
     private float skill11Value = 4f;
 
-    private int priceGold = 50000;
-    private int priceCrystal = 1;
+    private int priceGold = 100000;
+    private int pricePortion = 30000;
+    private int priceCrystal = 3;
 
     private int maxLevelGold = 100;
     private int maxLevelCrystal = 100;
@@ -154,7 +155,7 @@ public class SkillContent : MonoBehaviour
                     nextValueText.text = (skill4Value * (playerDataBase.Skill4 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.CoinA)
                     {
-                        value = (playerDataBase.Skill4 + 1) * priceGold;
+                        value = (playerDataBase.Skill4 + 1) * pricePortion;
                     }
                     else
                     {
@@ -176,7 +177,7 @@ public class SkillContent : MonoBehaviour
                     nextValueText.text = (skill5Value * (playerDataBase.Skill5 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.CoinA)
                     {
-                        value = (playerDataBase.Skill5 + 1) * priceGold;
+                        value = (playerDataBase.Skill5 + 1) * pricePortion;
                     }
                     else
                     {
@@ -198,7 +199,7 @@ public class SkillContent : MonoBehaviour
                     nextValueText.text = (skill6Value * (playerDataBase.Skill6 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.CoinA)
                     {
-                        value = (playerDataBase.Skill6 + 1) * priceGold;
+                        value = (playerDataBase.Skill6 + 1) * pricePortion;
                     }
                     else
                     {
@@ -330,7 +331,7 @@ public class SkillContent : MonoBehaviour
                     nextValueText.text = (skill12Value * (playerDataBase.Skill12 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.CoinA)
                     {
-                        value = (playerDataBase.Skill12 + 1) * priceGold;
+                        value = (playerDataBase.Skill12 + 1) * pricePortion;
                     }
                     else
                     {
@@ -352,7 +353,7 @@ public class SkillContent : MonoBehaviour
                     nextValueText.text = (skill13Value * (playerDataBase.Skill13 + 1)).ToString() + "%";
                     if (moneyType == MoneyType.CoinA)
                     {
-                        value = (playerDataBase.Skill13 + 1) * priceGold;
+                        value = (playerDataBase.Skill13 + 1) * pricePortion;
                     }
                     else
                     {

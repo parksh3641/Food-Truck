@@ -109,6 +109,7 @@ public enum CharacterType
     Character18,
     Character19,
     Character20,
+    Character21,
 }
 
 public enum TruckType

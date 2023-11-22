@@ -58,13 +58,15 @@ public class ShopManager : MonoBehaviour
     public GameObject[] mainButterflyArray;
     public GameObject[] shopButterflyArray;
 
-    public GameObject buyToCoinButton;
-    public GameObject buyToCrystalButton;
+    public GameObject buyButton;
+    public GameObject buySpeical;
     public GameObject selectObj;
 
     public Text selectText;
     public Text priceText;
     public Text crystalText;
+
+    public GameObject crystalButton;
 
     public LocalizationContent titleText;
     public LocalizationContent nameText;
@@ -575,7 +577,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[1].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddGold(5000000);
+        PlayfabManager.instance.UpdateAddGold(3000000);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
@@ -997,13 +999,19 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
                 break;
+            case CharacterType.Character21:
+                if (playerDataBase.Character21 >= 1)
+                {
+                    hold = true;
+                }
+                break;
         }
 
         if (hold)
         {
             selectObj.SetActive(true);
-            buyToCoinButton.SetActive(false);
-            buyToCrystalButton.SetActive(false);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
 
             if (GameStateManager.instance.CharacterType.Equals(characterInfo.characterType))
             {
@@ -1017,13 +1025,26 @@ public class ShopManager : MonoBehaviour
         else
         {
             selectObj.SetActive(false);
-            buyToCoinButton.SetActive(true);
-            buyToCrystalButton.SetActive(true);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
 
             if (!buy)
             {
                 priceText.text = LocalizationManager.instance.GetString("NotPurchase");
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+
+            crystalButton.SetActive(false);
+
+            if (characterIndex > 2)
+            {
+                crystalButton.SetActive(true);
+            }
+
+            if(characterInfo.characterType == CharacterType.Character21)
+            {
+                buyButton.SetActive(false);
+                buySpeical.SetActive(true);
             }
         }
     }
@@ -1192,8 +1213,8 @@ public class ShopManager : MonoBehaviour
         if (hold)
         {
             selectObj.SetActive(true);
-            buyToCoinButton.SetActive(false);
-            buyToCrystalButton.SetActive(false);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
 
             if (GameStateManager.instance.TruckType.Equals(truckInfo.truckType))
             {
@@ -1207,13 +1228,20 @@ public class ShopManager : MonoBehaviour
         else
         {
             selectObj.SetActive(false);
-            buyToCoinButton.SetActive(true);
-            buyToCrystalButton.SetActive(true);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
 
             if (!buy)
             {
                 priceText.text = LocalizationManager.instance.GetString("NotPurchase");
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+
+            crystalButton.SetActive(false);
+
+            if (truckIndex > 2)
+            {
+                crystalButton.SetActive(true);
             }
         }
     }
@@ -1359,8 +1387,8 @@ public class ShopManager : MonoBehaviour
         if (hold)
         {
             selectObj.SetActive(true);
-            buyToCoinButton.SetActive(false);
-            buyToCrystalButton.SetActive(false);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
 
             if (GameStateManager.instance.AnimalType.Equals(animalInfo.animalType))
             {
@@ -1374,13 +1402,20 @@ public class ShopManager : MonoBehaviour
         else
         {
             selectObj.SetActive(false);
-            buyToCoinButton.SetActive(true);
-            buyToCrystalButton.SetActive(true);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
 
             if (!buy)
             {
                 priceText.text = LocalizationManager.instance.GetString("NotPurchase");
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+
+            crystalButton.SetActive(false);
+
+            if (animalIndex > 2)
+            {
+                crystalButton.SetActive(true);
             }
         }
     }
@@ -1738,8 +1773,8 @@ public class ShopManager : MonoBehaviour
         if (hold)
         {
             selectObj.SetActive(true);
-            buyToCoinButton.SetActive(false);
-            buyToCrystalButton.SetActive(false);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
 
             if (GameStateManager.instance.ButterflyType.Equals(butterflyInfo.butterflyType))
             {
@@ -1753,13 +1788,20 @@ public class ShopManager : MonoBehaviour
         else
         {
             selectObj.SetActive(false);
-            buyToCoinButton.SetActive(true);
-            buyToCrystalButton.SetActive(true);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
 
             if (!buy)
             {
                 priceText.text = LocalizationManager.instance.GetString("NotPurchase");
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+
+            crystalButton.SetActive(false);
+
+            if (butterflyIndex > 2)
+            {
+                crystalButton.SetActive(true);
             }
         }
     }
@@ -2394,8 +2436,8 @@ public class ShopManager : MonoBehaviour
         }
 
         selectObj.SetActive(true);
-        buyToCoinButton.SetActive(false);
-        buyToCrystalButton.SetActive(false);
+        buyButton.SetActive(false);
+        
 
         selectText.text = LocalizationManager.instance.GetString("Select");
 
@@ -2496,8 +2538,8 @@ public class ShopManager : MonoBehaviour
     void RmDelay()
     {
         selectObj.SetActive(true);
-        buyToCoinButton.SetActive(false);
-        buyToCrystalButton.SetActive(false);
+        buyButton.SetActive(false);
+        
 
         selectText.text = LocalizationManager.instance.GetString("Select");
     }

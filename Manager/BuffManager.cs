@@ -127,6 +127,8 @@ public class BuffManager : MonoBehaviour
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffCount", playerDataBase.BuffCount);
 
+        GameStateManager.instance.Pause = false;
+
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
     }

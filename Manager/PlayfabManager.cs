@@ -174,6 +174,7 @@ public class PlayfabManager : MonoBehaviour
 #elif UNITY_ANDROID
         ((PlayGamesPlatform)Social.Active).SignOut();
 #endif
+
         SuccessLogOut();
     }
 
@@ -191,7 +192,7 @@ public class PlayfabManager : MonoBehaviour
 
         Debug.Log("Logout");
 
-        SceneManager.LoadScene("LoginScene");
+        SceneManager.LoadScene("MainScene");
     }
 
 
@@ -836,6 +837,11 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.Character20 = 1;
                     }
 
+                    if (list.ItemId.Equals("Character21"))
+                    {
+                        playerDataBase.Character21 = 1;
+                    }
+
                     if (list.ItemId.Equals("Chips"))
                     {
                         playerDataBase.ChipsTruck = 1;
@@ -1150,6 +1156,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "TestAccount":
                            playerDataBase.TestAccount = statistics.Value;
+                           break;
+                       case "Proficiency":
+                           playerDataBase.Proficiency = statistics.Value;
                            break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();

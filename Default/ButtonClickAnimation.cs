@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class ButtonClickAnimation : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    public bool isSound = true;
+
     public UnityEvent clickSoundEvent;
 
     void Awake()
@@ -20,7 +22,10 @@ public class ButtonClickAnimation : MonoBehaviour, IPointerDownHandler, IPointer
 
         if(GameStateManager.instance.Sfx)
         {
-            clickSoundEvent.Invoke();
+            if(isSound)
+            {
+                clickSoundEvent.Invoke();
+            }
         }
     }
 

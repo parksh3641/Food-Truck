@@ -833,6 +833,9 @@ public class GameStateManager : MonoBehaviour
     public void Initialize()
     {
         gameSettings = new GameSettings();
+
+        string str = JsonUtility.ToJson(gameSettings);
+        FileIO.SaveData(DEVICESETTINGFILENAME, str, true);
     }
 
     private void LoadData()

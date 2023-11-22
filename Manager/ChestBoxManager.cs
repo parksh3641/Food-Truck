@@ -10,11 +10,15 @@ public class ChestBoxManager : MonoBehaviour
 
     public GameObject ingameUI;
 
+    public Text[] portionPlusTextArray;
+
     public GameObject chestBoxView;
 
     public GameObject chestBoxIcon;
 
     public GameObject[] chestBoxArray;
+
+    private int number = 0;
 
     private int count = 0;
     private int goalCount = 0;
@@ -32,6 +36,11 @@ public class ChestBoxManager : MonoBehaviour
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
+
+        for(int i = 0; i < portionPlusTextArray.Length; i ++)
+        {
+            portionPlusTextArray[i].gameObject.SetActive(false);
+        }
     }
 
 
@@ -132,7 +141,10 @@ public class ChestBoxManager : MonoBehaviour
 
                 break;
             case RewardType.PortionSet:
-                switch (Random.Range(0, 5))
+
+                number = Random.Range(0, 5);
+
+                switch (number)
                 {
                     case 0:
                         playerDataBase.Portion1 += 1;
@@ -155,6 +167,10 @@ public class ChestBoxManager : MonoBehaviour
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
                         break;
                 }
+
+                portionPlusTextArray[number].gameObject.SetActive(false);
+                portionPlusTextArray[number].gameObject.SetActive(true);
+                portionPlusTextArray[number].text = "+1";
 
                 break;
             case RewardType.Crystal:
@@ -191,7 +207,10 @@ public class ChestBoxManager : MonoBehaviour
 
                 break;
             case RewardType.PortionSet:
-                switch (Random.Range(0, 5))
+
+                number = Random.Range(0, 5);
+
+                switch (number)
                 {
                     case 0:
                         playerDataBase.Portion1 += 10;
@@ -214,6 +233,11 @@ public class ChestBoxManager : MonoBehaviour
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
                         break;
                 }
+
+                portionPlusTextArray[number].gameObject.SetActive(false);
+                portionPlusTextArray[number].gameObject.SetActive(true);
+                portionPlusTextArray[number].text = "+10";
+
                 break;
             case RewardType.Crystal:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
@@ -229,6 +253,8 @@ public class ChestBoxManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+        GameStateManager.instance.Pause = false;
 
         GameStateManager.instance.ChestBoxCount += 1;
 

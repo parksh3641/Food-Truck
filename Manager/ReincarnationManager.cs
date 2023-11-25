@@ -7,6 +7,8 @@ public class ReincarnationManager : MonoBehaviour
 {
     public GameObject reincarnationView;
 
+    public GameObject lockedObj;
+
     public GameObject alarm;
 
     public Text crystalText;
@@ -14,7 +16,7 @@ public class ReincarnationManager : MonoBehaviour
     public Text passiveText;
     public Text adText;
 
-    public GameObject lockedObj;
+    public GameObject buttonLockedObj;
 
 
     private float crystal = 0;
@@ -26,7 +28,7 @@ public class ReincarnationManager : MonoBehaviour
     public TutorialManager tutorialManager;
     public GameManager gameManager;
 
-    WaitForSeconds waitForSeconds = new WaitForSeconds(0.3f);
+    WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
 
     PlayerDataBase playerDataBase;
 
@@ -42,7 +44,7 @@ public class ReincarnationManager : MonoBehaviour
 
     public void OpenReincarnationView()
     {
-        if(!reincarnationView.activeInHierarchy)
+        if(!reincarnationView.activeInHierarchy && !lockedObj.activeInHierarchy)
         {
             reincarnationView.SetActive(true);
 
@@ -60,19 +62,19 @@ public class ReincarnationManager : MonoBehaviour
     {
         crystal = 0;
 
-        lockedObj.SetActive(true);
+        buttonLockedObj.SetActive(true);
 
         if (playerDataBase.IslandNumber > 0)
         {
-            crystal += 30;
-            crystal += playerDataBase.NextFoodNumber2 * 5;
+            crystal += 20;
+            crystal += playerDataBase.NextFoodNumber2 * 10;
 
-            lockedObj.SetActive(false);
+            buttonLockedObj.SetActive(false);
         }
 
         passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 2).ToString() + "%)";
 
-        crystal = crystal + (crystal * (0.04f * (playerDataBase.Skill11 * 1)));
+        crystal = crystal + (crystal * (0.05f * (playerDataBase.Skill11 * 1)));
 
         crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
 
@@ -157,7 +159,10 @@ public class ReincarnationManager : MonoBehaviour
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("ReincarnationCount", playerDataBase.ReincarnationCount);
+
+        yield return waitForSeconds;
+
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber2);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
     }
 }

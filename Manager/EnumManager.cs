@@ -32,6 +32,7 @@ public enum RankingType
 {
     UpgradeCount,
     TotalLevel,
+    Michelin
 }
 
 public enum LanguageType
@@ -249,6 +250,7 @@ public enum PassiveEffect
     DefDestroyPercentUp,
     SellPriceX2Up,
     SellPricePercentUp,
+    ExpUp
 }
 
 public enum RewardType
@@ -285,7 +287,8 @@ public enum SkillType
     Skill10,
     Skill11,
     Skill12,
-    Skill13
+    Skill13,
+    Skill14
 }
 public enum IslandType
 {

@@ -15,6 +15,8 @@ public class QuestManager : MonoBehaviour
 
     private int value = 0;
 
+    private bool isDelay = false;
+
     QuestType questType = QuestType.UpgradeCount;
     QuestInfo questInfo = new QuestInfo();
 
@@ -75,6 +77,8 @@ public class QuestManager : MonoBehaviour
 
     public void ClearButton()
     {
+        if (isDelay) return;
+
         playerDataBase.QuestCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);
 
@@ -87,6 +91,15 @@ public class QuestManager : MonoBehaviour
 
         Initialize();
 
+        isDelay = true;
+        Invoke("Delay", 0.5f);
+
+
         FirebaseAnalytics.LogEvent("ClearQuest");
+    }
+
+    void Delay()
+    {
+        isDelay = false;
     }
 }

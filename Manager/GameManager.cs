@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     private float feverCount = 0;
     private float feverMaxCount = 400;
-    private float feverTime = 15;
+    private float feverTime = 0;
     private float feverPlus = 3;
 
     private float defDestroy = 0;
@@ -124,16 +124,17 @@ public class GameManager : MonoBehaviour
     public int sellPrice = 0;
     private float sellPricePlus = 0;
 
-    private float sellPriceX2 = 0;
+    private float sellPriceTip = 0;
+    private int expUp = 0;
 
     public float success = 0;
     private float successPlus = 0;
 
-    private float portion1Time = 15;
-    private float portion2Time = 15;
-    private float portion3Time = 15;
+    private float portion1Time = 0;
+    private float portion2Time = 0;
+    private float portion3Time = 0;
     private float portion4Plus = 0;
-    private float portion5Time = 15;
+    private float portion5Time = 0;
 
     public int level = 0;
     public int nextLevel = 0;
@@ -148,6 +149,7 @@ public class GameManager : MonoBehaviour
 
     private bool feverMode = false;
 
+    private int nowExp = 0;
     private int nowUpgradeCount = 0;
     private int nowSellCount = 0;
 
@@ -335,6 +337,7 @@ public class GameManager : MonoBehaviour
 
         feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  0%";
 
+        nowExp = playerDataBase.Exp;
         nowUpgradeCount = playerDataBase.UpgradeCount;
         nowSellCount = playerDataBase.SellCount;
         StartCoroutine(DelayCoroution());
@@ -359,9 +362,7 @@ public class GameManager : MonoBehaviour
 
         rankLocked.SetActive(true);
 
-        int level = levelDataBase.GetLevel(playerDataBase.UpgradeCount);
-
-        if(level > 4)
+        if(levelDataBase.GetLevel(playerDataBase.Exp) > 9)
         {
             rankLocked.SetActive(false);
         }
@@ -371,7 +372,7 @@ public class GameManager : MonoBehaviour
         if(playerDataBase.TestAccount > 0)
         {
             testModeButton.SetActive(true);
-            testModeText.text = "개발자 모드 열기";
+            testModeText.text = "Developer Mode ON";
         }
 
 #if UNITY_EDITOR
@@ -685,7 +686,7 @@ public class GameManager : MonoBehaviour
         successPlus = 0;
         needPlus = 0;
         sellPricePlus = 0;
-        sellPriceX2 = 0;
+        sellPriceTip = 0;
         defDestroy = 0;
 
         //changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
@@ -696,20 +697,22 @@ public class GameManager : MonoBehaviour
         }
 
         successPlus += playerDataBase.Skill7 * 0.2f;
-        successPlus += levelDataBase.GetLevel(playerDataBase.UpgradeCount) * 0.1f;
+        successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.1f;
 
         if (GameStateManager.instance.TruckType > TruckType.Bread)
         {
             sellPricePlus = truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
         }
 
-        sellPricePlus += playerDataBase.Skill8 * 0.3f;
+        sellPricePlus += playerDataBase.Skill8 * 0.5f;
         sellPricePlus += playerDataBase.Skill9 * 0.1f;
         sellPricePlus += playerDataBase.Proficiency * 1;
 
+        sellPriceTip = playerDataBase.Skill14 * 0.5f;
+
         if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
         {
-            sellPriceX2 = animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType);
+            expUp = (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType);
         }
 
         if (GameStateManager.instance.ButterflyType > ButterflyType.Butterfly1)
@@ -724,15 +727,15 @@ public class GameManager : MonoBehaviour
 
         feverCount = GameStateManager.instance.FeverCount;
 
-        feverTime = 20 + (20 * (0.01f * (playerDataBase.Skill1 + 1)));
+        feverTime = 30 + (30 * (0.005f * (playerDataBase.Skill1 + 1)));
         feverMaxCount = 400 - (400 * (0.003f * (playerDataBase.Skill2 + 1)));
         feverPlus = 3 + (3 * (0.005f * (playerDataBase.Skill3 + 1)));
 
-        portion1Time = 15 + (15 * (0.01f * (playerDataBase.Skill4 + 1)));
-        portion2Time = 15 + (15 * (0.01f * (playerDataBase.Skill5 + 1)));
-        portion3Time = 15 + (15 * (0.01f * (playerDataBase.Skill6 + 1)));
+        portion1Time = 30 + (30 * (0.005f * (playerDataBase.Skill4 + 1)));
+        portion2Time = 30 + (30 * (0.005f * (playerDataBase.Skill5 + 1)));
+        portion3Time = 30 + (30 * (0.005f * (playerDataBase.Skill6 + 1)));
         portion4Plus = (0.01f * playerDataBase.Skill12);
-        portion5Time = 15 + (15 * (0.01f * (playerDataBase.Skill13 + 1)));
+        portion5Time = 30 + (30 * (0.005f * (playerDataBase.Skill13 + 1)));
 
         if (playerDataBase.GoldX2)
         {
@@ -787,9 +790,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DelayCoroution()
     {
-        levelManager.Initialize();
-
         yield return waitForSeconds;
+
+        if (playerDataBase.Exp > nowExp)
+        {
+            nowExp = playerDataBase.Exp;
+
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
+
+            levelManager.Initialize();
+        }
 
         if (playerDataBase.UpgradeCount > nowUpgradeCount)
         {
@@ -851,9 +861,7 @@ public class GameManager : MonoBehaviour
 
         rankLocked.SetActive(true);
 
-        int level = levelDataBase.GetLevel(playerDataBase.UpgradeCount);
-
-        if (level > 4)
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 9)
         {
             rankLocked.SetActive(false);
         }
@@ -935,16 +943,16 @@ public class GameManager : MonoBehaviour
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
-                need = upgradeFood.GetNeed(level, 360);
-                sellPrice = upgradeFood.GetPrice(level, 2100);
+                need = upgradeFood.GetNeed(level, 300);
+                sellPrice = upgradeFood.GetPrice(level, 2200);
                 success = upgradeFood.GetSuccess(level);
 
                 maxLevel = upgradeFood.maxLevel;
 
                 break;
             case IslandType.Island2:
-                need = upgradeCandy.GetNeed(level, 360);
-                sellPrice = upgradeCandy.GetPrice(level, 2100);
+                need = upgradeCandy.GetNeed(level, 300);
+                sellPrice = upgradeCandy.GetPrice(level, 2200);
                 sellPrice = sellPrice + (int)(sellPrice * 0.2f);
                 success = upgradeCandy.GetSuccess(level);
 
@@ -956,6 +964,11 @@ public class GameManager : MonoBehaviour
         if (needPlus > 0)
         {
             need -= Mathf.CeilToInt((need * (0.01f * needPlus)));
+
+            if(needPlus >= 100)
+            {
+                need = 0;
+            }
         }
 
         if (sellPricePlus > 0)
@@ -1890,6 +1903,7 @@ public class GameManager : MonoBehaviour
             level += 1;
 
             playerDataBase.UpgradeCount += 1;
+            playerDataBase.Exp += (10 + expUp);
 
             questManager.CheckGoal();
 
@@ -2950,9 +2964,9 @@ public class GameManager : MonoBehaviour
 
         CheckFoodState();
 
-        if(sellPriceX2 > 0)
+        if(sellPriceTip > 0)
         {
-            if(sellPriceX2 >= Random.Range(0f, 100f))
+            if(sellPriceTip >= Random.Range(0f, 100f))
             {
                 sellPrice = sellPrice + (int)(sellPrice * 0.15f);
 
@@ -2982,7 +2996,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckDefTicket()
     {
-        if(level >= 5 && level + 1 < maxLevel)
+        if(level >= 1 && level + 1 < maxLevel)
         {
             defTicketObj.SetActive(true);
 
@@ -3030,6 +3044,8 @@ public class GameManager : MonoBehaviour
     {
         if (level + 1 >= maxLevel)
         {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.MaxLevel);
             return;
         }
 
@@ -3223,7 +3239,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case 3:
-                if (!feverMode)
+                if (!feverMode && feverFillamount.gameObject.activeInHierarchy)
                 {
                     if (playerDataBase.Portion4 > 0)
                     {
@@ -3286,13 +3302,16 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < portion1Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion1Time);
+            if(!GameStateManager.instance.Pause)
+            {
+                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion1Time);
 
-            fillAmount = Mathf.Clamp01(fillAmount);
+                fillAmount = Mathf.Clamp01(fillAmount);
 
-            portionFillamount1.fillAmount = fillAmount;
+                portionFillamount1.fillAmount = fillAmount;
 
-            currentTime += Time.deltaTime;
+                currentTime += Time.deltaTime;
+            }    
 
             yield return null;
         }
@@ -3325,13 +3344,16 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < portion2Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion2Time);
+            if (!GameStateManager.instance.Pause)
+            {
+                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion2Time);
 
-            fillAmount = Mathf.Clamp01(fillAmount);
+                fillAmount = Mathf.Clamp01(fillAmount);
 
-            portionFillamount2.fillAmount = fillAmount;
+                portionFillamount2.fillAmount = fillAmount;
 
-            currentTime += Time.deltaTime;
+                currentTime += Time.deltaTime;
+            }
 
             yield return null;
         }
@@ -3349,13 +3371,16 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < portion3Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion3Time);
+            if (!GameStateManager.instance.Pause)
+            {
+                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion3Time);
 
-            fillAmount = Mathf.Clamp01(fillAmount);
+                fillAmount = Mathf.Clamp01(fillAmount);
 
-            portionFillamount3.fillAmount = fillAmount;
+                portionFillamount3.fillAmount = fillAmount;
 
-            currentTime += Time.deltaTime;
+                currentTime += Time.deltaTime;
+            }
 
             yield return null;
         }
@@ -3373,13 +3398,16 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < portion5Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion5Time);
+            if (!GameStateManager.instance.Pause)
+            {
+                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion5Time);
 
-            fillAmount = Mathf.Clamp01(fillAmount);
+                fillAmount = Mathf.Clamp01(fillAmount);
 
-            portionFillamount5.fillAmount = fillAmount;
+                portionFillamount5.fillAmount = fillAmount;
 
-            currentTime += Time.deltaTime;
+                currentTime += Time.deltaTime;
+            }
 
             yield return null;
         }
@@ -3590,6 +3618,9 @@ public class GameManager : MonoBehaviour
         {
             PlayfabManager.instance.UpdateAddGold(100000);
         }
+
+        SoundManager.instance.PlaySFX(GameSfxType.GetMoney);
+        GameStateManager.instance.Bankruptcy += 1;
     }
 
     public void OpenDeveloperMode()
@@ -3597,12 +3628,12 @@ public class GameManager : MonoBehaviour
         if(!testMode.activeInHierarchy)
         {
             testMode.SetActive(true);
-            testModeText.text = "개발자 모드 닫기";
+            testModeText.text = "Developer Mode OFF";
         }
         else
         {
             testMode.SetActive(false);
-            testModeText.text = "개발자 모드 열기";
+            testModeText.text = "Developer Mode ON";
         }
     }
 
@@ -3678,15 +3709,15 @@ public class GameManager : MonoBehaviour
 
     public void GetExp()
     {
-        playerDataBase.UpgradeCount += 1000;
+        playerDataBase.Exp += 10000;
 
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
+
+        levelManager.Initialize();
 
         rankLocked.SetActive(true);
 
-        int level = levelDataBase.GetLevel(playerDataBase.UpgradeCount);
-
-        if (level > 2)
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 9)
         {
             rankLocked.SetActive(false);
         }

@@ -7,9 +7,9 @@ public class LockManager : MonoBehaviour
 {
     public GameObject lockView;
 
-    public GameObject[] lockIcon;
-
     public GameObject[] menuIcon;
+
+    public GameObject[] lockIcon;
 
     public LocalizationContent infoText;
 
@@ -30,6 +30,7 @@ public class LockManager : MonoBehaviour
     public void OnReset()
     {
         playerDataBase.LockTutorial = 0;
+        Initialize();
     }
 
     [Button]
@@ -47,6 +48,9 @@ public class LockManager : MonoBehaviour
             menuIcon[i].SetActive(false);
         }
 
+        menuIcon[7].SetActive(true);
+        menuIcon[10].SetActive(true);
+
         if (playerDataBase.LockTutorial >= 1) //음식 변경
         {
             menuIcon[0].SetActive(true);
@@ -57,23 +61,25 @@ public class LockManager : MonoBehaviour
             menuIcon[1].SetActive(true);
             menuIcon[2].SetActive(true);
             menuIcon[3].SetActive(true);
-            menuIcon[4].SetActive(true);
             menuIcon[5].SetActive(true);
         }
 
         if (playerDataBase.LockTutorial >= 3) //피버모드 해제
         {
+            menuIcon[4].SetActive(true);
             menuIcon[6].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 4) //연구소, 특별 연구소 해제
+        if (playerDataBase.LockTutorial >= 4) //레시피, 버프 해제
         {
-            menuIcon[7].SetActive(true);
+            menuIcon[7].SetActive(false);
+            menuIcon[8].SetActive(true);
+            menuIcon[9].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 5) //섬 이동, 환생 해제
+        if (playerDataBase.LockTutorial >= 5) //챌린지 해제
         {
-            menuIcon[8].SetActive(true);
+            menuIcon[10].SetActive(false);
         }
     }
 
@@ -105,13 +111,13 @@ public class LockManager : MonoBehaviour
                 lockIcon[1].SetActive(true);
                 lockIcon[2].SetActive(true);
                 lockIcon[3].SetActive(true);
-                lockIcon[4].SetActive(true);
                 lockIcon[5].SetActive(true);
 
                 gameManager.CheckPortion();
 
                 break;
             case 3:
+                lockIcon[4].SetActive(true);
                 lockIcon[6].SetActive(true);
 
                 break;

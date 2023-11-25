@@ -24,11 +24,11 @@ public class LevelDataBase : ScriptableObject
         {
             LevelInfo levelInfo = new LevelInfo();
             levelInfo.level = i + 1;
-            levelInfo.needExp = 300;
+            levelInfo.needExp = 3000;
 
             if(i > 0)
             {
-                levelInfo.needExp += 20 * i;
+                levelInfo.needExp += 25 * i;
             }
 
             levelInfoList.Add(levelInfo);

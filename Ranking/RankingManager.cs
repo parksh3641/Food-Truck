@@ -121,11 +121,11 @@ public class RankingManager : MonoBehaviour
 
                 infoText.localizationName = "Ranking2_Info";
                 break;
-            //case 2:
-            //    ChangeRankingView(RankingType.TotalLevel);
+            case 2:
+                ChangeRankingView(RankingType.Michelin);
 
-            //    infoText.localizationName = "Ranking3_Info";
-            //    break;
+                infoText.localizationName = "Ranking3_Info";
+                break;
         }
 
         infoText.ReLoad();
@@ -229,7 +229,7 @@ public class RankingManager : MonoBehaviour
                 number = playerDataBase.QuestCount;
                 break;
             case 2:
-                number = playerDataBase.UpgradeCount;
+                number = playerDataBase.Michelin;
                 break;
         }
 

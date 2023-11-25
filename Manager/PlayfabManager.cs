@@ -1160,6 +1160,12 @@ public class PlayfabManager : MonoBehaviour
                        case "Proficiency":
                            playerDataBase.Proficiency = statistics.Value;
                            break;
+                       case "Exp":
+                           playerDataBase.Exp = statistics.Value;
+                           break;
+                       case "Michelin":
+                           playerDataBase.Michelin = statistics.Value;
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;
@@ -1292,6 +1298,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Skill13":
                            playerDataBase.Skill13 = statistics.Value;
+                           break;
+                       case "Skill14":
+                           playerDataBase.Skill14 = statistics.Value;
                            break;
                        case "Portion1":
                            playerDataBase.Portion1 = statistics.Value;

@@ -9,6 +9,8 @@ public class SkillManager : MonoBehaviour
 {
     public GameObject skillView;
 
+    public GameObject lockedObj;
+
     public GameObject alarm;
 
     [Space]
@@ -40,7 +42,7 @@ public class SkillManager : MonoBehaviour
 
     public void OpenSkillView()
     {
-        if (!skillView.activeInHierarchy)
+        if (!skillView.activeInHierarchy && !lockedObj.activeInHierarchy)
         {
             skillView.SetActive(true);
 

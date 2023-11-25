@@ -8,6 +8,8 @@ public class ChangeFoodManager : MonoBehaviour
 {
     public GameObject changeFoodView;
 
+    public GameObject moveIsland;
+
     public GameObject alarmObj;
 
     [Title("Proficiency")]
@@ -128,12 +130,19 @@ public class ChangeFoodManager : MonoBehaviour
     {
         CheckProficiency();
 
+        moveIsland.SetActive(false);
+
+        if (playerDataBase.IslandNumber > 0)
+        {
+            moveIsland.SetActive(true);
+        }
+
         proficiencyLevelText.text = (level + 1).ToString();
 
         proficiencyValueText.text = nowExp + " / " + nextExp;
         proficiencyFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
 
-        proficiencyEffectText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : " + (level * 1) + "% (+1%)";
+        proficiencyEffectText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : " + (level * 1) + "%  (+1%)";
 
         for (int i = 0; i < changeFoodContentList.Count; i++)
         {
@@ -148,7 +157,10 @@ public class ChangeFoodManager : MonoBehaviour
         if (GameStateManager.instance.GameType == GameType.Rank)
         {
             changeFoodContentList[7].gameObject.SetActive(true);
+            changeFoodContentList[7].CheckFoodProficiency();
+
             changeCandyList[9].gameObject.SetActive(true);
+            changeCandyList[9].CheckCandyProficiency();
 
             switch (GameStateManager.instance.IslandType)
             {

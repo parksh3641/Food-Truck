@@ -17,6 +17,10 @@ public class ChangeIslandContent : MonoBehaviour
     public GameObject lockedObj;
     public GameObject selectedObj;
 
+    public Sprite[] buttonImgArray;
+
+    public Image buttonImg;
+
     public Image background;
 
     Color foodColor = new Color(206 / 255f, 141 / 255f, 1);
@@ -52,7 +56,7 @@ public class ChangeIslandContent : MonoBehaviour
         islandManager = manager;
 
         titleText.localizationName = type.ToString();
-        titleText.plusText = " Lv.1";
+        titleText.plusText = "\nLv.1";
         titleText.ReLoad();
     }
 
@@ -78,7 +82,7 @@ public class ChangeIslandContent : MonoBehaviour
 
                 break;
             case IslandType.Island4:
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +7%";
+                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +8%";
                 sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +60%";
 
                 break;
@@ -90,16 +94,25 @@ public class ChangeIslandContent : MonoBehaviour
         lockedObj.SetActive(true);
 
         SetLevel(0);
+
+        buttonImg.sprite = buttonImgArray[0];
     }
 
     public void UnLock()
     {
         lockedObj.SetActive(false);
+
+        if(!selectedObj.activeInHierarchy)
+        {
+            buttonImg.sprite = buttonImgArray[1];
+        }
     }
 
     public void Selected()
     {
         selectedObj.SetActive(true);
+
+        buttonImg.sprite = buttonImgArray[0];
     }
 
     public void UnSelected()

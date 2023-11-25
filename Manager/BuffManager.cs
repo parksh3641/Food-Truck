@@ -101,7 +101,7 @@ public class BuffManager : MonoBehaviour
             if (buff1) return;
 
             buff1 = true;
-            buff1Time = time / 2;
+            buff1Time = time;
 
             buff1Obj.SetActive(true);
             StartCoroutine(Buff1Coroution());
@@ -137,7 +137,10 @@ public class BuffManager : MonoBehaviour
     {
         if(buff1Time > 0)
         {
-            buff1Time -= 1;
+            if(!GameStateManager.instance.Pause)
+            {
+                buff1Time -= 1;
+            }
         }
         else
         {
@@ -161,7 +164,10 @@ public class BuffManager : MonoBehaviour
     {
         if (buff2Time > 0)
         {
-            buff2Time -= 1;
+            if (!GameStateManager.instance.Pause)
+            {
+                buff2Time -= 1;
+            }
         }
         else
         {

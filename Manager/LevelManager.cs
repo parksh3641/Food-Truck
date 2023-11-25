@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     public GameObject levelView;
 
     public Text titleText;
+    public Text titleInfoText;
     public Text levelText;
     public Text expText;
     public Image expFillamount;
@@ -21,11 +22,13 @@ public class LevelManager : MonoBehaviour
 
     PlayerDataBase playerDataBase;
     LevelDataBase levelDataBase;
+    AnimalDataBase animalDataBase;
 
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
         if (levelDataBase == null) levelDataBase = Resources.Load("LevelDataBase") as LevelDataBase;
+        if (animalDataBase == null) animalDataBase = Resources.Load("AnimalDataBase") as AnimalDataBase;
 
         levelDataBase.Initialize();
 
@@ -42,6 +45,8 @@ public class LevelManager : MonoBehaviour
             FirebaseAnalytics.LogEvent("OpenLevel");
 
             Initialize();
+
+            infoText.ReLoad();
         }
         else
         {
@@ -51,14 +56,16 @@ public class LevelManager : MonoBehaviour
 
     public void Initialize()
     {
-        level = levelDataBase.GetLevel(playerDataBase.UpgradeCount);
+        level = levelDataBase.GetLevel(playerDataBase.Exp);
 
         GameStateManager.instance.Level = level;
 
         titleText.text = "Lv." + level.ToString();
         levelText.text = level.ToString();
 
-        nowExp = levelDataBase.GetNowExp(playerDataBase.UpgradeCount);
+        titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "  (+" + (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType) +")";
+
+        nowExp = levelDataBase.GetNowExp(playerDataBase.Exp);
         nextExp = levelDataBase.GetNextExp(level);
 
         expText.text = nowExp + " / " + nextExp;

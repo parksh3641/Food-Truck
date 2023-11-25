@@ -358,10 +358,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop1:
-                if (playerDataBase.Crystal >= 200)
+                if (playerDataBase.Crystal >= 150)
                 {
                     PlayfabManager.instance.UpdateAddGold(10000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 200);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 150);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -373,10 +373,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop2:
-                if (playerDataBase.Crystal >= 2000)
+                if (playerDataBase.Crystal >= 1500)
                 {
                     PlayfabManager.instance.UpdateAddGold(100000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 2000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1500);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -388,10 +388,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop3:
-                if (playerDataBase.Crystal >= 20000)
+                if (playerDataBase.Crystal >= 15000)
                 {
                     PlayfabManager.instance.UpdateAddGold(1000000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 20000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 15000);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -593,11 +593,13 @@ public class ShopManager : MonoBehaviour
         playerDataBase.Portion2 += 3;
         playerDataBase.Portion3 += 3;
         playerDataBase.Portion4 += 3;
+        playerDataBase.Portion5 += 3;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -1272,8 +1274,8 @@ public class ShopManager : MonoBehaviour
         else
         {
             effectText.localizationName = animalInfo.passiveEffect.ToString();
-            effectText.plusText = " : +" + animalInfo.effectNumber.ToString() + "%";
-            passiveText.text = LocalizationManager.instance.GetString("SellPriceX2Up_Info");
+            effectText.plusText = " +" + animalInfo.effectNumber.ToString();
+            //passiveText.text = LocalizationManager.instance.GetString("SellPriceX2Up_Info");
         }
 
         titleText.localizationName = "ChangeAnimal";
@@ -2654,7 +2656,25 @@ public class ShopManager : MonoBehaviour
     public void Failed()
     {
         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-
         NotionManager.instance.UseNotion(NotionType.CancelPurchase);
+    }
+
+    public void DanceMotion()
+    {
+        switch(speicalIndex)
+        {
+            case 0:
+                shopCharacterArray[characterIndex].GetComponent<Animator>().SetBool("YummyTime", true);
+                break;
+            case 1:
+                shopTruckArray[truckIndex].GetComponent<Animator>().SetBool("YummyTime", true);
+                break;
+            case 2:
+                shopAnimalArray[animalIndex].GetComponent<Animator>().SetBool("YummyTime", true);
+                break;
+            case 3:
+                shopButterflyArray[butterflyIndex].GetComponent<Animator>().SetBool("YummyTime", true);
+                break;
+        }
     }
 }

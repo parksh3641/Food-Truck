@@ -117,7 +117,7 @@ public class ShopContent : MonoBehaviour
 
                 rewardText.text = MoneyUnitString.ToCurrencyString(10000000);
 
-                buyCrystalText.text = "200";
+                buyCrystalText.text = "150";
 
                 //buyRmObj[0].SetActive(true);
                 //buyRmText[0].localizationName = itemType + "_Price";
@@ -128,7 +128,7 @@ public class ShopContent : MonoBehaviour
 
                 rewardText.text = MoneyUnitString.ToCurrencyString(100000000);
 
-                buyCrystalText.text = "2,000";
+                buyCrystalText.text = "1,500";
 
                 //buyRmObj[1].SetActive(true);
                 //buyRmText[1].localizationName = itemType + "_Price";
@@ -140,7 +140,7 @@ public class ShopContent : MonoBehaviour
 
                 rewardText.text = MoneyUnitString.ToCurrencyString(1000000000);
 
-                buyCrystalText.text = "20,000";
+                buyCrystalText.text = "15,000";
 
                 //buyRmObj[2].SetActive(true);
                 //buyRmText[2].localizationName = itemType + "_Price";

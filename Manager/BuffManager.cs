@@ -8,6 +8,8 @@ public class BuffManager : MonoBehaviour
 {
     public GameObject buffView;
 
+    public Text buffTicketsText;
+
     public LocalizationContent infoText;
 
     public GameObject buff1Obj;
@@ -59,6 +61,9 @@ public class BuffManager : MonoBehaviour
 
             index = number;
 
+            buffTicketsText.text = LocalizationManager.instance.GetString("BuffTicket") + "\n<size=10>" + 
+                LocalizationManager.instance.GetString("Hold") + " : " + playerDataBase.BuffTickets + "</size>";
+
             if (number == 0)
             {
                 infoText.localizationName = "AdRewad_SellPrice";
@@ -80,6 +85,24 @@ public class BuffManager : MonoBehaviour
         }
     }
 
+    public void UseBuffTicket()
+    {
+        if(playerDataBase.BuffTickets <= 0)
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+            return;
+        }
+
+        playerDataBase.BuffTickets -= 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+
+        BuffON();
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.UseItem);
+    }
+
     public void WatchAd()
     {
         if (index == 0)
@@ -92,7 +115,7 @@ public class BuffManager : MonoBehaviour
         }
     }
 
-    public void SuccessWatchAd()
+    public void BuffON()
     {
         buffView.SetActive(false);
 
@@ -121,13 +144,18 @@ public class BuffManager : MonoBehaviour
             gameManager.OnBuff(1);
         }
 
-        FirebaseAnalytics.LogEvent("Buff");
-
         playerDataBase.BuffCount += 1;
+
+        FirebaseAnalytics.LogEvent("Buff");
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffCount", playerDataBase.BuffCount);
 
         GameStateManager.instance.Pause = false;
+    }
+
+    public void SuccessWatchAd()
+    {
+        BuffON();
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

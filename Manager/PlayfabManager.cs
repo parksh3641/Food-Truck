@@ -1157,6 +1157,9 @@ public class PlayfabManager : MonoBehaviour
                        case "TestAccount":
                            playerDataBase.TestAccount = statistics.Value;
                            break;
+                       case "BuffTickets":
+                           playerDataBase.BuffTickets = statistics.Value;
+                           break;
                        case "Proficiency":
                            playerDataBase.Proficiency = statistics.Value;
                            break;

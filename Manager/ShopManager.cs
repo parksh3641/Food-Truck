@@ -589,11 +589,11 @@ public class ShopManager : MonoBehaviour
 
         shopContents[6].SetLocked(true);
 
-        playerDataBase.Portion1 += 3;
-        playerDataBase.Portion2 += 3;
-        playerDataBase.Portion3 += 3;
-        playerDataBase.Portion4 += 3;
-        playerDataBase.Portion5 += 3;
+        playerDataBase.Portion1 += 2;
+        playerDataBase.Portion2 += 2;
+        playerDataBase.Portion3 += 2;
+        playerDataBase.Portion4 += 2;
+        playerDataBase.Portion5 += 2;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);

@@ -100,6 +100,8 @@ public class RankingManager : MonoBehaviour
     {
         if (topNumber == number) return;
 
+        if (isDelay) return;
+
         topNumber = number;
 
         for (int i = 0; i < topMenuImgArray.Length; i++)

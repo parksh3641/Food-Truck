@@ -11,6 +11,8 @@ public class LockManager : MonoBehaviour
 
     public GameObject[] lockIcon;
 
+    public GameObject tutorial;
+
     public LocalizationContent infoText;
 
     private int level = 0;
@@ -48,6 +50,8 @@ public class LockManager : MonoBehaviour
             menuIcon[i].SetActive(false);
         }
 
+        tutorial.SetActive(true);
+
         menuIcon[7].SetActive(true);
         menuIcon[10].SetActive(true);
 
@@ -62,6 +66,8 @@ public class LockManager : MonoBehaviour
             menuIcon[2].SetActive(true);
             menuIcon[3].SetActive(true);
             menuIcon[5].SetActive(true);
+
+            tutorial.SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 3) //피버모드 해제

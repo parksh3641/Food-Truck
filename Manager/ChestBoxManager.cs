@@ -213,30 +213,30 @@ public class ChestBoxManager : MonoBehaviour
                 switch (number)
                 {
                     case 0:
-                        playerDataBase.Portion1 += 10;
+                        playerDataBase.Portion1 += 5;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
                         break;
                     case 1:
-                        playerDataBase.Portion2 += 10;
+                        playerDataBase.Portion2 += 5;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
                         break;
                     case 2:
-                        playerDataBase.Portion3 += 10;
+                        playerDataBase.Portion3 += 5;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
                         break;
                     case 3:
-                        playerDataBase.Portion4 += 10;
+                        playerDataBase.Portion4 += 5;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
                         break;
                     case 4:
-                        playerDataBase.Portion5 += 10;
+                        playerDataBase.Portion5 += 5;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
                         break;
                 }
 
                 portionPlusTextArray[number].gameObject.SetActive(false);
                 portionPlusTextArray[number].gameObject.SetActive(true);
-                portionPlusTextArray[number].text = "+10";
+                portionPlusTextArray[number].text = "+5";
 
                 break;
             case RewardType.Crystal:

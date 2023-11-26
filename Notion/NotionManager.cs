@@ -189,5 +189,6 @@ public enum NotionType
     PortionInfo2,
     PortionInfo3,
     PortionInfo4,
-    PortionInfo5
+    PortionInfo5,
+    UseItem
 }

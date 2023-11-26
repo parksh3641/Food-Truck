@@ -574,6 +574,8 @@ public class GameManager : MonoBehaviour
         playerDataBase.Portion4 += 10;
         playerDataBase.Portion5 += 10;
 
+        playerDataBase.BuffTickets += 3;
+
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
 
@@ -582,6 +584,7 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
 
         CheckPortion();
     }
@@ -727,15 +730,16 @@ public class GameManager : MonoBehaviour
 
         feverCount = GameStateManager.instance.FeverCount;
 
-        feverTime = 30 + (30 * (0.005f * (playerDataBase.Skill1 + 1)));
-        feverMaxCount = 400 - (400 * (0.003f * (playerDataBase.Skill2 + 1)));
-        feverPlus = 3 + (3 * (0.005f * (playerDataBase.Skill3 + 1)));
+        feverTime = 30 + (30 * (0.005f * playerDataBase.Skill1));
 
-        portion1Time = 30 + (30 * (0.005f * (playerDataBase.Skill4 + 1)));
-        portion2Time = 30 + (30 * (0.005f * (playerDataBase.Skill5 + 1)));
-        portion3Time = 30 + (30 * (0.005f * (playerDataBase.Skill6 + 1)));
-        portion4Plus = (0.01f * playerDataBase.Skill12);
-        portion5Time = 30 + (30 * (0.005f * (playerDataBase.Skill13 + 1)));
+        feverMaxCount = 400 - (400 * (0.003f * playerDataBase.Skill2));
+        feverPlus = 3 + (3 * (0.005f * playerDataBase.Skill3));
+
+        portion1Time = 30 + (30 * (0.005f * playerDataBase.Skill4));
+        portion2Time = 30 + (30 * (0.005f * playerDataBase.Skill5));
+        portion3Time = 30 + (30 * (0.005f * playerDataBase.Skill6));
+        portion4Plus = 0.01f * playerDataBase.Skill12;
+        portion5Time = 30 + (30 * (0.005f * playerDataBase.Skill13));
 
         if (playerDataBase.GoldX2)
         {
@@ -744,7 +748,7 @@ public class GameManager : MonoBehaviour
 
         if (portion1)
         {
-            needPlus += 30;
+            needPlus += 50;
         }
 
         if (portion2)
@@ -879,6 +883,7 @@ public class GameManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
 
             PlayfabManager.instance.UpdateAddGold(1000000);
+            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
 
             StartCoroutine(FirstDelay());
         }
@@ -2434,8 +2439,6 @@ public class GameManager : MonoBehaviour
             {
                 fillAmount = Mathf.Lerp(1.0f, 0, currentTime / feverTime);
 
-                //feverText.text = LocalizationManager.instance.GetString("FeverNotion") + " : " + (fillAmount * 100).ToString("N0") + "%";
-
                 fillAmount = Mathf.Clamp01(fillAmount);
 
                 feverFillamount.fillAmount = fillAmount;
@@ -2449,7 +2452,6 @@ public class GameManager : MonoBehaviour
         lightParticle.gameObject.SetActive(false);
 
         feverMode = false;
-
         feverFillamount.fillAmount = 0;
 
         defDestroy -= 10;
@@ -2649,6 +2651,8 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
                             changeFoodAlarmObj.SetActive(true);
+
+                            tutorialManager.NextFood();
                         }
 
                         lockManager.UnLocked(1);
@@ -2870,6 +2874,7 @@ public class GameManager : MonoBehaviour
 
         questManager.CheckGoal();
         changeFoodManager.CheckProficiency();
+        UpgradeInitialize();
     }
 
     public void SellButton()
@@ -3146,7 +3151,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion1 = true;
 
-                        needPlus += 30;
+                        needPlus += 50;
 
                         need -= (int)(need * (0.01f * needPlus));
 
@@ -3319,7 +3324,7 @@ public class GameManager : MonoBehaviour
         portion1 = false;
         portionFillamount1.fillAmount = 0;
 
-        needPlus -= 30;
+        needPlus -= 50;
 
         need -= (int)(need * (0.01f * needPlus));
 
@@ -3668,6 +3673,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.Skill11 = 100;
         playerDataBase.Skill12 = 100;
         playerDataBase.Skill13 = 100;
+        playerDataBase.Skill14 = 100;
     }
 
     public void GetGold()

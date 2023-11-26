@@ -40,11 +40,19 @@ public class TutorialManager : MonoBehaviour
         Initialize(talkIndex);
     }
 
-    public void Reincarnation()
+    public void NextFood()
     {
         tutorialView.SetActive(true);
 
         talkIndex = 5;
+        Initialize(talkIndex);
+    }
+
+    public void Reincarnation()
+    {
+        tutorialView.SetActive(true);
+
+        talkIndex = 7;
         Initialize(talkIndex);
     }
 
@@ -69,6 +77,9 @@ public class TutorialManager : MonoBehaviour
                 GameStateManager.instance.Tutorial = true;
                 break;
             case 6:
+                tutorialView.SetActive(false);
+                break;
+            case 8:
                 tutorialView.SetActive(false);
                 break;
         }

@@ -114,6 +114,8 @@ public class ReincarnationManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
+        SoundManager.instance.ResetBGM();
+
         reincarnationView.SetActive(false);
 
         if(number == 0)

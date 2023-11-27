@@ -42,11 +42,11 @@ public class LevelManager : MonoBehaviour
         {
             levelView.SetActive(true);
 
-            FirebaseAnalytics.LogEvent("OpenLevel");
-
             Initialize();
 
             infoText.ReLoad();
+
+            FirebaseAnalytics.LogEvent("OpenLevel");
         }
         else
         {

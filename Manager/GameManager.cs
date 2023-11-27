@@ -661,6 +661,8 @@ public class GameManager : MonoBehaviour
                 case IslandType.Island4:
                     break;
             }
+
+            FirebaseAnalytics.LogEvent("NormalMode");
         }
         else
         {
@@ -677,6 +679,8 @@ public class GameManager : MonoBehaviour
                 case IslandType.Island4:
                     break;
             }
+
+            FirebaseAnalytics.LogEvent("RankingMode");
         }
 
         mainUI.SetActive(false);
@@ -773,7 +777,7 @@ public class GameManager : MonoBehaviour
 
         if (buff1)
         {
-            sellPricePlus += 100;
+            sellPricePlus += 50;
         }
 
         if (buff2)
@@ -3179,6 +3183,8 @@ public class GameManager : MonoBehaviour
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion1);
+
+                        FirebaseAnalytics.LogEvent("UsePortion1");
                     }
                     else
                     {
@@ -3207,6 +3213,8 @@ public class GameManager : MonoBehaviour
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion2);
+
+                        FirebaseAnalytics.LogEvent("UsePortion2");
                     }
                     else
                     {
@@ -3235,6 +3243,8 @@ public class GameManager : MonoBehaviour
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion3);
+
+                        FirebaseAnalytics.LogEvent("UsePortion3");
                     }
                     else
                     {
@@ -3260,6 +3270,8 @@ public class GameManager : MonoBehaviour
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion4);
+
+                        FirebaseAnalytics.LogEvent("UsePortion4");
                     }
                     else
                     {
@@ -3288,6 +3300,8 @@ public class GameManager : MonoBehaviour
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion5);
+
+                        FirebaseAnalytics.LogEvent("UsePortion5");
                     }
                     else
                     {
@@ -3431,7 +3445,7 @@ public class GameManager : MonoBehaviour
         {
             buff1 = true;
 
-            sellPricePlus += 100;
+            sellPricePlus += 50;
             UpgradeInitialize();
         }
         else
@@ -3449,7 +3463,7 @@ public class GameManager : MonoBehaviour
         {
             buff1 = false;
 
-            sellPricePlus -= 100;
+            sellPricePlus -= 50;
             UpgradeInitialize();
         }
         else
@@ -3749,5 +3763,12 @@ public class GameManager : MonoBehaviour
                 NotionManager.instance.UseNotion(NotionType.PortionInfo5);
                 break;
         }
+    }
+
+    public void GetUpgradeCount()
+    {
+        playerDataBase.UpgradeCount += Random.Range(500, 1001);
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
     }
 }

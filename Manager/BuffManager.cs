@@ -130,6 +130,8 @@ public class BuffManager : MonoBehaviour
             StartCoroutine(Buff1Coroution());
 
             gameManager.OnBuff(0);
+
+            FirebaseAnalytics.LogEvent("UseBuff1");
         }
         else
         {
@@ -142,11 +144,11 @@ public class BuffManager : MonoBehaviour
             StartCoroutine(Buff2Coroution());
 
             gameManager.OnBuff(1);
+
+            FirebaseAnalytics.LogEvent("UseBuff2");
         }
 
         playerDataBase.BuffCount += 1;
-
-        FirebaseAnalytics.LogEvent("Buff");
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffCount", playerDataBase.BuffCount);
 

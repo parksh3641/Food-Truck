@@ -94,8 +94,7 @@ public class QuestManager : MonoBehaviour
         isDelay = true;
         Invoke("Delay", 0.5f);
 
-
-        FirebaseAnalytics.LogEvent("ClearQuest");
+        FirebaseAnalytics.LogEvent("QuestClear");
     }
 
     void Delay()

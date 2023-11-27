@@ -132,6 +132,24 @@ public class ChestBoxManager : MonoBehaviour
         }
     }
 
+    void Success()
+    {
+        playerDataBase.OpenChestBox += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
+
+        gameManager.CheckPortion();
+        questManager.CheckGoal();
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+        GameStateManager.instance.Pause = false;
+
+        Initialize();
+
+        FirebaseAnalytics.LogEvent("ChestBox");
+    }
+
     public void GetFreeReward()
     {
         switch (rewardType)
@@ -178,19 +196,7 @@ public class ChestBoxManager : MonoBehaviour
                 break;
         }
 
-        playerDataBase.OpenChestBox += 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
-
-        gameManager.CheckPortion();
-
-        questManager.CheckGoal();
-
-        SoundManager.instance.PlaySFX(GameSfxType.Success);
-        NotionManager.instance.UseNotion(NotionType.SuccessReward);
-
-        GameStateManager.instance.ChestBoxCount += 1;
-
-        Initialize();
+        Success();
     }
 
     public void GetAdsReward()
@@ -244,22 +250,7 @@ public class ChestBoxManager : MonoBehaviour
                 break;
         }
 
-        playerDataBase.OpenChestBox += 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
-
-        gameManager.CheckPortion();
-
-        questManager.CheckGoal();
-
-        SoundManager.instance.PlaySFX(GameSfxType.Success);
-        NotionManager.instance.UseNotion(NotionType.SuccessReward);
-
-        GameStateManager.instance.Pause = false;
-
         GameStateManager.instance.ChestBoxCount += 1;
-
-        FirebaseAnalytics.LogEvent("ChestBox");
-
-        Initialize();
+        Success();
     }
 }

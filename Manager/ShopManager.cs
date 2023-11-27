@@ -463,9 +463,9 @@ public class ShopManager : MonoBehaviour
             case ItemType.CrystalShop6:
                 break;
             case ItemType.Portion1:
-                if (playerDataBase.Crystal >= 5)
+                if (playerDataBase.Crystal >= 10)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 5);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
 
                     playerDataBase.Portion1 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
@@ -482,9 +482,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion2:
-                if (playerDataBase.Crystal >= 10)
+                if (playerDataBase.Crystal >= 15)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 15);
 
                     playerDataBase.Portion2 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
@@ -501,9 +501,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion3:
-                if (playerDataBase.Crystal >= 5)
+                if (playerDataBase.Crystal >= 10)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 5);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
 
                     playerDataBase.Portion3 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
@@ -520,9 +520,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion4:
-                if (playerDataBase.Crystal >= 5)
+                if (playerDataBase.Crystal >= 10)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 5);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
 
                     playerDataBase.Portion4 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
@@ -539,9 +539,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion5:
-                if (playerDataBase.Crystal >= 10)
+                if (playerDataBase.Crystal >= 15)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 15);
 
                     playerDataBase.Portion5 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
@@ -639,19 +639,25 @@ public class ShopManager : MonoBehaviour
             {
                 case 0:
                     shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                    FirebaseAnalytics.LogEvent("OpenCharacter");
                     break;
                 case 1:
                     shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                    FirebaseAnalytics.LogEvent("OpenFoodTruck");
                     break;
                 case 2:
                     shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                    FirebaseAnalytics.LogEvent("OpenPet");
                     break;
                 case 3:
                     shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                    FirebaseAnalytics.LogEvent("OpenButterfly");
                     break;
             }
-
-            FirebaseAnalytics.LogEvent("OpenSpeicalShop");
         }
         else
         {

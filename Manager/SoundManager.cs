@@ -101,4 +101,11 @@ public class SoundManager : MonoBehaviour
         musicAudio.clip = musicArray[Random.Range(0, musicArray.Length)];
         musicAudio.Play();
     }
+
+    public void ResetBGM()
+    {
+        musicAudio.Stop();
+        StopAllCoroutines();
+        StartCoroutine(PlayList());
+    }
 }

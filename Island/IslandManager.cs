@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,6 +62,8 @@ public class IslandManager : MonoBehaviour
             changeIslandView.SetActive(true);
 
             Initialize();
+
+            FirebaseAnalytics.LogEvent("OpenIsland");
         }
         else
         {

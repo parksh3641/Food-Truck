@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -99,6 +100,8 @@ public class ChangeFoodManager : MonoBehaviour
             Initialize();
 
             GameStateManager.instance.Pause = true;
+
+            FirebaseAnalytics.LogEvent("OpenChangeFood");
         }
         else
         {

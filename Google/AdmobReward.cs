@@ -139,10 +139,32 @@ public class AdmobReward : MonoBehaviour
             }
             else
             {
-                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                NotionManager.instance.UseNotion(NotionType.CancelWatchAd);
+                switch (number)
+                {
+                    case 0:
+                        shopManager.SuccessWatchAd();
+                        break;
+                    case 1:
+                        shopManager.SuccessWatchAd_Portion();
+                        break;
+                    case 2:
+                        chestBoxManager.SuccessWatchAd();
+                        break;
+                    case 3:
+                        buffManager.SuccessWatchAd();
+                        break;
+                    case 4:
+                        reincarnationManager.SuccessWatchAd();
+                        break;
+                }
+
+                //SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                //NotionManager.instance.UseNotion(NotionType.CancelWatchAd);
             }
         }
+
+        playerDataBase.AdCount += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("AdCount", playerDataBase.AdCount);
     }
 
     private void RegisterReloadHandler(RewardedAd ad)

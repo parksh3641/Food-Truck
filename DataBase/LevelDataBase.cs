@@ -15,20 +15,36 @@ public class LevelDataBase : ScriptableObject
 {
     public List<LevelInfo> levelInfoList = new List<LevelInfo>();
 
-
     public void Initialize()
     {
         levelInfoList.Clear();
 
-        for (int i = 0; i < 100; i ++)
+        for (int i = 0; i < 300; i ++)
         {
             LevelInfo levelInfo = new LevelInfo();
             levelInfo.level = i + 1;
-            levelInfo.needExp = 3000;
 
-            if(i > 0)
+            if (i < 5)
             {
-                levelInfo.needExp += 25 * i;
+                levelInfo.needExp = 1000;
+            }
+            else if (i < 10)
+            {
+                levelInfo.needExp = 1500;
+            }
+            else if (i < 15)
+            {
+                levelInfo.needExp = 2000;
+            }
+            else if (i < 20)
+            {
+                levelInfo.needExp = 2500;
+            }
+            else
+            {
+                levelInfo.needExp = 3000;
+
+                levelInfo.needExp += 25 * (i - 20);
             }
 
             levelInfoList.Add(levelInfo);

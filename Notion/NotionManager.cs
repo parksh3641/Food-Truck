@@ -47,7 +47,7 @@ public class NotionManager : MonoBehaviour
                 notion.txt.color = new Color(1, 0, 0);
                 break;
             case ColorType.Orange:
-                notion.txt.color = new Color(1, 255f / 150f, 0);
+                notion.txt.color = new Color(1, 150f / 255f, 0);
                 break;
             case ColorType.Yellow:
                 notion.txt.color = new Color(1, 1, 0);
@@ -59,13 +59,13 @@ public class NotionManager : MonoBehaviour
                 notion.txt.color = new Color(0, 1, 1);
                 break;
             case ColorType.Blue:
-                notion.txt.color = new Color(0, 255f / 150f, 1);
+                notion.txt.color = new Color(0, 150f / 255f, 1);
                 break;
             case ColorType.Purple:
-                notion.txt.color = new Color(255f / 200f, 0, 1);
+                notion.txt.color = new Color(200f / 255f, 0, 1);
                 break;
             case ColorType.Pink:
-                notion.txt.color = new Color(1, 255f / 150f, 1);
+                notion.txt.color = new Color(1, 150 / 255f, 1);
                 break;
             case ColorType.Black:
                 notion.txt.color = new Color(0, 0, 0);
@@ -190,5 +190,7 @@ public enum NotionType
     PortionInfo3,
     PortionInfo4,
     PortionInfo5,
-    UseItem
+    UseItem,
+    PortionInfo6,
+    UsePortionNotion6,
 }

@@ -33,6 +33,8 @@ public class PlayerDataBase : ScriptableObject
     private int exp = 0;
     [SerializeField]
     private int michelin = 0;
+    [SerializeField]
+    private int adCount = 0;
 
     [Space]
     [Title("Count")]
@@ -321,6 +323,8 @@ public class PlayerDataBase : ScriptableObject
     private int portion4 = 0;
     [SerializeField]
     private int portion5 = 0;
+    [SerializeField]
+    private int portion6 = 0;
 
     [Space]
     [Title("Coupon")]
@@ -500,6 +504,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             michelin = value;
+        }
+    }
+
+    public int AdCount
+    {
+        get
+        {
+            return adCount;
+        }
+        set
+        {
+            adCount = value;
         }
     }
 
@@ -2026,6 +2042,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Portion6
+    {
+        get
+        {
+            return portion6;
+        }
+        set
+        {
+            portion6 = value;
+        }
+    }
+
     public int Coupon1
     {
         get
@@ -2164,6 +2192,7 @@ public class PlayerDataBase : ScriptableObject
         proficiency = 0;
         exp = 0;
         michelin = 0;
+        adCount = 0;
 
         nextFoodNumber = 0;
         hamburgerMaxValue = 0;
@@ -2302,6 +2331,7 @@ public class PlayerDataBase : ScriptableObject
         portion3 = 0;
         portion4 = 0;
         portion5 = 0;
+        portion6 = 0;
 
         coupon1 = 0;
         coupon2 = 0;

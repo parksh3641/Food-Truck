@@ -83,12 +83,9 @@ public class GameManager : MonoBehaviour
 
     public Text myMoneyPlusText;
 
-
-    [Space]
-    [Title("Portion")]
-    public Text portionText1, portionText2, portionText3, portionText4, portionText5;
-    public Image portionFillamount1, portionFillamount2, portionFillamount3, portionFillamount4, portionFillamount5;
-    private bool portion1, portion2, portion3, portion4, portion5;
+    public Text portionText1, portionText2, portionText3, portionText4, portionText5, portionText6;
+    public Image portionFillamount1, portionFillamount2, portionFillamount3, portionFillamount4, portionFillamount5, portionFillamount6;
+    private bool portion1, portion2, portion3, portion4, portion5, portion6;
 
     public Text titleText;
     public Text highLevelText;
@@ -135,6 +132,7 @@ public class GameManager : MonoBehaviour
     private float portion3Time = 0;
     private float portion4Plus = 0;
     private float portion5Time = 0;
+    private float portion6Time = 30;
 
     public int level = 0;
     public int nextLevel = 0;
@@ -259,12 +257,14 @@ public class GameManager : MonoBehaviour
         portion3 = false;
         portion4 = false;
         portion5 = false;
+        portion6 = false;
 
         portionFillamount1.fillAmount = 0;
         portionFillamount2.fillAmount = 0;
         portionFillamount3.fillAmount = 0;
         portionFillamount4.fillAmount = 0;
         portionFillamount5.fillAmount = 0;
+        portionFillamount6.fillAmount = 0;
 
         defTicketObj.SetActive(false);
         bankruptcyView.SetActive(false);
@@ -572,9 +572,8 @@ public class GameManager : MonoBehaviour
         playerDataBase.Portion2 += 10;
         playerDataBase.Portion3 += 10;
         playerDataBase.Portion4 += 10;
-        playerDataBase.Portion5 += 10;
 
-        playerDataBase.BuffTickets += 3;
+        playerDataBase.BuffTickets += 2;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
@@ -583,7 +582,6 @@ public class GameManager : MonoBehaviour
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
 
         CheckPortion();
@@ -952,18 +950,18 @@ public class GameManager : MonoBehaviour
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
-                need = upgradeFood.GetNeed(level, 300);
-                sellPrice = upgradeFood.GetPrice(level, 2200);
-                success = upgradeFood.GetSuccess(level);
+                need = upgradeDataBase.GetNeed(level, 200);
+                sellPrice = upgradeDataBase.GetPrice(level, 2000);
+                success = upgradeDataBase.GetSuccess(level);
 
                 maxLevel = upgradeFood.maxLevel;
 
                 break;
             case IslandType.Island2:
-                need = upgradeCandy.GetNeed(level, 300);
-                sellPrice = upgradeCandy.GetPrice(level, 2200);
+                need = upgradeDataBase.GetNeed(level, 200);
+                sellPrice = upgradeDataBase.GetPrice(level, 2000);
                 sellPrice = sellPrice + (int)(sellPrice * 0.2f);
-                success = upgradeCandy.GetSuccess(level);
+                success = upgradeDataBase.GetSuccess(level);
 
                 maxLevel = upgradeCandy.maxLevel;
 
@@ -3071,7 +3069,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                SoundManager.instance.PlaySFX(GameSfxType.Shield);
                 NotionManager.instance.UseNotion(NotionType.LowItemNotion);
                 return;
             }
@@ -3085,13 +3083,6 @@ public class GameManager : MonoBehaviour
             isDef = false;
             checkMark.SetActive(false);
         }
-
-        //if(defDestroy >= 100)
-        //{
-        //    defDestroy = 100;
-        //}
-
-        defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
     }
 
     public void CheckPortion()
@@ -3141,6 +3132,15 @@ public class GameManager : MonoBehaviour
             portionText5.text = playerDataBase.Portion5.ToString();
         }
 
+        if (playerDataBase.Portion6 == 0)
+        {
+            portionText6.text = "-";
+        }
+        else
+        {
+            portionText6.text = playerDataBase.Portion6.ToString();
+        }
+
         questManager.CheckGoal();
     }
 
@@ -3156,22 +3156,7 @@ public class GameManager : MonoBehaviour
                         portion1 = true;
 
                         needPlus += 50;
-
-                        need -= (int)(need * (0.01f * needPlus));
-
-                        if (level + 1 < maxLevel)
-                        {
-                            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice");
-
-                            if (needPlus > 0)
-                            {
-                                needText.text += " (-" + (needPlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
-                            }
-                            else
-                            {
-                                needText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(need);
-                            }
-                        }
+                        UpgradeInitialize();
 
                         playerDataBase.Portion1 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
@@ -3258,15 +3243,14 @@ public class GameManager : MonoBehaviour
                 {
                     if (playerDataBase.Portion4 > 0)
                     {
+                        feverCount += (feverMaxCount * (0.25f + portion4Plus));
+                        CheckFever();
+
                         playerDataBase.Portion4 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
                         playerDataBase.UseSources += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
-
-                        feverCount += (feverMaxCount * (0.25f + portion4Plus));
-
-                        CheckFever();
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion4);
@@ -3288,7 +3272,7 @@ public class GameManager : MonoBehaviour
                         portion5 = true;
 
                         defDestroy += 10;
-                        defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+                        UpgradeInitialize();
 
                         playerDataBase.Portion5 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
@@ -3302,6 +3286,42 @@ public class GameManager : MonoBehaviour
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion5);
 
                         FirebaseAnalytics.LogEvent("UsePortion5");
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.NotSources);
+                        NotionManager.instance.UseNotion(NotionType.LowPortion);
+                    }
+                }
+                break;
+            case 5:
+                if (!portion6)
+                {
+                    if (playerDataBase.Portion6 > 0)
+                    {
+                        portion6 = true;
+
+                        needPlus += 50;
+                        sellPricePlus += 10;
+                        successPlus += 1;
+                        feverCount = feverMaxCount;
+                        CheckFever();
+                        defDestroy += 10;
+
+                        UpgradeInitialize();
+
+                        playerDataBase.Portion6 -= 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion6", playerDataBase.Portion6);
+
+                        playerDataBase.UseSources += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
+
+                        StartCoroutine(PortionCoroution6());
+
+                        SoundManager.instance.PlaySFX(GameSfxType.UseSources);
+                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion6);
+
+                        FirebaseAnalytics.LogEvent("UsePortion6");
                     }
                     else
                     {
@@ -3339,22 +3359,7 @@ public class GameManager : MonoBehaviour
         portionFillamount1.fillAmount = 0;
 
         needPlus -= 50;
-
-        need -= (int)(need * (0.01f * needPlus));
-
-        if (level + 1 < maxLevel)
-        {
-            needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice");
-
-            if (needPlus > 0)
-            {
-                needText.text += " (-" + (needPlus) + "%)</size>\n" + MoneyUnitString.ToCurrencyString(need);
-            }
-            else
-            {
-                needText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(need);
-            }
-        }
+        UpgradeInitialize();
     }
 
     IEnumerator PortionCoroution2()
@@ -3435,7 +3440,37 @@ public class GameManager : MonoBehaviour
         portionFillamount5.fillAmount = 0;
 
         defDestroy -= 10;
-        defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+        UpgradeInitialize();
+    }
+
+    IEnumerator PortionCoroution6()
+    {
+        float currentTime = 0f;
+
+        while (currentTime < portion6Time)
+        {
+            if (!GameStateManager.instance.Pause)
+            {
+                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion6Time);
+
+                fillAmount = Mathf.Clamp01(fillAmount);
+
+                portionFillamount6.fillAmount = fillAmount;
+
+                currentTime += Time.deltaTime;
+            }
+
+            yield return null;
+        }
+
+        portion6 = false;
+        portionFillamount6.fillAmount = 0;
+
+        needPlus -= 50;
+        sellPricePlus -= 10;
+        successPlus -= 1;
+        defDestroy -= 10;
+        UpgradeInitialize();
     }
 
 
@@ -3707,12 +3742,14 @@ public class GameManager : MonoBehaviour
         playerDataBase.Portion3 += 100;
         playerDataBase.Portion4 += 100;
         playerDataBase.Portion5 += 100;
+        playerDataBase.Portion6 += 100;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion6", playerDataBase.Portion6);
     }
 
     public void GetDefTicket()
@@ -3761,6 +3798,9 @@ public class GameManager : MonoBehaviour
                 break;
             case 4:
                 NotionManager.instance.UseNotion(NotionType.PortionInfo5);
+                break;
+            case 5:
+                NotionManager.instance.UseNotion(NotionType.PortionInfo6);
                 break;
         }
     }

@@ -34,7 +34,7 @@ public class QuestManager : MonoBehaviour
 
     public void Initialize()
     {
-        questView.SetActive(true);
+        questView.SetActive(false);
 
         questTitleText.text = LocalizationManager.instance.GetString("Quest");
         questTitleText.text += " " + (playerDataBase.QuestCount + 1).ToString();

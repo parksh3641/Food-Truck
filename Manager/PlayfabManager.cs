@@ -1169,6 +1169,9 @@ public class PlayfabManager : MonoBehaviour
                        case "Michelin":
                            playerDataBase.Michelin = statistics.Value;
                            break;
+                       case "AdCount":
+                           playerDataBase.AdCount = statistics.Value;
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;
@@ -1319,6 +1322,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Portion5":
                            playerDataBase.Portion5 = statistics.Value;
+                           break;
+                       case "Portion6":
+                           playerDataBase.Portion6 = statistics.Value;
                            break;
                        case "Coupon1":
                            playerDataBase.Coupon1 = statistics.Value;

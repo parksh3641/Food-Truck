@@ -117,7 +117,7 @@ public class ShopContent : MonoBehaviour
 
                 rewardText.text = MoneyUnitString.ToCurrencyString(10000000);
 
-                buyCrystalText.text = "150";
+                buyCrystalText.text = "120";
 
                 //buyRmObj[0].SetActive(true);
                 //buyRmText[0].localizationName = itemType + "_Price";
@@ -128,7 +128,7 @@ public class ShopContent : MonoBehaviour
 
                 rewardText.text = MoneyUnitString.ToCurrencyString(100000000);
 
-                buyCrystalText.text = "1,500";
+                buyCrystalText.text = "1,200";
 
                 //buyRmObj[1].SetActive(true);
                 //buyRmText[1].localizationName = itemType + "_Price";
@@ -140,7 +140,7 @@ public class ShopContent : MonoBehaviour
 
                 rewardText.text = MoneyUnitString.ToCurrencyString(1000000000);
 
-                buyCrystalText.text = "15,000";
+                buyCrystalText.text = "12,000";
 
                 //buyRmObj[2].SetActive(true);
                 //buyRmText[2].localizationName = itemType + "_Price";
@@ -276,7 +276,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion1:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(2);
 
                 titleText.plusText = " x1";
 
@@ -287,7 +287,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion2:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(15);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
 
                 titleText.plusText = " x1";
 
@@ -309,7 +309,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion4:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(5);
 
                 titleText.plusText = " x1";
 

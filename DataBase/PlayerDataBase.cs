@@ -18,6 +18,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int defDestroyTicket = 0;
     [SerializeField]
+    private int defDestroyTicketPiece = 0;
+    [SerializeField]
     private int lockTutorial = 0;
     [SerializeField]
     private int firstReward = 0;
@@ -30,11 +32,22 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int proficiency = 0;
     [SerializeField]
+    private int level = 0;
+    [SerializeField]
     private int exp = 0;
     [SerializeField]
     private int michelin = 0;
     [SerializeField]
     private int adCount = 0;
+    [SerializeField]
+    private int accessDate = 0;
+    [SerializeField]
+    private int castleLevel = 0;
+    [SerializeField]
+    private string castleDate = "";
+    [SerializeField]
+    private string castleServerDate = "";
+
 
     [Space]
     [Title("Count")]
@@ -411,6 +424,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int DefDestroyTicketPiece
+    {
+        get
+        {
+            return defDestroyTicketPiece;
+        }
+        set
+        {
+            defDestroyTicketPiece = value;
+        }
+    }
+
     public int LockTutorial
     {
         get
@@ -483,6 +508,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Level
+    {
+        get
+        {
+            return level;
+        }
+        set
+        {
+            level = value;
+        }
+    }
+
     public int Exp
     {
         get
@@ -504,6 +541,53 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             michelin = value;
+        }
+    }
+
+    public int AccessDate
+    {
+        get
+        {
+            return accessDate;
+        }
+        set
+        {
+            accessDate = value;
+        }
+    }
+
+    public int CastleLevel
+    {
+        get
+        {
+            return castleLevel;
+        }
+        set
+        {
+            castleLevel = value;
+        }
+    }
+    public string CastleDate
+    {
+        get
+        {
+            return castleDate;
+        }
+        set
+        {
+            castleDate = value;
+        }
+    }
+
+    public string CastleServerDate
+    {
+        get
+        {
+            return castleServerDate;
+        }
+        set
+        {
+            castleServerDate = value;
         }
     }
 
@@ -2184,15 +2268,21 @@ public class PlayerDataBase : ScriptableObject
         coinB = 0;
         crystal = 0;
         defDestroyTicket = 0;
+        defDestroyTicketPiece = 0;
         lockTutorial = 0;
         firstReward = 0;
         islandNumber = 0;
         testAccount = 0;
         buffTickets = 0;
         proficiency = 0;
+        level = 0;
         exp = 0;
         michelin = 0;
         adCount = 0;
+        accessDate = 0;
+        castleLevel = 0;
+        castleDate = "";
+        castleServerDate = "";
 
         nextFoodNumber = 0;
         hamburgerMaxValue = 0;

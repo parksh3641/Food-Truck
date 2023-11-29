@@ -51,14 +51,15 @@ public class ResetManager : MonoBehaviour
             Debug.Log("데일리 미션 맨 처음 초기화");
 
             playerDataBase.AttendanceDay = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
-            //playerDataBase.AccessDate += 1;
-            //PlayfabManager.instance.UpdatePlayerStatisticsInsert("AccessDate", playerDataBase.AccessDate);
+            playerDataBase.AccessDate += 1;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("AccessDate", playerDataBase.AccessDate);
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceDay", int.Parse(playerDataBase.AttendanceDay));
 
             GameStateManager.instance.DailyReward = false;
             GameStateManager.instance.DailyReward_Portion = false;
             GameStateManager.instance.DailyAdsReward = false;
             GameStateManager.instance.DailyAdsReward2 = false;
+            GameStateManager.instance.DailyCastleReward = false;
 
             GameStateManager.instance.ChestBoxCount = 0;
 
@@ -99,14 +100,15 @@ public class ResetManager : MonoBehaviour
                 Debug.Log("하루가 지났습니다");
 
                 playerDataBase.AttendanceDay = System.DateTime.Now.AddDays(1).ToString("yyyyMMdd");
-                //playerDataBase.AccessDate += 1;
-                //PlayfabManager.instance.UpdatePlayerStatisticsInsert("AccessDate", playerDataBase.AccessDate);
+                playerDataBase.AccessDate += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("AccessDate", playerDataBase.AccessDate);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceDay", int.Parse(playerDataBase.AttendanceDay));
 
                 GameStateManager.instance.DailyReward = false;
                 GameStateManager.instance.DailyReward_Portion = false;
                 GameStateManager.instance.DailyAdsReward = false;
                 GameStateManager.instance.DailyAdsReward2 = false;
+                GameStateManager.instance.DailyCastleReward = false;
 
                 GameStateManager.instance.ChestBoxCount = 0;
 

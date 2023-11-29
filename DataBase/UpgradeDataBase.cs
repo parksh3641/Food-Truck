@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class UpgradeFoodNeedMagnification
+{
+    public float value = 0;
+}
+
+[System.Serializable]
 public class UpgradeFoodMagnification
 {
     public float value = 0;
@@ -32,9 +38,9 @@ public class UpgradeDataBase : ScriptableObject
 
     public List<UpgradeFoodMagnification> priceList = new List<UpgradeFoodMagnification>();
 
-    private int need = 0;
+    public List<UpgradeFoodNeedMagnification> needList = new List<UpgradeFoodNeedMagnification>();
 
-    private float price, success = 0;
+    private float need, price, success = 0;
 
     public UpgradeFood GetUpgradeFood(FoodType type)
     {
@@ -111,22 +117,25 @@ public class UpgradeDataBase : ScriptableObject
                     need = 100;
                     break;
                 case GameType.Rank:
-                    need = 50;
+                    need = 0;
                     break;
             }
 
-            return need;
+            return (int)need;
         }
         else
         {
             switch (GameStateManager.instance.GameType)
             {
+                case GameType.Story:
+                    need = level * level * value * needList[level].value;
+                    break;
                 case GameType.Rank:
-                    value /= 2;
+                    need = 100 * level;
                     break;
             }
 
-            return level * level * value;
+            return (int)need;
         }
     }
 
@@ -142,52 +151,54 @@ public class UpgradeDataBase : ScriptableObject
 
                 break;
             case GameType.Rank:
-                if (level >= 99)
-                {
-                    price = level * level * (value * 11);
-                }
-                else if (level >= 89)
-                {
-                    price = level * level * (value * 10);
-                }
-                else if (level >= 79)
-                {
-                    price = level * level * (value * 9);
-                }
-                else if (level >= 69)
-                {
-                    price = level * level * (value * 8);
-                }
-                else if (level >= 59)
-                {
-                    price = level * level * (value * 7);
-                }
-                else if (level >= 49)
-                {
-                    price = level * level * (value * 6);
-                }
-                else if (level >= 39)
-                {
-                    price = level * level * (value * 5);
-                }
-                else if (level >= 29)
-                {
-                    price = level * level * (value * 4);
-                }
-                else if (level >= 19)
-                {
-                    price = level * level * (value * 3);
-                }
-                else if (level >= 9)
-                {
-                    price = level * level * (value * 2);
-                }
-                else
-                {
-                    price = level * level * (value * 1);
-                }
+                //if (level >= 99)
+                //{
+                //    price = level * level * (value * 11);
+                //}
+                //else if (level >= 89)
+                //{
+                //    price = level * level * (value * 10);
+                //}
+                //else if (level >= 79)
+                //{
+                //    price = level * level * (value * 9);
+                //}
+                //else if (level >= 69)
+                //{
+                //    price = level * level * (value * 8);
+                //}
+                //else if (level >= 59)
+                //{
+                //    price = level * level * (value * 7);
+                //}
+                //else if (level >= 49)
+                //{
+                //    price = level * level * (value * 6);
+                //}
+                //else if (level >= 39)
+                //{
+                //    price = level * level * (value * 5);
+                //}
+                //else if (level >= 29)
+                //{
+                //    price = level * level * (value * 4);
+                //}
+                //else if (level >= 19)
+                //{
+                //    price = level * level * (value * 3);
+                //}
+                //else if (level >= 9)
+                //{
+                //    price = level * level * (value * 2);
+                //}
+                //else
+                //{
+                //    price = level * level * (value * 1);
+                //}
 
-                price *= 0.1f;
+                //price *= 0.1f;
+
+                price = 0;
 
                 break;
         }
@@ -214,7 +225,7 @@ public class UpgradeDataBase : ScriptableObject
             case GameType.Rank:
                 if (level > 0)
                 {
-                    success = 100 - (level * 0.1f);
+                    success = 100 - (level * 0.3f);
                 }
                 else
                 {

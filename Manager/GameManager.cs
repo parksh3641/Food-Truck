@@ -701,7 +701,7 @@ public class GameManager : MonoBehaviour
             successPlus = characterDataBase.GetCharacterEffect(GameStateManager.instance.CharacterType);
         }
 
-        successPlus += playerDataBase.Skill7 * 0.2f;
+        successPlus += playerDataBase.Skill7 * 0.1f;
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.1f;
 
         if (GameStateManager.instance.TruckType > TruckType.Bread)
@@ -734,8 +734,8 @@ public class GameManager : MonoBehaviour
 
         feverTime = 30 + (30 * (0.005f * playerDataBase.Skill1));
 
-        feverMaxCount = 400 - (400 * (0.003f * playerDataBase.Skill2));
-        feverPlus = 3 + (3 * (0.005f * playerDataBase.Skill3));
+        feverMaxCount = 400 - (400 * (0.005f * playerDataBase.Skill2));
+        feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
         portion1Time = 30 + (30 * (0.005f * playerDataBase.Skill4));
         portion2Time = 30 + (30 * (0.005f * playerDataBase.Skill5));
@@ -1898,9 +1898,7 @@ public class GameManager : MonoBehaviour
         myMoneyPlusText.color = Color.red;
         myMoneyPlusText.text = "-" + MoneyUnitString.ToCurrencyString(need);
 
-        float random = Random.Range(0, 100f);
-
-        if (random >= 100 - success)
+        if (Random.Range(0, 100f) >= 100 - success)
         {
             if (isDef)
             {
@@ -1910,7 +1908,7 @@ public class GameManager : MonoBehaviour
             level += 1;
 
             playerDataBase.UpgradeCount += 1;
-            playerDataBase.Exp += (10 + expUp);
+            playerDataBase.Exp += 10 + expUp;
 
             questManager.CheckGoal();
 
@@ -1983,7 +1981,6 @@ public class GameManager : MonoBehaviour
             }
 
             CheckFoodLevelUp();
-
             UpgradeInitialize();
 
             if (level + 1 >= maxLevel)
@@ -2110,7 +2107,6 @@ public class GameManager : MonoBehaviour
                         }
 
                         CheckFood();
-
                         CheckFoodState();
                         UpgradeInitialize();
 
@@ -2129,78 +2125,7 @@ public class GameManager : MonoBehaviour
                 bombPartice.Play();
             }
 
-
-            level = 0;
-            nextLevel = 0;
-
-            switch (GameStateManager.instance.IslandType)
-            {
-                case IslandType.Island1:
-                    switch (GameStateManager.instance.FoodType)
-                    {
-                        case FoodType.Hamburger:
-                            GameStateManager.instance.HamburgerLevel = 0;
-                            break;
-                        case FoodType.Sandwich:
-                            GameStateManager.instance.SandwichLevel = 0;
-                            break;
-                        case FoodType.SnackLab:
-                            GameStateManager.instance.SnackLabLevel = 0;
-                            break;
-                        case FoodType.Drink:
-                            GameStateManager.instance.DrinkLevel = 0;
-                            break;
-                        case FoodType.Pizza:
-                            GameStateManager.instance.PizzaLevel = 0;
-                            break;
-                        case FoodType.Donut:
-                            GameStateManager.instance.DonutLevel = 0;
-                            break;
-                        case FoodType.Fries:
-                            GameStateManager.instance.FriesLevel = 0;
-                            break;
-                        case FoodType.Ribs:
-                            GameStateManager.instance.RibsLevel = 0;
-                            break;
-                    }
-
-                    break;
-                case IslandType.Island2:
-                    switch (GameStateManager.instance.CandyType)
-                    {
-                        case CandyType.Candy1:
-                            GameStateManager.instance.Candy1Level = 0;
-                            break;
-                        case CandyType.Candy2:
-                            GameStateManager.instance.Candy2Level = 0;
-                            break;
-                        case CandyType.Candy3:
-                            GameStateManager.instance.Candy3Level = 0;
-                            break;
-                        case CandyType.Candy4:
-                            GameStateManager.instance.Candy4Level = 0;
-                            break;
-                        case CandyType.Candy5:
-                            GameStateManager.instance.Candy5Level = 0;
-                            break;
-                        case CandyType.Candy6:
-                            GameStateManager.instance.Candy6Level = 0;
-                            break;
-                        case CandyType.Candy7:
-                            GameStateManager.instance.Candy7Level = 0;
-                            break;
-                        case CandyType.Candy8:
-                            GameStateManager.instance.Candy8Level = 0;
-                            break;
-                        case CandyType.Candy9:
-                            GameStateManager.instance.Candy9Level = 0;
-                            break;
-                        case CandyType.Chocolate:
-                            GameStateManager.instance.RibsLevel = 0;
-                            break;
-                    }
-                    break;
-            }
+            DestoryFood();
 
             CheckFoodState();
             UpgradeInitialize();
@@ -2220,7 +2145,82 @@ public class GameManager : MonoBehaviour
         }
 
         isDelay = true;
-        Invoke("WaitDelay", 0.5f);
+        Invoke("WaitDelay", 0.4f);
+    }
+
+    void DestoryFood()
+    {
+        level = 0;
+        nextLevel = 0;
+
+        switch (GameStateManager.instance.IslandType)
+        {
+            case IslandType.Island1:
+                switch (GameStateManager.instance.FoodType)
+                {
+                    case FoodType.Hamburger:
+                        GameStateManager.instance.HamburgerLevel = 0;
+                        break;
+                    case FoodType.Sandwich:
+                        GameStateManager.instance.SandwichLevel = 0;
+                        break;
+                    case FoodType.SnackLab:
+                        GameStateManager.instance.SnackLabLevel = 0;
+                        break;
+                    case FoodType.Drink:
+                        GameStateManager.instance.DrinkLevel = 0;
+                        break;
+                    case FoodType.Pizza:
+                        GameStateManager.instance.PizzaLevel = 0;
+                        break;
+                    case FoodType.Donut:
+                        GameStateManager.instance.DonutLevel = 0;
+                        break;
+                    case FoodType.Fries:
+                        GameStateManager.instance.FriesLevel = 0;
+                        break;
+                    case FoodType.Ribs:
+                        GameStateManager.instance.RibsLevel = 0;
+                        break;
+                }
+
+                break;
+            case IslandType.Island2:
+                switch (GameStateManager.instance.CandyType)
+                {
+                    case CandyType.Candy1:
+                        GameStateManager.instance.Candy1Level = 0;
+                        break;
+                    case CandyType.Candy2:
+                        GameStateManager.instance.Candy2Level = 0;
+                        break;
+                    case CandyType.Candy3:
+                        GameStateManager.instance.Candy3Level = 0;
+                        break;
+                    case CandyType.Candy4:
+                        GameStateManager.instance.Candy4Level = 0;
+                        break;
+                    case CandyType.Candy5:
+                        GameStateManager.instance.Candy5Level = 0;
+                        break;
+                    case CandyType.Candy6:
+                        GameStateManager.instance.Candy6Level = 0;
+                        break;
+                    case CandyType.Candy7:
+                        GameStateManager.instance.Candy7Level = 0;
+                        break;
+                    case CandyType.Candy8:
+                        GameStateManager.instance.Candy8Level = 0;
+                        break;
+                    case CandyType.Candy9:
+                        GameStateManager.instance.Candy9Level = 0;
+                        break;
+                    case CandyType.Chocolate:
+                        GameStateManager.instance.RibsLevel = 0;
+                        break;
+                }
+                break;
+        }
     }
 
     void CheckFever()
@@ -2717,6 +2717,8 @@ public class GameManager : MonoBehaviour
                             changeFoodAlarmObj.SetActive(true);
                         }
 
+                        lockManager.UnLocked(5);
+
                         break;
                     case FoodType.Donut:
                         playerDataBase.DonutMaxValue += 1;
@@ -2735,13 +2737,13 @@ public class GameManager : MonoBehaviour
                         playerDataBase.FriesMaxValue += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("FriesMaxValue", playerDataBase.FriesMaxValue);
 
-                        lockManager.UnLocked(5);
-
                         if (playerDataBase.IslandNumber <= 0)
                         {
                             playerDataBase.IslandNumber = 1;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
                         }
+
+                        lockManager.UnLocked(6);
 
                         break;
                     case FoodType.Ribs:
@@ -3014,8 +3016,6 @@ public class GameManager : MonoBehaviour
                 if (isDef)
                 {
                     defDestroy -= defDestroyPlus;
-
-                    UpgradeInitialize();
                 }
 
                 isDef = false;
@@ -3027,8 +3027,6 @@ public class GameManager : MonoBehaviour
             if(isDef)
             {
                 defDestroy -= defDestroyPlus;
-
-                UpgradeInitialize();
             }
 
             isDef = false;
@@ -3036,6 +3034,8 @@ public class GameManager : MonoBehaviour
 
             defTicketObj.SetActive(false);
         }
+
+        defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
     }
 
     public void UseDefTicket()
@@ -3062,8 +3062,6 @@ public class GameManager : MonoBehaviour
             {
                 defDestroy += defDestroyPlus;
 
-                UpgradeInitialize();
-
                 isDef = true;
                 checkMark.SetActive(true);
             }
@@ -3078,11 +3076,11 @@ public class GameManager : MonoBehaviour
         {
             defDestroy -= defDestroyPlus;
 
-            UpgradeInitialize();
-
             isDef = false;
             checkMark.SetActive(false);
         }
+
+        UpgradeInitialize();
     }
 
     public void CheckPortion()

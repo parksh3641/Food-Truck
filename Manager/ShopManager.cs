@@ -252,6 +252,7 @@ public class ShopManager : MonoBehaviour
                 shopContents[7].Initialize(ItemType.RemoveAds, BuyType.Rm, this);
                 shopContents[11].Initialize(ItemType.DailyReward_Portion, BuyType.Free, this);
                 shopContents[12].Initialize(ItemType.GoldX2, BuyType.Rm, this);
+                shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
 
                 if (!GameStateManager.instance.DailyReward)
                 {
@@ -310,7 +311,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void BuyItem(ItemType item, BuyType buy)
+    public void BuyItem(ItemType item)
     {
         if (isDelay) return;
 
@@ -557,6 +558,27 @@ public class ShopManager : MonoBehaviour
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.LowCoin);
+                }
+                break;
+            case ItemType.DefDestroyTicketSlices:
+                if(playerDataBase.DefDestroyTicketPiece >= 10)
+                {
+                    playerDataBase.DefDestroyTicketPiece -= 10;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicketPiece",playerDataBase.DefDestroyTicketPiece);
+
+                    playerDataBase.DefDestroyTicket += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
+
+                    shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
+                    shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowItemNotion);
                 }
                 break;
         }
@@ -2444,13 +2466,14 @@ public class ShopManager : MonoBehaviour
         }
 
         selectObj.SetActive(true);
-        buyButton.SetActive(false);
-        
+        buyButton.SetActive(false);;      
 
         selectText.text = LocalizationManager.instance.GetString("Select");
 
         SoundManager.instance.PlaySFX(GameSfxType.Purchase);
         NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+
+        Selected();
     }
 
     public void BuyTruckToRm(int number)

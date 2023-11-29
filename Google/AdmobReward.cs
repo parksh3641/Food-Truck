@@ -18,6 +18,7 @@ public class AdmobReward : MonoBehaviour
     public ChestBoxManager chestBoxManager;
     public BuffManager buffManager;
     public ReincarnationManager reincarnationManager;
+    public OfflineManager offlineManager;
 
     PlayerDataBase playerDataBase;
 
@@ -102,6 +103,9 @@ public class AdmobReward : MonoBehaviour
                 case 4:
                     reincarnationManager.SuccessWatchAd();
                     break;
+                case 5:
+                    offlineManager.SuccessWatchAd();
+                    break;
             }
         }
         else
@@ -132,6 +136,9 @@ public class AdmobReward : MonoBehaviour
                         case 4:
                             reincarnationManager.SuccessWatchAd();
                             break;
+                        case 5:
+                            offlineManager.SuccessWatchAd();
+                            break;
                     }
 
                 //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
@@ -155,6 +162,9 @@ public class AdmobReward : MonoBehaviour
                         break;
                     case 4:
                         reincarnationManager.SuccessWatchAd();
+                        break;
+                    case 5:
+                        offlineManager.SuccessWatchAd();
                         break;
                 }
 

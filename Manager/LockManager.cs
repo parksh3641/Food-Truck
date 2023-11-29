@@ -17,6 +17,8 @@ public class LockManager : MonoBehaviour
 
     private int level = 0;
 
+    private int number = 0;
+
     public GameManager gameManager;
 
     PlayerDataBase playerDataBase;
@@ -32,14 +34,15 @@ public class LockManager : MonoBehaviour
     public void OnReset()
     {
         playerDataBase.LockTutorial = 0;
+        number = 0;
         Initialize();
     }
 
     [Button]
     public void LevelUp()
     {
-        playerDataBase.LockTutorial += 1;
-        Initialize();
+        number += 1;
+        UnLocked(number);
     }
 
 
@@ -54,6 +57,7 @@ public class LockManager : MonoBehaviour
 
         menuIcon[7].SetActive(true);
         menuIcon[10].SetActive(true);
+        menuIcon[11].SetActive(true);
 
         if (playerDataBase.LockTutorial >= 1) //음식 변경
         {
@@ -83,9 +87,14 @@ public class LockManager : MonoBehaviour
             menuIcon[9].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 5) //챌린지 해제
+        if (playerDataBase.LockTutorial >= 5) //택배 배송 해제
         {
             menuIcon[10].SetActive(false);
+        }
+
+        if (playerDataBase.LockTutorial >= 6) //챌린지 해제
+        {
+            menuIcon[11].SetActive(false);
         }
     }
 
@@ -133,6 +142,10 @@ public class LockManager : MonoBehaviour
                 break;
             case 5:
                 lockIcon[8].SetActive(true);
+
+                break;
+            case 6:
+                lockIcon[9].SetActive(true);
 
                 break;
         }

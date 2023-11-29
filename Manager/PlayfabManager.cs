@@ -1163,6 +1163,9 @@ public class PlayfabManager : MonoBehaviour
                        case "Proficiency":
                            playerDataBase.Proficiency = statistics.Value;
                            break;
+                       case "Level":
+                           playerDataBase.Level = statistics.Value;
+                           break;
                        case "Exp":
                            playerDataBase.Exp = statistics.Value;
                            break;
@@ -1171,6 +1174,18 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "AdCount":
                            playerDataBase.AdCount = statistics.Value;
+                           break;
+                       case "AccessDate":
+                           playerDataBase.AccessDate = statistics.Value;
+                           break;
+                       case "CastleLevel":
+                           playerDataBase.CastleLevel = statistics.Value;
+                           break;
+                       case "CastleDate":
+                           playerDataBase.CastleDate = statistics.Value.ToString();
+                           break;
+                       case "CastleServerDate":
+                           playerDataBase.CastleServerDate = statistics.Value.ToString();
                            break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
@@ -1193,6 +1208,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "DefDestroyTicket":
                            playerDataBase.DefDestroyTicket = statistics.Value;
+                           break;
+                       case "DefDestroyTicketPiece":
+                           playerDataBase.DefDestroyTicketPiece = statistics.Value;
                            break;
                        case "LockTutorial":
                            playerDataBase.LockTutorial = statistics.Value;

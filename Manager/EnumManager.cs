@@ -197,6 +197,7 @@ public enum ItemType
     Portion3,
     Portion4,
     Portion5,
+    DefDestroyTicketSlices
 }
 
 public enum BuyType
@@ -205,7 +206,8 @@ public enum BuyType
     Rm,
     Ad,
     Coin,
-    Crystal
+    Crystal,
+    Exchange
 }
 
 public enum RankType
@@ -262,7 +264,8 @@ public enum RewardType
     Portion3,
     Portion4,
     PortionSet,
-    Crystal
+    Crystal,
+    Exp
 }
 
 public enum QuestType
@@ -271,6 +274,7 @@ public enum QuestType
     SellCount,
     UseSources,
     OpenChestBox,
+    YummyTime
 }
 
 public enum SkillType

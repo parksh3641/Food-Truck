@@ -58,6 +58,12 @@ public class LevelManager : MonoBehaviour
     {
         level = levelDataBase.GetLevel(playerDataBase.Exp);
 
+        if(playerDataBase.Level != level)
+        {
+            playerDataBase.Level = level;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Level", playerDataBase.Level);
+        }
+
         GameStateManager.instance.Level = level;
 
         titleText.text = "Lv." + level.ToString();
@@ -73,6 +79,6 @@ public class LevelManager : MonoBehaviour
         expFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
 
         infoText.localizationName = "SuccessPercent";
-        infoText.plusText = " : +" + (level * 0.1f) + "%";
+        infoText.plusText = " : +" + (level * 0.1f).ToString("N1") + "%";
     }
 }

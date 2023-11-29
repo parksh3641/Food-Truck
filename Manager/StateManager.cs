@@ -13,6 +13,7 @@ public class StateManager : MonoBehaviour
     public LockManager lockManager;
     public ChestBoxManager chestBoxManager;
     public QuestManager questManager;
+    public OfflineManager offlineManager;
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class StateManager : MonoBehaviour
         lockManager.Initialize();
         chestBoxManager.Initialize();
         questManager.Initialize();
+        offlineManager.Initialize();
 
         Debug.Log("Load Complete!");
     }

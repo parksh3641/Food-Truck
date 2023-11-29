@@ -21,6 +21,7 @@ public class ShopContent : MonoBehaviour
     public GameObject buyAdObj;
     public GameObject buyCoinObj;
     public GameObject buyCrystalObj;
+    public GameObject buyExchangeObj;
     public GameObject lockedObj;
 
     public Text buyCoinText;
@@ -72,6 +73,8 @@ public class ShopContent : MonoBehaviour
         buyAdObj.SetActive(false);
         buyCoinObj.SetActive(false);
         buyCrystalObj.SetActive(false);
+        buyExchangeObj.SetActive(false);
+
         bestObj.SetActive(false);
 
         switch (buyType)
@@ -89,6 +92,9 @@ public class ShopContent : MonoBehaviour
                 break;
             case BuyType.Crystal:
                 buyCrystalObj.SetActive(true);
+                break;
+            case BuyType.Exchange:
+                buyExchangeObj.SetActive(true);
                 break;
         }
 
@@ -328,6 +334,15 @@ public class ShopContent : MonoBehaviour
                 infoText.plusText = " : " + playerDataBase.Portion5;
                 infoText.ReLoad();
                 break;
+            case ItemType.DefDestroyTicketSlices:
+                lockedObj.SetActive(false);
+
+                titleText.plusText = " x1";
+
+                infoText.localizationName = "HoldPiece";
+                infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece + " / 10";
+                infoText.ReLoad();
+                break;
         }
 
         titleText.ReLoad();
@@ -335,7 +350,7 @@ public class ShopContent : MonoBehaviour
 
     public void Click()
     {
-        shopManager.BuyItem(itemType, buyType);
+        shopManager.BuyItem(itemType);
     }
 
     public void BuyPurchase(int index)

@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -93,6 +94,8 @@ public class OfflineManager : MonoBehaviour
             }
 
             CheckCastle();
+
+            FirebaseAnalytics.LogEvent("OpenDelivery");
         }
         else
         {

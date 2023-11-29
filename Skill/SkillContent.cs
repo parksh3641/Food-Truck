@@ -34,14 +34,14 @@ public class SkillContent : MonoBehaviour
 
     private float skill7Value = 0.1f;
     private float skill8Value = 0.3f;
-    private float skill9Value = 0.1f;
+    private float skill9Value = 0.05f;
     private float skill10Value = 0.5f;
     private float skill11Value = 5f;
     private float skill14Value = 0.5f;
 
     private int priceGold = 100000;
     private int pricePortion = 30000;
-    private int priceCrystal = 1;
+    private int priceCrystal = 10;
 
     private int maxLevelGold = 100;
     private int maxLevelCrystal = 100;
@@ -91,7 +91,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill1 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill1 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -115,7 +116,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill2 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill2 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -138,7 +140,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill3 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill3 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -160,7 +163,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill4 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill4 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -182,7 +186,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill5 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill5 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -204,7 +209,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill6 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill6 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -226,7 +232,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill7 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill7 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -248,7 +255,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill8 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill8 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -270,7 +278,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill9 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill9 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -292,7 +301,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill10 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill10 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -314,7 +324,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill11 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill11 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -336,7 +347,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill12 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill12 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -358,7 +370,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill13 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill13 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else
@@ -380,7 +393,8 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = (playerDataBase.Skill14 + 1) * priceCrystal;
+                        //value = (playerDataBase.Skill14 + 1) * priceCrystal;
+                        value = priceCrystal;
                     }
                 }
                 else

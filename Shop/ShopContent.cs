@@ -340,7 +340,7 @@ public class ShopContent : MonoBehaviour
                 titleText.plusText = " x1";
 
                 infoText.localizationName = "HoldPiece";
-                infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece + " / 10";
+                infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece + "/10";
                 infoText.ReLoad();
                 break;
         }

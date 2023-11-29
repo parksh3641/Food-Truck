@@ -58,6 +58,7 @@ public class LockManager : MonoBehaviour
         menuIcon[7].SetActive(true);
         menuIcon[10].SetActive(true);
         menuIcon[11].SetActive(true);
+        menuIcon[12].SetActive(true);
 
         if (playerDataBase.LockTutorial >= 1) //음식 변경
         {
@@ -92,9 +93,14 @@ public class LockManager : MonoBehaviour
             menuIcon[10].SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 6) //챌린지 해제
+        if (playerDataBase.LockTutorial >= 6) //퀘스트 해제
         {
             menuIcon[11].SetActive(false);
+        }
+
+        if (playerDataBase.LockTutorial >= 7) //챌린지 해제
+        {
+            menuIcon[12].SetActive(false);
         }
     }
 
@@ -146,6 +152,10 @@ public class LockManager : MonoBehaviour
                 break;
             case 6:
                 lockIcon[9].SetActive(true);
+
+                break;
+            case 7:
+                lockIcon[10].SetActive(true);
 
                 break;
         }

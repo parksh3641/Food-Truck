@@ -117,6 +117,8 @@ public class ReincarnationManager : MonoBehaviour
             buttonLockedObj.SetActive(false);
         }
 
+        crystal /= 2;
+
         passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 5).ToString() + "%)";
 
         crystal = crystal + (crystal * (0.05f * (playerDataBase.Skill11 * 1)));

@@ -48,7 +48,7 @@ public class StateManager : MonoBehaviour
         resetManager.Initialize();
         lockManager.Initialize();
         chestBoxManager.Initialize();
-        questManager.Initialize();
+        //questManager.Initialize();
         offlineManager.Initialize();
 
         Debug.Log("Load Complete!");

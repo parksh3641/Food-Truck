@@ -382,6 +382,8 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Version", int.Parse(Application.version.Replace(".","")));
 
         changeFoodManager.CheckProficiency();
+
+        questManager.CheckingAlarm();
     }
 
     void CheckFood()
@@ -710,8 +712,9 @@ public class GameManager : MonoBehaviour
         }
 
         sellPricePlus += playerDataBase.Skill8 * 0.5f;
-        sellPricePlus += playerDataBase.Skill9 * 0.1f;
         sellPricePlus += playerDataBase.Proficiency * 1;
+
+        defDestroy += playerDataBase.Skill9 * 0.05f;
 
         sellPriceTip = playerDataBase.Skill14 * 0.5f;
 
@@ -722,7 +725,7 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.ButterflyType > ButterflyType.Butterfly1)
         {
-            defDestroy = butterflyDataBase.GetButterflyEffect(GameStateManager.instance.ButterflyType);
+            defDestroy += butterflyDataBase.GetButterflyEffect(GameStateManager.instance.ButterflyType);
         }
 
         needPlus += playerDataBase.Skill10 * 0.5f;
@@ -750,7 +753,7 @@ public class GameManager : MonoBehaviour
 
         if (portion1)
         {
-            needPlus += 50;
+            needPlus += 30;
         }
 
         if (portion2)
@@ -766,11 +769,12 @@ public class GameManager : MonoBehaviour
         if (feverMode)
         {
             successPlus += feverPlus;
+            defDestroy += 5;
         }
 
         if (portion5)
         {
-            defDestroy += 10;
+            defDestroy += 5;
         }
 
         if (buff1)
@@ -789,7 +793,7 @@ public class GameManager : MonoBehaviour
 
         UpgradeInitialize();
 
-        questManager.Initialize();
+        //questManager.Initialize();
 
         cameraController.GoToB();
     }
@@ -871,6 +875,8 @@ public class GameManager : MonoBehaviour
         {
             rankLocked.SetActive(false);
         }
+
+        questManager.CheckingAlarm();
 
         //StopAllCoroutines();
     }
@@ -1111,7 +1117,7 @@ public class GameManager : MonoBehaviour
             priceText.text += "</size>\n" + MoneyUnitString.ToCurrencyString(sellPrice);
         }
 
-        defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+        defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
 
         CheckDefTicket();
 
@@ -1910,7 +1916,7 @@ public class GameManager : MonoBehaviour
             playerDataBase.UpgradeCount += 1;
             playerDataBase.Exp += 10 + expUp;
 
-            questManager.CheckGoal();
+            //questManager.CheckGoal();
 
             switch (GameStateManager.instance.IslandType)
             {
@@ -2240,7 +2246,7 @@ public class GameManager : MonoBehaviour
             successText.color = Color.red;
 
             successPlus += feverPlus;
-            defDestroy += 10;
+            defDestroy += 5;
 
             UpgradeInitialize();
 
@@ -2430,7 +2436,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.FeverModeCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("FeverModeCount", playerDataBase.FeverModeCount);
 
-        questManager.CheckGoal();
+        //questManager.CheckGoal();
 
         float currentTime = 0f;
         float fillAmount = 0;
@@ -2456,7 +2462,7 @@ public class GameManager : MonoBehaviour
         feverMode = false;
         feverFillamount.fillAmount = 0;
 
-        defDestroy -= 10;
+        defDestroy -= 5;
 
         successPlus -= feverPlus;
 
@@ -2732,6 +2738,8 @@ public class GameManager : MonoBehaviour
                             changeFoodAlarmObj.SetActive(true);
                         }
 
+                        lockManager.UnLocked(6);
+
                         break;
                     case FoodType.Fries:
                         playerDataBase.FriesMaxValue += 1;
@@ -2743,7 +2751,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
                         }
 
-                        lockManager.UnLocked(6);
+                        lockManager.UnLocked(7);
 
                         break;
                     case FoodType.Ribs:
@@ -2876,7 +2884,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        questManager.CheckGoal();
+        //questManager.CheckGoal();
         changeFoodManager.CheckProficiency();
         UpgradeInitialize();
     }
@@ -2896,7 +2904,7 @@ public class GameManager : MonoBehaviour
         {
             playerDataBase.SellCount += 1;
 
-            questManager.CheckGoal();
+            //questManager.CheckGoal();
         }
 
         level = 0;
@@ -3035,7 +3043,7 @@ public class GameManager : MonoBehaviour
             defTicketObj.SetActive(false);
         }
 
-        defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+        defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
     }
 
     public void UseDefTicket()
@@ -3139,7 +3147,7 @@ public class GameManager : MonoBehaviour
             portionText6.text = playerDataBase.Portion6.ToString();
         }
 
-        questManager.CheckGoal();
+        //questManager.CheckGoal();
     }
 
     public void UseSources(int number)
@@ -3153,7 +3161,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion1 = true;
 
-                        needPlus += 50;
+                        needPlus += 30;
                         UpgradeInitialize();
 
                         playerDataBase.Portion1 -= 1;
@@ -3269,7 +3277,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion5 = true;
 
-                        defDestroy += 10;
+                        defDestroy += 5;
                         UpgradeInitialize();
 
                         playerDataBase.Portion5 -= 1;
@@ -3299,7 +3307,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion6 = true;
 
-                        needPlus += 50;
+                        needPlus += 30;
                         sellPricePlus += 10;
                         successPlus += 1;
                         feverCount = feverMaxCount;
@@ -3356,7 +3364,7 @@ public class GameManager : MonoBehaviour
         portion1 = false;
         portionFillamount1.fillAmount = 0;
 
-        needPlus -= 50;
+        needPlus -= 30;
         UpgradeInitialize();
     }
 
@@ -3437,7 +3445,7 @@ public class GameManager : MonoBehaviour
         portion5 = false;
         portionFillamount5.fillAmount = 0;
 
-        defDestroy -= 10;
+        defDestroy -= 5;
         UpgradeInitialize();
     }
 
@@ -3464,7 +3472,7 @@ public class GameManager : MonoBehaviour
         portion6 = false;
         portionFillamount6.fillAmount = 0;
 
-        needPlus -= 50;
+        needPlus -= 30;
         sellPricePlus -= 10;
         successPlus -= 1;
         defDestroy -= 10;
@@ -3486,7 +3494,7 @@ public class GameManager : MonoBehaviour
             buff2 = true;
 
             defDestroy += 10;
-            defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+            defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
         }
     }
 
@@ -3504,7 +3512,7 @@ public class GameManager : MonoBehaviour
             buff2 = false;
 
             defDestroy -= 10;
-            defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N1") + "%";
+            defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
         }
     }
 
@@ -3759,7 +3767,7 @@ public class GameManager : MonoBehaviour
 
     public void GetUnLocked()
     {
-        lockManager.UnLocked(5);
+        lockManager.UnLocked(7);
     }
 
     public void GetExp()

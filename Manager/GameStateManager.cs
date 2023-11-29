@@ -96,6 +96,7 @@ public class GameStateManager : MonoBehaviour
         public bool dailyAdsReward = false;
         public bool dailyAdsReward2 = false;
         public bool dailyCastleReward = false;
+        public bool dailyQuestReward = false;
 
         [Space]
         [Title("Bankruptcy")]
@@ -779,6 +780,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.dailyCastleReward = value;
+            SaveFile();
+        }
+    }
+
+    public bool DailyQuestReward
+    {
+        get
+        {
+            return gameSettings.dailyQuestReward;
+        }
+        set
+        {
+            gameSettings.dailyQuestReward = value;
             SaveFile();
         }
     }

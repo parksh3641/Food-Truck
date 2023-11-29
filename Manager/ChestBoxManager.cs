@@ -138,7 +138,7 @@ public class ChestBoxManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
 
         gameManager.CheckPortion();
-        questManager.CheckGoal();
+        //questManager.CheckGoal();
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

@@ -20,6 +20,7 @@ public class AdmobReward : MonoBehaviour
     public ReincarnationManager reincarnationManager;
     public OfflineManager offlineManager;
     public QuestManager questManager;
+    public TreasureManager treasureManager;
 
     PlayerDataBase playerDataBase;
 
@@ -110,6 +111,9 @@ public class AdmobReward : MonoBehaviour
                 case 6:
                     questManager.SuccessWatchAd();
                     break;
+                case 7:
+                    treasureManager.SuccessWatchAd();
+                    break;
             }
         }
         else
@@ -146,6 +150,9 @@ public class AdmobReward : MonoBehaviour
                         case 6:
                             questManager.SuccessWatchAd();
                             break;
+                        case 7:
+                            treasureManager.SuccessWatchAd();
+                            break;
                     }
 
                 //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
@@ -175,6 +182,9 @@ public class AdmobReward : MonoBehaviour
                         break;
                     case 6:
                         questManager.SuccessWatchAd();
+                        break;
+                    case 7:
+                        treasureManager.SuccessWatchAd();
                         break;
                 }
 

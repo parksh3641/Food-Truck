@@ -43,6 +43,11 @@ public class QuestManager : MonoBehaviour
     {
         if(!questView.activeInHierarchy)
         {
+            if (playerDataBase.AttendanceDay == System.DateTime.Today.ToString("yyyyMMdd"))
+            {
+                ResetManager.instance.Initialize();
+            }
+
             questView.SetActive(true);
 
             Initialize();
@@ -144,6 +149,13 @@ public class QuestManager : MonoBehaviour
 
     public void ClearButton()
     {
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
         GameStateManager.instance.DailyQuestReward = true;
 
         playerDataBase.QuestCount += 1;

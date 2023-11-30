@@ -326,7 +326,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion5:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(15);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
 
                 titleText.plusText = " x1";
 

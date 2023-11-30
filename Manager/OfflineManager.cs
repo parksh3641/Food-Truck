@@ -39,6 +39,8 @@ public class OfflineManager : MonoBehaviour
     private int saveCoin = 0;
     private int saveExp = 0;
 
+    private bool isDelay = false;
+
     string localization_Time;
     string localization_Hours = "";
     string localization_Minutes = "";
@@ -74,6 +76,11 @@ public class OfflineManager : MonoBehaviour
     {
         if (!offlineView.activeInHierarchy)
         {
+            if (playerDataBase.AttendanceDay == System.DateTime.Today.ToString("yyyyMMdd"))
+            {
+                ResetManager.instance.Initialize();
+            }
+
             offlineView.SetActive(true);
 
             timerText.text = "";
@@ -144,6 +151,8 @@ public class OfflineManager : MonoBehaviour
         addCoin = 100000 + playerDataBase.CastleLevel * 1000;
         addExp = 1000 + playerDataBase.CastleLevel * 10;
 
+        addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.01f));
+
         levelUpCostText.text = addCrystal.ToString();
         coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "\n/" + localization_Hours + "  (+1000)";
         expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+10)";
@@ -179,7 +188,16 @@ public class OfflineManager : MonoBehaviour
 
     public void LevelUpButton()
     {
-        if (playerDataBase.CastleLevel < playerDataBase.Level + 1)
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
+        if (isDelay) return;
+
+        if (playerDataBase.CastleLevel < playerDataBase.Level)
         {
             if (playerDataBase.Crystal >= addCrystal)
             {
@@ -203,15 +221,39 @@ public class OfflineManager : MonoBehaviour
         {
             NotionManager.instance.UseNotion(NotionType.MaxLevel);
         }
+
+        isDelay = true;
+        Invoke("Delay", 0.3f);
+    }
+
+    void Delay()
+    {
+        isDelay = false;
     }
 
     public void ReceiveAdButton()
     {
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
+        if (GameStateManager.instance.DailyCastleReward) return;
+
         GoogleAdsManager.instance.admobReward_Delivery.ShowAd(5);
     }
 
     public void ReceiveButton()
     {
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
         if (!lockObj.activeInHierarchy)
         {
             playerDataBase.CastleDate = DateTime.Now.ToString("MMddHHmm");

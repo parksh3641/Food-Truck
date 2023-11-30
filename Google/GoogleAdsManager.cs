@@ -19,6 +19,7 @@ public class GoogleAdsManager : MonoBehaviour
     public AdmobReward admobReward_ReincarnationX2;
     public AdmobReward admobReward_Delivery;
     public AdmobReward admobReward_Quest;
+    public AdmobReward admobReward_Treasure;
 
     private void Awake()
     {

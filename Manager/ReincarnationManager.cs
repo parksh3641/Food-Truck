@@ -119,9 +119,9 @@ public class ReincarnationManager : MonoBehaviour
 
         crystal /= 2;
 
-        passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 5).ToString() + "%)";
+        passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 3).ToString() + "%)";
 
-        crystal = crystal + (crystal * (0.05f * (playerDataBase.Skill11 * 1)));
+        crystal = crystal + (crystal * (0.03f * (playerDataBase.Skill11 * 1)));
 
         crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
 

@@ -108,8 +108,6 @@ public class ShopManager : MonoBehaviour
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
-    public ResetManager resetManager;
-
     PlayerDataBase playerDataBase;
     CharacterDataBase characterDataBase;
     TruckDataBase truckDataBase;
@@ -194,7 +192,7 @@ public class ShopManager : MonoBehaviour
 
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
-                resetManager.Initialize();
+                ResetManager.instance.Initialize();
             }
 
             if (!isTimer)
@@ -542,9 +540,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion5:
-                if (playerDataBase.Crystal >= 15)
+                if (playerDataBase.Crystal >= 10)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 15);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
 
                     playerDataBase.Portion5 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);

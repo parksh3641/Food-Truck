@@ -265,7 +265,13 @@ public enum RewardType
     Portion4,
     PortionSet,
     Crystal,
-    Exp
+    Exp,
+    Treasure1,
+    Treasure2,
+    Treasure3,
+    Treasure4,
+    Treasure5,
+    Treasure6,
 }
 
 public enum QuestType
@@ -300,4 +306,14 @@ public enum IslandType
     Island2,
     Island3,
     Island4,
+}
+
+public enum TreasureType
+{
+    Treasure1,
+    Treasure2,
+    Treasure3,
+    Treasure4,
+    Treasure5,
+    Treasure6,
 }

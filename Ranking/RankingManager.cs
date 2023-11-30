@@ -11,11 +11,10 @@ public class RankingManager : MonoBehaviour
 {
     public static RankingManager instance;
 
-    public GameObject alarm;
-
-    private LevelType scoreLevel = LevelType.Insane;
-
     public GameObject rankingView;
+    public GameObject rankingRewardView;
+
+    public GameObject alarm;
 
     public LocalizationContent infoText;
 
@@ -64,6 +63,7 @@ public class RankingManager : MonoBehaviour
         }
 
         rankingView.SetActive(false);
+        rankingRewardView.SetActive(false);
 
         rankContentParent.anchoredPosition = new Vector2(0, -9999);
 
@@ -93,6 +93,20 @@ public class RankingManager : MonoBehaviour
             {
                 rankingView.SetActive(false);
             }
+        }
+    }
+
+    public void OpenRankingReward()
+    {
+        if (!rankingRewardView.activeSelf)
+        {
+            rankingRewardView.SetActive(true);
+
+            FirebaseAnalytics.LogEvent("OpenRankingReward");
+        }
+        else
+        {
+            rankingRewardView.SetActive(false);
         }
     }
 

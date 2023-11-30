@@ -38,8 +38,6 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int michelin = 0;
     [SerializeField]
-    private int adCount = 0;
-    [SerializeField]
     private int accessDate = 0;
     [SerializeField]
     private int castleLevel = 0;
@@ -51,6 +49,8 @@ public class PlayerDataBase : ScriptableObject
 
     [Space]
     [Title("Count")]
+    [SerializeField]
+    private int adCount = 0;
     [SerializeField]
     private int gourmetLevel = 0;
     [SerializeField]
@@ -69,6 +69,35 @@ public class PlayerDataBase : ScriptableObject
     private int reincarnationCount = 0;
     [SerializeField]
     private int buffCount = 0;
+
+    [Space]
+    [Title("Treasure")]
+    [SerializeField]
+    private int treasure1 = 0;
+    [SerializeField]
+    private int treasure2 = 0;
+    [SerializeField]
+    private int treasure3 = 0;
+    [SerializeField]
+    private int treasure4 = 0;
+    [SerializeField]
+    private int treasure5 = 0;
+    [SerializeField]
+    private int treasure6 = 0;
+
+    [Space]
+    [SerializeField]
+    private int treasure1Count = 0;
+    [SerializeField]
+    private int treasure2Count = 0;
+    [SerializeField]
+    private int treasure3Count = 0;
+    [SerializeField]
+    private int treasure4Count = 0;
+    [SerializeField]
+    private int treasure5Count = 0;
+    [SerializeField]
+    private int treasure6Count = 0;
 
     [Space]
     [Title("Character")]
@@ -600,6 +629,150 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             adCount = value;
+        }
+    }
+
+    public int Treasure1
+    {
+        get
+        {
+            return treasure1;
+        }
+        set
+        {
+            treasure1 = value;
+        }
+    }
+
+    public int Treasure2
+    {
+        get
+        {
+            return treasure2;
+        }
+        set
+        {
+            treasure2 = value;
+        }
+    }
+
+    public int Treasure3
+    {
+        get
+        {
+            return treasure3;
+        }
+        set
+        {
+            treasure3 = value;
+        }
+    }
+
+    public int Treasure4
+    {
+        get
+        {
+            return treasure4;
+        }
+        set
+        {
+            treasure4 = value;
+        }
+    }
+
+    public int Treasure5
+    {
+        get
+        {
+            return treasure5;
+        }
+        set
+        {
+            treasure5 = value;
+        }
+    }
+
+    public int Treasure6
+    {
+        get
+        {
+            return treasure6;
+        }
+        set
+        {
+            treasure6 = value;
+        }
+    }
+
+    public int Treasure1Count
+    {
+        get
+        {
+            return treasure1Count;
+        }
+        set
+        {
+            treasure1Count = value;
+        }
+    }
+
+    public int Treasure2Count
+    {
+        get
+        {
+            return treasure2Count;
+        }
+        set
+        {
+            treasure2Count = value;
+        }
+    }
+
+    public int Treasure3Count
+    {
+        get
+        {
+            return treasure3Count;
+        }
+        set
+        {
+            treasure3Count = value;
+        }
+    }
+
+    public int Treasure4Count
+    {
+        get
+        {
+            return treasure4Count;
+        }
+        set
+        {
+            treasure4Count = value;
+        }
+    }
+
+    public int Treasure5Count
+    {
+        get
+        {
+            return treasure5Count;
+        }
+        set
+        {
+            treasure5Count = value;
+        }
+    }
+
+    public int Treasure6Count
+    {
+        get
+        {
+            return treasure6Count;
+        }
+        set
+        {
+            treasure6Count = value;
         }
     }
 
@@ -2303,6 +2476,13 @@ public class PlayerDataBase : ScriptableObject
         candy7MaxValue = 0;
         candy8MaxValue = 0;
         candy9MaxValue = 0;
+
+        treasure1 = 0;
+        treasure2 = 0;
+        treasure3 = 0;
+        treasure4 = 0;
+        treasure5 = 0;
+        treasure6 = 0;
 
         character1 = 0;
         character2 = 0;

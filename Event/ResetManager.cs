@@ -61,6 +61,7 @@ public class ResetManager : MonoBehaviour
             GameStateManager.instance.DailyAdsReward2 = false;
             GameStateManager.instance.DailyCastleReward = false;
             GameStateManager.instance.DailyQuestReward = false;
+            GameStateManager.instance.DailyTreasureReward = false;
 
             GameStateManager.instance.ChestBoxCount = 0;
 
@@ -111,6 +112,7 @@ public class ResetManager : MonoBehaviour
                 GameStateManager.instance.DailyAdsReward2 = false;
                 GameStateManager.instance.DailyCastleReward = false;
                 GameStateManager.instance.DailyQuestReward = false;
+                GameStateManager.instance.DailyTreasureReward = false;
 
                 GameStateManager.instance.ChestBoxCount = 0;
 

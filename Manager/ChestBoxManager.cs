@@ -104,6 +104,8 @@ public class ChestBoxManager : MonoBehaviour
             return;
         }
 
+        GameStateManager.instance.Pause = true;
+
         chestBoxView.SetActive(true);
 
         chestBoxArray[0].SetActive(false);
@@ -134,16 +136,15 @@ public class ChestBoxManager : MonoBehaviour
 
     void Success()
     {
+        GameStateManager.instance.Pause = false;
+
         playerDataBase.OpenChestBox += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
 
         gameManager.CheckPortion();
-        //questManager.CheckGoal();
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
-
-        GameStateManager.instance.Pause = false;
 
         Initialize();
 

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public GameObject checkUpdate;
+
     public CameraController cameraController;
 
     public Text goldText;
@@ -32,7 +34,10 @@ public class GameManager : MonoBehaviour
     public LocalizationContent islandText;
 
     public LocalizationContent bestRankLevelText;
+
+    public GameObject butterflyLocked;
     public GameObject rankLocked;
+    public GameObject treasureLocked;
 
     public GameObject notUpgrade;
     public GameObject notSell;
@@ -93,6 +98,7 @@ public class GameManager : MonoBehaviour
     public Text priceText;
     public Text successText;
     public Text defDestroyText;
+    public Text successX2Text;
 
     public GameObject defTicketObj;
     public Text defTicketText;
@@ -126,6 +132,8 @@ public class GameManager : MonoBehaviour
 
     public float success = 0;
     private float successPlus = 0;
+
+    private float successX2 = 0;
 
     private float portion1Time = 0;
     private float portion2Time = 0;
@@ -202,12 +210,6 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
-#if UNITY_ANDROID
-        Application.targetFrameRate = 60;
-#elif UNITY_IOS
-        Application.targetFrameRate = 90;
-#endif
-
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
@@ -272,6 +274,8 @@ public class GameManager : MonoBehaviour
         myMoneyPlusText.gameObject.SetActive(false);
         lightParticle.gameObject.SetActive(false);
         testMode.SetActive(false);
+
+        checkUpdate.SetActive(false);
     }
 
     private void OnApplicationQuit()
@@ -285,9 +289,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if(GameStateManager.instance.AutoLogin)
+        if (GameStateManager.instance.AutoLogin)
         {
-            if(!NetworkConnect.instance.CheckConnectInternet())
+            if (!NetworkConnect.instance.CheckConnectInternet())
             {
                 checkInternet.SetActive(true);
                 return;
@@ -360,12 +364,7 @@ public class GameManager : MonoBehaviour
         bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel;
         bestRankLevelText.ReLoad();
 
-        rankLocked.SetActive(true);
-
-        if(levelDataBase.GetLevel(playerDataBase.Exp) > 9)
-        {
-            rankLocked.SetActive(false);
-        }
+        CheckLocked();
 
         testModeButton.SetActive(false);
 
@@ -626,14 +625,6 @@ public class GameManager : MonoBehaviour
 
     public void GameStart(int number)
     {
-        if(number == 1)
-        {
-            if(rankLocked.activeInHierarchy)
-            {
-                return;
-            }
-        }
-
         if (!isDelay_Camera) return;
 
         isDelay_Camera = false;
@@ -691,10 +682,12 @@ public class GameManager : MonoBehaviour
         checkMark.SetActive(false);
 
         successPlus = 0;
+        successX2 = 0;
         needPlus = 0;
         sellPricePlus = 0;
         sellPriceTip = 0;
         defDestroy = 0;
+        expUp = 0;
 
         //changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
@@ -705,6 +698,9 @@ public class GameManager : MonoBehaviour
 
         successPlus += playerDataBase.Skill7 * 0.1f;
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.1f;
+        successPlus += playerDataBase.Treasure1 * 0.2f;
+
+        successX2 += playerDataBase.Treasure3 * 0.1f;
 
         if (GameStateManager.instance.TruckType > TruckType.Bread)
         {
@@ -714,13 +710,12 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.Skill8 * 0.5f;
         sellPricePlus += playerDataBase.Proficiency * 1;
 
-        defDestroy += playerDataBase.Skill9 * 0.05f;
 
-        sellPriceTip = playerDataBase.Skill14 * 0.5f;
+        sellPriceTip = playerDataBase.Skill14 * 0.5f; //ÆÁ È®·ü
 
         if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
         {
-            expUp = (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType);
+            expUp += (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType);
         }
 
         if (GameStateManager.instance.ButterflyType > ButterflyType.Butterfly1)
@@ -728,7 +723,10 @@ public class GameManager : MonoBehaviour
             defDestroy += butterflyDataBase.GetButterflyEffect(GameStateManager.instance.ButterflyType);
         }
 
-        needPlus += playerDataBase.Skill10 * 0.5f;
+        defDestroy += playerDataBase.Skill9 * 0.05f;
+        defDestroy += playerDataBase.Treasure2 * 0.1f;
+
+        needPlus += playerDataBase.Skill10 * 0.3f;
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
         upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
@@ -737,14 +735,14 @@ public class GameManager : MonoBehaviour
 
         feverTime = 30 + (30 * (0.005f * playerDataBase.Skill1));
 
-        feverMaxCount = 400 - (400 * (0.005f * playerDataBase.Skill2));
+        feverMaxCount = 500 - (500 * (0.002f * playerDataBase.Skill2));
         feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
-        portion1Time = 30 + (30 * (0.005f * playerDataBase.Skill4));
-        portion2Time = 30 + (30 * (0.005f * playerDataBase.Skill5));
-        portion3Time = 30 + (30 * (0.005f * playerDataBase.Skill6));
-        portion4Plus = 0.01f * playerDataBase.Skill12;
-        portion5Time = 30 + (30 * (0.005f * playerDataBase.Skill13));
+        portion1Time = 30 + (30 * (0.003f * playerDataBase.Skill4)) + (30 * (0.005f * playerDataBase.Treasure6));
+        portion2Time = 30 + (30 * (0.003f * playerDataBase.Skill5)) + (30 * (0.005f * playerDataBase.Treasure6));
+        portion3Time = 30 + (30 * (0.003f * playerDataBase.Skill6)) + (30 * (0.005f * playerDataBase.Treasure6));
+        portion4Plus = 0.03f * playerDataBase.Skill12;
+        portion5Time = 30 + (30 * (0.003f * playerDataBase.Skill13)) + (30 * (0.005f * playerDataBase.Treasure6));
 
         if (playerDataBase.GoldX2)
         {
@@ -869,12 +867,7 @@ public class GameManager : MonoBehaviour
         bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel;
         bestRankLevelText.ReLoad();
 
-        rankLocked.SetActive(true);
-
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 9)
-        {
-            rankLocked.SetActive(false);
-        }
+        CheckLocked();
 
         questManager.CheckingAlarm();
 
@@ -1118,6 +1111,8 @@ public class GameManager : MonoBehaviour
         }
 
         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
+
+        successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
 
         CheckDefTicket();
 
@@ -1911,7 +1906,24 @@ public class GameManager : MonoBehaviour
                 UseDefTicket();
             }
 
-            level += 1;
+            if (successX2 >= Random.Range(0, 100))
+            {
+                if(level + 2 >= maxLevel - 1)
+                {
+                    level += 1;
+                }
+                else
+                {
+                    level += 2;
+                }
+
+                NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX2);
+            }
+            else
+            {
+                level += 1;
+                NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+            }
 
             playerDataBase.UpgradeCount += 1;
             playerDataBase.Exp += 10 + expUp;
@@ -1992,7 +2004,6 @@ public class GameManager : MonoBehaviour
             if (level + 1 >= maxLevel)
             {
                 SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
-
                 NotionManager.instance.UseNotion(NotionType.MaxLevel);
 
                 MaxLevelUpgradeSuccess();
@@ -2017,8 +2028,6 @@ public class GameManager : MonoBehaviour
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
                 }
-
-                NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
             }
         }
         else
@@ -3589,22 +3598,36 @@ public class GameManager : MonoBehaviour
         appReview.SetActive(false);
     }
 
-    public void MoreGame()
+    public void OnNeedUpdate()
     {
-        FirebaseAnalytics.LogEvent("MoreGame");
-
-        Application.OpenURL("https://play.google.com/store/apps/dev?id=6063135311448213232");
+        checkUpdate.SetActive(true);
     }
 
-    public void OpenURL()
+    public void OpenUpdate()
     {
-        FirebaseAnalytics.LogEvent("OpenAppReview");
-
 #if UNITY_ANDROID || UNITY_EDITOR
         Application.OpenURL("https://play.google.com/store/apps/details?id=com.whilili.foodtruck");
 #elif UNITY_IOS
         Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
 #endif
+    }
+
+    //public void MoreGame()
+    //{
+    //    FirebaseAnalytics.LogEvent("MoreGame");
+
+    //    Application.OpenURL("https://play.google.com/store/apps/dev?id=6063135311448213232");
+    //}
+
+    public void OpenURL()
+    {
+#if UNITY_ANDROID || UNITY_EDITOR
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.whilili.foodtruck");
+#elif UNITY_IOS
+        Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
+#endif
+
+        FirebaseAnalytics.LogEvent("OpenAppReview");
 
         CloseAppReview();
     }
@@ -3778,12 +3801,7 @@ public class GameManager : MonoBehaviour
 
         levelManager.Initialize();
 
-        rankLocked.SetActive(true);
-
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 9)
-        {
-            rankLocked.SetActive(false);
-        }
+        CheckLocked();
     }
 
     public void PortionInfo(int number)
@@ -3816,5 +3834,28 @@ public class GameManager : MonoBehaviour
         playerDataBase.UpgradeCount += Random.Range(500, 1001);
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
+    }
+
+    public void CheckLocked()
+    {
+        butterflyLocked.SetActive(true);
+        rankLocked.SetActive(true);
+        treasureLocked.SetActive(true);
+
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 4)
+        {
+            butterflyLocked.SetActive(false);
+        }
+
+
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 9)
+        {
+            rankLocked.SetActive(false);
+        }
+
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 14)
+        {
+            treasureLocked.SetActive(false);
+        }
     }
 }

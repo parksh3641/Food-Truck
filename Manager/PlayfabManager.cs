@@ -576,7 +576,42 @@ public class PlayfabManager : MonoBehaviour
 
         GameStateManager.instance.PlayfabId = result.PlayFabId;
 
+#if UNITY_EDITOR || UNITY_EDITOR_OSX
         StartCoroutine(LoadDataCoroutine());
+#else
+        GetTitleInternalData("CheckVersion", CheckVersion);
+#endif
+    }
+
+    public void CheckVersion(bool check)
+    {
+        Debug.Log("Checking Version...");
+
+        if (check)
+        {
+#if UNITY_ANDROID
+            GetTitleInternalData("AOSVersion", CheckUpdate);
+#elif UNITY_IOS
+            GetTitleInternalData("IOSVersion", CheckUpdate);
+#endif
+        }
+        else
+        {
+            StartCoroutine(LoadDataCoroutine());
+        }
+    }
+
+
+    public void CheckUpdate(bool check)
+    {
+        if (check)
+        {
+            StartCoroutine(LoadDataCoroutine());
+        }
+        else
+        {
+            gameManager.OnNeedUpdate();
+        }
     }
 
 
@@ -1214,6 +1249,42 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "LockTutorial":
                            playerDataBase.LockTutorial = statistics.Value;
+                           break;
+                       case "Treasure1":
+                           playerDataBase.Treasure1 = statistics.Value;
+                           break;
+                       case "Treasure2":
+                           playerDataBase.Treasure2 = statistics.Value;
+                           break;
+                       case "Treasure3":
+                           playerDataBase.Treasure3 = statistics.Value;
+                           break;
+                       case "Treasure4":
+                           playerDataBase.Treasure4 = statistics.Value;
+                           break;
+                       case "Treasure5":
+                           playerDataBase.Treasure5 = statistics.Value;
+                           break;
+                       case "Treasure6":
+                           playerDataBase.Treasure6 = statistics.Value;
+                           break;
+                       case "Treasure1Count":
+                           playerDataBase.Treasure1Count = statistics.Value;
+                           break;
+                       case "Treasure2Count":
+                           playerDataBase.Treasure2Count = statistics.Value;
+                           break;
+                       case "Treasure3Count":
+                           playerDataBase.Treasure3Count = statistics.Value;
+                           break;
+                       case "Treasure4Count":
+                           playerDataBase.Treasure4Count = statistics.Value;
+                           break;
+                       case "Treasure5Count":
+                           playerDataBase.Treasure5Count = statistics.Value;
+                           break;
+                       case "Treasure6Count":
+                           playerDataBase.Treasure6Count = statistics.Value;
                            break;
                        case "NextFoodNumber":
                            playerDataBase.NextFoodNumber = statistics.Value;

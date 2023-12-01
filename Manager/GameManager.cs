@@ -159,6 +159,9 @@ public class GameManager : MonoBehaviour
     private int nowUpgradeCount = 0;
     private int nowSellCount = 0;
 
+    private int defaultNeed = 150;
+    private int defaultSellPrice = 2000;
+
     [Space]
     [Title("Bankruptcy")]
     public GameObject bankruptcyView;
@@ -734,7 +737,7 @@ public class GameManager : MonoBehaviour
 
         feverTime = 30 + (30 * (0.003f * playerDataBase.Skill1));
 
-        feverMaxCount = 500 - (500 * (0.003f * playerDataBase.Skill2));
+        feverMaxCount = 300 - (300 * (0.003f * playerDataBase.Skill2));
         feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
         portion1Time = 30 + (30 * (0.003f * playerDataBase.Skill4)) + (30 * (0.005f * playerDataBase.Treasure6));
@@ -824,14 +827,14 @@ public class GameManager : MonoBehaviour
 
         yield return waitForSeconds;
 
-        if (GameStateManager.instance.RibsLevel > playerDataBase.RankLevel1)
+        if (GameStateManager.instance.RibsLevel + 1 > playerDataBase.RankLevel1)
         {
             playerDataBase.RankLevel1 = GameStateManager.instance.RibsLevel + 1;
 
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel1", playerDataBase.RankLevel1);
         }
 
-        if (GameStateManager.instance.ChocolateLevel > playerDataBase.RankLevel2)
+        if (GameStateManager.instance.ChocolateLevel + 1 > playerDataBase.RankLevel2)
         {
             playerDataBase.RankLevel2 = GameStateManager.instance.ChocolateLevel + 1;
 
@@ -948,16 +951,16 @@ public class GameManager : MonoBehaviour
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
-                need = upgradeDataBase.GetNeed(level, 200);
-                sellPrice = upgradeDataBase.GetPrice(level, 2000);
+                need = upgradeDataBase.GetNeed(level, defaultNeed);
+                sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
                 success = upgradeDataBase.GetSuccess(level);
 
                 maxLevel = upgradeFood.maxLevel;
 
                 break;
             case IslandType.Island2:
-                need = upgradeDataBase.GetNeed(level, 200);
-                sellPrice = upgradeDataBase.GetPrice(level, 2000);
+                need = upgradeDataBase.GetNeed(level, defaultNeed);
+                sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
                 sellPrice = sellPrice + (int)(sellPrice * 0.2f);
                 success = upgradeDataBase.GetSuccess(level);
 
@@ -1013,7 +1016,7 @@ public class GameManager : MonoBehaviour
 
                         break;
                     case IslandType.Island2:
-                        if (GameStateManager.instance.RibsLevel > playerDataBase.RankLevel2)
+                        if (GameStateManager.instance.ChocolateLevel > playerDataBase.RankLevel2)
                         {
                             highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.ChocolateLevel + 1);
                         }
@@ -3762,6 +3765,13 @@ public class GameManager : MonoBehaviour
         playerDataBase.Skill12 = 100;
         playerDataBase.Skill13 = 100;
         //playerDataBase.Skill14 = 100;
+
+        playerDataBase.Treasure1 = 100;
+        playerDataBase.Treasure2 = 100;
+        playerDataBase.Treasure3 = 100;
+        playerDataBase.Treasure4 = 100;
+        playerDataBase.Treasure5 = 100;
+        playerDataBase.Treasure6 = 100;
     }
 
     public void GetGold()

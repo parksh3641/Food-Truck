@@ -90,7 +90,7 @@ public class GameStateManager : MonoBehaviour
         public bool adActive = false;
         public int adCount = 200;
         public int chestBoxCount = 0;
-        public int chestBoxCoolTime = 90;
+        public int chestBoxCoolTime = 120;
         public bool dailyReward = false;
         public bool dailyReward_Portion = false;
         public bool dailyAdsReward = false;
@@ -889,7 +889,7 @@ public class GameStateManager : MonoBehaviour
             if (!string.IsNullOrEmpty(stjs))
             {
                 gameSettings = JsonUtility.FromJson<GameSettings>(stjs);
-                gameSettings.chestBoxCoolTime = 60;
+                gameSettings.chestBoxCoolTime = 120;
             }
             else
             {

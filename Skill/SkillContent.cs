@@ -23,7 +23,7 @@ public class SkillContent : MonoBehaviour
     public GameObject buttonCrystal;
     public Text crystalText;
 
-    private float skill1Value = 0.5f;
+    private float skill1Value = 0.3f;
     private float skill2Value = 0.3f;
     private float skill3Value = 1f;
     private float skill4Value = 0.3f;
@@ -36,7 +36,7 @@ public class SkillContent : MonoBehaviour
     private float skill8Value = 0.2f;
     private float skill9Value = 0.05f;
     private float skill10Value = 0.3f;
-    private float skill11Value = 3f;
+    private float skill11Value = 0.5f;
     private float skill14Value = 0.5f;
 
     private int priceGold = 100000;
@@ -91,8 +91,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill1 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill1 / 10));
                     }
                 }
                 else
@@ -116,8 +115,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill2 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill2 / 10));
                     }
                 }
                 else
@@ -140,8 +138,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill3 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill3 / 10));
                     }
                 }
                 else
@@ -163,8 +160,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill4 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill4 / 10));
                     }
                 }
                 else
@@ -186,8 +182,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill5 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill5 / 10));
                     }
                 }
                 else
@@ -209,8 +204,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill6 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill6 / 10));
                     }
                 }
                 else
@@ -232,8 +226,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill7 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill7 / 10));
                     }
                 }
                 else
@@ -255,8 +248,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill8 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill8 / 10));
                     }
                 }
                 else
@@ -278,8 +270,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill9 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill9 / 10));
                     }
                 }
                 else
@@ -301,8 +292,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill10 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill10 / 10));
                     }
                 }
                 else
@@ -324,8 +314,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill11 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill11 / 10));
                     }
                 }
                 else
@@ -347,8 +336,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill12 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill12 / 10));
                     }
                 }
                 else
@@ -370,8 +358,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill13 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill13 / 10));
                     }
                 }
                 else
@@ -393,8 +380,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        //value = (playerDataBase.Skill14 + 1) * priceCrystal;
-                        value = priceCrystal;
+                        value = priceCrystal + (priceCrystal * (playerDataBase.Skill14 / 10));
                     }
                 }
                 else

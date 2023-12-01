@@ -245,7 +245,7 @@ public class ShopManager : MonoBehaviour
             case 0:
                 shopContents[0].Initialize(ItemType.DailyReward, BuyType.Free, this);
                 shopContents[1].Initialize(ItemType.AdReward_Gold, BuyType.Ad, this);
-                shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
+                shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Crystal, this);
                 shopContents[6].Initialize(ItemType.AdReward_Portion, BuyType.Ad, this);
                 shopContents[7].Initialize(ItemType.RemoveAds, BuyType.Rm, this);
                 shopContents[11].Initialize(ItemType.DailyReward_Portion, BuyType.Free, this);
@@ -340,14 +340,14 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case ItemType.DefDestroyTicket:
-                if (playerDataBase.Coin >= 50000000)
+                if (playerDataBase.Crystal >= 100)
                 {
-                    PlayfabManager.instance.UpdateSubtractGold(50000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal,100);
 
                     playerDataBase.DefDestroyTicket += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
 
-                    shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
+                    shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Crystal, this);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -1064,7 +1064,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (characterIndex > 2)
+            if (characterIndex > 3)
             {
                 crystalButton.SetActive(true);
             }
@@ -1267,7 +1267,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (truckIndex > 2)
+            if (truckIndex > 3)
             {
                 crystalButton.SetActive(true);
             }
@@ -1441,7 +1441,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (animalIndex > 2)
+            if (animalIndex > 3)
             {
                 crystalButton.SetActive(true);
             }
@@ -1827,7 +1827,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (butterflyIndex > 2)
+            if (butterflyIndex > 3)
             {
                 crystalButton.SetActive(true);
             }

@@ -105,6 +105,7 @@ public class UpgradeDataBase : ScriptableObject
     }
 
 
+
     public int GetNeed(int level, int value)
     {
         need = 0;
@@ -128,7 +129,7 @@ public class UpgradeDataBase : ScriptableObject
             switch (GameStateManager.instance.GameType)
             {
                 case GameType.Story:
-                    need = level * level * value * needList[level].value;
+                    need = level * value * needList[level].value;
                     break;
                 case GameType.Rank:
                     need = 100 * level;
@@ -147,7 +148,7 @@ public class UpgradeDataBase : ScriptableObject
         {
             case GameType.Story:
 
-                price = level * level * (value * priceList[level].value);
+                price = level * (value * priceList[level].value);
 
                 break;
             case GameType.Rank:

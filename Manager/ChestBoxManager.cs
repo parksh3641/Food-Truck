@@ -53,7 +53,7 @@ public class ChestBoxManager : MonoBehaviour
 
         if (GameStateManager.instance.ChestBoxCount >= 20) return;
 
-        goalCount = GameStateManager.instance.ChestBoxCoolTime;
+        goalCount = Random.Range(60, 120);
 
         count = 0;
         StartCoroutine(TimerCoroution());

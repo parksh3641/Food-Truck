@@ -109,7 +109,8 @@ public class ShopContent : MonoBehaviour
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
 
-                buyCoinText.text = MoneyUnitString.ToCurrencyString(50000000);
+                //buyCoinText.text = MoneyUnitString.ToCurrencyString(50000000);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(100);
 
                 titleText.plusText = " x1";
 

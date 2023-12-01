@@ -117,11 +117,11 @@ public class ReincarnationManager : MonoBehaviour
             buttonLockedObj.SetActive(false);
         }
 
-        crystal /= 2;
+        crystal /= 5;
 
-        passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 3).ToString() + "%)";
+        passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 0.5f).ToString() + "%)";
 
-        crystal = crystal + (crystal * (0.03f * (playerDataBase.Skill11 * 1)));
+        crystal = crystal + (crystal * (0.005f * playerDataBase.Skill11));
 
         crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
 

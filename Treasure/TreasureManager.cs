@@ -18,7 +18,7 @@ public class TreasureManager : MonoBehaviour
     public ReceiveContent[] receiveContents;
 
     private int index = 0;
-    private int price = 30;
+    private int price = 20;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(0.5f);
@@ -85,6 +85,9 @@ public class TreasureManager : MonoBehaviour
 
         treasureAdLockedObj.SetActive(true);
 
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
+
         OpenTreasure(1);
     }
 
@@ -105,6 +108,9 @@ public class TreasureManager : MonoBehaviour
         }
 
         PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+        NotionManager.instance.UseNotion(NotionType.SuccessBuy);
 
         OpenTreasure(1);
     }
@@ -127,6 +133,9 @@ public class TreasureManager : MonoBehaviour
 
         PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price * 10);
 
+        SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+        NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+
         OpenTreasure(11);
     }
 
@@ -140,6 +149,10 @@ public class TreasureManager : MonoBehaviour
         treasureRewardView.SetActive(true);
         treasureButton.SetActive(false);
 
+        playerDataBase.TreasureCount += count;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TreasureCount", playerDataBase.TreasureCount);
+
         for (int i = 0; i < receiveContents.Length; i++)
         {
             receiveContents[i].gameObject.SetActive(false);
@@ -150,6 +163,8 @@ public class TreasureManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             index = Random.Range(0, System.Enum.GetValues(typeof(TreasureType)).Length);
+
+            SoundManager.instance.PlaySFX(GameSfxType.Click);
 
             GetTreasure(index);
 

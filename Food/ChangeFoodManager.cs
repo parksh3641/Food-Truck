@@ -135,7 +135,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         moveIsland.SetActive(false);
 
-        if (playerDataBase.IslandNumber > 0)
+        if (playerDataBase.IslandNumber > 0 && GameStateManager.instance.GameType != GameType.Rank)
         {
             moveIsland.SetActive(true);
         }

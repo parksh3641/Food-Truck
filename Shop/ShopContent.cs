@@ -282,7 +282,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion1:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(2);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(5);
 
                 titleText.plusText = " x1";
 
@@ -293,7 +293,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion2:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(20);
 
                 titleText.plusText = " x1";
 
@@ -304,7 +304,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion3:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(20);
 
                 titleText.plusText = " x1";
 
@@ -315,7 +315,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion4:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(5);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
 
                 titleText.plusText = " x1";
 
@@ -326,7 +326,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion5:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(20);
 
                 titleText.plusText = " x1";
 

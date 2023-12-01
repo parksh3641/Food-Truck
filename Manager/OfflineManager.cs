@@ -149,13 +149,14 @@ public class OfflineManager : MonoBehaviour
 
         addCrystal = (playerDataBase.CastleLevel + 1) * 2;
         addCoin = 100000 + playerDataBase.CastleLevel * 1000;
-        addExp = 1000 + playerDataBase.CastleLevel * 10;
+        addExp = 100 + playerDataBase.CastleLevel * 1;
 
         addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.01f));
+        addExp += (int)(addExp * (playerDataBase.Treasure5 * 0.01f));
 
         levelUpCostText.text = addCrystal.ToString();
         coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "\n/" + localization_Hours + "  (+1000)";
-        expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+10)";
+        expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+1)";
 
         adCoinText.text = MoneyUnitString.ToCurrencyString(addCoin * 12);
         adExpText.text = MoneyUnitString.ToCurrencyString(addExp * 12);
@@ -214,11 +215,13 @@ public class OfflineManager : MonoBehaviour
             }
             else
             {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.LowCrystal);
             }
         }
         else
         {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.MaxLevel);
         }
 
@@ -356,6 +359,7 @@ public class OfflineManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
         levelManager.Initialize();
 
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
     }
 

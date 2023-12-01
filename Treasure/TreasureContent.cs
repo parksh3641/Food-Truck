@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -204,7 +204,7 @@ public class TreasureContent : MonoBehaviour
 
         infoText.text = LocalizationManager.instance.GetString(type.ToString() + "_Info");
 
-        effectText.text = nowValue.ToString("N1") + "%  ¢º  " + nextValue.ToString("N1") + "%";
+        effectText.text = nowValue.ToString("N1") + "%  â–¶  " + nextValue.ToString("N1") + "%";
 
         upgradeText.text = LocalizationManager.instance.GetString("Upgrade") + "\n" + count + " / " + need;
 
@@ -291,7 +291,7 @@ public class TreasureContent : MonoBehaviour
 
         Initialize(treasureType, treasureManager);
 
-        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
         NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
 
         isDelay = true;

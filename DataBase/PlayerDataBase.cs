@@ -52,6 +52,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int adCount = 0;
     [SerializeField]
+    private int treasureCount = 0;
+    [SerializeField]
     private int gourmetLevel = 0;
     [SerializeField]
     private int upgradeCount = 0;
@@ -629,6 +631,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             adCount = value;
+        }
+    }
+
+    public int TreasureCount
+    {
+        get
+        {
+            return treasureCount;
+        }
+        set
+        {
+            treasureCount = value;
         }
     }
 
@@ -2452,6 +2466,7 @@ public class PlayerDataBase : ScriptableObject
         exp = 0;
         michelin = 0;
         adCount = 0;
+        treasureCount = 0;
         accessDate = 0;
         castleLevel = 0;
         castleDate = "";

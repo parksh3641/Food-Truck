@@ -693,7 +693,7 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.CharacterType > CharacterType.Character1)
         {
-            successPlus = characterDataBase.GetCharacterEffect(GameStateManager.instance.CharacterType);
+            successPlus += characterDataBase.GetCharacterEffect(GameStateManager.instance.CharacterType);
         }
 
         successPlus += playerDataBase.Skill7 * 0.1f;
@@ -704,12 +704,11 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.TruckType > TruckType.Bread)
         {
-            sellPricePlus = truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
+            sellPricePlus += truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
         }
 
-        sellPricePlus += playerDataBase.Skill8 * 0.5f;
+        sellPricePlus += playerDataBase.Skill8 * 0.2f;
         sellPricePlus += playerDataBase.Proficiency * 1;
-
 
         sellPriceTip = playerDataBase.Skill14 * 0.5f; //ÆÁ È®·ü
 
@@ -733,9 +732,9 @@ public class GameManager : MonoBehaviour
 
         feverCount = GameStateManager.instance.FeverCount;
 
-        feverTime = 30 + (30 * (0.005f * playerDataBase.Skill1));
+        feverTime = 30 + (30 * (0.003f * playerDataBase.Skill1));
 
-        feverMaxCount = 500 - (500 * (0.002f * playerDataBase.Skill2));
+        feverMaxCount = 500 - (500 * (0.003f * playerDataBase.Skill2));
         feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
         portion1Time = 30 + (30 * (0.003f * playerDataBase.Skill4)) + (30 * (0.005f * playerDataBase.Treasure6));
@@ -777,7 +776,7 @@ public class GameManager : MonoBehaviour
 
         if (buff1)
         {
-            sellPricePlus += 50;
+            sellPricePlus += 30;
         }
 
         if (buff2)
@@ -1906,18 +1905,26 @@ public class GameManager : MonoBehaviour
                 UseDefTicket();
             }
 
-            if (successX2 >= Random.Range(0, 100))
+            if(successX2 > 0)
             {
-                if(level + 2 >= maxLevel - 1)
+                if (successX2 >= Random.Range(0, 100))
                 {
-                    level += 1;
+                    if (level + 2 >= maxLevel - 1)
+                    {
+                        level += 1;
+                    }
+                    else
+                    {
+                        level += 2;
+                    }
+
+                    NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX2);
                 }
                 else
                 {
-                    level += 2;
+                    level += 1;
+                    NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
                 }
-
-                NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX2);
             }
             else
             {
@@ -2669,7 +2676,10 @@ public class GameManager : MonoBehaviour
 
                             changeFoodAlarmObj.SetActive(true);
 
-                            tutorialManager.NextFood();
+                            if(playerDataBase.ReincarnationCount == 0)
+                            {
+                                tutorialManager.NextFood();
+                            }
                         }
 
                         lockManager.UnLocked(1);
@@ -3495,7 +3505,7 @@ public class GameManager : MonoBehaviour
         {
             buff1 = true;
 
-            sellPricePlus += 50;
+            sellPricePlus += 30;
             UpgradeInitialize();
         }
         else
@@ -3513,7 +3523,7 @@ public class GameManager : MonoBehaviour
         {
             buff1 = false;
 
-            sellPricePlus -= 50;
+            sellPricePlus -= 30;
             UpgradeInitialize();
         }
         else
@@ -3751,7 +3761,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.Skill11 = 100;
         playerDataBase.Skill12 = 100;
         playerDataBase.Skill13 = 100;
-        playerDataBase.Skill14 = 100;
+        //playerDataBase.Skill14 = 100;
     }
 
     public void GetGold()

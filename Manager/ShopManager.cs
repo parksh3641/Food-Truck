@@ -464,9 +464,9 @@ public class ShopManager : MonoBehaviour
             case ItemType.CrystalShop6:
                 break;
             case ItemType.Portion1:
-                if (playerDataBase.Crystal >= 2)
+                if (playerDataBase.Crystal >= 5)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 2);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 5);
 
                     playerDataBase.Portion1 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
@@ -483,9 +483,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion2:
-                if (playerDataBase.Crystal >= 10)
+                if (playerDataBase.Crystal >= 20)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 20);
 
                     playerDataBase.Portion2 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
@@ -502,9 +502,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion3:
-                if (playerDataBase.Crystal >= 10)
+                if (playerDataBase.Crystal >= 20)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 20);
 
                     playerDataBase.Portion3 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
@@ -521,9 +521,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion4:
-                if (playerDataBase.Crystal >= 5)
+                if (playerDataBase.Crystal >= 10)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 5);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
 
                     playerDataBase.Portion4 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
@@ -540,9 +540,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion5:
-                if (playerDataBase.Crystal >= 10)
+                if (playerDataBase.Crystal >= 20)
                 {
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 20);
 
                     playerDataBase.Portion5 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);

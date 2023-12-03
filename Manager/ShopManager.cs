@@ -1090,7 +1090,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (characterIndex > 3)
+            if (characterIndex > 5)
             {
                 crystalButton.SetActive(true);
             }
@@ -1291,12 +1291,12 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(false);
+            crystalButton.SetActive(true);
 
-            if (truckIndex > 3)
-            {
-                crystalButton.SetActive(true);
-            }
+            //if (truckIndex > 3)
+            //{
+            //    crystalButton.SetActive(true);
+            //}
         }
     }
 
@@ -1467,10 +1467,10 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (animalIndex > 3)
-            {
-                crystalButton.SetActive(true);
-            }
+            //if (animalIndex > 3)
+            //{
+            //    crystalButton.SetActive(true);
+            //}
         }
     }
 
@@ -1843,7 +1843,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (butterflyIndex > 3)
+            if (butterflyIndex > 5)
             {
                 crystalButton.SetActive(true);
             }

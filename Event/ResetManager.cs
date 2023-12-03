@@ -20,6 +20,8 @@ public class ResetManager : MonoBehaviour
     public AttendanceManager attendanceManager;
     //public EventManager eventManager;
 
+    WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
+
     PlayerDataBase playerDataBase;
 
     private void Awake()
@@ -55,14 +57,14 @@ public class ResetManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("AccessDate", playerDataBase.AccessDate);
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceDay", int.Parse(playerDataBase.AttendanceDay));
 
-            GameStateManager.instance.DailyReward = false;
-            GameStateManager.instance.DailyReward_Portion = false;
-            GameStateManager.instance.DailyReward_DefTicket = false;
-            GameStateManager.instance.DailyAdsReward = false;
-            GameStateManager.instance.DailyAdsReward2 = false;
-            GameStateManager.instance.DailyCastleReward = false;
-            GameStateManager.instance.DailyQuestReward = false;
-            GameStateManager.instance.DailyTreasureReward = false;
+            playerDataBase.DailyReward = 0;
+            playerDataBase.DailyReward_Portion = 0;
+            playerDataBase.DailyReward_DefTicket = 0;
+            playerDataBase.DailyAdsReward = 0;
+            playerDataBase.DailyAdsReward2 = 0;
+            playerDataBase.DailyCastleReward = 0;
+            playerDataBase.DailyQuestReward = 0;
+            playerDataBase.DailyTreasureReward = 0;
 
             GameStateManager.instance.UpgradeCount = 0;
             GameStateManager.instance.SellCount = 0;
@@ -113,14 +115,7 @@ public class ResetManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("AccessDate", playerDataBase.AccessDate);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceDay", int.Parse(playerDataBase.AttendanceDay));
 
-                GameStateManager.instance.DailyReward = false;
-                GameStateManager.instance.DailyReward_Portion = false;
-                GameStateManager.instance.DailyReward_DefTicket = false;
-                GameStateManager.instance.DailyAdsReward = false;
-                GameStateManager.instance.DailyAdsReward2 = false;
-                GameStateManager.instance.DailyCastleReward = false;
-                GameStateManager.instance.DailyQuestReward = false;
-                GameStateManager.instance.DailyTreasureReward = false;
+                StartCoroutine(ResetCoroution());
 
                 GameStateManager.instance.UpgradeCount = 0;
                 GameStateManager.instance.SellCount = 0;
@@ -250,5 +245,29 @@ public class ResetManager : MonoBehaviour
         }
 
         return c;
+    }
+
+    IEnumerator ResetCoroution()
+    {
+        playerDataBase.DailyReward = 0;
+        playerDataBase.DailyReward_Portion = 0;
+        playerDataBase.DailyReward_DefTicket = 0;
+        playerDataBase.DailyAdsReward = 0;
+        playerDataBase.DailyAdsReward2 = 0;
+        playerDataBase.DailyCastleReward = 0;
+        playerDataBase.DailyQuestReward = 0;
+        playerDataBase.DailyTreasureReward = 0;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward", playerDataBase.DailyReward);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_Portion", playerDataBase.DailyReward_Portion);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_DefTicket", playerDataBase.DailyReward_DefTicket);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyAdsReward", playerDataBase.DailyAdsReward);
+
+        yield return waitForSeconds;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyAdsReward2", playerDataBase.DailyAdsReward2);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyCastleReward", playerDataBase.DailyCastleReward);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyQuestReward", playerDataBase.DailyQuestReward);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyTreasureReward", playerDataBase.DailyTreasureReward);
     }
 }

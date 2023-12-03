@@ -265,13 +265,6 @@ public class ChangeFoodManager : MonoBehaviour
                     changeFoodContentList[4].UnLock();
                     changeFoodContentList[5].UnLock();
                     changeFoodContentList[6].UnLock();
-
-                    if (!GameStateManager.instance.AppReview)
-                    {
-                        gameManager.OpenAppReview();
-
-                        GameStateManager.instance.AppReview = true;
-                    }
                 }
 
                 break;

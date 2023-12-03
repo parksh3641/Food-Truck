@@ -257,27 +257,27 @@ public class ShopManager : MonoBehaviour
                 shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
                 shopContents[25].Initialize(ItemType.DefDestroyTicketPiece, BuyType.Free, this);
 
-                if (!GameStateManager.instance.DailyReward)
+                if (playerDataBase.DailyReward == 0)
                 {
                     shopContents[0].SetLocked(false);
                 }
 
-                if (!GameStateManager.instance.DailyReward_Portion)
+                if (playerDataBase.DailyReward_Portion == 0)
                 {
                     shopContents[11].SetLocked(false);
                 }
 
-                if (!GameStateManager.instance.DailyReward_DefTicket)
+                if (playerDataBase.DailyReward_DefTicket == 0)
                 {
                     shopContents[25].SetLocked(false);
                 }
 
-                if (!GameStateManager.instance.DailyAdsReward)
+                if (playerDataBase.DailyAdsReward == 0)
                 {
                     shopContents[1].SetLocked(false);
                 }
 
-                if (!GameStateManager.instance.DailyAdsReward2)
+                if (playerDataBase.DailyAdsReward2 == 0)
                 {
                     shopContents[6].SetLocked(false);
                 }
@@ -333,9 +333,10 @@ public class ShopManager : MonoBehaviour
         switch (item)
         {
             case ItemType.DailyReward:
-                if (GameStateManager.instance.DailyReward) return;
+                if (playerDataBase.DailyReward == 1) return;
 
-                GameStateManager.instance.DailyReward = true;
+                playerDataBase.DailyReward = 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward", playerDataBase.DailyReward);
 
                 shopContents[0].SetLocked(true);
 
@@ -425,9 +426,10 @@ public class ShopManager : MonoBehaviour
             case ItemType.PortionSet3:
                 break;
             case ItemType.DailyReward_Portion:
-                if (GameStateManager.instance.DailyReward_Portion) return;
+                if (playerDataBase.DailyReward_Portion == 1) return;
 
-                GameStateManager.instance.DailyReward_Portion = true;
+                playerDataBase.DailyReward_Portion = 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_Portion", playerDataBase.DailyReward_Portion);
 
                 shopContents[11].SetLocked(true);
 
@@ -589,15 +591,16 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.DefDestroyTicketPiece:
-                if (GameStateManager.instance.DailyReward_DefTicket) return;
+                if (playerDataBase.DailyReward_DefTicket == 1) return;
 
-                GameStateManager.instance.DailyReward_DefTicket = true;
-
-                shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
-                shopContents[25].SetLocked(true);
+                playerDataBase.DailyReward_DefTicket = 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_DefTicket", playerDataBase.DailyReward_DefTicket);
 
                 playerDataBase.DefDestroyTicketPiece += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicketPiece", playerDataBase.DefDestroyTicketPiece);
+
+                shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
+                shopContents[25].SetLocked(true);
 
                 SoundManager.instance.PlaySFX(GameSfxType.Success);
                 NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -618,10 +621,13 @@ public class ShopManager : MonoBehaviour
 
     public void SuccessWatchAd()
     {
+        if (playerDataBase.DailyAdsReward == 1) return;
+
         alarm.SetActive(false);
         dailyAlarm.SetActive(false);
 
-        GameStateManager.instance.DailyAdsReward = true;
+        playerDataBase.DailyAdsReward = 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyAdsReward", playerDataBase.DailyAdsReward);
 
         shopContents[1].SetLocked(true);
 
@@ -633,7 +639,10 @@ public class ShopManager : MonoBehaviour
 
     public void SuccessWatchAd_Portion()
     {
-        GameStateManager.instance.DailyAdsReward2 = true;
+        if (playerDataBase.DailyAdsReward2 == 1) return;
+
+        playerDataBase.DailyAdsReward2 = 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyAdsReward2", playerDataBase.DailyAdsReward2);
 
         shopContents[6].SetLocked(true);
 
@@ -1467,10 +1476,10 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            //if (animalIndex > 3)
-            //{
-            //    crystalButton.SetActive(true);
-            //}
+            if (animalIndex > 2)
+            {
+                crystalButton.SetActive(true);
+            }
         }
     }
 

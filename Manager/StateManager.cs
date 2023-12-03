@@ -16,6 +16,7 @@ public class StateManager : MonoBehaviour
     public OfflineManager offlineManager;
     public NoticeManager noticeManager;
     public ChangeFoodManager changeFoodManager;
+    public AttendanceManager attendanceManager;
 
     private void Awake()
     {
@@ -54,6 +55,7 @@ public class StateManager : MonoBehaviour
         offlineManager.Initialize();
         noticeManager.Initialize();
         changeFoodManager.Initialize();
+        attendanceManager.Initialize();
 
         Debug.Log("Load Complete!");
     }

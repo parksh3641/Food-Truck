@@ -97,14 +97,6 @@ public class GameStateManager : MonoBehaviour
         public int adCount = 200;
         public int chestBoxCount = 0;
         public int chestBoxCoolTime = 120;
-        public bool dailyReward = false;
-        public bool dailyReward_Portion = false;
-        public bool dailyReward_DefTicket = false;
-        public bool dailyAdsReward = false;
-        public bool dailyAdsReward2 = false;
-        public bool dailyCastleReward = false;
-        public bool dailyQuestReward = false;
-        public bool dailyTreasureReward = false;
 
         [Space]
         [Title("Bankruptcy")]
@@ -800,111 +792,6 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.chestBoxCoolTime = value;
-            SaveFile();
-        }
-    }
-
-
-    public bool DailyReward
-    {
-        get
-        {
-            return gameSettings.dailyReward;
-        }
-        set
-        {
-            gameSettings.dailyReward = value;
-            SaveFile();
-        }
-    }
-
-    public bool DailyReward_Portion
-    {
-        get
-        {
-            return gameSettings.dailyReward_Portion;
-        }
-        set
-        {
-            gameSettings.dailyReward_Portion = value;
-            SaveFile();
-        }
-    }
-
-    public bool DailyReward_DefTicket
-    {
-        get
-        {
-            return gameSettings.dailyReward_DefTicket;
-        }
-        set
-        {
-            gameSettings.dailyReward_DefTicket = value;
-            SaveFile();
-        }
-    }
-
-    public bool DailyAdsReward
-    {
-        get
-        {
-            return gameSettings.dailyAdsReward;
-        }
-        set
-        {
-            gameSettings.dailyAdsReward = value;
-            SaveFile();
-        }
-    }
-
-    public bool DailyAdsReward2
-    {
-        get
-        {
-            return gameSettings.dailyAdsReward2;
-        }
-        set
-        {
-            gameSettings.dailyAdsReward2 = value;
-            SaveFile();
-        }
-    }
-
-    public bool DailyCastleReward
-    {
-        get
-        {
-            return gameSettings.dailyCastleReward;
-        }
-        set
-        {
-            gameSettings.dailyCastleReward = value;
-            SaveFile();
-        }
-    }
-
-    public bool DailyQuestReward
-    {
-        get
-        {
-            return gameSettings.dailyQuestReward;
-        }
-        set
-        {
-            gameSettings.dailyQuestReward = value;
-            SaveFile();
-        }
-    }
-
-    public bool DailyTreasureReward
-    {
-        get
-        {
-            return gameSettings.dailyTreasureReward;
-        }
-        set
-        {
-            gameSettings.dailyTreasureReward = value;
             SaveFile();
         }
     }

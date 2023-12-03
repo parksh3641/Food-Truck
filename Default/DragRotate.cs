@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class DragRotate : MonoBehaviour
 {
-    private float speed = 8f;
+    private float speed = 6f;
 
     void Update()
     {

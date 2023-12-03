@@ -409,6 +409,13 @@ public class GameManager : MonoBehaviour
         changeFoodManager.CheckProficiency();
 
         questManager.CheckingAlarm();
+
+        if (!GameStateManager.instance.AppReview && playerDataBase.IslandNumber > 0)
+        {
+            OpenAppReview();
+
+            GameStateManager.instance.AppReview = true;
+        }
     }
 
     void CheckFood()
@@ -616,6 +623,10 @@ public class GameManager : MonoBehaviour
 
     void CheckCoupon(bool check)
     {
+#if UNITY_EDITOR || UNITY_ANDROID
+        coupon.SetActive(true);
+        deleteAccount.SetActive(false);
+#else
         if(check)
         {
             coupon.SetActive(true);
@@ -626,6 +637,7 @@ public class GameManager : MonoBehaviour
             coupon.SetActive(false);
             deleteAccount.SetActive(true);
         }
+#endif
     }
 
     public void CheckInternet()
@@ -854,25 +866,28 @@ public class GameManager : MonoBehaviour
 
         yield return waitForSeconds;
 
-        if (GameStateManager.instance.RibsLevel + 1 > playerDataBase.RankLevel1)
+        if (GameStateManager.instance.GameType == GameType.Rank)
         {
-            playerDataBase.RankLevel1 = GameStateManager.instance.RibsLevel + 1;
+            if (GameStateManager.instance.RibsLevel + 1 > playerDataBase.RankLevel1)
+            {
+                playerDataBase.RankLevel1 = GameStateManager.instance.RibsLevel + 1;
 
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel1", playerDataBase.RankLevel1);
-        }
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel1", playerDataBase.RankLevel1);
+            }
 
-        if (GameStateManager.instance.ChocolateLevel + 1 > playerDataBase.RankLevel2)
-        {
-            playerDataBase.RankLevel2 = GameStateManager.instance.ChocolateLevel + 1;
+            if (GameStateManager.instance.ChocolateLevel + 1 > playerDataBase.RankLevel2)
+            {
+                playerDataBase.RankLevel2 = GameStateManager.instance.ChocolateLevel + 1;
 
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel2", playerDataBase.RankLevel2);
-        }
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel2", playerDataBase.RankLevel2);
+            }
 
-        if(playerDataBase.RankLevel1 + playerDataBase.RankLevel2 > playerDataBase.TotalLevel)
-        {
-            playerDataBase.TotalLevel = playerDataBase.RankLevel1 + playerDataBase.RankLevel2;
+            if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 > playerDataBase.TotalLevel)
+            {
+                playerDataBase.TotalLevel = playerDataBase.RankLevel1 + playerDataBase.RankLevel2;
 
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
+            }
         }
 
         StartCoroutine(DelayCoroution());
@@ -912,7 +927,7 @@ public class GameManager : MonoBehaviour
             playerDataBase.FirstReward = 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
 
-            PlayfabManager.instance.UpdateAddGold(1000000);
+            PlayfabManager.instance.UpdateAddGold(100000);
             PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
 
             StartCoroutine(FirstDelay());
@@ -947,7 +962,6 @@ public class GameManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.ChangeIslandNotion);
 
         CheckFoodState();
-
         UpgradeInitialize();
     }
 
@@ -2936,6 +2950,8 @@ public class GameManager : MonoBehaviour
 
     public void SellButton()
     {
+        if (isDelay) return;
+
         if (level == 0) return;
 
         if (!NetworkConnect.instance.CheckConnectInternet())
@@ -3055,6 +3071,9 @@ public class GameManager : MonoBehaviour
         UpgradeInitialize();
 
         SoundManager.instance.PlaySFX(GameSfxType.Sell);
+
+        isDelay = true;
+        Invoke("WaitDelay", 0.4f);
     }
 
     public void CheckDefTicket()
@@ -3733,11 +3752,11 @@ public class GameManager : MonoBehaviour
 
             if(GameStateManager.instance.Bankruptcy < 1)
             {
-                bankruptcyText.text = MoneyUnitString.ToCurrencyString(500000);
+                bankruptcyText.text = MoneyUnitString.ToCurrencyString(100000);
             }
             else
             {
-                bankruptcyText.text = MoneyUnitString.ToCurrencyString(100000);
+                bankruptcyText.text = MoneyUnitString.ToCurrencyString(30000);
             }
         }
     }
@@ -3847,14 +3866,14 @@ public class GameManager : MonoBehaviour
 
     public void GetResetReward()
     {
-        GameStateManager.instance.DailyReward = false;
-        GameStateManager.instance.DailyReward_Portion = false;
-        GameStateManager.instance.DailyReward_DefTicket = false;
-        GameStateManager.instance.DailyAdsReward = false;
-        GameStateManager.instance.DailyAdsReward2 = false;
-        GameStateManager.instance.DailyCastleReward = false;
-        GameStateManager.instance.DailyQuestReward = false;
-        GameStateManager.instance.DailyTreasureReward = false;
+        playerDataBase.DailyReward = 0;
+        playerDataBase.DailyReward_Portion = 0;
+        playerDataBase.DailyReward_DefTicket = 0;
+        playerDataBase.DailyAdsReward = 0;
+        playerDataBase.DailyAdsReward2 = 0;
+        playerDataBase.DailyCastleReward = 0;
+        playerDataBase.DailyQuestReward = 0;
+        playerDataBase.DailyTreasureReward = 0;
 
         GameStateManager.instance.UpgradeCount = 0;
         GameStateManager.instance.SellCount = 0;
@@ -3955,18 +3974,17 @@ public class GameManager : MonoBehaviour
         rankLocked.SetActive(true);
         treasureLocked.SetActive(true);
 
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 4)
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 2)
         {
             butterflyLocked.SetActive(false);
         }
-
 
         if (levelDataBase.GetLevel(playerDataBase.Exp) > 9)
         {
             rankLocked.SetActive(false);
         }
 
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 14)
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 4)
         {
             treasureLocked.SetActive(false);
         }

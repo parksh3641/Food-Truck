@@ -53,6 +53,14 @@ public class AttendanceManager : MonoBehaviour
         StartCoroutine(TimerCoroution());
     }
 
+    public void Initialize()
+    {
+        if(!playerDataBase.attendanceCheck)
+        {
+            OnSetAlarm();
+        }
+    }
+
     [Button]
     public void NextDay()
     {
@@ -88,7 +96,7 @@ public class AttendanceManager : MonoBehaviour
             localization_Hours = LocalizationManager.instance.GetString("Hours");
             localization_Minutes = LocalizationManager.instance.GetString("Minutes");
 
-            Initialize();
+            CheckInitialize();
 
             CheckAttendance();
 
@@ -100,7 +108,7 @@ public class AttendanceManager : MonoBehaviour
         }
     }
 
-    public void Initialize()
+    public void CheckInitialize()
     {
         attendanceContentArray[0].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[0].receiveContent[1].gameObject.SetActive(true);

@@ -1234,6 +1234,30 @@ public class PlayfabManager : MonoBehaviour
                        case "CastleServerDate":
                            playerDataBase.CastleServerDate = statistics.Value.ToString();
                            break;
+                       case "DailyReward":
+                           playerDataBase.DailyReward = statistics.Value;
+                           break;
+                       case "DailyReward_Portion":
+                           playerDataBase.DailyReward_Portion = statistics.Value;
+                           break;
+                       case "DailyReward_DefTicket":
+                           playerDataBase.DailyReward_DefTicket = statistics.Value;
+                           break;
+                       case "DailyAdsReward":
+                           playerDataBase.DailyAdsReward = statistics.Value;
+                           break;
+                       case "DailyAdsReward2":
+                           playerDataBase.DailyAdsReward2 = statistics.Value;
+                           break;
+                       case "DailyCastleReward":
+                           playerDataBase.DailyCastleReward = statistics.Value;
+                           break;
+                       case "DailyQuestReward":
+                           playerDataBase.DailyQuestReward = statistics.Value;
+                           break;
+                       case "DailyTreasureReward":
+                           playerDataBase.DailyTreasureReward = statistics.Value;
+                           break;
                        case "ConsumeGold":
                            playerDataBase.ConsumeGold = statistics.Value;
                            break;

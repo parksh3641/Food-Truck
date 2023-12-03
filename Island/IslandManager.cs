@@ -103,7 +103,7 @@ public class IslandManager : MonoBehaviour
 
         if(changeFoodManager.changeFoodView.activeInHierarchy)
         {
-            changeFoodManager.Initialize();
+            changeFoodManager.CheckFood();
         }
     }
 }

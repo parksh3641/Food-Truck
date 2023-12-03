@@ -92,7 +92,7 @@ public class OfflineManager : MonoBehaviour
             localization_Minutes = LocalizationManager.instance.GetString("Minutes");
             localization_Seconds = LocalizationManager.instance.GetString("Seconds");
 
-            if (!GameStateManager.instance.DailyCastleReward)
+            if (playerDataBase.DailyCastleReward == 0)
             {
                 quickLockObj.SetActive(false);
             }
@@ -243,14 +243,14 @@ public class OfflineManager : MonoBehaviour
 
     public void ReceiveAdButton()
     {
+        if (playerDataBase.DailyCastleReward == 1) return;
+
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }
-
-        if (GameStateManager.instance.DailyCastleReward) return;
 
         GoogleAdsManager.instance.admobReward_Delivery.ShowAd(5);
     }
@@ -353,7 +353,8 @@ public class OfflineManager : MonoBehaviour
 
     public void SuccessWatchAd()
     {
-        GameStateManager.instance.DailyCastleReward = true;
+        playerDataBase.DailyCastleReward = 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyCastleReward", playerDataBase.DailyCastleReward);
 
         quickLockObj.SetActive(true);
 

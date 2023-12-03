@@ -46,6 +46,24 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private string castleServerDate = "";
 
+    [Space]
+    [Title("Daily")]
+    [SerializeField]
+    private int dailyReward = 0;
+    [SerializeField]
+    private int dailyReward_Portion = 0;
+    [SerializeField]
+    private int dailyReward_DefTicket = 0;
+    [SerializeField]
+    private int dailyAdsReward = 0;
+    [SerializeField]
+    private int dailyAdsReward2 = 0;
+    [SerializeField]
+    private int dailyCastleReward = 0;
+    [SerializeField]
+    private int dailyQuestReward = 0;
+    [SerializeField]
+    private int dailyTreasureReward = 0;
 
     [Space]
     [Title("Count")]
@@ -648,6 +666,103 @@ public class PlayerDataBase : ScriptableObject
             castleServerDate = value;
         }
     }
+
+    public int DailyReward
+    {
+        get
+        {
+            return dailyReward;
+        }
+        set
+        {
+            dailyReward = value;
+        }
+    }
+
+    public int DailyReward_Portion
+    {
+        get
+        {
+            return dailyReward_Portion;
+        }
+        set
+        {
+            dailyReward_Portion = value;
+        }
+    }
+
+    public int DailyReward_DefTicket
+    {
+        get
+        {
+            return dailyReward_DefTicket;
+        }
+        set
+        {
+            dailyReward_DefTicket = value;
+        }
+    }
+
+    public int DailyAdsReward
+    {
+        get
+        {
+            return dailyAdsReward;
+        }
+        set
+        {
+            dailyAdsReward = value;
+        }
+    }
+
+    public int DailyAdsReward2
+    {
+        get
+        {
+            return dailyAdsReward2;
+        }
+        set
+        {
+            dailyAdsReward2 = value;
+        }
+    }
+
+    public int DailyCastleReward
+    {
+        get
+        {
+            return dailyCastleReward;
+        }
+        set
+        {
+            dailyCastleReward = value;
+        }
+    }
+
+    public int DailyQuestReward
+    {
+        get
+        {
+            return dailyQuestReward;
+        }
+        set
+        {
+            dailyQuestReward = value;
+        }
+    }
+
+    public int DailyTreasureReward
+    {
+        get
+        {
+            return dailyTreasureReward;
+        }
+        set
+        {
+            dailyTreasureReward = value;
+        }
+    }
+
 
     public int AdCount
     {
@@ -2642,6 +2757,15 @@ public class PlayerDataBase : ScriptableObject
         castleLevel = 0;
         castleDate = "";
         castleServerDate = "";
+
+        dailyReward = 0;
+        dailyReward_Portion = 0;
+        dailyReward_DefTicket = 0;
+        dailyAdsReward = 0;
+        dailyAdsReward2 = 0;
+        dailyCastleReward = 0;
+        dailyQuestReward = 0;
+        dailyTreasureReward = 0;
 
         nextFoodNumber = 0;
         hamburgerMaxValue = 0;

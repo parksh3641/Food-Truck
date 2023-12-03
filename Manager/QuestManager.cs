@@ -71,7 +71,7 @@ public class QuestManager : MonoBehaviour
 
         questClearValueText.text = MoneyUnitString.ToCurrencyString(reward);
 
-        if (!GameStateManager.instance.DailyQuestReward)
+        if (playerDataBase.DailyQuestReward == 0)
         {
             questType = QuestType.UpgradeCount + (playerDataBase.QuestCount % 5);
             questInfo = questDataBase.GetQuestInfo(questType);
@@ -92,7 +92,7 @@ public class QuestManager : MonoBehaviour
 
     public void CheckingAlarm()
     {
-        if (GameStateManager.instance.DailyQuestReward) return;
+        if (playerDataBase.DailyQuestReward == 1) return;
 
         switch (questType)
         {
@@ -155,6 +155,8 @@ public class QuestManager : MonoBehaviour
 
     public void ClearButton()
     {
+        if (playerDataBase.DailyQuestReward == 1) return;
+
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -162,7 +164,8 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        GameStateManager.instance.DailyQuestReward = true;
+        playerDataBase.DailyQuestReward = 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyQuestReward", playerDataBase.DailyQuestReward);
 
         playerDataBase.QuestCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);
@@ -181,12 +184,15 @@ public class QuestManager : MonoBehaviour
 
     public void ClearAdButton()
     {
+        if (playerDataBase.DailyQuestReward == 1) return;
+
         GoogleAdsManager.instance.admobReward_Quest.ShowAd(6);
     }
 
     public void SuccessWatchAd()
     {
-        GameStateManager.instance.DailyQuestReward = true;
+        playerDataBase.DailyQuestReward = 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyQuestReward", playerDataBase.DailyQuestReward);
 
         playerDataBase.QuestCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);

@@ -56,9 +56,11 @@ public class TreasureManager : MonoBehaviour
                 ResetManager.instance.Initialize();
             }
 
-            if(GameStateManager.instance.DailyTreasureReward)
+            treasureAdLockedObj.SetActive(true);
+
+            if (playerDataBase.DailyTreasureReward == 0)
             {
-                treasureAdLockedObj.SetActive(true);
+                treasureAdLockedObj.SetActive(false);
             }
 
             treasureView.SetActive(true);
@@ -85,14 +87,15 @@ public class TreasureManager : MonoBehaviour
 
     public void WatchAd()
     {
-        if (GameStateManager.instance.DailyTreasureReward) return;
+        if (playerDataBase.DailyTreasureReward == 1) return;
 
         GoogleAdsManager.instance.admobReward_Treasure.ShowAd(7);
     }
 
     public void SuccessWatchAd()
     {
-        GameStateManager.instance.DailyTreasureReward = true;
+        playerDataBase.DailyTreasureReward = 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyTreasureReward", playerDataBase.DailyTreasureReward);
 
         treasureAdLockedObj.SetActive(true);
 

@@ -76,6 +76,12 @@ public class GameStateManager : MonoBehaviour
         [Space]
         [Title("Save")]
         public float feverCount = 0;
+        public int consumeGold = 0;
+        public int upgradeCount = 0;
+        public int sellCount = 0;
+        public int useSauce = 0;
+        public int openChestBox = 0;
+        public int yummyTimeCount = 0;
 
         [Space]
         [Title("Equip")]
@@ -93,6 +99,7 @@ public class GameStateManager : MonoBehaviour
         public int chestBoxCoolTime = 120;
         public bool dailyReward = false;
         public bool dailyReward_Portion = false;
+        public bool dailyReward_DefTicket = false;
         public bool dailyAdsReward = false;
         public bool dailyAdsReward2 = false;
         public bool dailyCastleReward = false;
@@ -654,6 +661,84 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public int ConsumeGold
+    {
+        get
+        {
+            return gameSettings.consumeGold;
+        }
+        set
+        {
+            gameSettings.consumeGold = value;
+            SaveFile();
+        }
+    }
+
+    public int UpgradeCount
+    {
+        get
+        {
+            return gameSettings.upgradeCount;
+        }
+        set
+        {
+            gameSettings.upgradeCount = value;
+            SaveFile();
+        }
+    }
+
+    public int SellCount
+    {
+        get
+        {
+            return gameSettings.sellCount;
+        }
+        set
+        {
+            gameSettings.sellCount = value;
+            SaveFile();
+        }
+    }
+
+    public int UseSauce
+    {
+        get
+        {
+            return gameSettings.useSauce;
+        }
+        set
+        {
+            gameSettings.useSauce = value;
+            SaveFile();
+        }
+    }
+
+    public int OpenChestBox
+    {
+        get
+        {
+            return gameSettings.openChestBox;
+        }
+        set
+        {
+            gameSettings.openChestBox = value;
+            SaveFile();
+        }
+    }
+
+    public int YummyTimeCount
+    {
+        get
+        {
+            return gameSettings.yummyTimeCount;
+        }
+        set
+        {
+            gameSettings.yummyTimeCount = value;
+            SaveFile();
+        }
+    }
+
     public bool RemoveAds
     {
         get
@@ -742,6 +827,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.dailyReward_Portion = value;
+            SaveFile();
+        }
+    }
+
+    public bool DailyReward_DefTicket
+    {
+        get
+        {
+            return gameSettings.dailyReward_DefTicket;
+        }
+        set
+        {
+            gameSettings.dailyReward_DefTicket = value;
             SaveFile();
         }
     }

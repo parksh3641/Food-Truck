@@ -45,6 +45,10 @@ public class PlayfabManager : MonoBehaviour
     private long coinA = 0;
     private long coinB = 0;
 
+    private int consumeGold = 0;
+    private int consumeGoldA = 0;
+    private int consumeGoldB = 0;
+
     public NickNameManager nickNameManager;
     public GameManager gameManager;
     public MoneyAnimation moneyAnimation;
@@ -734,6 +738,11 @@ public class PlayfabManager : MonoBehaviour
             int coinB = result.VirtualCurrency["GA"];
             int crystal = result.VirtualCurrency["ST"];
 
+            if(coinA < 0)
+            {
+                UpdateAddGold(Mathf.Abs(coinA));
+            }
+
             if (coinA > 2000000000)
             {
                 coinA = 2000000000;
@@ -1225,6 +1234,9 @@ public class PlayfabManager : MonoBehaviour
                        case "CastleServerDate":
                            playerDataBase.CastleServerDate = statistics.Value.ToString();
                            break;
+                       case "ConsumeGold":
+                           playerDataBase.ConsumeGold = statistics.Value;
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;
@@ -1271,6 +1283,15 @@ public class PlayfabManager : MonoBehaviour
                        case "Treasure6":
                            playerDataBase.Treasure6 = statistics.Value;
                            break;
+                       case "Treasure7":
+                           playerDataBase.Treasure7 = statistics.Value;
+                           break;
+                       case "Treasure8":
+                           playerDataBase.Treasure8 = statistics.Value;
+                           break;
+                       case "Treasure9":
+                           playerDataBase.Treasure9 = statistics.Value;
+                           break;
                        case "Treasure1Count":
                            playerDataBase.Treasure1Count = statistics.Value;
                            break;
@@ -1288,6 +1309,15 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Treasure6Count":
                            playerDataBase.Treasure6Count = statistics.Value;
+                           break;
+                       case "Treasure7Count":
+                           playerDataBase.Treasure7Count = statistics.Value;
+                           break;
+                       case "Treasure8Count":
+                           playerDataBase.Treasure8Count = statistics.Value;
+                           break;
+                       case "Treasure9Count":
+                           playerDataBase.Treasure9Count = statistics.Value;
                            break;
                        case "NextFoodNumber":
                            playerDataBase.NextFoodNumber = statistics.Value;
@@ -1352,8 +1382,8 @@ public class PlayfabManager : MonoBehaviour
                        case "OpenChestBox":
                            playerDataBase.OpenChestBox = statistics.Value;
                            break;
-                       case "FeverModeCount":
-                           playerDataBase.FeverModeCount = statistics.Value;
+                       case "YummyTimeCount":
+                           playerDataBase.YummyTimeCount = statistics.Value;
                            break;
                        case "QuestCount":
                            playerDataBase.QuestCount = statistics.Value;
@@ -1430,8 +1460,23 @@ public class PlayfabManager : MonoBehaviour
                        case "Coupon4":
                            playerDataBase.Coupon4 = statistics.Value;
                            break;
-                       case "GourmetLevel":
-                           playerDataBase.GourmetLevel = statistics.Value;
+                       case "Coupon5":
+                           playerDataBase.Coupon5 = statistics.Value;
+                           break;
+                       case "Coupon6":
+                           playerDataBase.Coupon6 = statistics.Value;
+                           break;
+                       case "Coupon7":
+                           playerDataBase.Coupon7 = statistics.Value;
+                           break;
+                       case "Coupon8":
+                           playerDataBase.Coupon8 = statistics.Value;
+                           break;
+                       case "Coupon9":
+                           playerDataBase.Coupon9 = statistics.Value;
+                           break;
+                       case "Coupon10":
+                           playerDataBase.Coupon10 = statistics.Value;
                            break;
                        case "UpgradeCount":
                            playerDataBase.UpgradeCount = statistics.Value;
@@ -1590,7 +1635,7 @@ public class PlayfabManager : MonoBehaviour
         {
             UpdateAddCurrency(MoneyType.CoinA, (int)(coinA - playerDataBase.CoinA));
         }
-        else
+        else if (coinA < playerDataBase.CoinA)
         {
             UpdateSubtractCurrency(MoneyType.CoinA, (int)(playerDataBase.CoinA - coinA));
         }
@@ -1599,7 +1644,7 @@ public class PlayfabManager : MonoBehaviour
         {
             UpdateAddCurrency(MoneyType.CoinB, (int)(coinB - playerDataBase.CoinB));
         }
-        else
+        else if(coinB < playerDataBase.CoinB)
         {
             UpdateSubtractCurrency(MoneyType.CoinB, (int)(playerDataBase.CoinB - coinB));
         }
@@ -1632,6 +1677,23 @@ public class PlayfabManager : MonoBehaviour
         else
         {
             UpdateSubtractCurrency(MoneyType.CoinB, (int)(playerDataBase.CoinB - coinB));
+        }
+
+
+        consumeGoldA = GameStateManager.instance.ConsumeGold;
+
+        consumeGoldA += number;
+
+        if(consumeGoldA >= 1000000)
+        {
+            consumeGoldB = consumeGoldA / 1000000;
+
+            consumeGoldA /= 1000000;
+
+            playerDataBase.ConsumeGold += consumeGoldB;
+
+            GameStateManager.instance.ConsumeGold = consumeGoldA;
+            UpdatePlayerStatisticsInsert("ConsumeGold", playerDataBase.ConsumeGold);
         }
     }
 
@@ -1704,6 +1766,9 @@ public class PlayfabManager : MonoBehaviour
                 break;
             case MoneyType.Crystal:
                 currentType = "ST";
+
+                playerDataBase.ConsumeGold += number;
+                UpdatePlayerStatisticsInsert("ConsumeGold", playerDataBase.ConsumeGold);
                 break;
             case MoneyType.CoinB:
                 currentType = "GA";

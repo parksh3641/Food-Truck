@@ -14,6 +14,8 @@ public class StateManager : MonoBehaviour
     public ChestBoxManager chestBoxManager;
     public QuestManager questManager;
     public OfflineManager offlineManager;
+    public NoticeManager noticeManager;
+    public ChangeFoodManager changeFoodManager;
 
     private void Awake()
     {
@@ -50,6 +52,8 @@ public class StateManager : MonoBehaviour
         chestBoxManager.Initialize();
         //questManager.Initialize();
         offlineManager.Initialize();
+        noticeManager.Initialize();
+        changeFoodManager.Initialize();
 
         Debug.Log("Load Complete!");
     }

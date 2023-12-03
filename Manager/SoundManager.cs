@@ -71,11 +71,6 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySFX(GameSfxType type)
     {
-        if(type.Equals(GameSfxType.Fever_In))
-        {
-            if (!GameStateManager.instance.Music) return;
-        }
-
         if (!GameStateManager.instance.Sfx) return;
 
         for (int i = 0; i < sfxAudio.Length; i++)
@@ -90,6 +85,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlayFever()
     {
+        if (!GameStateManager.instance.Music) return;
+
         musicAudio.Stop();
         musicAudio.clip = musicFever;
         musicAudio.Play();
@@ -97,9 +94,7 @@ public class SoundManager : MonoBehaviour
 
     public void StopFever()
     {
-        musicAudio.Stop();
-        musicAudio.clip = musicArray[Random.Range(0, musicArray.Length)];
-        musicAudio.Play();
+        ResetBGM();
     }
 
     public void ResetBGM()

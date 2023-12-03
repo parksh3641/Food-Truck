@@ -46,11 +46,15 @@ public class LevelManager : MonoBehaviour
 
             infoText.ReLoad();
 
+            GameStateManager.instance.Pause = true;
+
             FirebaseAnalytics.LogEvent("OpenLevel");
         }
         else
         {
             levelView.SetActive(false);
+
+            GameStateManager.instance.Pause = false;
         }
     }
 
@@ -69,7 +73,7 @@ public class LevelManager : MonoBehaviour
         titleText.text = "Lv." + level.ToString();
         levelText.text = level.ToString();
 
-        titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "  (+" + (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType) +")";
+        titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "\n(+" + (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType) +")";
 
         nowExp = levelDataBase.GetNowExp(playerDataBase.Exp);
         nextExp = levelDataBase.GetNextExp(level);

@@ -197,7 +197,8 @@ public enum ItemType
     Portion3,
     Portion4,
     Portion5,
-    DefDestroyTicketSlices
+    DefDestroyTicketSlices,
+    DefDestroyTicketPiece
 }
 
 public enum BuyType
@@ -272,6 +273,10 @@ public enum RewardType
     Treasure4,
     Treasure5,
     Treasure6,
+    Portion5,
+    Treasure7,
+    Treasure8,
+    Treasure9,
 }
 
 public enum QuestType
@@ -316,4 +321,7 @@ public enum TreasureType
     Treasure4,
     Treasure5,
     Treasure6,
+    Treasure7,
+    Treasure8,
+    Treasure9,
 }

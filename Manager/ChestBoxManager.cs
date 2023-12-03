@@ -55,8 +55,14 @@ public class ChestBoxManager : MonoBehaviour
 
         goalCount = Random.Range(60, 120);
 
+#if UNITY_EDITOR
+        goalCount = 1;
+#endif
+
         count = 0;
         StartCoroutine(TimerCoroution());
+
+        FirebaseAnalytics.LogEvent("ChestBox");
     }
 
     IEnumerator TimerCoroution()
@@ -85,8 +91,6 @@ public class ChestBoxManager : MonoBehaviour
             chestBoxIcon.SetActive(true);
 
             SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
-
-            GameStateManager.instance.Pause = true;
         }
         else
         {
@@ -112,15 +116,17 @@ public class ChestBoxManager : MonoBehaviour
         chestBoxArray[1].SetActive(false);
         chestBoxArray[2].SetActive(false);
 
-        random = Random.Range(0, 10);
+        random = Random.Range(0, 100);
 
-        //if (random >= 8)
-        //{
-        //    rewardType = RewardType.Gold;
+        Debug.LogError(random);
 
-        //    chestBoxArray[0].SetActive(true);
-        //}
-        if (random >= 1)
+        if (random >= 71)
+        {
+            rewardType = RewardType.Gold;
+
+            chestBoxArray[0].SetActive(true);
+        }
+        else if (random > 5)
         {
             rewardType = RewardType.PortionSet;
 
@@ -136,10 +142,10 @@ public class ChestBoxManager : MonoBehaviour
 
     void Success()
     {
-        GameStateManager.instance.Pause = false;
-
         playerDataBase.OpenChestBox += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
+
+        GameStateManager.instance.OpenChestBox += 1;
 
         gameManager.CheckPortion();
 
@@ -147,21 +153,28 @@ public class ChestBoxManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
 
         Initialize();
-
-        FirebaseAnalytics.LogEvent("ChestBox");
     }
 
     public void GetFreeReward()
     {
+        if(Random.Range(0, 10) <= 1)
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.FailGetItem);
+
+            Initialize();
+            return;
+        }
+
         switch (rewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddGold(200000);
+                PlayfabManager.instance.UpdateAddGold(100000);
 
                 break;
             case RewardType.PortionSet:
 
-                number = Random.Range(0, 5);
+                number = Random.Range(0, 4);
 
                 switch (number)
                 {
@@ -181,10 +194,10 @@ public class ChestBoxManager : MonoBehaviour
                         playerDataBase.Portion4 += 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
                         break;
-                    case 4:
-                        playerDataBase.Portion5 += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
-                        break;
+                    //case 4:
+                    //    playerDataBase.Portion5 += 1;
+                    //    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
+                    //    break;
                 }
 
                 portionPlusTextArray[number].gameObject.SetActive(false);
@@ -210,44 +223,44 @@ public class ChestBoxManager : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddGold(2000000);
+                PlayfabManager.instance.UpdateAddGold(300000);
 
                 break;
             case RewardType.PortionSet:
 
-                number = Random.Range(0, 5);
+                number = Random.Range(0, 4);
 
                 switch (number)
                 {
                     case 0:
-                        playerDataBase.Portion1 += 5;
+                        playerDataBase.Portion1 += 3;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
                         break;
                     case 1:
-                        playerDataBase.Portion2 += 5;
+                        playerDataBase.Portion2 += 3;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
                         break;
                     case 2:
-                        playerDataBase.Portion3 += 5;
+                        playerDataBase.Portion3 += 3;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
                         break;
                     case 3:
-                        playerDataBase.Portion4 += 5;
+                        playerDataBase.Portion4 += 3;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
                         break;
-                    case 4:
-                        playerDataBase.Portion5 += 5;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
-                        break;
+                    //case 4:
+                    //    playerDataBase.Portion5 += 3;
+                    //    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
+                    //    break;
                 }
 
                 portionPlusTextArray[number].gameObject.SetActive(false);
                 portionPlusTextArray[number].gameObject.SetActive(true);
-                portionPlusTextArray[number].text = "+5";
+                portionPlusTextArray[number].text = "+3";
 
                 break;
             case RewardType.Crystal:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3);
                 break;
         }
 

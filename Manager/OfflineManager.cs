@@ -48,6 +48,8 @@ public class OfflineManager : MonoBehaviour
 
     public ReceiveContent[] receiveContents;
 
+    public MoneyAnimation moneyAnimation;
+
 
     DateTime time; //적립을 한 시점
     DateTime serverTime; //최대 적립 날짜
@@ -145,21 +147,26 @@ public class OfflineManager : MonoBehaviour
 
     public void CheckCastle()
     {
+        if(playerDataBase.CastleLevel > playerDataBase.Level)
+        {
+            playerDataBase.CastleLevel = playerDataBase.Level;
+        }
+
         castleLevelText.text = LocalizationManager.instance.GetString("CastleLevel") + " : " + playerDataBase.CastleLevel + " / " + playerDataBase.Level;
 
         addCrystal = playerDataBase.CastleLevel + 1;
-        addCoin = 100000 + playerDataBase.CastleLevel * 2000;
-        addExp = 100 + playerDataBase.CastleLevel * 2;
+        addCoin = 5000 + playerDataBase.CastleLevel * 1000;
+        addExp = 100 + playerDataBase.CastleLevel * 1;
 
         addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.01f));
         addExp += (int)(addExp * (playerDataBase.Treasure5 * 0.01f));
 
         levelUpCostText.text = addCrystal.ToString();
-        coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "\n/" + localization_Hours + "  (+2000)";
-        expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+2)";
+        coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "\n/" + localization_Hours + "  (+1000)";
+        expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+1)";
 
-        adCoinText.text = MoneyUnitString.ToCurrencyString(addCoin * 12);
-        adExpText.text = MoneyUnitString.ToCurrencyString(addExp * 12);
+        adCoinText.text = MoneyUnitString.ToCurrencyString(addCoin * 6);
+        adExpText.text = MoneyUnitString.ToCurrencyString(addExp * 6);
 
         receiveContents[0].Initialize(RewardType.Gold, saveCoin);
         receiveContents[1].Initialize(RewardType.Exp, saveExp);
@@ -274,6 +281,8 @@ public class OfflineManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
             levelManager.Initialize();
 
+            moneyAnimation.PlusMoney(10);
+
             StopAllCoroutines();
             StartCoroutine(TimerCoroution());
 
@@ -358,6 +367,8 @@ public class OfflineManager : MonoBehaviour
         playerDataBase.Exp += quickExp;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
         levelManager.Initialize();
+
+        moneyAnimation.PlusMoney(10);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);

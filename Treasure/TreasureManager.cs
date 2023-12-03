@@ -2,10 +2,16 @@ using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TreasureManager : MonoBehaviour
 {
     public GameObject treasureView;
+
+    public RectTransform treasureRectTransform;
+
+    public Text treasure1Text;
+    public Text treasure2Text;
 
     public GameObject treasureAdLockedObj;
 
@@ -33,6 +39,11 @@ public class TreasureManager : MonoBehaviour
         treasureAdLockedObj.SetActive(false);
         treasureRewardView.SetActive(false);
         treasureButton.SetActive(false);
+
+        treasure1Text.text = price.ToString();
+        treasure2Text.text = (price * 10).ToString();
+
+        treasureRectTransform.anchoredPosition = new Vector2(0, -9999);
     }
 
 
@@ -190,6 +201,15 @@ public class TreasureManager : MonoBehaviour
                 case 5:
                     receiveContents[i].Initialize(RewardType.Treasure6, 1);
                     break;
+                case 6:
+                    receiveContents[i].Initialize(RewardType.Treasure7, 1);
+                    break;
+                case 7:
+                    receiveContents[i].Initialize(RewardType.Treasure8, 1);
+                    break;
+                case 8:
+                    receiveContents[i].Initialize(RewardType.Treasure9, 1);
+                    break;
             }
 
             yield return waitForSeconds;
@@ -229,6 +249,18 @@ public class TreasureManager : MonoBehaviour
             case 5:
                 playerDataBase.Treasure6Count += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure6Count", playerDataBase.Treasure6Count);
+                break;
+            case 6:
+                playerDataBase.Treasure7Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure7Count", playerDataBase.Treasure7Count);
+                break;
+            case 7:
+                playerDataBase.Treasure8Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure8Count", playerDataBase.Treasure8Count);
+                break;
+            case 8:
+                playerDataBase.Treasure9Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure9Count", playerDataBase.Treasure9Count);
                 break;
         }
     }

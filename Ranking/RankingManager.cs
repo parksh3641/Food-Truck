@@ -239,10 +239,10 @@ public class RankingManager : MonoBehaviour
         switch (topNumber)
         {
             case 0:
-                number = playerDataBase.GourmetLevel;
+                number = playerDataBase.UpgradeCount;
                 break;
             case 1:
-                number = playerDataBase.QuestCount;
+                number = playerDataBase.TotalLevel;
                 break;
             case 2:
                 number = playerDataBase.Michelin;

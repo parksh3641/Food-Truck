@@ -65,7 +65,10 @@ public class MoneyAnimation : MonoBehaviour
 
         plusMoneyObj.SetActive(false);
         plusMoneyObj.SetActive(true);
-        plusMoneyText.text = "+" + MoneyUnitString.ToCurrencyString(target);
+        if (plusMoneyText != null)
+        {
+            plusMoneyText.text = "+" + MoneyUnitString.ToCurrencyString(target);
+        }
 
         StartCoroutine(PlusMoneyCoroution(target));
     }

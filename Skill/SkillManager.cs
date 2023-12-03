@@ -53,8 +53,6 @@ public class SkillManager : MonoBehaviour
                 skillContents[i].Initialize();
             }
 
-            skillContents[13].gameObject.SetActive(false);
-
             alarm.SetActive(false);
 
             FirebaseAnalytics.LogEvent("OpenSkill");

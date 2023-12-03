@@ -54,7 +54,16 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int treasureCount = 0;
     [SerializeField]
-    private int gourmetLevel = 0;
+    private int questCount = 0;
+    [SerializeField]
+    private int reincarnationCount = 0;
+    [SerializeField]
+    private int buffCount = 0;
+    [SerializeField]
+    private int consumeGold = 0;
+
+    [Space]
+    [Title("Quest")]
     [SerializeField]
     private int upgradeCount = 0;
     [SerializeField]
@@ -64,13 +73,7 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int openChestBox = 0;
     [SerializeField]
-    private int feverModeCount = 0;
-    [SerializeField]
-    private int questCount = 0;
-    [SerializeField]
-    private int reincarnationCount = 0;
-    [SerializeField]
-    private int buffCount = 0;
+    private int yummyTimeCount = 0;
 
     [Space]
     [Title("Treasure")]
@@ -86,6 +89,12 @@ public class PlayerDataBase : ScriptableObject
     private int treasure5 = 0;
     [SerializeField]
     private int treasure6 = 0;
+    [SerializeField]
+    private int treasure7 = 0;
+    [SerializeField]
+    private int treasure8 = 0;
+    [SerializeField]
+    private int treasure9 = 0;
 
     [Space]
     [SerializeField]
@@ -100,6 +109,12 @@ public class PlayerDataBase : ScriptableObject
     private int treasure5Count = 0;
     [SerializeField]
     private int treasure6Count = 0;
+    [SerializeField]
+    private int treasure7Count = 0;
+    [SerializeField]
+    private int treasure8Count = 0;
+    [SerializeField]
+    private int treasure9Count = 0;
 
     [Space]
     [Title("Character")]
@@ -380,6 +395,18 @@ public class PlayerDataBase : ScriptableObject
     private int coupon3 = 0;
     [SerializeField]
     private int coupon4 = 0;
+    [SerializeField]
+    private int coupon5 = 0;
+    [SerializeField]
+    private int coupon6 = 0;
+    [SerializeField]
+    private int coupon7 = 0;
+    [SerializeField]
+    private int coupon8 = 0;
+    [SerializeField]
+    private int coupon9 = 0;
+    [SerializeField]
+    private int coupon10 = 0;
 
 
     [Space]
@@ -718,6 +745,42 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Treasure7
+    {
+        get
+        {
+            return treasure7;
+        }
+        set
+        {
+            treasure7 = value;
+        }
+    }
+
+    public int Treasure8
+    {
+        get
+        {
+            return treasure8;
+        }
+        set
+        {
+            treasure8 = value;
+        }
+    }
+
+    public int Treasure9
+    {
+        get
+        {
+            return treasure9;
+        }
+        set
+        {
+            treasure9 = value;
+        }
+    }
+
     public int Treasure1Count
     {
         get
@@ -787,6 +850,42 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             treasure6Count = value;
+        }
+    }
+
+    public int Treasure7Count
+    {
+        get
+        {
+            return treasure7Count;
+        }
+        set
+        {
+            treasure7Count = value;
+        }
+    }
+
+    public int Treasure8Count
+    {
+        get
+        {
+            return treasure8Count;
+        }
+        set
+        {
+            treasure8Count = value;
+        }
+    }
+
+    public int Treasure9Count
+    {
+        get
+        {
+            return treasure9Count;
+        }
+        set
+        {
+            treasure9Count = value;
         }
     }
 
@@ -1258,18 +1357,6 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int GourmetLevel
-    {
-        get
-        {
-            return gourmetLevel;
-        }
-        set
-        {
-            gourmetLevel = value;
-        }
-    }
-
     public int UpgradeCount
     {
         get
@@ -1318,15 +1405,15 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int FeverModeCount
+    public int YummyTimeCount
     {
         get
         {
-            return feverModeCount;
+            return yummyTimeCount;
         }
         set
         {
-            feverModeCount = value;
+            yummyTimeCount = value;
         }
     }
 
@@ -1363,6 +1450,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             buffCount = value;
+        }
+    }
+
+    public int ConsumeGold
+    {
+        get
+        {
+            return consumeGold;
+        }
+        set
+        {
+            consumeGold = value;
         }
     }
 
@@ -2373,6 +2472,78 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Coupon5
+    {
+        get
+        {
+            return coupon5;
+        }
+        set
+        {
+            coupon5 = value;
+        }
+    }
+
+    public int Coupon6
+    {
+        get
+        {
+            return coupon6;
+        }
+        set
+        {
+            coupon6 = value;
+        }
+    }
+
+    public int Coupon7
+    {
+        get
+        {
+            return coupon7;
+        }
+        set
+        {
+            coupon7 = value;
+        }
+    }
+
+    public int Coupon8
+    {
+        get
+        {
+            return coupon8;
+        }
+        set
+        {
+            coupon8 = value;
+        }
+    }
+
+    public int Coupon9
+    {
+        get
+        {
+            return coupon9;
+        }
+        set
+        {
+            coupon9 = value;
+        }
+    }
+
+    public int Coupon10
+    {
+        get
+        {
+            return coupon10;
+        }
+        set
+        {
+            coupon10 = value;
+        }
+    }
+
     public string AttendanceDay
     {
         get
@@ -2498,6 +2669,19 @@ public class PlayerDataBase : ScriptableObject
         treasure4 = 0;
         treasure5 = 0;
         treasure6 = 0;
+        treasure7 = 0;
+        treasure8 = 0;
+        treasure9 = 0;
+
+        treasure1Count = 0;
+        treasure2Count = 0;
+        treasure3Count = 0;
+        treasure4Count = 0;
+        treasure5Count = 0;
+        treasure6Count = 0;
+        treasure7Count = 0;
+        treasure8Count = 0;
+        treasure9Count = 0;
 
         character1 = 0;
         character2 = 0;
@@ -2580,15 +2764,16 @@ public class PlayerDataBase : ScriptableObject
         island9 = 0;
         island10 = 0;
 
-        gourmetLevel = 0;
+        questCount = 0;
+        reincarnationCount = 0;
+        buffCount = 0;
+        consumeGold = 0;
+
         upgradeCount = 0;
         sellCount = 0;
         useSources = 0;
         openChestBox = 0;
-        feverModeCount = 0;
-        questCount = 0;
-        reincarnationCount = 0;
-        buffCount = 0;
+        yummyTimeCount = 0;
 
         rankLevel1 = 0;
         rankLevel2 = 0;
@@ -2622,6 +2807,7 @@ public class PlayerDataBase : ScriptableObject
         coupon2 = 0;
         coupon3 = 0;
         coupon4 = 0;
+        coupon5 = 0;
 
         attendanceDay = "";
         attendanceCount = 0;

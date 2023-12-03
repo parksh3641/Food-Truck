@@ -12,6 +12,7 @@ public class QuestManager : MonoBehaviour
 
     public Text questTitleText;
     public Text questInfoText;
+    public Text questClearValueText;
 
     public GameObject lockedObj;
     public GameObject lockedAdObj;
@@ -19,6 +20,7 @@ public class QuestManager : MonoBehaviour
     public GameObject clearAdObj;
 
     private int value = 0;
+    private int reward = 0;
 
     private bool isDelay = false;
 
@@ -65,6 +67,10 @@ public class QuestManager : MonoBehaviour
         questTitleText.text = LocalizationManager.instance.GetString("Quest");
         questTitleText.text += " " + (playerDataBase.QuestCount + 1).ToString();
 
+        reward = questDataBase.reward;
+
+        questClearValueText.text = MoneyUnitString.ToCurrencyString(reward);
+
         if (!GameStateManager.instance.DailyQuestReward)
         {
             questType = QuestType.UpgradeCount + (playerDataBase.QuestCount % 5);
@@ -91,19 +97,19 @@ public class QuestManager : MonoBehaviour
         switch (questType)
         {
             case QuestType.UpgradeCount:
-                value = playerDataBase.UpgradeCount;
+                value = GameStateManager.instance.UpgradeCount;
                 break;
             case QuestType.SellCount:
-                value = playerDataBase.SellCount;
+                value = GameStateManager.instance.SellCount;
                 break;
             case QuestType.UseSources:
-                value = playerDataBase.UseSources;
+                value = GameStateManager.instance.UseSauce;
                 break;
             case QuestType.OpenChestBox:
-                value = playerDataBase.OpenChestBox;
+                value = GameStateManager.instance.OpenChestBox;
                 break;
             case QuestType.YummyTime:
-                value = playerDataBase.FeverModeCount;
+                value = GameStateManager.instance.YummyTimeCount;
                 break;
         }
 
@@ -121,19 +127,19 @@ public class QuestManager : MonoBehaviour
         switch (questType)
         {
             case QuestType.UpgradeCount:
-                value = playerDataBase.UpgradeCount;
+                value = GameStateManager.instance.UpgradeCount;
                 break;
             case QuestType.SellCount:
-                value = playerDataBase.SellCount;
+                value = GameStateManager.instance.SellCount;
                 break;
             case QuestType.UseSources:
-                value = playerDataBase.UseSources;
+                value = GameStateManager.instance.UseSauce;
                 break;
             case QuestType.OpenChestBox:
-                value = playerDataBase.OpenChestBox;
+                value = GameStateManager.instance.OpenChestBox;
                 break;
             case QuestType.YummyTime:
-                value = playerDataBase.FeverModeCount;
+                value = GameStateManager.instance.YummyTimeCount;
                 break;
         }
 
@@ -161,7 +167,7 @@ public class QuestManager : MonoBehaviour
         playerDataBase.QuestCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);
 
-        PlayfabManager.instance.UpdateAddGold(1000000);
+        PlayfabManager.instance.UpdateAddGold(reward);
 
         NotionManager.instance.UseNotion(NotionType.QuestNotion);
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
@@ -226,7 +232,7 @@ public class QuestManager : MonoBehaviour
             number = 10;
         }
 
-        PlayfabManager.instance.UpdateAddGold(1000000 * number);
+        PlayfabManager.instance.UpdateAddGold(reward * number);
 
         NotionManager.instance.UseNotion(NotionType.QuestNotion);
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);

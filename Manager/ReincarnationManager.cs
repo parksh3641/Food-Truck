@@ -66,7 +66,7 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.IslandNumber > 0)
         {
-            crystal += 100;
+            crystal += 5;
 
             if(playerDataBase.NextFoodNumber2 > 0)
             {
@@ -75,49 +75,47 @@ public class ReincarnationManager : MonoBehaviour
 
             if (playerDataBase.NextFoodNumber2 > 1)
             {
-                crystal += 7;
+                crystal += 1;
             }
 
             if (playerDataBase.NextFoodNumber2 > 2)
             {
-                crystal += 8;
+                crystal += 1;
             }
 
             if (playerDataBase.NextFoodNumber2 > 3)
             {
-                crystal += 32;
+                crystal += 2;
             }
 
             if (playerDataBase.NextFoodNumber2 > 4)
             {
-                crystal += 33;
+                crystal += 2;
             }
 
             if (playerDataBase.NextFoodNumber2 > 5)
             {
-                crystal += 53;
+                crystal += 6;
             }
 
             if (playerDataBase.NextFoodNumber2 > 6)
             {
-                crystal += 53;
+                crystal += 6;
             }
 
             if (playerDataBase.NextFoodNumber2 > 7)
             {
-                crystal += 96;
+                crystal += 6;
             }
 
             if (playerDataBase.NextFoodNumber2 > 8)
             {
-                crystal += 157;
+                crystal += 15;
             }
 
 
             buttonLockedObj.SetActive(false);
         }
-
-        crystal /= 5;
 
         passiveText.text = crystal.ToString() + " (+" + (playerDataBase.Skill11 * 0.5f).ToString() + "%)";
 

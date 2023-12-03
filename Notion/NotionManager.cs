@@ -193,5 +193,6 @@ public enum NotionType
     UseItem,
     PortionInfo6,
     UsePortionNotion6,
-    SuccessUpgradeX2
+    SuccessUpgradeX2,
+    FailGetItem
 }

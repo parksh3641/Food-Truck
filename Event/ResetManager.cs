@@ -17,7 +17,7 @@ public class ResetManager : MonoBehaviour
 
     public ShopManager shopManager;
 
-    //public AttendanceManager attendanceManager;
+    public AttendanceManager attendanceManager;
     //public EventManager eventManager;
 
     PlayerDataBase playerDataBase;
@@ -57,11 +57,18 @@ public class ResetManager : MonoBehaviour
 
             GameStateManager.instance.DailyReward = false;
             GameStateManager.instance.DailyReward_Portion = false;
+            GameStateManager.instance.DailyReward_DefTicket = false;
             GameStateManager.instance.DailyAdsReward = false;
             GameStateManager.instance.DailyAdsReward2 = false;
             GameStateManager.instance.DailyCastleReward = false;
             GameStateManager.instance.DailyQuestReward = false;
             GameStateManager.instance.DailyTreasureReward = false;
+
+            GameStateManager.instance.UpgradeCount = 0;
+            GameStateManager.instance.SellCount = 0;
+            GameStateManager.instance.UseSauce = 0;
+            GameStateManager.instance.OpenChestBox = 0;
+            GameStateManager.instance.YummyTimeCount = 0;
 
             GameStateManager.instance.ChestBoxCount = 0;
 
@@ -84,7 +91,7 @@ public class ResetManager : MonoBehaviour
 
                 shopManager.SetAlarm();
 
-                //attendanceManager.OnSetAlarm();
+                attendanceManager.OnSetAlarm();
             }
 
             //if(playerDataBase.WelcomeCheck)
@@ -108,11 +115,18 @@ public class ResetManager : MonoBehaviour
 
                 GameStateManager.instance.DailyReward = false;
                 GameStateManager.instance.DailyReward_Portion = false;
+                GameStateManager.instance.DailyReward_DefTicket = false;
                 GameStateManager.instance.DailyAdsReward = false;
                 GameStateManager.instance.DailyAdsReward2 = false;
                 GameStateManager.instance.DailyCastleReward = false;
                 GameStateManager.instance.DailyQuestReward = false;
                 GameStateManager.instance.DailyTreasureReward = false;
+
+                GameStateManager.instance.UpgradeCount = 0;
+                GameStateManager.instance.SellCount = 0;
+                GameStateManager.instance.UseSauce = 0;
+                GameStateManager.instance.OpenChestBox = 0;
+                GameStateManager.instance.YummyTimeCount = 0;
 
                 GameStateManager.instance.ChestBoxCount = 0;
 
@@ -135,7 +149,7 @@ public class ResetManager : MonoBehaviour
 
                     shopManager.SetAlarm();
 
-                    //attendanceManager.OnSetAlarm();
+                    attendanceManager.OnSetAlarm();
                 }
 
                 //if (playerDataBase.WelcomeCheck)

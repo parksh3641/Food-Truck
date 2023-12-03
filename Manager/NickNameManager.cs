@@ -12,6 +12,8 @@ public class NickNameManager : MonoBehaviour
     public Text signText;
 
     public GameObject closeButton;
+    public GameObject buyFreeButton;
+    public GameObject buyCoinButton;
 
     public InputField inputField;
 
@@ -44,6 +46,15 @@ public class NickNameManager : MonoBehaviour
         nickNameView.SetActive(false);
     }
 
+    public void OpenFreeNickName()
+    {
+        nickNameView.SetActive(true);
+
+        closeButton.SetActive(false);
+        buyFreeButton.SetActive(true);
+        buyCoinButton.SetActive(false);
+    }    
+
     public void OpenNickName()
     {
         if (!nickNameView.activeSelf)
@@ -51,14 +62,17 @@ public class NickNameManager : MonoBehaviour
             inputField.text = "";
 
             nickNameView.SetActive(true);
+
             closeButton.SetActive(true);
+            buyFreeButton.SetActive(false);
+            buyCoinButton.SetActive(true);
         }
         else
         {
             nickNameView.SetActive(false);
         }
     }
-    public void CheckNickName()
+    public void CheckNickName(int number)
     {
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
@@ -67,14 +81,17 @@ public class NickNameManager : MonoBehaviour
             return;
         }
 
+#if !UNITY_EDITOR
         for (int i = 0; i < lines.Length; i++)
         {
             if (inputField.text.Contains(lines[i]))
             {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.SignNotion3);
                 return;
             }
         }
+#endif
 
         string Check = Regex.Replace(inputField.text, @"[^a-zA-Z0-9가-힣]", "", RegexOptions.Singleline);
 
@@ -96,6 +113,20 @@ public class NickNameManager : MonoBehaviour
             {
                 if (!(newNickName.Equals(oldNickName)))
                 {
+                    if (number == 1)
+                    {
+                        if (playerDataBase.Coin >= 1000000)
+                        {
+                            PlayfabManager.instance.UpdateSubtractGold(1000000);
+                        }
+                        else
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+                            return;
+                        }
+                    }
+
                     PlayfabManager.instance.UpdateDisplayName(newNickName, Success, Failure);
                 }
                 else

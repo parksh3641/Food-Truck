@@ -71,7 +71,7 @@ public class TutorialManager : MonoBehaviour
 
                 if (GameStateManager.instance.NickName.Length > 15)
                 {
-                    nameManager.nickNameView.SetActive(true);
+                    nameManager.OpenFreeNickName();
                 }
 
                 GameStateManager.instance.Tutorial = true;

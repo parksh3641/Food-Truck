@@ -101,10 +101,10 @@ public class ShopContent : MonoBehaviour
         switch (itemType)
         {
             case ItemType.DailyReward:
-                rewardText.text = MoneyUnitString.ToCurrencyString(1000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(100000);
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = MoneyUnitString.ToCurrencyString(3000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(200000) + " ~\n" + MoneyUnitString.ToCurrencyString(1000000);
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
@@ -189,9 +189,6 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
-                bestObj.SetActive(true);
-                bestText.text = "BEST";
-
                 break;
             case ItemType.PortionSet3:
                 lockedObj.SetActive(false);
@@ -202,6 +199,9 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
+
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
 
                 break;
             case ItemType.DailyReward_Portion:
@@ -238,8 +238,6 @@ public class ShopContent : MonoBehaviour
 
                 rewardText.text = "500";
 
-                bestObj.SetActive(true);
-                bestText.text = "BEST";
                 break;
             case ItemType.CrystalShop3:
                 lockedObj.SetActive(false);
@@ -249,6 +247,9 @@ public class ShopContent : MonoBehaviour
                 buyRmText[10].ReLoad();
 
                 rewardText.text = "1,200";
+
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
                 break;
             case ItemType.CrystalShop4:
                 lockedObj.SetActive(false);
@@ -268,8 +269,6 @@ public class ShopContent : MonoBehaviour
 
                 rewardText.text = "6,500";
 
-                bestObj.SetActive(true);
-                bestText.text = "BEST";
                 break;
             case ItemType.CrystalShop6:
                 lockedObj.SetActive(false);
@@ -283,7 +282,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion1:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(5);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(3);
 
                 titleText.plusText = " x1";
 
@@ -294,7 +293,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion2:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(20);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
 
                 titleText.plusText = " x1";
 
@@ -305,7 +304,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion3:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(20);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
 
                 titleText.plusText = " x1";
 
@@ -316,7 +315,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion4:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(5);
 
                 titleText.plusText = " x1";
 
@@ -327,7 +326,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion5:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(20);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
 
                 titleText.plusText = " x1";
 
@@ -343,6 +342,9 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = "HoldPiece";
                 infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece + "/10";
                 infoText.ReLoad();
+                break;
+            case ItemType.DefDestroyTicketPiece:
+                rewardText.text = "x1";
                 break;
         }
 

@@ -7,13 +7,9 @@ public class EventManager : MonoBehaviour
 {
     public GameObject eventView;
 
-    public GameObject alarmObj;
-
     private void Awake()
     {
         eventView.SetActive(false);
-
-        alarmObj.SetActive(true);
     }
 
     public void OpenEventView()
@@ -21,7 +17,6 @@ public class EventManager : MonoBehaviour
         if (!eventView.activeInHierarchy)
         {
             eventView.SetActive(true);
-            alarmObj.SetActive(false);
 
             FirebaseAnalytics.LogEvent("OpenEvent");
         }

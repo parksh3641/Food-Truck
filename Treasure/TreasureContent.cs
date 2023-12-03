@@ -12,6 +12,9 @@ public class TreasureContent : MonoBehaviour
     public Text levelText;
     public Text infoText;
     public Text effectText;
+    public Text upgradePercentText;
+
+
     public Text upgradeText;
 
     public Sprite[] upgradeImgArray;
@@ -23,6 +26,9 @@ public class TreasureContent : MonoBehaviour
     private int level = 0;
     private int maxLevel = 100;
 
+    private int percent = 100;
+    private bool success = false;
+
     private float nowValue = 0;
     private float nextValue = 0;
 
@@ -31,10 +37,13 @@ public class TreasureContent : MonoBehaviour
 
     private float treasure1Value = 0.2f;
     private float treasure2Value = 0.1f;
-    private float treasure3Value = 0.1f;
+    private float treasure3Value = 0.2f;
     private float treasure4Value = 0.3f;
     private float treasure5Value = 1f;
     private float treasure6Value = 0.5f;
+    private float treasure7Value = 0.5f;
+    private float treasure8Value = 0.5f;
+    private float treasure9Value = 0.5f;
 
     Sprite[] treasureArray;
 
@@ -56,6 +65,8 @@ public class TreasureContent : MonoBehaviour
         treasureType = type;
         treasureManager = manager;
 
+        percent = 100 - (((level + 1) / 10) * 10);
+
         icon.sprite = treasureArray[(int)type];
 
         titleText.text = LocalizationManager.instance.GetString(type.ToString());
@@ -70,11 +81,11 @@ public class TreasureContent : MonoBehaviour
                 nowValue = treasure1Value * playerDataBase.Treasure1;
                 need = (playerDataBase.Treasure1 / 10) + 1;
 
-                if(playerDataBase.Treasure1 < maxLevel - 1)
+                if (playerDataBase.Treasure1 < maxLevel - 1)
                 {
                     nextValue = treasure1Value * (playerDataBase.Treasure1 + 1);
 
-                    if(count >= need)
+                    if (count >= need)
                     {
                         check = 1;
                     }
@@ -198,6 +209,72 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
                 break;
+            case TreasureType.Treasure7:
+                count = playerDataBase.Treasure7Count;
+                level = playerDataBase.Treasure7;
+                nowValue = treasure7Value * playerDataBase.Treasure7;
+                need = (playerDataBase.Treasure7 / 10) + 1;
+
+                if (playerDataBase.Treasure7 < maxLevel - 1)
+                {
+                    nextValue = treasure7Value * (playerDataBase.Treasure7 + 1);
+
+                    if (count >= need)
+                    {
+                        check = 1;
+                    }
+                }
+                else
+                {
+                    nextValue = 0;
+
+                    check = 2;
+                }
+                break;
+            case TreasureType.Treasure8:
+                count = playerDataBase.Treasure8Count;
+                level = playerDataBase.Treasure8;
+                nowValue = treasure8Value * playerDataBase.Treasure8;
+                need = (playerDataBase.Treasure8 / 10) + 1;
+
+                if (playerDataBase.Treasure8 < maxLevel - 1)
+                {
+                    nextValue = treasure8Value * (playerDataBase.Treasure8 + 1);
+
+                    if (count >= need)
+                    {
+                        check = 1;
+                    }
+                }
+                else
+                {
+                    nextValue = 0;
+
+                    check = 2;
+                }
+                break;
+            case TreasureType.Treasure9:
+                count = playerDataBase.Treasure9Count;
+                level = playerDataBase.Treasure9;
+                nowValue = treasure9Value * playerDataBase.Treasure9;
+                need = (playerDataBase.Treasure9 / 10) + 1;
+
+                if (playerDataBase.Treasure9 < maxLevel - 1)
+                {
+                    nextValue = treasure9Value * (playerDataBase.Treasure9 + 1);
+
+                    if (count >= need)
+                    {
+                        check = 1;
+                    }
+                }
+                else
+                {
+                    nextValue = 0;
+
+                    check = 2;
+                }
+                break;
         }
 
         levelText.text = "Lv. " + level + " / " + maxLevel;
@@ -205,6 +282,8 @@ public class TreasureContent : MonoBehaviour
         infoText.text = LocalizationManager.instance.GetString(type.ToString() + "_Info");
 
         effectText.text = nowValue.ToString("N1") + "%  ▶  " + nextValue.ToString("N1") + "%";
+
+        upgradePercentText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + percent.ToString() + "%";
 
         upgradeText.text = LocalizationManager.instance.GetString("Upgrade") + "\n" + count + " / " + need;
 
@@ -243,56 +322,116 @@ public class TreasureContent : MonoBehaviour
                 return;
         }
 
+        if (percent >= Random.Range(0, 100))
+        {
+            success = true;
+
+            SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+            NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+        }
+        else
+        {
+            success = false;
+
+            SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
+            NotionManager.instance.UseNotion(NotionType.FailUpgrade);
+        }
+
         switch (treasureType)
         {
             case TreasureType.Treasure1:
                 playerDataBase.Treasure1Count -= need;
-                playerDataBase.Treasure1 += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure1Count", playerDataBase.Treasure1Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure1", playerDataBase.Treasure1);
+
+                if (success)
+                {
+                    playerDataBase.Treasure1 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure1", playerDataBase.Treasure1);
+                }
                 break;
             case TreasureType.Treasure2:
                 playerDataBase.Treasure2Count -= need;
-                playerDataBase.Treasure2 += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure2Count", playerDataBase.Treasure2Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure2", playerDataBase.Treasure2);
+
+                if (success)
+                {
+                    playerDataBase.Treasure2 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure2", playerDataBase.Treasure2);
+                }
                 break;
             case TreasureType.Treasure3:
                 playerDataBase.Treasure3Count -= need;
-                playerDataBase.Treasure3 += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure3Count", playerDataBase.Treasure3Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure3", playerDataBase.Treasure3);
+
+                if (success)
+                {
+                    playerDataBase.Treasure3 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure3", playerDataBase.Treasure3);
+                }
                 break;
             case TreasureType.Treasure4:
                 playerDataBase.Treasure4Count -= need;
-                playerDataBase.Treasure4 += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure4Count", playerDataBase.Treasure4Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure4", playerDataBase.Treasure4);
+
+                if (success)
+                {
+                    playerDataBase.Treasure4 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure4", playerDataBase.Treasure4);
+                }
                 break;
             case TreasureType.Treasure5:
                 playerDataBase.Treasure5Count -= need;
-                playerDataBase.Treasure5 += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure5Count", playerDataBase.Treasure5Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure5", playerDataBase.Treasure5);
+
+                if (success)
+                {
+                    playerDataBase.Treasure5 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure5", playerDataBase.Treasure5);
+                }
                 break;
             case TreasureType.Treasure6:
                 playerDataBase.Treasure6Count -= need;
-                playerDataBase.Treasure6 += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure6Count", playerDataBase.Treasure6Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure6", playerDataBase.Treasure6);
+
+                if (success)
+                {
+                    playerDataBase.Treasure6 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure6", playerDataBase.Treasure6);
+                }
+                break;
+            case TreasureType.Treasure7:
+                playerDataBase.Treasure7Count -= need;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure7Count", playerDataBase.Treasure7Count);
+
+                if (success)
+                {
+                    playerDataBase.Treasure7 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure7", playerDataBase.Treasure7);
+                }
+                break;
+            case TreasureType.Treasure8:
+                playerDataBase.Treasure8Count -= need;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure8Count", playerDataBase.Treasure8Count);
+
+                if (success)
+                {
+                    playerDataBase.Treasure8 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure8", playerDataBase.Treasure8);
+                }
+                break;
+            case TreasureType.Treasure9:
+                playerDataBase.Treasure9Count -= need;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure9Count", playerDataBase.Treasure9Count);
+
+                if (success)
+                {
+                    playerDataBase.Treasure9 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure9", playerDataBase.Treasure9);
+                }
                 break;
         }
 
         Initialize(treasureType, treasureManager);
-
-        SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
-        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
 
         isDelay = true;
         Invoke("Delay", 0.3f);

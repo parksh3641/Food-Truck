@@ -15,18 +15,21 @@ public class BuffManager : MonoBehaviour
     public GameObject buff1Obj;
     public Text buff1Text;
 
-
     public GameObject buff2Obj;
     public Text buff2Text;
 
+    public GameObject buff3Obj;
+    public Text buff3Text;
 
     private bool buff1;
     private bool buff2;
+    private bool buff3;
 
     private int time = 600;
 
     private int buff1Time = 0;
     private int buff2Time = 0;
+    private int buff3Time = 0;
 
     private int index = 0;
 
@@ -45,9 +48,11 @@ public class BuffManager : MonoBehaviour
 
         buff1Obj.SetActive(false);
         buff2Obj.SetActive(false);
+        buff3Obj.SetActive(false);
 
         buff1 = false;
         buff2 = false;
+        buff3 = false;
 
         buffView.SetActive(false);
     }
@@ -64,13 +69,17 @@ public class BuffManager : MonoBehaviour
             buffTicketsText.text = LocalizationManager.instance.GetString("BuffTicket") + "\n<size=10>" + 
                 LocalizationManager.instance.GetString("Hold") + " : " + playerDataBase.BuffTickets + "</size>";
 
-            if (number == 0)
+            switch(number)
             {
-                infoText.localizationName = "AdRewad_SellPrice";
-            }
-            else
-            {
-                infoText.localizationName = "AdReward_DefDestroy";
+                case 0:
+                    infoText.localizationName = "AdReward_Buff1";
+                    break;
+                case 1:
+                    infoText.localizationName = "AdReward_Buff2";
+                    break;
+                case 2:
+                    infoText.localizationName = "AdReward_Buff3";
+                    break;
             }
 
             infoText.ReLoad();
@@ -105,13 +114,17 @@ public class BuffManager : MonoBehaviour
 
     public void WatchAd()
     {
-        if (index == 0)
+        switch(index)
         {
-            GoogleAdsManager.instance.admobReward_SellPriceTime.ShowAd(3);
-        }
-        else
-        {
-            GoogleAdsManager.instance.admobReward_DefDestroyTime.ShowAd(3);
+            case 0:
+                GoogleAdsManager.instance.admobReward_SellPriceTime.ShowAd(3);
+                break;
+            case 1:
+                GoogleAdsManager.instance.admobReward_DefDestroyTime.ShowAd(3);
+                break;
+            case 2:
+                GoogleAdsManager.instance.admobReward_Buff3.ShowAd(3);
+                break;
         }
     }
 
@@ -119,39 +132,51 @@ public class BuffManager : MonoBehaviour
     {
         buffView.SetActive(false);
 
-        if (index == 0)
+        switch(index)
         {
-            if (buff1) return;
+            case 0:
+                if (buff1) return;
 
-            buff1 = true;
-            buff1Time = time;
+                buff1 = true;
+                buff1Time = time;
 
-            buff1Obj.SetActive(true);
-            StartCoroutine(Buff1Coroution());
+                buff1Obj.SetActive(true);
+                StartCoroutine(Buff1Coroution());
 
-            gameManager.OnBuff(0);
+                gameManager.OnBuff(0);
 
-            FirebaseAnalytics.LogEvent("UseBuff1");
-        }
-        else
-        {
-            if (buff2) return;
+                FirebaseAnalytics.LogEvent("UseBuff1");
+                break;
+            case 1:
+                if (buff2) return;
 
-            buff2 = true;
-            buff2Time = time;
+                buff2 = true;
+                buff2Time = time;
 
-            buff2Obj.SetActive(true);
-            StartCoroutine(Buff2Coroution());
+                buff2Obj.SetActive(true);
+                StartCoroutine(Buff2Coroution());
 
-            gameManager.OnBuff(1);
+                gameManager.OnBuff(1);
 
-            FirebaseAnalytics.LogEvent("UseBuff2");
+                FirebaseAnalytics.LogEvent("UseBuff2");
+                break;
+            case 2:
+                if (buff3) return;
+
+                buff3 = true;
+                buff3Time = time;
+
+                buff3Obj.SetActive(true);
+                StartCoroutine(Buff3Coroution());
+
+                gameManager.OnBuff(2);
+
+                FirebaseAnalytics.LogEvent("UseBuff3");
+                break;
         }
 
         playerDataBase.BuffCount += 1;
-
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffCount", playerDataBase.BuffCount);
-
         GameStateManager.instance.Pause = false;
     }
 
@@ -215,5 +240,32 @@ public class BuffManager : MonoBehaviour
         yield return waitForSeconds;
 
         StartCoroutine(Buff2Coroution());
+    }
+
+    IEnumerator Buff3Coroution()
+    {
+        if (buff3Time > 0)
+        {
+            if (!GameStateManager.instance.Pause)
+            {
+                buff3Time -= 1;
+            }
+        }
+        else
+        {
+            buff3 = false;
+
+            buff3Obj.SetActive(false);
+
+            gameManager.OffBuff(2);
+
+            yield break;
+        }
+
+        buff3Text.text = (buff3Time / 60 % 60).ToString("D2") + ":" + (buff3Time % 60).ToString("D2");
+
+        yield return waitForSeconds;
+
+        StartCoroutine(Buff3Coroution());
     }
 }

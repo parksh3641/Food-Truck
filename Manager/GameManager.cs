@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameObject checkUpdate;
+    public GameObject rankingNoticeView;
+    public GameObject rankingNoticeButton;
 
     public CameraController cameraController;
 
@@ -45,6 +47,20 @@ public class GameManager : MonoBehaviour
     public GameObject testModeButton;
     public Text testModeText;
     public GameObject testMode;
+
+    [Space]
+    [Title("Buff")]
+    public Text buff1Text;
+    public Text buff2Text;
+    public Text buff3Text;
+
+    private int buff1Value = 50;
+    private int buff2Value = 10;
+    private int buff3Value = 5;
+
+    private bool buff1 = false;
+    private bool buff2 = false;
+    private bool buff3 = false;
 
     [Space]
     [Title("Christmas")]
@@ -150,14 +166,13 @@ public class GameManager : MonoBehaviour
 
     public int level = 0;
     public int nextLevel = 0;
-
     private int maxLevel = 0;
+    private int playTime = 0;
 
     public bool isDelay_Camera = false;
-    public bool isDelay = false;
+    public bool isUpgradeDelay = false;
+    public bool isSellDelay = false;
     public bool isDef = false;
-    private bool buff1 = false;
-    private bool buff2 = false;
 
     private bool feverMode = false;
 
@@ -215,6 +230,7 @@ public class GameManager : MonoBehaviour
     LevelDataBase levelDataBase;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
+    WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
 
     private void Awake()
     {
@@ -242,6 +258,7 @@ public class GameManager : MonoBehaviour
         deleteAccountView.SetActive(false);
         appReview.SetActive(false);
         checkInternet.SetActive(false);
+        rankingNoticeView.SetActive(false);
 
         loginButtonArray[0].SetActive(false);
         loginButtonArray[1].SetActive(false);
@@ -250,7 +267,7 @@ public class GameManager : MonoBehaviour
         mainUI.SetActive(true);
         inGameUI.SetActive(false);
 
-        isDelay = false;
+        isUpgradeDelay = false;
         isDef = false;
 
         checkMark.SetActive(false);
@@ -345,6 +362,10 @@ public class GameManager : MonoBehaviour
 
     public void SuccessLogin()
     {
+        buff1Text.text = "+" + buff1Value.ToString() + "%";
+        buff2Text.text = "+" + buff2Value.ToString() + "%";
+        buff3Text.text = "+" + buff3Value.ToString() + "%";
+
         removeAds.SetActive(false);
         goldx2.SetActive(false);
 
@@ -416,6 +437,9 @@ public class GameManager : MonoBehaviour
 
             GameStateManager.instance.AppReview = true;
         }
+
+        playTime = 0;
+        StartCoroutine(PlayTimeCoroution());
     }
 
     void CheckFood()
@@ -621,6 +645,23 @@ public class GameManager : MonoBehaviour
         CheckPortion();
     }
 
+    IEnumerator PlayTimeCoroution()
+    {
+        if(playTime >= 60)
+        {
+            playTime = 0;
+            playerDataBase.PlayTime += 1;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("PlayTime", playerDataBase.PlayTime);
+        }
+        else
+        {
+            playTime += 1;
+        }
+
+        yield return waitForSeconds;
+        StartCoroutine(PlayTimeCoroution());
+    }
+
     void CheckCoupon(bool check)
     {
 #if UNITY_EDITOR || UNITY_ANDROID
@@ -667,6 +708,8 @@ public class GameManager : MonoBehaviour
 
         isDelay_Camera = false;
 
+        rankingNoticeButton.SetActive(false);
+
         GameStateManager.instance.GameType = GameType.Story + number;
 
         if(GameStateManager.instance.GameType == GameType.Story)
@@ -695,6 +738,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            rankingNoticeButton.SetActive(true);
+
             switch (GameStateManager.instance.IslandType)
             {
                 case IslandType.Island1:
@@ -707,6 +752,13 @@ public class GameManager : MonoBehaviour
                     break;
                 case IslandType.Island4:
                     break;
+            }
+
+            if(!GameStateManager.instance.RankingNotice)
+            {
+                OpenRankingNoticeView();
+
+                GameStateManager.instance.RankingNotice = true;
             }
 
             FirebaseAnalytics.LogEvent("RankingMode");
@@ -740,11 +792,7 @@ public class GameManager : MonoBehaviour
 
         successX2 += playerDataBase.Treasure3 * 0.2f;
 
-        if (GameStateManager.instance.TruckType > TruckType.Bread)
-        {
-            sellPricePlus += truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
-        }
-
+        sellPricePlus += truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
         sellPricePlus += playerDataBase.Skill8 * 0.3f;
         sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.5f;
@@ -752,16 +800,9 @@ public class GameManager : MonoBehaviour
         sellPriceTip += playerDataBase.Skill14 * 0.3f; //ÆÁ È®·ü
         sellPriceTip += playerDataBase.Treasure8 * 0.5f;
 
-        if (GameStateManager.instance.AnimalType > AnimalType.Colobus)
-        {
-            expUp += (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType);
-        }
+        expUp += (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType);
 
-        if (GameStateManager.instance.ButterflyType > ButterflyType.Butterfly1)
-        {
-            defDestroy += butterflyDataBase.GetButterflyEffect(GameStateManager.instance.ButterflyType);
-        }
-
+        defDestroy += butterflyDataBase.GetButterflyEffect(GameStateManager.instance.ButterflyType);
         defDestroy += playerDataBase.Skill9 * 0.05f;
         defDestroy += playerDataBase.Treasure2 * 0.1f;
 
@@ -818,12 +859,17 @@ public class GameManager : MonoBehaviour
 
         if (buff1)
         {
-            sellPricePlus += 50;
+            sellPricePlus += buff1Value;
         }
 
         if (buff2)
         {
-            defDestroy += 10;
+            defDestroy += buff2Value;
+        }
+
+        if (buff3)
+        {
+            successX2 += buff3Value;
         }
 
         CheckFever();
@@ -844,23 +890,19 @@ public class GameManager : MonoBehaviour
         if (playerDataBase.Exp > nowExp)
         {
             nowExp = playerDataBase.Exp;
-
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
-
             levelManager.Initialize();
         }
 
         if (playerDataBase.UpgradeCount > nowUpgradeCount)
         {
             nowUpgradeCount = playerDataBase.UpgradeCount;
-
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
         }
 
         if (playerDataBase.SellCount > nowSellCount)
         {
             nowSellCount = playerDataBase.SellCount;
-
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("SellCount", playerDataBase.SellCount);
         }
 
@@ -871,21 +913,18 @@ public class GameManager : MonoBehaviour
             if (GameStateManager.instance.RibsLevel + 1 > playerDataBase.RankLevel1)
             {
                 playerDataBase.RankLevel1 = GameStateManager.instance.RibsLevel + 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel1", playerDataBase.RankLevel1);
             }
 
             if (GameStateManager.instance.ChocolateLevel + 1 > playerDataBase.RankLevel2)
             {
                 playerDataBase.RankLevel2 = GameStateManager.instance.ChocolateLevel + 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel2", playerDataBase.RankLevel2);
             }
 
             if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 > playerDataBase.TotalLevel)
             {
                 playerDataBase.TotalLevel = playerDataBase.RankLevel1 + playerDataBase.RankLevel2;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
             }
         }
@@ -1154,7 +1193,6 @@ public class GameManager : MonoBehaviour
         }
 
         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
-
         successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
 
         CheckDefTicket();
@@ -1912,7 +1950,7 @@ public class GameManager : MonoBehaviour
 
     public void UpgradeButton()
     {
-        if (isDelay) return;
+        if (isUpgradeDelay) return;
 
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
@@ -2218,8 +2256,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        isDelay = true;
-        Invoke("WaitDelay", 0.4f);
+        isUpgradeDelay = true;
+        Invoke("WaitUpgradeDelay", 0.4f);
     }
 
     void DestoryFood()
@@ -2950,7 +2988,7 @@ public class GameManager : MonoBehaviour
 
     public void SellButton()
     {
-        if (isDelay) return;
+        if (isSellDelay) return;
 
         if (level == 0) return;
 
@@ -3072,8 +3110,8 @@ public class GameManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Sell);
 
-        isDelay = true;
-        Invoke("WaitDelay", 0.4f);
+        isSellDelay = true;
+        Invoke("WaitSellDelay", 0.4f);
     }
 
     public void CheckDefTicket()
@@ -3556,37 +3594,51 @@ public class GameManager : MonoBehaviour
 
     public void OnBuff(int number)
     {
-        if(number == 0)
+        switch(number)
         {
-            buff1 = true;
+            case 0:
+                buff1 = true;
 
-            sellPricePlus += 50;
-            UpgradeInitialize();
-        }
-        else
-        {
-            buff2 = true;
+                sellPricePlus += buff1Value;
+                UpgradeInitialize();
+                break;
+            case 1:
+                buff2 = true;
 
-            defDestroy += 10;
-            defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
+                defDestroy += buff2Value;
+                defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
+                break;
+            case 2:
+                buff2 = true;
+
+                successX2 += buff3Value;
+                successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
+                break;
         }
     }
 
     public void OffBuff(int number)
     {
-        if (number == 0)
+        switch (number)
         {
-            buff1 = false;
+            case 0:
+                buff1 = false;
 
-            sellPricePlus -= 50;
-            UpgradeInitialize();
-        }
-        else
-        {
-            buff2 = false;
+                sellPricePlus -= buff1Value;
+                UpgradeInitialize();
+                break;
+            case 1:
+                buff2 = false;
 
-            defDestroy -= 10;
-            defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
+                defDestroy -= buff2Value;
+                defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
+                break;
+            case 2:
+                buff3 = false;
+
+                successX2 += buff3Value;
+                successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
+                break;
         }
     }
 
@@ -3733,10 +3785,16 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    void WaitDelay()
+    void WaitUpgradeDelay()
     {
-        isDelay = false;
+        isUpgradeDelay = false;
     }
+
+    void WaitSellDelay()
+    {
+        isSellDelay = false;
+    }
+
 
     void CheckBankruptcy()
     {
@@ -3987,6 +4045,18 @@ public class GameManager : MonoBehaviour
         if (levelDataBase.GetLevel(playerDataBase.Exp) > 4)
         {
             treasureLocked.SetActive(false);
+        }
+    }
+
+    public void OpenRankingNoticeView()
+    {
+        if(!rankingNoticeView.activeInHierarchy)
+        {
+            rankingNoticeView.SetActive(true);
+        }
+        else
+        {
+            rankingNoticeView.SetActive(false);
         }
     }
 }

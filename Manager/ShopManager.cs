@@ -366,7 +366,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
                 }
                 break;
             case ItemType.GoldShop1:
@@ -490,7 +490,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
                 }
                 break;
             case ItemType.Portion2:
@@ -509,7 +509,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
                 }
                 break;
             case ItemType.Portion3:
@@ -528,7 +528,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
                 }
                 break;
             case ItemType.Portion4:
@@ -547,7 +547,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
                 }
                 break;
             case ItemType.Portion5:
@@ -566,7 +566,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
                 }
                 break;
             case ItemType.DefDestroyTicketSlices:

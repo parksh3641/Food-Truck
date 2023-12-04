@@ -267,7 +267,7 @@ public class CouponManager : MonoBehaviour
                     receiveContents[2].Initialize(RewardType.DefDestroyTicket, 3);
                     receiveContents[3].Initialize(RewardType.Portion5, 5);
 
-                    if(playerDataBase.Character21 != 0)
+                    if(playerDataBase.Character21 == 0)
                     {
                         playerDataBase.Character21 = 1;
 

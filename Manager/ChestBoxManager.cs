@@ -120,7 +120,7 @@ public class ChestBoxManager : MonoBehaviour
 
         Debug.LogError(random);
 
-        if (random >= 71)
+        if (random >= 61)
         {
             rewardType = RewardType.Gold;
 

@@ -56,9 +56,9 @@ public class LockManager : MonoBehaviour
         tutorial.SetActive(true);
 
         menuIcon[7].SetActive(true);
+        menuIcon[9].SetActive(true);
         menuIcon[10].SetActive(true);
         menuIcon[11].SetActive(true);
-        menuIcon[12].SetActive(true);
 
         if (playerDataBase.LockTutorial >= 1) //음식 변경
         {
@@ -85,22 +85,21 @@ public class LockManager : MonoBehaviour
         {
             menuIcon[7].SetActive(false);
             menuIcon[8].SetActive(true);
-            menuIcon[9].SetActive(true);
         }
 
         if (playerDataBase.LockTutorial >= 5) //택배 배송 해제
         {
-            menuIcon[10].SetActive(false);
+            menuIcon[9].SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 6) //퀘스트 해제
         {
-            menuIcon[11].SetActive(false);
+            menuIcon[10].SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 7) //챌린지 해제
         {
-            menuIcon[12].SetActive(false);
+            menuIcon[11].SetActive(false);
         }
     }
 

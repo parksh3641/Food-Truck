@@ -37,9 +37,9 @@ public class GameStateManager : MonoBehaviour
         public bool sfx = true;
         public bool vibration = true;
         public bool effect = true;
-        public bool record = false;
         public bool appReview = false;
         public bool developer = false;
+        public bool rankingNotice = false;
 
         [Space]
         [Title("InGame")]
@@ -354,15 +354,15 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public bool Record
+    public bool RankingNotice
     {
         get
         {
-            return gameSettings.record;
+            return gameSettings.rankingNotice;
         }
         set
         {
-            gameSettings.record = value;
+            gameSettings.rankingNotice = value;
             SaveFile();
         }
     }

@@ -165,8 +165,8 @@ public class OfflineManager : MonoBehaviour
         coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "\n/" + localization_Hours + "  (+1000)";
         expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+1)";
 
-        adCoinText.text = MoneyUnitString.ToCurrencyString(addCoin * 6);
-        adExpText.text = MoneyUnitString.ToCurrencyString(addExp * 6);
+        adCoinText.text = MoneyUnitString.ToCurrencyString(addCoin * 12);
+        adExpText.text = MoneyUnitString.ToCurrencyString(addExp * 12);
 
         receiveContents[0].Initialize(RewardType.Gold, saveCoin);
         receiveContents[1].Initialize(RewardType.Exp, saveExp);

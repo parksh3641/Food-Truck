@@ -582,8 +582,10 @@ public class PlayfabManager : MonoBehaviour
 
 #if UNITY_EDITOR || UNITY_EDITOR_OSX
         StartCoroutine(LoadDataCoroutine());
-#else
-        GetTitleInternalData("CheckVersion", CheckVersion);
+#elif UNITY_ANDROID
+        GetTitleInternalData("CheckAOSVersion", CheckVersion);
+#elif UNITY_IOS
+        GetTitleInternalData("CheckIOSVersion", CheckVersion);
 #endif
     }
 
@@ -1212,6 +1214,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Exp":
                            playerDataBase.Exp = statistics.Value;
+                           break;
+                       case "PlayTime":
+                           playerDataBase.PlayTime = statistics.Value;
                            break;
                        case "Michelin":
                            playerDataBase.Michelin = statistics.Value;
@@ -1886,7 +1891,18 @@ public class PlayfabManager : MonoBehaviour
         PlayFabServerAPI.GetTitleInternalData(new PlayFab.ServerModels.GetTitleDataRequest(),
             result =>
             {
-                if (name.Equals("CheckVersion"))
+                if (name.Equals("CheckAOSVersion"))
+                {
+                    if (result.Data[name].Equals("ON"))
+                    {
+                        action?.Invoke(true);
+                    }
+                    else
+                    {
+                        action?.Invoke(false);
+                    }
+                }
+                if (name.Equals("CheckIOSVersion"))
                 {
                     if (result.Data[name].Equals("ON"))
                     {

@@ -16,25 +16,27 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int crystal = 0;
     [SerializeField]
-    private int defDestroyTicket = 0;
-    [SerializeField]
-    private int defDestroyTicketPiece = 0;
+    private int firstReward = 0;
     [SerializeField]
     private int lockTutorial = 0;
     [SerializeField]
-    private int firstReward = 0;
-    [SerializeField]
-    private int islandNumber = 0;
-    [SerializeField]
     private int testAccount = 0;
-    [SerializeField]
-    private int buffTickets = 0;
-    [SerializeField]
-    private int proficiency = 0;
+
+    [Title("Info")]
     [SerializeField]
     private int level = 0;
     [SerializeField]
     private int exp = 0;
+    [SerializeField]
+    private int playTime = 0;
+    [SerializeField]
+    private int consumeGold = 0;
+    [SerializeField]
+    private int islandNumber = 0;
+    [SerializeField]
+    private int buffTickets = 0;
+    [SerializeField]
+    private int proficiency = 0;
     [SerializeField]
     private int michelin = 0;
     [SerializeField]
@@ -45,6 +47,10 @@ public class PlayerDataBase : ScriptableObject
     private string castleDate = "";
     [SerializeField]
     private string castleServerDate = "";
+    [SerializeField]
+    private int defDestroyTicket = 0;
+    [SerializeField]
+    private int defDestroyTicketPiece = 0;
 
     [Space]
     [Title("Daily")]
@@ -77,8 +83,6 @@ public class PlayerDataBase : ScriptableObject
     private int reincarnationCount = 0;
     [SerializeField]
     private int buffCount = 0;
-    [SerializeField]
-    private int consumeGold = 0;
 
     [Space]
     [Title("Quest")]
@@ -605,6 +609,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             exp = value;
+        }
+    }
+
+    public int PlayTime
+    {
+        get
+        {
+            return playTime;
+        }
+        set
+        {
+            playTime = value;
         }
     }
 
@@ -2750,6 +2766,7 @@ public class PlayerDataBase : ScriptableObject
         proficiency = 0;
         level = 0;
         exp = 0;
+        playTime = 0;
         michelin = 0;
         adCount = 0;
         treasureCount = 0;

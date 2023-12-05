@@ -68,51 +68,20 @@ public class ReincarnationManager : MonoBehaviour
         {
             crystal += 5;
 
-            if(playerDataBase.NextFoodNumber2 > 0)
-            {
-                crystal += 1;
-            }
-
-            if (playerDataBase.NextFoodNumber2 > 1)
-            {
-                crystal += 1;
-            }
-
-            if (playerDataBase.NextFoodNumber2 > 2)
-            {
-                crystal += 1;
-            }
-
-            if (playerDataBase.NextFoodNumber2 > 3)
-            {
-                crystal += 2;
-            }
-
-            if (playerDataBase.NextFoodNumber2 > 4)
-            {
-                crystal += 2;
-            }
-
-            if (playerDataBase.NextFoodNumber2 > 5)
-            {
-                crystal += 6;
-            }
-
-            if (playerDataBase.NextFoodNumber2 > 6)
-            {
-                crystal += 6;
-            }
-
             if (playerDataBase.NextFoodNumber2 > 7)
             {
-                crystal += 6;
+                crystal += 30;
             }
 
-            if (playerDataBase.NextFoodNumber2 > 8)
+            if (playerDataBase.NextFoodNumber3 > 5)
             {
-                crystal += 15;
+                crystal += 40;
             }
 
+            if (playerDataBase.NextFoodNumber4 > 7)
+            {
+                crystal += 50;
+            }
 
             buttonLockedObj.SetActive(false);
         }
@@ -173,8 +142,10 @@ public class ReincarnationManager : MonoBehaviour
         }
 
         GameStateManager.instance.IslandType = IslandType.Island1;
-        GameStateManager.instance.FoodType = FoodType.Hamburger;
+        GameStateManager.instance.FoodType = FoodType.Food1;
         GameStateManager.instance.CandyType = CandyType.Candy1;
+        GameStateManager.instance.JapaneseFoodType = JapaneseFoodType.JapaneseFood1;
+        GameStateManager.instance.DessertType = DessertType.Dessert1;
 
         GameStateManager.instance.HamburgerLevel = 0;
         GameStateManager.instance.SandwichLevel = 0;
@@ -198,6 +169,8 @@ public class ReincarnationManager : MonoBehaviour
 
         playerDataBase.NextFoodNumber = 0;
         playerDataBase.NextFoodNumber2 = 0;
+        playerDataBase.NextFoodNumber3 = 0;
+        playerDataBase.NextFoodNumber4 = 0;
 
         gameManager.Reincarnation();
         tutorialManager.Reincarnation();
@@ -211,5 +184,7 @@ public class ReincarnationManager : MonoBehaviour
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
     }
 }

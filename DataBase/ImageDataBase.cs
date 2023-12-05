@@ -6,9 +6,11 @@ using UnityEngine;
 public class ImageDataBase : ScriptableObject
 {
     public Sprite[] foodChangeArray;
-
     public Sprite[] candyArray;
+    public Sprite[] japaneseArray;
+    public Sprite[] dessertArray;
 
+    [Space]
     public Sprite[] foodIconArray;
 
     public Sprite[] itemArray;
@@ -21,7 +23,7 @@ public class ImageDataBase : ScriptableObject
 
     public Sprite[] treasureArray;
 
-    public Sprite[] GetFoodChangeArray()
+    public Sprite[] GetFoodArray()
     {
         return foodChangeArray;
     }
@@ -29,6 +31,16 @@ public class ImageDataBase : ScriptableObject
     public Sprite[] GetCandyArray()
     {
         return candyArray;
+    }
+
+    public Sprite[] GetJapaneseFoodArray()
+    {
+        return japaneseArray;
+    }
+
+    public Sprite[] GetDessertArray()
+    {
+        return dessertArray;
     }
 
     public Sprite[] GetFoodIconArray()

@@ -179,7 +179,7 @@ public class ShopManager : MonoBehaviour
     public void SetAlarm()
     {
         alarm.SetActive(true);
-        dailyAlarm.SetActive(true);
+        //dailyAlarm.SetActive(true);
     }
 
     public void OpenShopView()

@@ -222,13 +222,13 @@ public enum RankType
 
 public enum FoodType
 {
-    Hamburger,
-    Sandwich,
-    SnackLab,
-    Drink,
-    Pizza,
-    Donut,
-    Fries,
+    Food1,
+    Food2,
+    Food3,
+    Food4,
+    Food5,
+    Food6,
+    Food7,
     Ribs
 }
 
@@ -244,6 +244,32 @@ public enum CandyType
     Candy8,
     Candy9,
     Chocolate
+}
+
+public enum JapaneseFoodType
+{
+    JapaneseFood1,
+    JapaneseFood2,
+    JapaneseFood3,
+    JapaneseFood4,
+    JapaneseFood5,
+    JapaneseFood6,
+    JapaneseFood7,
+    Ramen
+}
+
+public enum DessertType
+{
+    Dessert1,
+    Dessert2,
+    Dessert3,
+    Dessert4,
+    Dessert5,
+    Dessert6,
+    Dessert7,
+    Dessert8,
+    Dessert9,
+    FruitSkewers
 }
 
 public enum PassiveEffect

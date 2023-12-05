@@ -25,8 +25,8 @@ public class ChangeIslandContent : MonoBehaviour
 
     Color foodColor = new Color(206 / 255f, 141 / 255f, 1);
     Color candyColor = new Color(247 / 255f, 160 / 255f, 0);
+    Color jpColor = new Color(94 / 255f, 102 / 255f, 220 / 255f);
     Color dessertColor = new Color(242 / 255f, 138 / 255f, 222 / 255f);
-    Color appleColor = new Color(94 / 255f, 102 / 255f, 220 / 255f);
 
     IslandManager islandManager;
 
@@ -44,10 +44,10 @@ public class ChangeIslandContent : MonoBehaviour
                 background.color = candyColor;
                 break;
             case IslandType.Island3:
-                background.color = dessertColor;
+                background.color = jpColor;
                 break;
             case IslandType.Island4:
-                background.color = appleColor;
+                background.color = dessertColor;
                 break;
         }
 
@@ -56,7 +56,7 @@ public class ChangeIslandContent : MonoBehaviour
         islandManager = manager;
 
         titleText.localizationName = type.ToString();
-        titleText.plusText = "\nLv.1";
+        //titleText.plusText = "\nLv.1";
         titleText.ReLoad();
     }
 
@@ -72,18 +72,18 @@ public class ChangeIslandContent : MonoBehaviour
 
                 break;
             case IslandType.Island2:
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +3%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +20%";
+                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +2%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +10%";
 
                 break;
             case IslandType.Island3:
                 upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +5%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +40%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +25%";
 
                 break;
             case IslandType.Island4:
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +8%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +60%";
+                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +10%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +50%";
 
                 break;
         }

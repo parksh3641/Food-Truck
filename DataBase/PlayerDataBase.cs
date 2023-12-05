@@ -184,6 +184,17 @@ public class PlayerDataBase : ScriptableObject
     private int character21 = 0;
 
     [Space]
+    [Title("Food Number")]
+    [SerializeField]
+    private int nextFoodNumber = 0;
+    [SerializeField]
+    private int nextFoodNumber2 = 0;
+    [SerializeField]
+    private int nextFoodNumber3 = 0;
+    [SerializeField]
+    private int nextFoodNumber4 = 0;
+
+    [Space]
     [Title("Fast Food")]
     [SerializeField]
     private int hamburgerMaxValue = 0;
@@ -199,8 +210,6 @@ public class PlayerDataBase : ScriptableObject
     private int donutMaxValue = 0;
     [SerializeField]
     private int friesMaxValue = 0;
-    [SerializeField]
-    private int nextFoodNumber = 0;
 
     [Space]
     [Title("Candy")]
@@ -222,9 +231,44 @@ public class PlayerDataBase : ScriptableObject
     private int candy8MaxValue = 0;
     [SerializeField]
     private int candy9MaxValue = 0;
-    [SerializeField]
-    private int nextFoodNumber2 = 0;
 
+    [Space]
+    [Title("Japanese Food")]
+    [SerializeField]
+    private int japaneseFood1MaxValue = 0;
+    [SerializeField]
+    private int japaneseFood2MaxValue = 0;
+    [SerializeField]
+    private int japaneseFood3MaxValue = 0;
+    [SerializeField]
+    private int japaneseFood4MaxValue = 0;
+    [SerializeField]
+    private int japaneseFood5MaxValue = 0;
+    [SerializeField]
+    private int japaneseFood6MaxValue = 0;
+    [SerializeField]
+    private int japaneseFood7MaxValue = 0;
+
+    [Space]
+    [Title("Dessert")]
+    [SerializeField]
+    private int dessert1MaxValue = 0;
+    [SerializeField]
+    private int dessert2MaxValue = 0;
+    [SerializeField]
+    private int dessert3MaxValue = 0;
+    [SerializeField]
+    private int dessert4MaxValue = 0;
+    [SerializeField]
+    private int dessert5MaxValue = 0;
+    [SerializeField]
+    private int dessert6MaxValue = 0;
+    [SerializeField]
+    private int dessert7MaxValue = 0;
+    [SerializeField]
+    private int dessert8MaxValue = 0;
+    [SerializeField]
+    private int dessert9MaxValue = 0;
 
     [Space]
     [Title("Truck")]
@@ -1284,6 +1328,42 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int NextFoodNumber2
+    {
+        get
+        {
+            return nextFoodNumber2;
+        }
+        set
+        {
+            nextFoodNumber2 = value;
+        }
+    }
+
+    public int NextFoodNumber3
+    {
+        get
+        {
+            return nextFoodNumber3;
+        }
+        set
+        {
+            nextFoodNumber3 = value;
+        }
+    }
+
+    public int NextFoodNumber4
+    {
+        get
+        {
+            return nextFoodNumber4;
+        }
+        set
+        {
+            nextFoodNumber4 = value;
+        }
+    }
+
     public int HamburgerMaxValue
     {
         get
@@ -1365,18 +1445,6 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             friesMaxValue = value;
-        }
-    }
-
-    public int NextFoodNumber2
-    {
-        get
-        {
-            return nextFoodNumber2;
-        }
-        set
-        {
-            nextFoodNumber2 = value;
         }
     }
 
@@ -1485,6 +1553,198 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             candy9MaxValue = value;
+        }
+    }
+
+    public int JapaneseFood1MaxValue
+    {
+        get
+        {
+            return japaneseFood1MaxValue;
+        }
+        set
+        {
+            japaneseFood1MaxValue = value;
+        }
+    }
+
+    public int JapaneseFood2MaxValue
+    {
+        get
+        {
+            return japaneseFood2MaxValue;
+        }
+        set
+        {
+            japaneseFood2MaxValue = value;
+        }
+    }
+
+    public int JapaneseFood3MaxValue
+    {
+        get
+        {
+            return japaneseFood3MaxValue;
+        }
+        set
+        {
+            japaneseFood3MaxValue = value;
+        }
+    }
+
+    public int JapaneseFood4MaxValue
+    {
+        get
+        {
+            return japaneseFood4MaxValue;
+        }
+        set
+        {
+            japaneseFood4MaxValue = value;
+        }
+    }
+
+    public int JapaneseFood5MaxValue
+    {
+        get
+        {
+            return japaneseFood5MaxValue;
+        }
+        set
+        {
+            japaneseFood5MaxValue = value;
+        }
+    }
+
+    public int JapaneseFood6MaxValue
+    {
+        get
+        {
+            return japaneseFood6MaxValue;
+        }
+        set
+        {
+            japaneseFood6MaxValue = value;
+        }
+    }
+
+    public int JapaneseFood7MaxValue
+    {
+        get
+        {
+            return japaneseFood7MaxValue;
+        }
+        set
+        {
+            japaneseFood7MaxValue = value;
+        }
+    }
+
+    public int Dessert1MaxValue
+    {
+        get
+        {
+            return dessert1MaxValue;
+        }
+        set
+        {
+            dessert1MaxValue = value;
+        }
+    }
+
+    public int Dessert2MaxValue
+    {
+        get
+        {
+            return dessert2MaxValue;
+        }
+        set
+        {
+            dessert2MaxValue = value;
+        }
+    }
+
+    public int Dessert3MaxValue
+    {
+        get
+        {
+            return dessert3MaxValue;
+        }
+        set
+        {
+            dessert3MaxValue = value;
+        }
+    }
+
+    public int Dessert4MaxValue
+    {
+        get
+        {
+            return dessert4MaxValue;
+        }
+        set
+        {
+            dessert4MaxValue = value;
+        }
+    }
+
+    public int Dessert5MaxValue
+    {
+        get
+        {
+            return dessert5MaxValue;
+        }
+        set
+        {
+            dessert5MaxValue = value;
+        }
+    }
+
+    public int Dessert6MaxValue
+    {
+        get
+        {
+            return dessert6MaxValue;
+        }
+        set
+        {
+            dessert6MaxValue = value;
+        }
+    }
+
+    public int Dessert7MaxValue
+    {
+        get
+        {
+            return dessert7MaxValue;
+        }
+        set
+        {
+            dessert7MaxValue = value;
+        }
+    }
+
+    public int Dessert8MaxValue
+    {
+        get
+        {
+            return dessert8MaxValue;
+        }
+        set
+        {
+            dessert8MaxValue = value;
+        }
+    }
+
+    public int Dessert9MaxValue
+    {
+        get
+        {
+            return dessert9MaxValue;
+        }
+        set
+        {
+            dessert9MaxValue = value;
         }
     }
 
@@ -2785,6 +3045,10 @@ public class PlayerDataBase : ScriptableObject
         dailyTreasureReward = 0;
 
         nextFoodNumber = 0;
+        nextFoodNumber2 = 0;
+        nextFoodNumber3 = 0;
+        nextFoodNumber4 = 0;
+
         hamburgerMaxValue = 0;
         sandwichMaxValue = 0;
         snackLabMaxValue = 0;
@@ -2793,7 +3057,6 @@ public class PlayerDataBase : ScriptableObject
         donutMaxValue = 0;
         friesMaxValue = 0;
 
-        nextFoodNumber2 = 0;
         candy1MaxValue = 0;
         candy2MaxValue = 0;
         candy3MaxValue = 0;
@@ -2803,6 +3066,24 @@ public class PlayerDataBase : ScriptableObject
         candy7MaxValue = 0;
         candy8MaxValue = 0;
         candy9MaxValue = 0;
+
+        japaneseFood1MaxValue = 0;
+        japaneseFood2MaxValue = 0;
+        japaneseFood3MaxValue = 0;
+        japaneseFood4MaxValue = 0;
+        japaneseFood5MaxValue = 0;
+        japaneseFood6MaxValue = 0;
+        japaneseFood7MaxValue = 0;
+
+        dessert1MaxValue = 0;
+        dessert2MaxValue = 0;
+        dessert3MaxValue = 0;
+        dessert4MaxValue = 0;
+        dessert5MaxValue = 0;
+        dessert6MaxValue = 0;
+        dessert7MaxValue = 0;
+        dessert8MaxValue = 0;
+        dessert9MaxValue = 0;
 
         treasure1 = 0;
         treasure2 = 0;

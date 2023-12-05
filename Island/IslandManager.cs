@@ -84,12 +84,24 @@ public class IslandManager : MonoBehaviour
         changeIslandContentList[(int)GameStateManager.instance.IslandType].Selected();
 
         changeIslandContentList[0].UnLock();
-        changeIslandContentList[0].SetLevel(playerDataBase.NextFoodNumber / 7);
+        changeIslandContentList[0].SetLevel(playerDataBase.NextFoodNumber / 6);
 
         if (playerDataBase.IslandNumber >= 1)
         {
             changeIslandContentList[1].UnLock();
-            changeIslandContentList[1].SetLevel(playerDataBase.NextFoodNumber2 / 9);
+            changeIslandContentList[1].SetLevel(playerDataBase.NextFoodNumber2 / 8);
+        }
+
+        if (playerDataBase.IslandNumber >= 2)
+        {
+            changeIslandContentList[2].UnLock();
+            changeIslandContentList[2].SetLevel(playerDataBase.NextFoodNumber3 / 6);
+        }
+
+        if (playerDataBase.IslandNumber >= 3)
+        {
+            changeIslandContentList[3].UnLock();
+            changeIslandContentList[3].SetLevel(playerDataBase.NextFoodNumber4 / 8);
         }
     }
 

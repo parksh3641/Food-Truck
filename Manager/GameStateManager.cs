@@ -45,8 +45,10 @@ public class GameStateManager : MonoBehaviour
         [Title("InGame")]
         public GameType gameType = GameType.Story;
         public IslandType islandType = IslandType.Island1;
-        public FoodType foodType = FoodType.Hamburger;
+        public FoodType foodType = FoodType.Food1;
         public CandyType candyType = CandyType.Candy1;
+        public JapaneseFoodType japaneseFoodType = JapaneseFoodType.JapaneseFood1;
+        public DessertType dessertType = DessertType.Dessert1;
 
         public int level = 0;
 
@@ -72,6 +74,28 @@ public class GameStateManager : MonoBehaviour
         public int candy8Level = 0;
         public int candy9Level = 0;
         public int chocolateLevel = 0;
+
+        [Space]
+        public int japaneseFood1Level = 0;
+        public int japaneseFood2Level = 0;
+        public int japaneseFood3Level = 0;
+        public int japaneseFood4Level = 0;
+        public int japaneseFood5Level = 0;
+        public int japaneseFood6Level = 0;
+        public int japaneseFood7Level = 0;
+        public int ramenLevel = 0;
+
+        [Space]
+        public int dessert1Level = 0;
+        public int dessert2Level = 0;
+        public int dessert3Level = 0;
+        public int dessert4Level = 0;
+        public int dessert5Level = 0;
+        public int dessert6Level = 0;
+        public int dessert7Level = 0;
+        public int dessert8Level = 0;
+        public int dessert9Level = 0;
+        public int fruitSkewersLevel = 0;
 
         [Space]
         [Title("Save")]
@@ -246,6 +270,32 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.candyType = value;
+            SaveFile();
+        }
+    }
+
+    public JapaneseFoodType JapaneseFoodType
+    {
+        get
+        {
+            return gameSettings.japaneseFoodType;
+        }
+        set
+        {
+            gameSettings.japaneseFoodType = value;
+            SaveFile();
+        }
+    }
+
+    public DessertType DessertType
+    {
+        get
+        {
+            return gameSettings.dessertType;
+        }
+        set
+        {
+            gameSettings.dessertType = value;
             SaveFile();
         }
     }
@@ -636,6 +686,240 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.chocolateLevel = value;
+            SaveFile();
+        }
+    }
+
+    public int JapaneseFood1Level
+    {
+        get
+        {
+            return gameSettings.japaneseFood1Level;
+        }
+        set
+        {
+            gameSettings.japaneseFood1Level = value;
+            SaveFile();
+        }
+    }
+
+    public int JapaneseFood2Level
+    {
+        get
+        {
+            return gameSettings.japaneseFood2Level;
+        }
+        set
+        {
+            gameSettings.japaneseFood2Level = value;
+            SaveFile();
+        }
+    }
+
+    public int JapaneseFood3Level
+    {
+        get
+        {
+            return gameSettings.japaneseFood3Level;
+        }
+        set
+        {
+            gameSettings.japaneseFood3Level = value;
+            SaveFile();
+        }
+    }
+
+    public int JapaneseFood4Level
+    {
+        get
+        {
+            return gameSettings.japaneseFood4Level;
+        }
+        set
+        {
+            gameSettings.japaneseFood4Level = value;
+            SaveFile();
+        }
+    }
+
+    public int JapaneseFood5Level
+    {
+        get
+        {
+            return gameSettings.japaneseFood5Level;
+        }
+        set
+        {
+            gameSettings.japaneseFood5Level = value;
+            SaveFile();
+        }
+    }
+
+    public int JapaneseFood6Level
+    {
+        get
+        {
+            return gameSettings.japaneseFood6Level;
+        }
+        set
+        {
+            gameSettings.japaneseFood6Level = value;
+            SaveFile();
+        }
+    }
+
+    public int JapaneseFood7Level
+    {
+        get
+        {
+            return gameSettings.japaneseFood7Level;
+        }
+        set
+        {
+            gameSettings.japaneseFood7Level = value;
+            SaveFile();
+        }
+    }
+
+    public int RamenLevel
+    {
+        get
+        {
+            return gameSettings.ramenLevel;
+        }
+        set
+        {
+            gameSettings.ramenLevel = value;
+            SaveFile();
+        }
+    }
+
+    public int Dessert1Level
+    {
+        get
+        {
+            return gameSettings.dessert1Level;
+        }
+        set
+        {
+            gameSettings.dessert1Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Dessert2Level
+    {
+        get
+        {
+            return gameSettings.dessert2Level;
+        }
+        set
+        {
+            gameSettings.dessert2Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Dessert3Level
+    {
+        get
+        {
+            return gameSettings.dessert3Level;
+        }
+        set
+        {
+            gameSettings.dessert3Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Dessert4Level
+    {
+        get
+        {
+            return gameSettings.dessert4Level;
+        }
+        set
+        {
+            gameSettings.dessert4Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Dessert5Level
+    {
+        get
+        {
+            return gameSettings.dessert5Level;
+        }
+        set
+        {
+            gameSettings.dessert5Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Dessert6Level
+    {
+        get
+        {
+            return gameSettings.dessert6Level;
+        }
+        set
+        {
+            gameSettings.dessert6Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Dessert7Level
+    {
+        get
+        {
+            return gameSettings.dessert7Level;
+        }
+        set
+        {
+            gameSettings.dessert7Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Dessert8Level
+    {
+        get
+        {
+            return gameSettings.dessert8Level;
+        }
+        set
+        {
+            gameSettings.dessert8Level = value;
+            SaveFile();
+        }
+    }
+
+    public int Dessert9Level
+    {
+        get
+        {
+            return gameSettings.dessert9Level;
+        }
+        set
+        {
+            gameSettings.dessert9Level = value;
+            SaveFile();
+        }
+    }
+
+    public int FruitSkewersLevel
+    {
+        get
+        {
+            return gameSettings.fruitSkewersLevel;
+        }
+        set
+        {
+            gameSettings.fruitSkewersLevel = value;
             SaveFile();
         }
     }

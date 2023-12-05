@@ -1351,6 +1351,15 @@ public class PlayfabManager : MonoBehaviour
                        case "NextFoodNumber":
                            playerDataBase.NextFoodNumber = statistics.Value;
                            break;
+                       case "NextFoodNumber2":
+                           playerDataBase.NextFoodNumber2 = statistics.Value;
+                           break;
+                       case "NextFoodNumber3":
+                           playerDataBase.NextFoodNumber3 = statistics.Value;
+                           break;
+                       case "NextFoodNumber4":
+                           playerDataBase.NextFoodNumber4 = statistics.Value;
+                           break;
                        case "HamburgerMaxValue":
                            playerDataBase.HamburgerMaxValue = statistics.Value;
                            break;
@@ -1371,9 +1380,6 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "FriesMaxValue":
                            playerDataBase.FriesMaxValue = statistics.Value;
-                           break;
-                       case "NextFoodNumber2":
-                           playerDataBase.NextFoodNumber2 = statistics.Value;
                            break;
                        case "Candy1MaxValue":
                            playerDataBase.Candy1MaxValue = statistics.Value;
@@ -1401,6 +1407,54 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Candy9MaxValue":
                            playerDataBase.Candy9MaxValue = statistics.Value;
+                           break;
+                       case "JapaneseFood1MaxValue":
+                           playerDataBase.JapaneseFood1MaxValue = statistics.Value;
+                           break;
+                       case "JapaneseFood2MaxValue":
+                           playerDataBase.JapaneseFood2MaxValue = statistics.Value;
+                           break;
+                       case "JapaneseFood3MaxValue":
+                           playerDataBase.JapaneseFood3MaxValue = statistics.Value;
+                           break;
+                       case "JapaneseFood4MaxValue":
+                           playerDataBase.JapaneseFood4MaxValue = statistics.Value;
+                           break;
+                       case "JapaneseFood5MaxValue":
+                           playerDataBase.JapaneseFood5MaxValue = statistics.Value;
+                           break;
+                       case "JapaneseFood6MaxValue":
+                           playerDataBase.JapaneseFood6MaxValue = statistics.Value;
+                           break;
+                       case "JapaneseFood7MaxValue":
+                           playerDataBase.JapaneseFood7MaxValue = statistics.Value;
+                           break;
+                       case "Dessert1MaxValue":
+                           playerDataBase.Dessert1MaxValue = statistics.Value;
+                           break;
+                       case "Dessert2MaxValue":
+                           playerDataBase.Dessert2MaxValue = statistics.Value;
+                           break;
+                       case "Dessert3MaxValue":
+                           playerDataBase.Dessert3MaxValue = statistics.Value;
+                           break;
+                       case "Dessert4MaxValue":
+                           playerDataBase.Dessert4MaxValue = statistics.Value;
+                           break;
+                       case "Dessert5MaxValue":
+                           playerDataBase.Dessert5MaxValue = statistics.Value;
+                           break;
+                       case "Dessert6MaxValue":
+                           playerDataBase.Dessert6MaxValue = statistics.Value;
+                           break;
+                       case "Dessert7MaxValue":
+                           playerDataBase.Dessert7MaxValue = statistics.Value;
+                           break;
+                       case "Dessert8MaxValue":
+                           playerDataBase.Dessert8MaxValue = statistics.Value;
+                           break;
+                       case "Dessert9MaxValue":
+                           playerDataBase.Dessert9MaxValue = statistics.Value;
                            break;
                        case "SellCount":
                            playerDataBase.SellCount = statistics.Value;

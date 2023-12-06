@@ -106,6 +106,7 @@ public class GameStateManager : MonoBehaviour
         public int useSauce = 0;
         public int openChestBox = 0;
         public int yummyTimeCount = 0;
+        public int playTime = 0;
 
         [Space]
         [Title("Equip")]
@@ -1015,6 +1016,19 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public int PlayTime
+    {
+        get
+        {
+            return gameSettings.playTime;
+        }
+        set
+        {
+            gameSettings.playTime = value;
+            SaveFile();
+        }
+    }
+
     public bool RemoveAds
     {
         get
@@ -1158,7 +1172,6 @@ public class GameStateManager : MonoBehaviour
             if (!string.IsNullOrEmpty(stjs))
             {
                 gameSettings = JsonUtility.FromJson<GameSettings>(stjs);
-                gameSettings.chestBoxCoolTime = 120;
             }
             else
             {

@@ -57,22 +57,7 @@ public class ResetManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("AccessDate", playerDataBase.AccessDate);
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceDay", int.Parse(playerDataBase.AttendanceDay));
 
-            playerDataBase.DailyReward = 0;
-            playerDataBase.DailyReward_Portion = 0;
-            playerDataBase.DailyReward_DefTicket = 0;
-            playerDataBase.DailyAdsReward = 0;
-            playerDataBase.DailyAdsReward2 = 0;
-            playerDataBase.DailyCastleReward = 0;
-            playerDataBase.DailyQuestReward = 0;
-            playerDataBase.DailyTreasureReward = 0;
-
-            GameStateManager.instance.UpgradeCount = 0;
-            GameStateManager.instance.SellCount = 0;
-            GameStateManager.instance.UseSauce = 0;
-            GameStateManager.instance.OpenChestBox = 0;
-            GameStateManager.instance.YummyTimeCount = 0;
-
-            GameStateManager.instance.ChestBoxCount = 0;
+            ResetValue();
 
             if (playerDataBase.AttendanceCheck)
             {
@@ -93,7 +78,7 @@ public class ResetManager : MonoBehaviour
 
                 shopManager.SetAlarm();
 
-                attendanceManager.OnSetAlarm();
+                attendanceManager.SetAlarm();
             }
 
             //if(playerDataBase.WelcomeCheck)
@@ -115,15 +100,9 @@ public class ResetManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("AccessDate", playerDataBase.AccessDate);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceDay", int.Parse(playerDataBase.AttendanceDay));
 
+                ResetValue();
+
                 StartCoroutine(ResetCoroution());
-
-                GameStateManager.instance.UpgradeCount = 0;
-                GameStateManager.instance.SellCount = 0;
-                GameStateManager.instance.UseSauce = 0;
-                GameStateManager.instance.OpenChestBox = 0;
-                GameStateManager.instance.YummyTimeCount = 0;
-
-                GameStateManager.instance.ChestBoxCount = 0;
 
                 if (playerDataBase.AttendanceCheck)
                 {
@@ -143,8 +122,7 @@ public class ResetManager : MonoBehaviour
                     }
 
                     shopManager.SetAlarm();
-
-                    attendanceManager.OnSetAlarm();
+                    attendanceManager.SetAlarm();
                 }
 
                 //if (playerDataBase.WelcomeCheck)
@@ -247,7 +225,7 @@ public class ResetManager : MonoBehaviour
         return c;
     }
 
-    IEnumerator ResetCoroution()
+    void ResetValue()
     {
         playerDataBase.DailyReward = 0;
         playerDataBase.DailyReward_Portion = 0;
@@ -258,6 +236,21 @@ public class ResetManager : MonoBehaviour
         playerDataBase.DailyQuestReward = 0;
         playerDataBase.DailyTreasureReward = 0;
 
+        GameStateManager.instance.UpgradeCount = 0;
+        GameStateManager.instance.SellCount = 0;
+        GameStateManager.instance.UseSauce = 0;
+        GameStateManager.instance.OpenChestBox = 0;
+        GameStateManager.instance.YummyTimeCount = 0;
+
+        GameStateManager.instance.ChestBoxCount = 0;
+
+
+        playerDataBase.PlayTimeCount = 0;
+        GameStateManager.instance.PlayTime = 0;
+    }
+
+    IEnumerator ResetCoroution()
+    {
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward", playerDataBase.DailyReward);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_Portion", playerDataBase.DailyReward_Portion);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_DefTicket", playerDataBase.DailyReward_DefTicket);
@@ -269,5 +262,9 @@ public class ResetManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyCastleReward", playerDataBase.DailyCastleReward);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyQuestReward", playerDataBase.DailyQuestReward);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyTreasureReward", playerDataBase.DailyTreasureReward);
+
+        yield return waitForSeconds;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("PlayTimeCount", playerDataBase.PlayTimeCount);
     }
 }

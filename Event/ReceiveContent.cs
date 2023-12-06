@@ -31,48 +31,6 @@ public class ReceiveContent : MonoBehaviour
 
         rewardType = type;
 
-        //switch (type)
-        //{
-        //    case RewardType.Gold:
-        //        mainBackground.sprite = rankBackgroundArray[0];
-        //        break;
-        //    case RewardType.UpgradeTicket:
-        //        mainBackground.sprite = rankBackgroundArray[2];
-        //        break;
-        //    case RewardType.Box:
-        //        mainBackground.sprite = rankBackgroundArray[3];
-        //        break;
-        //    case RewardType.Box_N:
-        //        mainBackground.sprite = rankBackgroundArray[0];
-        //        break;
-        //    case RewardType.Box_R:
-        //        mainBackground.sprite = rankBackgroundArray[1];
-        //        break;
-        //    case RewardType.Box_SR:
-        //        mainBackground.sprite = rankBackgroundArray[2];
-        //        break;
-        //    case RewardType.Box_SSR:
-        //        mainBackground.sprite = rankBackgroundArray[3];
-        //        break;
-        //    case RewardType.Box_UR:
-        //        mainBackground.sprite = rankBackgroundArray[4];
-        //        break;
-        //    case RewardType.Box_NR:
-        //        mainBackground.sprite = rankBackgroundArray[0];
-        //        break;
-        //    case RewardType.Box_RSR:
-        //        mainBackground.sprite = rankBackgroundArray[1];
-        //        break;
-        //    case RewardType.Box_SRSSR:
-        //        mainBackground.sprite = rankBackgroundArray[2];
-        //        break;
-        //}
-
         countText.text = MoneyUnitString.ToCurrencyString(count);
     }
-
-    //public void OpenInfo()
-    //{
-    //    ReceiveInfoManager.instance.OpenReceiveInfo(rewardType);
-    //}
 }

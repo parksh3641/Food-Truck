@@ -27,6 +27,8 @@ public class AttendanceManager : MonoBehaviour
 
     public AttendanceContent[] attendanceContentArray;
 
+    public TreasureManager treasureManager;
+
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
     PlayerDataBase playerDataBase;
@@ -53,11 +55,17 @@ public class AttendanceManager : MonoBehaviour
         StartCoroutine(TimerCoroution());
     }
 
+    [Button]
+    void OpenTreasureBox()
+    {
+        treasureManager.OpenTreasure(1);
+    }
+
     public void Initialize()
     {
         if(!playerDataBase.attendanceCheck)
         {
-            OnSetAlarm();
+            SetAlarm();
         }
     }
 
@@ -80,11 +88,6 @@ public class AttendanceManager : MonoBehaviour
         {
             attendanceView.SetActive(true);
 
-            if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
-            {
-                ResetManager.instance.Initialize();
-            }
-
             if (!isTimer)
             {
                 isTimer = true;
@@ -96,9 +99,9 @@ public class AttendanceManager : MonoBehaviour
             localization_Hours = LocalizationManager.instance.GetString("Hours");
             localization_Minutes = LocalizationManager.instance.GetString("Minutes");
 
-            CheckInitialize();
-
             CheckAttendance();
+
+            CheckInitialize();
 
             FirebaseAnalytics.LogEvent("Attendance");
         }
@@ -108,55 +111,55 @@ public class AttendanceManager : MonoBehaviour
         }
     }
 
+    public void CheckAttendance()
+    {
+        for (int i = 0; i < attendanceContentArray.Length; i++)
+        {
+            attendanceContentArray[i].InitializeAttendance(playerDataBase.AttendanceCount, playerDataBase.AttendanceCheck, this);
+        }
+    }
+
     public void CheckInitialize()
     {
         attendanceContentArray[0].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[0].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[0].receiveContent[0].Initialize(RewardType.Gold, 50000);
+        attendanceContentArray[0].receiveContent[0].Initialize(RewardType.Gold, 100000);
         attendanceContentArray[0].receiveContent[1].Initialize(RewardType.Portion1, 2);
 
         attendanceContentArray[1].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[1].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Gold, 50000);
+        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Gold, 100000);
         attendanceContentArray[1].receiveContent[1].Initialize(RewardType.Portion2, 2);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[2].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Gold, 50000);
+        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Gold, 100000);
         attendanceContentArray[2].receiveContent[1].Initialize(RewardType.Portion3, 2);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[3].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[3].receiveContent[0].Initialize(RewardType.Gold, 50000);
-        attendanceContentArray[3].receiveContent[1].Initialize(RewardType.Portion4, 2);
+        attendanceContentArray[3].receiveContent[0].Initialize(RewardType.Gold, 100000);
+        attendanceContentArray[3].receiveContent[1].Initialize(RewardType.TreasureBox, 1);
 
         attendanceContentArray[4].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[4].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[4].receiveContent[0].Initialize(RewardType.Gold, 50000);
-        attendanceContentArray[4].receiveContent[1].Initialize(RewardType.Portion5, 2);
+        attendanceContentArray[4].receiveContent[0].Initialize(RewardType.Gold, 100000);
+        attendanceContentArray[4].receiveContent[1].Initialize(RewardType.Portion4, 2);
 
         attendanceContentArray[5].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[5].receiveContent[1].gameObject.SetActive(true);
         attendanceContentArray[5].receiveContent[0].Initialize(RewardType.Gold, 100000);
-        attendanceContentArray[5].receiveContent[1].Initialize(RewardType.PortionSet, 1);
+        attendanceContentArray[5].receiveContent[1].Initialize(RewardType.Portion5, 2);
 
         attendanceContentArray[6].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[6].receiveContent[1].gameObject.SetActive(true);
         attendanceContentArray[6].receiveContent[2].gameObject.SetActive(true);
-        attendanceContentArray[6].receiveContent[0].Initialize(RewardType.Gold, 300000);
-        attendanceContentArray[6].receiveContent[1].Initialize(RewardType.PortionSet, 2);
+        attendanceContentArray[6].receiveContent[0].Initialize(RewardType.Gold, 500000);
+        attendanceContentArray[6].receiveContent[1].Initialize(RewardType.TreasureBox, 3);
         attendanceContentArray[6].receiveContent[2].Initialize(RewardType.DefDestroyTicket, 1);
     }
 
-    public void CheckAttendance()
-    {
-        for (int i = 0; i < attendanceContentArray.Length; i ++)
-        {
-            attendanceContentArray[i].Initialize(playerDataBase.AttendanceCount, playerDataBase.AttendanceCheck, this);
-        }
-    }
-
-    public void ReceiveButton(int number, Action action)
+    public void ReceiveButton(int index, Action action)
     {
         if (playerDataBase.AttendanceCheck) return;
 
@@ -167,41 +170,40 @@ public class AttendanceManager : MonoBehaviour
             return;
         }
 
-        switch (number)
+        switch (index)
         {
             case 0:
-                PlayfabManager.instance.UpdateAddGold(50000);
+                PlayfabManager.instance.UpdateAddGold(100000);
                 GetRandomPortion(0, 2);
 
                 break;
             case 1:
-                PlayfabManager.instance.UpdateAddGold(50000);
+                PlayfabManager.instance.UpdateAddGold(100000);
                 GetRandomPortion(1, 2);
 
                 break;
             case 2:
-                PlayfabManager.instance.UpdateAddGold(50000);
+                PlayfabManager.instance.UpdateAddGold(100000);
                 GetRandomPortion(2, 2);
 
                 break;
             case 3:
-                PlayfabManager.instance.UpdateAddGold(50000);
-                GetRandomPortion(3, 2);
+                PlayfabManager.instance.UpdateAddGold(100000);
+                treasureManager.OpenTreasure(1);
 
                 break;
             case 4:
-                PlayfabManager.instance.UpdateAddGold(50000);
-                GetRandomPortion(4, 2);
+                PlayfabManager.instance.UpdateAddGold(100000);
+                GetRandomPortion(3, 2);
 
                 break;
             case 5:
-                PlayfabManager.instance.UpdateAddGold(100000);
-                GetAllPortion(1);
+                GetRandomPortion(4, 2);
 
                 break;
             case 6:
                 PlayfabManager.instance.UpdateAddGold(300000);
-                GetAllPortion(2);
+                treasureManager.OpenTreasure(3);
 
                 playerDataBase.DefDestroyTicket += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
@@ -218,7 +220,7 @@ public class AttendanceManager : MonoBehaviour
 
         CheckAttendance();
 
-        OnCheckAlarm();
+        OffAlarm();
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -246,13 +248,13 @@ public class AttendanceManager : MonoBehaviour
         StartCoroutine(TimerCoroution());
     }
 
-    public void OnSetAlarm()
+    public void SetAlarm()
     {
         mainAlarm.SetActive(true);
         alarm.SetActive(true);
     }
 
-    public void OnCheckAlarm()
+    public void OffAlarm()
     {
         mainAlarm.SetActive(false);
         alarm.SetActive(false);
@@ -260,7 +262,7 @@ public class AttendanceManager : MonoBehaviour
 
     void GetRandomPortion(int index, int number)
     {
-        switch (number)
+        switch (index)
         {
             case 0:
                 playerDataBase.Portion1 += number;

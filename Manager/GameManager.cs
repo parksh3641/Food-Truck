@@ -33,8 +33,6 @@ public class GameManager : MonoBehaviour
     public Image changeFoodImg;
     public Image islandImg;
 
-    public LocalizationContent islandText;
-
     public LocalizationContent bestRankLevelText;
 
     public GameObject butterflyLocked;
@@ -247,6 +245,7 @@ public class GameManager : MonoBehaviour
     public QuestManager questManager;
     public LevelManager levelManager;
     public ChangeFoodManager changeFoodManager;
+    public GourmetManager gourmetManager;
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
@@ -414,8 +413,8 @@ public class GameManager : MonoBehaviour
         loginView.SetActive(false);
 
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
-        islandText.localizationName = GameStateManager.instance.IslandType.ToString();
-        islandText.ReLoad();
+        //islandText.localizationName = GameStateManager.instance.IslandType.ToString();
+        //islandText.ReLoad();
 
         feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  0%";
 
@@ -1004,14 +1003,17 @@ public class GameManager : MonoBehaviour
         {
             playTime = 0;
             playerDataBase.PlayTime += 1;
+            GameStateManager.instance.PlayTime += 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("PlayTime", playerDataBase.PlayTime);
+
+            Debug.Log("1ºÐ Áö³²");
         }
         else
         {
             playTime += 1;
         }
 
-        yield return waitForSeconds;
+        yield return waitForSeconds2;
         StartCoroutine(PlayTimeCoroution());
     }
 
@@ -1330,8 +1332,7 @@ public class GameManager : MonoBehaviour
         CheckLocked();
 
         questManager.CheckingAlarm();
-
-        //StopAllCoroutines();
+        gourmetManager.Initialize();
     }
 
     public void Initialize()
@@ -1361,8 +1362,8 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.IslandType = type;
 
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
-        islandText.localizationName = GameStateManager.instance.IslandType.ToString();
-        islandText.ReLoad();
+        //islandText.localizationName = GameStateManager.instance.IslandType.ToString();
+        //islandText.ReLoad();
 
         switch (GameStateManager.instance.IslandType)
         {
@@ -1468,14 +1469,14 @@ public class GameManager : MonoBehaviour
                 break;
             case IslandType.Island3:
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice = sellPrice + (int)(sellPrice * 0.25f);
+                sellPrice = sellPrice + (int)(sellPrice * 0.2f);
                 success = upgradeDataBase.GetSuccess(level);
 
                 maxLevel = upgradeJapaneseFood.maxLevel;
                 break;
             case IslandType.Island4:
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice = sellPrice + (int)(sellPrice * 0.5f);
+                sellPrice = sellPrice + (int)(sellPrice * 0.3f);
 
                 maxLevel = upgradeDessert.maxLevel;
                 break;
@@ -4768,8 +4769,8 @@ public class GameManager : MonoBehaviour
     public void Reincarnation()
     {
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
-        islandText.localizationName = GameStateManager.instance.IslandType.ToString();
-        islandText.ReLoad();
+        //islandText.localizationName = GameStateManager.instance.IslandType.ToString();
+        //islandText.ReLoad();
 
         CheckFoodState();
     }

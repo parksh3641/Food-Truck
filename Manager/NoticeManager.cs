@@ -19,7 +19,10 @@ public class NoticeManager : MonoBehaviour
     public void Initialize()
     {
 #if !UNITY_EDITOR
-        noticeView.SetActive(true);
+        if(GameStateManager.instance.Tutorial)
+        {
+            noticeView.SetActive(true);
+        }
 #endif
     }
 

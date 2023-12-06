@@ -138,7 +138,7 @@ public class RankingManager : MonoBehaviour
                 infoText.localizationName = "Ranking2_Info";
                 break;
             case 2:
-                ChangeRankingView(RankingType.Michelin);
+                ChangeRankingView(RankingType.GourmetLevel);
 
                 infoText.localizationName = "Ranking3_Info";
                 break;

@@ -294,6 +294,9 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 1:
+
+                break;
+            case 2:
                 shopContents[19].Initialize(ItemType.Portion1, BuyType.Crystal, this);
                 shopContents[20].Initialize(ItemType.Portion2, BuyType.Crystal, this);
                 shopContents[21].Initialize(ItemType.Portion3, BuyType.Crystal, this);
@@ -305,7 +308,7 @@ public class ShopManager : MonoBehaviour
                 shopContents[10].Initialize(ItemType.PortionSet3, BuyType.Rm, this);
 
                 break;
-            case 2:
+            case 3:
                 shopContents[3].Initialize(ItemType.GoldShop1, BuyType.Crystal, this);
                 shopContents[4].Initialize(ItemType.GoldShop2, BuyType.Crystal, this);
                 shopContents[5].Initialize(ItemType.GoldShop3, BuyType.Crystal, this);
@@ -370,10 +373,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop1:
-                if (playerDataBase.Crystal >= 120)
+                if (playerDataBase.Crystal >= 100)
                 {
-                    PlayfabManager.instance.UpdateAddGold(10000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 120);
+                    PlayfabManager.instance.UpdateAddGold(5000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 100);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -385,10 +388,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop2:
-                if (playerDataBase.Crystal >= 1200)
+                if (playerDataBase.Crystal >= 1000)
                 {
-                    PlayfabManager.instance.UpdateAddGold(100000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1200);
+                    PlayfabManager.instance.UpdateAddGold(50000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1000);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -400,10 +403,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop3:
-                if (playerDataBase.Crystal >= 12000)
+                if (playerDataBase.Crystal >= 10000)
                 {
-                    PlayfabManager.instance.UpdateAddGold(1000000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 12000);
+                    PlayfabManager.instance.UpdateAddGold(500000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10000);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -646,15 +649,29 @@ public class ShopManager : MonoBehaviour
 
         shopContents[6].SetLocked(true);
 
-        playerDataBase.Portion1 += 2;
-        playerDataBase.Portion2 += 2;
-        playerDataBase.Portion3 += 2;
-        playerDataBase.Portion4 += 2;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+        switch (Random.Range(0, 4))
+        {
+            case 0:
+                playerDataBase.Portion1 += 5;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+                break;
+            case 1:
+                playerDataBase.Portion2 += 5;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+                break;
+            case 2:
+                playerDataBase.Portion3 += 5;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+                break;
+            case 3:
+                playerDataBase.Portion4 += 5;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                break;
+                //case 4:
+                //    playerDataBase.Portion5 += 1;
+                //    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
+                //    break;
+        }
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

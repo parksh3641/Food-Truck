@@ -17,6 +17,9 @@ public class AttendanceContent : MonoBehaviour
 
 
     AttendanceManager attendanceManager;
+    RankEventManager rankEventManager;
+    PlayTimeManager playTimeManager;
+
 
     private void Awake()
     {
@@ -26,7 +29,7 @@ public class AttendanceContent : MonoBehaviour
         }    
     }
 
-    public void Initialize(int number, bool check, AttendanceManager manager)
+    public void InitializeAttendance(int number, bool check, AttendanceManager manager)
     {
         attendanceManager = manager;
 
@@ -34,6 +37,7 @@ public class AttendanceContent : MonoBehaviour
         titleText.ReLoad();
 
         selectObj.SetActive(false);
+        lockObj.SetActive(false);
         clearObj.SetActive(false);
 
         if (index == number)
@@ -62,9 +66,206 @@ public class AttendanceContent : MonoBehaviour
         }
     }
 
+    public void InitializeRankEvent(int _index, int number, int check, int value, RankEventManager manager)
+    {
+        index = _index;
+        rankEventManager = manager;
+
+        titleText.localizationName = "RankEvent";
+        titleText.plusText = " : " + number.ToString();
+        titleText.ReLoad();
+
+        selectObj.SetActive(false);
+        lockObj.SetActive(false);
+        clearObj.SetActive(false);
+
+        if (index == check)
+        {
+            selectObj.SetActive(true);
+
+            if(value >= number)
+            {
+                lockObj.SetActive(false);
+            }
+            else
+            {
+                lockObj.SetActive(true);
+            }
+        }
+        else
+        {
+            if (index > check)
+            {
+                lockObj.SetActive(true);
+            }
+            else
+            {
+                lockObj.SetActive(true);
+                clearObj.SetActive(true);
+            }
+        }
+
+    }
+
+    public void InitializePlayTime(int number, int check, PlayTimeManager manager)
+    {
+        playTimeManager = manager;
+
+        titleText.localizationName = "PlayTime";
+
+        selectObj.SetActive(false);
+        lockObj.SetActive(false);
+        clearObj.SetActive(false);
+
+        switch (index)
+        {
+            case 0:
+                titleText.plusText = " : 5";
+
+                if(check == 0)
+                {
+                    selectObj.SetActive(true);
+
+                    if (number >= 5)
+                    {
+                        lockObj.SetActive(false);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (index > check)
+                    {
+                        lockObj.SetActive(true);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                        clearObj.SetActive(true);
+                    }
+                }
+
+                break;
+            case 1:
+                titleText.plusText = " : 10";
+
+                if (check == 1)
+                {
+                    selectObj.SetActive(true);
+
+                    if (number >= 10)
+                    {
+                        lockObj.SetActive(false);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (index > check)
+                    {
+                        lockObj.SetActive(true);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                        clearObj.SetActive(true);
+                    }
+                }
+                break;
+            case 2:
+                titleText.plusText = " : 20";
+
+                if (check == 2)
+                {
+                    selectObj.SetActive(true);
+
+                    if (number >= 20)
+                    {
+                        lockObj.SetActive(false);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (index > check)
+                    {
+                        lockObj.SetActive(true);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                        clearObj.SetActive(true);
+                    }
+                }
+                break;
+            case 3:
+                titleText.plusText = " : 30";
+
+                if (check == 3)
+                {
+                    selectObj.SetActive(true);
+
+                    if (number >= 30)
+                    {
+                        lockObj.SetActive(false);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (index > check)
+                    {
+                        lockObj.SetActive(true);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                        clearObj.SetActive(true);
+                    }
+                }
+                break;
+        }
+
+        titleText.ReLoad();
+    }
+
     public void ReceiveButton()
     {
-        attendanceManager.ReceiveButton(index, SuccessReceive);
+        if(attendanceManager != null)
+        {
+            if(!lockObj.activeInHierarchy)
+            {
+                attendanceManager.ReceiveButton(index, SuccessReceive);
+            }
+        }
+
+        if(rankEventManager != null)
+        {
+            if (!lockObj.activeInHierarchy)
+            {
+                rankEventManager.ReceiveButton(SuccessReceive);
+            }
+        }
+
+        if(playTimeManager != null)
+        {
+            if (!lockObj.activeInHierarchy)
+            {
+                playTimeManager.ReceiveButton(index, SuccessReceive);
+            }
+        }
     }
 
     public void SuccessReceive()

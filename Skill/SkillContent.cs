@@ -39,8 +39,8 @@ public class SkillContent : MonoBehaviour
     private float skill11Value = 0.5f;
     private float skill14Value = 0.3f;
 
-    private int priceGold = 50000;
-    private int pricePortion = 20000;
+    private int priceGold = 100000;
+    private int pricePortion = 50000;
     private int priceCrystal = 5;
 
     private int maxLevelGold = 100;

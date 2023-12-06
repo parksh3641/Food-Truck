@@ -1266,6 +1266,9 @@ public class PlayfabManager : MonoBehaviour
                        case "ConsumeGold":
                            playerDataBase.ConsumeGold = statistics.Value;
                            break;
+                       case "GourmetLevel":
+                           playerDataBase.GourmetLevel = statistics.Value;
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;
@@ -1284,6 +1287,12 @@ public class PlayfabManager : MonoBehaviour
                            {
                                playerDataBase.AttendanceCheck = true;
                            }
+                           break;
+                       case "PlayTimeCount":
+                           playerDataBase.PlayTimeCount = statistics.Value;
+                           break;
+                       case "RankEventCount":
+                           playerDataBase.RankEventCount = statistics.Value;
                            break;
                        case "DefDestroyTicket":
                            playerDataBase.DefDestroyTicket = statistics.Value;

@@ -122,9 +122,9 @@ public class ShopContent : MonoBehaviour
             case ItemType.GoldShop1:
                 lockedObj.SetActive(false);
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(10000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(5000000);
 
-                buyCrystalText.text = "120";
+                buyCrystalText.text = "100";
 
                 //buyRmObj[0].SetActive(true);
                 //buyRmText[0].localizationName = itemType + "_Price";
@@ -133,9 +133,9 @@ public class ShopContent : MonoBehaviour
             case ItemType.GoldShop2:
                 lockedObj.SetActive(false);
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(100000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(50000000);
 
-                buyCrystalText.text = "1,200";
+                buyCrystalText.text = "1,000";
 
                 //buyRmObj[1].SetActive(true);
                 //buyRmText[1].localizationName = itemType + "_Price";
@@ -145,9 +145,9 @@ public class ShopContent : MonoBehaviour
             case ItemType.GoldShop3:
                 lockedObj.SetActive(false);
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(1000000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(500000000);
 
-                buyCrystalText.text = "12,000";
+                buyCrystalText.text = "10,000";
 
                 //buyRmObj[2].SetActive(true);
                 //buyRmText[2].localizationName = itemType + "_Price";

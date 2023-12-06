@@ -32,6 +32,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int consumeGold = 0;
     [SerializeField]
+    private int gourmetLevel = 0;
+    [SerializeField]
     private int islandNumber = 0;
     [SerializeField]
     private int buffTickets = 0;
@@ -480,6 +482,8 @@ public class PlayerDataBase : ScriptableObject
     public string attendanceDay = "";
     public int attendanceCount = 0;
     public bool attendanceCheck = false;
+    public int playTimeCount = 0;
+    public int rankEventCount = 0;
     [Space]
     public string nextMonday = "";
 
@@ -1856,6 +1860,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int GourmetLevel
+    {
+        get
+        {
+            return gourmetLevel;
+        }
+        set
+        {
+            gourmetLevel = value;
+        }
+    }
+
     public int RankLevel1
     {
         get
@@ -2959,6 +2975,30 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int PlayTimeCount
+    {
+        get
+        {
+            return playTimeCount;
+        }
+        set
+        {
+            playTimeCount = value;
+        }
+    }
+
+    public int RankEventCount
+    {
+        get
+        {
+            return rankEventCount;
+        }
+        set
+        {
+            rankEventCount = value;
+        }
+    }
+
     public bool AttendanceCheck
     {
         get
@@ -3011,6 +3051,12 @@ public class PlayerDataBase : ScriptableObject
     {
         removeAds = false;
         goldX2 = false;
+
+        rankLevel1 = 0;
+        rankLevel2 = 0;
+        rankLevel3 = 0;
+        rankLevel4 = 0;
+        totalLevel = 0;
 
         coin = 0;
         coinA = 0;
@@ -3190,18 +3236,13 @@ public class PlayerDataBase : ScriptableObject
         reincarnationCount = 0;
         buffCount = 0;
         consumeGold = 0;
+        gourmetLevel = 0;
 
         upgradeCount = 0;
         sellCount = 0;
         useSources = 0;
         openChestBox = 0;
         yummyTimeCount = 0;
-
-        rankLevel1 = 0;
-        rankLevel2 = 0;
-        rankLevel3 = 0;
-        rankLevel4 = 0;
-        totalLevel = 0;
 
         skill1 = 0;
         skill2 = 0;
@@ -3349,6 +3390,21 @@ public class PlayerDataBase : ScriptableObject
             count += 1;
         }
 
+        if (NoodlesTruck > 0)
+        {
+            count += 1;
+        }
+
+        if (PizzaTruck > 0)
+        {
+            count += 1;
+        }
+
+        if (SushiTruck > 0)
+        {
+            count += 1;
+        }
+
         return count;
     }
 
@@ -3398,37 +3454,252 @@ public class PlayerDataBase : ScriptableObject
     {
         int count = 0;
 
-        if (GeckoAnimal > 0)
+        if (butterfly1 > 0)
         {
             count += 1;
         }
 
-        if (HerringAnimal > 0)
+        if (butterfly2 > 0)
         {
             count += 1;
         }
 
-        if (MuskratAnimal > 0)
+        if (butterfly3 > 0)
         {
             count += 1;
         }
 
-        if (PuduAnimal > 0)
+        if (butterfly4 > 0)
         {
             count += 1;
         }
 
-        if (SparrowAnimal > 0)
+        if (butterfly5 > 0)
         {
             count += 1;
         }
 
-        if (SquidAnimal > 0)
+        if (butterfly6 > 0)
         {
             count += 1;
         }
 
-        if (TaipanAnimal > 0)
+        if (butterfly7 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly8 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly9 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly10 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly11 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly12 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly13 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly14 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly15 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly16 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly17 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly18 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly19 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly20 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly21 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly22 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly23 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly24 > 0)
+        {
+            count += 1;
+        }
+        if (butterfly25 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly26 > 0)
+        {
+            count += 1;
+        }
+        if (butterfly27 > 0)
+        {
+            count += 1;
+        }
+
+        if (butterfly28 > 0)
+        {
+            count += 1;
+        }
+
+        return count;
+    }
+
+    public int GetCharacterNumber()
+    {
+        int count = 0;
+
+        if (character1 > 0)
+        {
+            count += 1;
+        }
+
+        if (character2 > 0)
+        {
+            count += 1;
+        }
+
+        if (character3 > 0)
+        {
+            count += 1;
+        }
+
+        if (character4 > 0)
+        {
+            count += 1;
+        }
+
+        if (character5 > 0)
+        {
+            count += 1;
+        }
+
+        if (character6 > 0)
+        {
+            count += 1;
+        }
+
+        if (character7 > 0)
+        {
+            count += 1;
+        }
+
+        if (character8 > 0)
+        {
+            count += 1;
+        }
+
+        if (character9 > 0)
+        {
+            count += 1;
+        }
+
+        if (character10 > 0)
+        {
+            count += 1;
+        }
+
+        if (character11 > 0)
+        {
+            count += 1;
+        }
+
+        if (character12 > 0)
+        {
+            count += 1;
+        }
+
+        if (character13 > 0)
+        {
+            count += 1;
+        }
+
+        if (character14 > 0)
+        {
+            count += 1;
+        }
+
+        if (character15 > 0)
+        {
+            count += 1;
+        }
+
+        if (character16 > 0)
+        {
+            count += 1;
+        }
+
+        if (character17 > 0)
+        {
+            count += 1;
+        }
+
+        if (character18 > 0)
+        {
+            count += 1;
+        }
+
+        if (character19 > 0)
+        {
+            count += 1;
+        }
+
+        if (character20 > 0)
+        {
+            count += 1;
+        }
+
+        if (character21 > 0)
         {
             count += 1;
         }

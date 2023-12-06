@@ -32,7 +32,7 @@ public enum RankingType
 {
     UpgradeCount,
     TotalLevel,
-    Michelin
+    GourmetLevel
 }
 
 public enum LanguageType
@@ -303,6 +303,8 @@ public enum RewardType
     Treasure7,
     Treasure8,
     Treasure9,
+    TreasureBox,
+    DefDestroyTicketPiece
 }
 
 public enum QuestType

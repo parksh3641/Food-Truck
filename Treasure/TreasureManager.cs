@@ -218,7 +218,10 @@ public class TreasureManager : MonoBehaviour
             yield return waitForSeconds;
         }
 
-        Initialize();
+        if(treasureView.activeInHierarchy)
+        {
+            Initialize();
+        }
 
         yield return waitForSeconds2;
 

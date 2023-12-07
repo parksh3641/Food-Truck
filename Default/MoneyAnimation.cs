@@ -14,8 +14,7 @@ public class MoneyAnimation : MonoBehaviour
     public Transform plusMoneyStartTransform;
     public Transform plusMoneyEndTransform;
 
-    private int gold = 0;
-    private int max = 0;
+    private int number = 0;
 
     [Space]
     [Title("Prefab")]
@@ -61,6 +60,13 @@ public class MoneyAnimation : MonoBehaviour
 
     public void PlusMoney(int target)
     {
+        number = target;
+
+        if(number >= 10)
+        {
+            number = 10;
+        }
+
         StopAllCoroutines();
 
         plusMoneyObj.SetActive(false);
@@ -75,7 +81,7 @@ public class MoneyAnimation : MonoBehaviour
 
     IEnumerator PlusMoneyCoroution(int target)
     {
-        for (int i = 0; i < moneyPrefabList.Count; i++)
+        for (int i = 0; i < number; i++)
         {
             moneyPrefabList[i].gameObject.SetActive(true);
             moneyPrefabList[i].GoToTarget(plusMoneyStartTransform.localPosition, plusMoneyEndTransform.localPosition);

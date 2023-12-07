@@ -37,7 +37,7 @@ public class TreasureContent : MonoBehaviour
 
     private float treasure1Value = 0.2f;
     private float treasure2Value = 0.1f;
-    private float treasure3Value = 0.2f;
+    private float treasure3Value = 0.3f;
     private float treasure4Value = 0.3f;
     private float treasure5Value = 1f;
     private float treasure6Value = 0.5f;

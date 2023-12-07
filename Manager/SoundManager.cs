@@ -15,6 +15,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource[] sfxAudio;
 
+    private bool fever = false;
 
     private void Awake()
     {
@@ -60,6 +61,11 @@ public class SoundManager : MonoBehaviour
         }
 
         musicAudio2.Play();
+
+        if(fever)
+        {
+            PlayFever();
+        }
     }
 
     public void StopBGM()
@@ -85,6 +91,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlayFever()
     {
+        fever = true;
+
         if (!GameStateManager.instance.Music) return;
 
         musicAudio.Stop();
@@ -94,6 +102,8 @@ public class SoundManager : MonoBehaviour
 
     public void StopFever()
     {
+        fever = false;
+
         ResetBGM();
     }
 

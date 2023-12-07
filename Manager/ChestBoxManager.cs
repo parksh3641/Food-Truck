@@ -10,7 +10,7 @@ public class ChestBoxManager : MonoBehaviour
 
     public GameObject ingameUI;
 
-    public Text[] portionPlusTextArray;
+    public MoneyAnimation[] portionAnimation;
 
     public GameObject chestBoxView;
 
@@ -36,11 +36,6 @@ public class ChestBoxManager : MonoBehaviour
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
-
-        for(int i = 0; i < portionPlusTextArray.Length; i ++)
-        {
-            portionPlusTextArray[i].gameObject.SetActive(false);
-        }
     }
 
 
@@ -124,7 +119,7 @@ public class ChestBoxManager : MonoBehaviour
 
             chestBoxArray[0].SetActive(true);
         }
-        else if (random > 5)
+        else if (random > 11)
         {
             rewardType = RewardType.PortionSet;
 
@@ -198,13 +193,11 @@ public class ChestBoxManager : MonoBehaviour
                     //    break;
                 }
 
-                portionPlusTextArray[number].gameObject.SetActive(false);
-                portionPlusTextArray[number].gameObject.SetActive(true);
-                portionPlusTextArray[number].text = "+1";
+                portionAnimation[number].PlusMoney(1);
 
                 break;
             case RewardType.Crystal:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3);
                 break;
         }
 
@@ -252,13 +245,11 @@ public class ChestBoxManager : MonoBehaviour
                     //    break;
                 }
 
-                portionPlusTextArray[number].gameObject.SetActive(false);
-                portionPlusTextArray[number].gameObject.SetActive(true);
-                portionPlusTextArray[number].text = "+3";
+                portionAnimation[number].PlusMoney(3);
 
                 break;
             case RewardType.Crystal:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
                 break;
         }
 

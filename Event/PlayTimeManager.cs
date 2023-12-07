@@ -69,7 +69,7 @@ public class PlayTimeManager : MonoBehaviour
         attendanceContentArray[0].receiveContent[0].Initialize(RewardType.Gold, 100000);
 
         attendanceContentArray[1].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Crystal, 3);
+        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Crystal, 10);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[2].receiveContent[0].Initialize(RewardType.DefDestroyTicketPiece, 1);
@@ -94,7 +94,7 @@ public class PlayTimeManager : MonoBehaviour
 
                 break;
             case 1:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
 
                 break;
             case 2:

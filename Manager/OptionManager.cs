@@ -10,19 +10,25 @@ public class OptionManager : MonoBehaviour
     public GameObject languageView;
     public Text versionText;
 
+    public Sprite[] buttonImgArray;
+
     [Title("Music")]
+    public Image musicButtonImg;
     public LocalizationContent musicText;
 
     [Space]
     [Title("Sfx")]
+    public Image sfxButtonImg;
     public LocalizationContent sfxText;
 
     [Space]
     [Title("Vibration")]
+    public Image vibrationButtonImg;
     public LocalizationContent vibrationText;
 
     [Space]
     [Title("Effect")]
+    public Image effectButtonImg;
     public LocalizationContent effectText;
 
     [Space]
@@ -137,12 +143,16 @@ public class OptionManager : MonoBehaviour
             musicText.localizationName = "ON";
             musicText.ReLoad();
 
+            musicButtonImg.sprite = buttonImgArray[0];
+
             soundManager.PlayBGM();
         }
         else
         {
             musicText.localizationName = "OFF";
             musicText.ReLoad();
+
+            musicButtonImg.sprite = buttonImgArray[1];
 
             soundManager.StopBGM();
         }
@@ -154,11 +164,15 @@ public class OptionManager : MonoBehaviour
         {
             sfxText.localizationName = "ON";
             sfxText.ReLoad();
+
+            sfxButtonImg.sprite = buttonImgArray[0];
         }
         else
         {
             sfxText.localizationName = "OFF";
             sfxText.ReLoad();
+
+            sfxButtonImg.sprite = buttonImgArray[1];
         }
     }
 
@@ -168,11 +182,15 @@ public class OptionManager : MonoBehaviour
         {
             vibrationText.localizationName = "ON";
             vibrationText.ReLoad();
+
+            vibrationButtonImg.sprite = buttonImgArray[0];
         }
         else
         {
             vibrationText.localizationName = "OFF";
             vibrationText.ReLoad();
+
+            vibrationButtonImg.sprite = buttonImgArray[1];
         }
     }
 
@@ -182,11 +200,15 @@ public class OptionManager : MonoBehaviour
         {
             effectText.localizationName = "ON";
             effectText.ReLoad();
+
+            effectButtonImg.sprite = buttonImgArray[0];
         }
         else
         {
             effectText.localizationName = "OFF";
             effectText.ReLoad();
+
+            effectButtonImg.sprite = buttonImgArray[1];
         }
     }
 }

@@ -24,7 +24,7 @@ public class TreasureManager : MonoBehaviour
     public ReceiveContent[] receiveContents;
 
     private int index = 0;
-    private int price = 20;
+    private int price = 30;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(0.5f);
@@ -178,7 +178,7 @@ public class TreasureManager : MonoBehaviour
         {
             index = Random.Range(0, System.Enum.GetValues(typeof(TreasureType)).Length);
 
-            SoundManager.instance.PlaySFX(GameSfxType.Click);
+            SoundManager.instance.PlaySFX(GameSfxType.UseSources);
 
             GetTreasure(index);
 

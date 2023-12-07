@@ -97,8 +97,6 @@ public class ShopManager : MonoBehaviour
     private int price_Gold = 0;
     private int price_Crystal = 0;
 
-    private int exchangeRate = 1000000;
-
     CharacterInfo characterInfo = new CharacterInfo();
     TruckInfo truckInfo = new TruckInfo();
     AnimalInfo animalInfo = new AnimalInfo();
@@ -249,7 +247,8 @@ public class ShopManager : MonoBehaviour
             case 0:
                 shopContents[0].Initialize(ItemType.DailyReward, BuyType.Free, this);
                 shopContents[1].Initialize(ItemType.AdReward_Gold, BuyType.Ad, this);
-                shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Crystal, this);
+                //shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Crystal, this);
+                shopContents[2].gameObject.SetActive(false);
                 shopContents[6].Initialize(ItemType.AdReward_Portion, BuyType.Ad, this);
                 shopContents[7].Initialize(ItemType.RemoveAds, BuyType.Rm, this);
                 shopContents[11].Initialize(ItemType.DailyReward_Portion, BuyType.Free, this);
@@ -297,11 +296,16 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 2:
-                shopContents[19].Initialize(ItemType.Portion1, BuyType.Crystal, this);
-                shopContents[20].Initialize(ItemType.Portion2, BuyType.Crystal, this);
-                shopContents[21].Initialize(ItemType.Portion3, BuyType.Crystal, this);
-                shopContents[22].Initialize(ItemType.Portion4, BuyType.Crystal, this);
-                shopContents[23].Initialize(ItemType.Portion5, BuyType.Crystal, this);
+                //shopContents[19].Initialize(ItemType.Portion1, BuyType.Crystal, this);
+                //shopContents[20].Initialize(ItemType.Portion2, BuyType.Crystal, this);
+                //shopContents[21].Initialize(ItemType.Portion3, BuyType.Crystal, this);
+                //shopContents[22].Initialize(ItemType.Portion4, BuyType.Crystal, this);
+                //shopContents[23].Initialize(ItemType.Portion5, BuyType.Crystal, this);
+                shopContents[19].gameObject.SetActive(false);
+                shopContents[20].gameObject.SetActive(false);
+                shopContents[21].gameObject.SetActive(false);
+                shopContents[22].gameObject.SetActive(false);
+                shopContents[23].gameObject.SetActive(false);
 
                 shopContents[8].Initialize(ItemType.PortionSet1, BuyType.Rm, this);
                 shopContents[9].Initialize(ItemType.PortionSet2, BuyType.Rm, this);
@@ -373,10 +377,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop1:
-                if (playerDataBase.Crystal >= 100)
+                if (playerDataBase.Crystal >= 120)
                 {
-                    PlayfabManager.instance.UpdateAddGold(5000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 100);
+                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 120);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -388,10 +392,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop2:
-                if (playerDataBase.Crystal >= 1000)
+                if (playerDataBase.Crystal >= 1200)
                 {
-                    PlayfabManager.instance.UpdateAddGold(50000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1000);
+                    PlayfabManager.instance.UpdateAddGold(10000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1200);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -403,10 +407,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop3:
-                if (playerDataBase.Crystal >= 10000)
+                if (playerDataBase.Crystal >= 12000)
                 {
-                    PlayfabManager.instance.UpdateAddGold(500000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10000);
+                    PlayfabManager.instance.UpdateAddGold(10000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 12000);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -516,7 +520,7 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion3:
-                if (playerDataBase.Crystal >= 110)
+                if (playerDataBase.Crystal >= 10)
                 {
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 10);
 
@@ -581,7 +585,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.DefDestroyTicket += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
 
-                    shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
+                    //shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
                     shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
@@ -1087,6 +1091,10 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
+#if UNITY_EDITOR
+        buy = true;
+#endif
+
         if (hold)
         {
             selectObj.SetActive(true);
@@ -1114,12 +1122,12 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(false);
+            crystalButton.SetActive(true);
 
-            if (characterIndex > 5)
-            {
-                crystalButton.SetActive(true);
-            }
+            //if (characterIndex > 5)
+            //{
+            //    crystalButton.SetActive(true);
+            //}
 
             if(characterInfo.characterType == CharacterType.Character21)
             {
@@ -1289,6 +1297,10 @@ public class ShopManager : MonoBehaviour
 
                 break;
         }
+
+#if UNITY_EDITOR
+        buy = true;
+#endif
 
         if (hold)
         {
@@ -1464,6 +1476,10 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
+#if UNITY_EDITOR
+        buy = true;
+#endif
+
         if (hold)
         {
             selectObj.SetActive(true);
@@ -1491,12 +1507,12 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(false);
+            crystalButton.SetActive(true);
 
-            if (animalIndex > 2)
-            {
-                crystalButton.SetActive(true);
-            }
+            //if (animalIndex > 2)
+            //{
+            //    crystalButton.SetActive(true);
+            //}
         }
     }
 
@@ -1840,6 +1856,10 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
+#if UNITY_EDITOR
+        buy = true;
+#endif
+
         if (hold)
         {
             selectObj.SetActive(true);
@@ -1867,12 +1887,12 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(false);
+            crystalButton.SetActive(true);
 
-            if (butterflyIndex > 5)
-            {
-                crystalButton.SetActive(true);
-            }
+            //if (butterflyIndex > 5)
+            //{
+            //    crystalButton.SetActive(true);
+            //}
         }
     }
 

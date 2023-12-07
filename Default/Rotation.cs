@@ -6,7 +6,7 @@ public class Rotation : MonoBehaviour
 {
     public bool rotateY = false;
 
-    public float rotationSpeed = 10f;
+    public float rotationSpeed = 30f;
 
     private void Update()
     {

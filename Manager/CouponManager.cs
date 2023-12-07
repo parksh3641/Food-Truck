@@ -247,11 +247,11 @@ public class CouponManager : MonoBehaviour
                     playerDataBase.Coupon5 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon5", 1);
 
-                    PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
+                    PlayfabManager.instance.UpdateAddGold(2000000);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
 
-                    playerDataBase.DefDestroyTicket += 3;
-                    playerDataBase.Portion5 += 5;
+                    playerDataBase.DefDestroyTicket += 5;
+                    playerDataBase.Portion5 += 10;
 
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
@@ -262,10 +262,10 @@ public class CouponManager : MonoBehaviour
                     receiveContents[2].gameObject.SetActive(true);
                     receiveContents[3].gameObject.SetActive(true);
 
-                    receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 10);
-                    receiveContents[2].Initialize(RewardType.DefDestroyTicket, 3);
-                    receiveContents[3].Initialize(RewardType.Portion5, 5);
+                    receiveContents[0].Initialize(RewardType.Gold, 2000000);
+                    receiveContents[1].Initialize(RewardType.Crystal, 100);
+                    receiveContents[2].Initialize(RewardType.DefDestroyTicket, 5);
+                    receiveContents[3].Initialize(RewardType.Portion5, 10);
 
                     if(playerDataBase.Character21 == 0)
                     {

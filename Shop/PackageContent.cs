@@ -25,11 +25,6 @@ public class PackageContent : MonoBehaviour
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
-
-        //for (int i = 0; i < receiveContents.Length; i ++)
-        //{
-        //    receiveContents[i].gameObject.SetActive(false);
-        //}
     }
 
     public void Initialize(PackageType type, ShopManager manager)
@@ -38,31 +33,36 @@ public class PackageContent : MonoBehaviour
 
         titleText.text = LocalizationManager.instance.GetString(type.ToString());
 
+        //for (int i = 0; i < receiveContents.Length; i++)
+        //{
+        //    receiveContents[i].gameObject.SetActive(false);
+        //}
+
         switch (type)
         {
             case PackageType.Package1:
-                receiveContents[0].Initialize(RewardType.Gold, 10);
-                receiveContents[1].Initialize(RewardType.Crystal, 10);
-                receiveContents[2].Initialize(RewardType.Portion1, 10);
-                receiveContents[3].Initialize(RewardType.Portion2, 10);
+                receiveContents[0].Initialize(RewardType.Gold, 5000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 50);
+                receiveContents[2].Initialize(RewardType.PortionSet, 5);
+                receiveContents[3].Initialize(RewardType.BuffTickets, 10);
                 break;
             case PackageType.Package2:
-                receiveContents[0].Initialize(RewardType.Gold, 20);
-                receiveContents[1].Initialize(RewardType.Crystal, 20);
-                receiveContents[2].Initialize(RewardType.Portion1, 20);
-                receiveContents[3].Initialize(RewardType.Portion2, 20);
+                receiveContents[0].Initialize(RewardType.Gold, 50000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 500);
+                receiveContents[2].Initialize(RewardType.PortionSet, 40);
+                receiveContents[3].Initialize(RewardType.BuffTickets, 10);
                 break;
             case PackageType.Package3:
-                receiveContents[0].Initialize(RewardType.Gold, 30);
-                receiveContents[1].Initialize(RewardType.Crystal, 30);
-                receiveContents[2].Initialize(RewardType.Portion1, 30);
-                receiveContents[3].Initialize(RewardType.Portion2, 30);
+                receiveContents[0].Initialize(RewardType.Gold, 200000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 2500);
+                receiveContents[2].Initialize(RewardType.BuffTickets, 50);
+                receiveContents[3].Initialize(RewardType.DefDestroyTicket, 30);
                 break;
             case PackageType.Package4:
-                receiveContents[0].Initialize(RewardType.Gold, 40);
-                receiveContents[1].Initialize(RewardType.Crystal, 40);
-                receiveContents[2].Initialize(RewardType.Portion1, 40);
-                receiveContents[3].Initialize(RewardType.Portion2, 40);
+                receiveContents[0].Initialize(RewardType.Gold, 50000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 3000);
+                receiveContents[2].Initialize(RewardType.BuffTickets, 100);
+                receiveContents[3].Initialize(RewardType.DefDestroyTicket, 100);
                 break;
         }
 

@@ -167,8 +167,8 @@ public class OfflineManager : MonoBehaviour
         addCoin = 5000 + playerDataBase.CastleLevel * 500;
         addExp = 300 + playerDataBase.CastleLevel * 3;
 
-        addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.01f));
-        addExp += (int)(addExp * (playerDataBase.Treasure5 * 0.01f));
+        addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.005f));
+        addExp += (int)(addExp * (playerDataBase.Treasure5 * 0.005f));
 
         if(playerDataBase.SuperOffline)
         {

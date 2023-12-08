@@ -21,7 +21,7 @@ public class GourmetManager : MonoBehaviour
 
     public void FirstInitialize()
     {
-        Invoke("Initialize", 2f);
+        Invoke("Initialize", 1f);
     }
 
     public void Initialize()

@@ -171,9 +171,10 @@ public class ShopManager : MonoBehaviour
         dailyShopCountText.text = "";
         StartCoroutine(DailyShopTimer());
 
-        shopRectTransform[0].anchoredPosition = new Vector2(0, -9999);
-        shopRectTransform[1].anchoredPosition = new Vector2(0, -9999);
-        shopRectTransform[2].anchoredPosition = new Vector2(0, -9999);
+        for(int i = 0; i < shopRectTransform.Length; i ++)
+        {
+            shopRectTransform[i].anchoredPosition = new Vector2(0, -9999);
+        }
     }
 
     public void SetAlarm()
@@ -1162,14 +1163,14 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(true);
+            crystalButton.SetActive(false);
 
-            //if (characterIndex > 5)
-            //{
-            //    crystalButton.SetActive(true);
-            //}
+            if (characterIndex > 2)
+            {
+                crystalButton.SetActive(true);
+            }
 
-            if(characterInfo.characterType == CharacterType.Character21)
+            if (characterInfo.characterType == CharacterType.Character21)
             {
                 buyButton.SetActive(false);
                 buySpeical.SetActive(true);
@@ -2686,15 +2687,13 @@ public class ShopManager : MonoBehaviour
                 break;
             case 4:
                 playerDataBase.Portion1 += 5;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-
                 playerDataBase.Portion2 += 5;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-
                 playerDataBase.Portion3 += 5;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-
                 playerDataBase.Portion4 += 5;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
                 //playerDataBase.Portion5 += 10;
@@ -2702,32 +2701,28 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 5:
-                playerDataBase.Portion1 += 20;
+                playerDataBase.Portion1 += 15;
+                playerDataBase.Portion2 += 15;
+                playerDataBase.Portion3 += 15;
+                playerDataBase.Portion4 += 15;
+
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-
-                playerDataBase.Portion2 += 20;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-
-                playerDataBase.Portion3 += 20;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-
-                playerDataBase.Portion4 += 20;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
                 //playerDataBase.Portion5 += 25;
                 //PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
                 break;
             case 6:
-                playerDataBase.Portion1 += 50;
+                playerDataBase.Portion1 += 40;
+                playerDataBase.Portion2 += 40;
+                playerDataBase.Portion3 += 40;
+                playerDataBase.Portion4 += 40;
+
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-
-                playerDataBase.Portion2 += 50;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-
-                playerDataBase.Portion3 += 50;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-
-                playerDataBase.Portion4 += 50;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
                 //playerDataBase.Portion5 += 50;
@@ -2802,41 +2797,90 @@ public class ShopManager : MonoBehaviour
 
     public void BuyPackage(PackageType type)
     {
+        StartCoroutine(BuyPackageCoroution(type));
+    }
+
+    IEnumerator BuyPackageCoroution(PackageType type)
+    {
         switch (type)
         {
             case PackageType.Package1:
-
-
                 playerDataBase.Package1 = true;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package1", 1);
-
                 Invoke("PackageDelay", 0.5f);
+
+                PlayfabManager.instance.UpdateAddGold(5000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
+
+                playerDataBase.Portion1 += 5;
+                playerDataBase.Portion2 += 5;
+                playerDataBase.Portion3 += 5;
+                playerDataBase.Portion4 += 5;
+                playerDataBase.BuffTickets += 10;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+
+                yield return waitForSeconds;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package1", 1);
                 break;
             case PackageType.Package2:
-
-
-
                 playerDataBase.Package2 = true;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package2", 1);
-
                 Invoke("PackageDelay2", 0.5f);
+
+                PlayfabManager.instance.UpdateAddGold(50000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
+
+                playerDataBase.Portion1 += 40;
+                playerDataBase.Portion2 += 40;
+                playerDataBase.Portion3 += 40;
+                playerDataBase.Portion4 += 40;
+                playerDataBase.BuffTickets += 10;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+
+                yield return waitForSeconds;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package2", 1);
                 break;
             case PackageType.Package3:
-
-
-
                 playerDataBase.Package3 = true;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package3", 1);
-
                 Invoke("PackageDelay3", 0.5f);
+
+                PlayfabManager.instance.UpdateAddGold(200000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 2500);
+
+                playerDataBase.BuffTickets += 50;
+                playerDataBase.DefDestroyTicket += 30;
+
+                yield return waitForSeconds;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package3", 1);
                 break;
             case PackageType.Package4:
-
-
                 playerDataBase.Package4 = true;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package4", 1);
-
                 Invoke("PackageDelay4", 0.5f);
+
+                PlayfabManager.instance.UpdateAddGold(50000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3000);
+
+                playerDataBase.BuffTickets += 100;
+                playerDataBase.DefDestroyTicket += 100;
+
+                yield return waitForSeconds;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package4", 1);
                 break;
         }
 

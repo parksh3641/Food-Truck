@@ -305,13 +305,13 @@ public class UpgradeDataBase : ScriptableObject
                             success = 100 - (level * 1);
                             break;
                         case IslandType.Island2:
-                            success = 99 - (level * 1);
-                            break;
-                        case IslandType.Island3:
                             success = 96 - (level * 1);
                             break;
-                        case IslandType.Island4:
+                        case IslandType.Island3:
                             success = 91 - (level * 1);
+                            break;
+                        case IslandType.Island4:
+                            success = 86 - (level * 1);
                             break;
                     }
                 }

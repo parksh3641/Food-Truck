@@ -352,6 +352,11 @@ public class ChangeFoodContent : MonoBehaviour
 
     public void SetLevel(int level, int max)
     {
+        if(level > max)
+        {
+            level = max - 1;
+        }
+
         levelText.text = "( " + (level + 1).ToString() + " / " + max.ToString() + " )";
     }
 

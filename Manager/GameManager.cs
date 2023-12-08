@@ -1162,7 +1162,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
         sellPricePlus += playerDataBase.Skill8 * 0.2f;
         sellPricePlus += playerDataBase.Proficiency * 0.5f;
-        sellPricePlus += playerDataBase.Treasure7 * 0.5f;
+        sellPricePlus += playerDataBase.Treasure7 * 0.4f;
 
         sellPriceTip += playerDataBase.Skill14 * 0.3f; //ÆÁ È®·ü
         sellPriceTip += playerDataBase.Treasure8 * 0.5f;
@@ -1183,17 +1183,17 @@ public class GameManager : MonoBehaviour
         feverCount = GameStateManager.instance.FeverCount;
 
         feverTime = 30;
-        feverTime += (30 * (0.003f * playerDataBase.Skill1));
-        feverTime += (30 * (0.005f * playerDataBase.Treasure9));
+        feverTime += (30 * (0.002f * playerDataBase.Skill1));
+        feverTime += (30 * (0.004f * playerDataBase.Treasure9));
 
         feverMaxCount = 300 - (300 * (0.003f * playerDataBase.Skill2));
         feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
-        portion1Time = 30 + (30 * (0.003f * playerDataBase.Skill4)) + (30 * (0.005f * playerDataBase.Treasure6));
-        portion2Time = 30 + (30 * (0.003f * playerDataBase.Skill5)) + (30 * (0.005f * playerDataBase.Treasure6));
-        portion3Time = 30 + (30 * (0.003f * playerDataBase.Skill6)) + (30 * (0.005f * playerDataBase.Treasure6));
-        portion4Plus = 0.003f * playerDataBase.Skill12;
-        portion5Time = 30 + (30 * (0.003f * playerDataBase.Skill13)) + (30 * (0.005f * playerDataBase.Treasure6));
+        portion1Time = 30 + (30 * (0.002f * playerDataBase.Skill4)) + (30 * (0.005f * playerDataBase.Treasure6));
+        portion2Time = 30 + (30 * (0.002f * playerDataBase.Skill5)) + (30 * (0.005f * playerDataBase.Treasure6));
+        portion3Time = 30 + (30 * (0.002f * playerDataBase.Skill6)) + (30 * (0.005f * playerDataBase.Treasure6));
+        portion4Plus = 0.002f * playerDataBase.Skill12;
+        portion5Time = 30 + (30 * (0.002f * playerDataBase.Skill13)) + (30 * (0.005f * playerDataBase.Treasure6));
 
         if (playerDataBase.GoldX2)
         {
@@ -1244,7 +1244,6 @@ public class GameManager : MonoBehaviour
         CheckFever();
         CheckDefTicket();
         CheckPortion();
-
         UpgradeInitialize();
 
         portion6Obj.SetActive(false);
@@ -1473,28 +1472,47 @@ public class GameManager : MonoBehaviour
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
-                sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-
                 maxLevel = upgradeFood.maxLevel;
+
+                if (level > maxLevel)
+                {
+                    level = maxLevel - 1;
+                }
+
+                sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
                 break;
             case IslandType.Island2:
+                maxLevel = upgradeCandy.maxLevel;
+
+                if (level > maxLevel)
+                {
+                    level = maxLevel - 1;
+                }
+
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
                 sellPrice = sellPrice + (int)(sellPrice * 0.1f);
-
-                maxLevel = upgradeCandy.maxLevel;
                 break;
             case IslandType.Island3:
+                maxLevel = upgradeJapaneseFood.maxLevel;
+
+                if (level > maxLevel)
+                {
+                    level = maxLevel - 1;
+                }
+
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
                 sellPrice = sellPrice + (int)(sellPrice * 0.2f);
-                success = upgradeDataBase.GetSuccess(level);
-
-                maxLevel = upgradeJapaneseFood.maxLevel;
                 break;
             case IslandType.Island4:
+                maxLevel = upgradeDessert.maxLevel;
+
+                if (level > maxLevel)
+                {
+                    level = maxLevel - 1;
+                }
+
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
                 sellPrice = sellPrice + (int)(sellPrice * 0.3f);
-
-                maxLevel = upgradeDessert.maxLevel;
                 break;
         }
 
@@ -4916,12 +4934,12 @@ public class GameManager : MonoBehaviour
         if(!testMode.activeInHierarchy)
         {
             testMode.SetActive(true);
-            testModeText.text = "Developer Mode OFF";
+            testModeText.text = "Cheat Mode OFF";
         }
         else
         {
             testMode.SetActive(false);
-            testModeText.text = "Developer Mode ON";
+            testModeText.text = "Cheat Mode ON";
         }
     }
 

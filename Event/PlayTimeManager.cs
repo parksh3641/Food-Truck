@@ -74,7 +74,7 @@ public class PlayTimeManager : MonoBehaviour
         attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Crystal, 10);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.DefDestroyTicketPiece, 1);
+        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.BuffTickets, 1);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[3].receiveContent[0].Initialize(RewardType.TreasureBox, 1);
@@ -100,8 +100,8 @@ public class PlayTimeManager : MonoBehaviour
 
                 break;
             case 2:
-                playerDataBase.DefDestroyTicketPiece += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicketPiece", playerDataBase.DefDestroyTicketPiece);
+                playerDataBase.BuffTickets += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
 
                 break;
             case 3:

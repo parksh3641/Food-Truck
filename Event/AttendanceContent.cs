@@ -179,13 +179,13 @@ public class AttendanceContent : MonoBehaviour
                 }
                 break;
             case 2:
-                titleText.plusText = " : 20";
+                titleText.plusText = " : 15";
 
                 if (check == 2)
                 {
                     selectObj.SetActive(true);
 
-                    if (number >= 20)
+                    if (number >= 15)
                     {
                         lockObj.SetActive(false);
                     }
@@ -208,13 +208,13 @@ public class AttendanceContent : MonoBehaviour
                 }
                 break;
             case 3:
-                titleText.plusText = " : 30";
+                titleText.plusText = " : 20";
 
                 if (check == 3)
                 {
                     selectObj.SetActive(true);
 
-                    if (number >= 30)
+                    if (number >= 20)
                     {
                         lockObj.SetActive(false);
                     }

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject goldx2;
     public GameObject removeAds;
+    public GameObject superOffline;
 
     public GameObject privacypolicyView;
 
@@ -400,6 +401,7 @@ public class GameManager : MonoBehaviour
 
         removeAds.SetActive(false);
         goldx2.SetActive(false);
+        superOffline.SetActive(false);
 
         if (playerDataBase.RemoveAds)
         {
@@ -409,6 +411,11 @@ public class GameManager : MonoBehaviour
         if (playerDataBase.GoldX2)
         {
             goldx2.SetActive(true);
+        }
+
+        if (playerDataBase.SuperOffline)
+        {
+            superOffline.SetActive(true);
         }
 
         checkInternet.SetActive(false);
@@ -4178,7 +4185,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckDefTicket()
     {
-        if(level >= 1 && level + 1 < maxLevel)
+        if(level >= 1 && level + 1 < maxLevel && playerDataBase.LockTutorial > 1)
         {
             defTicketObj.SetActive(true);
 
@@ -4767,8 +4774,6 @@ public class GameManager : MonoBehaviour
     public void OpenAppReview()
     {
         appReview.SetActive(true);
-
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 20);
     }
 
     public void CloseAppReview()
@@ -4804,6 +4809,8 @@ public class GameManager : MonoBehaviour
 #elif UNITY_IOS
         Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
 #endif
+
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 20);
 
         FirebaseAnalytics.LogEvent("OpenAppReview");
 
@@ -5111,17 +5118,17 @@ public class GameManager : MonoBehaviour
         rankLocked.SetActive(true);
         treasureLocked.SetActive(true);
 
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 2)
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 1)
         {
             butterflyLocked.SetActive(false);
         }
 
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 9)
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 8)
         {
             rankLocked.SetActive(false);
         }
 
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 4)
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 3)
         {
             treasureLocked.SetActive(false);
         }

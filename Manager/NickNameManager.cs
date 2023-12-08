@@ -20,6 +20,8 @@ public class NickNameManager : MonoBehaviour
     public string[] lines;
     string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
 
+    public NoticeManager noticeManager;
+
     public PlayerDataBase playerDataBase;
 
     private void Awake()
@@ -156,6 +158,11 @@ public class NickNameManager : MonoBehaviour
         signText.text = GameStateManager.instance.NickName;
 
         nickNameView.SetActive(false);
+
+        if(playerDataBase.LockTutorial == 0)
+        {
+            noticeManager.OpenNoticeView();
+        }
     }
 
     public void Failure()

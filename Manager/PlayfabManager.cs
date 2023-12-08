@@ -783,6 +783,11 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.GoldX2 = true;
                     }
 
+                    if (list.ItemId.Equals("SuperOffline"))
+                    {
+                        playerDataBase.SuperOffline = true;
+                    }
+
                     if (list.ItemId.Equals("Character1"))
                     {
                         playerDataBase.Character1 = 1;
@@ -1269,6 +1274,46 @@ public class PlayfabManager : MonoBehaviour
                        case "GourmetLevel":
                            playerDataBase.GourmetLevel = statistics.Value;
                            break;
+                       case "Package1":
+                           if (statistics.Value == 0)
+                           {
+                               playerDataBase.Package1 = false;
+                           }
+                           else
+                           {
+                               playerDataBase.Package1 = true;
+                           }
+                           break;
+                       case "Package2":
+                           if (statistics.Value == 0)
+                           {
+                               playerDataBase.Package2 = false;
+                           }
+                           else
+                           {
+                               playerDataBase.Package2 = true;
+                           }
+                           break;
+                       case "Package3":
+                           if (statistics.Value == 0)
+                           {
+                               playerDataBase.Package3 = false;
+                           }
+                           else
+                           {
+                               playerDataBase.Package3 = true;
+                           }
+                           break;
+                       case "Package4":
+                           if (statistics.Value == 0)
+                           {
+                               playerDataBase.Package4 = false;
+                           }
+                           else
+                           {
+                               playerDataBase.Package4 = true;
+                           }
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;
@@ -1581,15 +1626,35 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "RankLevel1":
                            playerDataBase.RankLevel1 = statistics.Value;
+
+                           if(GameStateManager.instance.RibsLevel > playerDataBase.RankLevel1)
+                           {
+                               GameStateManager.instance.RibsLevel = playerDataBase.RankLevel1;
+                           }
                            break;
                        case "RankLevel2":
                            playerDataBase.RankLevel2 = statistics.Value;
+
+                           if (GameStateManager.instance.ChocolateLevel > playerDataBase.RankLevel2)
+                           {
+                               GameStateManager.instance.ChocolateLevel = playerDataBase.RankLevel2;
+                           }
                            break;
                        case "RankLevel3":
                            playerDataBase.RankLevel3 = statistics.Value;
+
+                           if (GameStateManager.instance.RamenLevel > playerDataBase.RankLevel3)
+                           {
+                               GameStateManager.instance.RamenLevel = playerDataBase.RankLevel3;
+                           }
                            break;
                        case "RankLevel4":
                            playerDataBase.RankLevel4 = statistics.Value;
+
+                           if (GameStateManager.instance.FruitSkewersLevel > playerDataBase.RankLevel4)
+                           {
+                               GameStateManager.instance.FruitSkewersLevel = playerDataBase.RankLevel4;
+                           }
                            break;
                        case "TotalLevel":
                            playerDataBase.TotalLevel = statistics.Value;
@@ -2212,6 +2277,19 @@ public class PlayfabManager : MonoBehaviour
         GrantItemToUser("Shop", itemList);
 
         playerDataBase.GoldX2 = true;
+    }
+
+    public void PurchaseSuperOffline()
+    {
+        itemList.Clear();
+        itemList.Add("SuperOffline");
+
+        GrantItemToUser("Shop", itemList);
+
+        playerDataBase.CastleServerDate = DateTime.Now.AddDays(1).ToString("MMddHHmm");
+        UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));
+
+        playerDataBase.SuperOffline = true;
     }
 
     public void RestorePurchases()

@@ -125,10 +125,19 @@ public class OfflineManager : MonoBehaviour
             else
             {
                 playerDataBase.CastleDate = DateTime.Now.ToString("MMddHHmm");
-                playerDataBase.CastleServerDate = DateTime.Now.AddDays(1).ToString("MMddHHmm");
 
                 time = DateTime.Now;
-                serverTime = DateTime.Now.AddDays(1);
+
+                if(playerDataBase.SuperOffline)
+                {
+                    playerDataBase.CastleServerDate = DateTime.Now.AddDays(2).ToString("MMddHHmm");
+                    serverTime = DateTime.Now.AddDays(2);
+                }
+                else
+                {
+                    playerDataBase.CastleServerDate = DateTime.Now.AddDays(1).ToString("MMddHHmm");
+                    serverTime = DateTime.Now.AddDays(1);
+                }
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleDate", int.Parse("1" + playerDataBase.CastleDate));
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));
@@ -154,16 +163,22 @@ public class OfflineManager : MonoBehaviour
 
         castleLevelText.text = LocalizationManager.instance.GetString("CastleLevel") + " : " + playerDataBase.CastleLevel + " / " + playerDataBase.Level;
 
-        addCrystal = (playerDataBase.CastleLevel + 1) * 5;
-        addCoin = 5000 + playerDataBase.CastleLevel * 300;
-        addExp = 200 + playerDataBase.CastleLevel * 5;
+        addCrystal = (playerDataBase.CastleLevel + 1) * 3;
+        addCoin = 5000 + playerDataBase.CastleLevel * 500;
+        addExp = 300 + playerDataBase.CastleLevel * 3;
 
         addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.01f));
         addExp += (int)(addExp * (playerDataBase.Treasure5 * 0.01f));
 
+        if(playerDataBase.SuperOffline)
+        {
+            addCoin += (int)(addCoin * 0.1f);
+            addExp += (int)(addExp * 0.1f);
+        }
+
         levelUpCostText.text = addCrystal.ToString();
-        coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "\n/" + localization_Hours + "  (+300)";
-        expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+5)";
+        coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "\n/" + localization_Hours + "  (+500)";
+        expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+3)";
 
         adCoinText.text = MoneyUnitString.ToCurrencyString(addCoin * 12);
         adExpText.text = MoneyUnitString.ToCurrencyString(addExp * 12);
@@ -173,9 +188,18 @@ public class OfflineManager : MonoBehaviour
 
         if (DateTime.Compare(DateTime.Now, serverTime) == 1)
         {
-            timerText.text = localization_Time + " : " + "24" + localization_Hours + " " + "00" + localization_Minutes;
+            if(playerDataBase.SuperOffline)
+            {
+                timerText.text = localization_Time + " : " + "48" + localization_Hours + " " + "00" + localization_Minutes;
 
-            CheckReward(60 * 24);
+                CheckReward(60 * 48);
+            }
+            else
+            {
+                timerText.text = localization_Time + " : " + "24" + localization_Hours + " " + "00" + localization_Minutes;
+
+                CheckReward(60 * 24);
+            }
 
             lockObj.SetActive(false);
         }
@@ -212,7 +236,6 @@ public class OfflineManager : MonoBehaviour
                 PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, addCrystal);
 
                 playerDataBase.CastleLevel += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleLevel", playerDataBase.CastleLevel);
 
                 CheckCastle();
@@ -233,7 +256,7 @@ public class OfflineManager : MonoBehaviour
         }
 
         isDelay = true;
-        Invoke("Delay", 0.3f);
+        Invoke("Delay", 0.4f);
     }
 
     void Delay()
@@ -267,10 +290,18 @@ public class OfflineManager : MonoBehaviour
         if (!lockObj.activeInHierarchy)
         {
             playerDataBase.CastleDate = DateTime.Now.ToString("MMddHHmm");
-            playerDataBase.CastleServerDate = DateTime.Now.AddDays(1).ToString("MMddHHmm");
 
             time = DateTime.Now;
-            serverTime = DateTime.Now.AddDays(1);
+            if (playerDataBase.SuperOffline)
+            {
+                playerDataBase.CastleServerDate = DateTime.Now.AddDays(2).ToString("MMddHHmm");
+                serverTime = DateTime.Now.AddDays(2);
+            }
+            else
+            {
+                playerDataBase.CastleServerDate = DateTime.Now.AddDays(1).ToString("MMddHHmm");
+                serverTime = DateTime.Now.AddDays(1);
+            }
 
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleDate", int.Parse("1" + playerDataBase.CastleDate));
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));

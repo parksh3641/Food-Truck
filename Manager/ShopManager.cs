@@ -17,6 +17,7 @@ public class ShopManager : MonoBehaviour
 
     public GameObject goldx2;
     public GameObject removeAds;
+    public GameObject superOffline;
 
     public GameObject leftButton;
     public GameObject rightButton;
@@ -38,8 +39,9 @@ public class ShopManager : MonoBehaviour
     public RectTransform[] shopRectTransform;
 
     [Space]
-    [Title("Item")]
+    [Title("Content")]
     public ShopContent[] shopContents;
+    public PackageContent[] packageContents;
 
     [Space]
     public GameObject mainCharacter;
@@ -255,6 +257,7 @@ public class ShopManager : MonoBehaviour
                 shopContents[12].Initialize(ItemType.GoldX2, BuyType.Rm, this);
                 shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
                 shopContents[25].Initialize(ItemType.DefDestroyTicketPiece, BuyType.Free, this);
+                shopContents[32].Initialize(ItemType.SuperOffline, BuyType.Rm, this);
 
                 if (playerDataBase.DailyReward == 0)
                 {
@@ -291,8 +294,37 @@ public class ShopManager : MonoBehaviour
                     shopContents[12].gameObject.SetActive(false);
                 }
 
+                if(playerDataBase.SuperOffline)
+                {
+                    shopContents[32].gameObject.SetActive(false);
+                }
+
                 break;
             case 1:
+                packageContents[0].Initialize(PackageType.Package1, this);
+                packageContents[1].Initialize(PackageType.Package2, this);
+                packageContents[2].Initialize(PackageType.Package3, this);
+                packageContents[3].Initialize(PackageType.Package4, this);
+
+                if(playerDataBase.Package1)
+                {
+                    packageContents[0].gameObject.SetActive(false);
+                }
+
+                if (playerDataBase.Package2)
+                {
+                    packageContents[1].gameObject.SetActive(false);
+                }
+
+                if (playerDataBase.Package3)
+                {
+                    packageContents[2].gameObject.SetActive(false);
+                }
+
+                if (playerDataBase.Package4)
+                {
+                    packageContents[3].gameObject.SetActive(false);
+                }
 
                 break;
             case 2:
@@ -310,6 +342,14 @@ public class ShopManager : MonoBehaviour
                 shopContents[8].Initialize(ItemType.PortionSet1, BuyType.Rm, this);
                 shopContents[9].Initialize(ItemType.PortionSet2, BuyType.Rm, this);
                 shopContents[10].Initialize(ItemType.PortionSet3, BuyType.Rm, this);
+
+                shopContents[26].Initialize(ItemType.BuffTicketSet1, BuyType.Rm, this);
+                shopContents[27].Initialize(ItemType.BuffTicketSet2, BuyType.Rm, this);
+                shopContents[28].Initialize(ItemType.BuffTicketSet3, BuyType.Rm, this);
+
+                shopContents[29].Initialize(ItemType.DefTicketSet1, BuyType.Rm, this);
+                shopContents[30].Initialize(ItemType.DefTicketSet2, BuyType.Rm, this);
+                shopContents[31].Initialize(ItemType.DefTicketSet3, BuyType.Rm, this);
 
                 break;
             case 3:
@@ -2645,16 +2685,16 @@ public class ShopManager : MonoBehaviour
                 Invoke("ContentDelay", 0.5f);
                 break;
             case 4:
-                playerDataBase.Portion1 += 10;
+                playerDataBase.Portion1 += 5;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
 
-                playerDataBase.Portion2 += 10;
+                playerDataBase.Portion2 += 5;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
 
-                playerDataBase.Portion3 += 10;
+                playerDataBase.Portion3 += 5;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
 
-                playerDataBase.Portion4 += 10;
+                playerDataBase.Portion4 += 5;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
                 //playerDataBase.Portion5 += 10;
@@ -2662,16 +2702,16 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 5:
-                playerDataBase.Portion1 += 25;
+                playerDataBase.Portion1 += 20;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
 
-                playerDataBase.Portion2 += 25;
+                playerDataBase.Portion2 += 20;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
 
-                playerDataBase.Portion3 += 25;
+                playerDataBase.Portion3 += 20;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
 
-                playerDataBase.Portion4 += 25;
+                playerDataBase.Portion4 += 20;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
                 //playerDataBase.Portion5 += 25;
@@ -2716,19 +2756,92 @@ public class ShopManager : MonoBehaviour
             case 13:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 14000);
                 break;
+            case 14:
+                playerDataBase.BuffTickets += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+                break;
+            case 15:
+                playerDataBase.BuffTickets += 2;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+                break;
+            case 16:
+                playerDataBase.BuffTickets += 3;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+                break;
+            case 17:
+                playerDataBase.DefDestroyTicket += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
+                break;
+            case 18:
+                playerDataBase.DefDestroyTicket += 2;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
+                break;
+            case 19:
+                playerDataBase.DefDestroyTicket += 3;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
+                break;
+            case 20:
+                PlayfabManager.instance.PurchaseSuperOffline();
+
+                Invoke("ContentDelay3", 0.5f);
+                break;
         }
 
-        shopContents[19].Initialize(ItemType.Portion1, BuyType.Crystal, this);
-        shopContents[20].Initialize(ItemType.Portion2, BuyType.Crystal, this);
-        shopContents[21].Initialize(ItemType.Portion3, BuyType.Crystal, this);
-        shopContents[22].Initialize(ItemType.Portion4, BuyType.Crystal, this);
-        shopContents[23].Initialize(ItemType.Portion5, BuyType.Crystal, this);
+        //shopContents[19].Initialize(ItemType.Portion1, BuyType.Crystal, this);
+        //shopContents[20].Initialize(ItemType.Portion2, BuyType.Crystal, this);
+        //shopContents[21].Initialize(ItemType.Portion3, BuyType.Crystal, this);
+        //shopContents[22].Initialize(ItemType.Portion4, BuyType.Crystal, this);
+        //shopContents[23].Initialize(ItemType.Portion5, BuyType.Crystal, this);
 
         SoundManager.instance.PlaySFX(GameSfxType.Purchase);
         NotionManager.instance.UseNotion(NotionType.SuccessBuy);
 
         GameManager.instance.CheckPortion();
         GameManager.instance.CheckDefTicket();
+    }
+
+    public void BuyPackage(PackageType type)
+    {
+        switch (type)
+        {
+            case PackageType.Package1:
+
+
+                playerDataBase.Package1 = true;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package1", 1);
+
+                Invoke("PackageDelay", 0.5f);
+                break;
+            case PackageType.Package2:
+
+
+
+                playerDataBase.Package2 = true;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package2", 1);
+
+                Invoke("PackageDelay2", 0.5f);
+                break;
+            case PackageType.Package3:
+
+
+
+                playerDataBase.Package3 = true;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package3", 1);
+
+                Invoke("PackageDelay3", 0.5f);
+                break;
+            case PackageType.Package4:
+
+
+                playerDataBase.Package4 = true;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package4", 1);
+
+                Invoke("PackageDelay4", 0.5f);
+                break;
+        }
+
+        SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+        NotionManager.instance.UseNotion(NotionType.SuccessBuy);
     }
 
     void ContentDelay()
@@ -2743,6 +2856,33 @@ public class ShopManager : MonoBehaviour
         shopContents[12].gameObject.SetActive(false);
 
         goldx2.SetActive(true);
+    }
+
+    void ContentDelay3()
+    {
+        shopContents[32].gameObject.SetActive(false);
+
+        superOffline.SetActive(true);
+    }
+
+    void PackageDelay()
+    {
+        packageContents[0].gameObject.SetActive(false);
+    }
+
+    void PackageDelay2()
+    {
+        packageContents[1].gameObject.SetActive(false);
+    }
+
+    void PackageDelay3()
+    {
+        packageContents[2].gameObject.SetActive(false);
+    }
+
+    void PackageDelay4()
+    {
+        packageContents[3].gameObject.SetActive(false);
     }
 
     public void Failed()

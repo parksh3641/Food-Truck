@@ -32,7 +32,7 @@ public class PlayTimeManager : MonoBehaviour
         playTimeRectTransform.anchoredPosition = new Vector2(0, -9999);
 
         mainAlarm.SetActive(false);
-        alarm.SetActive(false);
+        alarm.SetActive(true);
     }
 
     public void OpenPlayTimeView()
@@ -41,11 +41,13 @@ public class PlayTimeManager : MonoBehaviour
         {
             playTimeView.SetActive(true);
 
+            alarm.SetActive(false);
+
             playTimeText.text = LocalizationManager.instance.GetString("PlayTime") + " : " + GameStateManager.instance.PlayTime;
 
-            CheckInitialize();
-
             CheckPlayTime();
+
+            CheckInitialize();
 
             FirebaseAnalytics.LogEvent("PlayTime");
         }

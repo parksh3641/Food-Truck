@@ -198,7 +198,22 @@ public enum ItemType
     Portion4,
     Portion5,
     DefDestroyTicketSlices,
-    DefDestroyTicketPiece
+    DefDestroyTicketPiece,
+    BuffTicketSet1,
+    BuffTicketSet2,
+    BuffTicketSet3,
+    DefTicketSet1,
+    DefTicketSet2,
+    DefTicketSet3,
+    SuperOffline
+}
+
+public enum PackageType
+{
+    Package1,
+    Package2,
+    Package3,
+    Package4,
 }
 
 public enum BuyType
@@ -304,7 +319,9 @@ public enum RewardType
     Treasure8,
     Treasure9,
     TreasureBox,
-    DefDestroyTicketPiece
+    DefDestroyTicketPiece,
+    BuffTickets,
+    Portion6,
 }
 
 public enum QuestType

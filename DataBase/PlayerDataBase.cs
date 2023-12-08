@@ -476,6 +476,17 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int coupon10 = 0;
 
+    [Space]
+    [Title("Package")]
+    [SerializeField]
+    private bool package1 = false;
+    [SerializeField]
+    private bool package2 = false;
+    [SerializeField]
+    private bool package3 = false;
+    [SerializeField]
+    private bool package4 = false;
+
 
     [Space]
     [Title("Reset")]
@@ -491,6 +502,8 @@ public class PlayerDataBase : ScriptableObject
     private bool removeAds = false;
     [SerializeField]
     private bool goldX2 = false;
+    [SerializeField]
+    private bool superOffline = false;
 
     public long Coin
     {
@@ -2951,6 +2964,54 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public bool Package1
+    {
+        get
+        {
+            return package1;
+        }
+        set
+        {
+            package1 = value;
+        }
+    }
+
+    public bool Package2
+    {
+        get
+        {
+            return package2;
+        }
+        set
+        {
+            package2 = value;
+        }
+    }
+
+    public bool Package3
+    {
+        get
+        {
+            return package3;
+        }
+        set
+        {
+            package3 = value;
+        }
+    }
+
+    public bool Package4
+    {
+        get
+        {
+            return package4;
+        }
+        set
+        {
+            package4 = value;
+        }
+    }
+
     public string AttendanceDay
     {
         get
@@ -3047,10 +3108,23 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public bool SuperOffline
+    {
+        get
+        {
+            return superOffline;
+        }
+        set
+        {
+            superOffline = value;
+        }
+    }
+
     public void Initialize()
     {
         removeAds = false;
         goldX2 = false;
+        superOffline = false;
 
         rankLevel1 = 0;
         rankLevel2 = 0;
@@ -3271,6 +3345,11 @@ public class PlayerDataBase : ScriptableObject
         coupon3 = 0;
         coupon4 = 0;
         coupon5 = 0;
+
+        package1 = false;
+        package2 = false;
+        package3 = false;
+        package4 = false;
 
         attendanceDay = "";
         attendanceCount = 0;

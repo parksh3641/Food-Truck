@@ -109,7 +109,6 @@ public class ShopContent : MonoBehaviour
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
 
-                //buyCoinText.text = MoneyUnitString.ToCurrencyString(50000000);
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(100);
 
                 titleText.plusText = " x1";
@@ -125,10 +124,6 @@ public class ShopContent : MonoBehaviour
                 rewardText.text = MoneyUnitString.ToCurrencyString(1000000);
 
                 buyCrystalText.text = "120";
-
-                //buyRmObj[0].SetActive(true);
-                //buyRmText[0].localizationName = itemType + "_Price";
-                //buyRmText[0].ReLoad();
                 break;
             case ItemType.GoldShop2:
                 lockedObj.SetActive(false);
@@ -136,11 +131,6 @@ public class ShopContent : MonoBehaviour
                 rewardText.text = MoneyUnitString.ToCurrencyString(10000000);
 
                 buyCrystalText.text = "1,200";
-
-                //buyRmObj[1].SetActive(true);
-                //buyRmText[1].localizationName = itemType + "_Price";
-                //buyRmText[1].ReLoad();
-
                 break;
             case ItemType.GoldShop3:
                 lockedObj.SetActive(false);
@@ -148,10 +138,6 @@ public class ShopContent : MonoBehaviour
                 rewardText.text = MoneyUnitString.ToCurrencyString(100000000);
 
                 buyCrystalText.text = "12,000";
-
-                //buyRmObj[2].SetActive(true);
-                //buyRmText[2].localizationName = itemType + "_Price";
-                //buyRmText[2].ReLoad();
                 break;
             case ItemType.AdReward_Portion:
                 rewardText.text = "";
@@ -189,6 +175,9 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
+
                 break;
             case ItemType.PortionSet3:
                 lockedObj.SetActive(false);
@@ -199,9 +188,6 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
-
-                bestObj.SetActive(true);
-                bestText.text = "BEST";
 
                 break;
             case ItemType.DailyReward_Portion:
@@ -345,6 +331,76 @@ public class ShopContent : MonoBehaviour
                 break;
             case ItemType.DefDestroyTicketPiece:
                 rewardText.text = "x1";
+                break;
+            case ItemType.BuffTicketSet1:
+                lockedObj.SetActive(false);
+
+                buyRmObj[14].SetActive(true);
+                buyRmText[14].localizationName = itemType.ToString();
+                buyRmText[14].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+                break;
+            case ItemType.BuffTicketSet2:
+                lockedObj.SetActive(false);
+
+                buyRmObj[15].SetActive(true);
+                buyRmText[15].localizationName = itemType.ToString();
+                buyRmText[15].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+                break;
+            case ItemType.BuffTicketSet3:
+                lockedObj.SetActive(false);
+
+                buyRmObj[16].SetActive(true);
+                buyRmText[16].localizationName = itemType.ToString();
+                buyRmText[16].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+                break;
+            case ItemType.DefTicketSet1:
+                lockedObj.SetActive(false);
+
+                buyRmObj[17].SetActive(true);
+                buyRmText[17].localizationName = itemType.ToString();
+                buyRmText[17].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+                break;
+            case ItemType.DefTicketSet2:
+                lockedObj.SetActive(false);
+
+                buyRmObj[18].SetActive(true);
+                buyRmText[18].localizationName = itemType.ToString();
+                buyRmText[18].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+                break;
+            case ItemType.DefTicketSet3:
+                lockedObj.SetActive(false);
+
+                buyRmObj[19].SetActive(true);
+                buyRmText[19].localizationName = itemType.ToString();
+                buyRmText[19].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+                break;
+            case ItemType.SuperOffline:
+                lockedObj.SetActive(false);
+
+                buyRmObj[20].SetActive(true);
+                buyRmText[20].localizationName = itemType.ToString();
+                buyRmText[20].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
                 break;
         }
 

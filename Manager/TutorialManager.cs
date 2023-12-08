@@ -44,7 +44,7 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialView.SetActive(true);
 
-        talkIndex = 5;
+        talkIndex = 6;
         Initialize(talkIndex);
     }
 
@@ -52,7 +52,7 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialView.SetActive(true);
 
-        talkIndex = 7;
+        talkIndex = 8;
         Initialize(talkIndex);
     }
 
@@ -66,7 +66,7 @@ public class TutorialManager : MonoBehaviour
 
         switch (number)
         {
-            case 4:
+            case 5:
                 tutorialView.SetActive(false);
 
                 if (GameStateManager.instance.NickName.Length > 15)
@@ -76,10 +76,10 @@ public class TutorialManager : MonoBehaviour
 
                 GameStateManager.instance.Tutorial = true;
                 break;
-            case 6:
+            case 7:
                 tutorialView.SetActive(false);
                 break;
-            case 8:
+            case 9:
                 tutorialView.SetActive(false);
                 break;
         }

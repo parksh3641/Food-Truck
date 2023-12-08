@@ -57,7 +57,7 @@ public class StateManager : MonoBehaviour
         noticeManager.Initialize();
         changeFoodManager.Initialize();
         attendanceManager.Initialize();
-        gourmetManager.Initialize();
+        gourmetManager.FirstInitialize();
 
         Debug.Log("Load Complete!");
     }

@@ -34,7 +34,7 @@ public class RankEventManager : MonoBehaviour
         rankEventRectTransform.anchoredPosition = new Vector2(0, -9999);
 
         mainAlarm.SetActive(false);
-        alarm.SetActive(false);
+        alarm.SetActive(true);
     }
 
     public void OpenRankEventView()
@@ -43,11 +43,13 @@ public class RankEventManager : MonoBehaviour
         {
             rankEventView.SetActive(true);
 
+            alarm.SetActive(false);
+
             rankEventText.text = LocalizationManager.instance.GetString("Ranking2_Info") + " : " + playerDataBase.TotalLevel;
 
-            CheckInitialize();
-
             CheckRankEvent();
+
+            CheckInitialize();
 
             FirebaseAnalytics.LogEvent("RankEvent");
         }

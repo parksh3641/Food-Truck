@@ -113,7 +113,7 @@ public class ChestBoxManager : MonoBehaviour
 
         random = Random.Range(0, 100);
 
-        if (random >= 61)
+        if (random >= 71)
         {
             rewardType = RewardType.Gold;
 
@@ -150,7 +150,7 @@ public class ChestBoxManager : MonoBehaviour
 
     public void GetFreeReward()
     {
-        if(Random.Range(0, 10) > 6)
+        if(Random.Range(0, 10) > 5)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.FailGetItem);

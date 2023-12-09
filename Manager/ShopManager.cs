@@ -2752,27 +2752,27 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 14000);
                 break;
             case 14:
-                playerDataBase.BuffTickets += 1;
+                playerDataBase.BuffTickets += 10;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
                 break;
             case 15:
-                playerDataBase.BuffTickets += 2;
+                playerDataBase.BuffTickets += 25;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
                 break;
             case 16:
-                playerDataBase.BuffTickets += 3;
+                playerDataBase.BuffTickets += 50;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
                 break;
             case 17:
-                playerDataBase.DefDestroyTicket += 1;
+                playerDataBase.DefDestroyTicket += 10;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
                 break;
             case 18:
-                playerDataBase.DefDestroyTicket += 2;
+                playerDataBase.DefDestroyTicket += 50;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
                 break;
             case 19:
-                playerDataBase.DefDestroyTicket += 3;
+                playerDataBase.DefDestroyTicket += 100;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
                 break;
             case 20:
@@ -2854,27 +2854,34 @@ public class ShopManager : MonoBehaviour
                 playerDataBase.Package3 = true;
                 Invoke("PackageDelay3", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(200000000);
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 2500);
+                PlayfabManager.instance.UpdateAddGold(100000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3000);
 
-                playerDataBase.BuffTickets += 50;
-                playerDataBase.DefDestroyTicket += 30;
+                playerDataBase.Portion1 += 150;
+                playerDataBase.Portion2 += 150;
+                playerDataBase.Portion3 += 150;
+                playerDataBase.Portion4 += 150;
+                playerDataBase.BuffTickets += 100;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
 
                 yield return waitForSeconds;
 
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package3", 1);
                 break;
             case PackageType.Package4:
                 playerDataBase.Package4 = true;
                 Invoke("PackageDelay4", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(50000000);
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3000);
+                PlayfabManager.instance.UpdateAddGold(200000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3500);
 
                 playerDataBase.BuffTickets += 100;
-                playerDataBase.DefDestroyTicket += 100;
+                playerDataBase.DefDestroyTicket += 200;
 
                 yield return waitForSeconds;
 

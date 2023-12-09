@@ -499,6 +499,8 @@ public class PlayerDataBase : ScriptableObject
     public string nextMonday = "";
 
     [SerializeField]
+    private bool appReview = false;
+    [SerializeField]
     private bool removeAds = false;
     [SerializeField]
     private bool goldX2 = false;
@@ -3081,6 +3083,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             nextMonday = value;
+        }
+    }
+
+    public bool AppReview
+    {
+        get
+        {
+            return appReview;
+        }
+        set
+        {
+            appReview = value;
         }
     }
 

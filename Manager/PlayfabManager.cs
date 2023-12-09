@@ -1333,6 +1333,16 @@ public class PlayfabManager : MonoBehaviour
                                playerDataBase.AttendanceCheck = true;
                            }
                            break;
+                       case "AppReview":
+                           if (statistics.Value == 0)
+                           {
+                               playerDataBase.AppReview = false;
+                           }
+                           else
+                           {
+                               playerDataBase.AppReview = true;
+                           }
+                           break;
                        case "PlayTimeCount":
                            playerDataBase.PlayTimeCount = statistics.Value;
                            break;

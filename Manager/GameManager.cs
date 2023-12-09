@@ -1189,11 +1189,11 @@ public class GameManager : MonoBehaviour
         feverMaxCount = 300 - (300 * (0.003f * playerDataBase.Skill2));
         feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
-        portion1Time = 30 + (30 * (0.002f * playerDataBase.Skill4)) + (30 * (0.005f * playerDataBase.Treasure6));
-        portion2Time = 30 + (30 * (0.002f * playerDataBase.Skill5)) + (30 * (0.005f * playerDataBase.Treasure6));
-        portion3Time = 30 + (30 * (0.002f * playerDataBase.Skill6)) + (30 * (0.005f * playerDataBase.Treasure6));
+        portion1Time = 30 + (30 * (0.002f * playerDataBase.Skill4)) + (30 * (0.004f * playerDataBase.Treasure6));
+        portion2Time = 30 + (30 * (0.002f * playerDataBase.Skill5)) + (30 * (0.004f * playerDataBase.Treasure6));
+        portion3Time = 30 + (30 * (0.002f * playerDataBase.Skill6)) + (30 * (0.004f * playerDataBase.Treasure6));
         portion4Plus = 0.002f * playerDataBase.Skill12;
-        portion5Time = 30 + (30 * (0.002f * playerDataBase.Skill13)) + (30 * (0.005f * playerDataBase.Treasure6));
+        portion5Time = 30 + (30 * (0.002f * playerDataBase.Skill13)) + (30 * (0.004f * playerDataBase.Treasure6));
 
         if (playerDataBase.GoldX2)
         {
@@ -1391,11 +1391,14 @@ public class GameManager : MonoBehaviour
 
                 ChangeCandy(GameStateManager.instance.CandyType);
 
-                if (!GameStateManager.instance.AppReview)
+                if (!GameStateManager.instance.AppReview && !playerDataBase.AppReview)
                 {
                     OpenAppReview();
 
                     GameStateManager.instance.AppReview = true;
+
+                    playerDataBase.AppReview = true;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("AppReview", 1);
                 }
                 break;
             case IslandType.Island3:
@@ -5141,14 +5144,14 @@ public class GameManager : MonoBehaviour
             butterflyLocked.SetActive(false);
         }
 
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 8)
+        if (levelDataBase.GetLevel(playerDataBase.Exp) > 2)
         {
-            rankLocked.SetActive(false);
+            treasureLocked.SetActive(false);
         }
 
         if (levelDataBase.GetLevel(playerDataBase.Exp) > 3)
         {
-            treasureLocked.SetActive(false);
+            rankLocked.SetActive(false);
         }
     }
 

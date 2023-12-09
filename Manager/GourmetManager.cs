@@ -21,7 +21,7 @@ public class GourmetManager : MonoBehaviour
 
     public void FirstInitialize()
     {
-        Invoke("Initialize", 1f);
+        Invoke("Initialize", 0.5f);
     }
 
     public void Initialize()
@@ -34,7 +34,7 @@ public class GourmetManager : MonoBehaviour
         value += playerDataBase.AccessDate * 100;
         value += playerDataBase.Level * 1000;
         value += playerDataBase.Proficiency * 1000;
-        value += playerDataBase.CastleLevel * 1000;
+        value += playerDataBase.CastleLevel * 500;
 
         if (playerDataBase.TestAccount == 0)
         {
@@ -72,7 +72,7 @@ public class GourmetManager : MonoBehaviour
         Debug.LogError(value);
 
 #if !UNITY_EDITOR
-        if (value > playerDataBase.GourmetLevel)
+        if (value != playerDataBase.GourmetLevel)
         {
             playerDataBase.GourmetLevel = value;
 

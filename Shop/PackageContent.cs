@@ -53,16 +53,16 @@ public class PackageContent : MonoBehaviour
                 receiveContents[3].Initialize(RewardType.BuffTickets, 10);
                 break;
             case PackageType.Package3:
-                receiveContents[0].Initialize(RewardType.Gold, 200000000);
-                receiveContents[1].Initialize(RewardType.Crystal, 2500);
-                receiveContents[2].Initialize(RewardType.BuffTickets, 50);
-                receiveContents[3].Initialize(RewardType.DefDestroyTicket, 30);
+                receiveContents[0].Initialize(RewardType.Gold, 100000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 3000);
+                receiveContents[2].Initialize(RewardType.PortionSet, 150);
+                receiveContents[3].Initialize(RewardType.BuffTickets, 100);
                 break;
             case PackageType.Package4:
-                receiveContents[0].Initialize(RewardType.Gold, 50000000);
-                receiveContents[1].Initialize(RewardType.Crystal, 3000);
+                receiveContents[0].Initialize(RewardType.Gold, 200000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 3500);
                 receiveContents[2].Initialize(RewardType.BuffTickets, 100);
-                receiveContents[3].Initialize(RewardType.DefDestroyTicket, 100);
+                receiveContents[3].Initialize(RewardType.DefDestroyTicket, 200);
                 break;
         }
 

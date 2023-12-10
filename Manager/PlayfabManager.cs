@@ -1253,6 +1253,9 @@ public class PlayfabManager : MonoBehaviour
                        case "DailyReward_DefTicket":
                            playerDataBase.DailyReward_DefTicket = statistics.Value;
                            break;
+                       case "DailyReward_Crystal":
+                           playerDataBase.DailyReward_Crystal = statistics.Value;
+                           break;
                        case "DailyAdsReward":
                            playerDataBase.DailyAdsReward = statistics.Value;
                            break;

@@ -384,6 +384,9 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
+
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
                 break;
             case ItemType.DefTicketSet3:
                 lockedObj.SetActive(false);
@@ -394,9 +397,6 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
-
-                bestObj.SetActive(true);
-                bestText.text = "BEST";
                 break;
             case ItemType.SuperOffline:
                 lockedObj.SetActive(false);
@@ -407,6 +407,9 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
+                break;
+            case ItemType.AdReward_Crystal:
+                rewardText.text = "x30";
                 break;
         }
 

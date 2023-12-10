@@ -230,6 +230,7 @@ public class ResetManager : MonoBehaviour
         playerDataBase.DailyReward = 0;
         playerDataBase.DailyReward_Portion = 0;
         playerDataBase.DailyReward_DefTicket = 0;
+        playerDataBase.DailyReward_Crystal = 0;
         playerDataBase.DailyAdsReward = 0;
         playerDataBase.DailyAdsReward2 = 0;
         playerDataBase.DailyCastleReward = 0;
@@ -266,5 +267,6 @@ public class ResetManager : MonoBehaviour
         yield return waitForSeconds;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("PlayTimeCount", playerDataBase.PlayTimeCount);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_Crystal", playerDataBase.DailyReward_Crystal);
     }
 }

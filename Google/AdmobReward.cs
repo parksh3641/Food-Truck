@@ -114,6 +114,9 @@ public class AdmobReward : MonoBehaviour
                 case 7:
                     treasureManager.SuccessWatchAd();
                     break;
+                case 8:
+                    shopManager.SuccessWatchAd_Crystal();
+                    break;
             }
         }
         else
@@ -153,6 +156,9 @@ public class AdmobReward : MonoBehaviour
                         case 7:
                             treasureManager.SuccessWatchAd();
                             break;
+                        case 8:
+                            shopManager.SuccessWatchAd_Crystal();
+                            break;
                     }
 
                 //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
@@ -160,36 +166,39 @@ public class AdmobReward : MonoBehaviour
             }
             else
             {
-                switch (number)
-                {
-                    case 0:
-                        shopManager.SuccessWatchAd();
-                        break;
-                    case 1:
-                        shopManager.SuccessWatchAd_Portion();
-                        break;
-                    case 2:
-                        chestBoxManager.SuccessWatchAd();
-                        break;
-                    case 3:
-                        buffManager.SuccessWatchAd();
-                        break;
-                    case 4:
-                        reincarnationManager.SuccessWatchAd();
-                        break;
-                    case 5:
-                        offlineManager.SuccessWatchAd();
-                        break;
-                    case 6:
-                        questManager.SuccessWatchAd();
-                        break;
-                    case 7:
-                        treasureManager.SuccessWatchAd();
-                        break;
-                }
+                //switch (number)
+                //{
+                //    case 0:
+                //        shopManager.SuccessWatchAd();
+                //        break;
+                //    case 1:
+                //        shopManager.SuccessWatchAd_Portion();
+                //        break;
+                //    case 2:
+                //        chestBoxManager.SuccessWatchAd();
+                //        break;
+                //    case 3:
+                //        buffManager.SuccessWatchAd();
+                //        break;
+                //    case 4:
+                //        reincarnationManager.SuccessWatchAd();
+                //        break;
+                //    case 5:
+                //        offlineManager.SuccessWatchAd();
+                //        break;
+                //    case 6:
+                //        questManager.SuccessWatchAd();
+                //        break;
+                //    case 7:
+                //        treasureManager.SuccessWatchAd();
+                //        break;
+                //    case 8:
+                //        shopManager.SuccessWatchAd_Crystal();
+                //        break;
+                //}
 
-                //SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                //NotionManager.instance.UseNotion(NotionType.CancelWatchAd);
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                NotionManager.instance.UseNotion(NotionType.CancelWatchAd);
             }
         }
 

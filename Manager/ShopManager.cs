@@ -259,6 +259,7 @@ public class ShopManager : MonoBehaviour
                 shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
                 shopContents[25].Initialize(ItemType.DefDestroyTicketPiece, BuyType.Free, this);
                 shopContents[32].Initialize(ItemType.SuperOffline, BuyType.Rm, this);
+                shopContents[33].Initialize(ItemType.AdReward_Crystal, BuyType.Ad, this);
 
                 if (playerDataBase.DailyReward == 0)
                 {
@@ -273,6 +274,11 @@ public class ShopManager : MonoBehaviour
                 if (playerDataBase.DailyReward_DefTicket == 0)
                 {
                     shopContents[25].SetLocked(false);
+                }
+
+                if (playerDataBase.DailyReward_Crystal == 0)
+                {
+                    shopContents[33].SetLocked(false);
                 }
 
                 if (playerDataBase.DailyAdsReward == 0)
@@ -653,6 +659,23 @@ public class ShopManager : MonoBehaviour
                 SoundManager.instance.PlaySFX(GameSfxType.Success);
                 NotionManager.instance.UseNotion(NotionType.SuccessReward);
                 break;
+            case ItemType.BuffTicketSet1:
+                break;
+            case ItemType.BuffTicketSet2:
+                break;
+            case ItemType.BuffTicketSet3:
+                break;
+            case ItemType.DefTicketSet1:
+                break;
+            case ItemType.DefTicketSet2:
+                break;
+            case ItemType.DefTicketSet3:
+                break;
+            case ItemType.SuperOffline:
+                break;
+            case ItemType.AdReward_Crystal:
+                GoogleAdsManager.instance.admobReward_Portion.ShowAd(8);
+                break;
         }
 
         GameManager.instance.CheckPortion();
@@ -720,6 +743,21 @@ public class ShopManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
+    }
+
+    public void SuccessWatchAd_Crystal()
+    {
+        if (playerDataBase.DailyReward_Crystal == 1) return;
+
+        playerDataBase.DailyReward_Crystal = 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_Crystal", playerDataBase.DailyReward_Crystal);
+
+        shopContents[33].SetLocked(true);
+
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 30);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
     }
 
     IEnumerator DailyShopTimer()
@@ -1165,7 +1203,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (characterIndex > 2)
+            if (price_Crystal > 100)
             {
                 crystalButton.SetActive(true);
             }
@@ -1370,12 +1408,12 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(true);
+            crystalButton.SetActive(false);
 
-            //if (truckIndex > 3)
-            //{
-            //    crystalButton.SetActive(true);
-            //}
+            if (price_Crystal > 100)
+            {
+                crystalButton.SetActive(true);
+            }
         }
     }
 
@@ -1548,12 +1586,12 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(true);
+            crystalButton.SetActive(false);
 
-            //if (animalIndex > 2)
-            //{
-            //    crystalButton.SetActive(true);
-            //}
+            if (price_Crystal > 100)
+            {
+                crystalButton.SetActive(true);
+            }
         }
     }
 
@@ -1928,12 +1966,12 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(true);
+            crystalButton.SetActive(false);
 
-            //if (butterflyIndex > 5)
-            //{
-            //    crystalButton.SetActive(true);
-            //}
+            if (price_Crystal > 100)
+            {
+                crystalButton.SetActive(true);
+            }
         }
     }
 

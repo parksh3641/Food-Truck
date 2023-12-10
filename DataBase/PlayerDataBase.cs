@@ -72,6 +72,8 @@ public class PlayerDataBase : ScriptableObject
     private int dailyQuestReward = 0;
     [SerializeField]
     private int dailyTreasureReward = 0;
+    [SerializeField]
+    private int dailyReward_Crystal = 0;
 
     [Space]
     [Title("Count")]
@@ -779,6 +781,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             dailyReward_DefTicket = value;
+        }
+    }
+
+    public int DailyReward_Crystal
+    {
+        get
+        {
+            return dailyReward_Crystal;
+        }
+        set
+        {
+            dailyReward_Crystal = value;
         }
     }
 
@@ -3172,6 +3186,7 @@ public class PlayerDataBase : ScriptableObject
         dailyReward = 0;
         dailyReward_Portion = 0;
         dailyReward_DefTicket = 0;
+        dailyReward_Crystal = 0;
         dailyAdsReward = 0;
         dailyAdsReward2 = 0;
         dailyCastleReward = 0;

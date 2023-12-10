@@ -178,7 +178,7 @@ public class TreasureManager : MonoBehaviour
         {
             index = Random.Range(0, System.Enum.GetValues(typeof(TreasureType)).Length);
 
-            SoundManager.instance.PlaySFX(GameSfxType.UseSources);
+            SoundManager.instance.PlaySFX(GameSfxType.Click);
 
             GetTreasure(index);
 

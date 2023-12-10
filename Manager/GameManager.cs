@@ -1092,7 +1092,7 @@ public class GameManager : MonoBehaviour
                     }
                     break;
                 case IslandType.Island4:
-                    if (GameStateManager.instance.DessertType == DessertType.Dessert1)
+                    if (GameStateManager.instance.DessertType == DessertType.FruitSkewers)
                     {
                         ChangeDessert(DessertType.Dessert1);
                     }
@@ -1157,7 +1157,7 @@ public class GameManager : MonoBehaviour
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.1f;
         successPlus += playerDataBase.Treasure1 * 0.2f;
 
-        successX2 += playerDataBase.Treasure3 * 0.3f;
+        successX2 += playerDataBase.Treasure3 * 0.2f;
 
         sellPricePlus += truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
         sellPricePlus += playerDataBase.Skill8 * 0.2f;
@@ -1165,7 +1165,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.Treasure7 * 0.4f;
 
         sellPriceTip += playerDataBase.Skill14 * 0.3f; //ÆÁ È®·ü
-        sellPriceTip += playerDataBase.Treasure8 * 0.5f;
+        sellPriceTip += playerDataBase.Treasure8 * 0.6f;
 
         expUp += (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType);
 
@@ -1695,7 +1695,6 @@ public class GameManager : MonoBehaviour
         successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
 
         CheckDefTicket();
-
         CheckBankruptcy();
 
         notUpgrade.SetActive(false);
@@ -3059,11 +3058,9 @@ public class GameManager : MonoBehaviour
                 NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
             }
 
-            playerDataBase.UpgradeCount += 1;
             GameStateManager.instance.UpgradeCount += 1;
+            playerDataBase.UpgradeCount += 1;
             playerDataBase.Exp += 10 + expUp;
-
-            //questManager.CheckGoal();
 
             switch (GameStateManager.instance.IslandType)
             {
@@ -3202,10 +3199,10 @@ public class GameManager : MonoBehaviour
 
             if (level + 1 >= maxLevel)
             {
+                MaxLevelUpgradeSuccess();
+
                 SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
                 NotionManager.instance.UseNotion(NotionType.MaxLevel);
-
-                MaxLevelUpgradeSuccess();
 
                 if (GameStateManager.instance.Effect)
                 {
@@ -3288,7 +3285,6 @@ public class GameManager : MonoBehaviour
                                         GameStateManager.instance.RibsLevel -= 1;
                                         break;
                                 }
-
                                 break;
                             case IslandType.Island2:
                                 switch (GameStateManager.instance.CandyType)
@@ -5030,6 +5026,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.DailyReward = 0;
         playerDataBase.DailyReward_Portion = 0;
         playerDataBase.DailyReward_DefTicket = 0;
+        playerDataBase.DailyReward_Crystal = 0;
         playerDataBase.DailyAdsReward = 0;
         playerDataBase.DailyAdsReward2 = 0;
         playerDataBase.DailyCastleReward = 0;

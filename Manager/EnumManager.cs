@@ -205,7 +205,8 @@ public enum ItemType
     DefTicketSet1,
     DefTicketSet2,
     DefTicketSet3,
-    SuperOffline
+    SuperOffline,
+    AdReward_Crystal
 }
 
 public enum PackageType
@@ -322,6 +323,8 @@ public enum RewardType
     DefDestroyTicketPiece,
     BuffTickets,
     Portion6,
+    GoldTicket,
+
 }
 
 public enum QuestType

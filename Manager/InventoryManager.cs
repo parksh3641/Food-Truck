@@ -39,12 +39,13 @@ public class InventoryManager : MonoBehaviour
         receiveContents[0].Initialize(RewardType.DefDestroyTicket, playerDataBase.DefDestroyTicket);
         receiveContents[1].Initialize(RewardType.DefDestroyTicketPiece, playerDataBase.DefDestroyTicketPiece);
         receiveContents[2].Initialize(RewardType.BuffTickets, playerDataBase.BuffTickets);
-        receiveContents[3].Initialize(RewardType.Portion1, playerDataBase.Portion1);
-        receiveContents[4].Initialize(RewardType.Portion2, playerDataBase.Portion2);
-        receiveContents[5].Initialize(RewardType.Portion3, playerDataBase.Portion3);
-        receiveContents[6].Initialize(RewardType.Portion4, playerDataBase.Portion4);
-        receiveContents[7].Initialize(RewardType.Portion5, playerDataBase.Portion5);
-        receiveContents[8].Initialize(RewardType.Portion6, playerDataBase.Portion6);
+        receiveContents[3].Initialize(RewardType.GoldTicket, 0);
+        receiveContents[4].Initialize(RewardType.Portion1, playerDataBase.Portion1);
+        receiveContents[5].Initialize(RewardType.Portion2, playerDataBase.Portion2);
+        receiveContents[6].Initialize(RewardType.Portion3, playerDataBase.Portion3);
+        receiveContents[7].Initialize(RewardType.Portion4, playerDataBase.Portion4);
+        receiveContents[8].Initialize(RewardType.Portion5, playerDataBase.Portion5);
+        receiveContents[9].Initialize(RewardType.Portion6, playerDataBase.Portion6);
     }
 
 }

@@ -161,7 +161,7 @@ public class OfflineManager : MonoBehaviour
             playerDataBase.CastleLevel = playerDataBase.Level;
         }
 
-        castleLevelText.text = LocalizationManager.instance.GetString("CastleLevel") + " : " + playerDataBase.CastleLevel + " / " + playerDataBase.Level;
+        castleLevelText.text = LocalizationManager.instance.GetString("CastleLevel") + " : " + (playerDataBase.CastleLevel + 1) + " / " + (playerDataBase.Level + 1);
 
         addCrystal = (playerDataBase.CastleLevel + 1) * 3;
         addCoin = 5000 + playerDataBase.CastleLevel * 500;

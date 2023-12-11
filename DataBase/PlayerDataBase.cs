@@ -374,6 +374,52 @@ public class PlayerDataBase : ScriptableObject
     private int butterfly28 = 0;
 
     [Space]
+    [Title("Totems")]
+    [SerializeField]
+    private int totems1 = 0;
+    [SerializeField]
+    private int totems2 = 0;
+    [SerializeField]
+    private int totems3 = 0;
+    [SerializeField]
+    private int totems4 = 0;
+    [SerializeField]
+    private int totems5 = 0;
+    [SerializeField]
+    private int totems6 = 0;
+    [SerializeField]
+    private int totems7 = 0;
+    [SerializeField]
+    private int totems8 = 0;
+    [SerializeField]
+    private int totems9 = 0;
+    [SerializeField]
+    private int totems10 = 0;
+    [SerializeField]
+    private int totems11 = 0;
+    [SerializeField]
+    private int totems12 = 0;
+
+
+    [Space]
+    [Title("Flower")]
+    [SerializeField]
+    private int flower1 = 0;
+    [SerializeField]
+    private int flower2 = 0;
+    [SerializeField]
+    private int flower3 = 0;
+    [SerializeField]
+    private int flower4 = 0;
+    [SerializeField]
+    private int flower5 = 0;
+    [SerializeField]
+    private int flower6 = 0;
+    [SerializeField]
+    private int flower7 = 0;
+
+
+    [Space]
     [Title("Island")]
     [SerializeField]
     private int island1 = 0;
@@ -2668,6 +2714,234 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Totems1
+    {
+        get
+        {
+            return totems1;
+        }
+        set
+        {
+            totems1 = value;
+        }
+    }
+
+    public int Totems2
+    {
+        get
+        {
+            return totems2;
+        }
+        set
+        {
+            totems2 = value;
+        }
+    }
+
+    public int Totems3
+    {
+        get
+        {
+            return totems3;
+        }
+        set
+        {
+            totems3 = value;
+        }
+    }
+
+    public int Totems4
+    {
+        get
+        {
+            return totems4;
+        }
+        set
+        {
+            totems4 = value;
+        }
+    }
+
+    public int Totems5
+    {
+        get
+        {
+            return totems5;
+        }
+        set
+        {
+            totems5 = value;
+        }
+    }
+
+    public int Totems6
+    {
+        get
+        {
+            return totems6;
+        }
+        set
+        {
+            totems6 = value;
+        }
+    }
+
+    public int Totems7
+    {
+        get
+        {
+            return totems7;
+        }
+        set
+        {
+            totems7 = value;
+        }
+    }
+
+    public int Totems8
+    {
+        get
+        {
+            return totems8;
+        }
+        set
+        {
+            totems8 = value;
+        }
+    }
+
+    public int Totems9
+    {
+        get
+        {
+            return totems9;
+        }
+        set
+        {
+            totems9 = value;
+        }
+    }
+
+    public int Totems10
+    {
+        get
+        {
+            return totems10;
+        }
+        set
+        {
+            totems10 = value;
+        }
+    }
+
+    public int Totems11
+    {
+        get
+        {
+            return totems11;
+        }
+        set
+        {
+            totems11 = value;
+        }
+    }
+
+    public int Totems12
+    {
+        get
+        {
+            return totems12;
+        }
+        set
+        {
+            totems12 = value;
+        }
+    }
+
+    public int Flower1
+    {
+        get
+        {
+            return flower1;
+        }
+        set
+        {
+            flower1 = value;
+        }
+    }
+
+    public int Flower2
+    {
+        get
+        {
+            return flower2;
+        }
+        set
+        {
+            flower2 = value;
+        }
+    }
+
+    public int Flower3
+    {
+        get
+        {
+            return flower3;
+        }
+        set
+        {
+            flower3 = value;
+        }
+    }
+
+    public int Flower4
+    {
+        get
+        {
+            return flower4;
+        }
+        set
+        {
+            flower4 = value;
+        }
+    }
+
+    public int Flower5
+    {
+        get
+        {
+            return flower5;
+        }
+        set
+        {
+            flower5 = value;
+        }
+    }
+
+    public int Flower6
+    {
+        get
+        {
+            return flower6;
+        }
+        set
+        {
+            flower6 = value;
+        }
+    }
+
+    public int Flower7
+    {
+        get
+        {
+            return flower7;
+        }
+        set
+        {
+            flower7 = value;
+        }
+    }
+
     public int Island1
     {
         get
@@ -3808,6 +4082,115 @@ public class PlayerDataBase : ScriptableObject
         }
 
         if (character21 > 0)
+        {
+            count += 1;
+        }
+
+        return count;
+    }
+
+    public int GetTotemsNumber()
+    {
+        int count = 0;
+
+        if (totems1 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems2 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems3 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems4 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems5 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems6 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems7 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems8 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems9 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems10 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems11 > 0)
+        {
+            count += 1;
+        }
+
+        if (totems12 > 0)
+        {
+            count += 1;
+        }
+
+        return count;
+    }
+
+    public int GetFlowerNumber()
+    {
+        int count = 0;
+
+        if (flower1 > 0)
+        {
+            count += 1;
+        }
+
+        if (flower2 > 0)
+        {
+            count += 1;
+        }
+
+        if (flower3 > 0)
+        {
+            count += 1;
+        }
+
+        if (flower4 > 0)
+        {
+            count += 1;
+        }
+
+        if (flower5 > 0)
+        {
+            count += 1;
+        }
+
+        if (flower6 > 0)
+        {
+            count += 1;
+        }
+
+        if (flower7 > 0)
         {
             count += 1;
         }

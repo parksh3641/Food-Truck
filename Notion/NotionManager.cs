@@ -194,5 +194,7 @@ public enum NotionType
     PortionInfo6,
     UsePortionNotion6,
     SuccessUpgradeX2,
-    FailGetItem
+    FailGetItem,
+    ChangeTotemsNotion,
+    ChangeFlowerNotion,
 }

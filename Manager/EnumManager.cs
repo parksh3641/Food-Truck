@@ -295,7 +295,9 @@ public enum PassiveEffect
     DefDestroyPercentUp,
     SellPriceX2Up,
     SellPricePercentUp,
-    ExpUp
+    ExpUp,
+    SuccessX2PercentUp,
+    TotalPercentUp
 }
 
 public enum RewardType
@@ -353,6 +355,7 @@ public enum SkillType
     Skill13,
     Skill14
 }
+
 public enum IslandType
 {
     Island1,
@@ -372,4 +375,31 @@ public enum TreasureType
     Treasure7,
     Treasure8,
     Treasure9,
+}
+
+public enum TotemsType
+{
+    Totems1,
+    Totems2,
+    Totems3,
+    Totems4,
+    Totems5,
+    Totems6,
+    Totems7,
+    Totems8,
+    Totems9,
+    Totems10,
+    Totems11,
+    Totems12,
+}
+
+public enum FlowerType
+{
+    Flower1,
+    Flower2,
+    Flower3,
+    Flower4,
+    Flower5,
+    Flower6,
+    Flower7,
 }

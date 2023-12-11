@@ -110,10 +110,12 @@ public class GameStateManager : MonoBehaviour
 
         [Space]
         [Title("Equip")]
-        public CharacterType characterType = CharacterType.Character1;
-        public TruckType truckType = TruckType.Bread;
         public AnimalType animalType = AnimalType.Colobus;
+        public TruckType truckType = TruckType.Bread;
+        public CharacterType characterType = CharacterType.Character1;
         public ButterflyType butterflyType = ButterflyType.Butterfly1;
+        public TotemsType totemsType = TotemsType.Totems1;
+        public FlowerType flowerType = FlowerType.Flower1;
 
         [Space]
         [Title("Ads")]
@@ -349,6 +351,32 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.animalType = value;
+            SaveFile();
+        }
+    }
+
+    public TotemsType TotemsType
+    {
+        get
+        {
+            return gameSettings.totemsType;
+        }
+        set
+        {
+            gameSettings.totemsType = value;
+            SaveFile();
+        }
+    }
+
+    public FlowerType FlowerType
+    {
+        get
+        {
+            return gameSettings.flowerType;
+        }
+        set
+        {
+            gameSettings.flowerType = value;
             SaveFile();
         }
     }

@@ -149,6 +149,7 @@ public class GameManager : MonoBehaviour
     public Text successText;
     public Text defDestroyText;
     public Text successX2Text;
+    public Text sellPriceTipText;
 
     public GameObject defTicketObj;
     public Text defTicketText;
@@ -256,6 +257,9 @@ public class GameManager : MonoBehaviour
     TruckDataBase truckDataBase;
     AnimalDataBase animalDataBase;
     ButterflyDataBase butterflyDataBase;
+    TotemsDataBase totemsDataBase;
+    FlowerDataBase flowerDataBase;
+
     IslandDataBase islandDataBase;
     ImageDataBase imageDataBase;
     LevelDataBase levelDataBase;
@@ -278,6 +282,8 @@ public class GameManager : MonoBehaviour
         if (islandDataBase == null) islandDataBase = Resources.Load("IslandDataBase") as IslandDataBase;
         if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
         if (levelDataBase == null) levelDataBase = Resources.Load("LevelDataBase") as LevelDataBase;
+        if (totemsDataBase == null) totemsDataBase = Resources.Load("TotemsDataBase") as TotemsDataBase;
+        if (flowerDataBase == null) flowerDataBase = Resources.Load("FlowerDataBase") as FlowerDataBase;
 
         islandArray = imageDataBase.GetIslandArray();
 
@@ -345,7 +351,7 @@ public class GameManager : MonoBehaviour
 
         if (currentDate >= decemberStart && currentDate <= decemberEnd)
         {
-            christmasTree.SetActive(true);
+            //christmasTree.SetActive(true);
             christmasSnow.SetActive(true);
 
             Debug.Log("크리스마스 기간입니다.");
@@ -1157,6 +1163,7 @@ public class GameManager : MonoBehaviour
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.1f;
         successPlus += playerDataBase.Treasure1 * 0.2f;
 
+        successX2 += totemsDataBase.GetTotemsEffect(GameStateManager.instance.TotemsType);
         successX2 += playerDataBase.Treasure3 * 0.2f;
 
         sellPricePlus += truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
@@ -1164,6 +1171,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.Proficiency * 0.5f;
         sellPricePlus += playerDataBase.Treasure7 * 0.4f;
 
+        sellPriceTip += 5;
         sellPriceTip += playerDataBase.Skill14 * 0.3f; //팁 확률
         sellPriceTip += playerDataBase.Treasure8 * 0.6f;
 
@@ -1693,6 +1701,9 @@ public class GameManager : MonoBehaviour
 
         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
         successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
+
+        sellPriceTipText.text = "<size=45>" + LocalizationManager.instance.GetString("SellPriceX2Up") + "</size>";
+        sellPriceTipText.text += "\n" + sellPriceTip.ToString("N1") + "%";
 
         CheckDefTicket();
         CheckBankruptcy();
@@ -5133,13 +5144,13 @@ public class GameManager : MonoBehaviour
     public void CheckLocked()
     {
         butterflyLocked.SetActive(true);
-        rankLocked.SetActive(true);
+        //rankLocked.SetActive(true);
         treasureLocked.SetActive(true);
 
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 1)
-        {
-            butterflyLocked.SetActive(false);
-        }
+        //if (levelDataBase.GetLevel(playerDataBase.Exp) > 1)
+        //{
+        //    butterflyLocked.SetActive(false);
+        //}
 
         if (levelDataBase.GetLevel(playerDataBase.Exp) > 2)
         {

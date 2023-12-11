@@ -101,6 +101,8 @@ public class ReincarnationManager : MonoBehaviour
     {
         if (crystal == 0) return;
 
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+
         number = 0;
         StartCoroutine(ReincarnationCoroution());
     }

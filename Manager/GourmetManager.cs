@@ -67,6 +67,8 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.GetAnimalNumber() * 5000;
             value += playerDataBase.GetTruckNumber() * 5000;
             value += playerDataBase.GetButterflyNumber() * 5000;
+            value += playerDataBase.GetTotemsNumber() * 5000;
+            value += playerDataBase.GetFlowerNumber() * 5000;
         }
 
         Debug.LogError(value);

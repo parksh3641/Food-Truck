@@ -44,21 +44,30 @@ public class ShopManager : MonoBehaviour
     public PackageContent[] packageContents;
 
     [Space]
-    public GameObject mainCharacter;
-    public GameObject[] mainCharacterArray;
-    public GameObject[] shopCharacterArray;
+    public GameObject mainAnimal;
+    public GameObject[] mainAnimalArray;
+    public GameObject[] shopAnimalArray;
 
     public GameObject mainTruck;
     public GameObject[] mainTruckArray;
     public GameObject[] shopTruckArray;
 
-    public GameObject mainAnimal;
-    public GameObject[] mainAnimalArray;
-    public GameObject[] shopAnimalArray;
+    public GameObject mainCharacter;
+    public GameObject[] mainCharacterArray;
+    public GameObject[] shopCharacterArray;
 
     public GameObject mainButterfly;
     public GameObject[] mainButterflyArray;
     public GameObject[] shopButterflyArray;
+
+    public GameObject mainTotems;
+    public GameObject[] mainTotemsArray;
+    public GameObject[] shopTotemsArray;
+
+    public GameObject mainFlower;
+    public GameObject[] mainFlowerArray;
+    public GameObject[] shopFlowerArray;
+
 
     public GameObject buyButton;
     public GameObject buySpeical;
@@ -90,6 +99,8 @@ public class ShopManager : MonoBehaviour
     private int truckIndex = 0;
     private int animalIndex = 0;
     private int butterflyIndex = 0;
+    private int totemsIndex = 0;
+    private int flowerIndex = 0;
 
     bool hold = false;
     bool buy = false;
@@ -103,6 +114,8 @@ public class ShopManager : MonoBehaviour
     TruckInfo truckInfo = new TruckInfo();
     AnimalInfo animalInfo = new AnimalInfo();
     ButterflyInfo butterflyInfo = new ButterflyInfo();
+    TotemsInfo totemsInfo = new TotemsInfo();
+    FlowerInfo flowerInfo = new FlowerInfo();
 
     List<string> itemList = new List<string>();
 
@@ -113,6 +126,8 @@ public class ShopManager : MonoBehaviour
     TruckDataBase truckDataBase;
     AnimalDataBase animalDataBase;
     ButterflyDataBase butterflyDataBase;
+    TotemsDataBase totemsDataBase;
+    FlowerDataBase flowerDataBase;
 
     private void Awake()
     {
@@ -122,6 +137,8 @@ public class ShopManager : MonoBehaviour
         if (truckDataBase == null) truckDataBase = Resources.Load("TruckDataBase") as TruckDataBase;
         if (animalDataBase == null) animalDataBase = Resources.Load("AnimalDataBase") as AnimalDataBase;
         if (butterflyDataBase == null) butterflyDataBase = Resources.Load("ButterflyDataBase") as ButterflyDataBase;
+        if (totemsDataBase == null) totemsDataBase = Resources.Load("TotemsDataBase") as TotemsDataBase;
+        if (flowerDataBase == null) flowerDataBase = Resources.Load("FlowerDataBase") as FlowerDataBase;
 
         shopView.SetActive(false);
         speicalShopView.SetActive(false);
@@ -162,10 +179,22 @@ public class ShopManager : MonoBehaviour
             mainButterflyArray[i].SetActive(false);
         }
 
+        for (int i = 0; i < mainTotemsArray.Length; i++)
+        {
+            mainTotemsArray[i].SetActive(false);
+        }
+
+        for (int i = 0; i < mainFlowerArray.Length; i++)
+        {
+            mainFlowerArray[i].SetActive(false);
+        }
+
         mainCharacterArray[(int)GameStateManager.instance.CharacterType].SetActive(true);
         mainTruckArray[(int)GameStateManager.instance.TruckType].SetActive(true);
         mainAnimalArray[(int)GameStateManager.instance.AnimalType].SetActive(true);
         mainButterflyArray[(int)GameStateManager.instance.ButterflyType].SetActive(true);
+        mainTotemsArray[(int)GameStateManager.instance.TotemsType].SetActive(true);
+        //mainFlowerArray[(int)GameStateManager.instance.FlowerType].SetActive(true);
 
         isTimer = true;
         dailyShopCountText.text = "";
@@ -793,9 +822,9 @@ public class ShopManager : MonoBehaviour
             switch (number)
             {
                 case 0:
-                    shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
-                    FirebaseAnalytics.LogEvent("OpenCharacter");
+                    FirebaseAnalytics.LogEvent("OpenPet");
                     break;
                 case 1:
                     shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
@@ -803,14 +832,24 @@ public class ShopManager : MonoBehaviour
                     FirebaseAnalytics.LogEvent("OpenFoodTruck");
                     break;
                 case 2:
-                    shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
-                    FirebaseAnalytics.LogEvent("OpenPet");
+                    FirebaseAnalytics.LogEvent("OpenCharacter");
                     break;
                 case 3:
                     shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
                     FirebaseAnalytics.LogEvent("OpenButterfly");
+                    break;
+                case 4:
+                    shopTotemsArray[totemsIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                    FirebaseAnalytics.LogEvent("OpenTotems");
+                    break;
+                case 5:
+                    shopFlowerArray[flowerIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                    FirebaseAnalytics.LogEvent("OpenFlower");
                     break;
             }
         }
@@ -837,6 +876,8 @@ public class ShopManager : MonoBehaviour
         mainTruck.SetActive(false);
         mainAnimal.SetActive(false);
         mainButterfly.SetActive(false);
+        mainTotems.SetActive(false);
+        mainFlower.SetActive(false);
 
         leftButton.SetActive(true);
         rightButton.SetActive(true);
@@ -844,17 +885,17 @@ public class ShopManager : MonoBehaviour
         switch (number)
         {
             case 0:
-                if (characterIndex == 0)
+                if (animalIndex == 0)
                 {
                     leftButton.SetActive(false);
                 }
 
-                if (characterIndex >= shopCharacterArray.Length - 1)
+                if (animalIndex >= shopAnimalArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
 
-                CharacterInitialize();
+                AnimalInitialize();
                 break;
             case 1:
                 if (truckIndex == 0)
@@ -870,17 +911,17 @@ public class ShopManager : MonoBehaviour
                 TruckInitialize();
                 break;
             case 2:
-                if (animalIndex == 0)
+                if (characterIndex == 0)
                 {
                     leftButton.SetActive(false);
                 }
 
-                if (animalIndex >= shopAnimalArray.Length - 1)
+                if (characterIndex >= shopCharacterArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
 
-                AnimalInitialize();
+                CharacterInitialize();
                 break;
             case 3:
                 if (butterflyIndex == 0)
@@ -894,6 +935,32 @@ public class ShopManager : MonoBehaviour
                 }
 
                 ButterflyInitialize();
+                break;
+            case 4:
+                if (totemsIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (totemsIndex >= shopTotemsArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                TotemsInitialize();
+                break;
+            case 5:
+                if (flowerIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (flowerIndex >= shopFlowerArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                FlowerInitialize();
                 break;
         }
     }
@@ -916,18 +983,8 @@ public class ShopManager : MonoBehaviour
         nameText.localizationName =  "Character" + (characterIndex + 1);
         passiveText.text = "";
 
-        if (characterIndex == 0)
-        {
-            effectText.localizationName = "None";
-            effectText.plusText = "";
-            //passiveText.text = "";
-        }
-        else
-        {
-            effectText.localizationName = characterInfo.passiveEffect.ToString();
-            effectText.plusText = " : +" + characterInfo.effectNumber.ToString() + "%";
-            //passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NeedPrice") + " -1%";
-        }
+        effectText.localizationName = characterInfo.passiveEffect.ToString();
+        effectText.plusText = " : +" + characterInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeCharacter";
         titleText.plusText = "\n<size=10>( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )</size>";
@@ -1233,18 +1290,8 @@ public class ShopManager : MonoBehaviour
         nameText.localizationName = (TruckType.Bread + truckIndex).ToString() + "Truck";
         passiveText.text = "";
 
-        if (truckIndex == 0)
-        {
-            effectText.localizationName = "None";
-            effectText.plusText = "";
-            //passiveText.text = "";
-        }
-        else
-        {
-            effectText.localizationName = truckInfo.passiveEffect.ToString();
-            effectText.plusText = " : +" + truckInfo.effectNumber.ToString() + "%";
-            //passiveText.text = LocalizationManager.instance.GetString("Passive") + " : " + LocalizationManager.instance.GetString("NeedPrice") + " -1%";
-        }
+        effectText.localizationName = truckInfo.passiveEffect.ToString();
+        effectText.plusText = " : +" + truckInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeTruck";
         titleText.plusText = "\n<size=10>( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )</size>";
@@ -1434,18 +1481,8 @@ public class ShopManager : MonoBehaviour
         nameText.localizationName = (AnimalType.Colobus + animalIndex).ToString();
         passiveText.text = "";
 
-        if (animalIndex == 0)
-        {
-            effectText.localizationName = "None";
-            effectText.plusText = "";
-            //passiveText.text = "";
-        }
-        else
-        {
-            effectText.localizationName = animalInfo.passiveEffect.ToString();
-            effectText.plusText = " +" + animalInfo.effectNumber.ToString();
-            //passiveText.text = LocalizationManager.instance.GetString("SellPriceX2Up_Info");
-        }
+        effectText.localizationName = animalInfo.passiveEffect.ToString();
+        effectText.plusText = " +" + animalInfo.effectNumber.ToString();
 
         titleText.localizationName = "ChangeAnimal";
         titleText.plusText = "\n<size=10>( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )</size>";
@@ -1975,6 +2012,215 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    void TotemsInitialize()
+    {
+        mainTotems.SetActive(true);
+
+        for (int i = 0; i < shopTotemsArray.Length; i++)
+        {
+            shopTotemsArray[i].gameObject.SetActive(false);
+        }
+
+        shopTotemsArray[totemsIndex].gameObject.SetActive(true);
+        shopTotemsArray[totemsIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+        totemsInfo = totemsDataBase.GetTotemsInfo(TotemsType.Totems1 + totemsIndex);
+
+        nameText.localizationName = (TotemsType.Totems1 + totemsIndex).ToString();
+        passiveText.text = "";
+
+        effectText.localizationName = totemsInfo.passiveEffect.ToString();
+        effectText.plusText = " : +" + totemsInfo.effectNumber.ToString() + "%";
+
+        titleText.localizationName = "ChangeTotems";
+        titleText.plusText = "\n<size=10>( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )</size>";
+        titleText.ReLoad();
+
+        infoText.localizationName = " ";
+
+        nameText.ReLoad();
+        effectText.ReLoad();
+        infoText.ReLoad();
+
+        price_Gold = totemsInfo.price;
+        price_Crystal = totemsInfo.crystal;
+
+        priceText.text = MoneyUnitString.ToCurrencyString(price_Gold);
+        crystalText.text = MoneyUnitString.ToCurrencyString(price_Crystal);
+
+        hold = false;
+        buy = false;
+
+        switch (totemsInfo.totemsType)
+        {
+            case TotemsType.Totems1:
+                hold = true;
+                break;
+            case TotemsType.Totems2:
+                if (playerDataBase.Totems2 >= 1)
+                {
+                    hold = true;
+                }
+
+                buy = true;
+                break;
+            case TotemsType.Totems3:
+                if (playerDataBase.Totems3 >= 1)
+                {
+                    hold = true;
+                }
+
+                if(playerDataBase.Totems2 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TotemsType.Totems4:
+                if (playerDataBase.Totems4 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Totems3 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TotemsType.Totems5:
+                if (playerDataBase.Totems5 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Totems4 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TotemsType.Totems6:
+                if (playerDataBase.Totems6 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Totems5 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TotemsType.Totems7:
+                if (playerDataBase.Totems7 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Totems6 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TotemsType.Totems8:
+                if (playerDataBase.Totems8 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Totems7 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TotemsType.Totems9:
+                if (playerDataBase.Totems9 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Totems8 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TotemsType.Totems10:
+                if (playerDataBase.Totems10 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Totems9 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TotemsType.Totems11:
+                if (playerDataBase.Totems11 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Totems10 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TotemsType.Totems12:
+                if (playerDataBase.Totems12 >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Totems11 >= 1)
+                {
+                    buy = true;
+                }
+                break;
+        }
+
+#if UNITY_EDITOR
+        buy = true;
+#endif
+
+        if (hold)
+        {
+            selectObj.SetActive(true);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
+
+            if (GameStateManager.instance.TotemsType.Equals(totemsInfo.totemsType))
+            {
+                selectText.text = LocalizationManager.instance.GetString("Selected");
+            }
+            else
+            {
+                selectText.text = LocalizationManager.instance.GetString("Select");
+            }
+        }
+        else
+        {
+            selectObj.SetActive(false);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
+
+            if (!buy)
+            {
+                priceText.text = LocalizationManager.instance.GetString("NotPurchase");
+                crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+
+            crystalButton.SetActive(false);
+
+            if (price_Crystal > 100)
+            {
+                crystalButton.SetActive(true);
+            }
+        }
+    }
+
+    void FlowerInitialize()
+    {
+
+    }
+
     public void RightButton()
     {
         leftButton.SetActive(true);
@@ -1983,19 +2229,19 @@ public class ShopManager : MonoBehaviour
         switch (speicalIndex)
         {
             case 0:
-                if (characterIndex + 1 < shopCharacterArray.Length)
+                if (animalIndex + 1 < shopAnimalArray.Length)
                 {
-                    characterIndex += 1;
+                    animalIndex += 1;
 
-                    CharacterInitialize();
+                    AnimalInitialize();
                 }
 
-                if (characterIndex == 0)
+                if (animalIndex == 0)
                 {
                     leftButton.SetActive(false);
                 }
 
-                if (characterIndex >= shopCharacterArray.Length - 1)
+                if (animalIndex >= shopAnimalArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
@@ -2021,19 +2267,19 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 2:
-                if (animalIndex + 1 < shopAnimalArray.Length)
+                if (characterIndex + 1 < shopCharacterArray.Length)
                 {
-                    animalIndex += 1;
+                    characterIndex += 1;
 
-                    AnimalInitialize();
+                    CharacterInitialize();
                 }
 
-                if (animalIndex == 0)
+                if (characterIndex == 0)
                 {
                     leftButton.SetActive(false);
                 }
 
-                if (animalIndex >= shopAnimalArray.Length - 1)
+                if (characterIndex >= shopCharacterArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
@@ -2058,6 +2304,42 @@ public class ShopManager : MonoBehaviour
                 }
 
                 break;
+            case 4:
+                if (totemsIndex + 1 < shopTotemsArray.Length)
+                {
+                    totemsIndex += 1;
+
+                    TotemsInitialize();
+                }
+
+                if (totemsIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (totemsIndex >= shopTotemsArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+                break;
+            case 5:
+                if (flowerIndex + 1 < shopFlowerArray.Length)
+                {
+                    flowerIndex += 1;
+
+                    FlowerInitialize();
+                }
+
+                if (flowerIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (flowerIndex >= shopFlowerArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+                break;
         }
     }
 
@@ -2069,19 +2351,19 @@ public class ShopManager : MonoBehaviour
         switch (speicalIndex)
         {
             case 0:
-                if (characterIndex - 1 >= 0)
+                if (animalIndex - 1 >= 0)
                 {
-                    characterIndex -= 1;
+                    animalIndex -= 1;
 
-                    CharacterInitialize();
+                    AnimalInitialize();
                 }
 
-                if (characterIndex == 0)
+                if (animalIndex == 0)
                 {
                     leftButton.SetActive(false);
                 }
 
-                if (characterIndex >= shopCharacterArray.Length - 1)
+                if (animalIndex >= shopAnimalArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
@@ -2107,19 +2389,19 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 2:
-                if (animalIndex - 1 >= 0)
+                if (characterIndex - 1 >= 0)
                 {
-                    animalIndex -= 1;
+                    characterIndex -= 1;
 
-                    AnimalInitialize();
+                    CharacterInitialize();
                 }
 
-                if (animalIndex == 0)
+                if (characterIndex == 0)
                 {
                     leftButton.SetActive(false);
                 }
 
-                if (animalIndex >= shopAnimalArray.Length - 1)
+                if (characterIndex >= shopCharacterArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
@@ -2139,6 +2421,44 @@ public class ShopManager : MonoBehaviour
                 }
 
                 if (butterflyIndex >= shopButterflyArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                break;
+            case 4:
+                if (totemsIndex - 1 >= 0)
+                {
+                    totemsIndex -= 1;
+
+                    TotemsInitialize();
+                }
+
+                if (totemsIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (totemsIndex >= shopTotemsArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                break;
+            case 5:
+                if (flowerIndex - 1 >= 0)
+                {
+                    flowerIndex -= 1;
+
+                    FlowerInitialize();
+                }
+
+                if (flowerIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (flowerIndex >= shopFlowerArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
@@ -2218,6 +2538,40 @@ public class ShopManager : MonoBehaviour
                 mainButterflyArray[(int)GameStateManager.instance.ButterflyType].SetActive(true);
 
                 NotionManager.instance.UseNotion(NotionType.ChangeButterflyNotion);
+                break;
+            case 4:
+                if (GameStateManager.instance.TotemsType == totemsInfo.totemsType)
+                {
+                    return;
+                }
+
+                GameStateManager.instance.TotemsType = totemsInfo.totemsType;
+
+                for (int i = 0; i < mainTotemsArray.Length; i++)
+                {
+                    mainTotemsArray[i].SetActive(false);
+                }
+
+                mainTotemsArray[(int)GameStateManager.instance.TotemsType].SetActive(true);
+
+                NotionManager.instance.UseNotion(NotionType.ChangeTotemsNotion);
+                break;
+            case 5:
+                if (GameStateManager.instance.FlowerType == flowerInfo.flowerType)
+                {
+                    return;
+                }
+
+                GameStateManager.instance.FlowerType = flowerInfo.flowerType;
+
+                for (int i = 0; i < mainFlowerArray.Length; i++)
+                {
+                    mainFlowerArray[i].SetActive(false);
+                }
+
+                mainFlowerArray[(int)GameStateManager.instance.FlowerType].SetActive(true);
+
+                NotionManager.instance.UseNotion(NotionType.ChangeFlowerNotion);
                 break;
         }
 
@@ -2602,6 +2956,85 @@ public class ShopManager : MonoBehaviour
                 }
 
                 break;
+            case 4:
+                switch (number)
+                {
+                    case 0:
+                        if (playerDataBase.Coin < price_Gold)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < totemsInfo.crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(totemsInfo.totemsType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Totems", itemList);
+
+                switch (totemsInfo.totemsType)
+                {
+                    case TotemsType.Totems1:
+                        playerDataBase.Totems1 = 1;
+                        break;
+                    case TotemsType.Totems2:
+                        playerDataBase.Totems2 = 1;
+                        break;
+                    case TotemsType.Totems3:
+                        playerDataBase.Totems3 = 1;
+                        break;
+                    case TotemsType.Totems4:
+                        playerDataBase.Totems4 = 1;
+                        break;
+                    case TotemsType.Totems5:
+                        playerDataBase.Totems5 = 1;
+                        break;
+                    case TotemsType.Totems6:
+                        playerDataBase.Totems6 = 1;
+                        break;
+                    case TotemsType.Totems7:
+                        playerDataBase.Totems7 = 1;
+                        break;
+                    case TotemsType.Totems8:
+                        playerDataBase.Totems8 = 1;
+                        break;
+                    case TotemsType.Totems9:
+                        playerDataBase.Totems9 = 1;
+                        break;
+                    case TotemsType.Totems10:
+                        playerDataBase.Totems10 = 1;
+                        break;
+                    case TotemsType.Totems11:
+                        playerDataBase.Totems11 = 1;
+                        break;
+                    case TotemsType.Totems12:
+                        playerDataBase.Totems12 = 1;
+                        break;
+                }
+                break;
+            case 5:
+
+                break;
         }
 
         selectObj.SetActive(true);
@@ -2710,7 +3143,6 @@ public class ShopManager : MonoBehaviour
         selectObj.SetActive(true);
         buyButton.SetActive(false);
         
-
         selectText.text = LocalizationManager.instance.GetString("Select");
     }
 
@@ -2876,7 +3308,7 @@ public class ShopManager : MonoBehaviour
                 playerDataBase.Portion2 += 40;
                 playerDataBase.Portion3 += 40;
                 playerDataBase.Portion4 += 40;
-                playerDataBase.BuffTickets += 10;
+                playerDataBase.BuffTickets += 50;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
@@ -2916,10 +3348,10 @@ public class ShopManager : MonoBehaviour
                 Invoke("PackageDelay4", 0.5f);
 
                 PlayfabManager.instance.UpdateAddGold(200000000);
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3500);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 5000);
 
                 playerDataBase.BuffTickets += 100;
-                playerDataBase.DefDestroyTicket += 200;
+                playerDataBase.DefDestroyTicket += 100;
 
                 yield return waitForSeconds;
 

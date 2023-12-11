@@ -1113,6 +1113,101 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.Butterfly28 = 1;
                     }
 
+                    if (list.ItemId.Equals("Totems1"))
+                    {
+                        playerDataBase.Totems1 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems2"))
+                    {
+                        playerDataBase.Totems2 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems3"))
+                    {
+                        playerDataBase.Totems3 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems4"))
+                    {
+                        playerDataBase.Totems4 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems5"))
+                    {
+                        playerDataBase.Totems5 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems6"))
+                    {
+                        playerDataBase.Totems6 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems7"))
+                    {
+                        playerDataBase.Totems7 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems8"))
+                    {
+                        playerDataBase.Totems8 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems9"))
+                    {
+                        playerDataBase.Totems9 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems10"))
+                    {
+                        playerDataBase.Totems10 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems11"))
+                    {
+                        playerDataBase.Totems11 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Totems12"))
+                    {
+                        playerDataBase.Totems12 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Flower1"))
+                    {
+                        playerDataBase.Flower1 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Flower2"))
+                    {
+                        playerDataBase.Flower2 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Flower3"))
+                    {
+                        playerDataBase.Flower3 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Flower4"))
+                    {
+                        playerDataBase.Flower4 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Flower5"))
+                    {
+                        playerDataBase.Flower5 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Flower6"))
+                    {
+                        playerDataBase.Flower6 = 1;
+                    }
+
+                    if (list.ItemId.Equals("Flower7"))
+                    {
+                        playerDataBase.Flower7 = 1;
+                    }
+
                     if (list.ItemId.Equals("Island1"))
                     {
                         playerDataBase.Island1 = 1;

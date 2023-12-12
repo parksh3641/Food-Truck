@@ -75,7 +75,7 @@ public class FoodContent : MonoBehaviour
 
     public void FeverOn()
     {
-        rotation.rotationSpeed = 80;
+        rotation.rotationSpeed = 120;
     }
 
     public void FeverOff()

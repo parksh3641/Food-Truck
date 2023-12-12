@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     public Image expFillamount;
 
     public LocalizationContent infoText;
+    public Text accessDateText;
 
     private int level = 0;
     private int nowExp = 0;
@@ -84,5 +85,7 @@ public class LevelManager : MonoBehaviour
 
         infoText.localizationName = "SuccessPercent";
         infoText.plusText = " : +" + (level * 0.1f).ToString("N1") + "%";
+
+        accessDateText.text = LocalizationManager.instance.GetString("AccessDate") + " : " + playerDataBase.AccessDate;
     }
 }

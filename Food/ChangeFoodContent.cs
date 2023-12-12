@@ -17,6 +17,7 @@ public class ChangeFoodContent : MonoBehaviour
     public GameObject lockedObj;
     public GameObject selectedObj;
     public GameObject proficiency;
+    public Text bestText;
 
     public Text proficiencyValueText;
     public Image proficiencyFillamount;
@@ -68,10 +69,13 @@ public class ChangeFoodContent : MonoBehaviour
         lockedText.ReLoad();
 
         proficiency.SetActive(true);
+        bestText.text = "";
 
         if (type == FoodType.Ribs)
         {
             proficiency.SetActive(false);
+
+            bestText.text = LocalizationManager.instance.GetString("Best") + " : " + playerDataBase.RankLevel1;
         }
     }
 
@@ -133,11 +137,14 @@ public class ChangeFoodContent : MonoBehaviour
         titleText.ReLoad();
 
         proficiency.SetActive(true);
+        bestText.text = "";
 
         if (type == CandyType.Chocolate)
         {
             proficiency.SetActive(false);
             lockedText.localizationName = "RankLocked1";
+
+            bestText.text = LocalizationManager.instance.GetString("Best") + " : " + playerDataBase.RankLevel2;
         }
         else
         {
@@ -211,11 +218,14 @@ public class ChangeFoodContent : MonoBehaviour
         titleText.ReLoad();
 
         proficiency.SetActive(true);
+        bestText.text = "";
 
         if (type == JapaneseFoodType.Ramen)
         {
             proficiency.SetActive(false);
             lockedText.localizationName = "RankLocked2";
+
+            bestText.text = LocalizationManager.instance.GetString("Best") + " : " + playerDataBase.RankLevel3;
         }
         else
         {
@@ -283,11 +293,14 @@ public class ChangeFoodContent : MonoBehaviour
         titleText.ReLoad();
 
         proficiency.SetActive(true);
+        bestText.text = "";
 
         if (type == DessertType.FruitSkewers)
         {
             proficiency.SetActive(false);
             lockedText.localizationName = "RankLocked3";
+
+            bestText.text = LocalizationManager.instance.GetString("Best") + " : " + playerDataBase.RankLevel4;
         }
         else
         {
@@ -352,7 +365,7 @@ public class ChangeFoodContent : MonoBehaviour
 
     public void SetLevel(int level, int max)
     {
-        if(level > max)
+        if(level + 1 > max)
         {
             level = max - 1;
         }

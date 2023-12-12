@@ -63,7 +63,7 @@ public class AttendanceManager : MonoBehaviour
 
     public void Initialize()
     {
-        if(!playerDataBase.attendanceCheck)
+        if(!playerDataBase.AttendanceCheck)
         {
             SetAlarm();
         }
@@ -115,7 +115,7 @@ public class AttendanceManager : MonoBehaviour
     {
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
-            attendanceContentArray[i].InitializeAttendance(playerDataBase.AttendanceCount, playerDataBase.AttendanceCheck, this);
+            attendanceContentArray[i].InitializeAttendance(i, playerDataBase.AttendanceCount, playerDataBase.AttendanceCheck, this);
         }
     }
 

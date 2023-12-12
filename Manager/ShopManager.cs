@@ -783,7 +783,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[33].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 30);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
@@ -811,15 +811,18 @@ public class ShopManager : MonoBehaviour
         StartCoroutine(DailyShopTimer());
     }
 
-    public void OpenSpeicalShopView(int number)
+    public void OpenSpeicalShop()
     {
         if (!speicalShopView.activeInHierarchy)
         {
             speicalShopView.SetActive(true);
 
-            ChangeSpeicalTopToggle(number);
+            if (speicalIndex == -1)
+            {
+                ChangeSpeicalTopToggle(0);
+            }
 
-            switch (number)
+            switch (speicalIndex)
             {
                 case 0:
                     shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
@@ -852,6 +855,20 @@ public class ShopManager : MonoBehaviour
                     FirebaseAnalytics.LogEvent("OpenFlower");
                     break;
             }
+        }
+        else
+        {
+            speicalShopView.SetActive(false);
+        }
+    }
+
+    public void OpenSpeicalShopView(int number)
+    {
+        if (!speicalShopView.activeInHierarchy)
+        {
+            speicalShopView.SetActive(true);
+
+            ChangeSpeicalTopToggle(number);
         }
         else
         {
@@ -2472,21 +2489,21 @@ public class ShopManager : MonoBehaviour
         switch(speicalIndex)
         {
             case 0:
-                if (GameStateManager.instance.CharacterType == characterInfo.characterType)
+                if (GameStateManager.instance.AnimalType == animalInfo.animalType)
                 {
                     return;
                 }
 
-                GameStateManager.instance.CharacterType = characterInfo.characterType;
+                GameStateManager.instance.AnimalType = animalInfo.animalType;
 
-                for (int i = 0; i < mainCharacterArray.Length; i++)
+                for (int i = 0; i < mainAnimalArray.Length; i++)
                 {
-                    mainCharacterArray[i].SetActive(false);
+                    mainAnimalArray[i].SetActive(false);
                 }
 
-                mainCharacterArray[(int)GameStateManager.instance.CharacterType].SetActive(true);
+                mainAnimalArray[(int)GameStateManager.instance.AnimalType].SetActive(true);
 
-                NotionManager.instance.UseNotion(NotionType.ChangeCharacterNotion);
+                NotionManager.instance.UseNotion(NotionType.ChangeAnimalNotion);
                 break;
             case 1:
                 if (GameStateManager.instance.TruckType == truckInfo.truckType)
@@ -2506,21 +2523,21 @@ public class ShopManager : MonoBehaviour
                 NotionManager.instance.UseNotion(NotionType.ChangeTruckNotion);
                 break;
             case 2:
-                if (GameStateManager.instance.AnimalType == animalInfo.animalType)
+                if (GameStateManager.instance.CharacterType == characterInfo.characterType)
                 {
                     return;
                 }
 
-                GameStateManager.instance.AnimalType = animalInfo.animalType;
+                GameStateManager.instance.CharacterType = characterInfo.characterType;
 
-                for (int i = 0; i < mainAnimalArray.Length; i++)
+                for (int i = 0; i < mainCharacterArray.Length; i++)
                 {
-                    mainAnimalArray[i].SetActive(false);
+                    mainCharacterArray[i].SetActive(false);
                 }
 
-                mainAnimalArray[(int)GameStateManager.instance.AnimalType].SetActive(true);
+                mainCharacterArray[(int)GameStateManager.instance.CharacterType].SetActive(true);
 
-                NotionManager.instance.UseNotion(NotionType.ChangeAnimalNotion);
+                NotionManager.instance.UseNotion(NotionType.ChangeCharacterNotion);
                 break;
             case 3:
                 if (GameStateManager.instance.ButterflyType == butterflyInfo.butterflyType)
@@ -2599,6 +2616,140 @@ public class ShopManager : MonoBehaviour
         switch (speicalIndex)
         {
             case 0:
+                switch (number)
+                {
+                    case 0:
+                        if (playerDataBase.Coin < price_Gold)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < animalInfo.crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(animalInfo.animalType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Animal", itemList);
+
+                switch (animalInfo.animalType)
+                {
+                    case AnimalType.Colobus:
+                        break;
+                    case AnimalType.Gecko:
+                        playerDataBase.GeckoAnimal = 1;
+                        break;
+                    case AnimalType.Herring:
+                        playerDataBase.HerringAnimal = 1;
+                        break;
+                    case AnimalType.Muskrat:
+                        playerDataBase.MuskratAnimal = 1;
+                        break;
+                    case AnimalType.Pudu:
+                        playerDataBase.PuduAnimal = 1;
+                        break;
+                    case AnimalType.Sparrow:
+                        playerDataBase.SparrowAnimal = 1;
+                        break;
+                    case AnimalType.Squid:
+                        playerDataBase.SquidAnimal = 1;
+                        break;
+                    case AnimalType.Taipan:
+                        playerDataBase.TaipanAnimal = 1;
+                        break;
+                }
+
+                break;
+            case 1:
+                switch(number)
+                {
+                    case 0:
+                        if (playerDataBase.Coin < price_Gold)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < truckInfo.crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(truckInfo.truckType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Truck", itemList);
+
+                switch (truckInfo.truckType)
+                {
+                    case TruckType.Bread:
+                        break;
+                    case TruckType.Chips:
+                        playerDataBase.ChipsTruck = 1;
+                        break;
+                    case TruckType.Donut:
+                        playerDataBase.DonutTruck = 1;
+                        break;
+                    case TruckType.Hamburger:
+                        playerDataBase.HamburgerTruck = 1;
+                        break;
+                    case TruckType.Hotdog:
+                        playerDataBase.HotdogTruck = 1;
+                        break;
+                    case TruckType.Icecream:
+                        playerDataBase.IcecreamTruck = 1;
+                        break;
+                    case TruckType.Lemonade:
+                        playerDataBase.LemonadeTruck = 1;
+                        break;
+                    case TruckType.Noodles:
+                        playerDataBase.NoodlesTruck = 1;
+                        break;
+                    case TruckType.Pizza:
+                        playerDataBase.PizzaTruck = 1;
+                        break;
+                    case TruckType.Sushi:
+                        playerDataBase.SushiTruck = 1;
+                        break;
+                }
+
+                break;
+            case 2:
                 switch (number)
                 {
                     case 0:
@@ -2694,140 +2845,6 @@ public class ShopManager : MonoBehaviour
                         break;
                     case CharacterType.Character20:
                         playerDataBase.Character20 = 1;
-                        break;
-                }
-
-                break;
-            case 1:
-                switch(number)
-                {
-                    case 0:
-                        if (playerDataBase.Coin < price_Gold)
-                        {
-                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                            NotionManager.instance.UseNotion(NotionType.LowCoin);
-
-                            return;
-                        }
-                        else
-                        {
-                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
-                        }
-                        break;
-                    case 1:
-                        if (playerDataBase.Crystal < truckInfo.crystal)
-                        {
-                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
-
-                            return;
-                        }
-                        else
-                        {
-                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
-                        }
-                        break;
-                }
-
-                itemList.Clear();
-                itemList.Add(truckInfo.truckType.ToString());
-
-                PlayfabManager.instance.GrantItemToUser("Truck", itemList);
-
-                switch (truckInfo.truckType)
-                {
-                    case TruckType.Bread:
-                        break;
-                    case TruckType.Chips:
-                        playerDataBase.ChipsTruck = 1;
-                        break;
-                    case TruckType.Donut:
-                        playerDataBase.DonutTruck = 1;
-                        break;
-                    case TruckType.Hamburger:
-                        playerDataBase.HamburgerTruck = 1;
-                        break;
-                    case TruckType.Hotdog:
-                        playerDataBase.HotdogTruck = 1;
-                        break;
-                    case TruckType.Icecream:
-                        playerDataBase.IcecreamTruck = 1;
-                        break;
-                    case TruckType.Lemonade:
-                        playerDataBase.LemonadeTruck = 1;
-                        break;
-                    case TruckType.Noodles:
-                        playerDataBase.NoodlesTruck = 1;
-                        break;
-                    case TruckType.Pizza:
-                        playerDataBase.PizzaTruck = 1;
-                        break;
-                    case TruckType.Sushi:
-                        playerDataBase.SushiTruck = 1;
-                        break;
-                }
-
-                break;
-            case 2:
-                switch (number)
-                {
-                    case 0:
-                        if (playerDataBase.Coin < price_Gold)
-                        {
-                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                            NotionManager.instance.UseNotion(NotionType.LowCoin);
-
-                            return;
-                        }
-                        else
-                        {
-                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
-                        }
-                        break;
-                    case 1:
-                        if (playerDataBase.Crystal < animalInfo.crystal)
-                        {
-                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
-
-                            return;
-                        }
-                        else
-                        {
-                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
-                        }
-                        break;
-                }
-
-                itemList.Clear();
-                itemList.Add(animalInfo.animalType.ToString());
-
-                PlayfabManager.instance.GrantItemToUser("Animal", itemList);
-
-                switch (animalInfo.animalType)
-                {
-                    case AnimalType.Colobus:
-                        break;
-                    case AnimalType.Gecko:
-                        playerDataBase.GeckoAnimal = 1;
-                        break;
-                    case AnimalType.Herring:
-                        playerDataBase.HerringAnimal = 1;
-                        break;
-                    case AnimalType.Muskrat:
-                        playerDataBase.MuskratAnimal = 1;
-                        break;
-                    case AnimalType.Pudu:
-                        playerDataBase.PuduAnimal = 1;
-                        break;
-                    case AnimalType.Sparrow:
-                        playerDataBase.SparrowAnimal = 1;
-                        break;
-                    case AnimalType.Squid:
-                        playerDataBase.SquidAnimal = 1;
-                        break;
-                    case AnimalType.Taipan:
-                        playerDataBase.TaipanAnimal = 1;
                         break;
                 }
 
@@ -3417,13 +3434,13 @@ public class ShopManager : MonoBehaviour
         switch(speicalIndex)
         {
             case 0:
-                shopCharacterArray[characterIndex].GetComponent<Animator>().SetBool("YummyTime", true);
+                shopAnimalArray[animalIndex].GetComponent<Animator>().SetBool("YummyTime", true);
                 break;
             case 1:
                 shopTruckArray[truckIndex].GetComponent<Animator>().SetBool("YummyTime", true);
                 break;
             case 2:
-                shopAnimalArray[animalIndex].GetComponent<Animator>().SetBool("YummyTime", true);
+                shopCharacterArray[characterIndex].GetComponent<Animator>().SetBool("YummyTime", true);
                 break;
             case 3:
                 shopButterflyArray[butterflyIndex].GetComponent<Animator>().SetBool("YummyTime", true);

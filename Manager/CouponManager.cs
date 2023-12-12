@@ -169,10 +169,10 @@ public class CouponManager : MonoBehaviour
 
                     PlayfabManager.instance.UpdateAddGold(500000);
 
-                    playerDataBase.Portion1 += 5;
-                    playerDataBase.Portion2 += 5;
-                    playerDataBase.Portion3 += 5;
-                    playerDataBase.Portion4 += 5;
+                    playerDataBase.Portion1 += 3;
+                    playerDataBase.Portion2 += 3;
+                    playerDataBase.Portion3 += 3;
+                    playerDataBase.Portion4 += 3;
 
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
@@ -187,10 +187,10 @@ public class CouponManager : MonoBehaviour
                     receiveContents[4].gameObject.SetActive(true);
 
                     receiveContents[0].Initialize(RewardType.Gold, 500000);
-                    receiveContents[1].Initialize(RewardType.Portion1, 5);
-                    receiveContents[2].Initialize(RewardType.Portion2, 5);
-                    receiveContents[3].Initialize(RewardType.Portion3, 5);
-                    receiveContents[4].Initialize(RewardType.Portion4, 5);
+                    receiveContents[1].Initialize(RewardType.Portion1, 3);
+                    receiveContents[2].Initialize(RewardType.Portion2, 3);
+                    receiveContents[3].Initialize(RewardType.Portion3, 3);
+                    receiveContents[4].Initialize(RewardType.Portion4, 3);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Success);
                     NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -300,7 +300,7 @@ public class CouponManager : MonoBehaviour
                     receiveContents[1].gameObject.SetActive(true);
 
                     receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 50);
+                    receiveContents[1].Initialize(RewardType.Crystal, 100);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Success);
                     NotionManager.instance.UseNotion(NotionType.SuccessReward);

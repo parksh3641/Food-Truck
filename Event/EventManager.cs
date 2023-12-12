@@ -10,6 +10,9 @@ public class EventManager : MonoBehaviour
 
     public RectTransform eventTransform;
 
+    public GameObject welcomeEvent;
+    public GameObject weekendEvent;
+
     PlayerDataBase playerDataBase;
 
     private void Awake()
@@ -35,11 +38,30 @@ public class EventManager : MonoBehaviour
 
             eventView.SetActive(true);
 
+            if(playerDataBase.WelcomeCount > 6)
+            {
+                welcomeEvent.SetActive(false);
+            }
+
+            weekendEvent.SetActive(false);
+
+            if (IsWeekend())
+            {
+                weekendEvent.SetActive(true);
+            }
+
             FirebaseAnalytics.LogEvent("OpenEvent");
         }
         else
         {
             eventView.SetActive(false);
         }
+    }
+
+    bool IsWeekend()
+    {
+        DayOfWeek currentDay = DateTime.Now.DayOfWeek;
+
+        return currentDay == DayOfWeek.Saturday || currentDay == DayOfWeek.Sunday;
     }
 }

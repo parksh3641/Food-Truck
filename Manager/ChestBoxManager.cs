@@ -86,6 +86,7 @@ public class ChestBoxManager : MonoBehaviour
             chestBoxIcon.SetActive(true);
 
             SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
+            NotionManager.instance.UseNotion(NotionType.OpenChestBoxNotion);
         }
         else
         {
@@ -150,7 +151,7 @@ public class ChestBoxManager : MonoBehaviour
 
     public void GetFreeReward()
     {
-        if(Random.Range(0, 10) > 5)
+        if(Random.Range(0, 10) > 7)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.FailGetItem);

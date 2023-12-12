@@ -55,16 +55,14 @@ public class SoundManager : MonoBehaviour
     {
         musicAudio.volume = 1;
 
-        if(!musicAudio.isPlaying)
+        if(!fever)
         {
-            StartCoroutine(PlayList());
-        }
+            if (!musicAudio.isPlaying)
+            {
+                StartCoroutine(PlayList());
+            }
 
-        musicAudio2.Play();
-
-        if(fever)
-        {
-            PlayFever();
+            musicAudio2.Play();
         }
     }
 

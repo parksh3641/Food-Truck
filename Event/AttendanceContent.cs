@@ -19,6 +19,7 @@ public class AttendanceContent : MonoBehaviour
     AttendanceManager attendanceManager;
     RankEventManager rankEventManager;
     PlayTimeManager playTimeManager;
+    WelcomeManager welcomeManager;
 
 
     private void Awake()
@@ -29,8 +30,9 @@ public class AttendanceContent : MonoBehaviour
         }    
     }
 
-    public void InitializeAttendance(int number, bool check, AttendanceManager manager)
+    public void InitializeAttendance(int _index, int number, bool check, AttendanceManager manager)
     {
+        index = _index;
         attendanceManager = manager;
 
         titleText.localizationName = (index + 1) + "Day";
@@ -241,6 +243,45 @@ public class AttendanceContent : MonoBehaviour
         titleText.ReLoad();
     }
 
+    public void InitializeWelcome(int _index, int number, bool check, WelcomeManager manager)
+    {
+        index = _index;
+        welcomeManager = manager;
+
+        titleText.localizationName = (index + 1) + "Day";
+        titleText.ReLoad();
+
+        selectObj.SetActive(false);
+        lockObj.SetActive(false);
+        clearObj.SetActive(false);
+
+        if (index == number)
+        {
+            if (!check)
+            {
+                selectObj.SetActive(true);
+                lockObj.SetActive(false);
+            }
+            else
+            {
+                lockObj.SetActive(true);
+            }
+        }
+        else
+        {
+            if (index > number)
+            {
+                lockObj.SetActive(true);
+            }
+            else
+            {
+                lockObj.SetActive(true);
+                clearObj.SetActive(true);
+            }
+        }
+    }
+
+
     public void ReceiveButton()
     {
         if(attendanceManager != null)
@@ -264,6 +305,14 @@ public class AttendanceContent : MonoBehaviour
             if (!lockObj.activeInHierarchy)
             {
                 playTimeManager.ReceiveButton(index, SuccessReceive);
+            }
+        }
+
+        if (welcomeManager != null)
+        {
+            if (!lockObj.activeInHierarchy)
+            {
+                welcomeManager.ReceiveButton(index, SuccessReceive);
             }
         }
     }

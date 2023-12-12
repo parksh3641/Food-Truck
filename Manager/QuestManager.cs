@@ -1,4 +1,5 @@
 using Firebase.Analytics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -67,7 +68,14 @@ public class QuestManager : MonoBehaviour
         questTitleText.text = LocalizationManager.instance.GetString("Quest");
         questTitleText.text += " " + (playerDataBase.QuestCount + 1).ToString();
 
-        reward = questDataBase.reward;
+        if (IsWeekend())
+        {
+            reward = questDataBase.reward * 2;
+        }
+        else
+        {
+            reward = questDataBase.reward;
+        }
 
         questClearValueText.text = MoneyUnitString.ToCurrencyString(reward);
 
@@ -197,7 +205,7 @@ public class QuestManager : MonoBehaviour
         playerDataBase.QuestCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);
 
-        float random = Random.Range(0, 100f);
+        float random = UnityEngine.Random.Range(0, 100f);
 
         int number = 0;
 
@@ -248,5 +256,12 @@ public class QuestManager : MonoBehaviour
         alarm.SetActive(false);
 
         FirebaseAnalytics.LogEvent("QuestClear");
+    }
+
+    bool IsWeekend()
+    {
+        DayOfWeek currentDay = DateTime.Now.DayOfWeek;
+
+        return currentDay == DayOfWeek.Saturday || currentDay == DayOfWeek.Sunday;
     }
 }

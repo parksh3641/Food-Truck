@@ -538,13 +538,23 @@ public class PlayerDataBase : ScriptableObject
 
     [Space]
     [Title("Reset")]
-    public string attendanceDay = "";
-    public int attendanceCount = 0;
-    public bool attendanceCheck = false;
-    public int playTimeCount = 0;
-    public int rankEventCount = 0;
+    [SerializeField]
+    private string attendanceDay = "";
+    [SerializeField]
+    private int attendanceCount = 0;
+    [SerializeField]
+    private bool attendanceCheck = false;
+    [SerializeField]
+    private int playTimeCount = 0;
+    [SerializeField]
+    private int rankEventCount = 0;
+    [SerializeField]
+    private int welcomeCount = 0;
+    [SerializeField]
+    private bool welcomeCheck = false;
     [Space]
-    public string nextMonday = "";
+    [SerializeField]
+    private string nextMonday = "";
 
     [SerializeField]
     private bool appReview = false;
@@ -3362,6 +3372,30 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public bool WelcomeCheck
+    {
+        get
+        {
+            return welcomeCheck;
+        }
+        set
+        {
+            welcomeCheck = value;
+        }
+    }
+
+    public int WelcomeCount
+    {
+        get
+        {
+            return welcomeCount;
+        }
+        set
+        {
+            welcomeCount = value;
+        }
+    }
+
     public string NextMonday
     {
         get
@@ -3598,6 +3632,27 @@ public class PlayerDataBase : ScriptableObject
         butterfly27 = 0;
         butterfly28 = 0;
 
+        totems1 = 0;
+        totems2 = 0;
+        totems3 = 0;
+        totems4 = 0;
+        totems5 = 0;
+        totems6 = 0;
+        totems7 = 0;
+        totems8 = 0;
+        totems9 = 0;
+        totems10 = 0;
+        totems11 = 0;
+        totems12 = 0;
+
+        flower1 = 0;
+        flower2 = 0;
+        flower3 = 0;
+        flower4 = 0;
+        flower5 = 0;
+        flower6 = 0;
+        flower7 = 0;
+
         island1 = 0;
         island2 = 0;
         island3 = 0;
@@ -3657,13 +3712,9 @@ public class PlayerDataBase : ScriptableObject
         attendanceDay = "";
         attendanceCount = 0;
         attendanceCheck = false;
+        welcomeCount = 0;
+        welcomeCheck = false;
         nextMonday = "";
-
-        //easy_Offline = PlayerPrefs.GetInt("Easy_Offline");
-        //normal_Offline = PlayerPrefs.GetInt("Normal_Offline");
-        //hard_Offline = PlayerPrefs.GetInt("Hard_Offline");
-        //crazy_Offline = PlayerPrefs.GetInt("Crazy_Offline");
-        //insane_Offline = PlayerPrefs.GetInt("Insane_Offline");
     }
 
     public bool CheckCharacter(TruckType type)

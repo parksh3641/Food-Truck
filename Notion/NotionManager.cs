@@ -197,4 +197,5 @@ public enum NotionType
     FailGetItem,
     ChangeTotemsNotion,
     ChangeFlowerNotion,
+    OpenChestBoxNotion
 }

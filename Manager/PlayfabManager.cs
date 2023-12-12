@@ -1431,6 +1431,19 @@ public class PlayfabManager : MonoBehaviour
                                playerDataBase.AttendanceCheck = true;
                            }
                            break;
+                       case "WelcomeCount":
+                           playerDataBase.WelcomeCount = statistics.Value;
+                           break;
+                       case "WelcomeCheck":
+                           if (statistics.Value == 0)
+                           {
+                               playerDataBase.WelcomeCheck = false;
+                           }
+                           else
+                           {
+                               playerDataBase.WelcomeCheck = true;
+                           }
+                           break;
                        case "AppReview":
                            if (statistics.Value == 0)
                            {

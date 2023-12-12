@@ -1152,7 +1152,7 @@ public class GameManager : MonoBehaviour
         defDestroy = 0;
         expUp = 0;
 
-        //changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
+        changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
         if (GameStateManager.instance.CharacterType > CharacterType.Character1)
         {
@@ -1381,6 +1381,8 @@ public class GameManager : MonoBehaviour
         //islandText.localizationName = GameStateManager.instance.IslandType.ToString();
         //islandText.ReLoad();
 
+        changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
+
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
@@ -1485,7 +1487,7 @@ public class GameManager : MonoBehaviour
             case IslandType.Island1:
                 maxLevel = upgradeFood.maxLevel;
 
-                if (level > maxLevel)
+                if (level + 1 > maxLevel)
                 {
                     level = maxLevel - 1;
                 }
@@ -1495,7 +1497,7 @@ public class GameManager : MonoBehaviour
             case IslandType.Island2:
                 maxLevel = upgradeCandy.maxLevel;
 
-                if (level > maxLevel)
+                if (level + 1 > maxLevel)
                 {
                     level = maxLevel - 1;
                 }
@@ -1506,7 +1508,7 @@ public class GameManager : MonoBehaviour
             case IslandType.Island3:
                 maxLevel = upgradeJapaneseFood.maxLevel;
 
-                if (level > maxLevel)
+                if (level + 1 > maxLevel)
                 {
                     level = maxLevel - 1;
                 }
@@ -1517,7 +1519,7 @@ public class GameManager : MonoBehaviour
             case IslandType.Island4:
                 maxLevel = upgradeDessert.maxLevel;
 
-                if (level > maxLevel)
+                if (level + 1 > maxLevel)
                 {
                     level = maxLevel - 1;
                 }
@@ -1702,7 +1704,7 @@ public class GameManager : MonoBehaviour
         defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
         successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
 
-        sellPriceTipText.text = "<size=45>" + LocalizationManager.instance.GetString("SellPriceX2Up") + "</size>";
+        sellPriceTipText.text = "<size=40>" + LocalizationManager.instance.GetString("SellPriceX2Up") + "</size>";
         sellPriceTipText.text += "\n" + sellPriceTip.ToString("N1") + "%";
 
         CheckDefTicket();
@@ -4456,7 +4458,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (playerDataBase.Portion4 > 0)
                     {
-                        feverCount += (feverMaxCount * (0.25f + portion4Plus));
+                        feverCount += (feverMaxCount * (0.3f + portion4Plus));
                         CheckFever();
 
                         playerDataBase.Portion4 -= 1;
@@ -5034,6 +5036,9 @@ public class GameManager : MonoBehaviour
 
     public void GetResetReward()
     {
+        playerDataBase.AttendanceCheck = false;
+        playerDataBase.WelcomeCheck = false;
+
         playerDataBase.DailyReward = 0;
         playerDataBase.DailyReward_Portion = 0;
         playerDataBase.DailyReward_DefTicket = 0;
@@ -5052,11 +5057,8 @@ public class GameManager : MonoBehaviour
 
         GameStateManager.instance.ChestBoxCount = 0;
 
-        playerDataBase.attendanceCount = 0;
-        playerDataBase.attendanceCheck = false;
-
-        playerDataBase.playTimeCount = 0;
-        playerDataBase.rankEventCount = 0;
+        playerDataBase.PlayTimeCount = 0;
+        playerDataBase.RankEventCount = 0;
     }
 
     public void GetGold()
@@ -5071,24 +5073,31 @@ public class GameManager : MonoBehaviour
 
     public void GetPortion()
     {
-        playerDataBase.Portion1 += 100;
-        playerDataBase.Portion2 += 100;
-        playerDataBase.Portion3 += 100;
-        playerDataBase.Portion4 += 100;
-        playerDataBase.Portion5 += 100;
-        playerDataBase.Portion6 += 100;
+        playerDataBase.Portion1 += 999;
+        playerDataBase.Portion2 += 999;
+        playerDataBase.Portion3 += 999;
+        playerDataBase.Portion4 += 999;
+        playerDataBase.Portion5 += 999;
+        //playerDataBase.Portion6 += 100;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion6", playerDataBase.Portion6);
+        //PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion6", playerDataBase.Portion6);
+    }
+
+    public void GetBuffTicket()
+    {
+        playerDataBase.BuffTickets += 999;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
     }
 
     public void GetDefTicket()
     {
-        playerDataBase.DefDestroyTicket += 100;
+        playerDataBase.DefDestroyTicket += 999;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
     }
@@ -5183,5 +5192,173 @@ public class GameManager : MonoBehaviour
     public void DeveloperOff()
     {
         GameStateManager.instance.Developer = false;
+    }
+
+    public void GetEnableAllItem()
+    {
+        playerDataBase.ChipsTruck = 1;
+        playerDataBase.DonutTruck = 1;
+        playerDataBase.HamburgerTruck = 1;
+        playerDataBase.IcecreamTruck = 1;
+        playerDataBase.LemonadeTruck = 1;
+        playerDataBase.NoodlesTruck = 1;
+        playerDataBase.PizzaTruck = 1;
+        playerDataBase.SushiTruck = 1;
+
+        playerDataBase.GeckoAnimal = 1;
+        playerDataBase.HerringAnimal = 1;
+        playerDataBase.MuskratAnimal = 1;
+        playerDataBase.PuduAnimal = 1;
+        playerDataBase.SparrowAnimal = 1;
+        playerDataBase.SquidAnimal = 1;
+        playerDataBase.TaipanAnimal = 1;
+
+        playerDataBase.Butterfly1 = 1;
+        playerDataBase.Butterfly2 = 1;
+        playerDataBase.Butterfly3 = 1;
+        playerDataBase.Butterfly4 = 1;
+        playerDataBase.Butterfly5 = 1;
+        playerDataBase.Butterfly6 = 1;
+        playerDataBase.Butterfly7 = 1;
+        playerDataBase.Butterfly8 = 1;
+        playerDataBase.Butterfly9 = 1;
+        playerDataBase.Butterfly10 = 1;
+        playerDataBase.Butterfly11 = 1;
+        playerDataBase.Butterfly12 = 1;
+        playerDataBase.Butterfly13 = 1;
+        playerDataBase.Butterfly14 = 1;
+        playerDataBase.Butterfly15 = 1;
+        playerDataBase.Butterfly16 = 1;
+        playerDataBase.Butterfly17 = 1;
+        playerDataBase.Butterfly18 = 1;
+        playerDataBase.Butterfly19 = 1;
+        playerDataBase.Butterfly20 = 1;
+        playerDataBase.Butterfly21 = 1;
+        playerDataBase.Butterfly22 = 1;
+        playerDataBase.Butterfly23 = 1;
+        playerDataBase.Butterfly24 = 1;
+        playerDataBase.Butterfly25 = 1;
+        playerDataBase.Butterfly26 = 1;
+        playerDataBase.Butterfly27 = 1;
+        playerDataBase.Butterfly28 = 1;
+
+        playerDataBase.Character1 = 1;
+        playerDataBase.Character2 = 1;
+        playerDataBase.Character3 = 1;
+        playerDataBase.Character4 = 1;
+        playerDataBase.Character5 = 1;
+        playerDataBase.Character6 = 1;
+        playerDataBase.Character7 = 1;
+        playerDataBase.Character8 = 1;
+        playerDataBase.Character9 = 1;
+        playerDataBase.Character10 = 1;
+        playerDataBase.Character11 = 1;
+        playerDataBase.Character12 = 1;
+        playerDataBase.Character13 = 1;
+        playerDataBase.Character14 = 1;
+        playerDataBase.Character15 = 1;
+        playerDataBase.Character16 = 1;
+        playerDataBase.Character17 = 1;
+        playerDataBase.Character18 = 1;
+        playerDataBase.Character19 = 1;
+        playerDataBase.Character20 = 1;
+        playerDataBase.Character21 = 1;
+
+        playerDataBase.Totems1 = 1;
+        playerDataBase.Totems2 = 1;
+        playerDataBase.Totems3 = 1;
+        playerDataBase.Totems4 = 1;
+        playerDataBase.Totems5 = 1;
+        playerDataBase.Totems6 = 1;
+        playerDataBase.Totems7 = 1;
+        playerDataBase.Totems8 = 1;
+        playerDataBase.Totems9 = 1;
+        playerDataBase.Totems10 = 1;
+        playerDataBase.Totems11 = 1;
+        playerDataBase.Totems12 = 1;
+    }
+
+    public void GetDisableAllItem()
+    {
+        playerDataBase.ChipsTruck = 0;
+        playerDataBase.DonutTruck = 0;
+        playerDataBase.HamburgerTruck = 0;
+        playerDataBase.IcecreamTruck = 0;
+        playerDataBase.LemonadeTruck = 0;
+        playerDataBase.NoodlesTruck = 0;
+        playerDataBase.PizzaTruck = 0;
+        playerDataBase.SushiTruck = 0;
+
+        playerDataBase.GeckoAnimal = 0;
+        playerDataBase.HerringAnimal = 0;
+        playerDataBase.MuskratAnimal = 0;
+        playerDataBase.PuduAnimal = 0;
+        playerDataBase.SparrowAnimal = 0;
+        playerDataBase.SquidAnimal = 0;
+        playerDataBase.TaipanAnimal = 0;
+
+        playerDataBase.Butterfly1 = 0;
+        playerDataBase.Butterfly2 = 0;
+        playerDataBase.Butterfly3 = 0;
+        playerDataBase.Butterfly4 = 0;
+        playerDataBase.Butterfly5 = 0;
+        playerDataBase.Butterfly6 = 0;
+        playerDataBase.Butterfly7 = 0;
+        playerDataBase.Butterfly8 = 0;
+        playerDataBase.Butterfly9 = 0;
+        playerDataBase.Butterfly10 = 0;
+        playerDataBase.Butterfly11 = 0;
+        playerDataBase.Butterfly12 = 0;
+        playerDataBase.Butterfly13 = 0;
+        playerDataBase.Butterfly14 = 0;
+        playerDataBase.Butterfly15 = 0;
+        playerDataBase.Butterfly16 = 0;
+        playerDataBase.Butterfly17 = 0;
+        playerDataBase.Butterfly18 = 0;
+        playerDataBase.Butterfly19 = 0;
+        playerDataBase.Butterfly20 = 0;
+        playerDataBase.Butterfly21 = 0;
+        playerDataBase.Butterfly22 = 0;
+        playerDataBase.Butterfly23 = 0;
+        playerDataBase.Butterfly24 = 0;
+        playerDataBase.Butterfly25 = 0;
+        playerDataBase.Butterfly26 = 0;
+        playerDataBase.Butterfly27 = 0;
+        playerDataBase.Butterfly28 = 0;
+
+        playerDataBase.Character1 = 0;
+        playerDataBase.Character2 = 0;
+        playerDataBase.Character3 = 0;
+        playerDataBase.Character4 = 0;
+        playerDataBase.Character5 = 0;
+        playerDataBase.Character6 = 0;
+        playerDataBase.Character7 = 0;
+        playerDataBase.Character8 = 0;
+        playerDataBase.Character9 = 0;
+        playerDataBase.Character10 = 0;
+        playerDataBase.Character11 = 0;
+        playerDataBase.Character12 = 0;
+        playerDataBase.Character13 = 0;
+        playerDataBase.Character14 = 0;
+        playerDataBase.Character15 = 0;
+        playerDataBase.Character16 = 0;
+        playerDataBase.Character17 = 0;
+        playerDataBase.Character18 = 0;
+        playerDataBase.Character19 = 0;
+        playerDataBase.Character20 = 0;
+        playerDataBase.Character21 = 0;
+
+        playerDataBase.Totems1 = 0;
+        playerDataBase.Totems2 = 0;
+        playerDataBase.Totems3 = 0;
+        playerDataBase.Totems4 = 0;
+        playerDataBase.Totems5 = 0;
+        playerDataBase.Totems6 = 0;
+        playerDataBase.Totems7 = 0;
+        playerDataBase.Totems8 = 0;
+        playerDataBase.Totems9 = 0;
+        playerDataBase.Totems10 = 0;
+        playerDataBase.Totems11 = 0;
+        playerDataBase.Totems12 = 0;
     }
 }

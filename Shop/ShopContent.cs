@@ -153,6 +153,9 @@ public class ShopContent : MonoBehaviour
                 buyRmText[3].localizationName = itemType + "_Price";
                 buyRmText[3].ReLoad();
 
+                infoText.localizationName = "Unlimited";
+                infoText.ReLoad();
+
                 break;
             case ItemType.PortionSet1:
                 lockedObj.SetActive(false);
@@ -409,7 +412,7 @@ public class ShopContent : MonoBehaviour
                 infoText.ReLoad();
                 break;
             case ItemType.AdReward_Crystal:
-                rewardText.text = "30";
+                rewardText.text = "50";
                 break;
         }
 

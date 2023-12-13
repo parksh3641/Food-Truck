@@ -34,6 +34,12 @@ public class RankEventManager : MonoBehaviour
         rankEventRectTransform.anchoredPosition = new Vector2(0, -9999);
 
         mainAlarm.SetActive(false);
+        alarm.SetActive(false);
+    }
+
+    public void Initialize()
+    {
+        mainAlarm.SetActive(true);
         alarm.SetActive(true);
     }
 
@@ -44,6 +50,7 @@ public class RankEventManager : MonoBehaviour
             rankEventView.SetActive(true);
 
             alarm.SetActive(false);
+            mainAlarm.SetActive(false);
 
             rankEventText.text = LocalizationManager.instance.GetString("Ranking2_Info") + " : " + playerDataBase.TotalLevel;
 

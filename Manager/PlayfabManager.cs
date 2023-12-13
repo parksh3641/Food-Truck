@@ -53,6 +53,7 @@ public class PlayfabManager : MonoBehaviour
     public GameManager gameManager;
     public MoneyAnimation moneyAnimation;
     public MoneyAnimation moneyAnimation2;
+    public OptionManager optionManager;
 
     List<string> itemList = new List<string>();
 
@@ -390,19 +391,35 @@ public class PlayfabManager : MonoBehaviour
 
                         GameStateManager.instance.AutoLogin = true;
                         GameStateManager.instance.Login = LoginType.Google;
+
+                        optionManager.SuccessGoogleLink();
+
+                        SoundManager.instance.PlaySFX(GameSfxType.Success);
+                        NotionManager.instance.UseNotion(NotionType.SuccessLink);
                     }, error =>
                     {
                         Debug.Log(error.GenerateErrorReport());
+
+                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                        NotionManager.instance.UseNotion(NotionType.FailLink);
+
+                        Debug.Log("Link Google Account Fail");
                     });
                 }
                 else
                 {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.FailLink);
+
                     Debug.Log("Link Google Account Fail");
                 }
             });
         }
         else
         {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.FailLink);
+
             Debug.Log("Link Google Account Fail");
         }
 #endif
@@ -419,7 +436,6 @@ public class PlayfabManager : MonoBehaviour
             gameManager.OpenLoginView();
 
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }
@@ -548,6 +564,11 @@ public class PlayfabManager : MonoBehaviour
         }, error =>
         {
             var authorizationErrorCode = error.GetAuthorizationErrorCode();
+
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.FailLink);
+
+            Debug.Log("Link Apple Account Fail");
         });
     }
 
@@ -564,6 +585,11 @@ public class PlayfabManager : MonoBehaviour
 
             GameStateManager.instance.AutoLogin = true;
             GameStateManager.instance.Login = LoginType.Apple;
+
+            optionManager.SuccessAppleLink();
+
+            SoundManager.instance.PlaySFX(GameSfxType.Success);
+            NotionManager.instance.UseNotion(NotionType.SuccessLink);
         }
         , DisplayPlayfabError);
     }

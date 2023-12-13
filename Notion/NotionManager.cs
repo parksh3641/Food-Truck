@@ -197,5 +197,7 @@ public enum NotionType
     FailGetItem,
     ChangeTotemsNotion,
     ChangeFlowerNotion,
-    OpenChestBoxNotion
+    OpenChestBoxNotion,
+    SuccessLink,
+    FailLink
 }

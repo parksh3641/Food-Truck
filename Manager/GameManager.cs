@@ -463,7 +463,7 @@ public class GameManager : MonoBehaviour
         if (playerDataBase.TestAccount > 0)
         {
             testModeButton.SetActive(true);
-            testModeText.text = "Developer Mode ON";
+            testModeText.text = "Cheat Mode ON";
         }
 
 #if UNITY_EDITOR
@@ -471,6 +471,14 @@ public class GameManager : MonoBehaviour
 #endif
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Version", int.Parse(Application.version.Replace(".", "")));
+
+#if UNITY_ANDROID
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 0);
+#elif UNITY_IOS
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 1);
+#else
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 2);
+#endif
 
         changeFoodManager.CheckProficiency();
 
@@ -5360,5 +5368,19 @@ public class GameManager : MonoBehaviour
         playerDataBase.Totems10 = 0;
         playerDataBase.Totems11 = 0;
         playerDataBase.Totems12 = 0;
+    }
+
+    public void DeleteAllItem()
+    {
+        playerDataBase.Portion1 = 0;
+        playerDataBase.Portion2 = 0;
+        playerDataBase.Portion3 = 0;
+        playerDataBase.Portion4 = 0;
+        playerDataBase.Portion5 = 0;
+        playerDataBase.Portion6 = 0;
+
+        playerDataBase.BuffCount = 0;
+        playerDataBase.DefDestroyTicket = 0;
+        playerDataBase.DefDestroyTicketPiece = 0;
     }
 }

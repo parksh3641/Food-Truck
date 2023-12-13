@@ -51,6 +51,17 @@ public class WelcomeManager : MonoBehaviour
         StartCoroutine(TimerCoroution());
     }
 
+    public void Initialize()
+    {
+        if (!playerDataBase.WelcomeCheck)
+        {
+            if (playerDataBase.WelcomeCount < 7)
+            {
+                SetAlarm();
+            }
+        }
+    }
+
     public void OpenWelcomeView()
     {
         if (!welcomeView.activeInHierarchy)

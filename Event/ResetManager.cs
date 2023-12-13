@@ -183,8 +183,10 @@ public class ResetManager : MonoBehaviour
         if(playerDataBase.WelcomeCheck)
         {
             playerDataBase.WelcomeCheck = false;
-
-            if(playerDataBase.WelcomeCount < 7)
+        }
+        else
+        {
+            if (playerDataBase.WelcomeCount < 7)
             {
                 welcomeManager.SetAlarm();
             }

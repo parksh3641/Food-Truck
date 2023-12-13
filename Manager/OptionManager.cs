@@ -31,6 +31,10 @@ public class OptionManager : MonoBehaviour
     public Image effectButtonImg;
     public LocalizationContent effectText;
 
+    public GameObject googleLink;
+    public GameObject appleLink;
+
+    
     [Space]
     public SoundManager soundManager;
 
@@ -39,7 +43,7 @@ public class OptionManager : MonoBehaviour
         optionView.SetActive(false);
         languageView.SetActive(false);
 
-        versionText.text = "v" + Application.version + "  <size=10>(2023/12/12)</size>";
+        versionText.text = "v" + Application.version + "  <size=10>(2023/12/14)</size>";
     }
 
     private void Start()
@@ -59,6 +63,18 @@ public class OptionManager : MonoBehaviour
             OnEffect();
 
             GameStateManager.instance.Pause = true;
+
+            googleLink.SetActive(false);
+            appleLink.SetActive(false);
+
+            if(GameStateManager.instance.Login == LoginType.Guest)
+            {
+#if UNITY_ANDROID
+                googleLink.SetActive(true);
+#elif UNITY_IOS
+                appleLink.SetActive(true);
+#endif
+            }
         }
         else
         {
@@ -210,5 +226,15 @@ public class OptionManager : MonoBehaviour
 
             effectButtonImg.sprite = buttonImgArray[1];
         }
+    }
+
+    public void SuccessGoogleLink()
+    {
+        googleLink.SetActive(false);
+    }
+
+    public void SuccessAppleLink()
+    {
+        appleLink.SetActive(false);
     }
 }

@@ -18,6 +18,9 @@ public class StateManager : MonoBehaviour
     public ChangeFoodManager changeFoodManager;
     public AttendanceManager attendanceManager;
     public GourmetManager gourmetManager;
+    public WelcomeManager welcomeManager;
+    public RankEventManager rankEventManager;
+    public PlayTimeManager playTimeManager;
 
     private void Awake()
     {
@@ -58,6 +61,9 @@ public class StateManager : MonoBehaviour
         changeFoodManager.Initialize();
         attendanceManager.Initialize();
         gourmetManager.FirstInitialize();
+        welcomeManager.Initialize();
+        rankEventManager.Initialize();
+        playTimeManager.Initialize();
 
         Debug.Log("Load Complete!");
     }

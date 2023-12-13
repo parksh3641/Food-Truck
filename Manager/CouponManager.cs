@@ -247,10 +247,10 @@ public class CouponManager : MonoBehaviour
                     playerDataBase.Coupon5 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon5", 1);
 
-                    PlayfabManager.instance.UpdateAddGold(2000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
+                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
 
-                    playerDataBase.DefDestroyTicket += 5;
+                    playerDataBase.DefDestroyTicket += 10;
                     playerDataBase.Portion5 += 10;
 
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);

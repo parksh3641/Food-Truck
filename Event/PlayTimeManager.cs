@@ -32,7 +32,16 @@ public class PlayTimeManager : MonoBehaviour
         playTimeRectTransform.anchoredPosition = new Vector2(0, -9999);
 
         mainAlarm.SetActive(false);
-        alarm.SetActive(true);
+        alarm.SetActive(false);
+    }
+
+    public void Initialize()
+    {
+        if(playerDataBase.PlayTimeCount < 4)
+        {
+            mainAlarm.SetActive(true);
+            alarm.SetActive(true);
+        }
     }
 
     public void OpenPlayTimeView()
@@ -40,8 +49,6 @@ public class PlayTimeManager : MonoBehaviour
         if (!playTimeView.activeInHierarchy)
         {
             playTimeView.SetActive(true);
-
-            alarm.SetActive(false);
 
             playTimeText.text = LocalizationManager.instance.GetString("PlayTime") + " : " + GameStateManager.instance.PlayTime;
 
@@ -117,7 +124,10 @@ public class PlayTimeManager : MonoBehaviour
 
         CheckPlayTime();
 
-        OffAlarm();
+        if(playerDataBase.PlayTimeCount > 3)
+        {
+            OffAlarm();
+        }
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

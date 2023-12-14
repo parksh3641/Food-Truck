@@ -62,7 +62,7 @@ public class NotionManager : MonoBehaviour
                 notion.txt.color = new Color(0, 150f / 255f, 1);
                 break;
             case ColorType.Purple:
-                notion.txt.color = new Color(200f / 255f, 0, 1);
+                notion.txt.color = new Color(1, 50f / 255f, 1);
                 break;
             case ColorType.Pink:
                 notion.txt.color = new Color(1, 150 / 255f, 1);
@@ -199,5 +199,6 @@ public enum NotionType
     ChangeFlowerNotion,
     OpenChestBoxNotion,
     SuccessLink,
-    FailLink
+    FailLink,
+    CouponNotion4
 }

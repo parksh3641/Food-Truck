@@ -21,6 +21,7 @@ public class StateManager : MonoBehaviour
     public WelcomeManager welcomeManager;
     public RankEventManager rankEventManager;
     public PlayTimeManager playTimeManager;
+    public TreasureManager treasureManager;
 
     private void Awake()
     {
@@ -64,6 +65,7 @@ public class StateManager : MonoBehaviour
         welcomeManager.Initialize();
         rankEventManager.Initialize();
         playTimeManager.Initialize();
+        treasureManager.Initialize();
 
         Debug.Log("Load Complete!");
     }

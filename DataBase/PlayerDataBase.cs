@@ -121,6 +121,12 @@ public class PlayerDataBase : ScriptableObject
     private int treasure8 = 0;
     [SerializeField]
     private int treasure9 = 0;
+    [SerializeField]
+    private int treasure10 = 0;
+    [SerializeField]
+    private int treasure11 = 0;
+    [SerializeField]
+    private int treasure12 = 0;
 
     [Space]
     [SerializeField]
@@ -141,6 +147,12 @@ public class PlayerDataBase : ScriptableObject
     private int treasure8Count = 0;
     [SerializeField]
     private int treasure9Count = 0;
+    [SerializeField]
+    private int treasure10Count = 0;
+    [SerializeField]
+    private int treasure11Count = 0;
+    [SerializeField]
+    private int treasure12Count = 0;
 
     [Space]
     [Title("Character")]
@@ -523,6 +535,41 @@ public class PlayerDataBase : ScriptableObject
     private int coupon9 = 0;
     [SerializeField]
     private int coupon10 = 0;
+    [SerializeField]
+    private int coupon11 = 0;
+    [SerializeField]
+    private int coupon12 = 0;
+    [SerializeField]
+    private int coupon13 = 0;
+
+    [Space]
+    [Title("Speical Coupon")]
+    [SerializeField]
+    private int spCoupon1 = 0;
+    [SerializeField]
+    private int spCoupon2 = 0;
+    [SerializeField]
+    private int spCoupon3 = 0;
+    [SerializeField]
+    private int spCoupon4 = 0;
+    [SerializeField]
+    private int spCoupon5 = 0;
+    [SerializeField]
+    private int spCoupon6 = 0;
+    [SerializeField]
+    private int spCoupon7 = 0;
+    [SerializeField]
+    private int spCoupon8 = 0;
+    [SerializeField]
+    private int spCoupon9 = 0;
+    [SerializeField]
+    private int spCoupon10 = 0;
+    [SerializeField]
+    private int spCoupon11 = 0;
+    [SerializeField]
+    private int spCoupon12 = 0;
+    [SerializeField]
+    private int spCoupon13 = 0;
 
     [Space]
     [Title("Package")]
@@ -1045,6 +1092,42 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Treasure10
+    {
+        get
+        {
+            return treasure10;
+        }
+        set
+        {
+            treasure10 = value;
+        }
+    }
+
+    public int Treasure11
+    {
+        get
+        {
+            return treasure11;
+        }
+        set
+        {
+            treasure11 = value;
+        }
+    }
+
+    public int Treasure12
+    {
+        get
+        {
+            return treasure12;
+        }
+        set
+        {
+            treasure12 = value;
+        }
+    }
+
     public int Treasure1Count
     {
         get
@@ -1150,6 +1233,42 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             treasure9Count = value;
+        }
+    }
+
+    public int Treasure10Count
+    {
+        get
+        {
+            return treasure10Count;
+        }
+        set
+        {
+            treasure10Count = value;
+        }
+    }
+
+    public int Treasure11Count
+    {
+        get
+        {
+            return treasure11Count;
+        }
+        set
+        {
+            treasure11Count = value;
+        }
+    }
+
+    public int Treasure12Count
+    {
+        get
+        {
+            return treasure12Count;
+        }
+        set
+        {
+            treasure12Count = value;
         }
     }
 
@@ -3264,6 +3383,199 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Coupon11
+    {
+        get
+        {
+            return coupon11;
+        }
+        set
+        {
+            coupon12 = value;
+        }
+    }
+
+    public int Coupon12
+    {
+        get
+        {
+            return coupon12;
+        }
+        set
+        {
+            coupon12 = value;
+        }
+    }
+
+    public int Coupon13
+    {
+        get
+        {
+            return coupon13;
+        }
+        set
+        {
+            coupon13 = value;
+        }
+    }
+
+    public int SpCoupon1
+    {
+        get
+        {
+            return spCoupon1;
+        }
+        set
+        {
+            spCoupon1 = value;
+        }
+    }
+
+    public int SpCoupon2
+    {
+        get
+        {
+            return spCoupon2;
+        }
+        set
+        {
+            spCoupon2 = value;
+        }
+    }
+
+    public int SpCoupon3
+    {
+        get
+        {
+            return spCoupon3;
+        }
+        set
+        {
+            spCoupon3 = value;
+        }
+    }
+
+    public int SpCoupon4
+    {
+        get
+        {
+            return spCoupon4;
+        }
+        set
+        {
+            spCoupon4 = value;
+        }
+    }
+
+    public int SpCoupon5
+    {
+        get
+        {
+            return spCoupon5;
+        }
+        set
+        {
+            spCoupon5 = value;
+        }
+    }
+
+    public int SpCoupon6
+    {
+        get
+        {
+            return spCoupon6;
+        }
+        set
+        {
+            spCoupon6 = value;
+        }
+    }
+
+    public int SpCoupon7
+    {
+        get
+        {
+            return spCoupon7;
+        }
+        set
+        {
+            spCoupon7 = value;
+        }
+    }
+
+    public int SpCoupon8
+    {
+        get
+        {
+            return spCoupon8;
+        }
+        set
+        {
+            spCoupon8 = value;
+        }
+    }
+
+    public int SpCoupon9
+    {
+        get
+        {
+            return spCoupon9;
+        }
+        set
+        {
+            spCoupon9 = value;
+        }
+    }
+
+    public int SpCoupon10
+    {
+        get
+        {
+            return spCoupon10;
+        }
+        set
+        {
+            spCoupon10 = value;
+        }
+    }
+
+    public int SpCoupon11
+    {
+        get
+        {
+            return spCoupon11;
+        }
+        set
+        {
+            spCoupon11 = value;
+        }
+    }
+
+    public int SpCoupon12
+    {
+        get
+        {
+            return spCoupon12;
+        }
+        set
+        {
+            spCoupon12 = value;
+        }
+    }
+
+    public int SpCoupon13
+    {
+        get
+        {
+            return spCoupon13;
+        }
+        set
+        {
+            spCoupon13 = value;
+        }
+    }
+
+
     public bool Package1
     {
         get
@@ -3703,6 +4015,28 @@ public class PlayerDataBase : ScriptableObject
         coupon3 = 0;
         coupon4 = 0;
         coupon5 = 0;
+        coupon6 = 0;
+        coupon7 = 0;
+        coupon8 = 0;
+        coupon9 = 0;
+        coupon10 = 0;
+        coupon11 = 0;
+        coupon12 = 0;
+        coupon13 = 0;
+
+        spCoupon1 = 0;
+        spCoupon2 = 0;
+        spCoupon3 = 0;
+        spCoupon4 = 0;
+        spCoupon5 = 0;
+        spCoupon6 = 0;
+        spCoupon7 = 0;
+        spCoupon8 = 0;
+        spCoupon9 = 0;
+        spCoupon10 = 0;
+        spCoupon11 = 0;
+        spCoupon12 = 0;
+        SpCoupon13 = 0;
 
         package1 = false;
         package2 = false;

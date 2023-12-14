@@ -1,5 +1,6 @@
 using PlayFab;
 using PlayFab.ClientModels;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,7 +74,7 @@ public class CouponManager : MonoBehaviour
 
         switch (inputFieldText.text)
         {
-            case "YUM7979A":
+            case "YUMMYOPEN":
                 //if (System.DateTime.Now >= new System.DateTime(2023, 10, 1))
                 //{
                 //}
@@ -88,6 +89,7 @@ public class CouponManager : MonoBehaviour
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon1", 1);
 
                     PlayfabManager.instance.UpdateAddGold(1000000);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
 
                     playerDataBase.Portion1 += 5;
                     playerDataBase.Portion2 += 5;
@@ -105,12 +107,14 @@ public class CouponManager : MonoBehaviour
                     receiveContents[2].gameObject.SetActive(true);
                     receiveContents[3].gameObject.SetActive(true);
                     receiveContents[4].gameObject.SetActive(true);
+                    receiveContents[5].gameObject.SetActive(true);
 
                     receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Portion1, 5);
-                    receiveContents[2].Initialize(RewardType.Portion2, 5);
-                    receiveContents[3].Initialize(RewardType.Portion3, 5);
-                    receiveContents[4].Initialize(RewardType.Portion4, 5);
+                    receiveContents[1].Initialize(RewardType.Crystal, 300);
+                    receiveContents[2].Initialize(RewardType.Portion1, 5);
+                    receiveContents[3].Initialize(RewardType.Portion2, 5);
+                    receiveContents[4].Initialize(RewardType.Portion3, 5);
+                    receiveContents[5].Initialize(RewardType.Portion4, 5);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Success);
                     NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -121,39 +125,13 @@ public class CouponManager : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.CouponNotion2);
                 }
                 break;
-            case "YUM58NA":
+            case "QLH0C6N4":
                 if (playerDataBase.Coupon2 == 0)
                 {
                     playerDataBase.Coupon2 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon2", 1);
 
-                    PlayfabManager.instance.UpdateAddGold(1000000);
-
-                    playerDataBase.Portion1 += 5;
-                    playerDataBase.Portion2 += 5;
-                    playerDataBase.Portion3 += 5;
-                    playerDataBase.Portion4 += 5;
-
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
-
-                    couponRewardView.SetActive(true);
-                    receiveContents[0].gameObject.SetActive(true);
-                    receiveContents[1].gameObject.SetActive(true);
-                    receiveContents[2].gameObject.SetActive(true);
-                    receiveContents[3].gameObject.SetActive(true);
-                    receiveContents[4].gameObject.SetActive(true);
-
-                    receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Portion1, 5);
-                    receiveContents[2].Initialize(RewardType.Portion2, 5);
-                    receiveContents[3].Initialize(RewardType.Portion3, 5);
-                    receiveContents[4].Initialize(RewardType.Portion4, 5);
-
-                    SoundManager.instance.PlaySFX(GameSfxType.Success);
-                    NotionManager.instance.UseNotion(NotionType.SuccessReward);
+                    GetReward();
                 }
                 else
                 {
@@ -161,39 +139,13 @@ public class CouponManager : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.CouponNotion2);
                 }
                 break;
-            case "YUM11DBA":
+            case "XZ6LPHV3":
                 if (playerDataBase.Coupon3 == 0)
                 {
                     playerDataBase.Coupon3 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon3", 1);
 
-                    PlayfabManager.instance.UpdateAddGold(500000);
-
-                    playerDataBase.Portion1 += 3;
-                    playerDataBase.Portion2 += 3;
-                    playerDataBase.Portion3 += 3;
-                    playerDataBase.Portion4 += 3;
-
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
-
-                    couponRewardView.SetActive(true);
-                    receiveContents[0].gameObject.SetActive(true);
-                    receiveContents[1].gameObject.SetActive(true);
-                    receiveContents[2].gameObject.SetActive(true);
-                    receiveContents[3].gameObject.SetActive(true);
-                    receiveContents[4].gameObject.SetActive(true);
-
-                    receiveContents[0].Initialize(RewardType.Gold, 500000);
-                    receiveContents[1].Initialize(RewardType.Portion1, 3);
-                    receiveContents[2].Initialize(RewardType.Portion2, 3);
-                    receiveContents[3].Initialize(RewardType.Portion3, 3);
-                    receiveContents[4].Initialize(RewardType.Portion4, 3);
-
-                    SoundManager.instance.PlaySFX(GameSfxType.Success);
-                    NotionManager.instance.UseNotion(NotionType.SuccessReward);
+                    GetReward();
                 }
                 else
                 {
@@ -201,39 +153,307 @@ public class CouponManager : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.CouponNotion2);
                 }
                 break;
-            case "YUM11DBB":
+            case "1YSWKW4I":
                 if (playerDataBase.Coupon4 == 0)
                 {
                     playerDataBase.Coupon4 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon4", 1);
 
-                    PlayfabManager.instance.UpdateAddGold(3000000);
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "AZO8P80O":
+                if (playerDataBase.Coupon5 == 0)
+                {
+                    playerDataBase.Coupon5 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon5", 1);
 
-                    playerDataBase.Portion1 += 10;
-                    playerDataBase.Portion2 += 10;
-                    playerDataBase.Portion3 += 10;
-                    playerDataBase.Portion4 += 10;
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "IF3FVXK6":
+                if (playerDataBase.Coupon6 == 0)
+                {
+                    playerDataBase.Coupon6 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon6", 1);
 
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "5L1R7W3D":
+                if (playerDataBase.Coupon7 == 0)
+                {
+                    playerDataBase.Coupon7 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon7", 1);
 
-                    couponRewardView.SetActive(true);
-                    receiveContents[0].gameObject.SetActive(true);
-                    receiveContents[1].gameObject.SetActive(true);
-                    receiveContents[2].gameObject.SetActive(true);
-                    receiveContents[3].gameObject.SetActive(true);
-                    receiveContents[4].gameObject.SetActive(true);
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "X5CKGV64":
+                if (playerDataBase.Coupon8 == 0)
+                {
+                    playerDataBase.Coupon8 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon8", 1);
 
-                    receiveContents[0].Initialize(RewardType.Gold, 3000000);
-                    receiveContents[1].Initialize(RewardType.Portion1, 10);
-                    receiveContents[2].Initialize(RewardType.Portion2, 10);
-                    receiveContents[3].Initialize(RewardType.Portion3, 10);
-                    receiveContents[4].Initialize(RewardType.Portion4, 10);
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "S1NY5UID":
+                if (playerDataBase.Coupon9 == 0)
+                {
+                    playerDataBase.Coupon9 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon9", 1);
 
-                    SoundManager.instance.PlaySFX(GameSfxType.Success);
-                    NotionManager.instance.UseNotion(NotionType.SuccessReward);
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "1TJGXS6N":
+                if (playerDataBase.Coupon10 == 0)
+                {
+                    playerDataBase.Coupon10 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon10", 1);
+
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "9PFD4BX6":
+                if (playerDataBase.Coupon11 == 0)
+                {
+                    playerDataBase.Coupon11 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon11", 1);
+
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "9VKXA6MD":
+                if (playerDataBase.Coupon12 == 0)
+                {
+                    playerDataBase.Coupon12 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon12", 1);
+
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "XGMHXC2S":
+                if (playerDataBase.Coupon13 == 0)
+                {
+                    playerDataBase.Coupon13 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon13", 1);
+
+                    GetReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "2MXODNF2":
+                if (playerDataBase.SpCoupon1 == 0)
+                {
+                    playerDataBase.SpCoupon1 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon1", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "VYXPT7XK":
+                if (playerDataBase.SpCoupon2 == 0)
+                {
+                    playerDataBase.SpCoupon2 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon2", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "GVSCTBHY":
+                if (playerDataBase.SpCoupon3 == 0)
+                {
+                    playerDataBase.SpCoupon3 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon3", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "NU8S29PZ":
+                if (playerDataBase.SpCoupon4 == 0)
+                {
+                    playerDataBase.SpCoupon4 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon4", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "7DLB4AB0":
+                if (playerDataBase.SpCoupon5 == 0)
+                {
+                    playerDataBase.SpCoupon5 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon5", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "HF518C0O":
+                if (playerDataBase.SpCoupon6 == 0)
+                {
+                    playerDataBase.SpCoupon6 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon6", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "MPGCP8BN":
+                if (playerDataBase.SpCoupon7 == 0)
+                {
+                    playerDataBase.SpCoupon7 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon7", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "48SMEWCD":
+                if (playerDataBase.SpCoupon8 == 0)
+                {
+                    playerDataBase.SpCoupon8 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon8", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "J97DC3ON":
+                if (playerDataBase.SpCoupon9 == 0)
+                {
+                    playerDataBase.SpCoupon9 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon9", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "RCWGTK3P":
+                if (playerDataBase.SpCoupon10 == 0)
+                {
+                    playerDataBase.SpCoupon10 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon10", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "I8KJYXUM":
+                if (playerDataBase.SpCoupon11 == 0)
+                {
+                    playerDataBase.SpCoupon11 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon11", 1);
+
+                    GetSpeicalReward();
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
+                }
+                break;
+            case "WHILILI":
+                if (playerDataBase.SpCoupon12 == 0)
+                {
+                    playerDataBase.SpCoupon12 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon12", 1);
+
+                    GetSpeicalReward();
                 }
                 else
                 {
@@ -242,13 +462,20 @@ public class CouponManager : MonoBehaviour
                 }
                 break;
             case "YUMMYRUSH":
-                if (playerDataBase.Coupon5 == 0)
+                if (DateTime.Now >= new DateTime(2023, 12, 31))
                 {
-                    playerDataBase.Coupon5 = 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon5", 1);
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.CouponNotion4);
+                    return;
+                }
+
+                if (playerDataBase.SpCoupon13 == 0)
+                {
+                    playerDataBase.SpCoupon13 = 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon13", 1);
 
                     PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1000);
 
                     playerDataBase.DefDestroyTicket += 10;
                     playerDataBase.Portion5 += 10;
@@ -264,10 +491,10 @@ public class CouponManager : MonoBehaviour
 
                     receiveContents[0].Initialize(RewardType.Gold, 2000000);
                     receiveContents[1].Initialize(RewardType.Crystal, 100);
-                    receiveContents[2].Initialize(RewardType.DefDestroyTicket, 5);
+                    receiveContents[2].Initialize(RewardType.DefDestroyTicket, 10);
                     receiveContents[3].Initialize(RewardType.Portion5, 10);
 
-                    if(playerDataBase.Character21 == 0)
+                    if (playerDataBase.Character21 == 0)
                     {
                         playerDataBase.Character21 = 1;
 
@@ -286,37 +513,59 @@ public class CouponManager : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.CouponNotion2);
                 }
                 break;
-            case "WHILILI":
-                if (playerDataBase.Coupon6 == 0)
-                {
-                    playerDataBase.Coupon6 = 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon6", 1);
-
-                    PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 50);
-
-                    couponRewardView.SetActive(true);
-                    receiveContents[0].gameObject.SetActive(true);
-                    receiveContents[1].gameObject.SetActive(true);
-
-                    receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 100);
-
-                    SoundManager.instance.PlaySFX(GameSfxType.Success);
-                    NotionManager.instance.UseNotion(NotionType.SuccessReward);
-                }
-                else
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.CouponNotion2);
-                }
-                break;
 
             default:
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.CouponNotion3);
                 break;
         }
+    }
+
+    public void GetReward()
+    {
+        PlayfabManager.instance.UpdateAddGold(1000000);
+
+        playerDataBase.Portion1 += 5;
+        playerDataBase.Portion2 += 5;
+        playerDataBase.Portion3 += 5;
+        playerDataBase.Portion4 += 5;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+
+        couponRewardView.SetActive(true);
+        receiveContents[0].gameObject.SetActive(true);
+        receiveContents[1].gameObject.SetActive(true);
+        receiveContents[2].gameObject.SetActive(true);
+        receiveContents[3].gameObject.SetActive(true);
+        receiveContents[4].gameObject.SetActive(true);
+
+        receiveContents[0].Initialize(RewardType.Gold, 1000000);
+        receiveContents[1].Initialize(RewardType.Portion1, 5);
+        receiveContents[2].Initialize(RewardType.Portion2, 5);
+        receiveContents[3].Initialize(RewardType.Portion3, 5);
+        receiveContents[4].Initialize(RewardType.Portion4, 5);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessReward);
+    }
+
+    public void GetSpeicalReward()
+    {
+        PlayfabManager.instance.UpdateAddGold(1000000);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
+
+        couponRewardView.SetActive(true);
+        receiveContents[0].gameObject.SetActive(true);
+        receiveContents[1].gameObject.SetActive(true);
+
+        receiveContents[0].Initialize(RewardType.Gold, 1000000);
+        receiveContents[1].Initialize(RewardType.Crystal, 100);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessReward);
     }
 
     public void CloseCouponReward()

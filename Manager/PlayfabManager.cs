@@ -1522,6 +1522,15 @@ public class PlayfabManager : MonoBehaviour
                        case "Treasure9":
                            playerDataBase.Treasure9 = statistics.Value;
                            break;
+                       case "Treasure10":
+                           playerDataBase.Treasure10 = statistics.Value;
+                           break;
+                       case "Treasure11":
+                           playerDataBase.Treasure11 = statistics.Value;
+                           break;
+                       case "Treasure12":
+                           playerDataBase.Treasure12 = statistics.Value;
+                           break;
                        case "Treasure1Count":
                            playerDataBase.Treasure1Count = statistics.Value;
                            break;
@@ -1548,6 +1557,15 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Treasure9Count":
                            playerDataBase.Treasure9Count = statistics.Value;
+                           break;
+                       case "Treasure10Count":
+                           playerDataBase.Treasure10Count = statistics.Value;
+                           break;
+                       case "Treasure11Count":
+                           playerDataBase.Treasure11Count = statistics.Value;
+                           break;
+                       case "Treasure12Count":
+                           playerDataBase.Treasure12Count = statistics.Value;
                            break;
                        case "NextFoodNumber":
                            playerDataBase.NextFoodNumber = statistics.Value;
@@ -1761,6 +1779,54 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Coupon10":
                            playerDataBase.Coupon10 = statistics.Value;
+                           break;
+                       case "Coupon11":
+                           playerDataBase.Coupon11 = statistics.Value;
+                           break;
+                       case "Coupon12":
+                           playerDataBase.Coupon12 = statistics.Value;
+                           break;
+                       case "Coupon13":
+                           playerDataBase.Coupon13 = statistics.Value;
+                           break;
+                       case "SpCoupon1":
+                           playerDataBase.SpCoupon1 = statistics.Value;
+                           break;
+                       case "SpCoupon2":
+                           playerDataBase.SpCoupon2 = statistics.Value;
+                           break;
+                       case "SpCoupon3":
+                           playerDataBase.SpCoupon3 = statistics.Value;
+                           break;
+                       case "SpCoupon4":
+                           playerDataBase.SpCoupon4 = statistics.Value;
+                           break;
+                       case "SpCoupon5":
+                           playerDataBase.SpCoupon5 = statistics.Value;
+                           break;
+                       case "SpCoupon6":
+                           playerDataBase.SpCoupon6 = statistics.Value;
+                           break;
+                       case "SpCoupon7":
+                           playerDataBase.SpCoupon7 = statistics.Value;
+                           break;
+                       case "SpCoupon8":
+                           playerDataBase.SpCoupon8 = statistics.Value;
+                           break;
+                       case "SpCoupon9":
+                           playerDataBase.SpCoupon9 = statistics.Value;
+                           break;
+                       case "SpCoupon10":
+                           playerDataBase.SpCoupon10 = statistics.Value;
+                           break;
+                       case "SpCoupon11":
+                           playerDataBase.SpCoupon11 = statistics.Value;
+                           break;
+                       case "SpCoupon12":
+                           playerDataBase.SpCoupon12 = statistics.Value;
+                           break;
+                       case "SpCoupon13":
+                           playerDataBase.SpCoupon13 = statistics.Value;
                            break;
                        case "UpgradeCount":
                            playerDataBase.UpgradeCount = statistics.Value;

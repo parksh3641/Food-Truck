@@ -8,6 +8,9 @@ public class TreasureManager : MonoBehaviour
 {
     public GameObject treasureView;
 
+    public GameObject mainAlarm;
+    public GameObject alarm;
+
     public RectTransform treasureRectTransform;
 
     public Text treasure1Text;
@@ -43,9 +46,20 @@ public class TreasureManager : MonoBehaviour
         treasure1Text.text = price.ToString();
         treasure2Text.text = (price * 10).ToString();
 
+        mainAlarm.SetActive(false);
+        alarm.SetActive(false);
+
         treasureRectTransform.anchoredPosition = new Vector2(0, -9999);
     }
 
+    public void Initialize()
+    {
+        if(playerDataBase.DailyTreasureReward == 0)
+        {
+            mainAlarm.SetActive(true);
+            alarm.SetActive(true);
+        }
+    }
 
     public void OpenTreasureView()
     {
@@ -67,7 +81,7 @@ public class TreasureManager : MonoBehaviour
             treasureRewardView.SetActive(false);
             treasureButton.SetActive(false);
 
-            Initialize();
+            CheckInitialize();
 
             FirebaseAnalytics.LogEvent("OpenTreasure");
         }
@@ -77,7 +91,7 @@ public class TreasureManager : MonoBehaviour
         }
     }
 
-    void Initialize()
+    void CheckInitialize()
     {
         for(int i = 0; i < treasureContents.Length; i ++)
         {
@@ -96,6 +110,9 @@ public class TreasureManager : MonoBehaviour
     {
         playerDataBase.DailyTreasureReward = 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyTreasureReward", playerDataBase.DailyTreasureReward);
+
+        mainAlarm.SetActive(false);
+        alarm.SetActive(false);
 
         treasureAdLockedObj.SetActive(true);
 
@@ -164,7 +181,6 @@ public class TreasureManager : MonoBehaviour
         treasureButton.SetActive(false);
 
         playerDataBase.TreasureCount += count;
-
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TreasureCount", playerDataBase.TreasureCount);
 
         for (int i = 0; i < receiveContents.Length; i++)
@@ -213,6 +229,15 @@ public class TreasureManager : MonoBehaviour
                 case 8:
                     receiveContents[i].Initialize(RewardType.Treasure9, 1);
                     break;
+                case 9:
+                    receiveContents[i].Initialize(RewardType.Treasure10, 1);
+                    break;
+                case 10:
+                    receiveContents[i].Initialize(RewardType.Treasure11, 1);
+                    break;
+                case 11:
+                    receiveContents[i].Initialize(RewardType.Treasure12, 1);
+                    break;
             }
 
             yield return waitForSeconds;
@@ -224,6 +249,8 @@ public class TreasureManager : MonoBehaviour
         }
 
         yield return waitForSeconds2;
+
+        CheckInitialize();
 
         treasureButton.SetActive(true);
     }
@@ -267,6 +294,18 @@ public class TreasureManager : MonoBehaviour
             case 8:
                 playerDataBase.Treasure9Count += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure9Count", playerDataBase.Treasure9Count);
+                break;
+            case 9:
+                playerDataBase.Treasure10Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure10Count", playerDataBase.Treasure10Count);
+                break;
+            case 10:
+                playerDataBase.Treasure11Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure11Count", playerDataBase.Treasure11Count);
+                break;
+            case 11:
+                playerDataBase.Treasure12Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure12Count", playerDataBase.Treasure12Count);
                 break;
         }
     }

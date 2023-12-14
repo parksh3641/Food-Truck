@@ -783,7 +783,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[33].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, Random.Range(50,101));
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);

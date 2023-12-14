@@ -104,7 +104,7 @@ public class WelcomeManager : MonoBehaviour
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 50 * (i + 1));
+            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 100 * (i + 1));
         }
     }
 
@@ -117,30 +117,7 @@ public class WelcomeManager : MonoBehaviour
             return;
         }
 
-        switch(index)
-        {
-            case 0:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
-                break;
-            case 1:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
-                break;
-            case 2:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 150);
-                break;
-            case 3:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200);
-                break;
-            case 4:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 250);
-                break;
-            case 5:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
-                break;
-            case 6:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 350);
-                break;
-        }
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100 * (index + 1));
 
         playerDataBase.WelcomeCount += 1;
         playerDataBase.WelcomeCheck = true;

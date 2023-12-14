@@ -326,7 +326,9 @@ public enum RewardType
     BuffTickets,
     Portion6,
     GoldTicket,
-
+    Treasure10,
+    Treasure11,
+    Treasure12,
 }
 
 public enum QuestType
@@ -375,6 +377,9 @@ public enum TreasureType
     Treasure7,
     Treasure8,
     Treasure9,
+    Treasure10,
+    Treasure11,
+    Treasure12,
 }
 
 public enum TotemsType

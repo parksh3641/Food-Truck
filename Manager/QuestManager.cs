@@ -13,6 +13,7 @@ public class QuestManager : MonoBehaviour
 
     public Text questTitleText;
     public Text questInfoText;
+    public LocalizationContent questClearTitleText;
     public Text questClearValueText;
 
     public GameObject lockedObj;
@@ -24,6 +25,8 @@ public class QuestManager : MonoBehaviour
     private int reward = 0;
 
     private bool isDelay = false;
+
+    private int plus = 0;
 
     QuestType questType = QuestType.UpgradeCount;
     QuestInfo questInfo = new QuestInfo();
@@ -68,15 +71,29 @@ public class QuestManager : MonoBehaviour
         questTitleText.text = LocalizationManager.instance.GetString("Quest");
         questTitleText.text += " " + (playerDataBase.QuestCount + 1).ToString();
 
+        plus = 0;
+
         if (IsWeekend())
         {
             reward = questDataBase.reward * 2;
+
+            plus += 100;
         }
         else
         {
             reward = questDataBase.reward;
         }
 
+        reward = Mathf.RoundToInt((reward + (reward * (0.01f * playerDataBase.Treasure11))));
+
+        plus += playerDataBase.Treasure11;
+
+        questClearTitleText.localizationName = "ClearReward";
+        if (plus > 0)
+        {
+            questClearTitleText.plusText = "  (+" + plus.ToString() + "%)";
+        }
+        questClearTitleText.ReLoad();
         questClearValueText.text = MoneyUnitString.ToCurrencyString(reward);
 
         if (playerDataBase.DailyQuestReward == 0)

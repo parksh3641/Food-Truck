@@ -49,6 +49,7 @@ public class ChestBoxManager : MonoBehaviour
         if (GameStateManager.instance.ChestBoxCount >= 20) return;
 
         goalCount = Random.Range(60, 120);
+        goalCount = (int)(goalCount - (goalCount * (0.005f * playerDataBase.Treasure12)));
 
 #if UNITY_EDITOR
         goalCount = 1;

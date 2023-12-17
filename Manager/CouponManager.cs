@@ -72,7 +72,7 @@ public class CouponManager : MonoBehaviour
         }
 
 
-        switch (inputFieldText.text)
+        switch (inputFieldText.text.ToUpper())
         {
             case "YUMMYOPEN":
                 //if (System.DateTime.Now >= new System.DateTime(2023, 10, 1))
@@ -91,15 +91,7 @@ public class CouponManager : MonoBehaviour
                     PlayfabManager.instance.UpdateAddGold(1000000);
                     PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
 
-                    playerDataBase.Portion1 += 5;
-                    playerDataBase.Portion2 += 5;
-                    playerDataBase.Portion3 += 5;
-                    playerDataBase.Portion4 += 5;
-
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                    PortionManager.instance.GetAllPortion(5);
 
                     couponRewardView.SetActive(true);
                     receiveContents[0].gameObject.SetActive(true);
@@ -477,11 +469,8 @@ public class CouponManager : MonoBehaviour
                     PlayfabManager.instance.UpdateAddGold(1000000);
                     PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1000);
 
-                    playerDataBase.DefDestroyTicket += 10;
-                    playerDataBase.Portion5 += 10;
-
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
+                    PortionManager.instance.GetDefTickets(10);
+                    PortionManager.instance.GetPortion(4, 10);
 
                     couponRewardView.SetActive(true);
                     receiveContents[0].gameObject.SetActive(true);
@@ -525,15 +514,7 @@ public class CouponManager : MonoBehaviour
     {
         PlayfabManager.instance.UpdateAddGold(1000000);
 
-        playerDataBase.Portion1 += 5;
-        playerDataBase.Portion2 += 5;
-        playerDataBase.Portion3 += 5;
-        playerDataBase.Portion4 += 5;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+        PortionManager.instance.GetAllPortion(5);
 
         couponRewardView.SetActive(true);
         receiveContents[0].gameObject.SetActive(true);

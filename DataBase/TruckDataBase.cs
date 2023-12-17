@@ -38,19 +38,8 @@ public class TruckDataBase : ScriptableObject
         return truck;
     }
 
-    public float GetTruckEffect(TruckType type)
+    public float GetTruckEffect(int number)
     {
-        float number = 0;
-
-        for (int i = 0; i < truckInfoList.Count; i++)
-        {
-            if (truckInfoList[i].truckType.Equals(type))
-            {
-                number = truckInfoList[i].effectNumber;
-                break;
-            }
-        }
-
-        return number;
+        return truckInfoList[number].effectNumber;
     }
 }

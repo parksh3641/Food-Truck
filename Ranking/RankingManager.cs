@@ -12,11 +12,16 @@ public class RankingManager : MonoBehaviour
     public static RankingManager instance;
 
     public GameObject rankingView;
-    public GameObject rankingRewardView;
 
     public GameObject alarm;
 
     public LocalizationContent infoText;
+
+    [Space]
+    [Title("Ranking Reward")]
+    public GameObject rankingRewardView;
+    public RectTransform rankingRewardTransform;
+    public ReceiveContent[] receiveContents;
 
     [Space]
     [Title("TopMenu")]
@@ -66,6 +71,7 @@ public class RankingManager : MonoBehaviour
         rankingRewardView.SetActive(false);
 
         rankContentParent.anchoredPosition = new Vector2(0, -9999);
+        rankingRewardTransform.anchoredPosition = new Vector2(0, -9999);
 
         topNumber = -1;
 
@@ -101,6 +107,14 @@ public class RankingManager : MonoBehaviour
         if (!rankingRewardView.activeSelf)
         {
             rankingRewardView.SetActive(true);
+
+            receiveContents[0].Initialize(RewardType.Crystal, 10000);
+            receiveContents[1].Initialize(RewardType.Crystal, 8000);
+            receiveContents[2].Initialize(RewardType.Crystal, 6000);
+            receiveContents[3].Initialize(RewardType.Crystal, 4000);
+            receiveContents[4].Initialize(RewardType.Crystal, 2000);
+            receiveContents[5].Initialize(RewardType.Crystal, 1000);
+            receiveContents[6].Initialize(RewardType.Crystal, 300);
 
             FirebaseAnalytics.LogEvent("OpenRankingReward");
         }

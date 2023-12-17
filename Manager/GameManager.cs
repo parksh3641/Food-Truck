@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     public GameObject rankLocked;
     public GameObject treasureLocked;
 
+    public ButtonClickAnimation upgradeButtonAnim;
+    public ButtonClickAnimation sellButtonAnim;
     public GameObject notUpgrade;
     public GameObject notSell;
 
@@ -266,6 +268,7 @@ public class GameManager : MonoBehaviour
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
+    WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.6f);
 
     private void Awake()
     {
@@ -354,7 +357,7 @@ public class GameManager : MonoBehaviour
             //christmasTree.SetActive(true);
             christmasSnow.SetActive(true);
 
-            Debug.Log("크리스마스 기간입니다.");
+            Debug.Log("12월 달이라 눈이 내리기 시작합니다.");
         }
     }
 
@@ -389,6 +392,7 @@ public class GameManager : MonoBehaviour
 
 #if !UNITY_EDITOR
             GameStateManager.instance.Developer = false;
+            GameStateManager.instance.Recorder = false;
 #endif
 
         if (!GameStateManager.instance.Privacypolicy)
@@ -995,20 +999,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FirstDelay()
     {
-        playerDataBase.Portion1 += 10;
-        playerDataBase.Portion2 += 10;
-        playerDataBase.Portion3 += 10;
-        playerDataBase.Portion4 += 10;
-        playerDataBase.BuffTickets += 2;
+        yield return waitForSeconds3;
 
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+        PortionManager.instance.GetAllPortion(10);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return waitForSeconds3;
 
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+        PortionManager.instance.GetBuffTickets(2);
 
         CheckPortion();
     }
@@ -1022,7 +1019,7 @@ public class GameManager : MonoBehaviour
             GameStateManager.instance.PlayTime += 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("PlayTime", playerDataBase.PlayTime);
 
-            Debug.Log("1분 지남");
+            Debug.LogError("1분 지남");
         }
         else
         {
@@ -1149,6 +1146,11 @@ public class GameManager : MonoBehaviour
         inGameUI.SetActive(true);
         languageUI.SetActive(false);
 
+        if (GameStateManager.instance.Recorder)
+        {
+            StartCoroutine(AutoUpgradeCoroution());
+        }
+
         isDef = false;
         checkMark.SetActive(false);
 
@@ -1164,17 +1166,17 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.CharacterType > CharacterType.Character1)
         {
-            successPlus += characterDataBase.GetCharacterEffect(GameStateManager.instance.CharacterType);
+            successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         }
 
         successPlus += playerDataBase.Skill7 * 0.1f;
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.1f;
         successPlus += playerDataBase.Treasure1 * 0.2f;
 
-        successX2 += totemsDataBase.GetTotemsEffect(GameStateManager.instance.TotemsType);
+        successX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         successX2 += playerDataBase.Treasure3 * 0.2f;
 
-        sellPricePlus += truckDataBase.GetTruckEffect(GameStateManager.instance.TruckType);
+        sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 0.2f;
         sellPricePlus += playerDataBase.Proficiency * 0.5f;
         sellPricePlus += playerDataBase.Treasure7 * 0.4f;
@@ -1183,9 +1185,9 @@ public class GameManager : MonoBehaviour
         sellPriceTip += playerDataBase.Skill14 * 0.3f; //팁 확률
         sellPriceTip += playerDataBase.Treasure8 * 0.6f;
 
-        expUp += (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType);
+        expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
 
-        defDestroy += butterflyDataBase.GetButterflyEffect(GameStateManager.instance.ButterflyType);
+        defDestroy += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
         defDestroy += playerDataBase.Skill9 * 0.05f;
         defDestroy += playerDataBase.Treasure2 * 0.1f;
 
@@ -1270,6 +1272,29 @@ public class GameManager : MonoBehaviour
         }
 
         cameraController.GoToB();
+    }
+
+    IEnumerator AutoUpgradeCoroution()
+    {
+        if(!inGameUI.activeInHierarchy)
+        {
+            yield break;
+        }
+
+        if(level >= 19)
+        {
+            sellButtonAnim.AutoClick();
+            SellButton();
+        }
+        else
+        {
+            upgradeButtonAnim.AutoClick();
+            UpgradeButton();
+        }
+
+        yield return waitForSeconds3;
+
+        StartCoroutine(AutoUpgradeCoroution());
     }
 
     IEnumerator DelayCoroution()
@@ -3721,9 +3746,9 @@ public class GameManager : MonoBehaviour
 
                             changeFoodAlarmObj.SetActive(true);
 
-                            if (playerDataBase.ReincarnationCount == 0)
+                            if (playerDataBase.Candy1MaxValue == 0)
                             {
-                                tutorialManager.NextFood();
+                                tutorialManager.Next1();
                             }
                         }
 
@@ -3770,6 +3795,11 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
                             changeFoodAlarmObj.SetActive(true);
+
+                            if (playerDataBase.Candy1MaxValue == 0)
+                            {
+                                tutorialManager.Next2();
+                            }
                         }
 
                         lockManager.UnLocked(4);
@@ -3813,6 +3843,11 @@ public class GameManager : MonoBehaviour
                         {
                             playerDataBase.IslandNumber = 1;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
+
+                            if (playerDataBase.Candy1MaxValue == 0)
+                            {
+                                tutorialManager.Next3();
+                            }
                         }
 
                         lockManager.UnLocked(7);
@@ -4466,7 +4501,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (playerDataBase.Portion4 > 0)
                     {
-                        feverCount += (feverMaxCount * (0.3f + portion4Plus));
+                        feverCount += (feverMaxCount * (0.35f + portion4Plus));
                         CheckFever();
 
                         playerDataBase.Portion4 -= 1;
@@ -4716,7 +4751,7 @@ public class GameManager : MonoBehaviour
                 defDestroyText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " : " + defDestroy.ToString("N2") + "%";
                 break;
             case 2:
-                buff2 = true;
+                buff3 = true;
 
                 successX2 += buff3Value;
                 successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
@@ -4848,7 +4883,7 @@ public class GameManager : MonoBehaviour
         Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
 #endif
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 20);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
 
         FirebaseAnalytics.LogEvent("OpenAppReview");
 
@@ -5081,33 +5116,20 @@ public class GameManager : MonoBehaviour
 
     public void GetPortion()
     {
-        playerDataBase.Portion1 += 999;
-        playerDataBase.Portion2 += 999;
-        playerDataBase.Portion3 += 999;
-        playerDataBase.Portion4 += 999;
-        playerDataBase.Portion5 += 999;
-        //playerDataBase.Portion6 += 100;
+        PortionManager.instance.GetAllPortion(999);
 
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+        playerDataBase.Portion5 += 999;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
-        //PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion6", playerDataBase.Portion6);
     }
 
     public void GetBuffTicket()
     {
-        playerDataBase.BuffTickets += 999;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+        PortionManager.instance.GetBuffTickets(999);
     }
 
     public void GetDefTicket()
     {
-        playerDataBase.DefDestroyTicket += 999;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
+        PortionManager.instance.GetDefTickets(999);
     }
 
     public void GetUnLocked()
@@ -5149,6 +5171,11 @@ public class GameManager : MonoBehaviour
                 NotionManager.instance.UseNotion(NotionType.PortionInfo6);
                 break;
         }
+    }
+
+    public void TipInfo()
+    {
+        NotionManager.instance.UseNotion(NotionType.TipInfoNotion);
     }
 
     public void GetUpgradeCount()

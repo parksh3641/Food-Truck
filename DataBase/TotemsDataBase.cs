@@ -35,19 +35,8 @@ public class TotemsDataBase : ScriptableObject
         return totems;
     }
 
-    public float GetTotemsEffect(TotemsType type)
+    public float GetTotemsEffect(int number)
     {
-        float number = 0;
-
-        for (int i = 0; i < totemsInfoList.Count; i++)
-        {
-            if (totemsInfoList[i].totemsType.Equals(type))
-            {
-                number = totemsInfoList[i].effectNumber;
-                break;
-            }
-        }
-
-        return number;
+        return totemsInfoList[number].effectNumber;
     }
 }

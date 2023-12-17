@@ -35,19 +35,8 @@ public class CharacterDataBase : ScriptableObject
         return character;
     }
 
-    public float GetCharacterEffect(CharacterType type)
+    public float GetCharacterEffect(int number)
     {
-        float number = 0;
-
-        for (int i = 0; i < characterInfoList.Count; i++)
-        {
-            if (characterInfoList[i].characterType.Equals(type))
-            {
-                number = characterInfoList[i].effectNumber;
-                break;
-            }
-        }
-
-        return number;
+        return characterInfoList[number].effectNumber; ;
     }
 }

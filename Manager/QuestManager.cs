@@ -84,6 +84,15 @@ public class QuestManager : MonoBehaviour
             reward = questDataBase.reward;
         }
 
+        if((playerDataBase.QuestCount / 5) > 10)
+        {
+            reward = reward * 2;
+        }
+        else
+        {
+            reward += (int)(reward * (0.1f * (playerDataBase.QuestCount / 5)));
+        }
+
         reward = Mathf.RoundToInt((reward + (reward * (0.01f * playerDataBase.Treasure11))));
 
         plus += playerDataBase.Treasure11;

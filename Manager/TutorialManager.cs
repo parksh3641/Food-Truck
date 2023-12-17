@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,8 +23,12 @@ public class TutorialManager : MonoBehaviour
 
     WaitForSeconds talkDelay = new WaitForSeconds(0.04f);
 
+    PlayerDataBase playerDataBase;
+
     private void Awake()
     {
+        if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
+
         tutorialView.SetActive(false);
     }
 
@@ -40,7 +45,8 @@ public class TutorialManager : MonoBehaviour
         Initialize(talkIndex);
     }
 
-    public void NextFood()
+    [Button]
+    public void Next1()
     {
         tutorialView.SetActive(true);
 
@@ -48,11 +54,30 @@ public class TutorialManager : MonoBehaviour
         Initialize(talkIndex);
     }
 
-    public void Reincarnation()
+    [Button]
+    public void Next2()
     {
         tutorialView.SetActive(true);
 
         talkIndex = 8;
+        Initialize(talkIndex);
+    }
+
+    [Button]
+    public void Next3()
+    {
+        tutorialView.SetActive(true);
+
+        talkIndex = 10;
+        Initialize(talkIndex);
+    }
+
+    [Button]
+    public void Reincarnation()
+    {
+        tutorialView.SetActive(true);
+
+        talkIndex = 12;
         Initialize(talkIndex);
     }
 
@@ -69,7 +94,7 @@ public class TutorialManager : MonoBehaviour
             case 5:
                 tutorialView.SetActive(false);
 
-                if (GameStateManager.instance.NickName.Length > 15)
+                if (playerDataBase.ChangeNicknameCount == 0)
                 {
                     nameManager.OpenFreeNickName();
                 }
@@ -80,6 +105,12 @@ public class TutorialManager : MonoBehaviour
                 tutorialView.SetActive(false);
                 break;
             case 9:
+                tutorialView.SetActive(false);
+                break;
+            case 11:
+                tutorialView.SetActive(false);
+                break;
+            case 13:
                 tutorialView.SetActive(false);
                 break;
         }

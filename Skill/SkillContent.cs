@@ -41,7 +41,7 @@ public class SkillContent : MonoBehaviour
 
     private int priceGold = 100000;
     private int pricePortion = 50000;
-    private int priceCrystal = 5;
+    private int priceCrystal = 1;
     private int maxCrystal = 20;
 
     private int maxLevelGold = 100;
@@ -92,7 +92,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -121,7 +121,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -149,7 +149,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -176,7 +176,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -203,7 +203,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -230,7 +230,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -257,7 +257,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -284,7 +284,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -311,7 +311,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -338,7 +338,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -365,7 +365,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -392,7 +392,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -419,7 +419,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {
@@ -446,7 +446,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal + (priceCrystal * (level / 10));
+                        value = priceCrystal * (level + 1);
 
                         if (value >= maxCrystal)
                         {

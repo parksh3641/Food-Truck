@@ -161,8 +161,10 @@ public class AdmobReward : MonoBehaviour
                             break;
                     }
 
-                //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
-            });
+                    LoadRewardedAd();
+
+                    //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
+                });
             }
             else
             {
@@ -196,6 +198,8 @@ public class AdmobReward : MonoBehaviour
                 //        shopManager.SuccessWatchAd_Crystal();
                 //        break;
                 //}
+
+                LoadRewardedAd();
 
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.CancelWatchAd);

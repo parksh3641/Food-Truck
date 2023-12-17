@@ -38,8 +38,10 @@ public class GameStateManager : MonoBehaviour
         public bool vibration = true;
         public bool effect = true;
         public bool appReview = false;
-        public bool developer = false;
         public bool rankingNotice = false;
+        public bool developer = false;
+        public bool recorder = false;
+
 
         [Space]
         [Title("InGame")]
@@ -468,6 +470,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.developer = value;
+            SaveFile();
+        }
+    }
+
+    public bool Recorder
+    {
+        get
+        {
+            return gameSettings.recorder;
+        }
+        set
+        {
+            gameSettings.recorder = value;
             SaveFile();
         }
     }

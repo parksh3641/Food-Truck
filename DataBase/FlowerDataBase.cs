@@ -35,19 +35,8 @@ public class FlowerDataBase : ScriptableObject
         return flower;
     }
 
-    public float GetFlowerEffect(FlowerType type)
+    public float GetFlowerEffect(int number)
     {
-        float number = 0;
-
-        for (int i = 0; i < flowerInfoList.Count; i++)
-        {
-            if (flowerInfoList[i].flowerType.Equals(type))
-            {
-                number = flowerInfoList[i].effectNumber;
-                break;
-            }
-        }
-
-        return number;
+        return flowerInfoList[number].effectNumber;
     }
 }

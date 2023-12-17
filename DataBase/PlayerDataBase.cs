@@ -87,6 +87,8 @@ public class PlayerDataBase : ScriptableObject
     private int reincarnationCount = 0;
     [SerializeField]
     private int buffCount = 0;
+    [SerializeField]
+    private int changeNicknameCount = 0;
 
     [Space]
     [Title("Quest")]
@@ -2052,6 +2054,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int ChangeNicknameCount
+    {
+        get
+        {
+            return changeNicknameCount;
+        }
+        set
+        {
+            changeNicknameCount = value;
+        }
+    }
+
     public int ConsumeGold
     {
         get
@@ -3863,6 +3877,9 @@ public class PlayerDataBase : ScriptableObject
         treasure7 = 0;
         treasure8 = 0;
         treasure9 = 0;
+        treasure10 = 0;
+        treasure11 = 0;
+        treasure12 = 0;
 
         treasure1Count = 0;
         treasure2Count = 0;
@@ -3873,6 +3890,9 @@ public class PlayerDataBase : ScriptableObject
         treasure7Count = 0;
         treasure8Count = 0;
         treasure9Count = 0;
+        treasure10Count = 0;
+        treasure11Count = 0;
+        treasure12Count = 0;
 
         character1 = 0;
         character2 = 0;
@@ -3981,6 +4001,7 @@ public class PlayerDataBase : ScriptableObject
         buffCount = 0;
         consumeGold = 0;
         gourmetLevel = 0;
+        ChangeNicknameCount = 0;
 
         upgradeCount = 0;
         sellCount = 0;
@@ -4046,6 +4067,8 @@ public class PlayerDataBase : ScriptableObject
         attendanceDay = "";
         attendanceCount = 0;
         attendanceCheck = false;
+        playTimeCount = 0;
+        rankEventCount = 0;
         welcomeCount = 0;
         welcomeCheck = false;
         nextMonday = "";
@@ -4578,6 +4601,416 @@ public class PlayerDataBase : ScriptableObject
         if (flower7 > 0)
         {
             count += 1;
+        }
+
+        return count;
+    }
+
+    public int GetTruckHighNumber()
+    {
+        int count = 0;
+
+        if (ChipsTruck > 0)
+        {
+            count = 1;
+        }
+
+        if (DonutTruck > 0)
+        {
+            count = 2;
+        }
+
+        if (HamburgerTruck > 0)
+        {
+            count = 3;
+        }
+
+        if (IcecreamTruck > 0)
+        {
+            count = 4;
+        }
+
+        if (LemonadeTruck > 0)
+        {
+            count = 5;
+        }
+
+        if (NoodlesTruck > 0)
+        {
+            count = 6;
+        }
+
+        if (PizzaTruck > 0)
+        {
+            count = 7;
+        }
+
+        if (SushiTruck > 0)
+        {
+            count = 8;
+        }
+
+        return count;
+    }
+
+    public int GetAnimalHighNumber()
+    {
+        int count = 0;
+
+        if (GeckoAnimal > 0)
+        {
+            count = 1;
+        }
+
+        if (HerringAnimal > 0)
+        {
+            count = 2;
+        }
+
+        if (MuskratAnimal > 0)
+        {
+            count = 3;
+        }
+
+        if (PuduAnimal > 0)
+        {
+            count = 4;
+        }
+
+        if (SparrowAnimal > 0)
+        {
+            count = 5;
+        }
+
+        if (SquidAnimal > 0)
+        {
+            count = 6;
+        }
+
+        if (TaipanAnimal > 0)
+        {
+            count = 7;
+        }
+
+        return count;
+    }
+
+    public int GetButterflyHighNumber()
+    {
+        int count = 0;
+
+        if (butterfly1 > 0)
+        {
+            count = 1;
+        }
+
+        if (butterfly2 > 0)
+        {
+            count = 2;
+        }
+
+        if (butterfly3 > 0)
+        {
+            count = 3;
+        }
+
+        if (butterfly4 > 0)
+        {
+            count = 4;
+        }
+
+        if (butterfly5 > 0)
+        {
+            count = 5;
+        }
+
+        if (butterfly6 > 0)
+        {
+            count = 6;
+        }
+
+        if (butterfly7 > 0)
+        {
+            count = 7;
+        }
+
+        if (butterfly8 > 0)
+        {
+            count = 8;
+        }
+
+        if (butterfly9 > 0)
+        {
+            count = 9;
+        }
+
+        if (butterfly10 > 0)
+        {
+            count = 10;
+        }
+
+        if (butterfly11 > 0)
+        {
+            count = 11;
+        }
+
+        if (butterfly12 > 0)
+        {
+            count = 12;
+        }
+
+        if (butterfly13 > 0)
+        {
+            count = 13;
+        }
+
+        if (butterfly14 > 0)
+        {
+            count = 14;
+        }
+
+        if (butterfly15 > 0)
+        {
+            count = 15;
+        }
+
+        if (butterfly16 > 0)
+        {
+            count = 16;
+        }
+
+        if (butterfly17 > 0)
+        {
+            count = 17;
+        }
+
+        if (butterfly18 > 0)
+        {
+            count = 18;
+        }
+
+        if (butterfly19 > 0)
+        {
+            count = 19;
+        }
+
+        if (butterfly20 > 0)
+        {
+            count = 20;
+        }
+
+        if (butterfly21 > 0)
+        {
+            count = 21;
+        }
+
+        if (butterfly22 > 0)
+        {
+            count = 22;
+        }
+
+        if (butterfly23 > 0)
+        {
+            count = 23;
+        }
+
+        if (butterfly24 > 0)
+        {
+            count = 24;
+        }
+
+        if (butterfly25 > 0)
+        {
+            count = 25;
+        }
+
+        if (butterfly26 > 0)
+        {
+            count = 26;
+        }
+
+        if (butterfly27 > 0)
+        {
+            count = 27;
+        }
+
+        if (butterfly28 > 0)
+        {
+            count = 28;
+        }
+
+        return count;
+    }
+
+    public int GetCharacterHighNumber()
+    {
+        int count = 0;
+
+        if (character1 > 0)
+        {
+            count = 1;
+        }
+
+        if (character2 > 0)
+        {
+            count = 2;
+        }
+
+        if (character3 > 0)
+        {
+            count = 3;
+        }
+
+        if (character4 > 0)
+        {
+            count = 4;
+        }
+
+        if (character5 > 0)
+        {
+            count = 5;
+        }
+
+        if (character6 > 0)
+        {
+            count = 6;
+        }
+
+        if (character7 > 0)
+        {
+            count = 7;
+        }
+
+        if (character8 > 0)
+        {
+            count = 8;
+        }
+
+        if (character9 > 0)
+        {
+            count = 9;
+        }
+
+        if (character10 > 0)
+        {
+            count = 10;
+        }
+
+        if (character11 > 0)
+        {
+            count = 11;
+        }
+
+        if (character12 > 0)
+        {
+            count = 12;
+        }
+
+        if (character13 > 0)
+        {
+            count = 13;
+        }
+
+        if (character14 > 0)
+        {
+            count = 14;
+        }
+
+        if (character15 > 0)
+        {
+            count = 15;
+        }
+
+        if (character16 > 0)
+        {
+            count = 16;
+        }
+
+        if (character17 > 0)
+        {
+            count = 17;
+        }
+
+        if (character18 > 0)
+        {
+            count = 18;
+        }
+
+        if (character19 > 0)
+        {
+            count = 19;
+        }
+
+        if (character20 > 0)
+        {
+            count = 20;
+        }
+
+        if (character21 > 0)
+        {
+            count = 21;
+        }
+
+        return count;
+    }
+
+    public int GetTotemsHighNumber()
+    {
+        int count = 0;
+
+        if (totems2 > 0)
+        {
+            count = 1;
+        }
+
+        if (totems3 > 0)
+        {
+            count = 2;
+        }
+
+        if (totems4 > 0)
+        {
+            count = 3;
+        }
+
+        if (totems5 > 0)
+        {
+            count = 4;
+        }
+
+        if (totems6 > 0)
+        {
+            count = 5;
+        }
+
+        if (totems7 > 0)
+        {
+            count = 6;
+        }
+
+        if (totems8 > 0)
+        {
+            count = 7;
+        }
+
+        if (totems9 > 0)
+        {
+            count = 8;
+        }
+
+        if (totems10 > 0)
+        {
+            count = 9;
+        }
+
+        if (totems11 > 0)
+        {
+            count = 10;
+        }
+
+        if (totems12 > 0)
+        {
+            count = 11;
         }
 
         return count;

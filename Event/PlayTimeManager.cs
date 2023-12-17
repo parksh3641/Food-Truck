@@ -100,20 +100,15 @@ public class PlayTimeManager : MonoBehaviour
         {
             case 0:
                 PlayfabManager.instance.UpdateAddGold(100000);
-
                 break;
             case 1:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
-
                 break;
             case 2:
-                playerDataBase.BuffTickets += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
-
+                PortionManager.instance.GetBuffTickets(1);
                 break;
             case 3:
                 treasureManager.OpenTreasure(1);
-
                 break;
         }
 

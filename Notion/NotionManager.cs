@@ -200,5 +200,6 @@ public enum NotionType
     OpenChestBoxNotion,
     SuccessLink,
     FailLink,
-    CouponNotion4
+    CouponNotion4,
+    TipInfoNotion
 }

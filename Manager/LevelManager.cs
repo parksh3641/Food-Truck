@@ -74,7 +74,7 @@ public class LevelManager : MonoBehaviour
         titleText.text = "Lv." + (level + 1).ToString();
         levelText.text = (level + 1).ToString();
 
-        titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "  (+" + (10 + (int)animalDataBase.GetAnimalEffect(GameStateManager.instance.AnimalType)) +")";
+        titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "  (+" + (10 + (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber())) +")";
 
         nowExp = levelDataBase.GetNowExp(playerDataBase.Exp);
         nextExp = levelDataBase.GetNextExp(level);

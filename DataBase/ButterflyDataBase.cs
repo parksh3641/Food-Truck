@@ -37,19 +37,8 @@ public class ButterflyDataBase : ScriptableObject
         return butterfly;
     }
 
-    public float GetButterflyEffect(ButterflyType type)
+    public float GetButterflyEffect(int number)
     {
-        float number = 0;
-
-        for (int i = 0; i < butterflyInfoList.Count; i++)
-        {
-            if (butterflyInfoList[i].butterflyType.Equals(type))
-            {
-                number = butterflyInfoList[i].effectNumber;
-                break;
-            }
-        }
-
-        return number;
+        return butterflyInfoList[number].effectNumber;
     }
 }

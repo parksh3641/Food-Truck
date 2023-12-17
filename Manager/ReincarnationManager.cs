@@ -20,7 +20,7 @@ public class ReincarnationManager : MonoBehaviour
 
 
     private float crystal = 0;
-
+    private float plus = 0;
     private int number = 0;
 
     public FadeInOut fadeInOut;
@@ -86,7 +86,16 @@ public class ReincarnationManager : MonoBehaviour
             buttonLockedObj.SetActive(false);
         }
 
-        passiveText.text = crystal.ToString() + " (+" + ((playerDataBase.Skill11 * 0.5f) + (playerDataBase.Treasure10 * 1)).ToString() + "%)";
+        plus = 0;
+        plus += playerDataBase.Skill11 * 0.5f;
+        plus += playerDataBase.Treasure10 * 1;
+
+        passiveText.text = crystal.ToString();
+
+        if(plus > 0)
+        {
+            passiveText.text += " (+" + plus.ToString() + "%)";
+        }
 
         crystal = crystal + (crystal * (0.005f * playerDataBase.Skill11));
         crystal = crystal + (crystal * (0.01f * playerDataBase.Treasure10));

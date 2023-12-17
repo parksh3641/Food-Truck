@@ -139,7 +139,7 @@ public class AttendanceManager : MonoBehaviour
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[3].receiveContent[1].gameObject.SetActive(true);
         attendanceContentArray[3].receiveContent[0].Initialize(RewardType.Gold, 100000);
-        attendanceContentArray[3].receiveContent[1].Initialize(RewardType.TreasureBox, 1);
+        attendanceContentArray[3].receiveContent[1].Initialize(RewardType.Crystal, 50);
 
         attendanceContentArray[4].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[4].receiveContent[1].gameObject.SetActive(true);
@@ -174,39 +174,38 @@ public class AttendanceManager : MonoBehaviour
         {
             case 0:
                 PlayfabManager.instance.UpdateAddGold(100000);
-                GetRandomPortion(0, 2);
+                PortionManager.instance.GetPortion(0, 2);
 
                 break;
             case 1:
                 PlayfabManager.instance.UpdateAddGold(100000);
-                GetRandomPortion(1, 2);
+                PortionManager.instance.GetPortion(1, 2);
 
                 break;
             case 2:
                 PlayfabManager.instance.UpdateAddGold(100000);
-                GetRandomPortion(2, 2);
+                PortionManager.instance.GetPortion(2, 2);
 
                 break;
             case 3:
                 PlayfabManager.instance.UpdateAddGold(100000);
-                treasureManager.OpenTreasure(1);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
 
                 break;
             case 4:
                 PlayfabManager.instance.UpdateAddGold(100000);
-                GetRandomPortion(3, 2);
+                PortionManager.instance.GetPortion(3, 2);
 
                 break;
             case 5:
-                GetRandomPortion(4, 2);
+                PortionManager.instance.GetPortion(4, 2);
 
                 break;
             case 6:
                 PlayfabManager.instance.UpdateAddGold(300000);
                 treasureManager.OpenTreasure(3);
 
-                playerDataBase.DefDestroyTicket += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
+                PortionManager.instance.GetDefTickets(1);
                 break;
         }
 
@@ -258,45 +257,5 @@ public class AttendanceManager : MonoBehaviour
     {
         mainAlarm.SetActive(false);
         alarm.SetActive(false);
-    }
-
-    void GetRandomPortion(int index, int number)
-    {
-        switch (index)
-        {
-            case 0:
-                playerDataBase.Portion1 += number;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-                break;
-            case 1:
-                playerDataBase.Portion2 += number;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-                break;
-            case 2:
-                playerDataBase.Portion3 += number;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-                break;
-            case 3:
-                playerDataBase.Portion4 += number;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
-                break;
-            case 4:
-                playerDataBase.Portion5 += number;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
-                break;
-        }
-    }
-
-    void GetAllPortion(int number)
-    {
-        playerDataBase.Portion1 += number;
-        playerDataBase.Portion2 += number;
-        playerDataBase.Portion3 += number;
-        playerDataBase.Portion4 += number;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
     }
 }

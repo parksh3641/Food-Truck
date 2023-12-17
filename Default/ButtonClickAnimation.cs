@@ -33,4 +33,16 @@ public class ButtonClickAnimation : MonoBehaviour, IPointerDownHandler, IPointer
     {
         transform.localScale = Vector3.one;
     }
+
+    public void AutoClick()
+    {
+        transform.localScale = Vector3.one * 0.95f;
+
+        Invoke("Delay", 0.1f);
+    }
+
+    void Delay()
+    {
+        transform.localScale = Vector3.one;
+    }
 }

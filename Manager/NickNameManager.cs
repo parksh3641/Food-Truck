@@ -14,6 +14,11 @@ public class NickNameManager : MonoBehaviour
     public GameObject closeButton;
     public GameObject buyFreeButton;
     public GameObject buyCoinButton;
+    public Text coinPriceText;
+
+    private int price = 100000;
+    private int maxPrice = 1000000;
+    private int nowPrice = 0;
 
     public InputField inputField;
 
@@ -68,6 +73,15 @@ public class NickNameManager : MonoBehaviour
             closeButton.SetActive(true);
             buyFreeButton.SetActive(false);
             buyCoinButton.SetActive(true);
+
+            nowPrice = price * (playerDataBase.ChangeNicknameCount + 1);
+
+            if(nowPrice > maxPrice)
+            {
+                nowPrice = maxPrice;
+            }
+
+            coinPriceText.text = MoneyUnitString.ToCurrencyString(nowPrice);
         }
         else
         {
@@ -115,9 +129,9 @@ public class NickNameManager : MonoBehaviour
                 {
                     if (number == 1)
                     {
-                        if (playerDataBase.Coin >= 1000000)
+                        if (playerDataBase.Coin >= nowPrice)
                         {
-                            PlayfabManager.instance.UpdateSubtractGold(1000000);
+                            PlayfabManager.instance.UpdateSubtractGold(nowPrice);
                         }
                         else
                         {
@@ -161,6 +175,9 @@ public class NickNameManager : MonoBehaviour
         {
             noticeManager.OpenNoticeView();
         }
+
+        playerDataBase.ChangeNicknameCount += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("ChangeNicknameCount", playerDataBase.ChangeNicknameCount);
     }
 
     public void Failure()

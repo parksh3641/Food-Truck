@@ -1353,6 +1353,9 @@ public class PlayfabManager : MonoBehaviour
                        case "TreasureCount":
                            playerDataBase.TreasureCount = statistics.Value;
                            break;
+                       case "ChangeNicknameCount":
+                           playerDataBase.ChangeNicknameCount = statistics.Value;
+                           break;
                        case "AccessDate":
                            playerDataBase.AccessDate = statistics.Value;
                            break;

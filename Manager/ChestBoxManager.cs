@@ -162,7 +162,7 @@ public class ChestBoxManager : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddGold(100000);
+                PlayfabManager.instance.UpdateAddGold(50000);
 
                 break;
             case RewardType.PortionSet:
@@ -186,7 +186,7 @@ public class ChestBoxManager : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddGold(300000);
+                PlayfabManager.instance.UpdateAddGold(500000);
 
                 break;
             case RewardType.PortionSet:

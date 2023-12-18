@@ -89,7 +89,7 @@ public class CouponManager : MonoBehaviour
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon1", 1);
 
                     PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
 
                     PortionManager.instance.GetAllPortion(5);
 
@@ -102,7 +102,7 @@ public class CouponManager : MonoBehaviour
                     receiveContents[5].gameObject.SetActive(true);
 
                     receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 300);
+                    receiveContents[1].Initialize(RewardType.Crystal, 500);
                     receiveContents[2].Initialize(RewardType.Portion1, 5);
                     receiveContents[3].Initialize(RewardType.Portion2, 5);
                     receiveContents[4].Initialize(RewardType.Portion3, 5);

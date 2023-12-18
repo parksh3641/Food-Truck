@@ -100,7 +100,14 @@ public class ReincarnationManager : MonoBehaviour
         crystal = crystal + (crystal * (0.005f * playerDataBase.Skill11));
         crystal = crystal + (crystal * (0.01f * playerDataBase.Treasure10));
 
-        crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
+        if(crystal > 0)
+        {
+            crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
+        }
+        else
+        {
+            crystalText.text = "";
+        }
 
         countText.text = LocalizationManager.instance.GetString("Reincarnation_Count") + " : " + playerDataBase.ReincarnationCount;
 

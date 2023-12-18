@@ -43,7 +43,7 @@ public class OptionManager : MonoBehaviour
         optionView.SetActive(false);
         languageView.SetActive(false);
 
-        versionText.text = "v" + Application.version + "  <size=10>(2023/12/18)</size>";
+        versionText.text = "v" + Application.version + "  <size=10>(2023/12/20)</size>";
     }
 
     private void Start()

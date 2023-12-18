@@ -42,8 +42,8 @@ public class MoneyContent : MonoBehaviour
 
         endPos = end;
 
-        posX = Random.Range(-300, 300);
-        posY = Random.Range(-150, 150);
+        posX = Random.Range(-400, 400);
+        posY = Random.Range(-200, 200);
 
         startPos = start + new Vector3(posX, posY, 0);
 

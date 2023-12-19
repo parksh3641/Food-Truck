@@ -178,6 +178,11 @@ public class NickNameManager : MonoBehaviour
 
         playerDataBase.ChangeNicknameCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("ChangeNicknameCount", playerDataBase.ChangeNicknameCount);
+
+        if(!GameStateManager.instance.Tutorial)
+        {
+            GameStateManager.instance.Tutorial = true;
+        }
     }
 
     public void Failure()

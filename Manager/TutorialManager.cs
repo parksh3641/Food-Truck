@@ -34,7 +34,7 @@ public class TutorialManager : MonoBehaviour
 
     public void TutorialStart()
     {
-        Invoke("Wait", 2f);
+        Invoke("Wait", 1f);
     }
 
     void Wait()
@@ -98,8 +98,6 @@ public class TutorialManager : MonoBehaviour
                 {
                     nameManager.OpenFreeNickName();
                 }
-
-                GameStateManager.instance.Tutorial = true;
                 break;
             case 7:
                 tutorialView.SetActive(false);

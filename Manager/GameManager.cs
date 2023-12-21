@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
 
     [Space]
     [Title("Christmas")]
-    public GameObject christmasTree;
     public GameObject christmasSnow;
 
     [Space]
@@ -354,16 +353,14 @@ public class GameManager : MonoBehaviour
 
         checkUpdate.SetActive(false);
 
-        christmasTree.SetActive(false);
-        christmasSnow.SetActive(false);
-
         System.DateTime currentDate = System.DateTime.Now;
         System.DateTime decemberStart = new System.DateTime(currentDate.Year, 12, 1);
         System.DateTime decemberEnd = new System.DateTime(currentDate.Year, 12, 31);
 
+        christmasSnow.SetActive(false);
+
         if (currentDate >= decemberStart && currentDate <= decemberEnd)
         {
-            //christmasTree.SetActive(true);
             christmasSnow.SetActive(true);
 
             Debug.Log("12월 달이라 눈이 내리기 시작합니다.");
@@ -453,8 +450,6 @@ public class GameManager : MonoBehaviour
         CheckFood();
         CheckFoodState();
 
-        PlayfabManager.instance.GetTitleInternalData("Coupon", CheckCoupon);
-
         if (!GameStateManager.instance.Tutorial)
         {
             tutorialManager.TutorialStart();
@@ -502,6 +497,8 @@ public class GameManager : MonoBehaviour
 #else
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 2);
 #endif
+
+        PlayfabManager.instance.GetTitleInternalData("Coupon", CheckCoupon);
     }
 
     void SetFoodContent()
@@ -1166,9 +1163,6 @@ public class GameManager : MonoBehaviour
             FirebaseAnalytics.LogEvent("RankingMode");
         }
 
-        isDef = false;
-        checkMark.SetActive(false);
-
         successPlus = 0;
         successX2 = 0;
         needPlus = 0;
@@ -1229,6 +1223,12 @@ public class GameManager : MonoBehaviour
             sellPricePlus += 100;
         }
 
+        if (feverMode)
+        {
+            successPlus += feverPlus;
+            defDestroy += 5;
+        }
+
         if (portion1)
         {
             needPlus += 30;
@@ -1242,12 +1242,6 @@ public class GameManager : MonoBehaviour
         if (portion3)
         {
             successPlus += 1;
-        }
-
-        if (feverMode)
-        {
-            successPlus += feverPlus;
-            defDestroy += 5;
         }
 
         if (portion5)
@@ -1270,8 +1264,11 @@ public class GameManager : MonoBehaviour
             successX2 += buff3Value;
         }
 
+        isDef = false;
+        checkMark.SetActive(false);
+
         CheckFever();
-        CheckDefTicket();
+        //CheckDefTicket();
         CheckPortion();
         UpgradeInitialize();
 
@@ -1417,6 +1414,8 @@ public class GameManager : MonoBehaviour
 
             PlayfabManager.instance.UpdateAddGold(100000);
             PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
+
+            SoundManager.instance.PlaySFX(GameSfxType.Sell);
 
             StartCoroutine(FirstDelay());
         }

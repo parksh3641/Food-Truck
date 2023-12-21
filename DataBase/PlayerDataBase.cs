@@ -4841,109 +4841,99 @@ public class PlayerDataBase : ScriptableObject
     {
         int count = 0;
 
-        if (character1 > 0)
+        if (character2 > 0)
         {
             count = 1;
         }
 
-        if (character2 > 0)
+        if (character3 > 0)
         {
             count = 2;
         }
 
-        if (character3 > 0)
+        if (character4 > 0 || character21 > 0)
         {
             count = 3;
         }
 
-        if (character4 > 0)
+        if (character5 > 0)
         {
             count = 4;
         }
 
-        if (character5 > 0)
+        if (character6 > 0)
         {
             count = 5;
         }
 
-        if (character6 > 0)
+        if (character7 > 0)
         {
             count = 6;
         }
 
-        if (character7 > 0)
+        if (character8 > 0)
         {
             count = 7;
         }
 
-        if (character8 > 0)
+        if (character9 > 0)
         {
             count = 8;
         }
 
-        if (character9 > 0)
+        if (character10 > 0)
         {
             count = 9;
         }
 
-        if (character10 > 0)
+        if (character11 > 0)
         {
             count = 10;
         }
 
-        if (character11 > 0)
+        if (character12 > 0)
         {
             count = 11;
         }
 
-        if (character12 > 0)
+        if (character13 > 0)
         {
             count = 12;
         }
 
-        if (character13 > 0)
+        if (character14 > 0)
         {
             count = 13;
         }
 
-        if (character14 > 0)
+        if (character15 > 0)
         {
             count = 14;
         }
 
-        if (character15 > 0)
+        if (character16 > 0)
         {
             count = 15;
         }
 
-        if (character16 > 0)
+        if (character17 > 0)
         {
             count = 16;
         }
 
-        if (character17 > 0)
+        if (character18 > 0)
         {
             count = 17;
         }
 
-        if (character18 > 0)
+        if (character19 > 0)
         {
             count = 18;
         }
 
-        if (character19 > 0)
-        {
-            count = 19;
-        }
-
         if (character20 > 0)
         {
-            count = 20;
-        }
-
-        if (character21 > 0)
-        {
-            count = 21;
+            count = 19;
         }
 
         return count;

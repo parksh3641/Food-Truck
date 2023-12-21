@@ -39,6 +39,11 @@ public class ButterflyDataBase : ScriptableObject
 
     public float GetButterflyEffect(int number)
     {
+        if(butterflyInfoList[number] == null)
+        {
+            number = 0;
+        }
+
         return butterflyInfoList[number].effectNumber;
     }
 }

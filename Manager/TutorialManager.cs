@@ -97,7 +97,9 @@ public class TutorialManager : MonoBehaviour
                 if (playerDataBase.ChangeNicknameCount == 0)
                 {
                     nameManager.OpenFreeNickName();
+                    GameManager.instance.FirstReward();
                 }
+
                 break;
             case 7:
                 tutorialView.SetActive(false);

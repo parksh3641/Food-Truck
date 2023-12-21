@@ -37,6 +37,11 @@ public class CharacterDataBase : ScriptableObject
 
     public float GetCharacterEffect(int number)
     {
-        return characterInfoList[number].effectNumber; ;
+        if (characterInfoList[number] == null)
+        {
+            number = 0;
+        }
+
+        return characterInfoList[number].effectNumber;
     }
 }

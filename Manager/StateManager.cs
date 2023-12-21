@@ -8,6 +8,7 @@ public class StateManager : MonoBehaviour
 
     public FadeInOut fadeInOut;
 
+    public ShopManager shopManager;
     public GameManager gameManager;
     public ResetManager resetManager;
     public LockManager lockManager;
@@ -52,6 +53,7 @@ public class StateManager : MonoBehaviour
     public void Initialize()
     {
         fadeInOut.FadeIn();
+        shopManager.Initialize();
         gameManager.Initialize();
         resetManager.Initialize();
         lockManager.Initialize();
@@ -61,12 +63,12 @@ public class StateManager : MonoBehaviour
         noticeManager.Initialize();
         changeFoodManager.Initialize();
         attendanceManager.Initialize();
-        gourmetManager.FirstInitialize();
         welcomeManager.Initialize();
         rankEventManager.Initialize();
         playTimeManager.Initialize();
         treasureManager.Initialize();
+        gourmetManager.FirstInitialize();
 
-        Debug.Log("Load Complete!");
+        Debug.LogError("Load Complete!");
     }
 }

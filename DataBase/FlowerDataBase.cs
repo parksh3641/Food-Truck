@@ -37,6 +37,11 @@ public class FlowerDataBase : ScriptableObject
 
     public float GetFlowerEffect(int number)
     {
+        if (flowerInfoList[number] == null)
+        {
+            number = 0;
+        }
+
         return flowerInfoList[number].effectNumber;
     }
 }

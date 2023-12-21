@@ -214,6 +214,8 @@ public class GameManager : MonoBehaviour
     private int defaultNeed = 150;
     private int defaultSellPrice = 2000;
 
+    private bool clickDelay = false;
+
     [Space]
     [Title("Bankruptcy")]
     public GameObject bankruptcyView;
@@ -329,6 +331,13 @@ public class GameManager : MonoBehaviour
         portion5 = false;
         portion6 = false;
 
+        portionText1.text = "0";
+        portionText2.text = "0";
+        portionText3.text = "0";
+        portionText4.text = "0";
+        portionText5.text = "0";
+        portionText6.text = "0";
+
         portionFillamount1.fillAmount = 0;
         portionFillamount2.fillAmount = 0;
         portionFillamount3.fillAmount = 0;
@@ -403,6 +412,11 @@ public class GameManager : MonoBehaviour
 
     public void SuccessLogin()
     {
+        isDelay_Camera = true;
+
+        checkInternet.SetActive(false);
+        loginView.SetActive(false);
+
         SetFoodContent();
 
         buff1Text.text = "+" + buff1Value.ToString() + "%";
@@ -428,24 +442,16 @@ public class GameManager : MonoBehaviour
             superOffline.SetActive(true);
         }
 
-        checkInternet.SetActive(false);
-        loginView.SetActive(false);
-
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
-        //islandText.localizationName = GameStateManager.instance.IslandType.ToString();
-        //islandText.ReLoad();
 
         feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  0%";
 
         nowExp = playerDataBase.Exp;
         nowUpgradeCount = playerDataBase.UpgradeCount;
         nowSellCount = playerDataBase.SellCount;
-        StartCoroutine(DelayCoroution());
 
         CheckFood();
         CheckFoodState();
-
-        isDelay_Camera = true;
 
         PlayfabManager.instance.GetTitleInternalData("Coupon", CheckCoupon);
 
@@ -474,6 +480,19 @@ public class GameManager : MonoBehaviour
         testModeButton.SetActive(true);
 #endif
 
+        changeFoodManager.CheckProficiency();
+        questManager.CheckingAlarm();
+
+        playTime = 0;
+        StartCoroutine(PlayTimeCoroution());
+
+        StartCoroutine(DelayCoroution());
+
+        Invoke("ServerDelay", 1.0f);
+    }
+
+    void ServerDelay()
+    {
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Version", int.Parse(Application.version.Replace(".", "")));
 
 #if UNITY_ANDROID
@@ -483,13 +502,6 @@ public class GameManager : MonoBehaviour
 #else
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 2);
 #endif
-
-        changeFoodManager.CheckProficiency();
-
-        questManager.CheckingAlarm();
-
-        playTime = 0;
-        StartCoroutine(PlayTimeCoroution());
     }
 
     void SetFoodContent()
@@ -1003,11 +1015,11 @@ public class GameManager : MonoBehaviour
 
         PortionManager.instance.GetAllPortion(10);
 
+        CheckPortion();
+
         yield return waitForSeconds3;
 
         PortionManager.instance.GetBuffTickets(2);
-
-        CheckPortion();
     }
 
     IEnumerator PlayTimeCoroution()
@@ -1032,7 +1044,10 @@ public class GameManager : MonoBehaviour
 
     void CheckCoupon(bool check)
     {
-#if UNITY_EDITOR || UNITY_ANDROID
+#if UNITY_EDITOR
+        coupon.SetActive(true);
+        deleteAccount.SetActive(true);
+#elif UNITY_ANDROID
         coupon.SetActive(true);
         deleteAccount.SetActive(false);
 #else
@@ -1070,12 +1085,21 @@ public class GameManager : MonoBehaviour
         crystalText.text = MoneyUnitString.ToCurrencyString(playerDataBase.Crystal);
     }
 
+    public void GameStartDelay()
+    {
+        clickDelay = true;
+    }
+
     public void GameStart(int number)
     {
         if (!isDelay_Camera) return;
 
         isDelay_Camera = false;
+        cameraController.GoToB();
 
+        mainUI.SetActive(false);
+        inGameUI.SetActive(true);
+        languageUI.SetActive(false);
         rankingNoticeButton.SetActive(false);
 
         GameStateManager.instance.GameType = GameType.Story + number;
@@ -1142,15 +1166,6 @@ public class GameManager : MonoBehaviour
             FirebaseAnalytics.LogEvent("RankingMode");
         }
 
-        mainUI.SetActive(false);
-        inGameUI.SetActive(true);
-        languageUI.SetActive(false);
-
-        if (GameStateManager.instance.Recorder)
-        {
-            StartCoroutine(AutoUpgradeCoroution());
-        }
-
         isDef = false;
         checkMark.SetActive(false);
 
@@ -1164,11 +1179,7 @@ public class GameManager : MonoBehaviour
 
         changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
-        if (GameStateManager.instance.CharacterType > CharacterType.Character1)
-        {
-            successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
-        }
-
+        successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         successPlus += playerDataBase.Skill7 * 0.1f;
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.1f;
         successPlus += playerDataBase.Treasure1 * 0.2f;
@@ -1265,13 +1276,18 @@ public class GameManager : MonoBehaviour
         UpgradeInitialize();
 
         portion6Obj.SetActive(false);
-
         if (playerDataBase.Portion6 > 0 && playerDataBase.LockTutorial > 1)
         {
             portion6Obj.SetActive(true);
         }
 
-        cameraController.GoToB();
+        if (GameStateManager.instance.Recorder)
+        {
+            StartCoroutine(AutoUpgradeCoroution());
+        }
+
+        clickDelay = false;
+        Invoke("GameStartDelay", 1.0f);
     }
 
     IEnumerator AutoUpgradeCoroution()
@@ -1364,15 +1380,14 @@ public class GameManager : MonoBehaviour
     {
         if (!isDelay_Camera) return;
 
-        GameStateManager.instance.FeverCount = feverCount;
-
         isDelay_Camera = false;
+        cameraController.GoToA();
 
         mainUI.SetActive(true);
         inGameUI.SetActive(false);
         languageUI.SetActive(true);
 
-        cameraController.GoToA();
+        GameStateManager.instance.FeverCount = feverCount;
 
         bestRankLevelText.localizationName = "Best";
         bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel;
@@ -1388,6 +1403,13 @@ public class GameManager : MonoBehaviour
     {
         signText.text = GameStateManager.instance.NickName;
 
+        RenewalVC();
+
+        SuccessLogin();
+    }
+
+    public void FirstReward()
+    {
         if (playerDataBase.FirstReward == 0)
         {
             playerDataBase.FirstReward = 1;
@@ -1398,12 +1420,6 @@ public class GameManager : MonoBehaviour
 
             StartCoroutine(FirstDelay());
         }
-        else
-        {
-            RenewalVC();
-        }
-
-        SuccessLogin();
     }
 
     public void ChangeIsland(IslandType type)
@@ -1558,7 +1574,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice = sellPrice + (int)(sellPrice * 0.3f);
+                sellPrice = sellPrice + (int)(sellPrice * 0.4f);
                 break;
         }
 
@@ -3667,12 +3683,10 @@ public class GameManager : MonoBehaviour
         feverCount = 0;
         GameStateManager.instance.FeverCount = 0;
 
-        playerDataBase.YummyTimeCount += 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FeverModeCount", playerDataBase.YummyTimeCount);
-
         GameStateManager.instance.YummyTimeCount += 1;
 
-        //questManager.CheckGoal();
+        playerDataBase.YummyTimeCount += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FeverModeCount", playerDataBase.YummyTimeCount);
 
         float currentTime = 0f;
         float fillAmount = 0;
@@ -3746,7 +3760,7 @@ public class GameManager : MonoBehaviour
 
                             changeFoodAlarmObj.SetActive(true);
 
-                            if (playerDataBase.Candy1MaxValue == 0)
+                            if (playerDataBase.HamburgerMaxValue == 1)
                             {
                                 tutorialManager.Next1();
                             }
@@ -3796,7 +3810,7 @@ public class GameManager : MonoBehaviour
 
                             changeFoodAlarmObj.SetActive(true);
 
-                            if (playerDataBase.Candy1MaxValue == 0)
+                            if (playerDataBase.DrinkMaxValue == 1)
                             {
                                 tutorialManager.Next2();
                             }
@@ -4401,6 +4415,8 @@ public class GameManager : MonoBehaviour
 
     public void UseSources(int number)
     {
+        if (!clickDelay) return;
+
         switch(number)
         {
             case 0:
@@ -4787,8 +4803,6 @@ public class GameManager : MonoBehaviour
     public void Reincarnation()
     {
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
-        //islandText.localizationName = GameStateManager.instance.IslandType.ToString();
-        //islandText.ReLoad();
 
         CheckFoodState();
     }
@@ -5178,6 +5192,12 @@ public class GameManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.TipInfoNotion);
     }
 
+    public void LockedInfo()
+    {
+        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+        NotionManager.instance.UseNotion(NotionType.UnLockedNotion);
+    }
+
     public void GetUpgradeCount()
     {
         playerDataBase.UpgradeCount += Random.Range(5000, 10001);
@@ -5187,20 +5207,20 @@ public class GameManager : MonoBehaviour
 
     public void CheckLocked()
     {
-        butterflyLocked.SetActive(true);
-        //rankLocked.SetActive(true);
-        treasureLocked.SetActive(true);
+        butterflyLocked.SetActive(false);
+        treasureLocked.SetActive(false);
 
         //if (levelDataBase.GetLevel(playerDataBase.Exp) > 1)
         //{
         //    butterflyLocked.SetActive(false);
         //}
 
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 2)
-        {
-            treasureLocked.SetActive(false);
-        }
+        //if (levelDataBase.GetLevel(playerDataBase.Exp) > 2)
+        //{
+        //    treasureLocked.SetActive(false);
+        //}
 
+        rankLocked.SetActive(true);
         if (levelDataBase.GetLevel(playerDataBase.Exp) > 3)
         {
             rankLocked.SetActive(false);

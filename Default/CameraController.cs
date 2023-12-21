@@ -30,6 +30,9 @@ public class CameraController : MonoBehaviour
     {
         Camera.main.transform.position = aPoint.position;
         Camera.main.transform.rotation = aPoint.rotation;
+
+        isA = false;
+        isB = false;
     }
 
     private void Update()
@@ -41,7 +44,7 @@ public class CameraController : MonoBehaviour
                 Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, aPoint.position, ref velocity, smoothTime);
                 Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, aPoint.rotation, smoothTime * 0.5f);
 
-                if (Vector3.Distance(aPoint.position, Camera.main.transform.position) < 0.01f)
+                if (Vector3.Distance(aPoint.position, Camera.main.transform.position) < 0.02f)
                 {
                     Camera.main.transform.position = aPoint.position;
                     Camera.main.transform.rotation = aPoint.rotation; 
@@ -57,7 +60,7 @@ public class CameraController : MonoBehaviour
                 Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, bPoint.position, ref velocity, smoothTime);
                 Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, bPoint.rotation, smoothTime * 0.5f);
 
-                if (Vector3.Distance(bPoint.position, Camera.main.transform.position) < 0.01f)
+                if (Vector3.Distance(bPoint.position, Camera.main.transform.position) < 0.02f)
                 {
                     Camera.main.transform.position = bPoint.position;
                     Camera.main.transform.rotation = bPoint.rotation;

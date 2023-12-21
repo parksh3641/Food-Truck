@@ -62,6 +62,9 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.Treasure7 * 500;
             value += playerDataBase.Treasure8 * 500;
             value += playerDataBase.Treasure9 * 500;
+            value += playerDataBase.Treasure10 * 500;
+            value += playerDataBase.Treasure11 * 500;
+            value += playerDataBase.Treasure12 * 500;
 
             value += playerDataBase.GetCharacterNumber() * 5000;
             value += playerDataBase.GetAnimalNumber() * 5000;

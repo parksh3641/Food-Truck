@@ -28,7 +28,7 @@ public class ReincarnationManager : MonoBehaviour
     public TutorialManager tutorialManager;
     public GameManager gameManager;
 
-    WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
+    WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
 
     PlayerDataBase playerDataBase;
 
@@ -145,20 +145,11 @@ public class ReincarnationManager : MonoBehaviour
     {
         fadeInOut.FadeOut();
 
-        yield return new WaitForSeconds(1.0f);
+        yield return waitForSeconds;
 
         SoundManager.instance.ResetBGM();
 
         reincarnationView.SetActive(false);
-
-        if(number == 0)
-        {
-            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (int)crystal);
-        }
-        else
-        {
-            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (int)crystal * 2);
-        }
 
         GameStateManager.instance.IslandType = IslandType.Island1;
         GameStateManager.instance.FoodType = FoodType.Food1;
@@ -171,6 +162,7 @@ public class ReincarnationManager : MonoBehaviour
         GameStateManager.instance.SnackLabLevel = 0;
         GameStateManager.instance.DrinkLevel = 0;
         GameStateManager.instance.PizzaLevel = 0;
+        GameStateManager.instance.DonutLevel = 0;
         GameStateManager.instance.FriesLevel = 0;
 
         GameStateManager.instance.Candy1Level = 0;
@@ -183,6 +175,24 @@ public class ReincarnationManager : MonoBehaviour
         GameStateManager.instance.Candy8Level = 0;
         GameStateManager.instance.Candy9Level = 0;
 
+        GameStateManager.instance.JapaneseFood1Level = 0;
+        GameStateManager.instance.JapaneseFood2Level = 0;
+        GameStateManager.instance.JapaneseFood3Level = 0;
+        GameStateManager.instance.JapaneseFood4Level = 0;
+        GameStateManager.instance.JapaneseFood5Level = 0;
+        GameStateManager.instance.JapaneseFood6Level = 0;
+        GameStateManager.instance.JapaneseFood7Level = 0;
+
+        GameStateManager.instance.Dessert1Level = 0;
+        GameStateManager.instance.Dessert2Level = 0;
+        GameStateManager.instance.Dessert3Level = 0;
+        GameStateManager.instance.Dessert4Level = 0;
+        GameStateManager.instance.Dessert5Level = 0;
+        GameStateManager.instance.Dessert6Level = 0;
+        GameStateManager.instance.Dessert7Level = 0;
+        GameStateManager.instance.Dessert8Level = 0;
+        GameStateManager.instance.Dessert9Level = 0;
+
         playerDataBase.IslandNumber = 0;
         playerDataBase.ReincarnationCount += 1;
 
@@ -191,8 +201,21 @@ public class ReincarnationManager : MonoBehaviour
         playerDataBase.NextFoodNumber3 = 0;
         playerDataBase.NextFoodNumber4 = 0;
 
+        playerDataBase.YummyTimeCount = 0;
+
         gameManager.Reincarnation();
         tutorialManager.Reincarnation();
+
+        yield return waitForSeconds;
+
+        if (number == 0)
+        {
+            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (int)crystal);
+        }
+        else
+        {
+            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (int)crystal * 2);
+        }
 
         yield return waitForSeconds;
 

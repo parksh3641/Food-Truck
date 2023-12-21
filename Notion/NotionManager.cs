@@ -201,5 +201,6 @@ public enum NotionType
     SuccessLink,
     FailLink,
     CouponNotion4,
-    TipInfoNotion
+    TipInfoNotion,
+    UnLockedNotion
 }

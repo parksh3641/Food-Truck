@@ -12,15 +12,13 @@ public class ResetManager : MonoBehaviour
 {
     public static ResetManager instance;
 
-    DateTime serverTime;
     DateTime nextMondey;
 
     public ShopManager shopManager;
-
     public AttendanceManager attendanceManager;
     public WelcomeManager welcomeManager;
 
-    WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
+    WaitForSeconds waitForSeconds = new WaitForSeconds(0.6f);
 
     PlayerDataBase playerDataBase;
 
@@ -33,11 +31,6 @@ public class ResetManager : MonoBehaviour
 
     public void Initialize()
     {
-        //if (!playerDataBase.AttendanceCheck)
-        //{
-        //    attendanceManager.OnSetAlarm();
-        //}
-
         OnCheckAttendanceDay();
     }
 
@@ -201,16 +194,14 @@ public class ResetManager : MonoBehaviour
         playerDataBase.DailyCastleReward = 0;
         playerDataBase.DailyQuestReward = 0;
         playerDataBase.DailyTreasureReward = 0;
+        playerDataBase.PlayTimeCount = 0;
 
         GameStateManager.instance.UpgradeCount = 0;
         GameStateManager.instance.SellCount = 0;
         GameStateManager.instance.UseSauce = 0;
         GameStateManager.instance.OpenChestBox = 0;
         GameStateManager.instance.YummyTimeCount = 0;
-
         GameStateManager.instance.ChestBoxCount = 0;
-
-        playerDataBase.PlayTimeCount = 0;
         GameStateManager.instance.PlayTime = 0;
     }
 

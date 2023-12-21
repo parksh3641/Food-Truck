@@ -99,7 +99,7 @@ public class NickNameManager : MonoBehaviour
 
         for (int i = 0; i < lines.Length; i++)
         {
-            if (inputField.text.Contains(lines[i]))
+            if (inputField.text.ToLower().Contains(lines[i]))
             {
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.SignNotion3);

@@ -37,6 +37,11 @@ public class TotemsDataBase : ScriptableObject
 
     public float GetTotemsEffect(int number)
     {
+        if (totemsInfoList[number] == null)
+        {
+            number = 0;
+        }
+
         return totemsInfoList[number].effectNumber;
     }
 }

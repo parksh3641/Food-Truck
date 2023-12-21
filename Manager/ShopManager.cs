@@ -147,26 +147,18 @@ public class ShopManager : MonoBehaviour
 
         alarm.SetActive(true);
         dailyAlarm.SetActive(false);
-    }
 
-    private void Start()
-    {
-        for(int i = 0; i < shopArray.Length; i ++)
+        for (int i = 0; i < shopArray.Length; i++)
         {
             shopArray[i].SetActive(false);
         }
-
-        //for (int i = 0; i < speicalShopArray.Length; i++)
-        //{
-        //    speicalShopArray[i].SetActive(false);
-        //}
 
         for (int i = 0; i < mainCharacterArray.Length; i++)
         {
             mainCharacterArray[i].SetActive(false);
         }
 
-        for (int i = 0; i < mainTruckArray.Length; i ++)
+        for (int i = 0; i < mainTruckArray.Length; i++)
         {
             mainTruckArray[i].SetActive(false);
         }
@@ -190,8 +182,23 @@ public class ShopManager : MonoBehaviour
         {
             mainFlowerArray[i].SetActive(false);
         }
+    }
 
-        if(GameStateManager.instance.Recorder)
+    private void Start()
+    {
+        isTimer = true;
+        dailyShopCountText.text = "";
+        StartCoroutine(DailyShopTimer());
+
+        for(int i = 0; i < shopRectTransform.Length; i ++)
+        {
+            shopRectTransform[i].anchoredPosition = new Vector2(0, -9999);
+        }
+    }
+
+    public void Initialize()
+    {
+        if (GameStateManager.instance.Recorder)
         {
             mainCharacterArray[Random.Range(0, Enum.GetValues(typeof(CharacterType)).Length - 1)].SetActive(true);
             mainTruckArray[Random.Range(0, Enum.GetValues(typeof(TruckType)).Length - 1)].SetActive(true);
@@ -208,21 +215,32 @@ public class ShopManager : MonoBehaviour
             mainTotemsArray[(int)GameStateManager.instance.TotemsType].SetActive(true);
             //mainFlowerArray[(int)GameStateManager.instance.FlowerType].SetActive(true);
         }
-
-        isTimer = true;
-        dailyShopCountText.text = "";
-        StartCoroutine(DailyShopTimer());
-
-        for(int i = 0; i < shopRectTransform.Length; i ++)
-        {
-            shopRectTransform[i].anchoredPosition = new Vector2(0, -9999);
-        }
     }
 
     public void SetAlarm()
     {
         alarm.SetActive(true);
         //dailyAlarm.SetActive(true);
+    }
+
+    public void OpenShopCoinView()
+    {
+        OpenShopView();
+
+        if (shopView.activeInHierarchy)
+        {
+            ChangeTopToggle(0);
+        }
+    }
+
+    public void OpenShopCrystalView()
+    {
+        OpenShopView();
+
+        if (shopView.activeInHierarchy)
+        {
+            ChangeTopToggle(3);
+        }
     }
 
     public void OpenShopView()
@@ -264,12 +282,6 @@ public class ShopManager : MonoBehaviour
 
             GameStateManager.instance.Pause = false;
         }
-    }
-
-    public void OpenShopView2()
-    {
-        OpenShopView();
-        ChangeTopToggle(2);
     }
 
     public void ChangeTopToggle(int number)

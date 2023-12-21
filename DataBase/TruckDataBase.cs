@@ -40,6 +40,11 @@ public class TruckDataBase : ScriptableObject
 
     public float GetTruckEffect(int number)
     {
+        if (truckInfoList[number] == null)
+        {
+            number = 0;
+        }
+
         return truckInfoList[number].effectNumber;
     }
 }

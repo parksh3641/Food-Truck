@@ -4699,144 +4699,139 @@ public class PlayerDataBase : ScriptableObject
     {
         int count = 0;
 
-        if (butterfly1 > 0)
+        if (butterfly2 > 0)
         {
             count = 1;
         }
 
-        if (butterfly2 > 0)
+        if (butterfly3 > 0)
         {
             count = 2;
         }
 
-        if (butterfly3 > 0)
+        if (butterfly4 > 0)
         {
             count = 3;
         }
 
-        if (butterfly4 > 0)
+        if (butterfly5 > 0)
         {
             count = 4;
         }
 
-        if (butterfly5 > 0)
+        if (butterfly6 > 0)
         {
             count = 5;
         }
 
-        if (butterfly6 > 0)
+        if (butterfly7 > 0)
         {
             count = 6;
         }
 
-        if (butterfly7 > 0)
+        if (butterfly8 > 0)
         {
             count = 7;
         }
 
-        if (butterfly8 > 0)
+        if (butterfly9 > 0)
         {
             count = 8;
         }
 
-        if (butterfly9 > 0)
+        if (butterfly10 > 0)
         {
             count = 9;
         }
 
-        if (butterfly10 > 0)
+        if (butterfly11 > 0)
         {
             count = 10;
         }
 
-        if (butterfly11 > 0)
+        if (butterfly12 > 0)
         {
             count = 11;
         }
 
-        if (butterfly12 > 0)
+        if (butterfly13 > 0)
         {
             count = 12;
         }
 
-        if (butterfly13 > 0)
+        if (butterfly14 > 0)
         {
             count = 13;
         }
 
-        if (butterfly14 > 0)
+        if (butterfly15 > 0)
         {
             count = 14;
         }
 
-        if (butterfly15 > 0)
+        if (butterfly16 > 0)
         {
             count = 15;
         }
 
-        if (butterfly16 > 0)
+        if (butterfly17 > 0)
         {
             count = 16;
         }
 
-        if (butterfly17 > 0)
+        if (butterfly18 > 0)
         {
             count = 17;
         }
 
-        if (butterfly18 > 0)
+        if (butterfly19 > 0)
         {
             count = 18;
         }
 
-        if (butterfly19 > 0)
+        if (butterfly20 > 0)
         {
             count = 19;
         }
 
-        if (butterfly20 > 0)
+        if (butterfly21 > 0)
         {
             count = 20;
         }
 
-        if (butterfly21 > 0)
+        if (butterfly22 > 0)
         {
             count = 21;
         }
 
-        if (butterfly22 > 0)
+        if (butterfly23 > 0)
         {
             count = 22;
         }
 
-        if (butterfly23 > 0)
+        if (butterfly24 > 0)
         {
             count = 23;
         }
 
-        if (butterfly24 > 0)
+        if (butterfly25 > 0)
         {
             count = 24;
         }
 
-        if (butterfly25 > 0)
+        if (butterfly26 > 0)
         {
             count = 25;
         }
 
-        if (butterfly26 > 0)
+        if (butterfly27 > 0)
         {
             count = 26;
         }
 
-        if (butterfly27 > 0)
-        {
-            count = 27;
-        }
-
         if (butterfly28 > 0)
         {
-            count = 28;
+            count = 27;
         }
 
         return count;

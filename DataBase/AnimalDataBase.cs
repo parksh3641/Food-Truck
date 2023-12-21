@@ -39,6 +39,11 @@ public class AnimalDataBase : ScriptableObject
 
     public float GetAnimalEffect(int number)
     {
+        if (animalInfoList[number] == null)
+        {
+            number = 0;
+        }
+
         return animalInfoList[number].effectNumber;
     }
 }

@@ -32,7 +32,6 @@ public class GameStateManager : MonoBehaviour
 
         [Space]
         [Title("Game Setting")]
-        public LevelType levelType = LevelType.Easy;
         public bool music = true;
         public bool sfx = true;
         public bool vibration = true;
@@ -121,11 +120,7 @@ public class GameStateManager : MonoBehaviour
 
         [Space]
         [Title("Ads")]
-        public bool removeAds = false;
-        public bool adActive = false;
-        public int adCount = 200;
         public int chestBoxCount = 0;
-        public int chestBoxCoolTime = 120;
 
         [Space]
         [Title("Bankruptcy")]
@@ -236,19 +231,6 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.islandType = value;
-            SaveFile();
-        }
-    }
-
-    public LevelType LevelType
-    {
-        get
-        {
-            return gameSettings.levelType;
-        }
-        set
-        {
-            gameSettings.levelType = value;
             SaveFile();
         }
     }
@@ -1072,44 +1054,6 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public bool RemoveAds
-    {
-        get
-        {
-            return gameSettings.removeAds;
-        }
-        set
-        {
-            gameSettings.removeAds = value;
-            SaveFile();
-        }
-    }
-
-    public bool AdActive
-    {
-        get
-        {
-            return gameSettings.adActive;
-        }
-        set
-        {
-            gameSettings.adActive = value;
-            SaveFile();
-        }
-    }
-
-    public int AdCount
-    {
-        get
-        {
-            return gameSettings.adCount;
-        }
-        set
-        {
-            gameSettings.adCount = value;
-            SaveFile();
-        }
-    }
 
     public int ChestBoxCount
     {
@@ -1120,19 +1064,6 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.chestBoxCount = value;
-            SaveFile();
-        }
-    }
-
-    public int ChestBoxCoolTime
-    {
-        get
-        {
-            return gameSettings.chestBoxCoolTime;
-        }
-        set
-        {
-            gameSettings.chestBoxCoolTime = value;
             SaveFile();
         }
     }

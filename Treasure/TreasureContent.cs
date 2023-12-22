@@ -65,8 +65,9 @@ public class TreasureContent : MonoBehaviour
 
     public void Initialize(TreasureType type, TreasureManager manager)
     {
-        if(treasureArray == null)
+        if(treasureArray[(int)type] == null)
         {
+            if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
             treasureArray = imageDataBase.GetTreasureArray();
         }
 

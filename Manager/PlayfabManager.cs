@@ -1325,6 +1325,11 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "IslandNumber":
                            playerDataBase.IslandNumber = statistics.Value;
+
+                           if((int)GameStateManager.instance.IslandType > playerDataBase.IslandNumber)
+                           {
+                               GameStateManager.instance.IslandType = IslandType.Island1 + playerDataBase.IslandNumber;
+                           }
                            break;
                        case "TestAccount":
                            playerDataBase.TestAccount = statistics.Value;

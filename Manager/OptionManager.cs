@@ -218,6 +218,8 @@ public class OptionManager : MonoBehaviour
             effectText.ReLoad();
 
             effectButtonImg.sprite = buttonImgArray[0];
+
+            GameManager.instance.SetParticle(true);
         }
         else
         {
@@ -225,6 +227,8 @@ public class OptionManager : MonoBehaviour
             effectText.ReLoad();
 
             effectButtonImg.sprite = buttonImgArray[1];
+
+            GameManager.instance.SetParticle(false);
         }
     }
 

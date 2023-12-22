@@ -90,10 +90,9 @@ public class ReincarnationManager : MonoBehaviour
         plus += playerDataBase.Skill11 * 0.5f;
         plus += playerDataBase.Treasure10 * 1;
 
-        passiveText.text = crystal.ToString();
-
         if(plus > 0)
         {
+            passiveText.text = crystal.ToString();
             passiveText.text += " (+" + plus.ToString() + "%)";
         }
 
@@ -106,7 +105,8 @@ public class ReincarnationManager : MonoBehaviour
         }
         else
         {
-            crystalText.text = "";
+            crystalText.text = "0";
+            passiveText.text = "";
         }
 
         countText.text = LocalizationManager.instance.GetString("Reincarnation_Count") + " : " + playerDataBase.ReincarnationCount;

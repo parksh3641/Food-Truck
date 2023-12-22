@@ -509,7 +509,7 @@ public class ShopManager : MonoBehaviour
             case ItemType.GoldShop3:
                 if (playerDataBase.Crystal >= 12000)
                 {
-                    PlayfabManager.instance.UpdateAddGold(10000000);
+                    PlayfabManager.instance.UpdateAddGold(100000000);
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 12000);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);

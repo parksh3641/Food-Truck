@@ -601,18 +601,26 @@ public class PlayerDataBase : ScriptableObject
     private int welcomeCount = 0;
     [SerializeField]
     private bool welcomeCheck = false;
-    [Space]
     [SerializeField]
     private string nextMonday = "";
-
     [SerializeField]
     private bool appReview = false;
+
+    [Space]
+    [Title("Purchase")]
     [SerializeField]
     private bool removeAds = false;
     [SerializeField]
     private bool goldX2 = false;
     [SerializeField]
     private bool superOffline = false;
+
+    [Space]
+    [Title("Warning")]
+    [SerializeField]
+    private int nickNameWarning = 0;
+    [SerializeField]
+    private int bugReportWarning = 0;
 
     public long Coin
     {
@@ -3782,6 +3790,30 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int NickNameWarning
+    {
+        get
+        {
+            return nickNameWarning;
+        }
+        set
+        {
+            nickNameWarning = value;
+        }
+    }
+
+    public int BugReportWarning
+    {
+        get
+        {
+            return bugReportWarning;
+        }
+        set
+        {
+            bugReportWarning = value;
+        }
+    }
+
     public void Initialize()
     {
         removeAds = false;
@@ -4072,6 +4104,9 @@ public class PlayerDataBase : ScriptableObject
         welcomeCount = 0;
         welcomeCheck = false;
         nextMonday = "";
+
+        nickNameWarning = 0;
+        bugReportWarning = 0;
     }
 
     public bool CheckCharacter(TruckType type)

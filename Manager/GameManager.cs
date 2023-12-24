@@ -1803,18 +1803,6 @@ public class GameManager : MonoBehaviour
                             hamburgerArray[nextLevel].gameObject.SetActive(true);
                             hamburgerArray[nextLevel].Initialize(GameStateManager.instance.HamburgerLevel - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (hamburgerArray.Length - 1 < nextLevel)
-                            {
-                                hamburgerArray[hamburgerArray.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                hamburgerArray[nextLevel].FeverOn();
-                            }
-                        }
                         break;
                     case FoodType.Food2:
                         if (sandwichArray.Length - 1 < nextLevel)
@@ -1826,18 +1814,6 @@ public class GameManager : MonoBehaviour
                         {
                             sandwichArray[nextLevel].gameObject.SetActive(true);
                             sandwichArray[nextLevel].Initialize(GameStateManager.instance.SandwichLevel - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (sandwichArray.Length - 1 < nextLevel)
-                            {
-                                sandwichArray[sandwichArray.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                sandwichArray[nextLevel].FeverOn();
-                            }
                         }
                         break;
                     case FoodType.Food3:
@@ -1851,18 +1827,6 @@ public class GameManager : MonoBehaviour
                             snackLabArray[nextLevel].gameObject.SetActive(true);
                             snackLabArray[nextLevel].Initialize(GameStateManager.instance.SnackLabLevel - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (snackLabArray.Length - 1 < nextLevel)
-                            {
-                                snackLabArray[snackLabArray.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                snackLabArray[nextLevel].FeverOn();
-                            }
-                        }
                         break;
                     case FoodType.Food4:
                         if (drinkArray.Length - 1 < nextLevel)
@@ -1874,18 +1838,6 @@ public class GameManager : MonoBehaviour
                         {
                             drinkArray[nextLevel].gameObject.SetActive(true);
                             drinkArray[nextLevel].Initialize(GameStateManager.instance.DrinkLevel - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (drinkArray.Length - 1 < nextLevel)
-                            {
-                                drinkArray[drinkArray.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                drinkArray[nextLevel].FeverOn();
-                            }
                         }
                         break;
                     case FoodType.Food5:
@@ -1899,19 +1851,6 @@ public class GameManager : MonoBehaviour
                             pizzaArray[nextLevel].gameObject.SetActive(true);
                             pizzaArray[nextLevel].Initialize(GameStateManager.instance.PizzaLevel - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (pizzaArray.Length - 1 < nextLevel)
-                            {
-                                pizzaArray[pizzaArray.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                pizzaArray[nextLevel].FeverOn();
-                            }
-                        }
-
                         break;
                     case FoodType.Food6:
                         if (donutArray.Length - 1 < nextLevel)
@@ -1923,18 +1862,6 @@ public class GameManager : MonoBehaviour
                         {
                             donutArray[nextLevel].gameObject.SetActive(true);
                             donutArray[nextLevel].Initialize(GameStateManager.instance.DonutLevel - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (donutArray.Length - 1 < nextLevel)
-                            {
-                                donutArray[donutArray.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                donutArray[nextLevel].FeverOn();
-                            }
                         }
                         break;
                     case FoodType.Food7:
@@ -1948,18 +1875,6 @@ public class GameManager : MonoBehaviour
                             friesArray[nextLevel].gameObject.SetActive(true);
                             friesArray[nextLevel].Initialize(GameStateManager.instance.FriesLevel - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (friesArray.Length - 1 < nextLevel)
-                            {
-                                friesArray[friesArray.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                friesArray[0].FeverOn();
-                            }
-                        }
                         break;
                     case FoodType.Ribs:
                         if (ribsArray.Length - 1 < nextLevel)
@@ -1971,18 +1886,6 @@ public class GameManager : MonoBehaviour
                         {
                             ribsArray[nextLevel].gameObject.SetActive(true);
                             ribsArray[nextLevel].Initialize(GameStateManager.instance.RibsLevel - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (ribsArray.Length - 1 < nextLevel)
-                            {
-                                ribsArray[ribsArray.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                ribsArray[0].FeverOn();
-                            }
                         }
                         break;
                 }
@@ -2001,18 +1904,6 @@ public class GameManager : MonoBehaviour
                             candy1Array[nextLevel].gameObject.SetActive(true);
                             candy1Array[nextLevel].Initialize(GameStateManager.instance.Candy1Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (candy1Array.Length - 1 < nextLevel)
-                            {
-                                candy1Array[candy1Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy1Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case CandyType.Candy2:
                         if (candy2Array.Length - 1 < nextLevel)
@@ -2024,18 +1915,6 @@ public class GameManager : MonoBehaviour
                         {
                             candy2Array[nextLevel].gameObject.SetActive(true);
                             candy2Array[nextLevel].Initialize(GameStateManager.instance.Candy2Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (candy2Array.Length - 1 < nextLevel)
-                            {
-                                candy2Array[candy2Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy2Array[0].FeverOn();
-                            }
                         }
                         break;
                     case CandyType.Candy3:
@@ -2049,18 +1928,6 @@ public class GameManager : MonoBehaviour
                             candy3Array[nextLevel].gameObject.SetActive(true);
                             candy3Array[nextLevel].Initialize(GameStateManager.instance.Candy3Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (candy3Array.Length - 1 < nextLevel)
-                            {
-                                candy3Array[candy3Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy3Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case CandyType.Candy4:
                         if (candy4Array.Length - 1 < nextLevel)
@@ -2072,18 +1939,6 @@ public class GameManager : MonoBehaviour
                         {
                             candy4Array[nextLevel].gameObject.SetActive(true);
                             candy4Array[nextLevel].Initialize(GameStateManager.instance.Candy4Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (candy4Array.Length - 1 < nextLevel)
-                            {
-                                candy4Array[candy4Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy4Array[0].FeverOn();
-                            }
                         }
                         break;
                     case CandyType.Candy5:
@@ -2097,18 +1952,6 @@ public class GameManager : MonoBehaviour
                             candy5Array[nextLevel].gameObject.SetActive(true);
                             candy5Array[nextLevel].Initialize(GameStateManager.instance.Candy5Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (candy5Array.Length - 1 < nextLevel)
-                            {
-                                candy5Array[candy5Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy5Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case CandyType.Candy6:
                         if (candy6Array.Length - 1 < nextLevel)
@@ -2120,18 +1963,6 @@ public class GameManager : MonoBehaviour
                         {
                             candy6Array[nextLevel].gameObject.SetActive(true);
                             candy6Array[nextLevel].Initialize(GameStateManager.instance.Candy6Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (candy6Array.Length - 1 < nextLevel)
-                            {
-                                candy6Array[candy6Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy6Array[0].FeverOn();
-                            }
                         }
                         break;
                     case CandyType.Candy7:
@@ -2145,18 +1976,6 @@ public class GameManager : MonoBehaviour
                             candy7Array[nextLevel].gameObject.SetActive(true);
                             candy7Array[nextLevel].Initialize(GameStateManager.instance.Candy7Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (candy7Array.Length - 1 < nextLevel)
-                            {
-                                candy7Array[candy7Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy7Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case CandyType.Candy8:
                         if (candy8Array.Length - 1 < nextLevel)
@@ -2168,18 +1987,6 @@ public class GameManager : MonoBehaviour
                         {
                             candy8Array[nextLevel].gameObject.SetActive(true);
                             candy8Array[nextLevel].Initialize(GameStateManager.instance.Candy8Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (candy8Array.Length - 1 < nextLevel)
-                            {
-                                candy8Array[candy8Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy8Array[0].FeverOn();
-                            }
                         }
                         break;
                     case CandyType.Candy9:
@@ -2193,18 +2000,6 @@ public class GameManager : MonoBehaviour
                             candy9Array[nextLevel].gameObject.SetActive(true);
                             candy9Array[nextLevel].Initialize(GameStateManager.instance.Candy9Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (candy9Array.Length - 1 < nextLevel)
-                            {
-                                candy9Array[candy9Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy9Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case CandyType.Chocolate:
                         if (candy10Array.Length - 1 < nextLevel)
@@ -2216,18 +2011,6 @@ public class GameManager : MonoBehaviour
                         {
                             candy10Array[nextLevel].gameObject.SetActive(true);
                             candy10Array[nextLevel].Initialize(GameStateManager.instance.ChocolateLevel - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (candy10Array.Length - 1 < nextLevel)
-                            {
-                                candy10Array[candy10Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                candy10Array[0].FeverOn();
-                            }
                         }
                         break;
                 }
@@ -2246,18 +2029,6 @@ public class GameManager : MonoBehaviour
                             japaneseFood1Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood1Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood1Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (japaneseFood1Array.Length - 1 < nextLevel)
-                            {
-                                japaneseFood1Array[japaneseFood1Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                japaneseFood1Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case JapaneseFoodType.JapaneseFood2:
                         if (japaneseFood2Array.Length - 1 < nextLevel)
@@ -2269,18 +2040,6 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood2Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood2Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood2Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (japaneseFood2Array.Length - 1 < nextLevel)
-                            {
-                                japaneseFood2Array[japaneseFood2Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                japaneseFood2Array[0].FeverOn();
-                            }
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood3:
@@ -2294,18 +2053,6 @@ public class GameManager : MonoBehaviour
                             japaneseFood3Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood3Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood3Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (japaneseFood3Array.Length - 1 < nextLevel)
-                            {
-                                japaneseFood3Array[japaneseFood3Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                japaneseFood3Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case JapaneseFoodType.JapaneseFood4:
                         if (japaneseFood4Array.Length - 1 < nextLevel)
@@ -2317,18 +2064,6 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood4Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood4Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood4Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (japaneseFood4Array.Length - 1 < nextLevel)
-                            {
-                                japaneseFood4Array[japaneseFood4Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                japaneseFood4Array[0].FeverOn();
-                            }
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood5:
@@ -2342,18 +2077,6 @@ public class GameManager : MonoBehaviour
                             japaneseFood5Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood5Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood5Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (japaneseFood5Array.Length - 1 < nextLevel)
-                            {
-                                japaneseFood5Array[japaneseFood5Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                japaneseFood5Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case JapaneseFoodType.JapaneseFood6:
                         if (japaneseFood6Array.Length - 1 < nextLevel)
@@ -2365,18 +2088,6 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood6Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood6Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood6Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (japaneseFood6Array.Length - 1 < nextLevel)
-                            {
-                                japaneseFood6Array[japaneseFood6Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                japaneseFood6Array[0].FeverOn();
-                            }
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood7:
@@ -2390,18 +2101,6 @@ public class GameManager : MonoBehaviour
                             japaneseFood7Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood7Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood7Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (japaneseFood7Array.Length - 1 < nextLevel)
-                            {
-                                japaneseFood7Array[japaneseFood7Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                japaneseFood7Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case JapaneseFoodType.Ramen:
                         if (japaneseFood8Array.Length - 1 < nextLevel)
@@ -2413,18 +2112,6 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood8Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood8Array[nextLevel].Initialize(GameStateManager.instance.RamenLevel - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (japaneseFood8Array.Length - 1 < nextLevel)
-                            {
-                                japaneseFood8Array[japaneseFood8Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                japaneseFood8Array[0].FeverOn();
-                            }
                         }
                         break;
                 }
@@ -2443,18 +2130,6 @@ public class GameManager : MonoBehaviour
                             dessert1Array[nextLevel].gameObject.SetActive(true);
                             dessert1Array[nextLevel].Initialize(GameStateManager.instance.Dessert1Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (dessert1Array.Length - 1 < nextLevel)
-                            {
-                                dessert1Array[dessert1Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert1Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case DessertType.Dessert2:
                         if (dessert2Array.Length - 1 < nextLevel)
@@ -2466,18 +2141,6 @@ public class GameManager : MonoBehaviour
                         {
                             dessert2Array[nextLevel].gameObject.SetActive(true);
                             dessert2Array[nextLevel].Initialize(GameStateManager.instance.Dessert2Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (dessert2Array.Length - 1 < nextLevel)
-                            {
-                                dessert2Array[dessert2Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert2Array[0].FeverOn();
-                            }
                         }
                         break;
                     case DessertType.Dessert3:
@@ -2491,18 +2154,6 @@ public class GameManager : MonoBehaviour
                             dessert3Array[nextLevel].gameObject.SetActive(true);
                             dessert3Array[nextLevel].Initialize(GameStateManager.instance.Dessert3Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (dessert3Array.Length - 1 < nextLevel)
-                            {
-                                dessert3Array[dessert3Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert3Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case DessertType.Dessert4:
                         if (dessert4Array.Length - 1 < nextLevel)
@@ -2514,18 +2165,6 @@ public class GameManager : MonoBehaviour
                         {
                             dessert4Array[nextLevel].gameObject.SetActive(true);
                             dessert4Array[nextLevel].Initialize(GameStateManager.instance.Dessert4Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (dessert4Array.Length - 1 < nextLevel)
-                            {
-                                dessert4Array[dessert4Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert4Array[0].FeverOn();
-                            }
                         }
                         break;
                     case DessertType.Dessert5:
@@ -2539,18 +2178,6 @@ public class GameManager : MonoBehaviour
                             dessert5Array[nextLevel].gameObject.SetActive(true);
                             dessert5Array[nextLevel].Initialize(GameStateManager.instance.Dessert5Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (dessert5Array.Length - 1 < nextLevel)
-                            {
-                                dessert5Array[dessert5Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert5Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case DessertType.Dessert6:
                         if (dessert6Array.Length - 1 < nextLevel)
@@ -2562,18 +2189,6 @@ public class GameManager : MonoBehaviour
                         {
                             dessert6Array[nextLevel].gameObject.SetActive(true);
                             dessert6Array[nextLevel].Initialize(GameStateManager.instance.Dessert6Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (dessert6Array.Length - 1 < nextLevel)
-                            {
-                                dessert6Array[dessert6Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert6Array[0].FeverOn();
-                            }
                         }
                         break;
                     case DessertType.Dessert7:
@@ -2587,18 +2202,6 @@ public class GameManager : MonoBehaviour
                             dessert7Array[nextLevel].gameObject.SetActive(true);
                             dessert7Array[nextLevel].Initialize(GameStateManager.instance.Dessert7Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (dessert7Array.Length - 1 < nextLevel)
-                            {
-                                dessert7Array[dessert7Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert7Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case DessertType.Dessert8:
                         if (dessert8Array.Length - 1 < nextLevel)
@@ -2610,18 +2213,6 @@ public class GameManager : MonoBehaviour
                         {
                             dessert8Array[nextLevel].gameObject.SetActive(true);
                             dessert8Array[nextLevel].Initialize(GameStateManager.instance.Dessert8Level - (5 * nextLevel));
-                        }
-
-                        if (feverMode)
-                        {
-                            if (dessert8Array.Length - 1 < nextLevel)
-                            {
-                                dessert8Array[dessert8Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert8Array[0].FeverOn();
-                            }
                         }
                         break;
                     case DessertType.Dessert9:
@@ -2635,18 +2226,6 @@ public class GameManager : MonoBehaviour
                             dessert9Array[nextLevel].gameObject.SetActive(true);
                             dessert9Array[nextLevel].Initialize(GameStateManager.instance.Dessert9Level - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (dessert9Array.Length - 1 < nextLevel)
-                            {
-                                dessert9Array[dessert9Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert9Array[0].FeverOn();
-                            }
-                        }
                         break;
                     case DessertType.FruitSkewers:
                         if (dessert10Array.Length - 1 < nextLevel)
@@ -2659,21 +2238,20 @@ public class GameManager : MonoBehaviour
                             dessert10Array[nextLevel].gameObject.SetActive(true);
                             dessert10Array[nextLevel].Initialize(GameStateManager.instance.FruitSkewersLevel - (5 * nextLevel));
                         }
-
-                        if (feverMode)
-                        {
-                            if (dessert10Array.Length - 1 < nextLevel)
-                            {
-                                dessert10Array[dessert10Array.Length - 1].FeverOn();
-                            }
-                            else
-                            {
-                                dessert10Array[0].FeverOn();
-                            }
-                        }
                         break;
                 }
                 break;
+        }
+
+        if (feverMode)
+        {
+            for (int i = 0; i < foodArrayList.Count; i++)
+            {
+                if (foodArrayList[i].gameObject.activeInHierarchy)
+                {
+                    foodArrayList[i].FeverOn();
+                }
+            }
         }
     }
 

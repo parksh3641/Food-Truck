@@ -16,8 +16,8 @@ public class NickNameManager : MonoBehaviour
     public GameObject buyCoinButton;
     public Text coinPriceText;
 
-    private int price = 100000;
-    private int maxPrice = 1000000;
+    private int price = 200000;
+    private int maxPrice = 2000000;
     private int nowPrice = 0;
 
     public InputField inputField;

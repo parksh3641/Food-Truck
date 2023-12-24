@@ -23,6 +23,7 @@ public class StateManager : MonoBehaviour
     public RankEventManager rankEventManager;
     public PlayTimeManager playTimeManager;
     public TreasureManager treasureManager;
+    public WarningManager warningManager;
 
     private void Awake()
     {
@@ -68,6 +69,7 @@ public class StateManager : MonoBehaviour
         playTimeManager.Initialize();
         treasureManager.Initialize();
         gourmetManager.FirstInitialize();
+        warningManager.Initialize();
 
         Debug.LogError("Load Complete!");
     }

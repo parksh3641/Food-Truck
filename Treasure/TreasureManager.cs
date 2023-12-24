@@ -203,40 +203,40 @@ public class TreasureManager : MonoBehaviour
             switch (index)
             {
                 case 0:
-                    receiveContents[i].Initialize(RewardType.Treasure1, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure1, 0);
                     break;
                 case 1:
-                    receiveContents[i].Initialize(RewardType.Treasure2, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure2, 0);
                     break;
                 case 2:
-                    receiveContents[i].Initialize(RewardType.Treasure3, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure3, 0);
                     break;
                 case 3:
-                    receiveContents[i].Initialize(RewardType.Treasure4, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure4, 0);
                     break;
                 case 4:
-                    receiveContents[i].Initialize(RewardType.Treasure5, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure5, 0);
                     break;
                 case 5:
-                    receiveContents[i].Initialize(RewardType.Treasure6, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure6, 0);
                     break;
                 case 6:
-                    receiveContents[i].Initialize(RewardType.Treasure7, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure7, 0);
                     break;
                 case 7:
-                    receiveContents[i].Initialize(RewardType.Treasure8, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure8, 0);
                     break;
                 case 8:
-                    receiveContents[i].Initialize(RewardType.Treasure9, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure9, 0);
                     break;
                 case 9:
-                    receiveContents[i].Initialize(RewardType.Treasure10, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure10, 0);
                     break;
                 case 10:
-                    receiveContents[i].Initialize(RewardType.Treasure11, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure11, 0);
                     break;
                 case 11:
-                    receiveContents[i].Initialize(RewardType.Treasure12, 1);
+                    receiveContents[i].Initialize(RewardType.Treasure12, 0);
                     break;
             }
 

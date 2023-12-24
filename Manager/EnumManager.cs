@@ -329,6 +329,8 @@ public enum RewardType
     Treasure10,
     Treasure11,
     Treasure12,
+    Gold2,
+    Gold3
 }
 
 public enum QuestType

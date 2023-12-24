@@ -15,6 +15,7 @@ public class QuestManager : MonoBehaviour
     public Text questInfoText;
     public LocalizationContent questClearTitleText;
     public Text questClearValueText;
+    public Text questClearValue2Text;
 
     public GameObject lockedObj;
     public GameObject lockedAdObj;
@@ -23,6 +24,7 @@ public class QuestManager : MonoBehaviour
 
     private int value = 0;
     private int reward = 0;
+    private int reward2 = 0;
 
     private bool isDelay = false;
 
@@ -78,10 +80,14 @@ public class QuestManager : MonoBehaviour
             reward = questDataBase.reward * 2;
 
             plus += 100;
+
+            reward2 = 2;
         }
         else
         {
             reward = questDataBase.reward;
+
+            reward2 = 1;
         }
 
         if((playerDataBase.QuestCount / 5) > 10)
@@ -102,6 +108,8 @@ public class QuestManager : MonoBehaviour
         {
             questClearTitleText.plusText = "  (+" + plus.ToString() + "%)";
         }
+
+        questClearValue2Text.text = reward2.ToString();
         questClearTitleText.ReLoad();
         questClearValueText.text = MoneyUnitString.ToCurrencyString(reward);
 
@@ -205,6 +213,8 @@ public class QuestManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);
 
         PlayfabManager.instance.UpdateAddGold(reward);
+
+        PortionManager.instance.GetRandomPortion(reward2);
 
         NotionManager.instance.UseNotion(NotionType.QuestNotion);
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);

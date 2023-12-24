@@ -61,6 +61,11 @@ public class IslandManager : MonoBehaviour
         {
             changeIslandView.SetActive(true);
 
+            if ((int)GameStateManager.instance.IslandType > playerDataBase.IslandNumber)
+            {
+                playerDataBase.IslandNumber = (int)GameStateManager.instance.IslandType;
+            }
+
             Initialize();
 
             FirebaseAnalytics.LogEvent("OpenIsland");

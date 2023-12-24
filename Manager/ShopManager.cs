@@ -68,7 +68,6 @@ public class ShopManager : MonoBehaviour
     public GameObject[] mainFlowerArray;
     public GameObject[] shopFlowerArray;
 
-
     public GameObject buyButton;
     public GameObject buySpeical;
     public GameObject selectObj;
@@ -88,6 +87,14 @@ public class ShopManager : MonoBehaviour
     public GameObject yummyButton;
 
     public Text dailyShopCountText;
+
+    [Space]
+    [Title("ChangeMoney")]
+    public GameObject changeMoneyView;
+    public ReceiveContent changeMoneyReceiveContent;
+    public Text changeMoneyText;
+
+    private int changeMoneyIndex = 0;
 
     string localization_Reset = "";
     string localization_Days = "";
@@ -144,6 +151,7 @@ public class ShopManager : MonoBehaviour
 
         shopView.SetActive(false);
         speicalShopView.SetActive(false);
+        changeMoneyView.SetActive(false);
 
         alarm.SetActive(true);
         dailyAlarm.SetActive(false);
@@ -477,49 +485,25 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.GoldShop1:
-                if (playerDataBase.Crystal >= 120)
-                {
-                    PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 120);
+                changeMoneyIndex = 0;
+                OpenChangeMoneyView();
+                changeMoneyReceiveContent.Initialize(RewardType.Gold, 1000000);
+                changeMoneyText.text = MoneyUnitString.ToCurrencyString(120);
 
-                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
-                }
-                else
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
-                }
                 break;
             case ItemType.GoldShop2:
-                if (playerDataBase.Crystal >= 1200)
-                {
-                    PlayfabManager.instance.UpdateAddGold(10000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1200);
+                changeMoneyIndex = 1;
+                OpenChangeMoneyView();
+                changeMoneyReceiveContent.Initialize(RewardType.Gold2, 10000000);
+                changeMoneyText.text = MoneyUnitString.ToCurrencyString(1200);
 
-                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
-                }
-                else
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
-                }
                 break;
             case ItemType.GoldShop3:
-                if (playerDataBase.Crystal >= 12000)
-                {
-                    PlayfabManager.instance.UpdateAddGold(100000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 12000);
+                changeMoneyIndex = 2;
+                OpenChangeMoneyView();
+                changeMoneyReceiveContent.Initialize(RewardType.Gold3, 100000000);
+                changeMoneyText.text = MoneyUnitString.ToCurrencyString(12000);
 
-                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
-                }
-                else
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
-                }
                 break;
             case ItemType.AdReward_Portion:
                 GoogleAdsManager.instance.admobReward_Portion.ShowAd(1);
@@ -717,6 +701,76 @@ public class ShopManager : MonoBehaviour
     void Delay()
     {
         isDelay = false;
+    }
+
+    public void BuyCoin()
+    {
+        switch(changeMoneyIndex)
+        {
+            case 0:
+                if (playerDataBase.Crystal >= 120)
+                {
+                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 120);
+
+                    OpenChangeMoneyView();
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                    NotionManager.instance.UseNotion(NotionType.SuccessSell);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                }
+                break;
+            case 1:
+                if (playerDataBase.Crystal >= 1200)
+                {
+                    PlayfabManager.instance.UpdateAddGold(10000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1200);
+
+                    OpenChangeMoneyView();
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                    NotionManager.instance.UseNotion(NotionType.SuccessSell);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                }
+                break;
+            case 2:
+                if (playerDataBase.Crystal >= 12000)
+                {
+                    PlayfabManager.instance.UpdateAddGold(100000000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 12000);
+
+                    OpenChangeMoneyView();
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                    NotionManager.instance.UseNotion(NotionType.SuccessSell);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                }
+                break;
+        }
+    }
+
+    public void OpenChangeMoneyView()
+    {
+        if(!changeMoneyView.activeInHierarchy)
+        {
+            changeMoneyView.SetActive(true);
+        }
+        else
+        {
+            changeMoneyView.SetActive(false);
+        }
     }
 
     public void SuccessWatchAd()
@@ -3188,22 +3242,22 @@ public class ShopManager : MonoBehaviour
                 Invoke("ContentDelay2", 0.5f);
                 break;
             case 8:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 600);
                 break;
             case 9:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1650);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3300);
                 break;
             case 10:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3600);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 7200);
                 break;
             case 11:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 7800);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 15600);
                 break;
             case 12:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 23100);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 46200);
                 break;
             case 13:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 45000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 90000);
                 break;
             case 14:
                 PortionManager.instance.GetBuffTickets(10);
@@ -3256,8 +3310,8 @@ public class ShopManager : MonoBehaviour
                 playerDataBase.Package1 = true;
                 Invoke("PackageDelay", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(1000000);
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200);
+                PlayfabManager.instance.UpdateAddGold(2000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 400);
 
                 yield return waitForSeconds;
 
@@ -3272,8 +3326,8 @@ public class ShopManager : MonoBehaviour
                 playerDataBase.Package2 = true;
                 Invoke("PackageDelay2", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(5000000);
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 4500);
+                PlayfabManager.instance.UpdateAddGold(10000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 9000);
 
                 yield return waitForSeconds;
 
@@ -3288,8 +3342,8 @@ public class ShopManager : MonoBehaviour
                 playerDataBase.Package3 = true;
                 Invoke("PackageDelay3", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(1000000);
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 8000);
+                PlayfabManager.instance.UpdateAddGold(20000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 16000);
 
                 yield return waitForSeconds;
 
@@ -3304,8 +3358,8 @@ public class ShopManager : MonoBehaviour
                 playerDataBase.Package4 = true;
                 Invoke("PackageDelay4", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(30000000);
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 18000);
+                PlayfabManager.instance.UpdateAddGold(60000000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 36000);
 
                 yield return waitForSeconds;
 

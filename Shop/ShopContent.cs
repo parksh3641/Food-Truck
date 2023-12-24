@@ -215,7 +215,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[8].localizationName = itemType + "_Price";
                 buyRmText[8].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(300);
+                rewardText.text = MoneyUnitString.ToCurrencyString(600);
 
                 break;
             case ItemType.CrystalShop2:
@@ -225,7 +225,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[9].localizationName = itemType + "_Price";
                 buyRmText[9].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(1650);
+                rewardText.text = MoneyUnitString.ToCurrencyString(3300);
 
                 bestObj.SetActive(true);
                 bestText.text = "+10%";
@@ -238,7 +238,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[10].localizationName = itemType + "_Price";
                 buyRmText[10].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(3600);
+                rewardText.text = MoneyUnitString.ToCurrencyString(7200);
 
                 bestObj.SetActive(true);
                 bestText.text = "+20%";
@@ -250,7 +250,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[11].localizationName = itemType + "_Price";
                 buyRmText[11].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(7800);
+                rewardText.text = MoneyUnitString.ToCurrencyString(15600);
 
                 bestObj.SetActive(true);
                 bestText.text = "+30%";
@@ -262,7 +262,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[12].localizationName = itemType + "_Price";
                 buyRmText[12].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(23100);
+                rewardText.text = MoneyUnitString.ToCurrencyString(46200);
 
                 bestObj.SetActive(true);
                 bestText.text = "+40%";
@@ -274,7 +274,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[13].localizationName = itemType + "_Price";
                 buyRmText[13].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(45000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(90000);
 
                 bestObj.SetActive(true);
                 bestText.text = "+50%";

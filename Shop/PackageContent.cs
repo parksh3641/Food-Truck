@@ -41,26 +41,26 @@ public class PackageContent : MonoBehaviour
         switch (type)
         {
             case PackageType.Package1:
-                receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                receiveContents[1].Initialize(RewardType.Crystal, 200);
+                receiveContents[0].Initialize(RewardType.Gold, 2000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 400);
                 receiveContents[2].Initialize(RewardType.PortionSet, 5);
                 receiveContents[3].Initialize(RewardType.BuffTickets, 10);
                 break;
             case PackageType.Package2:
-                receiveContents[0].Initialize(RewardType.Gold, 5000000);
-                receiveContents[1].Initialize(RewardType.Crystal, 4500);
+                receiveContents[0].Initialize(RewardType.Gold, 10000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 9000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 40);
                 receiveContents[3].Initialize(RewardType.BuffTickets, 50);
                 break;
             case PackageType.Package3:
-                receiveContents[0].Initialize(RewardType.Gold, 10000000);
-                receiveContents[1].Initialize(RewardType.Crystal, 8000);
+                receiveContents[0].Initialize(RewardType.Gold, 20000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 16000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 150);
                 receiveContents[3].Initialize(RewardType.BuffTickets, 100);
                 break;
             case PackageType.Package4:
-                receiveContents[0].Initialize(RewardType.Gold, 30000000);
-                receiveContents[1].Initialize(RewardType.Crystal, 18000);
+                receiveContents[0].Initialize(RewardType.Gold, 60000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 36000);
                 receiveContents[2].Initialize(RewardType.BuffTickets, 100);
                 receiveContents[3].Initialize(RewardType.DefDestroyTicket, 100);
                 break;

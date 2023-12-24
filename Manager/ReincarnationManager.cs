@@ -90,24 +90,30 @@ public class ReincarnationManager : MonoBehaviour
         plus += playerDataBase.Skill11 * 0.5f;
         plus += playerDataBase.Treasure10 * 1;
 
-        if(plus > 0)
+        //if(crystal > 0)
+        //{
+        //    crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
+        //}
+        //else
+        //{
+        //    crystalText.text = "0";
+        //    passiveText.text = "";
+        //}
+
+        if (plus > 0)
         {
-            passiveText.text = crystal.ToString();
+            passiveText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
             passiveText.text += " (+" + plus.ToString() + "%)";
+        }
+        else
+        {
+            passiveText.text = "";
         }
 
         crystal = crystal + (crystal * (0.005f * playerDataBase.Skill11));
         crystal = crystal + (crystal * (0.01f * playerDataBase.Treasure10));
 
-        if(crystal > 0)
-        {
-            crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
-        }
-        else
-        {
-            crystalText.text = "0";
-            passiveText.text = "";
-        }
+        crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
 
         countText.text = LocalizationManager.instance.GetString("Reincarnation_Count") + " : " + playerDataBase.ReincarnationCount;
 

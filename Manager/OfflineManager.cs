@@ -104,7 +104,7 @@ public class OfflineManager : MonoBehaviour
 
             CheckCastle();
 
-            FirebaseAnalytics.LogEvent("OpenDelivery");
+            FirebaseAnalytics.LogEvent("OpenOffline");
         }
         else
         {
@@ -163,7 +163,7 @@ public class OfflineManager : MonoBehaviour
 
         castleLevelText.text = LocalizationManager.instance.GetString("CastleLevel") + " : " + (playerDataBase.CastleLevel + 1) + " / " + (playerDataBase.Level + 1);
 
-        addCrystal = (playerDataBase.CastleLevel + 1) * 10;
+        addCrystal = (playerDataBase.CastleLevel + 1) * 5;
         addCoin = 10000 + playerDataBase.CastleLevel * 500;
         addExp = 200 + playerDataBase.CastleLevel * 20;
 

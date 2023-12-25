@@ -76,15 +76,12 @@ public class GourmetManager : MonoBehaviour
 
         Debug.LogError(value);
 
-#if !UNITY_EDITOR
         if (value != playerDataBase.GourmetLevel)
         {
             playerDataBase.GourmetLevel = value;
 
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("GourmetLevel", playerDataBase.GourmetLevel);
         }
-
-#endif
 
         levelText.localizationName = "GourmetScore";
         levelText.plusText = " : " + MoneyUnitString.ToCurrencyString(value);

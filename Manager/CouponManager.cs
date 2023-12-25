@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
@@ -40,6 +41,7 @@ public class CouponManager : MonoBehaviour
 
             inputFieldText.text = "";
 
+            FirebaseAnalytics.LogEvent("OpenCoupon");
         }
         else
         {
@@ -107,6 +109,8 @@ public class CouponManager : MonoBehaviour
                     receiveContents[3].Initialize(RewardType.Portion2, 5);
                     receiveContents[4].Initialize(RewardType.Portion3, 5);
                     receiveContents[5].Initialize(RewardType.Portion4, 5);
+
+                    FirebaseAnalytics.LogEvent("Coupon_Open");
 
                     SoundManager.instance.PlaySFX(GameSfxType.Success);
                     NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -529,6 +533,8 @@ public class CouponManager : MonoBehaviour
         receiveContents[3].Initialize(RewardType.Portion3, 5);
         receiveContents[4].Initialize(RewardType.Portion4, 5);
 
+        FirebaseAnalytics.LogEvent("Coupon_Reward");
+
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
     }
@@ -544,6 +550,8 @@ public class CouponManager : MonoBehaviour
 
         receiveContents[0].Initialize(RewardType.Gold, 1000000);
         receiveContents[1].Initialize(RewardType.Crystal, 100);
+
+        FirebaseAnalytics.LogEvent("Coupon_Speical");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

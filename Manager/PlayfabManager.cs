@@ -2492,7 +2492,7 @@ public class PlayfabManager : MonoBehaviour
 
         playerDataBase.RemoveAds = true;
 
-        //GoogleAdsManager.instance.admobBanner.DestroyAd();
+        UpdatePlayerStatisticsInsert("RemoveAds", 1);
 
         NotionManager.instance.UseNotion(NotionType.SuccessRemoveAds);
     }
@@ -2504,6 +2504,8 @@ public class PlayfabManager : MonoBehaviour
 
         GrantItemToUser("Shop", itemList);
 
+        UpdatePlayerStatisticsInsert("GoldX2", 1);
+
         playerDataBase.GoldX2 = true;
     }
 
@@ -2513,6 +2515,8 @@ public class PlayfabManager : MonoBehaviour
         itemList.Add("SuperOffline");
 
         GrantItemToUser("Shop", itemList);
+
+        UpdatePlayerStatisticsInsert("SuperOffline", 1);
 
         playerDataBase.CastleServerDate = DateTime.Now.AddDays(1).ToString("MMddHHmm");
         UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));

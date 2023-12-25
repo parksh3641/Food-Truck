@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Firebase.Analytics;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -82,6 +83,8 @@ public class NickNameManager : MonoBehaviour
             }
 
             coinPriceText.text = MoneyUnitString.ToCurrencyString(nowPrice);
+
+            FirebaseAnalytics.LogEvent("OpenNickName");
         }
         else
         {

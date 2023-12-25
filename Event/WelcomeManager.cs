@@ -83,7 +83,7 @@ public class WelcomeManager : MonoBehaviour
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("Welcome");
+            FirebaseAnalytics.LogEvent("OpenWelcome");
         }
         else
         {
@@ -130,6 +130,8 @@ public class WelcomeManager : MonoBehaviour
         CheckWelcome();
 
         OffAlarm();
+
+        FirebaseAnalytics.LogEvent("WelcomeClear");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

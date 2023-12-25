@@ -56,7 +56,7 @@ public class PlayTimeManager : MonoBehaviour
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("PlayTime");
+            FirebaseAnalytics.LogEvent("OpenPlayTime");
         }
         else
         {
@@ -119,7 +119,9 @@ public class PlayTimeManager : MonoBehaviour
 
         CheckPlayTime();
 
-        if(playerDataBase.PlayTimeCount > 3)
+        FirebaseAnalytics.LogEvent("PlayTimeClear");
+
+        if (playerDataBase.PlayTimeCount > 3)
         {
             OffAlarm();
         }

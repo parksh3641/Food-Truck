@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,6 @@ public class ReincarnationManager : MonoBehaviour
 {
     public GameObject reincarnationView;
 
-    public GameObject lockedObj;
-
     public GameObject alarm;
 
     public Text crystalText;
@@ -16,7 +15,9 @@ public class ReincarnationManager : MonoBehaviour
     public Text passiveText;
     public Text adText;
 
-    public GameObject buttonLockedObj;
+    public GameObject lockedObj;
+    public GameObject lockedAdObj;
+    public ButtonScaleAnimation buttonScaleAnim;
 
 
     private float crystal = 0;
@@ -44,13 +45,15 @@ public class ReincarnationManager : MonoBehaviour
 
     public void OpenReincarnationView()
     {
-        if(!reincarnationView.activeInHierarchy && !lockedObj.activeInHierarchy)
+        if(!reincarnationView.activeInHierarchy)
         {
             reincarnationView.SetActive(true);
 
             Initialize();
 
             alarm.SetActive(false);
+
+            FirebaseAnalytics.LogEvent("OpenChallenge");
         }
         else
         {
@@ -62,11 +65,12 @@ public class ReincarnationManager : MonoBehaviour
     {
         crystal = 0;
 
-        buttonLockedObj.SetActive(true);
+        lockedObj.SetActive(true);
+        lockedAdObj.SetActive(true);
 
         if (playerDataBase.IslandNumber > 0)
         {
-            crystal += 10;
+            crystal += 20;
 
             if (playerDataBase.NextFoodNumber2 > 7)
             {
@@ -75,15 +79,20 @@ public class ReincarnationManager : MonoBehaviour
 
             if (playerDataBase.NextFoodNumber3 > 5)
             {
-                crystal += 50;
+                crystal += 60;
             }
 
             if (playerDataBase.NextFoodNumber4 > 7)
             {
-                crystal += 60;
+                crystal += 70;
             }
 
-            buttonLockedObj.SetActive(false);
+            lockedObj.SetActive(false);
+            lockedAdObj.SetActive(false);
+        }
+        else
+        {
+            buttonScaleAnim.StopAnim();
         }
 
         plus = 0;
@@ -100,7 +109,7 @@ public class ReincarnationManager : MonoBehaviour
         //    passiveText.text = "";
         //}
 
-        if (plus > 0)
+        if (crystal > 0 && plus > 0)
         {
             passiveText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
             passiveText.text += " (+" + plus.ToString() + "%)";
@@ -149,6 +158,8 @@ public class ReincarnationManager : MonoBehaviour
 
     IEnumerator ReincarnationCoroution()
     {
+        FirebaseAnalytics.LogEvent("ChallengeClear");
+
         fadeInOut.FadeOut();
 
         yield return waitForSeconds;

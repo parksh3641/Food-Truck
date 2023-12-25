@@ -11,9 +11,9 @@ public class LocalizationManager : MonoBehaviour
 {
     public static LocalizationManager instance;
 
-    public Image country;
+    //public Image country;
 
-    public Sprite[] countryArray;
+    //public Sprite[] countryArray;
 
     public Font koreanFont;
     public Font normalFont;
@@ -142,7 +142,7 @@ public class LocalizationManager : MonoBehaviour
 
         //if (GameManager.instance != null) GameManager.instance.Initialize();
 
-        if (country != null) country.sprite = countryArray[(int)GameStateManager.instance.Language - 1];
+        //if (country != null) country.sprite = countryArray[(int)GameStateManager.instance.Language - 1];
     }
 
 
@@ -317,7 +317,7 @@ public class LocalizationManager : MonoBehaviour
                 break;
         }
 
-        if (country != null) country.sprite = countryArray[(int)GameStateManager.instance.Language - 1];
+        //if (country != null) country.sprite = countryArray[(int)GameStateManager.instance.Language - 1];
     }
 
     public void ChangeKorean()
@@ -420,6 +420,7 @@ public class LocalizationManager : MonoBehaviour
 
         if (optionManager.optionView.activeInHierarchy)
         {
+            optionManager.ChangeLanguage();
             SoundManager.instance.PlaySFX(GameSfxType.Success);
             NotionManager.instance.UseNotion(NotionType.SuccessLanguage);
         }

@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
 
             GameStateManager.instance.Pause = true;
 
-            FirebaseAnalytics.LogEvent("OpenLevel");
+            FirebaseAnalytics.LogEvent("OpenProfile");
         }
         else
         {

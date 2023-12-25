@@ -338,7 +338,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal * (level + 1) + 10;
+                        value = priceCrystal * (level + 1) + 9;
 
                         if (value >= maxCrystal)
                         {

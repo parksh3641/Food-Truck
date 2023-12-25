@@ -3814,6 +3814,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        FirebaseAnalytics.LogEvent("MaxLevel");
+
         //questManager.CheckGoal();
         changeFoodManager.CheckProficiency();
         UpgradeInitialize();

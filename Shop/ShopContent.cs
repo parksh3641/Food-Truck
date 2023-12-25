@@ -423,7 +423,7 @@ public class ShopContent : MonoBehaviour
                 infoText.ReLoad();
                 break;
             case ItemType.AdReward_Crystal:
-                rewardText.text = "30";
+                rewardText.text = "60";
                 break;
         }
 

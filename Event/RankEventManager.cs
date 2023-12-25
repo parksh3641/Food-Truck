@@ -58,7 +58,7 @@ public class RankEventManager : MonoBehaviour
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("RankEvent");
+            FirebaseAnalytics.LogEvent("OpenRankEvent");
         }
         else
         {
@@ -102,6 +102,8 @@ public class RankEventManager : MonoBehaviour
         CheckRankEvent();
 
         OffAlarm();
+
+        FirebaseAnalytics.LogEvent("RankEventClear");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

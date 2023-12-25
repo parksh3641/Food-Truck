@@ -109,12 +109,25 @@ public class RankingManager : MonoBehaviour
             rankingRewardView.SetActive(true);
 
             receiveContents[0].Initialize(RewardType.Crystal, 10000);
-            receiveContents[1].Initialize(RewardType.Crystal, 8000);
-            receiveContents[2].Initialize(RewardType.Crystal, 6000);
-            receiveContents[3].Initialize(RewardType.Crystal, 4000);
-            receiveContents[4].Initialize(RewardType.Crystal, 2000);
-            receiveContents[5].Initialize(RewardType.Crystal, 1000);
-            receiveContents[6].Initialize(RewardType.Crystal, 300);
+            receiveContents[1].Initialize(RewardType.RankPoint, 500);
+
+            receiveContents[2].Initialize(RewardType.Crystal, 8000);
+            receiveContents[3].Initialize(RewardType.RankPoint, 400);
+
+            receiveContents[4].Initialize(RewardType.Crystal, 6000);
+            receiveContents[5].Initialize(RewardType.RankPoint, 300);
+
+            receiveContents[6].Initialize(RewardType.Crystal, 4000);
+            receiveContents[7].Initialize(RewardType.RankPoint, 200);
+
+            receiveContents[8].Initialize(RewardType.Crystal, 2000);
+            receiveContents[9].Initialize(RewardType.RankPoint, 100);
+
+            receiveContents[10].Initialize(RewardType.Crystal, 1000);
+            receiveContents[11].Initialize(RewardType.RankPoint, 50);
+
+            receiveContents[12].Initialize(RewardType.Crystal, 300);
+            receiveContents[13].Initialize(RewardType.RankPoint, 10);
 
             FirebaseAnalytics.LogEvent("OpenRankingReward");
         }
@@ -145,16 +158,22 @@ public class RankingManager : MonoBehaviour
                 ChangeRankingView(RankingType.UpgradeCount);
 
                 infoText.localizationName = "Ranking1_Info";
+
+                FirebaseAnalytics.LogEvent("OpenRanking1");
                 break;
             case 1:
                 ChangeRankingView(RankingType.TotalLevel);
 
                 infoText.localizationName = "Ranking2_Info";
+
+                FirebaseAnalytics.LogEvent("OpenRanking2");
                 break;
             case 2:
                 ChangeRankingView(RankingType.GourmetLevel);
 
                 infoText.localizationName = "Ranking3_Info";
+
+                FirebaseAnalytics.LogEvent("OpenRanking3");
                 break;
         }
 

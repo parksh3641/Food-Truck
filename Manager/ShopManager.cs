@@ -233,16 +233,20 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShopCoinView()
     {
+        shopView.SetActive(false);
+
         OpenShopView();
 
         if (shopView.activeInHierarchy)
         {
-            ChangeTopToggle(0);
+            ChangeTopToggle(3);
         }
     }
 
     public void OpenShopCrystalView()
     {
+        shopView.SetActive(false);
+
         OpenShopView();
 
         if (shopView.activeInHierarchy)
@@ -815,7 +819,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[33].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 30);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 60);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
@@ -3220,6 +3224,9 @@ public class ShopManager : MonoBehaviour
 
     public void BuyPurchase(int number)
     {
+        SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+        NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+
         switch (number)
         {
             case 3:
@@ -3289,9 +3296,6 @@ public class ShopManager : MonoBehaviour
         //shopContents[21].Initialize(ItemType.Portion3, BuyType.Crystal, this);
         //shopContents[22].Initialize(ItemType.Portion4, BuyType.Crystal, this);
         //shopContents[23].Initialize(ItemType.Portion5, BuyType.Crystal, this);
-
-        SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-        NotionManager.instance.UseNotion(NotionType.SuccessBuy);
 
         GameManager.instance.CheckPortion();
         GameManager.instance.CheckDefTicket();

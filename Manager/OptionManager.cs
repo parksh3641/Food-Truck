@@ -12,6 +12,8 @@ public class OptionManager : MonoBehaviour
 
     public Sprite[] buttonImgArray;
 
+    public GameObject[] checkMarkArray;
+
     [Title("Music")]
     public Image musicButtonImg;
     public LocalizationContent musicText;
@@ -89,11 +91,28 @@ public class OptionManager : MonoBehaviour
         if(!languageView.activeInHierarchy)
         {
             languageView.SetActive(true);
+
+            for(int i = 0; i < checkMarkArray.Length; i ++)
+            {
+                checkMarkArray[i].SetActive(false);
+            }
+
+            checkMarkArray[(int)GameStateManager.instance.Language - 1].SetActive(true);
         }
         else
         {
             languageView.SetActive(false);
         }
+    }
+
+    public void ChangeLanguage()
+    {
+        for (int i = 0; i < checkMarkArray.Length; i++)
+        {
+            checkMarkArray[i].SetActive(false);
+        }
+
+        checkMarkArray[(int)GameStateManager.instance.Language - 1].SetActive(true);
     }
 
     public void MusicOnOff()

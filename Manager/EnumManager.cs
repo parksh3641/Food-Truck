@@ -330,7 +330,8 @@ public enum RewardType
     Treasure11,
     Treasure12,
     Gold2,
-    Gold3
+    Gold3,
+    RankPoint
 }
 
 public enum QuestType

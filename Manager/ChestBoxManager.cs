@@ -52,11 +52,10 @@ public class ChestBoxManager : MonoBehaviour
 #if UNITY_EDITOR
         goalCount = 1;
 #endif
-
         count = 0;
         StartCoroutine(TimerCoroution());
 
-        FirebaseAnalytics.LogEvent("ChestBox");
+        FirebaseAnalytics.LogEvent("OpenChestBox");
     }
 
     IEnumerator TimerCoroution()
@@ -107,9 +106,10 @@ public class ChestBoxManager : MonoBehaviour
 
         chestBoxView.SetActive(true);
 
-        chestBoxArray[0].SetActive(false);
-        chestBoxArray[1].SetActive(false);
-        chestBoxArray[2].SetActive(false);
+        for(int i = 0; i < chestBoxArray.Length; i ++)
+        {
+            chestBoxArray[i].SetActive(false);
+        }
 
         random = Random.Range(0, 100);
 
@@ -119,17 +119,23 @@ public class ChestBoxManager : MonoBehaviour
 
             chestBoxArray[0].SetActive(true);
         }
-        else if (random > 11)
+        else if (random > 16)
         {
             rewardType = RewardType.PortionSet;
 
             chestBoxArray[1].SetActive(true);
         }
+        else if (random > 11)
+        {
+            rewardType = RewardType.DefDestroyTicketPiece;
+
+            chestBoxArray[2].SetActive(true);
+        }
         else
         {
             rewardType = RewardType.Crystal;
 
-            chestBoxArray[2].SetActive(true);
+            chestBoxArray[3].SetActive(true);
         }
     }
 
@@ -163,10 +169,12 @@ public class ChestBoxManager : MonoBehaviour
         {
             case RewardType.Gold:
                 PlayfabManager.instance.UpdateAddGold(50000);
-
                 break;
             case RewardType.PortionSet:
                 PortionManager.instance.GetRandomPortion(1);
+                break;
+            case RewardType.DefDestroyTicketPiece:
+                PortionManager.instance.GetDefTicketPiece(1);
                 break;
             case RewardType.Crystal:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
@@ -174,6 +182,8 @@ public class ChestBoxManager : MonoBehaviour
         }
 
         Success();
+
+        FirebaseAnalytics.LogEvent("OpenChestBox_Free");
     }
 
     public void GetAdsReward()
@@ -187,10 +197,12 @@ public class ChestBoxManager : MonoBehaviour
         {
             case RewardType.Gold:
                 PlayfabManager.instance.UpdateAddGold(500000);
-
                 break;
             case RewardType.PortionSet:
                 PortionManager.instance.GetRandomPortion(3);
+                break;
+            case RewardType.DefDestroyTicketPiece:
+                PortionManager.instance.GetDefTicketPiece(3);
                 break;
             case RewardType.Crystal:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
@@ -199,5 +211,7 @@ public class ChestBoxManager : MonoBehaviour
 
         GameStateManager.instance.ChestBoxCount += 1;
         Success();
+
+        FirebaseAnalytics.LogEvent("OpenChestBox_Ad");
     }
 }

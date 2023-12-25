@@ -31,11 +31,9 @@ public class ReceiveContent : MonoBehaviour
 
         rewardType = type;
 
-        if(count > 0)
-        {
-            countText.text = MoneyUnitString.ToCurrencyString(count);
-        }
-        else
+        countText.text = MoneyUnitString.ToCurrencyString(count);
+
+        if (count == -1)
         {
             countText.text = "";
         }

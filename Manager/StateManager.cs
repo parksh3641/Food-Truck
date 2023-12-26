@@ -10,7 +10,6 @@ public class StateManager : MonoBehaviour
 
     public ShopManager shopManager;
     public GameManager gameManager;
-    public ResetManager resetManager;
     public LockManager lockManager;
     public ChestBoxManager chestBoxManager;
     public QuestManager questManager;
@@ -54,9 +53,9 @@ public class StateManager : MonoBehaviour
     public void Initialize()
     {
         fadeInOut.FadeIn();
+        ResetManager.instance.Initialize();
         shopManager.Initialize();
         gameManager.Initialize();
-        resetManager.Initialize();
         lockManager.Initialize();
         chestBoxManager.Initialize();
         //questManager.Initialize();

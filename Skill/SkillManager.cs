@@ -9,6 +9,8 @@ public class SkillManager : MonoBehaviour
 {
     public GameObject skillView;
 
+    public Text countText;
+
     public GameObject lockedObj;
 
     public GameObject alarm;
@@ -27,9 +29,13 @@ public class SkillManager : MonoBehaviour
 
     public SkillContent[] skillContents;
 
+    PlayerDataBase playerDataBase;
+
 
     private void Awake()
     {
+        if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
+
         skillView.SetActive(false);
 
         skillGrid.anchoredPosition = new Vector2(0, -9999);
@@ -46,11 +52,13 @@ public class SkillManager : MonoBehaviour
         {
             skillView.SetActive(true);
 
+            countText.text = playerDataBase.SkillTickets.ToString();
+
             ChangeTopToggle(0);
 
             for (int i = 0; i < skillContents.Length; i++)
             {
-                skillContents[i].Initialize();
+                skillContents[i].Initialize(this);
             }
 
             alarm.SetActive(false);
@@ -61,6 +69,11 @@ public class SkillManager : MonoBehaviour
         {
             skillView.SetActive(false);
         }
+    }
+
+    public void Initialize()
+    {
+        countText.text = playerDataBase.SkillTickets.ToString();
     }
 
     public void ChangeTopToggle(int number)

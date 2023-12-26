@@ -203,6 +203,7 @@ public class ResetManager : MonoBehaviour
         GameStateManager.instance.YummyTimeCount = 0;
         GameStateManager.instance.ChestBoxCount = 0;
         GameStateManager.instance.PlayTime = 0;
+        GameStateManager.instance.HideNotice = false;
     }
 
     IEnumerator ResetCoroution()

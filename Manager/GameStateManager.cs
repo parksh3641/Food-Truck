@@ -38,6 +38,9 @@ public class GameStateManager : MonoBehaviour
         public bool effect = true;
         public bool appReview = false;
         public bool rankingNotice = false;
+        public bool hideNotice = false;
+
+        [Space]
         public bool developer = false;
         public bool recorder = false;
 
@@ -426,6 +429,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.rankingNotice = value;
+            SaveFile();
+        }
+    }
+
+    public bool HideNotice
+    {
+        get
+        {
+            return gameSettings.hideNotice;
+        }
+        set
+        {
+            gameSettings.hideNotice = value;
             SaveFile();
         }
     }

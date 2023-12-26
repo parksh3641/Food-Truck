@@ -41,7 +41,8 @@ public class SkillContent : MonoBehaviour
 
     private int priceGold = 100000;
     private int pricePortion = 50000;
-    private int priceCrystal = 1;
+    private int priceCrystal = 5;
+    private int priceCrystal2 = 5;
     private int maxCrystal = 20;
 
     private int maxLevelGold = 100;
@@ -58,6 +59,7 @@ public class SkillContent : MonoBehaviour
 
     ImageDataBase imageDataBase;
     PlayerDataBase playerDataBase;
+    SkillManager skillManager;
 
 
     private void Awake()
@@ -70,8 +72,10 @@ public class SkillContent : MonoBehaviour
         isDelay = false;
     }
 
-    public void Initialize()
+    public void Initialize(SkillManager manager)
     {
+        skillManager = manager;
+
         icon.sprite = skillArray[(int)skillType];
 
         titleText.text = LocalizationManager.instance.GetString(skillType.ToString());
@@ -257,7 +261,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal * (level + 1) + 9;
+                        value = priceCrystal * (level + 1) + priceCrystal2;
 
                         if (value >= maxCrystal)
                         {
@@ -284,7 +288,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal * (level + 1) + 9;
+                        value = priceCrystal * (level + 1) + priceCrystal2;
 
                         if (value >= maxCrystal)
                         {
@@ -311,7 +315,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal * (level + 1) + 9;
+                        value = priceCrystal * (level + 1) + priceCrystal2;
 
                         if (value >= maxCrystal)
                         {
@@ -338,7 +342,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal * (level + 1) + 9;
+                        value = priceCrystal * (level + 1) + priceCrystal2;
 
                         if (value >= maxCrystal)
                         {
@@ -365,7 +369,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal * (level + 1) + 9;
+                        value = priceCrystal * (level + 1) + priceCrystal2;
 
                         if (value >= maxCrystal)
                         {
@@ -446,7 +450,7 @@ public class SkillContent : MonoBehaviour
                     }
                     else
                     {
-                        value = priceCrystal * (level + 1) + 9;
+                        value = priceCrystal * (level + 1) + priceCrystal2;
 
                         if (value >= maxCrystal)
                         {
@@ -489,7 +493,7 @@ public class SkillContent : MonoBehaviour
         }
     }
 
-    public void LevelUpButton()
+    public void LevelUpButton(int number)
     {
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
@@ -616,29 +620,46 @@ public class SkillContent : MonoBehaviour
                 break;
         }
 
-        if (moneyType == MoneyType.CoinA)
+        if(number == 0)
         {
-            if (playerDataBase.Coin >= value)
+            if (moneyType == MoneyType.CoinA)
             {
-                PlayfabManager.instance.UpdateSubtractGold(value);
+                if (playerDataBase.Coin >= value)
+                {
+                    PlayfabManager.instance.UpdateSubtractGold(value);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowCoin);
+                    return;
+                }
             }
             else
             {
-                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                NotionManager.instance.UseNotion(NotionType.LowCoin);
-                return;
+                if (playerDataBase.Crystal >= value)
+                {
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, value);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                    return;
+                }
             }
         }
         else
         {
-            if (playerDataBase.Crystal >= value)
+            if(playerDataBase.SkillTickets > 0)
             {
-                PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, value);
+                playerDataBase.SkillTickets -= 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("SkillTickets", playerDataBase.SkillTickets);
             }
             else
             {
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                NotionManager.instance.UseNotion(NotionType.LowItemNotion);
                 return;
             }
         }
@@ -721,7 +742,9 @@ public class SkillContent : MonoBehaviour
         SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
         NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
 
-        Initialize();
+        Initialize(skillManager);
+
+        skillManager.Initialize();
 
         isDelay = true;
         Invoke("Delay", 0.4f);

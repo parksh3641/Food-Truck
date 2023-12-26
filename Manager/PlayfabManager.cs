@@ -1338,6 +1338,9 @@ public class PlayfabManager : MonoBehaviour
                        case "BuffTickets":
                            playerDataBase.BuffTickets = statistics.Value;
                            break;
+                       case "SkillTickets":
+                           playerDataBase.SkillTickets = statistics.Value;
+                           break;
                        case "Proficiency":
                            playerDataBase.Proficiency = statistics.Value;
                            break;

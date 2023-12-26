@@ -325,7 +325,7 @@ public enum RewardType
     DefDestroyTicketPiece,
     BuffTickets,
     Portion6,
-    GoldTicket,
+    SkillTickets,
     Treasure10,
     Treasure11,
     Treasure12,

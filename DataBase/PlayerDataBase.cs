@@ -38,6 +38,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int buffTickets = 0;
     [SerializeField]
+    private int skillTickets = 0;
+    [SerializeField]
     private int proficiency = 0;
     [SerializeField]
     private int michelin = 0;
@@ -751,6 +753,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             buffTickets = value;
+        }
+    }
+
+    public int SkillTickets
+    {
+        get
+        {
+            return skillTickets;
+        }
+        set
+        {
+            skillTickets = value;
         }
     }
 
@@ -3837,6 +3851,7 @@ public class PlayerDataBase : ScriptableObject
         islandNumber = 0;
         testAccount = 0;
         buffTickets = 0;
+        skillTickets = 0;
         proficiency = 0;
         level = 0;
         exp = 0;

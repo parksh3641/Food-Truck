@@ -17,8 +17,8 @@ public class NickNameManager : MonoBehaviour
     public GameObject buyCoinButton;
     public Text coinPriceText;
 
-    private int price = 200000;
-    private int maxPrice = 2000000;
+    private int price = 100;
+    private int maxPrice = 100;
     private int nowPrice = 0;
 
     public InputField inputField;
@@ -75,14 +75,14 @@ public class NickNameManager : MonoBehaviour
             buyFreeButton.SetActive(false);
             buyCoinButton.SetActive(true);
 
-            nowPrice = price * (playerDataBase.ChangeNicknameCount + 1);
+            //nowPrice = price * (playerDataBase.ChangeNicknameCount + 1);
 
-            if(nowPrice > maxPrice)
-            {
-                nowPrice = maxPrice;
-            }
+            //if(nowPrice > maxPrice)
+            //{
+            //    nowPrice = maxPrice;
+            //}
 
-            coinPriceText.text = MoneyUnitString.ToCurrencyString(nowPrice);
+            coinPriceText.text = MoneyUnitString.ToCurrencyString(price);
 
             FirebaseAnalytics.LogEvent("OpenNickName");
         }
@@ -132,14 +132,14 @@ public class NickNameManager : MonoBehaviour
                 {
                     if (number == 1)
                     {
-                        if (playerDataBase.Coin >= nowPrice)
+                        if (playerDataBase.Crystal >= price)
                         {
-                            PlayfabManager.instance.UpdateSubtractGold(nowPrice);
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price);
                         }
                         else
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
                             return;
                         }
                     }

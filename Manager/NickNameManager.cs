@@ -132,17 +132,15 @@ public class NickNameManager : MonoBehaviour
                 {
                     if (number == 1)
                     {
-                        if (playerDataBase.Crystal >= price)
-                        {
-                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price);
-                        }
-                        else
+                        if (playerDataBase.Crystal < price)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCrystal);
                             return;
                         }
                     }
+
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price);
 
                     PlayfabManager.instance.UpdateDisplayName(newNickName, Success, Failure);
                 }
@@ -181,11 +179,6 @@ public class NickNameManager : MonoBehaviour
 
         playerDataBase.ChangeNicknameCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("ChangeNicknameCount", playerDataBase.ChangeNicknameCount);
-
-        if(!GameStateManager.instance.Tutorial)
-        {
-            GameStateManager.instance.Tutorial = true;
-        }
     }
 
     public void Failure()

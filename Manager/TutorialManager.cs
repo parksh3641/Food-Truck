@@ -100,6 +100,11 @@ public class TutorialManager : MonoBehaviour
                     GameManager.instance.FirstReward();
                 }
 
+                if (!GameStateManager.instance.Tutorial)
+                {
+                    GameStateManager.instance.Tutorial = true;
+                }
+
                 break;
             case 7:
                 tutorialView.SetActive(false);

@@ -104,7 +104,7 @@ public class ShopContent : MonoBehaviour
                 rewardText.text = MoneyUnitString.ToCurrencyString(100000);
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = MoneyUnitString.ToCurrencyString(200000) + " ~\n" + MoneyUnitString.ToCurrencyString(1000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(200000) + "\n~ " + MoneyUnitString.ToCurrencyString(500000);
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
@@ -167,6 +167,9 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
+
                 break;
             case ItemType.PortionSet2:
                 lockedObj.SetActive(false);
@@ -177,10 +180,6 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
-
-                bestObj.SetActive(true);
-                bestText.text = "BEST";
-
                 break;
             case ItemType.PortionSet3:
                 lockedObj.SetActive(false);
@@ -225,7 +224,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[9].localizationName = itemType + "_Price";
                 buyRmText[9].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(3300);
+                rewardText.text = MoneyUnitString.ToCurrencyString(3000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(300) + "</size>";
 
                 bestObj.SetActive(true);
                 bestText.text = "+10%";
@@ -238,7 +237,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[10].localizationName = itemType + "_Price";
                 buyRmText[10].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(7200);
+                rewardText.text = MoneyUnitString.ToCurrencyString(6000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(1200) + "</size>";
 
                 bestObj.SetActive(true);
                 bestText.text = "+20%";
@@ -250,7 +249,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[11].localizationName = itemType + "_Price";
                 buyRmText[11].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(15600);
+                rewardText.text = MoneyUnitString.ToCurrencyString(12000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(3600) + "</size>";
 
                 bestObj.SetActive(true);
                 bestText.text = "+30%";
@@ -262,7 +261,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[12].localizationName = itemType + "_Price";
                 buyRmText[12].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(46200);
+                rewardText.text = MoneyUnitString.ToCurrencyString(33000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(13200) + "</size>";
 
                 bestObj.SetActive(true);
                 bestText.text = "+40%";
@@ -274,7 +273,7 @@ public class ShopContent : MonoBehaviour
                 buyRmText[13].localizationName = itemType + "_Price";
                 buyRmText[13].ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(90000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(60000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(30000) + "</size>";
 
                 bestObj.SetActive(true);
                 bestText.text = "+50%";
@@ -344,7 +343,7 @@ public class ShopContent : MonoBehaviour
                 infoText.ReLoad();
                 break;
             case ItemType.DefDestroyTicketPiece:
-                rewardText.text = "x1";
+                rewardText.text = "<size=16>x1</size>";
                 break;
             case ItemType.BuffTicketSet1:
                 lockedObj.SetActive(false);
@@ -398,9 +397,6 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
-
-                //bestObj.SetActive(true);
-                //bestText.text = "BEST";
                 break;
             case ItemType.DefTicketSet3:
                 lockedObj.SetActive(false);
@@ -411,6 +407,9 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
+
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
                 break;
             case ItemType.SuperOffline:
                 lockedObj.SetActive(false);
@@ -423,7 +422,27 @@ public class ShopContent : MonoBehaviour
                 infoText.ReLoad();
                 break;
             case ItemType.AdReward_Crystal:
-                rewardText.text = "60";
+                rewardText.text = "<size=16>60</size>";
+                break;
+            case ItemType.AutoUpgrade:
+                lockedObj.SetActive(false);
+
+                buyRmObj[21].SetActive(true);
+                buyRmText[21].localizationName = itemType.ToString();
+                buyRmText[21].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
+                break;
+            case ItemType.AutoPresent:
+                lockedObj.SetActive(false);
+
+                buyRmObj[22].SetActive(true);
+                buyRmText[22].localizationName = itemType.ToString();
+                buyRmText[22].ReLoad();
+
+                infoText.localizationName = itemType + "_Info";
+                infoText.ReLoad();
                 break;
         }
 

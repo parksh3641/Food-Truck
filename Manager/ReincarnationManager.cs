@@ -70,21 +70,21 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.IslandNumber > 0)
         {
-            crystal += 20;
+            crystal += 30;
 
             if (playerDataBase.NextFoodNumber2 > 7)
             {
-                crystal += 40;
+                crystal += 50;
             }
 
             if (playerDataBase.NextFoodNumber3 > 5)
             {
-                crystal += 60;
+                crystal += 70;
             }
 
             if (playerDataBase.NextFoodNumber4 > 7)
             {
-                crystal += 70;
+                crystal += 100;
             }
 
             lockedObj.SetActive(false);

@@ -206,7 +206,9 @@ public enum ItemType
     DefTicketSet2,
     DefTicketSet3,
     SuperOffline,
-    AdReward_Crystal
+    AdReward_Crystal,
+    AutoUpgrade,
+    AutoPresent
 }
 
 public enum PackageType

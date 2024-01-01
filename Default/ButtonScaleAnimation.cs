@@ -28,8 +28,13 @@ public class ButtonScaleAnimation : MonoBehaviour
     public void StopAnim()
     {
         StopAllCoroutines();
-
         transform.localScale = Vector3.one;
+    }
+
+    public void PlayAnim()
+    {
+        StopAllCoroutines();
+        StartCoroutine(ButtonAnimation());
     }
 
     IEnumerator ButtonAnimation()

@@ -616,6 +616,10 @@ public class PlayerDataBase : ScriptableObject
     private bool goldX2 = false;
     [SerializeField]
     private bool superOffline = false;
+    [SerializeField]
+    private bool autoUpgrade = false;
+    [SerializeField]
+    private bool autoPresent = false;
 
     [Space]
     [Title("Warning")]
@@ -3803,6 +3807,29 @@ public class PlayerDataBase : ScriptableObject
             superOffline = value;
         }
     }
+    public bool AutoUpgrade
+    {
+        get
+        {
+            return autoUpgrade;
+        }
+        set
+        {
+            autoUpgrade = value;
+        }
+    }
+
+    public bool AutoPresent
+    {
+        get
+        {
+            return autoPresent;
+        }
+        set
+        {
+            autoPresent = value;
+        }
+    }
 
     public int NickNameWarning
     {
@@ -3833,6 +3860,8 @@ public class PlayerDataBase : ScriptableObject
         removeAds = false;
         goldX2 = false;
         superOffline = false;
+        autoUpgrade = false;
+        autoPresent = false;
 
         rankLevel1 = 0;
         rankLevel2 = 0;

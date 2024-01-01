@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rotation : MonoBehaviour
 {
     public bool rotateY = false;
+    public bool rotateZ = false;
 
     public float rotationSpeed = 30f;
 
@@ -13,6 +14,10 @@ public class Rotation : MonoBehaviour
         if(rotateY)
         {
             transform.Rotate(rotationSpeed * Time.deltaTime, 0, 0f);
+        }
+        else if(rotateZ)
+        {
+            transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
         }
         else
         {

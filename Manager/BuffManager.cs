@@ -12,12 +12,15 @@ public class BuffManager : MonoBehaviour
 
     public LocalizationContent infoText;
 
+    public ButtonScaleAnimation buff1Anim;
     public GameObject buff1Obj;
     public Text buff1Text;
 
+    public ButtonScaleAnimation buff2Anim;
     public GameObject buff2Obj;
     public Text buff2Text;
 
+    public ButtonScaleAnimation buff3Anim;
     public GameObject buff3Obj;
     public Text buff3Text;
 
@@ -137,6 +140,8 @@ public class BuffManager : MonoBehaviour
             case 0:
                 if (buff1) return;
 
+                buff1Anim.StopAnim();
+
                 buff1 = true;
                 buff1Time = time;
 
@@ -150,6 +155,8 @@ public class BuffManager : MonoBehaviour
             case 1:
                 if (buff2) return;
 
+                buff2Anim.StopAnim();
+
                 buff2 = true;
                 buff2Time = time;
 
@@ -162,6 +169,8 @@ public class BuffManager : MonoBehaviour
                 break;
             case 2:
                 if (buff3) return;
+
+                buff3Anim.StopAnim();
 
                 buff3 = true;
                 buff3Time = time;
@@ -201,6 +210,8 @@ public class BuffManager : MonoBehaviour
         {
             buff1 = false;
 
+            buff1Anim.PlayAnim();
+
             buff1Obj.SetActive(false);
 
             gameManager.OffBuff(0);
@@ -228,6 +239,8 @@ public class BuffManager : MonoBehaviour
         {
             buff2 = false;
 
+            buff2Anim.PlayAnim();
+
             buff2Obj.SetActive(false);
 
             gameManager.OffBuff(1);
@@ -254,6 +267,8 @@ public class BuffManager : MonoBehaviour
         else
         {
             buff3 = false;
+
+            buff3Anim.PlayAnim();
 
             buff3Obj.SetActive(false);
 

@@ -87,12 +87,12 @@ public class LockManager : MonoBehaviour
             menuIcon[8].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 5) //택배 배송 해제
+        if (playerDataBase.LockTutorial >= 5) //퀘스트 해제
         {
             menuIcon[9].SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 6) //퀘스트 해제
+        if (playerDataBase.LockTutorial >= 6) //택배 배송 해제
         {
             menuIcon[10].SetActive(false);
         }

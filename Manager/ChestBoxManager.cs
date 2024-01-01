@@ -46,7 +46,7 @@ public class ChestBoxManager : MonoBehaviour
 
         if (GameStateManager.instance.ChestBoxCount >= 20) return;
 
-        goalCount = Random.Range(90, 180);
+        goalCount = Random.Range(90, 120);
         goalCount = (int)(goalCount - (goalCount * (0.005f * playerDataBase.Treasure12)));
 
 #if UNITY_EDITOR
@@ -199,10 +199,10 @@ public class ChestBoxManager : MonoBehaviour
                 PlayfabManager.instance.UpdateAddGold(500000);
                 break;
             case RewardType.PortionSet:
-                PortionManager.instance.GetRandomPortion(3);
+                PortionManager.instance.GetRandomPortion(5);
                 break;
             case RewardType.DefDestroyTicketPiece:
-                PortionManager.instance.GetDefTicketPiece(3);
+                PortionManager.instance.GetDefTickets(1);
                 break;
             case RewardType.Crystal:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);

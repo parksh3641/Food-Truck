@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public GameObject goldx2;
     public GameObject removeAds;
     public GameObject superOffline;
+    public GameObject autoUpgrade;
+    public GameObject autoPresent;
 
     public GameObject privacypolicyView;
 
@@ -432,6 +434,8 @@ public class GameManager : MonoBehaviour
         removeAds.SetActive(false);
         goldx2.SetActive(false);
         superOffline.SetActive(false);
+        autoUpgrade.SetActive(false);
+        autoPresent.SetActive(false);
 
         if (playerDataBase.RemoveAds)
         {
@@ -446,6 +450,16 @@ public class GameManager : MonoBehaviour
         if (playerDataBase.SuperOffline)
         {
             superOffline.SetActive(true);
+        }
+
+        if (playerDataBase.AutoUpgrade)
+        {
+            autoUpgrade.SetActive(true);
+        }
+
+        if (playerDataBase.AutoPresent)
+        {
+            autoPresent.SetActive(true);
         }
 
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
@@ -1314,7 +1328,7 @@ public class GameManager : MonoBehaviour
         else
         {
             upgradeButtonAnim.AutoClick();
-            UpgradeButton();
+            UpgradeButton(1);
         }
 
         yield return waitForSeconds3;
@@ -1459,16 +1473,6 @@ public class GameManager : MonoBehaviour
                 }
 
                 ChangeCandy(GameStateManager.instance.CandyType);
-
-                if (!GameStateManager.instance.AppReview && !playerDataBase.AppReview)
-                {
-                    OpenAppReview();
-
-                    GameStateManager.instance.AppReview = true;
-
-                    playerDataBase.AppReview = true;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("AppReview", 1);
-                }
                 break;
             case IslandType.Island3:
                 if (GameStateManager.instance.JapaneseFoodType == JapaneseFoodType.Ramen)
@@ -1498,6 +1502,19 @@ public class GameManager : MonoBehaviour
     public void ChangeFood(FoodType type)
     {
         GameStateManager.instance.FoodType = type;
+
+        if(type == FoodType.Food5)
+        {
+            if (!GameStateManager.instance.AppReview && !playerDataBase.AppReview)
+            {
+                OpenAppReview();
+
+                GameStateManager.instance.AppReview = true;
+
+                playerDataBase.AppReview = true;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("AppReview", 1);
+            }
+        }
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
 
@@ -2642,7 +2659,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpgradeButton()
+    public void UpgradeButton(int number)
     {
         if (isUpgradeDelay) return;
 
@@ -2673,6 +2690,15 @@ public class GameManager : MonoBehaviour
         myMoneyPlusText.gameObject.SetActive(true);
         myMoneyPlusText.color = Color.red;
         myMoneyPlusText.text = "-" + MoneyUnitString.ToCurrencyString(need);
+
+        if(number == 0)
+        {
+            FirebaseAnalytics.LogEvent("Upgrade_Screen");
+        }
+        else
+        {
+            FirebaseAnalytics.LogEvent("Upgrade_Button");
+        }
 
         if (Random.Range(0, 100f) >= 100 - success)
         {
@@ -4800,10 +4826,25 @@ public class GameManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.TipInfoNotion);
     }
 
-    public void LockedInfo()
+    public void LockedInfo(int number)
     {
         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-        NotionManager.instance.UseNotion(NotionType.UnLockedNotion);
+
+        switch(number)
+        {
+            case 0:
+                NotionManager.instance.UseNotion(NotionType.UnLockedNotion1);
+                break;
+            case 1:
+                NotionManager.instance.UseNotion(NotionType.UnLockedNotion2);
+                break;
+            case 2:
+                NotionManager.instance.UseNotion(NotionType.UnLockedNotion3);
+                break;
+            case 3:
+                NotionManager.instance.UseNotion(NotionType.UnLockedNotion4);
+                break;
+        }
     }
 
     public void GetUpgradeCount()

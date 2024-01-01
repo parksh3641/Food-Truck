@@ -114,7 +114,7 @@ public class OfflineManager : MonoBehaviour
 
     public void Initialize()
     {
-        if (playerDataBase.LockTutorial >= 5)
+        if (playerDataBase.LockTutorial >= 6)
         {
             if (playerDataBase.CastleDate.Length > 1)
             {
@@ -188,7 +188,7 @@ public class OfflineManager : MonoBehaviour
 
         if (DateTime.Compare(DateTime.Now, serverTime) == 1)
         {
-            if(playerDataBase.SuperOffline)
+            if (playerDataBase.SuperOffline)
             {
                 timerText.text = localization_Time + " : " + "48" + localization_Hours + " " + "00" + localization_Minutes;
 
@@ -333,6 +333,28 @@ public class OfflineManager : MonoBehaviour
             if (timeSpan.TotalMinutes > 0)
             {
                 CheckReward(timeSpan.TotalMinutes);
+            }
+
+            if (timeSpan.TotalSeconds < 0)
+            {
+                Debug.LogError("적립 시간이 마이너스입니다");
+
+                playerDataBase.CastleDate = DateTime.Now.ToString("MMddHHmm");
+
+                time = DateTime.Now;
+                if (playerDataBase.SuperOffline)
+                {
+                    playerDataBase.CastleServerDate = DateTime.Now.AddDays(2).ToString("MMddHHmm");
+                    serverTime = DateTime.Now.AddDays(2);
+                }
+                else
+                {
+                    playerDataBase.CastleServerDate = DateTime.Now.AddDays(1).ToString("MMddHHmm");
+                    serverTime = DateTime.Now.AddDays(1);
+                }
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleDate", int.Parse("1" + playerDataBase.CastleDate));
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));
             }
         }
         else

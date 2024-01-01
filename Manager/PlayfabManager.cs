@@ -814,6 +814,16 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SuperOffline = true;
                     }
 
+                    if (list.ItemId.Equals("AutoUpgrade"))
+                    {
+                        playerDataBase.AutoUpgrade = true;
+                    }
+
+                    if (list.ItemId.Equals("AutoPresent"))
+                    {
+                        playerDataBase.AutoPresent = true;
+                    }
+
                     if (list.ItemId.Equals("Character1"))
                     {
                         playerDataBase.Character1 = 1;
@@ -2525,6 +2535,30 @@ public class PlayfabManager : MonoBehaviour
         UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));
 
         playerDataBase.SuperOffline = true;
+    }
+
+    public void PurchaseAutoUpgrade()
+    {
+        itemList.Clear();
+        itemList.Add("AutoUpgrade");
+
+        GrantItemToUser("Shop", itemList);
+
+        UpdatePlayerStatisticsInsert("AutoUpgrade", 1);
+
+        playerDataBase.AutoUpgrade = true;
+    }
+
+    public void PurchaseAutoPresent()
+    {
+        itemList.Clear();
+        itemList.Add("AutoPresent");
+
+        GrantItemToUser("Shop", itemList);
+
+        UpdatePlayerStatisticsInsert("AutoPresent", 1);
+
+        playerDataBase.AutoPresent = true;
     }
 
     public void RestorePurchases()

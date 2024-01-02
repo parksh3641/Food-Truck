@@ -31,6 +31,8 @@ public class PackageContent : MonoBehaviour
     {
         shopManager = manager;
 
+        packageType = type;
+
         titleText.text = LocalizationManager.instance.GetString(type.ToString());
 
         //for (int i = 0; i < receiveContents.Length; i++)

@@ -16,6 +16,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int crystal = 0;
     [SerializeField]
+    private int rankPoint = 0;
+    [SerializeField]
     private int firstReward = 0;
     [SerializeField]
     private int lockTutorial = 0;
@@ -673,6 +675,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             crystal = value;
+        }
+    }
+
+    public int RankPoint
+    {
+        get
+        {
+            return rankPoint;
+        }
+        set
+        {
+            rankPoint = value;
         }
     }
 
@@ -3873,6 +3887,7 @@ public class PlayerDataBase : ScriptableObject
         coinA = 0;
         coinB = 0;
         crystal = 0;
+        rankPoint = 0;
         defDestroyTicket = 0;
         defDestroyTicketPiece = 0;
         lockTutorial = 0;

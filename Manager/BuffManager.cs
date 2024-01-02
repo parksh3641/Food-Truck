@@ -24,23 +24,25 @@ public class BuffManager : MonoBehaviour
     public GameObject buff3Obj;
     public Text buff3Text;
 
+    public ButtonScaleAnimation buff4Anim;
+    public GameObject buff4Obj;
+    public Text buff4Text;
+
     private bool buff1;
     private bool buff2;
     private bool buff3;
+    private bool buff4;
 
     private int time = 600;
 
     private int buff1Time = 0;
     private int buff2Time = 0;
     private int buff3Time = 0;
+    private int buff4Time = 0;
 
     private int index = 0;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
-
-    public GameManager gameManager;
-
-
 
     PlayerDataBase playerDataBase;
 
@@ -52,10 +54,12 @@ public class BuffManager : MonoBehaviour
         buff1Obj.SetActive(false);
         buff2Obj.SetActive(false);
         buff3Obj.SetActive(false);
+        buff4Obj.SetActive(false);
 
         buff1 = false;
         buff2 = false;
         buff3 = false;
+        buff4 = false;
 
         buffView.SetActive(false);
     }
@@ -82,6 +86,9 @@ public class BuffManager : MonoBehaviour
                     break;
                 case 2:
                     infoText.localizationName = "AdReward_Buff3";
+                    break;
+                case 3:
+                    infoText.localizationName = "AdReward_Buff4";
                     break;
             }
 
@@ -128,6 +135,9 @@ public class BuffManager : MonoBehaviour
             case 2:
                 GoogleAdsManager.instance.admobReward_Buff3.ShowAd(3);
                 break;
+            case 3:
+                GoogleAdsManager.instance.admobReward_Buff4.ShowAd(3);
+                break;
         }
     }
 
@@ -148,7 +158,7 @@ public class BuffManager : MonoBehaviour
                 buff1Obj.SetActive(true);
                 StartCoroutine(Buff1Coroution());
 
-                gameManager.OnBuff(0);
+                GameManager.instance.OnBuff(0);
 
                 FirebaseAnalytics.LogEvent("UseBuff1");
                 break;
@@ -163,7 +173,7 @@ public class BuffManager : MonoBehaviour
                 buff2Obj.SetActive(true);
                 StartCoroutine(Buff2Coroution());
 
-                gameManager.OnBuff(1);
+                GameManager.instance.OnBuff(1);
 
                 FirebaseAnalytics.LogEvent("UseBuff2");
                 break;
@@ -178,9 +188,24 @@ public class BuffManager : MonoBehaviour
                 buff3Obj.SetActive(true);
                 StartCoroutine(Buff3Coroution());
 
-                gameManager.OnBuff(2);
+                GameManager.instance.OnBuff(2);
 
                 FirebaseAnalytics.LogEvent("UseBuff3");
+                break;
+            case 3:
+                if (buff4) return;
+
+                buff4Anim.StopAnim();
+
+                buff4 = true;
+                buff4Time = time;
+
+                buff4Obj.SetActive(true);
+                StartCoroutine(Buff4Coroution());
+
+                GameManager.instance.OnBuff(3);
+
+                FirebaseAnalytics.LogEvent("UseBuff4");
                 break;
         }
 
@@ -214,7 +239,7 @@ public class BuffManager : MonoBehaviour
 
             buff1Obj.SetActive(false);
 
-            gameManager.OffBuff(0);
+            GameManager.instance.OffBuff(0);
 
             yield break;
         }
@@ -243,7 +268,7 @@ public class BuffManager : MonoBehaviour
 
             buff2Obj.SetActive(false);
 
-            gameManager.OffBuff(1);
+            GameManager.instance.OffBuff(1);
 
             yield break;
         }
@@ -272,7 +297,7 @@ public class BuffManager : MonoBehaviour
 
             buff3Obj.SetActive(false);
 
-            gameManager.OffBuff(2);
+            GameManager.instance.OffBuff(2);
 
             yield break;
         }
@@ -282,5 +307,34 @@ public class BuffManager : MonoBehaviour
         yield return waitForSeconds;
 
         StartCoroutine(Buff3Coroution());
+    }
+
+    IEnumerator Buff4Coroution()
+    {
+        if (buff4Time > 0)
+        {
+            if (!GameStateManager.instance.Pause)
+            {
+                buff4Time -= 1;
+            }
+        }
+        else
+        {
+            buff4 = false;
+
+            buff4Anim.PlayAnim();
+
+            buff4Obj.SetActive(false);
+
+            GameManager.instance.OffBuff(3);
+
+            yield break;
+        }
+
+        buff4Text.text = (buff4Time / 60 % 60).ToString("D2") + ":" + (buff4Time % 60).ToString("D2");
+
+        yield return waitForSeconds;
+
+        StartCoroutine(Buff4Coroution());
     }
 }

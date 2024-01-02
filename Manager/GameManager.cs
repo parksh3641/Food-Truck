@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     private bool buff1 = false;
     private bool buff2 = false;
     private bool buff3 = false;
+    private bool buff4 = false;
 
     [Space]
     [Title("Christmas")]
@@ -217,6 +218,9 @@ public class GameManager : MonoBehaviour
 
     private bool clickDelay = false;
     private bool isReady = false;
+    private bool auto = false;
+
+    public GameObject buff4Obj;
 
     [Space]
     [Title("Bankruptcy")]
@@ -256,6 +260,7 @@ public class GameManager : MonoBehaviour
     public LevelManager levelManager;
     public ChangeFoodManager changeFoodManager;
     public GourmetManager gourmetManager;
+    public ChestBoxManager chestBoxManager;
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
@@ -272,7 +277,7 @@ public class GameManager : MonoBehaviour
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
-    WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.6f);
+    WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.5f);
 
     private void Awake()
     {
@@ -1304,31 +1309,86 @@ public class GameManager : MonoBehaviour
             portion6Obj.SetActive(true);
         }
 
-        if (GameStateManager.instance.Recorder)
+        if(!playerDataBase.AutoUpgrade)
         {
-            StartCoroutine(AutoUpgradeCoroution());
+            GameStateManager.instance.AutoUpgrade = false;
         }
+        else
+        {
+            buff4Obj.SetActive(false);
+            OffBuff(3);
+        }
+
+        if(!playerDataBase.AutoPresent)
+        {
+            GameStateManager.instance.AutoPresent = false;
+        }
+
+        CheckAuto();
 
         clickDelay = false;
         Invoke("GameStartDelay", 1.0f);
     }
 
+    public void CheckAuto()
+    {
+        if (GameStateManager.instance.AutoUpgrade)
+        {
+            if (!auto)
+            {
+                auto = true;
+                StartCoroutine(AutoUpgradeCoroution());
+            }
+        }
+        else
+        {
+            if(!buff4)
+            {
+                auto = false;
+            }
+            else
+            {
+                if (!auto)
+                {
+                    auto = true;
+                    StartCoroutine(AutoUpgradeCoroution());
+                }
+            }
+        }
+
+        if(GameStateManager.instance.AutoPresent)
+        {
+            chestBoxManager.CheckAuto();
+        }
+    }
+
     IEnumerator AutoUpgradeCoroution()
     {
-        if(!inGameUI.activeInHierarchy)
+        if(!inGameUI.activeInHierarchy || GameStateManager.instance.GameType == GameType.Rank)
+        {
+            auto = false;
+        }
+
+        if(!auto)
         {
             yield break;
         }
 
-        if(level >= 19)
+        if (level >= GameStateManager.instance.AutoUpgradeLevel - 1 || level + 1 > maxLevel - 1)
         {
-            sellButtonAnim.AutoClick();
-            SellButton();
+            if (!GameStateManager.instance.Pause)
+            {
+                sellButtonAnim.AutoClick();
+                SellButton(2);
+            }
         }
         else
         {
-            upgradeButtonAnim.AutoClick();
-            UpgradeButton(1);
+            if (!GameStateManager.instance.Pause)
+            {
+                upgradeButtonAnim.AutoClick();
+                UpgradeButton(2);
+            }
         }
 
         yield return waitForSeconds3;
@@ -2270,6 +2330,16 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            for (int i = 0; i < foodArrayList.Count; i++)
+            {
+                if (foodArrayList[i].gameObject.activeInHierarchy)
+                {
+                    foodArrayList[i].FeverOff();
+                }
+            }
+        }
     }
 
     void CheckFoodLevelUp()
@@ -2661,7 +2731,15 @@ public class GameManager : MonoBehaviour
 
     public void UpgradeButton(int number)
     {
-        if (isUpgradeDelay) return;
+        if(number < 2)
+        {
+            if(GameStateManager.instance.AutoUpgrade)
+            {
+                return;
+            }
+
+            if (isUpgradeDelay) return;
+        }
 
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
@@ -2691,14 +2769,15 @@ public class GameManager : MonoBehaviour
         myMoneyPlusText.color = Color.red;
         myMoneyPlusText.text = "-" + MoneyUnitString.ToCurrencyString(need);
 
-        if(number == 0)
+        switch(number)
         {
-            FirebaseAnalytics.LogEvent("Upgrade_Screen");
-        }
-        else
-        {
-            FirebaseAnalytics.LogEvent("Upgrade_Button");
-        }
+            case 0:
+                FirebaseAnalytics.LogEvent("Upgrade_Screen");
+                break;
+            case 1:
+                FirebaseAnalytics.LogEvent("Upgrade_Button");
+                break;
+        }    
 
         if (Random.Range(0, 100f) >= 100 - success)
         {
@@ -3847,9 +3926,17 @@ public class GameManager : MonoBehaviour
         UpgradeInitialize();
     }
 
-    public void SellButton()
+    public void SellButton(int number)
     {
-        if (isSellDelay) return;
+        if (number < 2)
+        {
+            if (GameStateManager.instance.AutoUpgrade)
+            {
+                return;
+            }
+
+            if (isSellDelay) return;
+        }
 
         if (level == 0) return;
 
@@ -4406,6 +4493,15 @@ public class GameManager : MonoBehaviour
                 successX2 += buff3Value;
                 successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
                 break;
+            case 3:
+                buff4 = true;
+
+                if (!auto)
+                {
+                    auto = true;
+                    StartCoroutine(AutoUpgradeCoroution());
+                }
+                break;
         }
     }
 
@@ -4430,6 +4526,11 @@ public class GameManager : MonoBehaviour
 
                 successX2 += buff3Value;
                 successX2Text.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " : " + successX2.ToString("N1") + "%";
+                break;
+            case 3:
+                buff4 = false;
+
+                auto = false;
                 break;
         }
     }

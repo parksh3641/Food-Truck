@@ -36,17 +36,19 @@ public class InventoryManager : MonoBehaviour
 
     void Initialize()
     {
-        receiveContents[0].Initialize(RewardType.RankPoint, 0);
-        receiveContents[1].Initialize(RewardType.DefDestroyTicket, playerDataBase.DefDestroyTicket);
+        //receiveContents[0].Initialize(RewardType.Crystal, playerDataBase.Crystal);
+        receiveContents[0].Initialize(RewardType.Exp, playerDataBase.Exp);
+        receiveContents[1].Initialize(RewardType.RankPoint, playerDataBase.RankPoint);
         receiveContents[2].Initialize(RewardType.DefDestroyTicketPiece, playerDataBase.DefDestroyTicketPiece);
-        receiveContents[3].Initialize(RewardType.SkillTickets, playerDataBase.SkillTickets);
+        receiveContents[3].Initialize(RewardType.DefDestroyTicket, playerDataBase.DefDestroyTicket);
         receiveContents[4].Initialize(RewardType.BuffTickets, playerDataBase.BuffTickets);
-        receiveContents[5].Initialize(RewardType.Portion1, playerDataBase.Portion1);
-        receiveContents[6].Initialize(RewardType.Portion2, playerDataBase.Portion2);
-        receiveContents[7].Initialize(RewardType.Portion3, playerDataBase.Portion3);
-        receiveContents[8].Initialize(RewardType.Portion4, playerDataBase.Portion4);
-        receiveContents[9].Initialize(RewardType.Portion5, playerDataBase.Portion5);
-        //receiveContents[9].Initialize(RewardType.Portion6, playerDataBase.Portion6);
+        receiveContents[5].Initialize(RewardType.SkillTickets, playerDataBase.SkillTickets);
+        receiveContents[6].Initialize(RewardType.Portion1, playerDataBase.Portion1);
+        receiveContents[7].Initialize(RewardType.Portion2, playerDataBase.Portion2);
+        receiveContents[8].Initialize(RewardType.Portion3, playerDataBase.Portion3);
+        receiveContents[9].Initialize(RewardType.Portion4, playerDataBase.Portion4);
+        receiveContents[10].Initialize(RewardType.Portion5, playerDataBase.Portion5);
+        receiveContents[11].gameObject.SetActive(false);
     }
 
 }

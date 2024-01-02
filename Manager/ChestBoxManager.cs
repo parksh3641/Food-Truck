@@ -27,6 +27,7 @@ public class ChestBoxManager : MonoBehaviour
 
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+    WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.5f);
 
     PlayerDataBase playerDataBase;
 
@@ -46,11 +47,16 @@ public class ChestBoxManager : MonoBehaviour
 
         if (GameStateManager.instance.ChestBoxCount >= 20) return;
 
-        goalCount = Random.Range(90, 120);
-        goalCount = (int)(goalCount - (goalCount * (0.005f * playerDataBase.Treasure12)));
+        goalCount = Random.Range(60, 120);
+        goalCount = (int)(goalCount - (goalCount * (0.003f * playerDataBase.Treasure12)));
+
+        if(playerDataBase.AutoPresent)
+        {
+            goalCount = (int)(goalCount - (goalCount * 0.1f));
+        }
 
 #if UNITY_EDITOR
-        goalCount = 1;
+        goalCount = 2;
 #endif
         count = 0;
         StartCoroutine(TimerCoroution());
@@ -58,16 +64,32 @@ public class ChestBoxManager : MonoBehaviour
         FirebaseAnalytics.LogEvent("OpenChestBox");
     }
 
+    public void CheckAuto()
+    {
+        if (!playerDataBase.AutoPresent) return;
+
+        if (playerDataBase.LockTutorial >= 2)
+        {
+            if (GameStateManager.instance.AutoPresent)
+            {
+                if (chestBoxIcon.activeInHierarchy)
+                {
+                    GetFreeReward();
+                }
+            }
+        }
+    }
+
     IEnumerator TimerCoroution()
     {
         if(count >= goalCount)
         {
-            SetChestBox();
+            StartCoroutine(SetChestBox());
             yield break;
         }
         else
         {
-            if(ingameUI.activeInHierarchy)
+            if(ingameUI.activeInHierarchy && !GameStateManager.instance.Pause)
             {
                 count += 1;
             }
@@ -77,7 +99,7 @@ public class ChestBoxManager : MonoBehaviour
         StartCoroutine(TimerCoroution());
     }
 
-    void SetChestBox()
+    IEnumerator SetChestBox()
     {
         if(playerDataBase.LockTutorial >= 2)
         {
@@ -85,6 +107,13 @@ public class ChestBoxManager : MonoBehaviour
 
             SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
             NotionManager.instance.UseNotion(NotionType.OpenChestBoxNotion);
+
+            yield return waitForSeconds2;
+
+            if (GameStateManager.instance.AutoPresent)
+            {
+                GetFreeReward();
+            }
         }
         else
         {
@@ -95,6 +124,8 @@ public class ChestBoxManager : MonoBehaviour
 
     public void OpenChestBox()
     {
+        if (GameStateManager.instance.AutoPresent) return;
+
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -113,19 +144,21 @@ public class ChestBoxManager : MonoBehaviour
 
         random = Random.Range(0, 100);
 
-        if (random >= 71)
+        Debug.LogError(random);
+
+        if (random >= 61)
         {
             rewardType = RewardType.Gold;
 
             chestBoxArray[0].SetActive(true);
         }
-        else if (random > 16)
+        else if (random > 26)
         {
             rewardType = RewardType.PortionSet;
 
             chestBoxArray[1].SetActive(true);
         }
-        else if (random > 11)
+        else if (random > 16)
         {
             rewardType = RewardType.DefDestroyTicketPiece;
 

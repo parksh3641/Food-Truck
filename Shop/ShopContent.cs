@@ -167,9 +167,8 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
-                bestObj.SetActive(true);
-                bestText.text = "BEST";
-
+                //bestObj.SetActive(true);
+                //bestText.text = "BEST";
                 break;
             case ItemType.PortionSet2:
                 lockedObj.SetActive(false);
@@ -343,7 +342,7 @@ public class ShopContent : MonoBehaviour
                 infoText.ReLoad();
                 break;
             case ItemType.DefDestroyTicketPiece:
-                rewardText.text = "<size=16>x1</size>";
+                rewardText.text = "<size=18>x1</size>";
                 break;
             case ItemType.BuffTicketSet1:
                 lockedObj.SetActive(false);
@@ -365,8 +364,8 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
-                bestObj.SetActive(true);
-                bestText.text = "BEST";
+                //bestObj.SetActive(true);
+                //bestText.text = "BEST";
                 break;
             case ItemType.BuffTicketSet3:
                 lockedObj.SetActive(false);
@@ -408,8 +407,8 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
-                bestObj.SetActive(true);
-                bestText.text = "BEST";
+                //bestObj.SetActive(true);
+                //bestText.text = "BEST";
                 break;
             case ItemType.SuperOffline:
                 lockedObj.SetActive(false);
@@ -422,14 +421,16 @@ public class ShopContent : MonoBehaviour
                 infoText.ReLoad();
                 break;
             case ItemType.AdReward_Crystal:
-                rewardText.text = "<size=16>60</size>";
+                rewardText.text = "<size=18>30 ~ 100</size>";
                 break;
             case ItemType.AutoUpgrade:
                 lockedObj.SetActive(false);
 
-                buyRmObj[21].SetActive(true);
-                buyRmText[21].localizationName = itemType.ToString();
-                buyRmText[21].ReLoad();
+                //buyRmObj[21].SetActive(true);
+                //buyRmText[21].localizationName = itemType.ToString();
+                //buyRmText[21].ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(6000);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
@@ -437,9 +438,11 @@ public class ShopContent : MonoBehaviour
             case ItemType.AutoPresent:
                 lockedObj.SetActive(false);
 
-                buyRmObj[22].SetActive(true);
-                buyRmText[22].localizationName = itemType.ToString();
-                buyRmText[22].ReLoad();
+                //buyRmObj[22].SetActive(true);
+                //buyRmText[22].localizationName = itemType.ToString();
+                //buyRmText[22].ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(3000);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();

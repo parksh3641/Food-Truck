@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class ChangeFoodManager : MonoBehaviour
 {
     public GameObject changeFoodView;
+    public GameObject autoUpgradeView;
 
     public GameObject moveIsland;
 
@@ -18,6 +19,21 @@ public class ChangeFoodManager : MonoBehaviour
     public Text proficiencyValueText;
     public Image proficiencyFillamount;
     public Text proficiencyEffectText;
+
+    [Title("Auto")]
+    public GameObject autoUpgradeLocked;
+    public Image autoUpgradeButton;
+    public Text autoUpgradeText;
+
+    public GameObject autoPresentLocked;
+    public Image autoPresentButton;
+    public Text autoPresentText;
+
+    public Image[] autoUpgradeArray;
+
+    Color onColor = new Color(38 / 255f, 238 / 255f, 130 / 255f);
+    Color offColor = new Color(1, 97 / 255f, 92 / 255f);
+
 
     public ChangeFoodContent changeFoodContent;
 
@@ -37,8 +53,6 @@ public class ChangeFoodManager : MonoBehaviour
     private int level = 0;
     private int nowExp = 0;
     private int nextExp = 0;
-
-    public GameManager gameManager;
 
     PlayerDataBase playerDataBase;
     ImageDataBase imageDataBase;
@@ -60,6 +74,7 @@ public class ChangeFoodManager : MonoBehaviour
         dessertArray = imageDataBase.GetDessertArray();
 
         changeFoodView.SetActive(false);
+        autoUpgradeView.SetActive(false);
 
         alarmObj.SetActive(false);
     }
@@ -133,6 +148,41 @@ public class ChangeFoodManager : MonoBehaviour
 
             GameStateManager.instance.Pause = true;
 
+            autoUpgradeLocked.SetActive(true);
+            autoPresentLocked.SetActive(true);
+
+            if (playerDataBase.AutoUpgrade)
+            {
+                autoUpgradeLocked.SetActive(false);
+            }
+
+            if (playerDataBase.AutoPresent)
+            {
+                autoPresentLocked.SetActive(false);
+            }
+
+            if (GameStateManager.instance.AutoUpgrade)
+            {
+                autoUpgradeButton.color = onColor;
+                autoUpgradeText.text = LocalizationManager.instance.GetString("ON");
+            }
+            else
+            {
+                autoUpgradeButton.color = offColor;
+                autoUpgradeText.text = LocalizationManager.instance.GetString("OFF");
+            }
+
+            if (GameStateManager.instance.AutoPresent)
+            {
+                autoPresentButton.color = onColor;
+                autoPresentText.text = LocalizationManager.instance.GetString("ON");
+            }
+            else
+            {
+                autoPresentButton.color = offColor;
+                autoPresentText.text = LocalizationManager.instance.GetString("OFF");
+            }
+
             FirebaseAnalytics.LogEvent("OpenChangeFood");
         }
         else
@@ -140,6 +190,47 @@ public class ChangeFoodManager : MonoBehaviour
             changeFoodView.SetActive(false);
 
             GameStateManager.instance.Pause = false;
+
+            GameManager.instance.CheckAuto();
+        }
+    }
+
+    public void OpenAutoUpgradeView()
+    {
+        if (!playerDataBase.AutoUpgrade) return;
+
+        if (!autoUpgradeView.activeInHierarchy)
+        {
+            autoUpgradeView.SetActive(true);
+
+            ChangeAutoUpgradeLevel(GameStateManager.instance.AutoUpgradeLevel);
+        }
+        else 
+        {
+            autoUpgradeView.SetActive(false);
+        }
+    }
+
+    public void ChangeAutoUpgradeLevel(int number)
+    {
+        for(int i = 0; i < autoUpgradeArray.Length; i ++)
+        {
+            autoUpgradeArray[i].color = Color.white;
+        }
+
+        autoUpgradeArray[(number / 5) - 1].color = onColor;
+
+        if(number < 5)
+        {
+            GameStateManager.instance.AutoUpgradeLevel = 5;
+        }
+
+        if(GameStateManager.instance.AutoUpgradeLevel != number)
+        {
+            GameStateManager.instance.AutoUpgradeLevel = number;
+
+            NotionManager.instance.UseNotion(NotionType.ChangeNotion);
+            SoundManager.instance.PlaySFX(GameSfxType.Success);
         }
     }
 
@@ -410,7 +501,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         changeFoodView.SetActive(false);
 
-        gameManager.ChangeFood(type);
+        GameManager.instance.ChangeFood(type);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
@@ -426,7 +517,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         changeFoodView.SetActive(false);
 
-        gameManager.ChangeFood(type);
+        GameManager.instance.ChangeFood(type);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
@@ -440,7 +531,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         changeFoodView.SetActive(false);
 
-        gameManager.ChangeCandy(type);
+        GameManager.instance.ChangeCandy(type);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
@@ -456,7 +547,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         changeFoodView.SetActive(false);
 
-        gameManager.ChangeCandy(type);
+        GameManager.instance.ChangeCandy(type);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
@@ -470,7 +561,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         changeFoodView.SetActive(false);
 
-        gameManager.ChangeJapaneseFood(type);
+        GameManager.instance.ChangeJapaneseFood(type);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
@@ -486,7 +577,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         changeFoodView.SetActive(false);
 
-        gameManager.ChangeJapaneseFood(type);
+        GameManager.instance.ChangeJapaneseFood(type);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
@@ -500,7 +591,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         changeFoodView.SetActive(false);
 
-        gameManager.ChangeDessert(type);
+        GameManager.instance.ChangeDessert(type);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
@@ -516,9 +607,55 @@ public class ChangeFoodManager : MonoBehaviour
 
         changeFoodView.SetActive(false);
 
-        gameManager.ChangeDessert(type);
+        GameManager.instance.ChangeDessert(type);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.ChangeFoodNotion);
+    }
+
+    public void BuyShopNotion()
+    {
+        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+        NotionManager.instance.UseNotion(NotionType.BuyShopNotion);
+    }
+
+    public void ChangeAutoUpgrade()
+    {
+        if (!playerDataBase.AutoUpgrade) return;
+
+        if(GameStateManager.instance.AutoUpgrade)
+        {
+            GameStateManager.instance.AutoUpgrade = false;
+
+            autoUpgradeButton.color = offColor;
+            autoUpgradeText.text = LocalizationManager.instance.GetString("OFF");
+        }
+        else
+        {
+            GameStateManager.instance.AutoUpgrade = true;
+
+            autoUpgradeButton.color = onColor;
+            autoUpgradeText.text = LocalizationManager.instance.GetString("ON");
+        }
+    }
+
+    public void ChangeAutoPresent()
+    {
+        if (!playerDataBase.AutoPresent) return;
+
+        if (GameStateManager.instance.AutoPresent)
+        {
+            GameStateManager.instance.AutoPresent = false;
+
+            autoPresentButton.color = offColor;
+            autoPresentText.text = LocalizationManager.instance.GetString("OFF");
+        }
+        else
+        {
+            GameStateManager.instance.AutoPresent = true;
+
+            autoPresentButton.color = onColor;
+            autoPresentText.text = LocalizationManager.instance.GetString("ON");
+        }
     }
 }

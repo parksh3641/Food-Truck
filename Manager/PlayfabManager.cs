@@ -1330,6 +1330,9 @@ public class PlayfabManager : MonoBehaviour
                        //case "":
                        //    string text = statistics.Value.ToString();
                        //    break;
+                       case "RankPoint":
+                           playerDataBase.RankPoint = statistics.Value;
+                           break;
                        case "FirstReward":
                            playerDataBase.FirstReward = statistics.Value;
                            break;
@@ -1421,41 +1424,25 @@ public class PlayfabManager : MonoBehaviour
                            playerDataBase.GourmetLevel = statistics.Value;
                            break;
                        case "Package1":
-                           if (statistics.Value == 0)
-                           {
-                               playerDataBase.Package1 = false;
-                           }
-                           else
+                           if (statistics.Value == 1)
                            {
                                playerDataBase.Package1 = true;
                            }
                            break;
                        case "Package2":
-                           if (statistics.Value == 0)
-                           {
-                               playerDataBase.Package2 = false;
-                           }
-                           else
+                           if (statistics.Value == 1)
                            {
                                playerDataBase.Package2 = true;
                            }
                            break;
                        case "Package3":
-                           if (statistics.Value == 0)
-                           {
-                               playerDataBase.Package3 = false;
-                           }
-                           else
+                           if (statistics.Value == 1)
                            {
                                playerDataBase.Package3 = true;
                            }
                            break;
                        case "Package4":
-                           if (statistics.Value == 0)
-                           {
-                               playerDataBase.Package4 = false;
-                           }
-                           else
+                           if (statistics.Value == 1)
                            {
                                playerDataBase.Package4 = true;
                            }
@@ -2546,6 +2533,9 @@ public class PlayfabManager : MonoBehaviour
 
         UpdatePlayerStatisticsInsert("AutoUpgrade", 1);
 
+        GameStateManager.instance.AutoUpgrade = true;
+        GameStateManager.instance.AutoUpgradeLevel = 10;
+
         playerDataBase.AutoUpgrade = true;
     }
 
@@ -2557,6 +2547,8 @@ public class PlayfabManager : MonoBehaviour
         GrantItemToUser("Shop", itemList);
 
         UpdatePlayerStatisticsInsert("AutoPresent", 1);
+
+        GameStateManager.instance.AutoPresent = true;
 
         playerDataBase.AutoPresent = true;
     }

@@ -20,12 +20,10 @@ public class NoticeManager : MonoBehaviour
 
     public void Initialize()
     {
-#if !UNITY_EDITOR
         if (GameStateManager.instance.Tutorial && !GameStateManager.instance.HideNotice)
         {
             noticeView.SetActive(true);
         }
-#endif
     }
 
     public void OpenNoticeView()

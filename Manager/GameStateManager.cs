@@ -41,6 +41,12 @@ public class GameStateManager : MonoBehaviour
         public bool hideNotice = false;
 
         [Space]
+        [Title("Auto")]
+        public bool autoUpgrade = false;
+        public int autoUpgradeLevel = 10;
+        public bool autoPresent = false;
+
+        [Space]
         public bool developer = false;
         public bool recorder = false;
 
@@ -481,6 +487,45 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.recorder = value;
+            SaveFile();
+        }
+    }
+
+    public bool AutoUpgrade
+    {
+        get
+        {
+            return gameSettings.autoUpgrade;
+        }
+        set
+        {
+            gameSettings.autoUpgrade = value;
+            SaveFile();
+        }
+    }
+
+    public int AutoUpgradeLevel
+    {
+        get
+        {
+            return gameSettings.autoUpgradeLevel;
+        }
+        set
+        {
+            gameSettings.autoUpgradeLevel = value;
+            SaveFile();
+        }
+    }
+
+    public bool AutoPresent
+    {
+        get
+        {
+            return gameSettings.autoPresent;
+        }
+        set
+        {
+            gameSettings.autoPresent = value;
             SaveFile();
         }
     }

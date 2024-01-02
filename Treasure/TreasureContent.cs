@@ -7,13 +7,13 @@ public class TreasureContent : MonoBehaviour
 {
     public TreasureType treasureType = TreasureType.Treasure1;
 
+    public Outline background;
     public Text titleText;
     public Image icon;
     public Text levelText;
     public Text infoText;
     public Text effectText;
     public Text upgradePercentText;
-
 
     public Text upgradeText;
 
@@ -46,9 +46,12 @@ public class TreasureContent : MonoBehaviour
     private float treasure9Value = 0.4f;
     private float treasure10Value = 1f;
     private float treasure11Value = 1f;
-    private float treasure12Value = 0.5f;
+    private float treasure12Value = 0.3f;
 
     Sprite[] treasureArray;
+
+    Color rareColor = new Color(61 / 255f, 208 / 255f, 1);
+    Color epicColor = new Color(1, 124 / 255f, 1);
 
     TreasureManager treasureManager;
 
@@ -65,9 +68,9 @@ public class TreasureContent : MonoBehaviour
 
     public void Initialize(TreasureType type, TreasureManager manager)
     {
-        if(treasureArray[(int)type] == null)
+        if (imageDataBase == null)
         {
-            if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
+            imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
             treasureArray = imageDataBase.GetTreasureArray();
         }
 
@@ -81,6 +84,11 @@ public class TreasureContent : MonoBehaviour
         titleText.text = LocalizationManager.instance.GetString(type.ToString());
 
         check = 0;
+
+        if (!treasureManager.treasureView.activeInHierarchy)
+        {
+            return;
+        }
 
         switch (treasureType)
         {
@@ -106,6 +114,8 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
+                background.effectColor = epicColor;
+
                 break;
             case TreasureType.Treasure2:
                 count = playerDataBase.Treasure2Count;
@@ -129,6 +139,8 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
+                background.effectColor = epicColor;
+
                 break;
             case TreasureType.Treasure3:
                 count = playerDataBase.Treasure3Count;
@@ -151,6 +163,9 @@ public class TreasureContent : MonoBehaviour
 
                     check = 2;
                 }
+
+                background.effectColor = epicColor;
+
                 break;
             case TreasureType.Treasure4:
                 count = playerDataBase.Treasure4Count;
@@ -173,6 +188,7 @@ public class TreasureContent : MonoBehaviour
 
                     check = 2;
                 }
+
                 break;
             case TreasureType.Treasure5:
                 count = playerDataBase.Treasure5Count;
@@ -217,6 +233,9 @@ public class TreasureContent : MonoBehaviour
 
                     check = 2;
                 }
+
+                background.effectColor = rareColor;
+
                 break;
             case TreasureType.Treasure7:
                 count = playerDataBase.Treasure7Count;
@@ -239,6 +258,9 @@ public class TreasureContent : MonoBehaviour
 
                     check = 2;
                 }
+
+                background.effectColor = epicColor;
+
                 break;
             case TreasureType.Treasure8:
                 count = playerDataBase.Treasure8Count;
@@ -261,6 +283,9 @@ public class TreasureContent : MonoBehaviour
 
                     check = 2;
                 }
+
+                background.effectColor = rareColor;
+
                 break;
             case TreasureType.Treasure9:
                 count = playerDataBase.Treasure9Count;
@@ -283,6 +308,9 @@ public class TreasureContent : MonoBehaviour
 
                     check = 2;
                 }
+
+                background.effectColor = rareColor;
+
                 break;
             case TreasureType.Treasure10:
                 count = playerDataBase.Treasure10Count;
@@ -305,6 +333,9 @@ public class TreasureContent : MonoBehaviour
 
                     check = 2;
                 }
+
+                background.effectColor = rareColor;
+
                 break;
             case TreasureType.Treasure11:
                 count = playerDataBase.Treasure11Count;

@@ -90,8 +90,8 @@ public class CouponManager : MonoBehaviour
                     playerDataBase.Coupon1 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon1", 1);
 
-                    PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
+                    PlayfabManager.instance.UpdateAddGold(500000);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
 
                     PortionManager.instance.GetAllPortion(5);
 
@@ -103,8 +103,8 @@ public class CouponManager : MonoBehaviour
                     receiveContents[4].gameObject.SetActive(true);
                     receiveContents[5].gameObject.SetActive(true);
 
-                    receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 500);
+                    receiveContents[0].Initialize(RewardType.Gold, 500000);
+                    receiveContents[1].Initialize(RewardType.Crystal, 300);
                     receiveContents[2].Initialize(RewardType.Portion1, 5);
                     receiveContents[3].Initialize(RewardType.Portion2, 5);
                     receiveContents[4].Initialize(RewardType.Portion3, 5);
@@ -458,7 +458,7 @@ public class CouponManager : MonoBehaviour
                 }
                 break;
             case "YUMMYRUSH":
-                if (DateTime.Now >= new DateTime(2023, 12, 31))
+                if (DateTime.Now >= new DateTime(2024, 01, 31))
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.CouponNotion4);
@@ -471,9 +471,9 @@ public class CouponManager : MonoBehaviour
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon13", 1);
 
                     PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1000);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
 
-                    PortionManager.instance.GetDefTickets(10);
+                    PortionManager.instance.GetBuffTickets(5);
                     PortionManager.instance.GetPortion(4, 10);
 
                     couponRewardView.SetActive(true);
@@ -482,9 +482,9 @@ public class CouponManager : MonoBehaviour
                     receiveContents[2].gameObject.SetActive(true);
                     receiveContents[3].gameObject.SetActive(true);
 
-                    receiveContents[0].Initialize(RewardType.Gold, 2000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 100);
-                    receiveContents[2].Initialize(RewardType.DefDestroyTicket, 10);
+                    receiveContents[0].Initialize(RewardType.Gold, 1000000);
+                    receiveContents[1].Initialize(RewardType.Crystal, 500);
+                    receiveContents[2].Initialize(RewardType.BuffTickets, 5);
                     receiveContents[3].Initialize(RewardType.Portion5, 10);
 
                     if (playerDataBase.Character21 == 0)

@@ -75,16 +75,16 @@ public class LockManager : MonoBehaviour
             tutorial.SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 3) //피버모드 해제
+        if (playerDataBase.LockTutorial >= 3) //피버모드, 버프 해제
         {
             menuIcon[4].SetActive(true);
             menuIcon[6].SetActive(true);
+            menuIcon[8].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 4) //레시피, 버프 해제
+        if (playerDataBase.LockTutorial >= 4) //레시피 해제
         {
             menuIcon[7].SetActive(false);
-            menuIcon[8].SetActive(true);
         }
 
         if (playerDataBase.LockTutorial >= 5) //퀘스트 해제

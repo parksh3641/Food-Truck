@@ -3319,21 +3319,39 @@ public class ShopManager : MonoBehaviour
                 break;
             case 8:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 600);
+
+                playerDataBase.BuyCrystal += 600;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 9:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3300);
+
+                playerDataBase.BuyCrystal += 3300;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 10:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 7200);
+
+                playerDataBase.BuyCrystal += 7200;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 11:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 15600);
+
+                playerDataBase.BuyCrystal += 15600;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 12:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 46200);
+
+                playerDataBase.BuyCrystal += 46200;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 13:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 90000);
+
+                playerDataBase.BuyCrystal += 90000;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 14:
                 PortionManager.instance.GetBuffTickets(20);

@@ -1420,6 +1420,9 @@ public class PlayfabManager : MonoBehaviour
                        case "ConsumeGold":
                            playerDataBase.ConsumeGold = statistics.Value;
                            break;
+                       case "BuyCrystal":
+                           playerDataBase.BuyCrystal = statistics.Value;
+                           break;
                        case "GourmetLevel":
                            playerDataBase.GourmetLevel = statistics.Value;
                            break;
@@ -1500,6 +1503,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "DefDestroyTicketPiece":
                            playerDataBase.DefDestroyTicketPiece = statistics.Value;
+                           break;
+                       case "EventNumber":
+                           playerDataBase.EventNumber = statistics.Value;
                            break;
                        case "LockTutorial":
                            playerDataBase.LockTutorial = statistics.Value;
@@ -2196,6 +2202,8 @@ public class PlayfabManager : MonoBehaviour
             Debug.LogError("Error : Internet Disconnected\nCheck Internet State");
         }
     }
+
+
 
     public void UpdateDisplayName(string nickname, Action successAction, Action failAction)
     {

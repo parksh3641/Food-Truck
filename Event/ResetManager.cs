@@ -176,9 +176,7 @@ public class ResetManager : MonoBehaviour
         if(playerDataBase.WelcomeCheck)
         {
             playerDataBase.WelcomeCheck = false;
-        }
-        else
-        {
+
             if (playerDataBase.WelcomeCount < 7)
             {
                 welcomeManager.SetAlarm();

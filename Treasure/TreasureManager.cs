@@ -21,6 +21,7 @@ public class TreasureManager : MonoBehaviour
     public GameObject treasureRewardView;
 
     public GameObject treasureButton;
+    public GameObject treasureOneMoreButton;
 
     public TreasureContent[] treasureContents;
 
@@ -28,6 +29,7 @@ public class TreasureManager : MonoBehaviour
 
     private int index = 0;
     private int price = 30;
+    private bool oneMore = false;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(0.5f);
@@ -143,6 +145,8 @@ public class TreasureManager : MonoBehaviour
         SoundManager.instance.PlaySFX(GameSfxType.Purchase);
         NotionManager.instance.UseNotion(NotionType.SuccessBuy);
 
+        oneMore = false;
+
         OpenTreasure(1);
 
         FirebaseAnalytics.LogEvent("OpenTreasure1");
@@ -168,6 +172,36 @@ public class TreasureManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Purchase);
         NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+
+        oneMore = true;
+
+        OpenTreasure(11);
+
+        FirebaseAnalytics.LogEvent("OpenTreasure11");
+    }
+
+    public void OpenTreasure2_OneMore()
+    {
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
+        if (playerDataBase.Crystal < price * 9)
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+            return;
+        }
+
+        PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price * 9);
+
+        SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+        NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+
+        oneMore = true;
 
         OpenTreasure(11);
 
@@ -257,6 +291,7 @@ public class TreasureManager : MonoBehaviour
         CheckInitialize();
 
         treasureButton.SetActive(true);
+        treasureOneMoreButton.SetActive(oneMore);
     }
 
     void GetTreasure(int number)
@@ -316,6 +351,8 @@ public class TreasureManager : MonoBehaviour
 
     public void CloseTreasure()
     {
+        oneMore = false;
+
         treasureRewardView.SetActive(false);
     }
 }

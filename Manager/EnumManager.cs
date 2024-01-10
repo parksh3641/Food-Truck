@@ -217,6 +217,8 @@ public enum PackageType
     Package2,
     Package3,
     Package4,
+    Package5,
+    Package6
 }
 
 public enum BuyType
@@ -325,15 +327,20 @@ public enum RewardType
     Treasure9,
     TreasureBox,
     DefDestroyTicketPiece,
-    BuffTickets,
+    BuffTicket,
     Portion6,
-    SkillTickets,
+    SkillTicket,
     Treasure10,
     Treasure11,
     Treasure12,
     Gold2,
     Gold3,
-    RankPoint
+    RankPoint,
+    RepairTicket,
+    RemoveAds,
+    GoldX2,
+    AutoUpgrade,
+    AutoPresent
 }
 
 public enum QuestType

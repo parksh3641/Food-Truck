@@ -174,13 +174,13 @@ public class ReincarnationManager : MonoBehaviour
         GameStateManager.instance.JapaneseFoodType = JapaneseFoodType.JapaneseFood1;
         GameStateManager.instance.DessertType = DessertType.Dessert1;
 
-        GameStateManager.instance.HamburgerLevel = 0;
-        GameStateManager.instance.SandwichLevel = 0;
-        GameStateManager.instance.SnackLabLevel = 0;
-        GameStateManager.instance.DrinkLevel = 0;
-        GameStateManager.instance.PizzaLevel = 0;
-        GameStateManager.instance.DonutLevel = 0;
-        GameStateManager.instance.FriesLevel = 0;
+        GameStateManager.instance.Food1Level = 0;
+        GameStateManager.instance.Food2Level = 0;
+        GameStateManager.instance.Food3Level = 0;
+        GameStateManager.instance.Food4Level = 0;
+        GameStateManager.instance.Food5Level = 0;
+        GameStateManager.instance.Food6Level = 0;
+        GameStateManager.instance.Food7Level = 0;
 
         GameStateManager.instance.Candy1Level = 0;
         GameStateManager.instance.Candy2Level = 0;

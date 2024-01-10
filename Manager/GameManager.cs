@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     public Text buff2Text;
     public Text buff3Text;
 
-    private int buff1Value = 30;
+    private int buff1Value = 50;
     private int buff2Value = 10;
     private int buff3Value = 5;
 
@@ -200,6 +200,7 @@ public class GameManager : MonoBehaviour
     public int level = 0;
     public int nextLevel = 0;
     private int maxLevel = 0;
+    private int recoverLevel = 0;
     private int playTime = 0;
 
     public bool isDelay_Camera = false;
@@ -261,6 +262,7 @@ public class GameManager : MonoBehaviour
     public ChangeFoodManager changeFoodManager;
     public GourmetManager gourmetManager;
     public ChestBoxManager chestBoxManager;
+    public RecoverManager recoverManager;
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
@@ -690,8 +692,8 @@ public class GameManager : MonoBehaviour
                 switch (GameStateManager.instance.FoodType)
                 {
                     case FoodType.Food1:
-                        level = GameStateManager.instance.HamburgerLevel;
-                        nextLevel = (GameStateManager.instance.HamburgerLevel + 1) / 5;
+                        level = GameStateManager.instance.Food1Level;
+                        nextLevel = (GameStateManager.instance.Food1Level + 1) / 5;
 
                         if (hamburgerArray.Length - 1 < nextLevel)
                         {
@@ -699,8 +701,8 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case FoodType.Food2:
-                        level = GameStateManager.instance.SandwichLevel;
-                        nextLevel = (GameStateManager.instance.SandwichLevel + 1) / 5;
+                        level = GameStateManager.instance.Food2Level;
+                        nextLevel = (GameStateManager.instance.Food2Level + 1) / 5;
 
                         if (sandwichArray.Length - 1 < nextLevel)
                         {
@@ -708,8 +710,8 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case FoodType.Food3:
-                        level = GameStateManager.instance.SnackLabLevel;
-                        nextLevel = (GameStateManager.instance.SnackLabLevel + 1) / 5;
+                        level = GameStateManager.instance.Food3Level;
+                        nextLevel = (GameStateManager.instance.Food3Level + 1) / 5;
 
                         if (snackLabArray.Length - 1 < nextLevel)
                         {
@@ -717,8 +719,8 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case FoodType.Food4:
-                        level = GameStateManager.instance.DrinkLevel;
-                        nextLevel = (GameStateManager.instance.DrinkLevel + 1) / 5;
+                        level = GameStateManager.instance.Food4Level;
+                        nextLevel = (GameStateManager.instance.Food4Level + 1) / 5;
 
                         if (drinkArray.Length - 1 < nextLevel)
                         {
@@ -726,8 +728,8 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case FoodType.Food5:
-                        level = GameStateManager.instance.PizzaLevel;
-                        nextLevel = (GameStateManager.instance.PizzaLevel + 1) / 5;
+                        level = GameStateManager.instance.Food5Level;
+                        nextLevel = (GameStateManager.instance.Food5Level + 1) / 5;
 
                         if (pizzaArray.Length - 1 < nextLevel)
                         {
@@ -735,8 +737,8 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case FoodType.Food6:
-                        level = GameStateManager.instance.DonutLevel;
-                        nextLevel = (GameStateManager.instance.DonutLevel + 1) / 5;
+                        level = GameStateManager.instance.Food6Level;
+                        nextLevel = (GameStateManager.instance.Food6Level + 1) / 5;
 
                         if (donutArray.Length - 1 < nextLevel)
                         {
@@ -745,8 +747,8 @@ public class GameManager : MonoBehaviour
 
                         break;
                     case FoodType.Food7:
-                        level = GameStateManager.instance.FriesLevel;
-                        nextLevel = (GameStateManager.instance.FriesLevel + 1) / 5;
+                        level = GameStateManager.instance.Food7Level;
+                        nextLevel = (GameStateManager.instance.Food7Level + 1) / 5;
 
                         if (friesArray.Length - 1 < nextLevel)
                         {
@@ -1046,7 +1048,15 @@ public class GameManager : MonoBehaviour
 
         yield return waitForSeconds3;
 
-        PortionManager.instance.GetBuffTickets(2);
+        PortionManager.instance.GetBuffTickets(3);
+
+        yield return waitForSeconds3;
+
+        PortionManager.instance.GetSkillTickets(3);
+
+        yield return waitForSeconds3;
+
+        PortionManager.instance.GetRecoverTickets(10);
     }
 
     IEnumerator PlayTimeCoroution()
@@ -1214,7 +1224,7 @@ public class GameManager : MonoBehaviour
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 0.2f;
-        sellPricePlus += playerDataBase.Proficiency * 0.5f;
+        sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.4f;
 
         sellPriceTip += 5;
@@ -1665,6 +1675,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        recoverLevel = ((int)(maxLevel * 0.7f)) - 1;
+
         need = upgradeDataBase.GetNeed(level, defaultNeed);
         success = upgradeDataBase.GetSuccess(level);
 
@@ -1878,7 +1890,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             hamburgerArray[nextLevel].gameObject.SetActive(true);
-                            hamburgerArray[nextLevel].Initialize(GameStateManager.instance.HamburgerLevel - (5 * nextLevel));
+                            hamburgerArray[nextLevel].Initialize(GameStateManager.instance.Food1Level - (5 * nextLevel));
                         }
                         break;
                     case FoodType.Food2:
@@ -1890,7 +1902,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             sandwichArray[nextLevel].gameObject.SetActive(true);
-                            sandwichArray[nextLevel].Initialize(GameStateManager.instance.SandwichLevel - (5 * nextLevel));
+                            sandwichArray[nextLevel].Initialize(GameStateManager.instance.Food2Level - (5 * nextLevel));
                         }
                         break;
                     case FoodType.Food3:
@@ -1902,7 +1914,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             snackLabArray[nextLevel].gameObject.SetActive(true);
-                            snackLabArray[nextLevel].Initialize(GameStateManager.instance.SnackLabLevel - (5 * nextLevel));
+                            snackLabArray[nextLevel].Initialize(GameStateManager.instance.Food3Level - (5 * nextLevel));
                         }
                         break;
                     case FoodType.Food4:
@@ -1914,7 +1926,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             drinkArray[nextLevel].gameObject.SetActive(true);
-                            drinkArray[nextLevel].Initialize(GameStateManager.instance.DrinkLevel - (5 * nextLevel));
+                            drinkArray[nextLevel].Initialize(GameStateManager.instance.Food4Level - (5 * nextLevel));
                         }
                         break;
                     case FoodType.Food5:
@@ -1926,7 +1938,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             pizzaArray[nextLevel].gameObject.SetActive(true);
-                            pizzaArray[nextLevel].Initialize(GameStateManager.instance.PizzaLevel - (5 * nextLevel));
+                            pizzaArray[nextLevel].Initialize(GameStateManager.instance.Food5Level - (5 * nextLevel));
                         }
                         break;
                     case FoodType.Food6:
@@ -1938,7 +1950,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             donutArray[nextLevel].gameObject.SetActive(true);
-                            donutArray[nextLevel].Initialize(GameStateManager.instance.DonutLevel - (5 * nextLevel));
+                            donutArray[nextLevel].Initialize(GameStateManager.instance.Food6Level - (5 * nextLevel));
                         }
                         break;
                     case FoodType.Food7:
@@ -1950,7 +1962,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             friesArray[nextLevel].gameObject.SetActive(true);
-                            friesArray[nextLevel].Initialize(GameStateManager.instance.FriesLevel - (5 * nextLevel));
+                            friesArray[nextLevel].Initialize(GameStateManager.instance.Food7Level - (5 * nextLevel));
                         }
                         break;
                     case FoodType.Ribs:
@@ -2823,25 +2835,25 @@ public class GameManager : MonoBehaviour
                     switch (GameStateManager.instance.FoodType)
                     {
                         case FoodType.Food1:
-                            GameStateManager.instance.HamburgerLevel = level;
+                            GameStateManager.instance.Food1Level = level;
                             break;
                         case FoodType.Food2:
-                            GameStateManager.instance.SandwichLevel = level;
+                            GameStateManager.instance.Food2Level = level;
                             break;
                         case FoodType.Food3:
-                            GameStateManager.instance.SnackLabLevel = level;
+                            GameStateManager.instance.Food3Level = level;
                             break;
                         case FoodType.Food4:
-                            GameStateManager.instance.DrinkLevel = level;
+                            GameStateManager.instance.Food4Level = level;
                             break;
                         case FoodType.Food5:
-                            GameStateManager.instance.PizzaLevel = level;
+                            GameStateManager.instance.Food5Level = level;
                             break;
                         case FoodType.Food6:
-                            GameStateManager.instance.DonutLevel = level;
+                            GameStateManager.instance.Food6Level = level;
                             break;
                         case FoodType.Food7:
-                            GameStateManager.instance.FriesLevel = level;
+                            GameStateManager.instance.Food7Level = level;
                             break;
                         case FoodType.Ribs:
                             GameStateManager.instance.RibsLevel = level;
@@ -3004,6 +3016,16 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                if (maxLevel >= 25)
+                {
+                    if (Random.Range(0, 100) < 10)
+                    {
+                        PortionManager.instance.GetRecoverTickets(1);
+
+                        Debug.LogError("º¹±¸ Æ¼ÄÏ È¹µæ");
+                    }
+                }
+
                 if (defDestroy > 0)
                 {
                     if (defDestroy >= Random.Range(0, 100))
@@ -3016,25 +3038,25 @@ public class GameManager : MonoBehaviour
                                 switch (GameStateManager.instance.FoodType)
                                 {
                                     case FoodType.Food1:
-                                        GameStateManager.instance.HamburgerLevel -= 1;
+                                        GameStateManager.instance.Food1Level -= 1;
                                         break;
                                     case FoodType.Food2:
-                                        GameStateManager.instance.SandwichLevel -= 1;
+                                        GameStateManager.instance.Food2Level -= 1;
                                         break;
                                     case FoodType.Food3:
-                                        GameStateManager.instance.SnackLabLevel -= 1;
+                                        GameStateManager.instance.Food3Level -= 1;
                                         break;
                                     case FoodType.Food4:
-                                        GameStateManager.instance.DrinkLevel -= 1;
+                                        GameStateManager.instance.Food4Level -= 1;
                                         break;
                                     case FoodType.Food5:
-                                        GameStateManager.instance.PizzaLevel -= 1;
+                                        GameStateManager.instance.Food5Level -= 1;
                                         break;
                                     case FoodType.Food6:
-                                        GameStateManager.instance.DonutLevel -= 1;
+                                        GameStateManager.instance.Food6Level -= 1;
                                         break;
                                     case FoodType.Food7:
-                                        GameStateManager.instance.FriesLevel -= 1;
+                                        GameStateManager.instance.Food7Level -= 1;
                                         break;
                                     case FoodType.Ribs:
                                         GameStateManager.instance.RibsLevel -= 1;
@@ -3161,6 +3183,25 @@ public class GameManager : MonoBehaviour
                 bombPartice.Play();
             }
 
+            if(maxLevel >= 25 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
+            {
+                switch (GameStateManager.instance.IslandType)
+                {
+                    case IslandType.Island1:
+                        recoverManager.FoodInitialize(GameStateManager.instance.FoodType, maxLevel);
+                        break;
+                    case IslandType.Island2:
+                        recoverManager.CandyInitialize(GameStateManager.instance.CandyType, maxLevel);
+                        break;
+                    case IslandType.Island3:
+                        recoverManager.JapaneseFoodInitialize(GameStateManager.instance.JapaneseFoodType, maxLevel);
+                        break;
+                    case IslandType.Island4:
+                        recoverManager.DessertInitialize(GameStateManager.instance.DessertType, maxLevel);
+                        break;
+                }
+            }
+
             DestoryFood();
 
             CheckFoodState();
@@ -3182,6 +3223,150 @@ public class GameManager : MonoBehaviour
 
         isUpgradeDelay = true;
         Invoke("WaitUpgradeDelay", 0.4f);
+    }
+
+    public void RecoverFood(FoodType type)
+    {
+        switch (type)
+        {
+            case FoodType.Food1:
+                GameStateManager.instance.Food1Level = recoverLevel;
+                break;
+            case FoodType.Food2:
+                GameStateManager.instance.Food2Level = recoverLevel;
+                break;
+            case FoodType.Food3:
+                GameStateManager.instance.Food3Level = recoverLevel;
+                break;
+            case FoodType.Food4:
+                GameStateManager.instance.Food4Level = recoverLevel;
+                break;
+            case FoodType.Food5:
+                GameStateManager.instance.Food5Level = recoverLevel;
+                break;
+            case FoodType.Food6:
+                GameStateManager.instance.Food6Level = recoverLevel;
+                break;
+            case FoodType.Food7:
+                GameStateManager.instance.Food7Level = recoverLevel;
+                break;
+            case FoodType.Ribs:
+                GameStateManager.instance.RibsLevel = recoverLevel;
+                break;
+        }
+
+        ChangeFood(type);
+    }
+
+    public void RecoverCandy(CandyType type)
+    {
+        switch (type)
+        {
+            case CandyType.Candy1:
+                GameStateManager.instance.Candy1Level = recoverLevel;
+                break;
+            case CandyType.Candy2:
+                GameStateManager.instance.Candy2Level = recoverLevel;
+                break;
+            case CandyType.Candy3:
+                GameStateManager.instance.Candy3Level = recoverLevel;
+                break;
+            case CandyType.Candy4:
+                GameStateManager.instance.Candy4Level = recoverLevel;
+                break;
+            case CandyType.Candy5:
+                GameStateManager.instance.Candy5Level = recoverLevel;
+                break;
+            case CandyType.Candy6:
+                GameStateManager.instance.Candy6Level = recoverLevel;
+                break;
+            case CandyType.Candy7:
+                GameStateManager.instance.Candy7Level = recoverLevel;
+                break;
+            case CandyType.Candy8:
+                GameStateManager.instance.Candy8Level = recoverLevel;
+                break;
+            case CandyType.Candy9:
+                GameStateManager.instance.Candy9Level = recoverLevel;
+                break;
+            case CandyType.Chocolate:
+                GameStateManager.instance.ChocolateLevel = recoverLevel;
+                break;
+        }
+
+        ChangeCandy(type);
+    }
+
+    public void RecoverJapanese(JapaneseFoodType type)
+    {
+        switch (type)
+        {
+            case JapaneseFoodType.JapaneseFood1:
+                GameStateManager.instance.JapaneseFood1Level = recoverLevel;
+                break;
+            case JapaneseFoodType.JapaneseFood2:
+                GameStateManager.instance.JapaneseFood2Level = recoverLevel;
+                break;
+            case JapaneseFoodType.JapaneseFood3:
+                GameStateManager.instance.JapaneseFood3Level = recoverLevel;
+                break;
+            case JapaneseFoodType.JapaneseFood4:
+                GameStateManager.instance.JapaneseFood4Level = recoverLevel;
+                break;
+            case JapaneseFoodType.JapaneseFood5:
+                GameStateManager.instance.JapaneseFood5Level = recoverLevel;
+                break;
+            case JapaneseFoodType.JapaneseFood6:
+                GameStateManager.instance.JapaneseFood6Level = recoverLevel;
+                break;
+            case JapaneseFoodType.JapaneseFood7:
+                GameStateManager.instance.JapaneseFood7Level = recoverLevel;
+                break;
+            case JapaneseFoodType.Ramen:
+                GameStateManager.instance.RamenLevel = recoverLevel;
+                break;
+        }
+
+        ChangeJapaneseFood(type);
+    }
+
+    public void RecoverDessert(DessertType type)
+    {
+        switch (type)
+        {
+            case DessertType.Dessert1:
+                GameStateManager.instance.Dessert1Level = recoverLevel;
+                break;
+            case DessertType.Dessert2:
+                GameStateManager.instance.Dessert2Level = recoverLevel;
+                break;
+            case DessertType.Dessert3:
+                GameStateManager.instance.Dessert3Level = recoverLevel;
+                break;
+            case DessertType.Dessert4:
+                GameStateManager.instance.Dessert4Level = recoverLevel;
+                break;
+            case DessertType.Dessert5:
+                GameStateManager.instance.Dessert5Level = recoverLevel;
+                break;
+            case DessertType.Dessert6:
+                GameStateManager.instance.Dessert6Level = recoverLevel;
+                break;
+            case DessertType.Dessert7:
+                GameStateManager.instance.Dessert7Level = recoverLevel;
+                break;
+            case DessertType.Dessert8:
+                GameStateManager.instance.Dessert8Level = recoverLevel;
+                break;
+            case DessertType.Dessert9:
+                GameStateManager.instance.Dessert9Level = recoverLevel;
+                break;
+            case DessertType.FruitSkewers:
+                GameStateManager.instance.FruitSkewersLevel = recoverLevel;
+                break;
+        }
+
+        ChangeDessert(type);
     }
 
     public void SetParticle(bool check)
@@ -3213,25 +3398,25 @@ public class GameManager : MonoBehaviour
                 switch (GameStateManager.instance.FoodType)
                 {
                     case FoodType.Food1:
-                        GameStateManager.instance.HamburgerLevel = 0;
+                        GameStateManager.instance.Food1Level = 0;
                         break;
                     case FoodType.Food2:
-                        GameStateManager.instance.SandwichLevel = 0;
+                        GameStateManager.instance.Food2Level = 0;
                         break;
                     case FoodType.Food3:
-                        GameStateManager.instance.SnackLabLevel = 0;
+                        GameStateManager.instance.Food3Level = 0;
                         break;
                     case FoodType.Food4:
-                        GameStateManager.instance.DrinkLevel = 0;
+                        GameStateManager.instance.Food4Level = 0;
                         break;
                     case FoodType.Food5:
-                        GameStateManager.instance.PizzaLevel = 0;
+                        GameStateManager.instance.Food5Level = 0;
                         break;
                     case FoodType.Food6:
-                        GameStateManager.instance.DonutLevel = 0;
+                        GameStateManager.instance.Food6Level = 0;
                         break;
                     case FoodType.Food7:
-                        GameStateManager.instance.FriesLevel = 0;
+                        GameStateManager.instance.Food7Level = 0;
                         break;
                     case FoodType.Ribs:
                         GameStateManager.instance.RibsLevel = 0;
@@ -4688,9 +4873,9 @@ public class GameManager : MonoBehaviour
 
     void CheckBankruptcy()
     {
-        if(GameStateManager.instance.HamburgerLevel <= 1 && GameStateManager.instance.SandwichLevel <= 1 && GameStateManager.instance.SnackLabLevel <= 1
-            && GameStateManager.instance.DrinkLevel <= 1 && GameStateManager.instance.PizzaLevel <= 1 && GameStateManager.instance.DonutLevel <= 1
-            && GameStateManager.instance.FriesLevel <= 1 && GameStateManager.instance.Candy1Level <= 1 && GameStateManager.instance.Candy2Level <= 1
+        if(GameStateManager.instance.Food1Level <= 1 && GameStateManager.instance.Food2Level <= 1 && GameStateManager.instance.Food3Level <= 1
+            && GameStateManager.instance.Food4Level <= 1 && GameStateManager.instance.Food5Level <= 1 && GameStateManager.instance.Food6Level <= 1
+            && GameStateManager.instance.Food7Level <= 1 && GameStateManager.instance.Candy1Level <= 1 && GameStateManager.instance.Candy2Level <= 1
             && GameStateManager.instance.Candy3Level <= 1 && GameStateManager.instance.Candy4Level <= 1 && GameStateManager.instance.Candy5Level <= 1
             && GameStateManager.instance.Candy6Level <= 1 && GameStateManager.instance.Candy7Level <= 1 && GameStateManager.instance.Candy8Level <= 1
             && GameStateManager.instance.Candy9Level <= 1 && GameStateManager.instance.JapaneseFood1Level <= 1 && GameStateManager.instance.JapaneseFood2Level <= 1

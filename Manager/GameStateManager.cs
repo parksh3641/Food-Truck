@@ -64,14 +64,14 @@ public class GameStateManager : MonoBehaviour
 
         [Space]
         [Title("Level")]
-        public int hamburgerLevel = 0;
-        public int sandwichLevel = 0;
-        public int snackLabLevel = 0;
-        public int drinkLevel = 0;
-        public int pizzaLevel = 0;
-        public int donutLevel = 0;
-        public int friesLevel = 0;
-        public int ribsLevel = 0;
+        public int food1Level = 0;
+        public int food2Level = 0;
+        public int food3Level = 0;
+        public int food4Level = 0;
+        public int food5Level = 0;
+        public int food6Level = 0;
+        public int food7Level = 0;
+        public int food8Level = 0;
 
         [Space]
         public int candy1Level = 0;
@@ -543,93 +543,93 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public int HamburgerLevel
+    public int Food1Level
     {
         get
         {
-            return gameSettings.hamburgerLevel;
+            return gameSettings.food1Level;
         }
         set
         {
-            gameSettings.hamburgerLevel = value;
+            gameSettings.food1Level = value;
             SaveFile();
         }
     }
 
-    public int SandwichLevel
+    public int Food2Level
     {
         get
         {
-            return gameSettings.sandwichLevel;
+            return gameSettings.food2Level;
         }
         set
         {
-            gameSettings.sandwichLevel = value;
+            gameSettings.food2Level = value;
             SaveFile();
         }
     }
 
-    public int SnackLabLevel
+    public int Food3Level
     {
         get
         {
-            return gameSettings.snackLabLevel;
+            return gameSettings.food3Level;
         }
         set
         {
-            gameSettings.snackLabLevel = value;
+            gameSettings.food3Level = value;
             SaveFile();
         }
     }
 
-    public int DrinkLevel
+    public int Food4Level
     {
         get
         {
-            return gameSettings.drinkLevel;
+            return gameSettings.food4Level;
         }
         set
         {
-            gameSettings.drinkLevel = value;
+            gameSettings.food4Level = value;
             SaveFile();
         }
     }
 
-    public int PizzaLevel
+    public int Food5Level
     {
         get
         {
-            return gameSettings.pizzaLevel;
+            return gameSettings.food5Level;
         }
         set
         {
-            gameSettings.pizzaLevel = value;
+            gameSettings.food5Level = value;
             SaveFile();
         }
     }
 
-    public int DonutLevel
+    public int Food6Level
     {
         get
         {
-            return gameSettings.donutLevel;
+            return gameSettings.food6Level;
         }
         set
         {
-            gameSettings.donutLevel = value;
+            gameSettings.food6Level = value;
             SaveFile();
         }
     }
 
-    public int FriesLevel
+    public int Food7Level
     {
         get
         {
-            return gameSettings.friesLevel;
+            return gameSettings.food7Level;
         }
         set
         {
-            gameSettings.friesLevel = value;
+            gameSettings.food7Level = value;
             SaveFile();
         }
     }
@@ -638,11 +638,11 @@ public class GameStateManager : MonoBehaviour
     {
         get
         {
-            return gameSettings.ribsLevel;
+            return gameSettings.food8Level;
         }
         set
         {
-            gameSettings.ribsLevel = value;
+            gameSettings.food8Level = value;
             SaveFile();
         }
     }

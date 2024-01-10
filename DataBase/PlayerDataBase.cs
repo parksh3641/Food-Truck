@@ -42,9 +42,11 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int islandNumber = 0;
     [SerializeField]
-    private int buffTickets = 0;
+    private int buffTicket = 0;
     [SerializeField]
-    private int skillTickets = 0;
+    private int skillTicket = 0;
+    [SerializeField]
+    private int recoverTicket = 0;
     [SerializeField]
     private int proficiency = 0;
     [SerializeField]
@@ -591,6 +593,10 @@ public class PlayerDataBase : ScriptableObject
     private bool package3 = false;
     [SerializeField]
     private bool package4 = false;
+    [SerializeField]
+    private bool package5 = false;
+    [SerializeField]
+    private bool package6 = false;
 
 
     [Space]
@@ -778,27 +784,39 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int BuffTickets
+    public int BuffTicket
     {
         get
         {
-            return buffTickets;
+            return buffTicket;
         }
         set
         {
-            buffTickets = value;
+            buffTicket = value;
         }
     }
 
-    public int SkillTickets
+    public int SkillTicket
     {
         get
         {
-            return skillTickets;
+            return skillTicket;
         }
         set
         {
-            skillTickets = value;
+            skillTicket = value;
+        }
+    }
+
+    public int RecoverTicket
+    {
+        get
+        {
+            return recoverTicket;
+        }
+        set
+        {
+            recoverTicket = value;
         }
     }
 
@@ -3706,6 +3724,30 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public bool Package5
+    {
+        get
+        {
+            return package5;
+        }
+        set
+        {
+            package5 = value;
+        }
+    }
+
+    public bool Package6
+    {
+        get
+        {
+            return package6;
+        }
+        set
+        {
+            package6 = value;
+        }
+    }
+
     public string AttendanceDay
     {
         get
@@ -3923,8 +3965,9 @@ public class PlayerDataBase : ScriptableObject
         firstReward = 0;
         islandNumber = 0;
         testAccount = 0;
-        buffTickets = 0;
-        skillTickets = 0;
+        buffTicket = 0;
+        skillTicket = 0;
+        recoverTicket = 0;
         proficiency = 0;
         level = 0;
         exp = 0;
@@ -4184,6 +4227,8 @@ public class PlayerDataBase : ScriptableObject
         package2 = false;
         package3 = false;
         package4 = false;
+        package5 = false;
+        package6 = false;
 
         attendanceDay = "";
         attendanceCount = 0;

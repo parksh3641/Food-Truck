@@ -23,6 +23,12 @@ public class SkillContent : MonoBehaviour
     public GameObject buttonCrystal;
     public Text crystalText;
 
+    public Image buttonGoldImg;
+    public Image buttonCrystalImg;
+    public Image buttonTicketImg;
+
+    public Sprite[] buttonImgArray;
+
     private float skill1Value = 0.2f;
     private float skill2Value = 0.3f;
     private float skill3Value = 1f;
@@ -491,6 +497,8 @@ public class SkillContent : MonoBehaviour
 
             crystalText.text = MoneyUnitString.ToCurrencyString(value);
         }
+
+        Checking();
     }
 
     public void LevelUpButton(int number)
@@ -651,10 +659,10 @@ public class SkillContent : MonoBehaviour
         }
         else
         {
-            if(playerDataBase.SkillTickets > 0)
+            if(playerDataBase.SkillTicket > 0)
             {
-                playerDataBase.SkillTickets -= 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("SkillTickets", playerDataBase.SkillTickets);
+                playerDataBase.SkillTicket -= 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("SkillTickets", playerDataBase.SkillTicket);
             }
             else
             {
@@ -754,5 +762,32 @@ public class SkillContent : MonoBehaviour
     void Delay()
     {
         isDelay = false;
+    }
+
+    public void Checking()
+    {
+        buttonGoldImg.sprite = buttonImgArray[0];
+        buttonCrystalImg.sprite = buttonImgArray[0];
+        buttonTicketImg.sprite = buttonImgArray[0];
+
+        if (moneyType == MoneyType.CoinA)
+        {
+            if(playerDataBase.Coin >= value)
+            {
+                buttonGoldImg.sprite = buttonImgArray[1];
+            }
+        }
+        else
+        {
+            if (playerDataBase.Crystal >= value)
+            {
+                buttonCrystalImg.sprite = buttonImgArray[2];
+            }
+        }
+
+        if (playerDataBase.SkillTicket > 0)
+        {
+            buttonTicketImg.sprite = buttonImgArray[3];
+        }
     }
 }

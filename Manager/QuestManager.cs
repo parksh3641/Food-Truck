@@ -212,9 +212,9 @@ public class QuestManager : MonoBehaviour
         playerDataBase.QuestCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);
 
-        PlayfabManager.instance.UpdateAddGold(reward);
-
         PortionManager.instance.GetRandomPortion(reward2);
+
+        PlayfabManager.instance.UpdateAddGold(reward);
 
         NotionManager.instance.UseNotion(NotionType.QuestNotion);
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);

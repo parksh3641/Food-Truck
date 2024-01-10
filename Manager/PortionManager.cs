@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class PortionManager : MonoBehaviour
     public MoneyAnimation defTicketPieceAnimation;
     public MoneyAnimation defTicketAnimation;
     public MoneyAnimation buffTicketAnimation;
+    public MoneyAnimation skillTicketAnimation;
+    public MoneyAnimation repairTicketAnimation;
 
     private int random = 0;
 
@@ -23,6 +26,7 @@ public class PortionManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
     }
 
+    [Button]
     public void GetPortion(int index, int number)
     {
         switch (index)
@@ -52,6 +56,7 @@ public class PortionManager : MonoBehaviour
         portionAnimation[index].PlusMoney(number);
     }
 
+    [Button]
     public void GetRandomPortion(int number)
     {
         random = Random.Range(0, 4);
@@ -82,6 +87,7 @@ public class PortionManager : MonoBehaviour
         portionAnimation[random].PlusMoney(number);
     }
 
+    [Button]
     public void GetAllPortion(int number)
     {
         playerDataBase.Portion1 += number;
@@ -100,6 +106,7 @@ public class PortionManager : MonoBehaviour
         portionAnimation[3].PlusMoney(number);
     }
 
+    [Button]
     public void GetDefTicketPiece(int number)
     {
         playerDataBase.DefDestroyTicketPiece += number;
@@ -108,6 +115,7 @@ public class PortionManager : MonoBehaviour
         defTicketPieceAnimation.PlusMoney(number);
     }
 
+    [Button]
     public void GetDefTickets(int number)
     {
         playerDataBase.DefDestroyTicket += number;
@@ -116,11 +124,30 @@ public class PortionManager : MonoBehaviour
         defTicketAnimation.PlusMoney(number);
     }
 
+    [Button]
     public void GetBuffTickets(int number)
     {
-        playerDataBase.BuffTickets += number;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+        playerDataBase.BuffTicket += number;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTicket);
 
         buffTicketAnimation.PlusMoney(number);
+    }
+
+    [Button]
+    public void GetSkillTickets(int number)
+    {
+        playerDataBase.SkillTicket += number;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SkillTickets", playerDataBase.SkillTicket);
+
+        skillTicketAnimation.PlusMoney(number);
+    }
+
+    [Button]
+    public void GetRecoverTickets(int number)
+    {
+        playerDataBase.RecoverTicket += number;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RepairTicket", playerDataBase.RecoverTicket);
+
+        repairTicketAnimation.PlusMoney(number);
     }
 }

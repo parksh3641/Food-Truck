@@ -66,7 +66,7 @@ public class WarningManager : MonoBehaviour
 
     public void ReceiveButton()
     {
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500 * playerDataBase.BugReportWarning);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1500 * playerDataBase.BugReportWarning);
 
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
 

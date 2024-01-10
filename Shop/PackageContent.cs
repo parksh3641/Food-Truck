@@ -46,25 +46,37 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.Gold, 3000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
-                receiveContents[3].Initialize(RewardType.BuffTickets, 10);
+                receiveContents[3].Initialize(RewardType.BuffTicket, 10);
                 break;
             case PackageType.Package2:
                 receiveContents[0].Initialize(RewardType.Gold, 10000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 8000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 40);
-                receiveContents[3].Initialize(RewardType.BuffTickets, 60);
+                receiveContents[3].Initialize(RewardType.BuffTicket, 60);
                 break;
             case PackageType.Package3:
                 receiveContents[0].Initialize(RewardType.Gold, 20000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 25000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 120);
-                receiveContents[3].Initialize(RewardType.BuffTickets, 120);
+                receiveContents[3].Initialize(RewardType.BuffTicket, 120);
                 break;
             case PackageType.Package4:
                 receiveContents[0].Initialize(RewardType.Gold, 60000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 40000);
-                receiveContents[2].Initialize(RewardType.BuffTickets, 240);
+                receiveContents[2].Initialize(RewardType.BuffTicket, 240);
                 receiveContents[3].Initialize(RewardType.DefDestroyTicket, 200);
+                break;
+            case PackageType.Package5:
+                receiveContents[0].Initialize(RewardType.Gold, 6000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 1200);
+                receiveContents[2].Initialize(RewardType.PortionSet, 20);
+                receiveContents[3].Initialize(RewardType.BuffTicket, 20);
+                break;
+            case PackageType.Package6:
+                receiveContents[0].Initialize(RewardType.RemoveAds, -1);
+                receiveContents[1].Initialize(RewardType.GoldX2, -1);
+                receiveContents[2].Initialize(RewardType.AutoUpgrade, -1);
+                receiveContents[3].Initialize(RewardType.AutoPresent, -1);
                 break;
         }
 

@@ -1349,10 +1349,13 @@ public class PlayfabManager : MonoBehaviour
                            playerDataBase.TestAccount = statistics.Value;
                            break;
                        case "BuffTickets":
-                           playerDataBase.BuffTickets = statistics.Value;
+                           playerDataBase.BuffTicket = statistics.Value;
                            break;
                        case "SkillTickets":
-                           playerDataBase.SkillTickets = statistics.Value;
+                           playerDataBase.SkillTicket = statistics.Value;
+                           break;
+                       case "RecoverTicket":
+                           playerDataBase.RecoverTicket = statistics.Value;
                            break;
                        case "Proficiency":
                            playerDataBase.Proficiency = statistics.Value;
@@ -2160,6 +2163,12 @@ public class PlayfabManager : MonoBehaviour
 
                 playerDataBase.ConsumeGold += number;
                 UpdatePlayerStatisticsInsert("ConsumeGold", playerDataBase.ConsumeGold);
+
+                if(playerDataBase.Crystal - number < 0)
+                {
+                    number = playerDataBase.Crystal;
+                }
+
                 break;
             case MoneyType.CoinB:
                 currentType = "GA";

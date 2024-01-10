@@ -138,9 +138,9 @@ public class NickNameManager : MonoBehaviour
                             NotionManager.instance.UseNotion(NotionType.LowCrystal);
                             return;
                         }
-                    }
 
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price);
+                        PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price);
+                    }
 
                     PlayfabManager.instance.UpdateDisplayName(newNickName, Success, Failure);
                 }

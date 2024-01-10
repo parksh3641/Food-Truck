@@ -103,14 +103,14 @@ public class ReceiveContent : MonoBehaviour
             case RewardType.DefDestroyTicketPiece:
                 mainBackground.sprite = rankBackgroundArray[0];
                 break;
-            case RewardType.BuffTickets:
+            case RewardType.BuffTicket:
                 mainBackground.sprite = rankBackgroundArray[2];
                 break;
             case RewardType.Portion6:
                 mainBackground.sprite = rankBackgroundArray[3];
                 break;
-            case RewardType.SkillTickets:
-                mainBackground.sprite = rankBackgroundArray[2];
+            case RewardType.SkillTicket:
+                mainBackground.sprite = rankBackgroundArray[1];
                 break;
             case RewardType.Treasure10:
                 mainBackground.sprite = rankBackgroundArray[1];
@@ -129,6 +129,33 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.RankPoint:
                 mainBackground.sprite = rankBackgroundArray[2];
+                break;
+            case RewardType.RepairTicket:
+                mainBackground.sprite = rankBackgroundArray[2];
+                break;
+            case RewardType.RemoveAds:
+                mainBackground.sprite = rankBackgroundArray[3];
+
+                countText.text = LocalizationManager.instance.GetString("RemoveAds");
+                countText.alignment = TextAnchor.MiddleCenter;
+                break;
+            case RewardType.GoldX2:
+                mainBackground.sprite = rankBackgroundArray[3];
+
+                countText.text = LocalizationManager.instance.GetString("GoldX2");
+                countText.alignment = TextAnchor.MiddleCenter;
+                break;
+            case RewardType.AutoUpgrade:
+                mainBackground.sprite = rankBackgroundArray[3];
+
+                countText.text = LocalizationManager.instance.GetString("AutoUpgrade");
+                countText.alignment = TextAnchor.MiddleCenter;
+                break;
+            case RewardType.AutoPresent:
+                mainBackground.sprite = rankBackgroundArray[3];
+
+                countText.text = LocalizationManager.instance.GetString("AutoPresent");
+                countText.alignment = TextAnchor.MiddleCenter;
                 break;
         }
     }

@@ -207,5 +207,6 @@ public enum NotionType
     UnLockedNotion3,
     UnLockedNotion4,
     BuyShopNotion,
-    ChangeNotion
+    ChangeNotion,
+    RecoverNotion
 }

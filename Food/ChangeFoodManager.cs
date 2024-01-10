@@ -68,7 +68,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         proficiencyDataBase.Initialize();
 
-        foodChangeArray = imageDataBase.GetFoodArray();
+        foodChangeArray = imageDataBase.GetFoodChangeArray();
         candyArray = imageDataBase.GetCandyArray();
         japaneseFoodArray = imageDataBase.GetJapaneseFoodArray();
         dessertArray = imageDataBase.GetDessertArray();
@@ -273,7 +273,7 @@ public class ChangeFoodManager : MonoBehaviour
         proficiencyValueText.text = nowExp + " / " + nextExp;
         proficiencyFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
 
-        proficiencyEffectText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : " + (level * 0.5f) + "%   (+0.5%)";
+        proficiencyEffectText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : " + (level * 1) + "%   (+1%)";
 
         for (int i = 0; i < changeFoodContentList.Count; i++)
         {
@@ -347,17 +347,17 @@ public class ChangeFoodManager : MonoBehaviour
             changeJapaneseFoodList[7].SetLevel(GameStateManager.instance.RamenLevel, upgradeDataBase.GetMaxLevelJapaneseFood(JapaneseFoodType.Ramen));
             changeDessertList[9].SetLevel(GameStateManager.instance.FruitSkewersLevel, upgradeDataBase.GetMaxLevelDessert(DessertType.FruitSkewers));
 
-            if (playerDataBase.IslandNumber > 0 || playerDataBase.RankLevel2 > 1)
+            if (playerDataBase.IslandNumber > 0 || playerDataBase.HamburgerMaxValue > 0)
             {
                 changeCandyList[9].UnLock();
             }
 
-            if (playerDataBase.IslandNumber > 1 || playerDataBase.RankLevel3 > 1)
+            if (playerDataBase.IslandNumber > 1 || playerDataBase.Candy1MaxValue > 0)
             {
                 changeJapaneseFoodList[7].UnLock();
             }
 
-            if (playerDataBase.IslandNumber > 2 || playerDataBase.RankLevel4 > 1)
+            if (playerDataBase.IslandNumber > 2 || playerDataBase.Dessert1MaxValue > 0)
             {
                 changeDessertList[9].UnLock();
             }
@@ -378,13 +378,13 @@ public class ChangeFoodManager : MonoBehaviour
                 }
 
                 changeFoodContentList[(int)GameStateManager.instance.FoodType].Selected();
-                changeFoodContentList[0].SetLevel(GameStateManager.instance.HamburgerLevel, upgradeDataBase.GetMaxLevel(FoodType.Food1));
-                changeFoodContentList[1].SetLevel(GameStateManager.instance.SandwichLevel, upgradeDataBase.GetMaxLevel(FoodType.Food2));
-                changeFoodContentList[2].SetLevel(GameStateManager.instance.SnackLabLevel, upgradeDataBase.GetMaxLevel(FoodType.Food3));
-                changeFoodContentList[3].SetLevel(GameStateManager.instance.DrinkLevel, upgradeDataBase.GetMaxLevel(FoodType.Food4));
-                changeFoodContentList[4].SetLevel(GameStateManager.instance.PizzaLevel, upgradeDataBase.GetMaxLevel(FoodType.Food5));
-                changeFoodContentList[5].SetLevel(GameStateManager.instance.DonutLevel, upgradeDataBase.GetMaxLevel(FoodType.Food6));
-                changeFoodContentList[6].SetLevel(GameStateManager.instance.FriesLevel, upgradeDataBase.GetMaxLevel(FoodType.Food7));
+                changeFoodContentList[0].SetLevel(GameStateManager.instance.Food1Level, upgradeDataBase.GetMaxLevel(FoodType.Food1));
+                changeFoodContentList[1].SetLevel(GameStateManager.instance.Food2Level, upgradeDataBase.GetMaxLevel(FoodType.Food2));
+                changeFoodContentList[2].SetLevel(GameStateManager.instance.Food3Level, upgradeDataBase.GetMaxLevel(FoodType.Food3));
+                changeFoodContentList[3].SetLevel(GameStateManager.instance.Food4Level, upgradeDataBase.GetMaxLevel(FoodType.Food4));
+                changeFoodContentList[4].SetLevel(GameStateManager.instance.Food5Level, upgradeDataBase.GetMaxLevel(FoodType.Food5));
+                changeFoodContentList[5].SetLevel(GameStateManager.instance.Food6Level, upgradeDataBase.GetMaxLevel(FoodType.Food6));
+                changeFoodContentList[6].SetLevel(GameStateManager.instance.Food7Level, upgradeDataBase.GetMaxLevel(FoodType.Food7));
                 changeFoodContentList[7].gameObject.SetActive(false);
 
                 changeFoodContentList[0].UnLock();

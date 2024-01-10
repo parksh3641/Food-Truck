@@ -74,7 +74,7 @@ public class BuffManager : MonoBehaviour
             index = number;
 
             buffTicketsText.text = LocalizationManager.instance.GetString("BuffTicket") + "\n<size=10>" + 
-                LocalizationManager.instance.GetString("Hold") + " : " + playerDataBase.BuffTickets + "</size>";
+                LocalizationManager.instance.GetString("Hold") + " : " + playerDataBase.BuffTicket + "</size>";
 
             switch(number)
             {
@@ -106,15 +106,15 @@ public class BuffManager : MonoBehaviour
 
     public void UseBuffTicket()
     {
-        if(playerDataBase.BuffTickets <= 0)
+        if(playerDataBase.BuffTicket <= 0)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.LowItemNotion);
             return;
         }
 
-        playerDataBase.BuffTickets -= 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTickets);
+        playerDataBase.BuffTicket -= 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTicket);
 
         BuffON();
 

@@ -392,12 +392,14 @@ public class ShopManager : MonoBehaviour
             case 1:
                 packageThanks.SetActive(false);
 
-                packageContents[0].Initialize(PackageType.Package1, this);
-                packageContents[1].Initialize(PackageType.Package2, this);
-                packageContents[2].Initialize(PackageType.Package3, this);
-                packageContents[3].Initialize(PackageType.Package4, this);
+                packageContents[0].Initialize(PackageType.Package5, this);
+                packageContents[1].Initialize(PackageType.Package1, this);
+                packageContents[2].Initialize(PackageType.Package2, this);
+                packageContents[3].Initialize(PackageType.Package3, this);
+                packageContents[4].Initialize(PackageType.Package4, this);
+                packageContents[5].Initialize(PackageType.Package6, this);
 
-                if(playerDataBase.Package1)
+                if (playerDataBase.Package1)
                 {
                     packageContents[0].gameObject.SetActive(false);
                 }
@@ -417,7 +419,18 @@ public class ShopManager : MonoBehaviour
                     packageContents[3].gameObject.SetActive(false);
                 }
 
-                if(playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4)
+                if (playerDataBase.Package5)
+                {
+                    packageContents[4].gameObject.SetActive(false);
+                }
+
+                if (playerDataBase.Package6)
+                {
+                    packageContents[5].gameObject.SetActive(false);
+                }
+
+                if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
+                    && playerDataBase.Package5 && playerDataBase.Package6)
                 {
                     packageThanks.SetActive(true);
                 }
@@ -668,9 +681,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.DefDestroyTicketSlices:
-                if (playerDataBase.DefDestroyTicketPiece >= 10)
+                if (playerDataBase.DefDestroyTicketPiece >= 5)
                 {
-                    playerDataBase.DefDestroyTicketPiece -= 10;
+                    playerDataBase.DefDestroyTicketPiece -= 5;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicketPiece", playerDataBase.DefDestroyTicketPiece);
 
                     PortionManager.instance.GetDefTickets(1);
@@ -719,11 +732,11 @@ public class ShopManager : MonoBehaviour
                 GoogleAdsManager.instance.admobReward_Portion.ShowAd(8);
                 break;
             case ItemType.AutoUpgrade:
-                if (playerDataBase.Crystal >= 6000)
+                if (playerDataBase.Crystal >= 4500)
                 {
                     if (playerDataBase.AutoUpgrade) return;
 
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 6000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 4500);
 
                     PlayfabManager.instance.PurchaseAutoUpgrade();
 
@@ -739,11 +752,11 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.AutoPresent:
-                if (playerDataBase.Crystal >= 3000)
+                if (playerDataBase.Crystal >= 1500)
                 {
                     if (playerDataBase.AutoPresent) return;
 
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 3000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1500);
 
                     PlayfabManager.instance.PurchaseAutoPresent();
 
@@ -1387,7 +1400,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 100)
+            if (price_Crystal > 500)
             {
                 crystalButton.SetActive(true);
             }
@@ -1587,7 +1600,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 100)
+            if (price_Crystal > 500)
             {
                 crystalButton.SetActive(true);
             }
@@ -1758,7 +1771,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 100)
+            if (price_Crystal > 500)
             {
                 crystalButton.SetActive(true);
             }
@@ -2141,7 +2154,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 100)
+            if (price_Crystal > 500)
             {
                 crystalButton.SetActive(true);
             }
@@ -2348,7 +2361,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 100)
+            if (price_Crystal > 500)
             {
                 crystalButton.SetActive(true);
             }
@@ -3324,33 +3337,33 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 9:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3300);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3600);
 
-                playerDataBase.BuyCrystal += 3300;
+                playerDataBase.BuyCrystal += 3600;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 10:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 7200);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 8400);
 
-                playerDataBase.BuyCrystal += 7200;
+                playerDataBase.BuyCrystal += 8400;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 11:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 15600);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 19200);
 
-                playerDataBase.BuyCrystal += 15600;
+                playerDataBase.BuyCrystal += 19200;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 12:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 46200);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 59400);
 
-                playerDataBase.BuyCrystal += 46200;
+                playerDataBase.BuyCrystal += 59400;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 13:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 90000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 120000);
 
-                playerDataBase.BuyCrystal += 90000;
+                playerDataBase.BuyCrystal += 120000;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 14:
@@ -3494,7 +3507,8 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
-        if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4)
+        if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
+             && playerDataBase.Package5 && playerDataBase.Package6)
         {
             packageThanks.SetActive(true);
         }

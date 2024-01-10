@@ -52,7 +52,7 @@ public class SkillManager : MonoBehaviour
         {
             skillView.SetActive(true);
 
-            countText.text = playerDataBase.SkillTickets.ToString();
+            countText.text = playerDataBase.SkillTicket.ToString();
 
             ChangeTopToggle(0);
 
@@ -73,7 +73,12 @@ public class SkillManager : MonoBehaviour
 
     public void Initialize()
     {
-        countText.text = playerDataBase.SkillTickets.ToString();
+        countText.text = playerDataBase.SkillTicket.ToString();
+
+        for (int i = 0; i < skillContents.Length; i++)
+        {
+            skillContents[i].Checking();
+        }
     }
 
     public void ChangeTopToggle(int number)

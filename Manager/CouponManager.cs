@@ -484,7 +484,7 @@ public class CouponManager : MonoBehaviour
 
                     receiveContents[0].Initialize(RewardType.Gold, 1000000);
                     receiveContents[1].Initialize(RewardType.Crystal, 500);
-                    receiveContents[2].Initialize(RewardType.BuffTickets, 5);
+                    receiveContents[2].Initialize(RewardType.BuffTicket, 5);
                     receiveContents[3].Initialize(RewardType.Portion5, 10);
 
                     if (playerDataBase.Character21 == 0)

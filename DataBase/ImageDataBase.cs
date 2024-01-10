@@ -25,7 +25,7 @@ public class ImageDataBase : ScriptableObject
 
     public Sprite[] rankBackgroundArray;
 
-    public Sprite[] GetFoodArray()
+    public Sprite[] GetFoodChangeArray()
     {
         return foodChangeArray;
     }

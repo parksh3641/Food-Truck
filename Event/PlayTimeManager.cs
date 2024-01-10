@@ -81,7 +81,7 @@ public class PlayTimeManager : MonoBehaviour
         attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Crystal, 10);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.BuffTickets, 1);
+        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.BuffTicket, 1);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[3].receiveContent[0].Initialize(RewardType.TreasureBox, 1);

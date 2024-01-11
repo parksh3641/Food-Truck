@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
 
     public GameObject welcomeEvent;
     public GameObject weekendEvent;
+    public LocalizationContent weekendEventTitle;
 
     PlayerDataBase playerDataBase;
 
@@ -43,12 +44,18 @@ public class EventManager : MonoBehaviour
                 welcomeEvent.SetActive(false);
             }
 
-            weekendEvent.SetActive(false);
+            weekendEvent.SetActive(true);
 
             if (IsWeekend())
             {
-                weekendEvent.SetActive(true);
+                weekendEventTitle.localizationName = "Event5Title_Now";
             }
+            else
+            {
+                weekendEventTitle.localizationName = "Event5Title_Before";
+            }
+
+            weekendEventTitle.ReLoad();
 
             FirebaseAnalytics.LogEvent("OpenEvent");
         }

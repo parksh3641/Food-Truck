@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +18,19 @@ public class PackageContent : MonoBehaviour
     public LocalizationContent[] nowPriceText;
 
     public Text bestText;
+    public Text timerText;
+
+    string localization_Time = "";
+    string localization_Days = "";
+    string localization_Hours = "";
+    string localization_Minutes = "";
+    string localization_Seconds = "";
+
+    DateTime time;
+    DateTime serverTime;
+    TimeSpan timeSpan;
+
+    WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
     ShopManager shopManager;
 
@@ -34,6 +49,8 @@ public class PackageContent : MonoBehaviour
         packageType = type;
 
         titleText.text = LocalizationManager.instance.GetString(type.ToString());
+
+        timerText.text = "";
 
         //for (int i = 0; i < receiveContents.Length; i++)
         //{
@@ -95,6 +112,60 @@ public class PackageContent : MonoBehaviour
 
         bestText.text = LocalizationManager.instance.GetString(type + "_Info");
     }
+
+    public void BuyLimitDate()
+    {
+        time = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
+        serverTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
+
+        localization_Time = LocalizationManager.instance.GetString("LimitDayTime");
+        localization_Days = LocalizationManager.instance.GetString("Days");
+        localization_Hours = LocalizationManager.instance.GetString("Hours");
+        localization_Minutes = LocalizationManager.instance.GetString("Minutes");
+        localization_Seconds = LocalizationManager.instance.GetString("Seconds");
+
+        StopAllCoroutines();
+        StartCoroutine(TimerCoroution());
+    }
+
+    IEnumerator TimerCoroution()
+    {
+        if (DateTime.Compare(DateTime.Now, serverTime) == -1)
+        {
+            timeSpan = serverTime - DateTime.Now;
+
+            if (timeSpan.Days > 0)
+            {
+                timerText.text = "<size=20>" + localization_Time + "</size>\n" + timeSpan.Days.ToString("D2") + localization_Days + " " + timeSpan.Hours.ToString("D2") + localization_Hours + " " + timeSpan.Minutes.ToString("D2") + localization_Minutes;
+            }
+            else
+            {
+                if (timeSpan.Hours > 0)
+                {
+                    timerText.text = "<size=20>" + localization_Time + "</size>\n" + timeSpan.Hours.ToString("D2") + localization_Hours + " " + timeSpan.Minutes.ToString("D2") + localization_Minutes;
+                }
+                else
+                {
+                    if (timeSpan.Minutes == 0)
+                    {
+                        timerText.text = "<size=20>" + localization_Time + "</size>\n" + timeSpan.Seconds.ToString("D2") + localization_Seconds;
+                    }
+                    else
+                    {
+                        timerText.text = "<size=20>" + localization_Time + "</size>\n" + timeSpan.Minutes.ToString("D2") + localization_Minutes + " " + timeSpan.Seconds.ToString("D2") + localization_Seconds;
+                    }
+                }
+            }
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+
+        yield return waitForSeconds;
+        StartCoroutine(TimerCoroution());
+    }
+
 
     public void BuyPurchase()
     {

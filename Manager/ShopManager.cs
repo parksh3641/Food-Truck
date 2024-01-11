@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -133,6 +134,10 @@ public class ShopManager : MonoBehaviour
     List<string> itemList = new List<string>();
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+
+    DateTime time;
+    DateTime serverTime;
+    TimeSpan timeSpan;
 
     PlayerDataBase playerDataBase;
     CharacterDataBase characterDataBase;
@@ -399,27 +404,57 @@ public class ShopManager : MonoBehaviour
                 packageContents[4].Initialize(PackageType.Package4, this);
                 packageContents[5].Initialize(PackageType.Package6, this);
 
-                if (playerDataBase.Package1)
+                if (playerDataBase.Package5)
                 {
                     packageContents[0].gameObject.SetActive(false);
                 }
+                else
+                {
+                    if (playerDataBase.FirstDate.Length < 1)
+                    {
+                        playerDataBase.FirstDate = DateTime.Now.ToString("MMddHHmm");
+                        playerDataBase.FirstServerDate = DateTime.Now.AddDays(3).ToString("MMddHHmm");
 
-                if (playerDataBase.Package2)
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstDate", int.Parse("1" + playerDataBase.FirstDate));
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstServerDate", int.Parse("1" + playerDataBase.FirstServerDate));
+
+                        playerDataBase.FirstDate = "1" + DateTime.Now.ToString("MMddHHmm");
+                        playerDataBase.FirstServerDate = "1" + DateTime.Now.AddDays(3).ToString("MMddHHmm");
+
+                        Debug.Log("한정 패키지 구매 날짜 설정");
+                    }
+
+                    time = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
+                    serverTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
+
+                    if (DateTime.Compare(DateTime.Now, serverTime) == -1)
+                    {
+                        Debug.Log("한정 패키지 구매 가능");
+
+                        packageContents[0].BuyLimitDate();
+                    }
+                    else
+                    {
+                        Debug.Log("한정 패키지 구매 가능 날짜가 지났습니다.");
+                    }
+                }
+
+                if (playerDataBase.Package1)
                 {
                     packageContents[1].gameObject.SetActive(false);
                 }
 
-                if (playerDataBase.Package3)
+                if (playerDataBase.Package2)
                 {
                     packageContents[2].gameObject.SetActive(false);
                 }
 
-                if (playerDataBase.Package4)
+                if (playerDataBase.Package3)
                 {
                     packageContents[3].gameObject.SetActive(false);
                 }
 
-                if (playerDataBase.Package5)
+                if (playerDataBase.Package4)
                 {
                     packageContents[4].gameObject.SetActive(false);
                 }
@@ -3312,6 +3347,8 @@ public class ShopManager : MonoBehaviour
 
                 PlayfabManager.instance.PurchaseRemoveAd();
 
+                NotionManager.instance.UseNotion(NotionType.SuccessRemoveAds);
+
                 Invoke("ContentDelay", 0.5f);
                 break;
             case 4:
@@ -3505,6 +3542,44 @@ public class ShopManager : MonoBehaviour
 
                 PortionManager.instance.GetDefTickets(200);
                 break;
+            case PackageType.Package5:
+                playerDataBase.Package5 = true;
+                Invoke("PackageDelay5", 0.5f);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package5", 1);
+
+                PlayfabManager.instance.UpdateAddGold(6000000);
+
+                yield return waitForSeconds;
+
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1200);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetAllPortion(20);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetBuffTickets(20);
+                break;
+            case PackageType.Package6:
+                playerDataBase.Package6 = true;
+                Invoke("PackageDelay6", 0.5f);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package6", 1);
+
+                PlayfabManager.instance.PurchaseRemoveAd();
+
+                yield return waitForSeconds;
+
+                PlayfabManager.instance.PurchaseGoldX2();
+
+                yield return waitForSeconds;
+
+                PlayfabManager.instance.PurchaseAutoUpgrade();
+
+                yield return waitForSeconds;
+
+                PlayfabManager.instance.PurchaseAutoPresent();
+                break;
         }
 
         if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
@@ -3551,22 +3626,32 @@ public class ShopManager : MonoBehaviour
 
     void PackageDelay()
     {
-        packageContents[0].gameObject.SetActive(false);
+        packageContents[1].gameObject.SetActive(false);
     }
 
     void PackageDelay2()
     {
-        packageContents[1].gameObject.SetActive(false);
+        packageContents[2].gameObject.SetActive(false);
     }
 
     void PackageDelay3()
     {
-        packageContents[2].gameObject.SetActive(false);
+        packageContents[3].gameObject.SetActive(false);
     }
 
     void PackageDelay4()
     {
-        packageContents[3].gameObject.SetActive(false);
+        packageContents[4].gameObject.SetActive(false);
+    }
+
+    void PackageDelay5()
+    {
+        packageContents[0].gameObject.SetActive(false);
+    }
+
+    void PackageDelay6()
+    {
+        packageContents[5].gameObject.SetActive(false);
     }
 
     public void Failed()

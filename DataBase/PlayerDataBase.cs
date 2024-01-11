@@ -20,6 +20,10 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int firstReward = 0;
     [SerializeField]
+    private string firstDate = "";
+    [SerializeField]
+    private string firstServerDate = "";
+    [SerializeField]
     private int lockTutorial = 0;
     [SerializeField]
     private int eventNumber = 0;
@@ -633,13 +637,6 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private bool autoPresent = false;
 
-    [Space]
-    [Title("Warning")]
-    [SerializeField]
-    private int nickNameWarning = 0;
-    [SerializeField]
-    private int bugReportWarning = 0;
-
     public long Coin
     {
         get
@@ -757,6 +754,30 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             firstReward = value;
+        }
+    }
+
+    public string FirstDate
+    {
+        get
+        {
+            return firstDate;
+        }
+        set
+        {
+            firstDate = value;
+        }
+    }
+
+    public string FirstServerDate
+    {
+        get
+        {
+            return firstServerDate;
+        }
+        set
+        {
+            firstServerDate = value;
         }
     }
 
@@ -3915,30 +3936,6 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int NickNameWarning
-    {
-        get
-        {
-            return nickNameWarning;
-        }
-        set
-        {
-            nickNameWarning = value;
-        }
-    }
-
-    public int BugReportWarning
-    {
-        get
-        {
-            return bugReportWarning;
-        }
-        set
-        {
-            bugReportWarning = value;
-        }
-    }
-
     public void Initialize()
     {
         removeAds = false;
@@ -3963,6 +3960,8 @@ public class PlayerDataBase : ScriptableObject
         eventNumber = 0;
         lockTutorial = 0;
         firstReward = 0;
+        firstDate = "";
+        firstServerDate = "";
         islandNumber = 0;
         testAccount = 0;
         buffTicket = 0;
@@ -4238,9 +4237,6 @@ public class PlayerDataBase : ScriptableObject
         welcomeCount = 0;
         welcomeCheck = false;
         nextMonday = "";
-
-        nickNameWarning = 0;
-        bugReportWarning = 0;
     }
 
     public bool CheckCharacter(TruckType type)

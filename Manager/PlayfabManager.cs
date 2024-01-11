@@ -1336,6 +1336,12 @@ public class PlayfabManager : MonoBehaviour
                        case "FirstReward":
                            playerDataBase.FirstReward = statistics.Value;
                            break;
+                       case "FirstDate":
+                           playerDataBase.FirstDate = statistics.Value.ToString();
+                           break;
+                       case "FirstServerDate":
+                           playerDataBase.FirstServerDate = statistics.Value.ToString();
+                           break;
                        case "IslandNumber":
                            playerDataBase.IslandNumber = statistics.Value;
 
@@ -1451,6 +1457,18 @@ public class PlayfabManager : MonoBehaviour
                            if (statistics.Value == 1)
                            {
                                playerDataBase.Package4 = true;
+                           }
+                           break;
+                       case "Package5":
+                           if (statistics.Value == 1)
+                           {
+                               playerDataBase.Package5 = true;
+                           }
+                           break;
+                       case "Package6":
+                           if (statistics.Value == 1)
+                           {
+                               playerDataBase.Package6 = true;
                            }
                            break;
                        case "AttendanceDay":
@@ -1889,12 +1907,6 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "TotalLevel":
                            playerDataBase.TotalLevel = statistics.Value;
-                           break;
-                       case "NickNameWarning":
-                           playerDataBase.NickNameWarning = statistics.Value;
-                           break;
-                       case "BugReportWarning":
-                           playerDataBase.BugReportWarning = statistics.Value;
                            break;
                    }
                }
@@ -2502,6 +2514,8 @@ public class PlayfabManager : MonoBehaviour
 
     public void PurchaseRemoveAd()
     {
+        if (playerDataBase.RemoveAds) return;
+
         itemList.Clear();
         itemList.Add("RemoveAds");
 
@@ -2511,11 +2525,13 @@ public class PlayfabManager : MonoBehaviour
 
         UpdatePlayerStatisticsInsert("RemoveAds", 1);
 
-        NotionManager.instance.UseNotion(NotionType.SuccessRemoveAds);
+        GameManager.instance.CheckPurchase();
     }
 
     public void PurchaseGoldX2()
     {
+        if (playerDataBase.GoldX2) return;
+
         itemList.Clear();
         itemList.Add("GoldX2");
 
@@ -2524,10 +2540,14 @@ public class PlayfabManager : MonoBehaviour
         UpdatePlayerStatisticsInsert("GoldX2", 1);
 
         playerDataBase.GoldX2 = true;
+
+        GameManager.instance.CheckPurchase();
     }
 
     public void PurchaseSuperOffline()
     {
+        if (playerDataBase.SuperOffline) return;
+
         itemList.Clear();
         itemList.Add("SuperOffline");
 
@@ -2539,10 +2559,14 @@ public class PlayfabManager : MonoBehaviour
         UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));
 
         playerDataBase.SuperOffline = true;
+
+        GameManager.instance.CheckPurchase();
     }
 
     public void PurchaseAutoUpgrade()
     {
+        if (playerDataBase.AutoUpgrade) return;
+
         itemList.Clear();
         itemList.Add("AutoUpgrade");
 
@@ -2554,10 +2578,14 @@ public class PlayfabManager : MonoBehaviour
         GameStateManager.instance.AutoUpgradeLevel = 10;
 
         playerDataBase.AutoUpgrade = true;
+
+        GameManager.instance.CheckPurchase();
     }
 
     public void PurchaseAutoPresent()
     {
+        if (playerDataBase.AutoPresent) return;
+
         itemList.Clear();
         itemList.Add("AutoPresent");
 
@@ -2568,6 +2596,8 @@ public class PlayfabManager : MonoBehaviour
         GameStateManager.instance.AutoPresent = true;
 
         playerDataBase.AutoPresent = true;
+
+        GameManager.instance.CheckPurchase();
     }
 
     public void RestorePurchases()

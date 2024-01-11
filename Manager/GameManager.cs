@@ -1,10 +1,12 @@
 using Firebase.Analytics;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -280,6 +282,7 @@ public class GameManager : MonoBehaviour
     WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
     WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.5f);
+    WaitForSeconds waitForSeconds4 = new WaitForSeconds(0.35f);
 
     private void Awake()
     {
@@ -392,6 +395,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    bool IsWeekend()
+    {
+        DayOfWeek currentDay = DateTime.Now.DayOfWeek;
+
+        return currentDay == DayOfWeek.Saturday || currentDay == DayOfWeek.Sunday;
+    }
+
 
     private void Start()
     {
@@ -432,42 +442,13 @@ public class GameManager : MonoBehaviour
         checkInternet.SetActive(false);
         loginView.SetActive(false);
 
+        CheckPurchase();
+
         SetFoodContent();
 
         buff1Text.text = "+" + buff1Value.ToString() + "%";
         buff2Text.text = "+" + buff2Value.ToString() + "%";
         buff3Text.text = "+" + buff3Value.ToString() + "%";
-
-        removeAds.SetActive(false);
-        goldx2.SetActive(false);
-        superOffline.SetActive(false);
-        autoUpgrade.SetActive(false);
-        autoPresent.SetActive(false);
-
-        if (playerDataBase.RemoveAds)
-        {
-            removeAds.SetActive(true);
-        }
-
-        if (playerDataBase.GoldX2)
-        {
-            goldx2.SetActive(true);
-        }
-
-        if (playerDataBase.SuperOffline)
-        {
-            superOffline.SetActive(true);
-        }
-
-        if (playerDataBase.AutoUpgrade)
-        {
-            autoUpgrade.SetActive(true);
-        }
-
-        if (playerDataBase.AutoPresent)
-        {
-            autoPresent.SetActive(true);
-        }
 
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
@@ -531,6 +512,40 @@ public class GameManager : MonoBehaviour
 #else
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 2);
 #endif
+    }
+
+    public void CheckPurchase()
+    {
+        removeAds.SetActive(false);
+        goldx2.SetActive(false);
+        superOffline.SetActive(false);
+        autoUpgrade.SetActive(false);
+        autoPresent.SetActive(false);
+
+        if (playerDataBase.RemoveAds)
+        {
+            removeAds.SetActive(true);
+        }
+
+        if (playerDataBase.GoldX2)
+        {
+            goldx2.SetActive(true);
+        }
+
+        if (playerDataBase.SuperOffline)
+        {
+            superOffline.SetActive(true);
+        }
+
+        if (playerDataBase.AutoUpgrade)
+        {
+            autoUpgrade.SetActive(true);
+        }
+
+        if (playerDataBase.AutoPresent)
+        {
+            autoPresent.SetActive(true);
+        }
     }
 
     void SetFoodContent()
@@ -1057,6 +1072,18 @@ public class GameManager : MonoBehaviour
         yield return waitForSeconds3;
 
         PortionManager.instance.GetRecoverTickets(10);
+
+        yield return waitForSeconds3;
+
+        playerDataBase.FirstDate = "1" + DateTime.Now.ToString("MMddHHmm");
+        playerDataBase.FirstServerDate = "1" + DateTime.Now.AddDays(3).ToString("MMddHHmm");
+        playerDataBase.CastleDate = "1" + DateTime.Now.ToString("MMddHHmm");
+        playerDataBase.CastleServerDate = "1" + DateTime.Now.AddDays(1).ToString("MMddHHmm");
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstDate", int.Parse("1" + playerDataBase.FirstDate));
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstServerDate", int.Parse("1" + playerDataBase.FirstServerDate));
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleDate", int.Parse("1" + playerDataBase.CastleDate));
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));
     }
 
     IEnumerator PlayTimeCoroution()
@@ -1226,6 +1253,11 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.Skill8 * 0.2f;
         sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.4f;
+
+        if(IsWeekend())
+        {
+            sellPricePlus += 30;
+        }
 
         sellPriceTip += 5;
         sellPriceTip += playerDataBase.Skill14 * 0.3f; //ÆÁ È®·ü
@@ -1401,7 +1433,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        yield return waitForSeconds3;
+        yield return waitForSeconds4;
 
         StartCoroutine(AutoUpgradeCoroution());
     }
@@ -1674,6 +1706,8 @@ public class GameManager : MonoBehaviour
                 sellPrice = sellPrice + (int)(sellPrice * 0.4f);
                 break;
         }
+
+        sellPrice = sellPrice + (int)(sellPrice * 0.2f); //ÀÓ½Ã·Î 20% Áõ°¡
 
         recoverLevel = ((int)(maxLevel * 0.7f)) - 1;
 
@@ -3222,7 +3256,7 @@ public class GameManager : MonoBehaviour
         }
 
         isUpgradeDelay = true;
-        Invoke("WaitUpgradeDelay", 0.4f);
+        Invoke("WaitUpgradeDelay", 0.35f);
     }
 
     public void RecoverFood(FoodType type)

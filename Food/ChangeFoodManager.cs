@@ -11,6 +11,8 @@ public class ChangeFoodManager : MonoBehaviour
     public GameObject autoUpgradeView;
 
     public GameObject moveIsland;
+    public GameObject skillLocked;
+    public GameObject treasureLocked;
 
     public GameObject alarmObj;
 
@@ -58,6 +60,7 @@ public class ChangeFoodManager : MonoBehaviour
     ImageDataBase imageDataBase;
     UpgradeDataBase upgradeDataBase;
     ProficiencyDataBase proficiencyDataBase;
+    LevelDataBase levelDataBase;
 
     private void Awake()
     {
@@ -65,6 +68,7 @@ public class ChangeFoodManager : MonoBehaviour
         if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
         if (upgradeDataBase == null) upgradeDataBase = Resources.Load("UpgradeDataBase") as UpgradeDataBase;
         if (proficiencyDataBase == null) proficiencyDataBase = Resources.Load("ProficiencyDataBase") as ProficiencyDataBase;
+        if (levelDataBase == null) levelDataBase = Resources.Load("LevelDataBase") as LevelDataBase;
 
         proficiencyDataBase.Initialize();
 
@@ -181,6 +185,20 @@ public class ChangeFoodManager : MonoBehaviour
             {
                 autoPresentButton.color = offColor;
                 autoPresentText.text = LocalizationManager.instance.GetString("OFF");
+            }
+
+            skillLocked.SetActive(true);
+
+            if (playerDataBase.LockTutorial >= 4) //레시피 해제
+            {
+                skillLocked.SetActive(false);
+            }
+
+            treasureLocked.SetActive(true);
+
+            if (levelDataBase.GetLevel(playerDataBase.Exp) > 1)
+            {
+                treasureLocked.SetActive(false);
             }
 
             FirebaseAnalytics.LogEvent("OpenChangeFood");

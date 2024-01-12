@@ -97,11 +97,11 @@ public class WarningManager : MonoBehaviour
 
     public void OpenUpdateWarning()
     {
-        if (!bugReportWarning.activeInHierarchy)
+        if (!updateWarning.activeInHierarchy)
         {
             updateWarning.SetActive(true);
 
-            receiveContent2.Initialize(RewardType.Crystal, 500);
+            receiveContent2.Initialize(RewardType.Crystal, 150);
         }
         else
         {
@@ -111,7 +111,7 @@ public class WarningManager : MonoBehaviour
 
     public void ReceiveButton2()
     {
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 150);
 
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

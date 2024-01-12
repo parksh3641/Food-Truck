@@ -14,7 +14,7 @@ public class ShopManager : MonoBehaviour
     public GameObject speicalShopView;
 
     public GameObject alarm;
-    public GameObject dailyAlarm;
+    public GameObject ingameAlarm;
 
     public GameObject goldx2;
     public GameObject removeAds;
@@ -163,7 +163,7 @@ public class ShopManager : MonoBehaviour
         changeMoneyView.SetActive(false);
 
         alarm.SetActive(true);
-        dailyAlarm.SetActive(false);
+        ingameAlarm.SetActive(true);
 
         for (int i = 0; i < shopArray.Length; i++)
         {
@@ -895,7 +895,7 @@ public class ShopManager : MonoBehaviour
         if (playerDataBase.DailyAdsReward == 1) return;
 
         alarm.SetActive(false);
-        dailyAlarm.SetActive(false);
+        ingameAlarm.SetActive(false);
 
         playerDataBase.DailyAdsReward = 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyAdsReward", playerDataBase.DailyAdsReward);

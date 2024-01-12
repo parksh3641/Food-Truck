@@ -47,15 +47,11 @@ public class LevelManager : MonoBehaviour
 
             infoText.ReLoad();
 
-            GameStateManager.instance.Pause = true;
-
             FirebaseAnalytics.LogEvent("OpenProfile");
         }
         else
         {
             levelView.SetActive(false);
-
-            GameStateManager.instance.Pause = false;
         }
     }
 

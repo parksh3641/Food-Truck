@@ -43,8 +43,6 @@ public class ChestBoxManager : MonoBehaviour
         chestBoxIcon.SetActive(false);
         chestBoxView.SetActive(false);
 
-        GameStateManager.instance.Pause = false;
-
         if (GameStateManager.instance.ChestBoxCount >= 20) return;
 
         goalCount = Random.Range(60, 120);
@@ -89,7 +87,7 @@ public class ChestBoxManager : MonoBehaviour
         }
         else
         {
-            if(ingameUI.activeInHierarchy && !GameStateManager.instance.Pause)
+            if(ingameUI.activeInHierarchy)
             {
                 count += 1;
             }
@@ -132,8 +130,6 @@ public class ChestBoxManager : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }
-
-        GameStateManager.instance.Pause = true;
 
         chestBoxView.SetActive(true);
 
@@ -189,14 +185,14 @@ public class ChestBoxManager : MonoBehaviour
 
     public void GetFreeReward()
     {
-        if(Random.Range(0, 10) > 7)
-        {
-            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-            NotionManager.instance.UseNotion(NotionType.FailGetItem);
+        //if(Random.Range(0, 10) > 7)
+        //{
+        //    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+        //    NotionManager.instance.UseNotion(NotionType.FailGetItem);
 
-            Initialize();
-            return;
-        }
+        //    Initialize();
+        //    return;
+        //}
 
         switch (rewardType)
         {

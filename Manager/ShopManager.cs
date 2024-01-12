@@ -293,15 +293,11 @@ public class ShopManager : MonoBehaviour
                 ChangeTopToggle(0);
             }
 
-            GameStateManager.instance.Pause = true;
-
             FirebaseAnalytics.LogEvent("OpenShop");
         }
         else
         {
             shopView.SetActive(false);
-
-            GameStateManager.instance.Pause = false;
         }
     }
 

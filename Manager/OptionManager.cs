@@ -50,7 +50,6 @@ public class OptionManager : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.instance.Pause = false;
     }
 
     public void OpenOptionView()
@@ -63,8 +62,6 @@ public class OptionManager : MonoBehaviour
             OnSFX();
             OnVibration();
             OnEffect();
-
-            GameStateManager.instance.Pause = true;
 
             googleLink.SetActive(false);
             appleLink.SetActive(false);
@@ -81,8 +78,6 @@ public class OptionManager : MonoBehaviour
         else
         {
             optionView.SetActive(false);
-
-            GameStateManager.instance.Pause = false;
         }
     }
 

@@ -1231,6 +1231,45 @@ public class GameManager : MonoBehaviour
             FirebaseAnalytics.LogEvent("RankingMode");
         }
 
+        CheckPercent();
+
+        isDef = false;
+        checkMark.SetActive(false);
+
+        CheckFever();
+        //CheckDefTicket();
+        CheckPortion();
+        UpgradeInitialize();
+
+        portion6Obj.SetActive(false);
+        //if (playerDataBase.Portion6 > 0 && playerDataBase.LockTutorial > 1)
+        //{
+        //    portion6Obj.SetActive(true);
+        //}
+
+        if(!playerDataBase.AutoUpgrade)
+        {
+            GameStateManager.instance.AutoUpgrade = false;
+        }
+        else
+        {
+            buff4Obj.SetActive(false);
+            OffBuff(3);
+        }
+
+        if(!playerDataBase.AutoPresent)
+        {
+            GameStateManager.instance.AutoPresent = false;
+        }
+
+        CheckAuto();
+
+        clickDelay = false;
+        Invoke("GameStartDelay", 1.0f);
+    }
+
+    public void CheckPercent()
+    {
         successPlus = 0;
         successX2 = 0;
         needPlus = 0;
@@ -1254,7 +1293,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.4f;
 
-        if(IsWeekend())
+        if (IsWeekend())
         {
             sellPricePlus += 30;
         }
@@ -1337,39 +1376,7 @@ public class GameManager : MonoBehaviour
             successX2 += buff3Value;
         }
 
-        isDef = false;
-        checkMark.SetActive(false);
-
-        CheckFever();
-        //CheckDefTicket();
-        CheckPortion();
         UpgradeInitialize();
-
-        portion6Obj.SetActive(false);
-        if (playerDataBase.Portion6 > 0 && playerDataBase.LockTutorial > 1)
-        {
-            portion6Obj.SetActive(true);
-        }
-
-        if(!playerDataBase.AutoUpgrade)
-        {
-            GameStateManager.instance.AutoUpgrade = false;
-        }
-        else
-        {
-            buff4Obj.SetActive(false);
-            OffBuff(3);
-        }
-
-        if(!playerDataBase.AutoPresent)
-        {
-            GameStateManager.instance.AutoPresent = false;
-        }
-
-        CheckAuto();
-
-        clickDelay = false;
-        Invoke("GameStartDelay", 1.0f);
     }
 
     public void CheckAuto()
@@ -1418,19 +1425,13 @@ public class GameManager : MonoBehaviour
 
         if (level >= GameStateManager.instance.AutoUpgradeLevel - 1 || level + 1 > maxLevel - 1)
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                sellButtonAnim.AutoClick();
-                SellButton(2);
-            }
+            sellButtonAnim.AutoClick();
+            SellButton(2);
         }
         else
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                upgradeButtonAnim.AutoClick();
-                UpgradeButton(2);
-            }
+            upgradeButtonAnim.AutoClick();
+            UpgradeButton(2);
         }
 
         yield return waitForSeconds4;
@@ -1605,13 +1606,11 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.FoodType = type;
 
-        if(type == FoodType.Food5)
+        if(type == FoodType.Food4)
         {
-            if (!GameStateManager.instance.AppReview && !playerDataBase.AppReview)
+            if (!playerDataBase.AppReview)
             {
                 OpenAppReview();
-
-                GameStateManager.instance.AppReview = true;
 
                 playerDataBase.AppReview = true;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("AppReview", 1);
@@ -3568,8 +3567,6 @@ public class GameManager : MonoBehaviour
         {
             feverMode = true;
 
-            GameStateManager.instance.Pause = false;
-
             feverEffect.SetActive(true);
             backButton.SetActive(false);
 
@@ -3623,16 +3620,13 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < feverTime)
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                fillAmount = Mathf.Lerp(1.0f, 0, currentTime / feverTime);
+            fillAmount = Mathf.Lerp(1.0f, 0, currentTime / feverTime);
 
-                fillAmount = Mathf.Clamp01(fillAmount);
+            fillAmount = Mathf.Clamp01(fillAmount);
 
-                feverFillamount.fillAmount = fillAmount;
+            feverFillamount.fillAmount = fillAmount;
 
-                currentTime += Time.deltaTime;
-            }
+            currentTime += Time.deltaTime;
 
             yield return null;
         }
@@ -4557,16 +4551,13 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < portion1Time)
         {
-            if(!GameStateManager.instance.Pause)
-            {
-                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion1Time);
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion1Time);
 
-                fillAmount = Mathf.Clamp01(fillAmount);
+            fillAmount = Mathf.Clamp01(fillAmount);
 
-                portionFillamount1.fillAmount = fillAmount;
+            portionFillamount1.fillAmount = fillAmount;
 
-                currentTime += Time.deltaTime;
-            }    
+            currentTime += Time.deltaTime;
 
             yield return null;
         }
@@ -4584,16 +4575,13 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < portion2Time)
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion2Time);
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion2Time);
 
-                fillAmount = Mathf.Clamp01(fillAmount);
+            fillAmount = Mathf.Clamp01(fillAmount);
 
-                portionFillamount2.fillAmount = fillAmount;
+            portionFillamount2.fillAmount = fillAmount;
 
-                currentTime += Time.deltaTime;
-            }
+            currentTime += Time.deltaTime;
 
             yield return null;
         }
@@ -4611,16 +4599,13 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < portion3Time)
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion3Time);
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion3Time);
 
-                fillAmount = Mathf.Clamp01(fillAmount);
+            fillAmount = Mathf.Clamp01(fillAmount);
 
-                portionFillamount3.fillAmount = fillAmount;
+            portionFillamount3.fillAmount = fillAmount;
 
-                currentTime += Time.deltaTime;
-            }
+            currentTime += Time.deltaTime;
 
             yield return null;
         }
@@ -4638,16 +4623,13 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < portion5Time)
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion5Time);
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion5Time);
 
-                fillAmount = Mathf.Clamp01(fillAmount);
+            fillAmount = Mathf.Clamp01(fillAmount);
 
-                portionFillamount5.fillAmount = fillAmount;
+            portionFillamount5.fillAmount = fillAmount;
 
-                currentTime += Time.deltaTime;
-            }
+            currentTime += Time.deltaTime;
 
             yield return null;
         }
@@ -4665,16 +4647,13 @@ public class GameManager : MonoBehaviour
 
         while (currentTime < portion6Time)
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion6Time);
+            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion6Time);
 
-                fillAmount = Mathf.Clamp01(fillAmount);
+            fillAmount = Mathf.Clamp01(fillAmount);
 
-                portionFillamount6.fillAmount = fillAmount;
+            portionFillamount6.fillAmount = fillAmount;
 
-                currentTime += Time.deltaTime;
-            }
+            currentTime += Time.deltaTime;
 
             yield return null;
         }

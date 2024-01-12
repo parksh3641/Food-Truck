@@ -150,8 +150,6 @@ public class ChangeFoodManager : MonoBehaviour
 
             CheckFood();
 
-            GameStateManager.instance.Pause = true;
-
             autoUpgradeLocked.SetActive(true);
             autoPresentLocked.SetActive(true);
 
@@ -207,9 +205,8 @@ public class ChangeFoodManager : MonoBehaviour
         {
             changeFoodView.SetActive(false);
 
-            GameStateManager.instance.Pause = false;
-
             GameManager.instance.CheckAuto();
+            GameManager.instance.CheckPercent();
         }
     }
 
@@ -515,8 +512,6 @@ public class ChangeFoodManager : MonoBehaviour
     {
         if (GameStateManager.instance.FoodType == type) return;
 
-        GameStateManager.instance.Pause = false;
-
         changeFoodView.SetActive(false);
 
         GameManager.instance.ChangeFood(type);
@@ -528,8 +523,6 @@ public class ChangeFoodManager : MonoBehaviour
     public void ChangeRankFood(FoodType type)
     {
         if (GameStateManager.instance.IslandType == IslandType.Island1) return;
-
-        GameStateManager.instance.Pause = false;
 
         GameStateManager.instance.IslandType = IslandType.Island1;
 
@@ -545,8 +538,6 @@ public class ChangeFoodManager : MonoBehaviour
     {
         if (GameStateManager.instance.CandyType == type) return;
 
-        GameStateManager.instance.Pause = false;
-
         changeFoodView.SetActive(false);
 
         GameManager.instance.ChangeCandy(type);
@@ -558,8 +549,6 @@ public class ChangeFoodManager : MonoBehaviour
     public void ChangeRankCandy(CandyType type)
     {
         if (GameStateManager.instance.IslandType == IslandType.Island2) return;
-
-        GameStateManager.instance.Pause = false;
 
         GameStateManager.instance.IslandType = IslandType.Island2;
 
@@ -575,8 +564,6 @@ public class ChangeFoodManager : MonoBehaviour
     {
         if (GameStateManager.instance.JapaneseFoodType == type) return;
 
-        GameStateManager.instance.Pause = false;
-
         changeFoodView.SetActive(false);
 
         GameManager.instance.ChangeJapaneseFood(type);
@@ -588,8 +575,6 @@ public class ChangeFoodManager : MonoBehaviour
     public void ChangeRankJapaneseFood(JapaneseFoodType type)
     {
         if (GameStateManager.instance.IslandType == IslandType.Island3) return;
-
-        GameStateManager.instance.Pause = false;
 
         GameStateManager.instance.IslandType = IslandType.Island3;
 
@@ -605,8 +590,6 @@ public class ChangeFoodManager : MonoBehaviour
     {
         if (GameStateManager.instance.DessertType == type) return;
 
-        GameStateManager.instance.Pause = false;
-
         changeFoodView.SetActive(false);
 
         GameManager.instance.ChangeDessert(type);
@@ -618,8 +601,6 @@ public class ChangeFoodManager : MonoBehaviour
     public void ChangeRankDessert(DessertType type)
     {
         if (GameStateManager.instance.IslandType == IslandType.Island4) return;
-
-        GameStateManager.instance.Pause = false;
 
         GameStateManager.instance.IslandType = IslandType.Island4;
 

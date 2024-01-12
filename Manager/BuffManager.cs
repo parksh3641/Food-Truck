@@ -93,14 +93,10 @@ public class BuffManager : MonoBehaviour
             }
 
             infoText.ReLoad();
-
-            GameStateManager.instance.Pause = true;
         }
         else
         {
             buffView.SetActive(false);
-
-            GameStateManager.instance.Pause = false;
         }
     }
 
@@ -211,7 +207,6 @@ public class BuffManager : MonoBehaviour
 
         playerDataBase.BuffCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffCount", playerDataBase.BuffCount);
-        GameStateManager.instance.Pause = false;
     }
 
     public void SuccessWatchAd()
@@ -226,10 +221,7 @@ public class BuffManager : MonoBehaviour
     {
         if(buff1Time > 0)
         {
-            if(!GameStateManager.instance.Pause)
-            {
-                buff1Time -= 1;
-            }
+            buff1Time -= 1;
         }
         else
         {
@@ -255,10 +247,7 @@ public class BuffManager : MonoBehaviour
     {
         if (buff2Time > 0)
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                buff2Time -= 1;
-            }
+            buff2Time -= 1;
         }
         else
         {
@@ -284,10 +273,7 @@ public class BuffManager : MonoBehaviour
     {
         if (buff3Time > 0)
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                buff3Time -= 1;
-            }
+            buff3Time -= 1;
         }
         else
         {
@@ -313,10 +299,7 @@ public class BuffManager : MonoBehaviour
     {
         if (buff4Time > 0)
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                buff4Time -= 1;
-            }
+            buff4Time -= 1;
         }
         else
         {

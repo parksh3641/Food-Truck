@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ReceiveContent : MonoBehaviour
+public class ReceiveInfoManager : MonoBehaviour
 {
-    RewardType rewardType = RewardType.Gold;
+    public static ReceiveInfoManager instance;
+
+    public GameObject receiveInfoView;
 
     public Image mainBackground;
     public Image icon;
-    public Text countText;
+    public Text titleText;
+    public Text infoText;
 
     ImageDataBase imageDataBase;
 
@@ -18,27 +21,44 @@ public class ReceiveContent : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
+        receiveInfoView.SetActive(false);
+
         if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
 
         rewardArray = imageDataBase.GetRewardArray();
-
         rankBackgroundArray = imageDataBase.GetRankBackgroundArray();
     }
 
-    public void Initialize(RewardType type, int count)
+
+    public void CloseReceiveInfo()
     {
-        icon.sprite = rewardArray[(int)type];
+        receiveInfoView.SetActive(false);
+    }
 
-        rewardType = type;
 
-        countText.text = MoneyUnitString.ToCurrencyString(count);
-
-        if (count == -1)
+    public void OpenReceiveInfo(RewardType rewardType)
+    {
+        if (!receiveInfoView.activeInHierarchy)
         {
-            countText.text = "";
-        }
+            receiveInfoView.SetActive(true);
 
-        switch (type)
+            Initialize(rewardType);
+        }
+        else
+        {
+            receiveInfoView.SetActive(false);
+        }
+    }
+
+    void Initialize(RewardType rewardType)
+    {
+        titleText.text = LocalizationManager.instance.GetString(rewardType.ToString());
+
+        icon.sprite = rewardArray[(int)rewardType];
+
+        switch (rewardType)
         {
             case RewardType.Gold:
                 mainBackground.sprite = rankBackgroundArray[0];
@@ -122,10 +142,10 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[0];
                 break;
             case RewardType.Gold2:
-                mainBackground.sprite = rankBackgroundArray[1];
+                mainBackground.sprite = rankBackgroundArray[0];
                 break;
             case RewardType.Gold3:
-                mainBackground.sprite = rankBackgroundArray[1];
+                mainBackground.sprite = rankBackgroundArray[0];
                 break;
             case RewardType.RankPoint:
                 mainBackground.sprite = rankBackgroundArray[2];
@@ -135,33 +155,18 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.RemoveAds:
                 mainBackground.sprite = rankBackgroundArray[3];
-
-                countText.text = LocalizationManager.instance.GetString("RemoveAds");
-                countText.alignment = TextAnchor.MiddleCenter;
                 break;
             case RewardType.GoldX2:
                 mainBackground.sprite = rankBackgroundArray[3];
-
-                countText.text = LocalizationManager.instance.GetString("GoldX2");
-                countText.alignment = TextAnchor.MiddleCenter;
                 break;
             case RewardType.AutoUpgrade:
                 mainBackground.sprite = rankBackgroundArray[3];
-
-                countText.text = LocalizationManager.instance.GetString("AutoUpgrade");
-                countText.alignment = TextAnchor.MiddleCenter;
                 break;
             case RewardType.AutoPresent:
                 mainBackground.sprite = rankBackgroundArray[3];
-
-                countText.text = LocalizationManager.instance.GetString("AutoPresent");
-                countText.alignment = TextAnchor.MiddleCenter;
                 break;
         }
-    }
 
-    public void OpenInfo()
-    {
-        ReceiveInfoManager.instance.OpenReceiveInfo(rewardType);
+        infoText.text = LocalizationManager.instance.GetString(rewardType.ToString() + "_Info");
     }
 }

@@ -46,6 +46,20 @@ public class LockManager : MonoBehaviour
         UnLocked(number);
     }
 
+    public void Localization()
+    {
+        if(playerDataBase.LockTutorial == 0)
+        {
+            tutorialText.localizationName = "Tutorial_First";
+            tutorialText.ReLoad();
+        }
+        else if(playerDataBase.LockTutorial == 1)
+        {
+            tutorialText.localizationName = "Tutorial_Seconds";
+            tutorialText.ReLoad();
+        }
+    }
+
 
     public void Initialize()
     {
@@ -55,8 +69,6 @@ public class LockManager : MonoBehaviour
         }
 
         tutorial.SetActive(true);
-        tutorialText.localizationName = "Tutorial_First";
-        tutorialText.ReLoad();
 
         menuIcon[7].SetActive(true);
         menuIcon[9].SetActive(true);
@@ -66,9 +78,6 @@ public class LockManager : MonoBehaviour
         if (playerDataBase.LockTutorial >= 1) //음식 변경
         {
             menuIcon[0].SetActive(true);
-
-            tutorialText.localizationName = "Tutorial_Seconds";
-            tutorialText.ReLoad();
         }
 
         if (playerDataBase.LockTutorial >= 2) //물약 해제
@@ -131,6 +140,9 @@ public class LockManager : MonoBehaviour
         {
             case 1:
                 lockIcon[0].SetActive(true);
+
+                tutorialText.localizationName = "Tutorial_Seconds";
+                tutorialText.ReLoad();
 
                 break;
             case 2:

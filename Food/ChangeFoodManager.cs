@@ -199,6 +199,8 @@ public class ChangeFoodManager : MonoBehaviour
                 treasureLocked.SetActive(false);
             }
 
+            GameStateManager.instance.Pause = true;
+
             FirebaseAnalytics.LogEvent("OpenChangeFood");
         }
         else
@@ -207,6 +209,8 @@ public class ChangeFoodManager : MonoBehaviour
 
             GameManager.instance.CheckAuto();
             GameManager.instance.CheckPercent();
+
+            GameStateManager.instance.Pause = false;
         }
     }
 

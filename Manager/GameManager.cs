@@ -62,8 +62,8 @@ public class GameManager : MonoBehaviour
     public Text buff3Text;
 
     private int buff1Value = 50;
-    private int buff2Value = 10;
-    private int buff3Value = 5;
+    private int buff2Value = 15;
+    private int buff3Value = 10;
 
     private bool buff1 = false;
     private bool buff2 = false;
@@ -282,7 +282,7 @@ public class GameManager : MonoBehaviour
     WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
     WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.5f);
-    WaitForSeconds waitForSeconds4 = new WaitForSeconds(0.35f);
+    WaitForSeconds waitForSeconds4 = new WaitForSeconds(0.4f);
 
     private void Awake()
     {
@@ -1231,6 +1231,8 @@ public class GameManager : MonoBehaviour
             FirebaseAnalytics.LogEvent("RankingMode");
         }
 
+        lockManager.Localization();
+
         CheckPercent();
 
         isDef = false;
@@ -1289,7 +1291,7 @@ public class GameManager : MonoBehaviour
         successX2 += playerDataBase.Treasure3 * 0.2f;
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
-        sellPricePlus += playerDataBase.Skill8 * 0.2f;
+        sellPricePlus += playerDataBase.Skill8 * 0.3f;
         sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.4f;
 
@@ -1308,7 +1310,7 @@ public class GameManager : MonoBehaviour
         defDestroy += playerDataBase.Skill9 * 0.05f;
         defDestroy += playerDataBase.Treasure2 * 0.1f;
 
-        needPlus += playerDataBase.Skill10 * 0.3f;
+        needPlus += playerDataBase.Skill10 * 0.5f;
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
         upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
@@ -1430,8 +1432,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            upgradeButtonAnim.AutoClick();
-            UpgradeButton(2);
+            if(!GameStateManager.instance.Pause)
+            {
+                upgradeButtonAnim.AutoClick();
+                UpgradeButton(2);
+            }
         }
 
         yield return waitForSeconds4;
@@ -3255,7 +3260,7 @@ public class GameManager : MonoBehaviour
         }
 
         isUpgradeDelay = true;
-        Invoke("WaitUpgradeDelay", 0.35f);
+        Invoke("WaitUpgradeDelay", 0.4f);
     }
 
     public void RecoverFood(FoodType type)
@@ -5100,19 +5105,19 @@ public class GameManager : MonoBehaviour
         switch(number)
         {
             case 0:
-                NotionManager.instance.UseNotion(NotionType.PortionInfo1);
+                NotionManager.instance.UseNotion(NotionType.Portion1_Info);
                 break;
             case 1:
-                NotionManager.instance.UseNotion(NotionType.PortionInfo2);
+                NotionManager.instance.UseNotion(NotionType.Portion2_Info);
                 break;
             case 2:
-                NotionManager.instance.UseNotion(NotionType.PortionInfo3);
+                NotionManager.instance.UseNotion(NotionType.Portion3_Info);
                 break;
             case 3:
-                NotionManager.instance.UseNotion(NotionType.PortionInfo4);
+                NotionManager.instance.UseNotion(NotionType.Portion4_Info);
                 break;
             case 4:
-                NotionManager.instance.UseNotion(NotionType.PortionInfo5);
+                NotionManager.instance.UseNotion(NotionType.Portion5_Info);
                 break;
             case 5:
                 NotionManager.instance.UseNotion(NotionType.PortionInfo6);

@@ -208,7 +208,10 @@ public enum ItemType
     SuperOffline,
     AdReward_Crystal,
     AutoUpgrade,
-    AutoPresent
+    AutoPresent,
+    BuffTicket,
+    SkillTicket,
+    RepairTicket,
 }
 
 public enum PackageType
@@ -228,7 +231,8 @@ public enum BuyType
     Ad,
     Coin,
     Crystal,
-    Exchange
+    Exchange,
+    RankPoint
 }
 
 public enum RankType

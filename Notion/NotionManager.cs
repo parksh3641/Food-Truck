@@ -185,11 +185,11 @@ public enum NotionType
     ChangeCharacterNotion,
     ChangeButterflyNotion,
     ChangeIslandNotion,
-    PortionInfo1,
-    PortionInfo2,
-    PortionInfo3,
-    PortionInfo4,
-    PortionInfo5,
+    Portion1_Info,
+    Portion2_Info,
+    Portion3_Info,
+    Portion4_Info,
+    Portion5_Info,
     UseItem,
     PortionInfo6,
     UsePortionNotion6,
@@ -208,5 +208,6 @@ public enum NotionType
     UnLockedNotion4,
     BuyShopNotion,
     ChangeNotion,
-    RecoverNotion
+    RecoverNotion,
+    LowRankPoint
 }

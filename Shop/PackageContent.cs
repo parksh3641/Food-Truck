@@ -136,23 +136,23 @@ public class PackageContent : MonoBehaviour
 
             if (timeSpan.Days > 0)
             {
-                timerText.text = "<size=20>" + localization_Time + "</size>\n" + timeSpan.Days.ToString("D2") + localization_Days + " " + timeSpan.Hours.ToString("D2") + localization_Hours + " " + timeSpan.Minutes.ToString("D2") + localization_Minutes;
+                timerText.text = "<size=18>" + localization_Time + "</size>\n" + timeSpan.Days.ToString("D2") + localization_Days + " " + timeSpan.Hours.ToString("D2") + localization_Hours + " " + timeSpan.Minutes.ToString("D2") + localization_Minutes;
             }
             else
             {
                 if (timeSpan.Hours > 0)
                 {
-                    timerText.text = "<size=20>" + localization_Time + "</size>\n" + timeSpan.Hours.ToString("D2") + localization_Hours + " " + timeSpan.Minutes.ToString("D2") + localization_Minutes;
+                    timerText.text = "<size=18>" + localization_Time + "</size>\n" + timeSpan.Hours.ToString("D2") + localization_Hours + " " + timeSpan.Minutes.ToString("D2") + localization_Minutes;
                 }
                 else
                 {
                     if (timeSpan.Minutes == 0)
                     {
-                        timerText.text = "<size=20>" + localization_Time + "</size>\n" + timeSpan.Seconds.ToString("D2") + localization_Seconds;
+                        timerText.text = "<size=18>" + localization_Time + "</size>\n" + timeSpan.Seconds.ToString("D2") + localization_Seconds;
                     }
                     else
                     {
-                        timerText.text = "<size=20>" + localization_Time + "</size>\n" + timeSpan.Minutes.ToString("D2") + localization_Minutes + " " + timeSpan.Seconds.ToString("D2") + localization_Seconds;
+                        timerText.text = "<size=18>" + localization_Time + "</size>\n" + timeSpan.Minutes.ToString("D2") + localization_Minutes + " " + timeSpan.Seconds.ToString("D2") + localization_Seconds;
                     }
                 }
             }

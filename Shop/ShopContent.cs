@@ -14,18 +14,20 @@ public class ShopContent : MonoBehaviour
     public Text rewardText;
     public LocalizationContent infoText;
 
-    public GameObject buyFreeObj;
     public GameObject[] buyRmObj;
     public LocalizationContent[] buyRmText;
 
+    public GameObject buyFreeObj;
     public GameObject buyAdObj;
     public GameObject buyCoinObj;
     public GameObject buyCrystalObj;
     public GameObject buyExchangeObj;
+    public GameObject buyRankPointObj;
     public GameObject lockedObj;
 
     public Text buyCoinText;
     public Text buyCrystalText;
+    public Text buyRankPointText;
 
     public GameObject bestObj;
     public Text bestText;
@@ -74,6 +76,7 @@ public class ShopContent : MonoBehaviour
         buyCoinObj.SetActive(false);
         buyCrystalObj.SetActive(false);
         buyExchangeObj.SetActive(false);
+        buyRankPointObj.SetActive(false);
 
         bestObj.SetActive(false);
 
@@ -96,6 +99,9 @@ public class ShopContent : MonoBehaviour
             case BuyType.Exchange:
                 buyExchangeObj.SetActive(true);
                 break;
+            case BuyType.RankPoint:
+                buyRankPointObj.SetActive(true);
+                break;
         }
 
         switch (itemType)
@@ -104,7 +110,7 @@ public class ShopContent : MonoBehaviour
                 rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(100000) + "</size>";
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = MoneyUnitString.ToCurrencyString(200000) + "\n~ " + MoneyUnitString.ToCurrencyString(500000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(200000) + "\n~ " + MoneyUnitString.ToCurrencyString(1000000);
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
@@ -283,7 +289,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion1:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(3);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(10);
 
                 titleText.plusText = " x1";
 
@@ -294,7 +300,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion2:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(20);
 
                 titleText.plusText = " x1";
 
@@ -305,7 +311,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion3:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(20);
 
                 titleText.plusText = " x1";
 
@@ -316,7 +322,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion4:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(5);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(10);
 
                 titleText.plusText = " x1";
 
@@ -327,7 +333,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion5:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(10);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(30);
 
                 titleText.plusText = " x1";
 
@@ -438,19 +444,48 @@ public class ShopContent : MonoBehaviour
 
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(4500);
 
-                infoText.localizationName = itemType + "_Info";
+                infoText.localizationName = itemType + "_Info2";
                 infoText.ReLoad();
                 break;
             case ItemType.AutoPresent:
                 lockedObj.SetActive(false);
 
-                //buyRmObj[22].SetActive(true);
-                //buyRmText[22].localizationName = itemType.ToString();
-                //buyRmText[22].ReLoad();
-
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(1500);
 
-                infoText.localizationName = itemType + "_Info";
+                infoText.localizationName = itemType + "_Info2";
+                infoText.ReLoad();
+                break;
+            case ItemType.BuffTicket:
+                lockedObj.SetActive(false);
+
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(100);
+
+                titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.BuffTicket;
+                infoText.ReLoad();
+                break;
+            case ItemType.SkillTicket:
+                lockedObj.SetActive(false);
+
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(200);
+
+                titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.SkillTicket;
+                infoText.ReLoad();
+                break;
+            case ItemType.RepairTicket:
+                lockedObj.SetActive(false);
+
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(5);
+
+                titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.RecoverTicket;
                 infoText.ReLoad();
                 break;
         }

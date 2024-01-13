@@ -27,6 +27,8 @@ public class ShopManager : MonoBehaviour
     public GameObject leftButton;
     public GameObject rightButton;
 
+    public Text rankPointText;
+
     [Space]
     [Title("TopMenu")]
     public Image[] topMenuImgArray;
@@ -293,6 +295,8 @@ public class ShopManager : MonoBehaviour
                 ChangeTopToggle(0);
             }
 
+            rankPointText.text = playerDataBase.RankPoint.ToString();
+
             FirebaseAnalytics.LogEvent("OpenShop");
         }
         else
@@ -468,16 +472,6 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 2:
-                //shopContents[19].Initialize(ItemType.Portion1, BuyType.Crystal, this);
-                //shopContents[20].Initialize(ItemType.Portion2, BuyType.Crystal, this);
-                //shopContents[21].Initialize(ItemType.Portion3, BuyType.Crystal, this);
-                //shopContents[22].Initialize(ItemType.Portion4, BuyType.Crystal, this);
-                //shopContents[23].Initialize(ItemType.Portion5, BuyType.Crystal, this);
-                shopContents[19].gameObject.SetActive(false);
-                shopContents[20].gameObject.SetActive(false);
-                shopContents[21].gameObject.SetActive(false);
-                shopContents[22].gameObject.SetActive(false);
-                shopContents[23].gameObject.SetActive(false);
 
                 shopContents[8].Initialize(ItemType.PortionSet1, BuyType.Rm, this);
                 shopContents[9].Initialize(ItemType.PortionSet2, BuyType.Rm, this);
@@ -502,6 +496,18 @@ public class ShopManager : MonoBehaviour
                 shopContents[16].Initialize(ItemType.CrystalShop4, BuyType.Rm, this);
                 shopContents[17].Initialize(ItemType.CrystalShop5, BuyType.Rm, this);
                 shopContents[18].Initialize(ItemType.CrystalShop6, BuyType.Rm, this);
+                break;
+            case 4:
+                shopContents[19].Initialize(ItemType.Portion1, BuyType.RankPoint, this);
+                shopContents[20].Initialize(ItemType.Portion2, BuyType.RankPoint, this);
+                shopContents[21].Initialize(ItemType.Portion3, BuyType.RankPoint, this);
+                shopContents[22].Initialize(ItemType.Portion4, BuyType.RankPoint, this);
+                shopContents[23].Initialize(ItemType.Portion5, BuyType.RankPoint, this);
+                shopContents[36].Initialize(ItemType.BuffTicket, BuyType.RankPoint, this);
+                shopContents[37].Initialize(ItemType.SkillTicket, BuyType.RankPoint, this);
+                shopContents[38].Initialize(ItemType.RepairTicket, BuyType.RankPoint, this);
+
+
                 break;
         }
     }
@@ -620,7 +626,11 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 10;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    shopContents[19].Initialize(ItemType.Portion1, BuyType.Crystal, this);
+                    rankPointText.text = playerDataBase.RankPoint.ToString();
+
+                    PortionManager.instance.GetPortion(0, 1);
+
+                    shopContents[19].Initialize(ItemType.Portion1, BuyType.RankPoint, this);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -628,19 +638,20 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
                 }
                 break;
             case ItemType.Portion2:
-                if (playerDataBase.RankPoint >= 10)
+                if (playerDataBase.RankPoint >= 20)
                 {
-                    playerDataBase.RankPoint -= 10;
+                    playerDataBase.RankPoint -= 20;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    playerDataBase.Portion2 += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
+                    rankPointText.text = playerDataBase.RankPoint.ToString();
 
-                    shopContents[20].Initialize(ItemType.Portion2, BuyType.Crystal, this);
+                    PortionManager.instance.GetPortion(1, 1);
+
+                    shopContents[20].Initialize(ItemType.Portion2, BuyType.RankPoint, this);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -648,19 +659,20 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
                 }
                 break;
             case ItemType.Portion3:
-                if (playerDataBase.RankPoint >= 10)
+                if (playerDataBase.RankPoint >= 20)
                 {
-                    playerDataBase.RankPoint -= 10;
+                    playerDataBase.RankPoint -= 20;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    playerDataBase.Portion3 += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
+                    rankPointText.text = playerDataBase.RankPoint.ToString();
 
-                    shopContents[21].Initialize(ItemType.Portion3, BuyType.Crystal, this);
+                    PortionManager.instance.GetPortion(2, 1);
+
+                    shopContents[21].Initialize(ItemType.Portion3, BuyType.RankPoint, this);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -668,7 +680,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
                 }
                 break;
             case ItemType.Portion4:
@@ -677,10 +689,11 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 10;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    playerDataBase.Portion4 += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
+                    rankPointText.text = playerDataBase.RankPoint.ToString();
 
-                    shopContents[22].Initialize(ItemType.Portion4, BuyType.Crystal, this);
+                    PortionManager.instance.GetPortion(3, 1);
+
+                    shopContents[22].Initialize(ItemType.Portion4, BuyType.RankPoint, this);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -688,19 +701,20 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
                 }
                 break;
             case ItemType.Portion5:
-                if (playerDataBase.RankPoint >= 10)
+                if (playerDataBase.RankPoint >= 30)
                 {
-                    playerDataBase.RankPoint -= 10;
+                    playerDataBase.RankPoint -= 30;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    playerDataBase.Portion5 += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
+                    rankPointText.text = playerDataBase.RankPoint.ToString();
 
-                    shopContents[23].Initialize(ItemType.Portion5, BuyType.Crystal, this);
+                    PortionManager.instance.GetPortion(4, 1);
+
+                    shopContents[23].Initialize(ItemType.Portion5, BuyType.RankPoint, this);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -708,7 +722,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
                 }
                 break;
             case ItemType.DefDestroyTicketSlices:
@@ -802,6 +816,69 @@ public class ShopManager : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.LowCrystal);
                 }
                 break;
+            case ItemType.BuffTicket:
+                if (playerDataBase.RankPoint >= 100)
+                {
+                    playerDataBase.RankPoint -= 100;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
+
+                    rankPointText.text = playerDataBase.RankPoint.ToString();
+
+                    PortionManager.instance.GetBuffTickets(1);
+
+                    shopContents[36].Initialize(ItemType.BuffTicket, BuyType.RankPoint, this);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                }
+                break;
+            case ItemType.SkillTicket:
+                if (playerDataBase.RankPoint >= 200)
+                {
+                    playerDataBase.RankPoint -= 200;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
+
+                    rankPointText.text = playerDataBase.RankPoint.ToString();
+
+                    PortionManager.instance.GetSkillTickets(1);
+
+                    shopContents[37].Initialize(ItemType.SkillTicket, BuyType.RankPoint, this);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                }
+                break;
+            case ItemType.RepairTicket:
+                if (playerDataBase.RankPoint >= 5)
+                {
+                    playerDataBase.RankPoint -= 5;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
+
+                    rankPointText.text = playerDataBase.RankPoint.ToString();
+
+                    PortionManager.instance.GetRecoverTickets(1);
+
+                    shopContents[38].Initialize(ItemType.RepairTicket, BuyType.RankPoint, this);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                }
+                else
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                }
+                break;
         }
 
         GameManager.instance.CheckPortion();
@@ -829,7 +906,7 @@ public class ShopManager : MonoBehaviour
                     OpenChangeMoneyView();
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessSell);
+                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
                 }
                 else
                 {
@@ -846,7 +923,7 @@ public class ShopManager : MonoBehaviour
                     OpenChangeMoneyView();
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessSell);
+                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
                 }
                 else
                 {
@@ -863,7 +940,7 @@ public class ShopManager : MonoBehaviour
                     OpenChangeMoneyView();
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessSell);
+                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
                 }
                 else
                 {
@@ -898,7 +975,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[1].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddGold(Random.Range(200000, 500001));
+        PlayfabManager.instance.UpdateAddGold(Random.Range(200000, 1000001));
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);

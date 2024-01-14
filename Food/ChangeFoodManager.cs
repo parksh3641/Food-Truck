@@ -209,6 +209,8 @@ public class ChangeFoodManager : MonoBehaviour
 
             GameManager.instance.CheckAuto();
             GameManager.instance.CheckPercent();
+            GameManager.instance.CheckPortion();
+            GameManager.instance.CheckDefTicket();
 
             GameStateManager.instance.Pause = false;
         }

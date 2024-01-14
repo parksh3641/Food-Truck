@@ -20,6 +20,8 @@ public class StateManager : MonoBehaviour
     public GourmetManager gourmetManager;
     public WelcomeManager welcomeManager;
     public RankEventManager rankEventManager;
+    public RecipeEventManager recipeEventManager;
+    public LevelUpEventManager levelUpEventManager;
     public PlayTimeManager playTimeManager;
     public TreasureManager treasureManager;
     public WarningManager warningManager;
@@ -65,6 +67,8 @@ public class StateManager : MonoBehaviour
         attendanceManager.Initialize();
         welcomeManager.Initialize();
         rankEventManager.Initialize();
+        recipeEventManager.Initialize();
+        levelUpEventManager.Initialize();
         playTimeManager.Initialize();
         treasureManager.Initialize();
         gourmetManager.FirstInitialize();

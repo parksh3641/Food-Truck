@@ -1519,6 +1519,12 @@ public class PlayfabManager : MonoBehaviour
                        case "RankEventCount":
                            playerDataBase.RankEventCount = statistics.Value;
                            break;
+                       case "RecipeEventCount":
+                           playerDataBase.RecipeEventCount = statistics.Value;
+                           break;
+                       case "LevelUpEventCount":
+                           playerDataBase.LevelUpEventCount = statistics.Value;
+                           break;
                        case "DefDestroyTicket":
                            playerDataBase.DefDestroyTicket = statistics.Value;
                            break;

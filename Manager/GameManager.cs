@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
 
     public bool isDelay_Camera = false;
     public bool isUpgradeDelay = false;
-    public bool isSellDelay = false;
+    //public bool isSellDelay = false;
     public bool isDef = false;
 
     private bool feverMode = false;
@@ -252,10 +252,12 @@ public class GameManager : MonoBehaviour
 
     Sprite[] islandArray;
 
-    public ParticleSystem levelUpParticle;
-    public ParticleSystem maxLevelParticle;
+    public ParticleSystem level1UpParticle;
+    public ParticleSystem level5UpParticle;
+    public ParticleSystem levelMaxParticle;
     public ParticleSystem bombPartice;
-    public ParticleSystem lightParticle;
+    public ParticleSystem yummyTimeParticle;
+    public ParticleSystem yummyTime2Particle;
 
     public TutorialManager tutorialManager;
     public LockManager lockManager;
@@ -282,7 +284,7 @@ public class GameManager : MonoBehaviour
     WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
     WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.5f);
-    WaitForSeconds waitForSeconds4 = new WaitForSeconds(0.4f);
+    WaitForSeconds waitForSeconds4 = new WaitForSeconds(0.45f);
 
     private void Awake()
     {
@@ -332,9 +334,12 @@ public class GameManager : MonoBehaviour
 
         feverEffect.SetActive(false);
 
-        levelUpParticle.gameObject.SetActive(false);
-        maxLevelParticle.gameObject.SetActive(false);
+        level1UpParticle.gameObject.SetActive(false);
+        level5UpParticle.gameObject.SetActive(false);
+        levelMaxParticle.gameObject.SetActive(false);
         bombPartice.gameObject.SetActive(false);
+        yummyTimeParticle.gameObject.SetActive(false);
+        yummyTime2Particle.gameObject.SetActive(false);
 
         portion1 = false;
         portion2 = false;
@@ -361,7 +366,6 @@ public class GameManager : MonoBehaviour
         bankruptcyView.SetActive(false);
         privacypolicyView.SetActive(false);
         myMoneyPlusText.gameObject.SetActive(false);
-        lightParticle.gameObject.SetActive(false);
         testMode.SetActive(false);
 
         checkUpdate.SetActive(false);
@@ -1291,7 +1295,7 @@ public class GameManager : MonoBehaviour
         successX2 += playerDataBase.Treasure3 * 0.2f;
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
-        sellPricePlus += playerDataBase.Skill8 * 0.3f;
+        sellPricePlus += playerDataBase.Skill8 * 0.4f;
         sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.4f;
 
@@ -1320,17 +1324,17 @@ public class GameManager : MonoBehaviour
         feverCount = GameStateManager.instance.FeverCount;
 
         feverTime = 30;
-        feverTime += (30 * (0.002f * playerDataBase.Skill1));
+        feverTime += (30 * (0.003f * playerDataBase.Skill1));
         feverTime += (30 * (0.004f * playerDataBase.Treasure9));
 
         feverMaxCount = 300 - (300 * (0.003f * playerDataBase.Skill2));
         feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
-        portion1Time = 30 + (30 * (0.002f * playerDataBase.Skill4)) + (30 * (0.004f * playerDataBase.Treasure6));
-        portion2Time = 30 + (30 * (0.002f * playerDataBase.Skill5)) + (30 * (0.004f * playerDataBase.Treasure6));
-        portion3Time = 30 + (30 * (0.002f * playerDataBase.Skill6)) + (30 * (0.004f * playerDataBase.Treasure6));
-        portion4Plus = 0.002f * playerDataBase.Skill12;
-        portion5Time = 30 + (30 * (0.002f * playerDataBase.Skill13)) + (30 * (0.004f * playerDataBase.Treasure6));
+        portion1Time = 30 + (30 * (0.003f * playerDataBase.Skill4)) + (30 * (0.006f * playerDataBase.Treasure6));
+        portion2Time = 30 + (30 * (0.003f * playerDataBase.Skill5)) + (30 * (0.006f * playerDataBase.Treasure6));
+        portion3Time = 30 + (30 * (0.003f * playerDataBase.Skill6)) + (30 * (0.006f * playerDataBase.Treasure6));
+        portion4Plus = 0.003f * playerDataBase.Skill12;
+        portion5Time = 30 + (30 * (0.003f * playerDataBase.Skill13)) + (30 * (0.006f * playerDataBase.Treasure6));
 
         if (playerDataBase.GoldX2)
         {
@@ -1448,12 +1452,12 @@ public class GameManager : MonoBehaviour
     {
         yield return waitForSeconds;
 
-        if (playerDataBase.Exp > nowExp)
-        {
-            nowExp = playerDataBase.Exp;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
-            levelManager.Initialize();
-        }
+        //if (playerDataBase.Exp > nowExp)
+        //{
+        //    nowExp = playerDataBase.Exp;
+        //    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
+        //    levelManager.Initialize();
+        //}
 
         if (playerDataBase.UpgradeCount > nowUpgradeCount)
         {
@@ -1685,7 +1689,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice = sellPrice + (int)(sellPrice * 0.1f);
+                sellPrice = sellPrice + (int)(sellPrice * 0.2f);
                 break;
             case IslandType.Island3:
                 maxLevel = upgradeJapaneseFood.maxLevel;
@@ -1696,7 +1700,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice = sellPrice + (int)(sellPrice * 0.2f);
+                sellPrice = sellPrice + (int)(sellPrice * 0.4f);
                 break;
             case IslandType.Island4:
                 maxLevel = upgradeDessert.maxLevel;
@@ -1707,13 +1711,13 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice = sellPrice + (int)(sellPrice * 0.4f);
+                sellPrice = sellPrice + (int)(sellPrice * 0.6f);
                 break;
         }
 
-        sellPrice = sellPrice + (int)(sellPrice * 0.2f); //임시로 20% 증가
+        sellPrice = sellPrice + (int)(sellPrice * 0.3f); //임시로 30% 증가
 
-        recoverLevel = ((int)(maxLevel * 0.7f)) - 1;
+        recoverLevel = ((int)(maxLevel * 0.5f)) - 1;
 
         need = upgradeDataBase.GetNeed(level, defaultNeed);
         success = upgradeDataBase.GetSuccess(level);
@@ -2783,7 +2787,7 @@ public class GameManager : MonoBehaviour
     {
         if(number < 2)
         {
-            if(GameStateManager.instance.AutoUpgrade)
+            if(GameStateManager.instance.AutoUpgrade && number == 0)
             {
                 return;
             }
@@ -2999,6 +3003,8 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
+            levelManager.Initialize();
+
             CheckFoodLevelUp();
             UpgradeInitialize();
 
@@ -3011,9 +3017,17 @@ public class GameManager : MonoBehaviour
 
                 if (GameStateManager.instance.Effect)
                 {
-                    maxLevelParticle.gameObject.SetActive(false);
-                    maxLevelParticle.gameObject.SetActive(true);
-                    maxLevelParticle.Play();
+                    level1UpParticle.gameObject.SetActive(false);
+                    level1UpParticle.gameObject.SetActive(true);
+                    level1UpParticle.Play();
+
+                    level5UpParticle.gameObject.SetActive(false);
+                    level5UpParticle.gameObject.SetActive(true);
+                    level5UpParticle.Play();
+
+                    levelMaxParticle.gameObject.SetActive(false);
+                    levelMaxParticle.gameObject.SetActive(true);
+                    levelMaxParticle.Play();
                 }
             }
             else
@@ -3027,13 +3041,24 @@ public class GameManager : MonoBehaviour
 
                     if (GameStateManager.instance.Effect)
                     {
-                        levelUpParticle.gameObject.SetActive(false);
-                        levelUpParticle.gameObject.SetActive(true);
-                        levelUpParticle.Play();
+                        level1UpParticle.gameObject.SetActive(false);
+                        level1UpParticle.gameObject.SetActive(true);
+                        level1UpParticle.Play();
+
+                        level5UpParticle.gameObject.SetActive(false);
+                        level5UpParticle.gameObject.SetActive(true);
+                        level5UpParticle.Play();
                     }
                 }
                 else
                 {
+                    if (GameStateManager.instance.Effect)
+                    {
+                        level1UpParticle.gameObject.SetActive(false);
+                        level1UpParticle.gameObject.SetActive(true);
+                        level1UpParticle.Play();
+                    }
+
                     SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
                 }
             }
@@ -3054,7 +3079,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if (maxLevel >= 25)
+                if (maxLevel >= 20)
                 {
                     if (Random.Range(0, 100) < 10)
                     {
@@ -3207,7 +3232,7 @@ public class GameManager : MonoBehaviour
                         UpgradeInitialize();
 
                         SoundManager.instance.PlaySFX(GameSfxType.Shield);
-                        NotionManager.instance.UseNotion(NotionType.DefDestroyNotion);
+                        NotionManager.instance.UseNotion4(NotionType.DefDestroyNotion);
 
                         return;
                     }
@@ -3221,7 +3246,7 @@ public class GameManager : MonoBehaviour
                 bombPartice.Play();
             }
 
-            if(maxLevel >= 25 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
+            if(maxLevel >= 20 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
             {
                 switch (GameStateManager.instance.IslandType)
                 {
@@ -3413,14 +3438,16 @@ public class GameManager : MonoBehaviour
         {
             if(feverMode)
             {
-                lightParticle.gameObject.SetActive(true);
+                yummyTimeParticle.gameObject.SetActive(true);
+                yummyTime2Particle.gameObject.SetActive(true);
             }
         }
         else
         {
             if (feverMode)
             {
-                lightParticle.gameObject.SetActive(false);
+                yummyTimeParticle.gameObject.SetActive(false);
+                yummyTime2Particle.gameObject.SetActive(false);
             }
         }
     }
@@ -3607,7 +3634,8 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.Effect)
         {
-            lightParticle.gameObject.SetActive(true);
+            yummyTimeParticle.gameObject.SetActive(true);
+            yummyTime2Particle.gameObject.SetActive(true);
         }
 
         feverText.enabled = false;
@@ -3636,7 +3664,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        lightParticle.gameObject.SetActive(false);
+        yummyTimeParticle.gameObject.SetActive(false);
+        yummyTime2Particle.gameObject.SetActive(false);
 
         feverMode = false;
         feverFillamount.fillAmount = 0;
@@ -4153,7 +4182,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
 
-            if (isSellDelay) return;
+            if (isUpgradeDelay) return;
         }
 
         if (level == 0) return;
@@ -4205,7 +4234,7 @@ public class GameManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Sell);
 
-        isSellDelay = true;
+        isUpgradeDelay = true;
         Invoke("WaitSellDelay", 0.4f);
     }
 
@@ -4885,7 +4914,7 @@ public class GameManager : MonoBehaviour
 
     void WaitSellDelay()
     {
-        isSellDelay = false;
+        isUpgradeDelay = false;
     }
 
 
@@ -4996,6 +5025,10 @@ public class GameManager : MonoBehaviour
         playerDataBase.Treasure7 = 100;
         playerDataBase.Treasure8 = 100;
         playerDataBase.Treasure9 = 100;
+        playerDataBase.Treasure10 = 100;
+        playerDataBase.Treasure11 = 100;
+        playerDataBase.Treasure12 = 100;
+
 
         playerDataBase.Level = 100;
         playerDataBase.Proficiency = 100;

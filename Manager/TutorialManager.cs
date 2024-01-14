@@ -15,13 +15,15 @@ public class TutorialManager : MonoBehaviour
     public int talkIndex = 0;
     public int talkReplace = 0;
 
-    public bool talkSkip = false;
+    private bool talkSkip = false;
+    private bool isSkip = false;
 
     string str = "";
 
     public NickNameManager nameManager;
 
     WaitForSeconds talkDelay = new WaitForSeconds(0.04f);
+    WaitForSeconds waitForSeconds = new WaitForSeconds(1.0f);
 
     PlayerDataBase playerDataBase;
 
@@ -38,6 +40,14 @@ public class TutorialManager : MonoBehaviour
     }
 
     void Wait()
+    {
+        tutorialView.SetActive(true);
+
+        talkIndex = 0;
+        Initialize(talkIndex);
+    }
+    [Button]
+    public void Next0()
     {
         tutorialView.SetActive(true);
 
@@ -84,6 +94,7 @@ public class TutorialManager : MonoBehaviour
     void Initialize(int number)
     {
         nextText.enabled = false;
+        isSkip = false;
 
         talkSkip = false;
 
@@ -136,10 +147,13 @@ public class TutorialManager : MonoBehaviour
         }
         else
         {
-            talkIndex++;
-            Initialize(talkIndex);
+            if (isSkip)
+            {
+                talkIndex++;
+                Initialize(talkIndex);
 
-            SoundManager.instance.PlaySFX(GameSfxType.Click);
+                SoundManager.instance.PlaySFX(GameSfxType.Click);
+            }
         }
     }
 
@@ -167,6 +181,9 @@ public class TutorialManager : MonoBehaviour
 
         talkText.text = talk;
 
+        yield return waitForSeconds;
+
         nextText.enabled = true;
+        isSkip = true;
     }
 }

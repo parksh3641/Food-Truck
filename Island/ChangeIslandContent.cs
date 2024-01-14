@@ -73,17 +73,17 @@ public class ChangeIslandContent : MonoBehaviour
                 break;
             case IslandType.Island2:
                 upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +5%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +10%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +20%";
 
                 break;
             case IslandType.Island3:
                 upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +10%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +20%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +40%";
 
                 break;
             case IslandType.Island4:
                 upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +15%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +40%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +60%";
 
                 break;
         }

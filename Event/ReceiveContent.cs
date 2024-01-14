@@ -38,6 +38,8 @@ public class ReceiveContent : MonoBehaviour
             countText.text = "";
         }
 
+        mainBackground.sprite = rankBackgroundArray[0];
+
         switch (type)
         {
             case RewardType.Gold:
@@ -157,11 +159,23 @@ public class ReceiveContent : MonoBehaviour
                 countText.text = LocalizationManager.instance.GetString("AutoPresent");
                 countText.alignment = TextAnchor.MiddleCenter;
                 break;
+            case RewardType.Island1:
+                mainBackground.sprite = rankBackgroundArray[0];
+                break;
+            case RewardType.Island2:
+                mainBackground.sprite = rankBackgroundArray[0];
+                break;
+            case RewardType.Island3:
+                mainBackground.sprite = rankBackgroundArray[0];
+                break;
+            case RewardType.Island4:
+                mainBackground.sprite = rankBackgroundArray[0];
+                break;
         }
     }
 
     public void OpenInfo()
     {
-        ReceiveInfoManager.instance.OpenReceiveInfo(rewardType);
+        ReceiveInfoManager.instance.OpenReceiveInfo(rewardType, mainBackground.sprite);
     }
 }

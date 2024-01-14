@@ -435,6 +435,8 @@ public class ShopManager : MonoBehaviour
                     }
                     else
                     {
+                        packageContents[0].gameObject.SetActive(false);
+
                         Debug.Log("한정 패키지 구매 가능 날짜가 지났습니다.");
                     }
                 }

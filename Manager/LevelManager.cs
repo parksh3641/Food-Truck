@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     public LocalizationContent infoText;
     public Text accessDateText;
 
+    private int nowLevel = 0;
     private int level = 0;
     private int nowExp = 0;
     private int nextExp = 0;
@@ -57,7 +58,17 @@ public class LevelManager : MonoBehaviour
 
     public void Initialize()
     {
+        nowLevel = level;
         level = levelDataBase.GetLevel(playerDataBase.Exp);
+
+        if(nowLevel != 0 && level > nowLevel)
+        {
+            NotionManager.instance.UseNotion3(NotionType.Levelup);
+
+            GameManager.instance.CheckPercent();
+
+            Debug.LogError("·¹º§ ¾÷");
+        }
 
         if(playerDataBase.Level != level)
         {

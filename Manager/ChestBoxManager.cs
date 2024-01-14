@@ -104,7 +104,7 @@ public class ChestBoxManager : MonoBehaviour
             chestBoxIcon.SetActive(true);
 
             SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
-            NotionManager.instance.UseNotion(NotionType.OpenChestBoxNotion);
+            NotionManager.instance.UseNotion2(NotionType.OpenChestBoxNotion);
 
             yield return waitForSeconds2;
 

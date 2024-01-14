@@ -5,22 +5,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RankEventManager : MonoBehaviour
+public class RecipeEventManager : MonoBehaviour
 {
-    public GameObject rankEventView;
+    public GameObject recipeEventView;
 
-    public Text rankEventText;
+    public Text recipeEventText;
 
-    public RectTransform rankEventRectTransform;
+    public RectTransform recipeEventRectTransform;
 
     public GameObject mainAlarm;
     public GameObject alarm;
 
     public AttendanceContent[] attendanceContentArray;
 
-    public TreasureManager treasureManager;
-
-    private int level = 10;
+    private int level = 20;
 
     PlayerDataBase playerDataBase;
 
@@ -28,9 +26,9 @@ public class RankEventManager : MonoBehaviour
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
-        rankEventView.SetActive(false);
+        recipeEventView.SetActive(false);
 
-        rankEventRectTransform.anchoredPosition = new Vector2(0, -9999);
+        recipeEventRectTransform.anchoredPosition = new Vector2(0, -9999);
 
         mainAlarm.SetActive(false);
         alarm.SetActive(false);
@@ -42,34 +40,34 @@ public class RankEventManager : MonoBehaviour
         alarm.SetActive(true);
     }
 
-    public void OpenRankEventView()
+    public void OpenRecipeEventView()
     {
-        if (!rankEventView.activeInHierarchy)
+        if (!recipeEventView.activeInHierarchy)
         {
-            rankEventView.SetActive(true);
+            recipeEventView.SetActive(true);
 
             alarm.SetActive(false);
             mainAlarm.SetActive(false);
 
-            rankEventText.text = LocalizationManager.instance.GetString("Ranking2_Info") + " : " + playerDataBase.TotalLevel;
+            recipeEventText.text = LocalizationManager.instance.GetString("RecipeEvent") + " : " + playerDataBase.GetRecipeUpgradeCount();
 
-            CheckRankEvent();
+            CheckRecipeEvent();
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("OpenRankEvent");
+            FirebaseAnalytics.LogEvent("OpenRecipeEvent");
         }
         else
         {
-            rankEventView.SetActive(false);
+            recipeEventView.SetActive(false);
         }
     }
 
-    void CheckRankEvent()
+    void CheckRecipeEvent()
     {
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
-            attendanceContentArray[i].InitializeRankEvent(i, level * (i + 1), playerDataBase.RankEventCount, playerDataBase.TotalLevel, this);
+            attendanceContentArray[i].InitializeRecipeEvent(i, level * (i + 1), playerDataBase.RecipeEventCount, playerDataBase.GetRecipeUpgradeCount(), this);
         }
     }
 
@@ -78,7 +76,7 @@ public class RankEventManager : MonoBehaviour
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.TreasureBox, 10);
+            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.SkillTicket, 2);
         }
     }
 
@@ -91,18 +89,18 @@ public class RankEventManager : MonoBehaviour
             return;
         }
 
-        treasureManager.OpenTreasure(10);
+        PortionManager.instance.GetSkillTickets(2);
 
-        playerDataBase.RankEventCount += 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankEventCount", playerDataBase.RankEventCount);
+        playerDataBase.RecipeEventCount += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RecipeEventCount", playerDataBase.RecipeEventCount);
 
         action.Invoke();
 
-        CheckRankEvent();
+        CheckRecipeEvent();
 
         OffAlarm();
 
-        FirebaseAnalytics.LogEvent("RankEventClear");
+        FirebaseAnalytics.LogEvent("RecipeEventClear");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

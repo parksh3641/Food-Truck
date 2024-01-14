@@ -118,6 +118,9 @@ public class AdmobReward : MonoBehaviour
                     shopManager.SuccessWatchAd_Crystal();
                     break;
             }
+
+            playerDataBase.AdCount += 1;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("AdCount", playerDataBase.AdCount);
         }
         else
         {
@@ -163,6 +166,9 @@ public class AdmobReward : MonoBehaviour
 
                     LoadRewardedAd();
 
+                    playerDataBase.AdCount += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("AdCount", playerDataBase.AdCount);
+
                     //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
                 });
             }
@@ -205,9 +211,6 @@ public class AdmobReward : MonoBehaviour
                 NotionManager.instance.UseNotion(NotionType.CancelWatchAd);
             }
         }
-
-        playerDataBase.AdCount += 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("AdCount", playerDataBase.AdCount);
     }
 
     private void RegisterReloadHandler(RewardedAd ad)

@@ -616,6 +616,10 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int rankEventCount = 0;
     [SerializeField]
+    private int recipeEventCount = 0;
+    [SerializeField]
+    private int levelUpEventCount = 0;
+    [SerializeField]
     private int welcomeCount = 0;
     [SerializeField]
     private bool welcomeCheck = false;
@@ -3817,6 +3821,30 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int RecipeEventCount
+    {
+        get
+        {
+            return recipeEventCount;
+        }
+        set
+        {
+            recipeEventCount = value;
+        }
+    }
+
+    public int LevelUpEventCount
+    {
+        get
+        {
+            return levelUpEventCount;
+        }
+        set
+        {
+            levelUpEventCount = value;
+        }
+    }
+
     public bool AttendanceCheck
     {
         get
@@ -4234,6 +4262,8 @@ public class PlayerDataBase : ScriptableObject
         attendanceCheck = false;
         playTimeCount = 0;
         rankEventCount = 0;
+        recipeEventCount = 0;
+        levelUpEventCount = 0;
         welcomeCount = 0;
         welcomeCheck = false;
         nextMonday = "";
@@ -5164,5 +5194,27 @@ public class PlayerDataBase : ScriptableObject
         }
 
         return count;
+    }
+
+    public int GetRecipeUpgradeCount()
+    {
+        int number = 0;
+
+        number += Skill1;
+        number += Skill2;
+        number += Skill3;
+        number += Skill4;
+        number += Skill5;
+        number += Skill6;
+        number += Skill7;
+        number += Skill8;
+        number += Skill9;
+        number += Skill10;
+        number += Skill11;
+        number += Skill12;
+        number += Skill13;
+        number += Skill14;
+
+        return number;
     }
 }

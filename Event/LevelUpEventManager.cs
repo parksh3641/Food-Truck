@@ -5,22 +5,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RankEventManager : MonoBehaviour
+public class LevelUpEventManager : MonoBehaviour
 {
-    public GameObject rankEventView;
+    public GameObject levelUpEventView;
 
-    public Text rankEventText;
+    public Text levelUpEventText;
 
-    public RectTransform rankEventRectTransform;
+    public RectTransform levelUpEventRectTransform;
 
     public GameObject mainAlarm;
     public GameObject alarm;
 
     public AttendanceContent[] attendanceContentArray;
 
-    public TreasureManager treasureManager;
-
-    private int level = 10;
+    private int level = 3;
 
     PlayerDataBase playerDataBase;
 
@@ -28,9 +26,9 @@ public class RankEventManager : MonoBehaviour
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
-        rankEventView.SetActive(false);
+        levelUpEventView.SetActive(false);
 
-        rankEventRectTransform.anchoredPosition = new Vector2(0, -9999);
+        levelUpEventRectTransform.anchoredPosition = new Vector2(0, -9999);
 
         mainAlarm.SetActive(false);
         alarm.SetActive(false);
@@ -42,34 +40,34 @@ public class RankEventManager : MonoBehaviour
         alarm.SetActive(true);
     }
 
-    public void OpenRankEventView()
+    public void OpenLevelUpView()
     {
-        if (!rankEventView.activeInHierarchy)
+        if (!levelUpEventView.activeInHierarchy)
         {
-            rankEventView.SetActive(true);
+            levelUpEventView.SetActive(true);
 
             alarm.SetActive(false);
             mainAlarm.SetActive(false);
 
-            rankEventText.text = LocalizationManager.instance.GetString("Ranking2_Info") + " : " + playerDataBase.TotalLevel;
+            levelUpEventText.text = LocalizationManager.instance.GetString("LevelUpEvent") + " : " + playerDataBase.Level;
 
-            CheckRankEvent();
+            CheckLevelUpEvent();
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("OpenRankEvent");
+            FirebaseAnalytics.LogEvent("OpenLevelUpEvent");
         }
         else
         {
-            rankEventView.SetActive(false);
+            levelUpEventView.SetActive(false);
         }
     }
 
-    void CheckRankEvent()
+    void CheckLevelUpEvent()
     {
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
-            attendanceContentArray[i].InitializeRankEvent(i, level * (i + 1), playerDataBase.RankEventCount, playerDataBase.TotalLevel, this);
+            attendanceContentArray[i].InitializeLevelUpEvent(i, level * (i + 1), playerDataBase.LevelUpEventCount, playerDataBase.Level, this);
         }
     }
 
@@ -78,7 +76,7 @@ public class RankEventManager : MonoBehaviour
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.TreasureBox, 10);
+            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.BuffTicket, 2);
         }
     }
 
@@ -91,18 +89,18 @@ public class RankEventManager : MonoBehaviour
             return;
         }
 
-        treasureManager.OpenTreasure(10);
+        PortionManager.instance.GetBuffTickets(2);
 
-        playerDataBase.RankEventCount += 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankEventCount", playerDataBase.RankEventCount);
+        playerDataBase.LevelUpEventCount += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("LevelUpEventCount", playerDataBase.LevelUpEventCount);
 
         action.Invoke();
 
-        CheckRankEvent();
+        CheckLevelUpEvent();
 
         OffAlarm();
 
-        FirebaseAnalytics.LogEvent("RankEventClear");
+        FirebaseAnalytics.LogEvent("LevelUpEventClear");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

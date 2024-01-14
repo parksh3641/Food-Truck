@@ -81,13 +81,13 @@ public class QuestManager : MonoBehaviour
 
             plus += 100;
 
-            reward2 = 2;
+            reward2 = 40;
         }
         else
         {
             reward = questDataBase.reward;
 
-            reward2 = 1;
+            reward2 = 20;
         }
 
         if((playerDataBase.QuestCount / 5) > 10)
@@ -212,7 +212,7 @@ public class QuestManager : MonoBehaviour
         playerDataBase.QuestCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);
 
-        PortionManager.instance.GetRandomPortion(reward2);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 20);
 
         PlayfabManager.instance.UpdateAddGold(reward);
 

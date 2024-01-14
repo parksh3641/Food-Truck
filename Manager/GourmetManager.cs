@@ -30,11 +30,69 @@ public class GourmetManager : MonoBehaviour
 
         value += playerDataBase.UpgradeCount * 1;
         value += playerDataBase.SellCount * 3;
+        value += playerDataBase.UseSources * 5;
+        value += playerDataBase.BuffCount * 10;
 
         value += playerDataBase.AccessDate * 100;
         value += playerDataBase.Level * 1000;
-        value += playerDataBase.Proficiency * 1000;
+        value += playerDataBase.QuestCount * 300;
         value += playerDataBase.CastleLevel * 500;
+        value += playerDataBase.Proficiency * 1000; //¼÷·Ãµµ
+
+        if (playerDataBase.Package1)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.Package2)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.Package3)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.Package4)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.Package5)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.Package6)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.RemoveAds)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.GoldX2)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.AutoUpgrade)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.AutoPresent)
+        {
+            value += 10000;
+        }
+
+        if (playerDataBase.SuperOffline)
+        {
+            value += 10000;
+        }
 
         if (playerDataBase.TestAccount == 0)
         {

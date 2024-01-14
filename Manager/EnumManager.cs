@@ -344,7 +344,11 @@ public enum RewardType
     RemoveAds,
     GoldX2,
     AutoUpgrade,
-    AutoPresent
+    AutoPresent,
+    Island1,
+    Island2,
+    Island3,
+    Island4
 }
 
 public enum QuestType

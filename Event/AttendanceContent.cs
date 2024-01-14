@@ -20,6 +20,8 @@ public class AttendanceContent : MonoBehaviour
     RankEventManager rankEventManager;
     PlayTimeManager playTimeManager;
     WelcomeManager welcomeManager;
+    RecipeEventManager recipeEventManager;
+    LevelUpEventManager levelUpEventManager;
 
 
     private void Awake()
@@ -281,6 +283,88 @@ public class AttendanceContent : MonoBehaviour
         }
     }
 
+    public void InitializeRecipeEvent(int _index, int number, int check, int value, RecipeEventManager manager)
+    {
+        index = _index;
+        recipeEventManager = manager;
+
+        titleText.localizationName = "RecipeEvent";
+        titleText.plusText = " : " + number.ToString();
+        titleText.ReLoad();
+
+        selectObj.SetActive(false);
+        lockObj.SetActive(false);
+        clearObj.SetActive(false);
+
+        if (index == check)
+        {
+            selectObj.SetActive(true);
+
+            if (value >= number)
+            {
+                lockObj.SetActive(false);
+            }
+            else
+            {
+                lockObj.SetActive(true);
+            }
+        }
+        else
+        {
+            if (index > check)
+            {
+                lockObj.SetActive(true);
+            }
+            else
+            {
+                lockObj.SetActive(true);
+                clearObj.SetActive(true);
+            }
+        }
+
+    }
+
+    public void InitializeLevelUpEvent(int _index, int number, int check, int value, LevelUpEventManager manager)
+    {
+        index = _index;
+        levelUpEventManager = manager;
+
+        titleText.localizationName = "RankEvent";
+        titleText.plusText = " : " + number.ToString();
+        titleText.ReLoad();
+
+        selectObj.SetActive(false);
+        lockObj.SetActive(false);
+        clearObj.SetActive(false);
+
+        if (index == check)
+        {
+            selectObj.SetActive(true);
+
+            if (value >= number)
+            {
+                lockObj.SetActive(false);
+            }
+            else
+            {
+                lockObj.SetActive(true);
+            }
+        }
+        else
+        {
+            if (index > check)
+            {
+                lockObj.SetActive(true);
+            }
+            else
+            {
+                lockObj.SetActive(true);
+                clearObj.SetActive(true);
+            }
+        }
+
+    }
+
 
     public void ReceiveButton()
     {
@@ -313,6 +397,22 @@ public class AttendanceContent : MonoBehaviour
             if (!lockObj.activeInHierarchy)
             {
                 welcomeManager.ReceiveButton(index, SuccessReceive);
+            }
+        }
+
+        if (recipeEventManager != null)
+        {
+            if (!lockObj.activeInHierarchy)
+            {
+                recipeEventManager.ReceiveButton(SuccessReceive);
+            }
+        }
+
+        if (levelUpEventManager != null)
+        {
+            if (!lockObj.activeInHierarchy)
+            {
+                levelUpEventManager.ReceiveButton(SuccessReceive);
             }
         }
     }

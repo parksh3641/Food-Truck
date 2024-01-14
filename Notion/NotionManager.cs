@@ -12,6 +12,10 @@ public class NotionManager : MonoBehaviour
     [Title("MainNotion")]
     public Notion notion;
 
+    public Notion notion2; //선물 등장
+    public Notion notion3; //레벨 업
+    public Notion notion4; //파괴 방어
+
 
     public NotionColor[] notionColor;
 
@@ -30,48 +34,11 @@ public class NotionManager : MonoBehaviour
         instance = this;
 
         notion.gameObject.SetActive(false);
+        notion2.gameObject.SetActive(false);
+        notion3.gameObject.SetActive(false);
+        notion4.gameObject.SetActive(false);
     }
 
-    private void Start()
-    {
-    }
-
-    void SetColor(ColorType type)
-    {
-        switch (type)
-        {
-            case ColorType.White:
-                notion.txt.color = new Color(1, 1, 1);
-                break;
-            case ColorType.Red:
-                notion.txt.color = new Color(1, 0, 0);
-                break;
-            case ColorType.Orange:
-                notion.txt.color = new Color(1, 150f / 255f, 0);
-                break;
-            case ColorType.Yellow:
-                notion.txt.color = new Color(1, 1, 0);
-                break;
-            case ColorType.Green:
-                notion.txt.color = new Color(0, 1, 0);
-                break;
-            case ColorType.SkyBlue:
-                notion.txt.color = new Color(0, 1, 1);
-                break;
-            case ColorType.Blue:
-                notion.txt.color = new Color(0, 150f / 255f, 1);
-                break;
-            case ColorType.Purple:
-                notion.txt.color = new Color(1, 50f / 255f, 1);
-                break;
-            case ColorType.Pink:
-                notion.txt.color = new Color(1, 150 / 255f, 1);
-                break;
-            case ColorType.Black:
-                notion.txt.color = new Color(0, 0, 0);
-                break;
-        }
-    }
     public void UseNotion(NotionType type)
     {
         notion.gameObject.SetActive(false);
@@ -81,22 +48,66 @@ public class NotionManager : MonoBehaviour
             if (list.notionType.Equals(type))
             {
                 notion.txt.text = LocalizationManager.instance.GetString(list.notionType.ToString());
-                SetColor(list.colorType);
-                SetEffect(list.effectType);
+                SetColor(list.colorType, notion.txt);
+                SetEffect(list.effectType, notion.txt);
             }
         }    
 
         notion.gameObject.SetActive(true);
     }
 
-    public void UseNotion(string str)
+    public void UseNotion2(NotionType type)
     {
-        notion.gameObject.SetActive(false);
-        notion.txt.text = str;
-        notion.gameObject.SetActive(true);
+        notion2.gameObject.SetActive(false);
+
+        foreach (var list in notionColor)
+        {
+            if (list.notionType.Equals(type))
+            {
+                notion2.txt.text = LocalizationManager.instance.GetString(list.notionType.ToString());
+                SetColor(list.colorType, notion2.txt);
+                SetEffect(list.effectType, notion2.txt);
+            }
+        }
+
+        notion2.gameObject.SetActive(true);
     }
 
-    public void SetEffect(EffectType type)
+    public void UseNotion3(NotionType type)
+    {
+        notion3.gameObject.SetActive(false);
+
+        foreach (var list in notionColor)
+        {
+            if (list.notionType.Equals(type))
+            {
+                notion3.txt.text = LocalizationManager.instance.GetString(list.notionType.ToString());
+                SetColor(list.colorType, notion3.txt);
+                SetEffect(list.effectType, notion3.txt);
+            }
+        }
+
+        notion3.gameObject.SetActive(true);
+    }
+
+    public void UseNotion4(NotionType type)
+    {
+        notion4.gameObject.SetActive(false);
+
+        foreach (var list in notionColor)
+        {
+            if (list.notionType.Equals(type))
+            {
+                notion4.txt.text = LocalizationManager.instance.GetString(list.notionType.ToString());
+                SetColor(list.colorType, notion4.txt);
+                SetEffect(list.effectType, notion4.txt);
+            }
+        }
+
+        notion4.gameObject.SetActive(true);
+    }
+
+    public void SetEffect(EffectType type, Text txt)
     {
         switch (type)
         {
@@ -104,7 +115,44 @@ public class NotionManager : MonoBehaviour
 
                 break;
             case EffectType.Vibration:
-                notion.txt.gameObject.transform.DOPunchPosition(Vector3.left * 50, 0.5f);
+                txt.gameObject.transform.DOPunchPosition(Vector3.left * 50, 0.5f);
+                break;
+        }
+    }
+
+    void SetColor(ColorType type, Text txt)
+    {
+        switch (type)
+        {
+            case ColorType.White:
+                txt.color = new Color(1, 1, 1);
+                break;
+            case ColorType.Red:
+                txt.color = new Color(1, 0, 0);
+                break;
+            case ColorType.Orange:
+                txt.color = new Color(1, 150f / 255f, 0);
+                break;
+            case ColorType.Yellow:
+                txt.color = new Color(1, 1, 0);
+                break;
+            case ColorType.Green:
+                txt.color = new Color(0, 1, 0);
+                break;
+            case ColorType.SkyBlue:
+                txt.color = new Color(0, 1, 1);
+                break;
+            case ColorType.Blue:
+                txt.color = new Color(0, 150f / 255f, 1);
+                break;
+            case ColorType.Purple:
+                txt.color = new Color(1, 50f / 255f, 1);
+                break;
+            case ColorType.Pink:
+                txt.color = new Color(1, 150 / 255f, 1);
+                break;
+            case ColorType.Black:
+                txt.color = new Color(0, 0, 0);
                 break;
         }
     }
@@ -209,5 +257,6 @@ public enum NotionType
     BuyShopNotion,
     ChangeNotion,
     RecoverNotion,
-    LowRankPoint
+    LowRankPoint,
+    Levelup
 }

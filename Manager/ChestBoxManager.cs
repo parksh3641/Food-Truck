@@ -87,7 +87,7 @@ public class ChestBoxManager : MonoBehaviour
         }
         else
         {
-            if(ingameUI.activeInHierarchy)
+            if(ingameUI.activeInHierarchy && !GameStateManager.instance.Pause)
             {
                 count += 1;
             }

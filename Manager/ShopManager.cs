@@ -412,14 +412,11 @@ public class ShopManager : MonoBehaviour
                 {
                     if (playerDataBase.FirstDate.Length < 1)
                     {
-                        playerDataBase.FirstDate = DateTime.Now.ToString("MMddHHmm");
-                        playerDataBase.FirstServerDate = DateTime.Now.AddDays(3).ToString("MMddHHmm");
-
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstDate", int.Parse("1" + playerDataBase.FirstDate));
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstServerDate", int.Parse("1" + playerDataBase.FirstServerDate));
-
                         playerDataBase.FirstDate = "1" + DateTime.Now.ToString("MMddHHmm");
                         playerDataBase.FirstServerDate = "1" + DateTime.Now.AddDays(3).ToString("MMddHHmm");
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstDate", int.Parse(playerDataBase.FirstDate));
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstServerDate", int.Parse(playerDataBase.FirstServerDate));
 
                         Debug.Log("한정 패키지 구매 날짜 설정");
                     }
@@ -992,7 +989,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[6].SetLocked(true);
 
-        PortionManager.instance.GetRandomPortion(5);
+        PortionManager.instance.GetRandomPortion(10);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

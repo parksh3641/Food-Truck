@@ -26,6 +26,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int lockTutorial = 0;
     [SerializeField]
+    private int inGameTutorial = 0;
+    [SerializeField]
     private int eventNumber = 0;
     [SerializeField]
     private int testAccount = 0;
@@ -37,6 +39,8 @@ public class PlayerDataBase : ScriptableObject
     private int exp = 0;
     [SerializeField]
     private int playTime = 0;
+    [SerializeField]
+    private int getGold = 0;
     [SerializeField]
     private int consumeGold = 0;
     [SerializeField]
@@ -734,6 +738,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             lockTutorial = value;
+        }
+    }
+
+    public int InGameTutorial
+    {
+        get
+        {
+            return inGameTutorial;
+        }
+        set
+        {
+            inGameTutorial = value;
         }
     }
 
@@ -2162,6 +2178,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             changeNicknameCount = value;
+        }
+    }
+
+    public int GetGold
+    {
+        get
+        {
+            return getGold;
+        }
+        set
+        {
+            getGold = value;
         }
     }
 
@@ -3987,6 +4015,7 @@ public class PlayerDataBase : ScriptableObject
         defDestroyTicketPiece = 0;
         eventNumber = 0;
         lockTutorial = 0;
+        inGameTutorial = 0;
         firstReward = 0;
         firstDate = "";
         firstServerDate = "";
@@ -4189,6 +4218,7 @@ public class PlayerDataBase : ScriptableObject
         questCount = 0;
         reincarnationCount = 0;
         buffCount = 0;
+        getGold = 0;
         consumeGold = 0;
         buyCrystal = 0;
         gourmetLevel = 0;

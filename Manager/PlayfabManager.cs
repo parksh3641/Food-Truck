@@ -49,6 +49,9 @@ public class PlayfabManager : MonoBehaviour
     private int consumeGoldA = 0;
     private int consumeGoldB = 0;
 
+    private int getGoldA = 0;
+    private int getGoldB = 0;
+
     public NickNameManager nickNameManager;
     public GameManager gameManager;
     public MoneyAnimation moneyAnimation;
@@ -1426,6 +1429,9 @@ public class PlayfabManager : MonoBehaviour
                        case "DailyTreasureReward":
                            playerDataBase.DailyTreasureReward = statistics.Value;
                            break;
+                       case "GetGold":
+                           playerDataBase.GetGold = statistics.Value;
+                           break;
                        case "ConsumeGold":
                            playerDataBase.ConsumeGold = statistics.Value;
                            break;
@@ -1536,6 +1542,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "LockTutorial":
                            playerDataBase.LockTutorial = statistics.Value;
+                           break;
+                       case "InGameTutorial":
+                           playerDataBase.InGameTutorial = statistics.Value;
                            break;
                        case "Treasure1":
                            playerDataBase.Treasure1 = statistics.Value;
@@ -2059,6 +2068,22 @@ public class PlayfabManager : MonoBehaviour
         else if(coinB < playerDataBase.CoinB)
         {
             UpdateSubtractCurrency(MoneyType.CoinB, (int)(playerDataBase.CoinB - coinB));
+        }
+
+        getGoldA = GameStateManager.instance.GetGold;
+
+        getGoldA += number;
+
+        if (getGoldA >= 1000000)
+        {
+            getGoldB = getGoldA / 1000000;
+
+            getGoldA /= 1000000;
+
+            playerDataBase.GetGold += getGoldB;
+
+            GameStateManager.instance.GetGold = getGoldA;
+            UpdatePlayerStatisticsInsert("GetGold", playerDataBase.GetGold);
         }
     }
 

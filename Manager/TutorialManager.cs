@@ -23,7 +23,7 @@ public class TutorialManager : MonoBehaviour
     public NickNameManager nameManager;
 
     WaitForSeconds talkDelay = new WaitForSeconds(0.04f);
-    WaitForSeconds waitForSeconds = new WaitForSeconds(1.0f);
+    WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
 
     PlayerDataBase playerDataBase;
 
@@ -102,18 +102,13 @@ public class TutorialManager : MonoBehaviour
 
         switch (number)
         {
-            case 5:
+            case 3:
                 tutorialView.SetActive(false);
 
                 if (playerDataBase.ChangeNicknameCount == 0)
                 {
                     nameManager.OpenFreeNickName();
                     GameManager.instance.FirstReward();
-                }
-
-                if (!GameStateManager.instance.Tutorial)
-                {
-                    GameStateManager.instance.Tutorial = true;
                 }
 
                 break;

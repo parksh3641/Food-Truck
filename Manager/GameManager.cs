@@ -55,6 +55,10 @@ public class GameManager : MonoBehaviour
     public Text testModeText;
     public GameObject testMode;
 
+    public GameObject moveArrow1;
+    public GameObject moveArrow2;
+    public GameObject moveArrow3;
+
     [Space]
     [Title("Buff")]
     public Text buff1Text;
@@ -372,11 +376,15 @@ public class GameManager : MonoBehaviour
 
         System.DateTime currentDate = System.DateTime.Now;
         System.DateTime decemberStart = new System.DateTime(currentDate.Year, 12, 1);
-        System.DateTime decemberEnd = new System.DateTime(currentDate.Year, 12, 31);
+        System.DateTime decemberEnd = new System.DateTime(currentDate.Year, 1, 31);
 
         christmasSnow.SetActive(false);
 
-        if (currentDate >= decemberStart && currentDate <= decemberEnd)
+        moveArrow1.SetActive(false);
+        moveArrow2.SetActive(false);
+        moveArrow3.SetActive(false);
+
+        if (currentDate >= decemberStart || currentDate <= decemberEnd)
         {
             christmasSnow.SetActive(true);
 
@@ -465,7 +473,7 @@ public class GameManager : MonoBehaviour
         CheckFood();
         CheckFoodState();
 
-        if (!GameStateManager.instance.Tutorial)
+        if (playerDataBase.InGameTutorial == 0)
         {
             tutorialManager.TutorialStart();
         }
@@ -1163,6 +1171,11 @@ public class GameManager : MonoBehaviour
         if (!isReady) return;
         if (!isDelay_Camera) return;
 
+        if (playerDataBase.LockTutorial == 1)
+        {
+            moveArrow2.SetActive(true);
+        }
+
         isDelay_Camera = false;
         cameraController.GoToB();
 
@@ -1549,6 +1562,8 @@ public class GameManager : MonoBehaviour
     {
         if (playerDataBase.FirstReward == 0)
         {
+            moveArrow1.SetActive(true);
+
             playerDataBase.FirstReward = 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
 
@@ -3081,11 +3096,11 @@ public class GameManager : MonoBehaviour
             {
                 if (maxLevel >= 20)
                 {
-                    if (Random.Range(0, 100) < 10)
+                    if (Random.Range(0, 100) < 20)
                     {
                         PortionManager.instance.GetRecoverTickets(1);
 
-                        Debug.LogError("º¹±¸ Æ¼ÄÏ È¹µæ");
+                        Debug.LogError("º¹±¸ ¿­¼è È¹µæ");
                     }
                 }
 
@@ -3717,6 +3732,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
 
                             if (playerDataBase.HamburgerMaxValue == 1)
                             {
@@ -3737,6 +3753,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
 
                         lockManager.UnLocked(2);
@@ -3752,6 +3769,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
 
                         lockManager.UnLocked(3);
@@ -3767,6 +3785,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
 
                             if (playerDataBase.DrinkMaxValue == 1)
                             {
@@ -3787,6 +3806,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
 
                         lockManager.UnLocked(5);
@@ -3802,6 +3822,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
 
                         lockManager.UnLocked(6);
@@ -3846,6 +3867,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
 
                         break;
@@ -3859,6 +3881,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
 
                         break;
@@ -3872,6 +3895,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case CandyType.Candy4:
@@ -3884,6 +3908,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case CandyType.Candy5:
@@ -3896,6 +3921,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case CandyType.Candy6:
@@ -3908,6 +3934,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case CandyType.Candy7:
@@ -3920,6 +3947,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case CandyType.Candy8:
@@ -3932,6 +3960,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case CandyType.Candy9:
@@ -3966,6 +3995,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood2:
@@ -3978,6 +4008,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood3:
@@ -3990,6 +4021,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood4:
@@ -4002,6 +4034,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood5:
@@ -4014,6 +4047,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood6:
@@ -4026,6 +4060,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood7:
@@ -4060,6 +4095,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case DessertType.Dessert2:
@@ -4072,6 +4108,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case DessertType.Dessert3:
@@ -4084,6 +4121,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case DessertType.Dessert4:
@@ -4096,6 +4134,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case DessertType.Dessert5:
@@ -4108,6 +4147,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case DessertType.Dessert6:
@@ -4120,6 +4160,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case DessertType.Dessert7:
@@ -4132,6 +4173,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case DessertType.Dessert8:
@@ -4144,6 +4186,7 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
 
                             changeFoodAlarmObj.SetActive(true);
+                            moveArrow3.SetActive(true);
                         }
                         break;
                     case DessertType.Dessert9:
@@ -4200,6 +4243,14 @@ public class GameManager : MonoBehaviour
             GameStateManager.instance.SellCount += 1;
 
             //questManager.CheckGoal();
+        }
+
+        if (playerDataBase.InGameTutorial == 0)
+        {
+            moveArrow2.SetActive(false);
+            moveArrow3.SetActive(true);
+
+            lockManager.ChangeFoodTutorial();
         }
 
         DestoryFood();

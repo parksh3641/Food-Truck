@@ -32,7 +32,8 @@ public enum RankingType
 {
     UpgradeCount,
     TotalLevel,
-    GourmetLevel
+    GourmetLevel,
+    Level
 }
 
 public enum LanguageType

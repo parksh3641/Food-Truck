@@ -110,6 +110,7 @@ public class GameStateManager : MonoBehaviour
         [Space]
         [Title("Save")]
         public float feverCount = 0;
+        public int getGold = 0;
         public int consumeGold = 0;
         public int upgradeCount = 0;
         public int sellCount = 0;
@@ -134,7 +135,6 @@ public class GameStateManager : MonoBehaviour
         [Space]
         [Title("Bankruptcy")]
         public int bankruptcy = 0;
-        public bool tutorial = false;
 
         public bool privacypolicy = false;
         public bool pause = false;
@@ -1024,6 +1024,19 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public int GetGold
+    {
+        get
+        {
+            return gameSettings.getGold;
+        }
+        set
+        {
+            gameSettings.getGold = value;
+            SaveFile();
+        }
+    }
+
     public int ConsumeGold
     {
         get
@@ -1138,19 +1151,6 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.bankruptcy = value;
-            SaveFile();
-        }
-    }
-
-    public bool Tutorial
-    {
-        get
-        {
-            return gameSettings.tutorial;
-        }
-        set
-        {
-            gameSettings.tutorial = value;
             SaveFile();
         }
     }

@@ -175,6 +175,13 @@ public class RankingManager : MonoBehaviour
 
                 FirebaseAnalytics.LogEvent("OpenRanking3");
                 break;
+            case 3:
+                ChangeRankingView(RankingType.Level);
+
+                infoText.localizationName = "Ranking4_Info";
+
+                FirebaseAnalytics.LogEvent("OpenRanking4");
+                break;
         }
 
         infoText.ReLoad();
@@ -279,6 +286,9 @@ public class RankingManager : MonoBehaviour
                 break;
             case 2:
                 number = playerDataBase.Michelin;
+                break;
+            case 3:
+                number = playerDataBase.Level;
                 break;
         }
 

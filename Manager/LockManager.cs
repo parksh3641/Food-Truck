@@ -17,10 +17,9 @@ public class LockManager : MonoBehaviour
     public LocalizationContent infoText;
 
     private int level = 0;
-
     private int number = 0;
 
-    public GameManager gameManager;
+    public GameObject button;
 
     PlayerDataBase playerDataBase;
 
@@ -128,6 +127,9 @@ public class LockManager : MonoBehaviour
 
         lockView.SetActive(true);
 
+        button.SetActive(false);
+        Invoke("Delay", 2.0f);
+
         infoText.localizationName = "LockTutorial" + number;
         infoText.ReLoad();
 
@@ -144,6 +146,11 @@ public class LockManager : MonoBehaviour
                 tutorialText.localizationName = "Tutorial_Seconds";
                 tutorialText.ReLoad();
 
+                if (playerDataBase.InGameTutorial == 0)
+                {
+                    GameManager.instance.moveArrow2.SetActive(true);
+                }
+
                 break;
             case 2:
                 lockIcon[1].SetActive(true);
@@ -151,7 +158,7 @@ public class LockManager : MonoBehaviour
                 lockIcon[3].SetActive(true);
                 lockIcon[5].SetActive(true);
 
-                gameManager.CheckPortion();
+                GameManager.instance.CheckPortion();
 
                 break;
             case 3:
@@ -178,8 +185,27 @@ public class LockManager : MonoBehaviour
         }
     }
 
+    void Delay()
+    {
+        button.SetActive(true);
+    }
+
     public void CloseLockView()
     {
         lockView.SetActive(false);
+    }
+
+    public void ChangeFoodTutorial()
+    {
+        tutorialText.localizationName = "Tutorial_Third";
+        tutorialText.ReLoad();
+
+        GameManager.instance.moveArrow1.SetActive(false);
+    }
+    
+    public void NextFoodTutorial()
+    {
+        tutorialText.localizationName = "Tutorial_First";
+        tutorialText.ReLoad();
     }
 }

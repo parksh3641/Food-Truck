@@ -56,6 +56,8 @@ public class ChangeFoodManager : MonoBehaviour
     private int nowExp = 0;
     private int nextExp = 0;
 
+    public LockManager lockManager;
+
     PlayerDataBase playerDataBase;
     ImageDataBase imageDataBase;
     UpgradeDataBase upgradeDataBase;
@@ -198,6 +200,17 @@ public class ChangeFoodManager : MonoBehaviour
             {
                 treasureLocked.SetActive(false);
             }
+
+            GameManager.instance.moveArrow3.SetActive(false);
+
+            if (playerDataBase.InGameTutorial == 0)
+            {
+                lockManager.NextFoodTutorial();
+
+                playerDataBase.InGameTutorial = 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("InGameTutorial", playerDataBase.InGameTutorial);
+            }
+
 
             GameStateManager.instance.Pause = true;
 

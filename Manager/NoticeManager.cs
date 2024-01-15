@@ -11,16 +11,20 @@ public class NoticeManager : MonoBehaviour
 
     public GameObject alarm;
 
+    PlayerDataBase playerDataBase;
+
 
     private void Awake()
     {
+        if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
+
         noticeView.SetActive(false);
         alarm.SetActive(false);
     }
 
     public void Initialize()
     {
-        if (GameStateManager.instance.Tutorial && !GameStateManager.instance.HideNotice)
+        if (playerDataBase.InGameTutorial == 1 && !GameStateManager.instance.HideNotice)
         {
             noticeView.SetActive(true);
         }

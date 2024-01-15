@@ -186,7 +186,7 @@ public class RecoverManager : MonoBehaviour
 
         need += ((maxLevel - 25) / 5);
 
-        afterLevelText.text = "Lv. " + ((int)(maxLevel * 0.7f)).ToString();
+        afterLevelText.text = "Lv. " + ((int)(maxLevel * 0.5f)).ToString();
         needText.text = need.ToString();
     }
 }

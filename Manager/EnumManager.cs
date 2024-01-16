@@ -349,7 +349,8 @@ public enum RewardType
     Island1,
     Island2,
     Island3,
-    Island4
+    Island4,
+    SpeicalCharacter
 }
 
 public enum QuestType

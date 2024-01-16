@@ -171,6 +171,9 @@ public class ReceiveContent : MonoBehaviour
             case RewardType.Island4:
                 mainBackground.sprite = rankBackgroundArray[0];
                 break;
+            case RewardType.SpeicalCharacter:
+                mainBackground.sprite = rankBackgroundArray[3];
+                break;
         }
     }
 

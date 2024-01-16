@@ -3732,7 +3732,11 @@ public class GameManager : MonoBehaviour
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
                             changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
+
+                            if(playerDataBase.InGameTutorial == 1)
+                            {
+                                moveArrow3.SetActive(true);
+                            }
 
                             if (playerDataBase.HamburgerMaxValue == 1)
                             {

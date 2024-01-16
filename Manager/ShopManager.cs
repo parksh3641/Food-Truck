@@ -266,6 +266,18 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void OpenPackageView()
+    {
+        shopView.SetActive(false);
+
+        OpenShopView();
+
+        if (shopView.activeInHierarchy)
+        {
+            ChangeTopToggle(1);
+        }
+    }
+
     public void OpenShopView()
     {
         if(!shopView.activeInHierarchy)

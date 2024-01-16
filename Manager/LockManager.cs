@@ -94,6 +94,7 @@ public class LockManager : MonoBehaviour
             menuIcon[4].SetActive(true);
             menuIcon[6].SetActive(true);
             menuIcon[8].SetActive(true);
+            menuIcon[9].SetActive(true);
         }
 
         if (playerDataBase.LockTutorial >= 4) //레시피 해제
@@ -103,17 +104,17 @@ public class LockManager : MonoBehaviour
 
         if (playerDataBase.LockTutorial >= 5) //퀘스트 해제
         {
-            menuIcon[9].SetActive(false);
+            menuIcon[10].SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 6) //택배 배송 해제
         {
-            menuIcon[10].SetActive(false);
+            menuIcon[11].SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 7) //챌린지 해제
         {
-            menuIcon[11].SetActive(false);
+            menuIcon[12].SetActive(false);
         }
     }
 

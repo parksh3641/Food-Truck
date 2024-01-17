@@ -124,10 +124,10 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[0];
                 break;
             case RewardType.Gold2:
-                mainBackground.sprite = rankBackgroundArray[1];
+                mainBackground.sprite = rankBackgroundArray[2];
                 break;
             case RewardType.Gold3:
-                mainBackground.sprite = rankBackgroundArray[1];
+                mainBackground.sprite = rankBackgroundArray[3];
                 break;
             case RewardType.RankPoint:
                 mainBackground.sprite = rankBackgroundArray[2];

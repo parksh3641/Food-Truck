@@ -3044,6 +3044,11 @@ public class GameManager : MonoBehaviour
                     levelMaxParticle.gameObject.SetActive(true);
                     levelMaxParticle.Play();
                 }
+
+                if (GameStateManager.instance.Vibration)
+                {
+                    Handheld.Vibrate();
+                }
             }
             else
             {
@@ -3096,7 +3101,7 @@ public class GameManager : MonoBehaviour
             {
                 if (maxLevel >= 20)
                 {
-                    if (Random.Range(0, 100) < 20)
+                    if (Random.Range(0, 100) < 10)
                     {
                         PortionManager.instance.GetRecoverTickets(1);
 
@@ -3261,7 +3266,7 @@ public class GameManager : MonoBehaviour
                 bombPartice.Play();
             }
 
-            if(maxLevel >= 20 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
+            if(maxLevel >= 30 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
             {
                 switch (GameStateManager.instance.IslandType)
                 {

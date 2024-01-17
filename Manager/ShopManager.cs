@@ -433,6 +433,16 @@ public class ShopManager : MonoBehaviour
                         Debug.Log("한정 패키지 구매 날짜 설정");
                     }
 
+                    if(playerDataBase.FirstDate[0] == '0')
+                    {
+                        playerDataBase.FirstDate = "1" + playerDataBase.FirstDate;
+                    }
+
+                    if (playerDataBase.FirstServerDate[0] == '0')
+                    {
+                        playerDataBase.FirstServerDate = "1" + playerDataBase.FirstServerDate;
+                    }
+
                     time = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
                     serverTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
 

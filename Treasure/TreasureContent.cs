@@ -441,6 +441,11 @@ public class TreasureContent : MonoBehaviour
 
             SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
             NotionManager.instance.UseNotion(NotionType.FailUpgrade);
+
+            if (GameStateManager.instance.Vibration)
+            {
+                Handheld.Vibrate();
+            }
         }
 
         switch (treasureType)

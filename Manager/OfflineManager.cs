@@ -151,6 +151,8 @@ public class OfflineManager : MonoBehaviour
             {
                 OnSetAlarm();
             }
+
+            OpenCastleView();
         }
     }
 

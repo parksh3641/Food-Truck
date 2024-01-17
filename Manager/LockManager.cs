@@ -70,9 +70,9 @@ public class LockManager : MonoBehaviour
         tutorial.SetActive(true);
 
         menuIcon[7].SetActive(true);
-        menuIcon[9].SetActive(true);
         menuIcon[10].SetActive(true);
         menuIcon[11].SetActive(true);
+        menuIcon[12].SetActive(true);
 
         if (playerDataBase.LockTutorial >= 1) //음식 변경
         {

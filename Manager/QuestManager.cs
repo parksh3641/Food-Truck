@@ -17,6 +17,8 @@ public class QuestManager : MonoBehaviour
     public Text questClearValueText;
     public Text questClearValue2Text;
 
+    public Text questClearCountText;
+
     public GameObject lockedObj;
     public GameObject lockedAdObj;
     public GameObject clearObj;
@@ -112,6 +114,8 @@ public class QuestManager : MonoBehaviour
         questClearValue2Text.text = reward2.ToString();
         questClearTitleText.ReLoad();
         questClearValueText.text = MoneyUnitString.ToCurrencyString(reward);
+
+        questClearCountText.text = LocalizationManager.instance.GetString("ClearCount") + " : " + playerDataBase.QuestCount;
 
         if (playerDataBase.DailyQuestReward == 0)
         {
@@ -212,6 +216,8 @@ public class QuestManager : MonoBehaviour
         playerDataBase.QuestCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);
 
+        questClearCountText.text = LocalizationManager.instance.GetString("ClearCount") + " : " + playerDataBase.QuestCount;
+
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 20);
 
         PlayfabManager.instance.UpdateAddGold(reward);
@@ -240,6 +246,8 @@ public class QuestManager : MonoBehaviour
 
         playerDataBase.QuestCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("QuestCount", playerDataBase.QuestCount);
+
+        questClearCountText.text = LocalizationManager.instance.GetString("ClearCount") + " : " + playerDataBase.QuestCount;
 
         float random = UnityEngine.Random.Range(0, 100f);
 

@@ -70,12 +70,14 @@ public class TreasureManager : MonoBehaviour
     {
         if (!treasureView.activeInHierarchy)
         {
+            treasureAdLockedObj.SetActive(true);
+
             if (playerDataBase.AttendanceDay == System.DateTime.Today.ToString("yyyyMMdd"))
             {
                 ResetManager.instance.Initialize();
             }
 
-            treasureAdLockedObj.SetActive(true);
+            GameManager.instance.RenewalVC();
 
             if (playerDataBase.DailyTreasureReward == 0)
             {

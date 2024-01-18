@@ -239,7 +239,7 @@ public class ShopManager : MonoBehaviour
     public void SetAlarm()
     {
         alarm.SetActive(true);
-        //dailyAlarm.SetActive(true);
+        ingameAlarm.SetActive(true);
     }
 
     public void OpenShopCoinView()
@@ -284,7 +284,10 @@ public class ShopManager : MonoBehaviour
         {
             shopView.SetActive(true);
 
+            GameManager.instance.RenewalVC();
+
             alarm.SetActive(false);
+            ingameAlarm.SetActive(false);
 
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
@@ -987,9 +990,6 @@ public class ShopManager : MonoBehaviour
     public void SuccessWatchAd()
     {
         if (playerDataBase.DailyAdsReward == 1) return;
-
-        alarm.SetActive(false);
-        ingameAlarm.SetActive(false);
 
         playerDataBase.DailyAdsReward = 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyAdsReward", playerDataBase.DailyAdsReward);
@@ -2885,6 +2885,8 @@ public class ShopManager : MonoBehaviour
                 switch (number)
                 {
                     case 0:
+                        GameManager.instance.RenewalVC();
+
                         if (playerDataBase.Coin < price_Gold)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -2949,6 +2951,8 @@ public class ShopManager : MonoBehaviour
                 switch(number)
                 {
                     case 0:
+                        GameManager.instance.RenewalVC();
+
                         if (playerDataBase.Coin < price_Gold)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -3019,6 +3023,8 @@ public class ShopManager : MonoBehaviour
                 switch (number)
                 {
                     case 0:
+                        GameManager.instance.RenewalVC();
+
                         if (playerDataBase.Coin < price_Gold)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -3119,6 +3125,8 @@ public class ShopManager : MonoBehaviour
                 switch (number)
                 {
                     case 0:
+                        GameManager.instance.RenewalVC();
+
                         if (playerDataBase.Coin < price_Gold)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -3243,6 +3251,8 @@ public class ShopManager : MonoBehaviour
                 switch (number)
                 {
                     case 0:
+                        GameManager.instance.RenewalVC();
+
                         if (playerDataBase.Coin < price_Gold)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);

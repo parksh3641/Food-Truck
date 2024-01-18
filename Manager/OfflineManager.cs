@@ -178,6 +178,11 @@ public class OfflineManager : MonoBehaviour
             addExp += (int)(addExp * 0.1f);
         }
 
+        if(addCrystal >= 50)
+        {
+            addCrystal = 50;
+        }
+
         levelUpCostText.text = addCrystal.ToString();
         coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "\n/" + localization_Hours + "  (+2000)";
         expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+30)";

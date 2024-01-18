@@ -1465,12 +1465,12 @@ public class GameManager : MonoBehaviour
     {
         yield return waitForSeconds;
 
-        //if (playerDataBase.Exp > nowExp)
-        //{
-        //    nowExp = playerDataBase.Exp;
-        //    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
-        //    levelManager.Initialize();
-        //}
+        if (playerDataBase.Exp > nowExp)
+        {
+            nowExp = playerDataBase.Exp;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
+            levelManager.Initialize();
+        }
 
         if (playerDataBase.UpgradeCount > nowUpgradeCount)
         {
@@ -2823,6 +2823,8 @@ public class GameManager : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.MaxLevel);
             return;
         }
+
+        RenewalVC();
 
         if (playerDataBase.Coin < need)
         {

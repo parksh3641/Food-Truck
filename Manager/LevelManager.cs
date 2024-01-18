@@ -73,7 +73,9 @@ public class LevelManager : MonoBehaviour
         if(playerDataBase.Level != level)
         {
             playerDataBase.Level = level;
+#if !UNITY_EDITOR
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("Level", playerDataBase.Level);
+#endif
         }
 
         GameStateManager.instance.Level = level;

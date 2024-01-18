@@ -53,7 +53,6 @@ public class PlayfabManager : MonoBehaviour
     private int getGoldB = 0;
 
     public NickNameManager nickNameManager;
-    public GameManager gameManager;
     public MoneyAnimation moneyAnimation;
     public MoneyAnimation moneyAnimation2;
     public OptionManager optionManager;
@@ -218,11 +217,11 @@ public class PlayfabManager : MonoBehaviour
 #region GuestLogin
     public void OnClickGuestLogin()
     {
-        gameManager.loginView.SetActive(false);
+        GameManager.instance.loginView.SetActive(false);
 
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
-            gameManager.OpenLoginView();
+            GameManager.instance.OpenLoginView();
 
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
 
@@ -263,7 +262,7 @@ public class PlayfabManager : MonoBehaviour
         {
             Debug.LogError("Login Fail - Guest");
 
-            gameManager.OpenLoginView();
+            GameManager.instance.OpenLoginView();
 
             isLogin = false;
         });
@@ -296,7 +295,7 @@ public class PlayfabManager : MonoBehaviour
 
             isLogin = false;
 
-            gameManager.OpenLoginView();
+            GameManager.instance.OpenLoginView();
         });
     }
 
@@ -304,11 +303,11 @@ public class PlayfabManager : MonoBehaviour
 #region Google Login
     public void OnClickGoogleLogin()
     {
-        gameManager.loginView.SetActive(false);
+        GameManager.instance.loginView.SetActive(false);
 
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
-            gameManager.OpenLoginView();
+            GameManager.instance.OpenLoginView();
 
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
 
@@ -363,7 +362,7 @@ public class PlayfabManager : MonoBehaviour
 
                 isLogin = false;
 
-                gameManager.OpenLoginView();
+                GameManager.instance.OpenLoginView();
             });
         });
 
@@ -432,11 +431,11 @@ public class PlayfabManager : MonoBehaviour
 
     public void OnClickAppleLogin()
     {
-        gameManager.loginView.SetActive(false);
+        GameManager.instance.loginView.SetActive(false);
 
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
-            gameManager.OpenLoginView();
+            GameManager.instance.OpenLoginView();
 
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
@@ -476,7 +475,7 @@ public class PlayfabManager : MonoBehaviour
                 }
             }, error =>
             {
-                gameManager.OpenLoginView();
+                GameManager.instance.OpenLoginView();
 
                 isLogin = false;
 
@@ -645,7 +644,7 @@ public class PlayfabManager : MonoBehaviour
         }
         else
         {
-            gameManager.OnNeedUpdate();
+            GameManager.instance.OnNeedUpdate();
         }
     }
 
@@ -771,7 +770,16 @@ public class PlayfabManager : MonoBehaviour
 
             if(coinA < 0)
             {
-                UpdateAddGold(Mathf.Abs(coinA));
+                UpdateAddCurrency(MoneyType.CoinA, Mathf.Abs(coinA));
+
+                coinA = 0;
+            }
+
+            if (coinB < 0)
+            {
+                UpdateAddCurrency(MoneyType.CoinB, Mathf.Abs(coinB));
+
+                coinB = 0;
             }
 
             if (coinA > 2000000000)
@@ -2085,6 +2093,8 @@ public class PlayfabManager : MonoBehaviour
             GameStateManager.instance.GetGold = getGoldA;
             UpdatePlayerStatisticsInsert("GetGold", playerDataBase.GetGold);
         }
+
+        GameManager.instance.RenewalVC();
     }
 
     public void UpdateSubtractGold(int number)
@@ -2132,6 +2142,8 @@ public class PlayfabManager : MonoBehaviour
             GameStateManager.instance.ConsumeGold = consumeGoldA;
             UpdatePlayerStatisticsInsert("ConsumeGold", playerDataBase.ConsumeGold);
         }
+
+        GameManager.instance.RenewalVC();
     }
 
     public void UpdateAddCurrency(MoneyType type, int number)
@@ -2177,8 +2189,6 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.CoinB += number;
                         break;
                 }
-
-                gameManager.RenewalVC();
             }
             catch (Exception e)
             {
@@ -2190,6 +2200,7 @@ public class PlayfabManager : MonoBehaviour
             Debug.LogError("Error : Internet Disconnected\nCheck Internet State");
         }
 
+        GameManager.instance.RenewalVC();
     }
 
     public void UpdateSubtractCurrency(MoneyType type, int number)
@@ -2246,13 +2257,13 @@ public class PlayfabManager : MonoBehaviour
                     playerDataBase.CoinB -= number;
                     break;
             }
-
-            gameManager.RenewalVC();
         }
         else
         {
             Debug.LogError("Error : Internet Disconnected\nCheck Internet State");
         }
+
+        GameManager.instance.RenewalVC();
     }
 
 
@@ -2269,7 +2280,7 @@ public class PlayfabManager : MonoBehaviour
 
             GameStateManager.instance.NickName = result.DisplayName;
 
-            //gameManager.Initialize();
+            //GameManager.instance.Initialize();
 
             successAction?.Invoke();
         }
@@ -2657,6 +2668,8 @@ public class PlayfabManager : MonoBehaviour
     [Button]
     public void MinusMoney()
     {
+        GameManager.instance.RenewalVC();
+
         UpdateSubtractGold(50000000);
     }
 }

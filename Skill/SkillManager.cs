@@ -52,6 +52,8 @@ public class SkillManager : MonoBehaviour
         {
             skillView.SetActive(true);
 
+            GameManager.instance.RenewalVC();
+
             countText.text = playerDataBase.SkillTicket.ToString();
 
             ChangeTopToggle(0);

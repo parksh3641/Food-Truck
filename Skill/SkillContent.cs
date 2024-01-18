@@ -631,6 +631,8 @@ public class SkillContent : MonoBehaviour
         {
             if (moneyType == MoneyType.CoinA)
             {
+                GameManager.instance.RenewalVC();
+
                 if (playerDataBase.Coin >= value)
                 {
                     PlayfabManager.instance.UpdateSubtractGold(value);

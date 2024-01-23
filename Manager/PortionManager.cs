@@ -14,6 +14,7 @@ public class PortionManager : MonoBehaviour
     public MoneyAnimation buffTicketAnimation;
     public MoneyAnimation skillTicketAnimation;
     public MoneyAnimation repairTicketAnimation;
+    public MoneyAnimation rankPointAnimation;
 
     private int random = 0;
 
@@ -149,5 +150,14 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RecoverTicket", playerDataBase.RecoverTicket);
 
         repairTicketAnimation.PlusMoney(number);
+    }
+
+    [Button]
+    public void GetRankPoint(int number)
+    {
+        playerDataBase.RankPoint += number;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
+
+        rankPointAnimation.PlusMoney(number);
     }
 }

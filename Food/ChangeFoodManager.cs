@@ -85,6 +85,11 @@ public class ChangeFoodManager : MonoBehaviour
         alarmObj.SetActive(false);
     }
 
+    private void Start()
+    {
+        GameStateManager.instance.Pause = false;
+    }
+
     public void Initialize()
     {
         for (int i = 0; i < System.Enum.GetValues(typeof(FoodType)).Length; i++)
@@ -378,10 +383,10 @@ public class ChangeFoodManager : MonoBehaviour
             changeJapaneseFoodList[7].Locked();
             changeDessertList[9].Locked();
 
-            changeFoodContentList[7].SetLevel(GameStateManager.instance.RibsLevel, upgradeDataBase.GetMaxLevel(FoodType.Ribs));
-            changeCandyList[9].SetLevel(GameStateManager.instance.ChocolateLevel, upgradeDataBase.GetMaxLevelCandy(CandyType.Chocolate));
-            changeJapaneseFoodList[7].SetLevel(GameStateManager.instance.RamenLevel, upgradeDataBase.GetMaxLevelJapaneseFood(JapaneseFoodType.Ramen));
-            changeDessertList[9].SetLevel(GameStateManager.instance.FruitSkewersLevel, upgradeDataBase.GetMaxLevelDessert(DessertType.FruitSkewers));
+            changeFoodContentList[7].SetLevel(GameStateManager.instance.Food8Level, upgradeDataBase.GetMaxLevel(FoodType.Ribs));
+            changeCandyList[9].SetLevel(GameStateManager.instance.Candy10Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Chocolate));
+            changeJapaneseFoodList[7].SetLevel(GameStateManager.instance.JapaneseFood8Level, upgradeDataBase.GetMaxLevelJapaneseFood(JapaneseFoodType.Ramen));
+            changeDessertList[9].SetLevel(GameStateManager.instance.Dessert10Level, upgradeDataBase.GetMaxLevelDessert(DessertType.FruitSkewers));
 
             if (playerDataBase.IslandNumber > 0 || playerDataBase.HamburgerMaxValue > 0)
             {
@@ -533,7 +538,7 @@ public class ChangeFoodManager : MonoBehaviour
     {
         if (GameStateManager.instance.FoodType == type) return;
 
-        changeFoodView.SetActive(false);
+        OpenChangeFoodView();
 
         GameManager.instance.ChangeFood(type);
 
@@ -547,7 +552,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         GameStateManager.instance.IslandType = IslandType.Island1;
 
-        changeFoodView.SetActive(false);
+        OpenChangeFoodView();
 
         GameManager.instance.ChangeFood(type);
 
@@ -559,7 +564,7 @@ public class ChangeFoodManager : MonoBehaviour
     {
         if (GameStateManager.instance.CandyType == type) return;
 
-        changeFoodView.SetActive(false);
+        OpenChangeFoodView();
 
         GameManager.instance.ChangeCandy(type);
 
@@ -573,7 +578,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         GameStateManager.instance.IslandType = IslandType.Island2;
 
-        changeFoodView.SetActive(false);
+        OpenChangeFoodView();
 
         GameManager.instance.ChangeCandy(type);
 
@@ -585,7 +590,7 @@ public class ChangeFoodManager : MonoBehaviour
     {
         if (GameStateManager.instance.JapaneseFoodType == type) return;
 
-        changeFoodView.SetActive(false);
+        OpenChangeFoodView();
 
         GameManager.instance.ChangeJapaneseFood(type);
 
@@ -599,7 +604,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         GameStateManager.instance.IslandType = IslandType.Island3;
 
-        changeFoodView.SetActive(false);
+        OpenChangeFoodView();
 
         GameManager.instance.ChangeJapaneseFood(type);
 
@@ -611,7 +616,7 @@ public class ChangeFoodManager : MonoBehaviour
     {
         if (GameStateManager.instance.DessertType == type) return;
 
-        changeFoodView.SetActive(false);
+        OpenChangeFoodView();
 
         GameManager.instance.ChangeDessert(type);
 
@@ -625,7 +630,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         GameStateManager.instance.IslandType = IslandType.Island4;
 
-        changeFoodView.SetActive(false);
+        OpenChangeFoodView();
 
         GameManager.instance.ChangeDessert(type);
 

@@ -40,6 +40,7 @@ public class OfflineManager : MonoBehaviour
     private int saveExp = 0;
 
     private bool isDelay = false;
+    private bool first = false;
 
     string localization_Time;
     string localization_Hours = "";
@@ -109,6 +110,8 @@ public class OfflineManager : MonoBehaviour
         else
         {
             offlineView.SetActive(false);
+
+            first = false;
         }
     }
 
@@ -153,6 +156,8 @@ public class OfflineManager : MonoBehaviour
             }
 
             OpenCastleView();
+
+            first = true;
         }
     }
 
@@ -328,6 +333,12 @@ public class OfflineManager : MonoBehaviour
 
             SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
             NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+            if(first)
+            {
+                first = false;
+                OpenCastleView();
+            }
         }
     }
 

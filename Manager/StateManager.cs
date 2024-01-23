@@ -73,6 +73,7 @@ public class StateManager : MonoBehaviour
         treasureManager.Initialize();
         gourmetManager.FirstInitialize();
         warningManager.Initialize();
+        SeasonManager.instance.CheckSeason();
 
         Debug.LogError("Load Complete!");
     }

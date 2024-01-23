@@ -83,7 +83,7 @@ public class GameStateManager : MonoBehaviour
         public int candy7Level = 0;
         public int candy8Level = 0;
         public int candy9Level = 0;
-        public int chocolateLevel = 0;
+        public int candy10Level = 0;
 
         [Space]
         public int japaneseFood1Level = 0;
@@ -93,7 +93,7 @@ public class GameStateManager : MonoBehaviour
         public int japaneseFood5Level = 0;
         public int japaneseFood6Level = 0;
         public int japaneseFood7Level = 0;
-        public int ramenLevel = 0;
+        public int japaneseFood8Level = 0;
 
         [Space]
         public int dessert1Level = 0;
@@ -105,7 +105,7 @@ public class GameStateManager : MonoBehaviour
         public int dessert7Level = 0;
         public int dessert8Level = 0;
         public int dessert9Level = 0;
-        public int fruitSkewersLevel = 0;
+        public int dessert10Level = 0;
 
         [Space]
         [Title("Save")]
@@ -634,7 +634,7 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public int RibsLevel
+    public int Food8Level
     {
         get
         {
@@ -764,15 +764,15 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public int ChocolateLevel
+    public int Candy10Level
     {
         get
         {
-            return gameSettings.chocolateLevel;
+            return gameSettings.candy10Level;
         }
         set
         {
-            gameSettings.chocolateLevel = value;
+            gameSettings.candy10Level = value;
             SaveFile();
         }
     }
@@ -868,15 +868,15 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public int RamenLevel
+    public int JapaneseFood8Level
     {
         get
         {
-            return gameSettings.ramenLevel;
+            return gameSettings.japaneseFood8Level;
         }
         set
         {
-            gameSettings.ramenLevel = value;
+            gameSettings.japaneseFood8Level = value;
             SaveFile();
         }
     }
@@ -998,15 +998,15 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public int FruitSkewersLevel
+    public int Dessert10Level
     {
         get
         {
-            return gameSettings.fruitSkewersLevel;
+            return gameSettings.dessert10Level;
         }
         set
         {
-            gameSettings.fruitSkewersLevel = value;
+            gameSettings.dessert10Level = value;
             SaveFile();
         }
     }

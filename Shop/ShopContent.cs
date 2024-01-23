@@ -32,6 +32,7 @@ public class ShopContent : MonoBehaviour
     public GameObject bestObj;
     public Text bestText;
 
+    private bool isDelay = false;
 
     Sprite[] itemArray;
 
@@ -289,7 +290,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion1:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(10);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(20);
 
                 titleText.plusText = " x1";
 
@@ -300,7 +301,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion2:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(20);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(40);
 
                 titleText.plusText = " x1";
 
@@ -311,7 +312,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion3:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(20);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(40);
 
                 titleText.plusText = " x1";
 
@@ -322,7 +323,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion4:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(10);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(20);
 
                 titleText.plusText = " x1";
 
@@ -333,7 +334,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion5:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(30);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(50);
 
                 titleText.plusText = " x1";
 
@@ -458,7 +459,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicket:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(100);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(300);
 
                 titleText.plusText = " x1";
 
@@ -469,7 +470,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.SkillTicket:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(200);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(500);
 
                 titleText.plusText = " x1";
 
@@ -480,9 +481,20 @@ public class ShopContent : MonoBehaviour
             case ItemType.RepairTicket:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(5);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(10);
 
                 titleText.plusText = " x1";
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.RecoverTicket;
+                infoText.ReLoad();
+                break;
+            case ItemType.RepairTicket10:
+                lockedObj.SetActive(false);
+
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(100);
+
+                titleText.plusText = " x10";
 
                 infoText.localizationName = "Hold";
                 infoText.plusText = " : " + playerDataBase.RecoverTicket;
@@ -495,7 +507,12 @@ public class ShopContent : MonoBehaviour
 
     public void Click()
     {
+        if (isDelay) return;
+
         shopManager.BuyItem(itemType);
+
+        isDelay = true;
+        Invoke("Delay", 0.5f);
     }
 
     public void BuyPurchase(int index)
@@ -511,5 +528,10 @@ public class ShopContent : MonoBehaviour
     public void SetLocked(bool check)
     {
         lockedObj.SetActive(check);
+    }
+
+    void Delay()
+    {
+        isDelay = false;
     }
 }

@@ -132,7 +132,7 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.GetFlowerNumber() * 5000;
         }
 
-        Debug.LogError(value);
+        //Debug.LogError(value);
 
         if (value != playerDataBase.GourmetLevel)
         {

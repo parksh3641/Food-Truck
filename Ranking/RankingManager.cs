@@ -13,6 +13,8 @@ public class RankingManager : MonoBehaviour
 
     public GameObject rankingView;
 
+    public GameObject nextSeason;
+
     public GameObject alarm;
 
     public LocalizationContent infoText;
@@ -22,6 +24,8 @@ public class RankingManager : MonoBehaviour
     public GameObject rankingRewardView;
     public RectTransform rankingRewardTransform;
     public ReceiveContent[] receiveContents;
+    public GameObject[] rankingRewardCheck;
+    public Text rankingRewardDateText;
 
     [Space]
     [Title("TopMenu")]
@@ -104,9 +108,60 @@ public class RankingManager : MonoBehaviour
 
     public void OpenRankingReward()
     {
+        if (isDelay) return;
+
         if (!rankingRewardView.activeSelf)
         {
             rankingRewardView.SetActive(true);
+
+            isDelay = true;
+
+            rankingRewardDateText.text = LocalizationManager.instance.GetString("Date") + " : ";
+
+            switch (SeasonManager.instance.CheckSeason_Ranking())
+            {
+                case 0:
+                    rankingRewardDateText.text += "2024.01.01 ~ 2024.01.31";
+                    break;
+                case 1:
+                    rankingRewardDateText.text += "2024.02.02 ~ 2024.02.14";
+                    break;
+                case 2:
+                    rankingRewardDateText.text += "2024.02.16 ~ 2024.02.29";
+                    break;
+                case 3:
+                    rankingRewardDateText.text += "2024.03.02 ~ 2024.03.16";
+                    break;
+                case 4:
+                    rankingRewardDateText.text += "2024.03.18 ~ 2024.03.31";
+                    break;
+                case 5:
+                    rankingRewardDateText.text += "2024.04.02 ~ 2024.04.15";
+                    break;
+                case 6:
+                    rankingRewardDateText.text += "2024.04.17 ~ 2024.04.30";
+                    break;
+                case 7:
+                    rankingRewardDateText.text += "2024.05.02 ~ 2024.05.16";
+                    break;
+                case 8:
+                    rankingRewardDateText.text += "2024.05.18 ~ 2024.05.31";
+                    break;
+                case 9:
+                    rankingRewardDateText.text += "2024.06.02 ~ 2024.06.15";
+                    break;
+                case 10:
+                    rankingRewardDateText.text += "2024.06.17 ~ 2024.06.30";
+                    break;
+                default:
+                    rankingRewardDateText.text = LocalizationManager.instance.GetString("SeasonWait");
+                    break;
+            }
+
+            for(int i = 0; i < rankingRewardCheck.Length; i ++)
+            {
+                rankingRewardCheck[i].SetActive(false);
+            }
 
             receiveContents[0].Initialize(RewardType.Crystal, 10000);
             receiveContents[1].Initialize(RewardType.RankPoint, 5000);
@@ -129,11 +184,27 @@ public class RankingManager : MonoBehaviour
             receiveContents[12].Initialize(RewardType.Crystal, 300);
             receiveContents[13].Initialize(RewardType.RankPoint, 100);
 
+            if (SeasonManager.instance.CheckSeason_Ranking() == 0)
+            {
+                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString(), SetRankingReward);
+            }
+            else if (SeasonManager.instance.CheckSeason_Ranking() > 0)
+            {
+                PlayfabManager.instance.GetLeaderboarder("TotalLevel_" + SeasonManager.instance.CheckSeason().ToString(), SetRankingReward);
+            }
+            else
+            {
+                isDelay = false;
+            }
+
             FirebaseAnalytics.LogEvent("OpenRankingReward");
         }
         else
         {
-            rankingRewardView.SetActive(false);
+            if (!isDelay)
+            {
+                rankingRewardView.SetActive(false);
+            }
         }
     }
 
@@ -152,31 +223,50 @@ public class RankingManager : MonoBehaviour
 
         topMenuImgArray[number].sprite = topMenuSpriteArray[1];
 
-        switch(number)
+        nextSeason.SetActive(false);
+
+        switch (number)
         {
             case 0:
-                ChangeRankingView(RankingType.UpgradeCount);
+                ChangeRankingView(RankingType.UpgradeCount.ToString());
 
                 infoText.localizationName = "Ranking1_Info";
 
                 FirebaseAnalytics.LogEvent("OpenRanking1");
                 break;
             case 1:
-                ChangeRankingView(RankingType.TotalLevel);
+                if(SeasonManager.instance.CheckSeason_Ranking() == 0)
+                {
+                    ChangeRankingView("TotalLevel");
+                }
+                else if(SeasonManager.instance.CheckSeason_Ranking() > 0)
+                {
+                    ChangeRankingView("TotalLevel_" + SeasonManager.instance.CheckSeason().ToString());
+                }
+                else
+                {
+                    for (int i = 0; i < rankContentList.Count; i++)
+                    {
+                        rankContentList[i].transform.localScale = Vector3.one;
+                        rankContentList[i].gameObject.SetActive(false);
+                    }
+
+                    nextSeason.SetActive(true);
+                }
 
                 infoText.localizationName = "Ranking2_Info";
 
                 FirebaseAnalytics.LogEvent("OpenRanking2");
                 break;
             case 2:
-                ChangeRankingView(RankingType.GourmetLevel);
+                ChangeRankingView(RankingType.GourmetLevel.ToString());
 
                 infoText.localizationName = "Ranking3_Info";
 
                 FirebaseAnalytics.LogEvent("OpenRanking3");
                 break;
             case 3:
-                ChangeRankingView(RankingType.Level);
+                ChangeRankingView(RankingType.Level.ToString());
 
                 infoText.localizationName = "Ranking4_Info";
 
@@ -188,13 +278,13 @@ public class RankingManager : MonoBehaviour
 
     }
 
-    public void ChangeRankingView(RankingType type)
+    public void ChangeRankingView(string type)
     {
         rankingView.SetActive(true);
 
         isDelay = true;
 
-        PlayfabManager.instance.GetLeaderboarder(type.ToString(), SetRanking);
+        PlayfabManager.instance.GetLeaderboarder(type, SetRanking);
     }
 
     public void SetRanking(GetLeaderboardResult result)
@@ -282,7 +372,42 @@ public class RankingManager : MonoBehaviour
                 number = playerDataBase.UpgradeCount;
                 break;
             case 1:
-                number = playerDataBase.TotalLevel;
+                switch(SeasonManager.instance.CheckSeason())
+                {
+                    case 0:
+                        number = playerDataBase.TotalLevel;
+                        break;
+                    case 1:
+                        number = playerDataBase.TotalLevel_1;
+                        break;
+                    case 2:
+                        number = playerDataBase.TotalLevel_2;
+                        break;
+                    case 3:
+                        number = playerDataBase.TotalLevel_3;
+                        break;
+                    case 4:
+                        number = playerDataBase.TotalLevel_4;
+                        break;
+                    case 5:
+                        number = playerDataBase.TotalLevel_5;
+                        break;
+                    case 6:
+                        number = playerDataBase.TotalLevel_6;
+                        break;
+                    case 7:
+                        number = playerDataBase.TotalLevel_7;
+                        break;
+                    case 8:
+                        number = playerDataBase.TotalLevel_8;
+                        break;
+                    case 9:
+                        number = playerDataBase.TotalLevel_9;
+                        break;
+                    case 10:
+                        number = playerDataBase.TotalLevel_10;
+                        break;
+                }
                 break;
             case 2:
                 number = playerDataBase.Michelin;
@@ -302,5 +427,55 @@ public class RankingManager : MonoBehaviour
         }
 
         myRankContent.InitState(999, code, GameStateManager.instance.NickName, recordStr, true);
+    }
+
+    public void SetRankingReward(GetLeaderboardResult result)
+    {
+        var curBoard = result.Leaderboard;
+
+        int index = 1;
+
+        foreach (PlayerLeaderboardEntry player in curBoard)
+        {
+            if (player.PlayFabId.Equals(GameStateManager.instance.PlayfabId))
+            {
+                if(index == 1)
+                {
+                    rankingRewardCheck[0].SetActive(true);
+                }
+                else if (index == 2)
+                {
+                    rankingRewardCheck[1].SetActive(true);
+                }
+                else if (index == 3)
+                {
+                    rankingRewardCheck[2].SetActive(true);
+                }
+                else if (index > 3 && index < 11)
+                {
+                    rankingRewardCheck[3].SetActive(true);
+                }
+                else if (index > 10 && index < 21)
+                {
+                    rankingRewardCheck[4].SetActive(true);
+                }
+                else if (index > 20 && index < 101)
+                {
+                    rankingRewardCheck[5].SetActive(true);
+                }
+                else
+                {
+                    if(playerDataBase.TotalLevel > 0)
+                    {
+                        rankingRewardCheck[6].SetActive(true);
+                    }
+                }
+                break;
+            }
+
+            index++;
+        }
+
+        isDelay = false;
     }
 }

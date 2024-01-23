@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TreasureManager : MonoBehaviour
 {
     public GameObject treasureView;
+    public GameObject treasureInfoView;
 
     public GameObject mainAlarm;
     public GameObject alarm;
@@ -42,6 +43,8 @@ public class TreasureManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         treasureView.SetActive(false);
+        treasureInfoView.SetActive(false);
+
         treasureAdLockedObj.SetActive(false);
         treasureRewardView.SetActive(false);
         treasureButton.SetActive(false);
@@ -95,6 +98,20 @@ public class TreasureManager : MonoBehaviour
         else
         {
             treasureView.SetActive(false);
+        }
+    }
+
+    public void OpenTreasureInfoView()
+    {
+        if (!treasureInfoView.activeInHierarchy)
+        {
+            treasureInfoView.SetActive(true);
+
+            FirebaseAnalytics.LogEvent("OpenTreasureInfo");
+        }
+        else
+        {
+            treasureInfoView.SetActive(false);
         }
     }
 

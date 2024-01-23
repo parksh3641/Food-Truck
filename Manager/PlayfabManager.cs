@@ -1746,6 +1746,39 @@ public class PlayfabManager : MonoBehaviour
                        case "YummyTimeCount":
                            playerDataBase.YummyTimeCount = statistics.Value;
                            break;
+                       case "Season1Reward":
+                           playerDataBase.Season1Reward = statistics.Value;
+                           break;
+                       case "Season2Reward":
+                           playerDataBase.Season2Reward = statistics.Value;
+                           break;
+                       case "Season3Reward":
+                           playerDataBase.Season3Reward = statistics.Value;
+                           break;
+                       case "Season4Reward":
+                           playerDataBase.Season4Reward = statistics.Value;
+                           break;
+                       case "Season5Reward":
+                           playerDataBase.Season5Reward = statistics.Value;
+                           break;
+                       case "Season6Reward":
+                           playerDataBase.Season6Reward = statistics.Value;
+                           break;
+                       case "Season7Reward":
+                           playerDataBase.Season7Reward = statistics.Value;
+                           break;
+                       case "Season8Reward":
+                           playerDataBase.Season8Reward = statistics.Value;
+                           break;
+                       case "Season9Reward":
+                           playerDataBase.Season9Reward = statistics.Value;
+                           break;
+                       case "Season10Reward":
+                           playerDataBase.Season10Reward = statistics.Value;
+                           break;
+                       case "Season11Reward":
+                           playerDataBase.Season11Reward = statistics.Value;
+                           break;
                        case "QuestCount":
                            playerDataBase.QuestCount = statistics.Value;
                            break;
@@ -1899,37 +1932,64 @@ public class PlayfabManager : MonoBehaviour
                        case "RankLevel1":
                            playerDataBase.RankLevel1 = statistics.Value;
 
-                           if(GameStateManager.instance.RibsLevel > playerDataBase.RankLevel1)
+                           if(GameStateManager.instance.Food8Level > playerDataBase.RankLevel1)
                            {
-                               GameStateManager.instance.RibsLevel = playerDataBase.RankLevel1;
+                               GameStateManager.instance.Food8Level = playerDataBase.RankLevel1;
                            }
                            break;
                        case "RankLevel2":
                            playerDataBase.RankLevel2 = statistics.Value;
 
-                           if (GameStateManager.instance.ChocolateLevel > playerDataBase.RankLevel2)
+                           if (GameStateManager.instance.Candy10Level > playerDataBase.RankLevel2)
                            {
-                               GameStateManager.instance.ChocolateLevel = playerDataBase.RankLevel2;
+                               GameStateManager.instance.Candy10Level = playerDataBase.RankLevel2;
                            }
                            break;
                        case "RankLevel3":
                            playerDataBase.RankLevel3 = statistics.Value;
 
-                           if (GameStateManager.instance.RamenLevel > playerDataBase.RankLevel3)
+                           if (GameStateManager.instance.JapaneseFood8Level > playerDataBase.RankLevel3)
                            {
-                               GameStateManager.instance.RamenLevel = playerDataBase.RankLevel3;
+                               GameStateManager.instance.JapaneseFood8Level = playerDataBase.RankLevel3;
                            }
                            break;
                        case "RankLevel4":
                            playerDataBase.RankLevel4 = statistics.Value;
 
-                           if (GameStateManager.instance.FruitSkewersLevel > playerDataBase.RankLevel4)
+                           if (GameStateManager.instance.Dessert10Level > playerDataBase.RankLevel4)
                            {
-                               GameStateManager.instance.FruitSkewersLevel = playerDataBase.RankLevel4;
+                               GameStateManager.instance.Dessert10Level = playerDataBase.RankLevel4;
                            }
                            break;
                        case "TotalLevel":
                            playerDataBase.TotalLevel = statistics.Value;
+                           break;
+                       case "TotalLevel_1":
+                           playerDataBase.TotalLevel_1 = statistics.Value;
+                           break;
+                       case "TotalLevel_2":
+                           playerDataBase.TotalLevel_2 = statistics.Value;
+                           break;
+                       case "TotalLevel_3":
+                           playerDataBase.TotalLevel_3 = statistics.Value;
+                           break;
+                       case "TotalLevel_4":
+                           playerDataBase.TotalLevel_4 = statistics.Value;
+                           break;
+                       case "TotalLevel_5":
+                           playerDataBase.TotalLevel_6 = statistics.Value;
+                           break;
+                       case "TotalLevel_6":
+                           playerDataBase.TotalLevel_7 = statistics.Value;
+                           break;
+                       case "TotalLevel_7":
+                           playerDataBase.TotalLevel_8 = statistics.Value;
+                           break;
+                       case "TotalLevel_8":
+                           playerDataBase.TotalLevel_9 = statistics.Value;
+                           break;
+                       case "TotalLevel_10":
+                           playerDataBase.TotalLevel_10 = statistics.Value;
                            break;
                    }
                }

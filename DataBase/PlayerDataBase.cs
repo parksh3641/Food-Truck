@@ -122,6 +122,31 @@ public class PlayerDataBase : ScriptableObject
     private int yummyTimeCount = 0;
 
     [Space]
+    [Title("Season")]
+    [SerializeField]
+    private int season1Reward = 0;
+    [SerializeField]
+    private int season2Reward = 0;
+    [SerializeField]
+    private int season3Reward = 0;
+    [SerializeField]
+    private int season4Reward = 0;
+    [SerializeField]
+    private int season5Reward = 0;
+    [SerializeField]
+    private int season6Reward = 0;
+    [SerializeField]
+    private int season7Reward = 0;
+    [SerializeField]
+    private int season8Reward = 0;
+    [SerializeField]
+    private int season9Reward = 0;
+    [SerializeField]
+    private int season10Reward = 0;
+    [SerializeField]
+    private int season11Reward = 0;
+
+    [Space]
     [Title("Treasure")]
     [SerializeField]
     private int treasure1 = 0;
@@ -486,6 +511,28 @@ public class PlayerDataBase : ScriptableObject
     private int rankLevel4 = 0;
     [SerializeField]
     private int totalLevel = 0;
+    [SerializeField]
+    private int totalLevel_1 = 0;
+    [SerializeField]
+    private int totalLevel_2 = 0;
+    [SerializeField]
+    private int totalLevel_3 = 0;
+    [SerializeField]
+    private int totalLevel_4 = 0;
+    [SerializeField]
+    private int totalLevel_5 = 0;
+    [SerializeField]
+    private int totalLevel_6 = 0;
+    [SerializeField]
+    private int totalLevel_7 = 0;
+    [SerializeField]
+    private int totalLevel_8 = 0;
+    [SerializeField]
+    private int totalLevel_9 = 0;
+    [SerializeField]
+    private int totalLevel_10 = 0;
+    [SerializeField]
+    private int totalLevel_11 = 0;
 
     [Space]
     [Title("Skill")]
@@ -2133,6 +2180,138 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Season1Reward
+    {
+        get
+        {
+            return season1Reward;
+        }
+        set
+        {
+            season1Reward = value;
+        }
+    }
+
+    public int Season2Reward
+    {
+        get
+        {
+            return season2Reward;
+        }
+        set
+        {
+            season2Reward = value;
+        }
+    }
+
+    public int Season3Reward
+    {
+        get
+        {
+            return season3Reward;
+        }
+        set
+        {
+            season3Reward = value;
+        }
+    }
+
+    public int Season4Reward
+    {
+        get
+        {
+            return season4Reward;
+        }
+        set
+        {
+            season4Reward = value;
+        }
+    }
+
+    public int Season5Reward
+    {
+        get
+        {
+            return season5Reward;
+        }
+        set
+        {
+            season5Reward = value;
+        }
+    }
+
+    public int Season6Reward
+    {
+        get
+        {
+            return season6Reward;
+        }
+        set
+        {
+            season6Reward = value;
+        }
+    }
+
+    public int Season7Reward
+    {
+        get
+        {
+            return season7Reward;
+        }
+        set
+        {
+            season7Reward = value;
+        }
+    }
+
+    public int Season8Reward
+    {
+        get
+        {
+            return season8Reward;
+        }
+        set
+        {
+            season8Reward = value;
+        }
+    }
+
+    public int Season9Reward
+    {
+        get
+        {
+            return season9Reward;
+        }
+        set
+        {
+            season9Reward = value;
+        }
+    }
+
+    public int Season10Reward
+    {
+        get
+        {
+            return season10Reward;
+        }
+        set
+        {
+            season10Reward = value;
+        }
+    }
+
+    public int Season11Reward
+    {
+        get
+        {
+            return season11Reward;
+        }
+        set
+        {
+            season11Reward = value;
+        }
+    }
+
     public int QuestCount
     {
         get
@@ -2286,6 +2465,126 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             totalLevel = value;
+        }
+    }
+
+    public int TotalLevel_1
+    {
+        get
+        {
+            return totalLevel_1;
+        }
+        set
+        {
+            totalLevel_1 = value;
+        }
+    }
+
+    public int TotalLevel_2
+    {
+        get
+        {
+            return totalLevel_2;
+        }
+        set
+        {
+            totalLevel_2 = value;
+        }
+    }
+
+    public int TotalLevel_3
+    {
+        get
+        {
+            return totalLevel_3;
+        }
+        set
+        {
+            totalLevel_3 = value;
+        }
+    }
+
+    public int TotalLevel_4
+    {
+        get
+        {
+            return totalLevel_4;
+        }
+        set
+        {
+            totalLevel_4 = value;
+        }
+    }
+
+    public int TotalLevel_5
+    {
+        get
+        {
+            return totalLevel_5;
+        }
+        set
+        {
+            totalLevel_5 = value;
+        }
+    }
+
+    public int TotalLevel_6
+    {
+        get
+        {
+            return totalLevel_6;
+        }
+        set
+        {
+            totalLevel_6 = value;
+        }
+    }
+
+    public int TotalLevel_7
+    {
+        get
+        {
+            return totalLevel_7;
+        }
+        set
+        {
+            totalLevel_7 = value;
+        }
+    }
+
+    public int TotalLevel_8
+    {
+        get
+        {
+            return totalLevel_8;
+        }
+        set
+        {
+            totalLevel_8 = value;
+        }
+    }
+
+    public int TotalLevel_9
+    {
+        get
+        {
+            return totalLevel_9;
+        }
+        set
+        {
+            totalLevel_9 = value;
+        }
+    }
+
+    public int TotalLevel_10
+    {
+        get
+        {
+            return totalLevel_10;
+        }
+        set
+        {
+            totalLevel_10 = value;
         }
     }
 
@@ -4005,6 +4304,17 @@ public class PlayerDataBase : ScriptableObject
         rankLevel3 = 0;
         rankLevel4 = 0;
         totalLevel = 0;
+        totalLevel_1 = 0;
+        totalLevel_2 = 0;
+        totalLevel_3 = 0;
+        totalLevel_4 = 0;
+        totalLevel_5 = 0;
+        totalLevel_6 = 0;
+        totalLevel_7 = 0;
+        totalLevel_8 = 0;
+        totalLevel_9 = 0;
+        totalLevel_10 = 0;
+
 
         coin = 0;
         coinA = 0;
@@ -4229,6 +4539,18 @@ public class PlayerDataBase : ScriptableObject
         useSources = 0;
         openChestBox = 0;
         yummyTimeCount = 0;
+
+        season1Reward = 0;
+        season2Reward = 0;
+        season3Reward = 0;
+        season4Reward = 0;
+        season5Reward = 0;
+        season6Reward = 0;
+        season7Reward = 0;
+        season8Reward = 0;
+        season9Reward = 0;
+        season10Reward = 0;
+        season11Reward = 0;
 
         skill1 = 0;
         skill2 = 0;

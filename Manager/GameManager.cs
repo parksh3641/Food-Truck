@@ -223,9 +223,12 @@ public class GameManager : MonoBehaviour
     private int defaultNeed = 150;
     private int defaultSellPrice = 2000;
 
+    private int season = 0;
+
     private bool clickDelay = false;
     private bool isReady = false;
     private bool auto = false;
+    private bool buffAutoUpgrade = false;
 
     public GameObject buff4Obj;
 
@@ -256,12 +259,12 @@ public class GameManager : MonoBehaviour
 
     Sprite[] islandArray;
 
-    public ParticleSystem level1UpParticle;
-    public ParticleSystem level5UpParticle;
-    public ParticleSystem levelMaxParticle;
-    public ParticleSystem bombPartice;
+    public ParticleSystem[] level1UpParticle;
+    public ParticleSystem[] level5UpParticle;
+    public ParticleSystem[] levelMaxParticle;
+    public ParticleSystem[] bombPartice;
     public ParticleSystem yummyTimeParticle;
-    public ParticleSystem yummyTime2Particle;
+    public ParticleSystem[] yummyTime2Particle;
 
     public TutorialManager tutorialManager;
     public LockManager lockManager;
@@ -338,12 +341,16 @@ public class GameManager : MonoBehaviour
 
         feverEffect.SetActive(false);
 
-        level1UpParticle.gameObject.SetActive(false);
-        level5UpParticle.gameObject.SetActive(false);
-        levelMaxParticle.gameObject.SetActive(false);
-        bombPartice.gameObject.SetActive(false);
+        for(int i = 0; i < level1UpParticle.Length; i ++)
+        {
+            level1UpParticle[i].gameObject.SetActive(false);
+            level5UpParticle[i].gameObject.SetActive(false);
+            levelMaxParticle[i].gameObject.SetActive(false);
+            bombPartice[i].gameObject.SetActive(false);
+            yummyTime2Particle[i].gameObject.SetActive(false);
+        }
+
         yummyTimeParticle.gameObject.SetActive(false);
-        yummyTime2Particle.gameObject.SetActive(false);
 
         portion1 = false;
         portion2 = false;
@@ -784,8 +791,8 @@ public class GameManager : MonoBehaviour
 
                         break;
                     case FoodType.Ribs:
-                        level = GameStateManager.instance.RibsLevel;
-                        nextLevel = (GameStateManager.instance.RibsLevel + 1) / 5;
+                        level = GameStateManager.instance.Food8Level;
+                        nextLevel = (GameStateManager.instance.Food8Level + 1) / 5;
 
                         if (ribsArray.Length - 1 < nextLevel)
                         {
@@ -880,8 +887,8 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case CandyType.Chocolate:
-                        level = GameStateManager.instance.ChocolateLevel;
-                        nextLevel = (GameStateManager.instance.ChocolateLevel + 1) / 5;
+                        level = GameStateManager.instance.Candy10Level;
+                        nextLevel = (GameStateManager.instance.Candy10Level + 1) / 5;
 
                         if (candy10Array.Length - 1 < nextLevel)
                         {
@@ -957,8 +964,8 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case JapaneseFoodType.Ramen:
-                        level = GameStateManager.instance.RamenLevel;
-                        nextLevel = (GameStateManager.instance.RamenLevel + 1) / 5;
+                        level = GameStateManager.instance.JapaneseFood8Level;
+                        nextLevel = (GameStateManager.instance.JapaneseFood8Level + 1) / 5;
 
                         if (japaneseFood8Array.Length - 1 < nextLevel)
                         {
@@ -1052,8 +1059,8 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case DessertType.FruitSkewers:
-                        level = GameStateManager.instance.FruitSkewersLevel;
-                        nextLevel = (GameStateManager.instance.FruitSkewersLevel + 1) / 5;
+                        level = GameStateManager.instance.Dessert10Level;
+                        nextLevel = (GameStateManager.instance.Dessert10Level + 1) / 5;
 
                         if (dessert10Array.Length - 1 < nextLevel)
                         {
@@ -1248,6 +1255,8 @@ public class GameManager : MonoBehaviour
             FirebaseAnalytics.LogEvent("RankingMode");
         }
 
+        season = SeasonManager.instance.CheckSeason();
+
         lockManager.Localization();
 
         CheckPercent();
@@ -1410,17 +1419,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if(!buff4)
+            if(buff4 && !buffAutoUpgrade)
             {
-                auto = false;
-            }
-            else
-            {
-                if (!auto)
-                {
-                    auto = true;
-                    StartCoroutine(AutoUpgradeCoroution());
-                }
+                buffAutoUpgrade = true;
+                StartCoroutine(BuffAutoUpgradeCoroution());
+
             }
         }
 
@@ -1461,6 +1464,37 @@ public class GameManager : MonoBehaviour
         StartCoroutine(AutoUpgradeCoroution());
     }
 
+    IEnumerator BuffAutoUpgradeCoroution()
+    {
+        if (!inGameUI.activeInHierarchy || GameStateManager.instance.GameType == GameType.Rank)
+        {
+            buffAutoUpgrade = false;
+        }
+
+        if (!buffAutoUpgrade)
+        {
+            yield break;
+        }
+
+        if (level >= 9)
+        {
+            sellButtonAnim.AutoClick();
+            SellButton(2);
+        }
+        else
+        {
+            if (!GameStateManager.instance.Pause)
+            {
+                upgradeButtonAnim.AutoClick();
+                UpgradeButton(2);
+            }
+        }
+
+        yield return waitForSeconds4;
+
+        StartCoroutine(BuffAutoUpgradeCoroution());
+    }
+
     IEnumerator DelayCoroution()
     {
         yield return waitForSeconds;
@@ -1488,38 +1522,144 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.GameType == GameType.Rank)
         {
-            if (GameStateManager.instance.RibsLevel + 1 > playerDataBase.RankLevel1)
+            if (GameStateManager.instance.Food8Level + 1 > playerDataBase.RankLevel1)
             {
-                playerDataBase.RankLevel1 = GameStateManager.instance.RibsLevel + 1;
+                playerDataBase.RankLevel1 = GameStateManager.instance.Food8Level + 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel1", playerDataBase.RankLevel1);
             }
 
-            if (GameStateManager.instance.ChocolateLevel + 1 > playerDataBase.RankLevel2)
+            if (GameStateManager.instance.Candy10Level + 1 > playerDataBase.RankLevel2)
             {
-                playerDataBase.RankLevel2 = GameStateManager.instance.ChocolateLevel + 1;
+                playerDataBase.RankLevel2 = GameStateManager.instance.Candy10Level + 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel2", playerDataBase.RankLevel2);
             }
 
-            if (GameStateManager.instance.RamenLevel + 1 > playerDataBase.RankLevel3)
+            if (GameStateManager.instance.JapaneseFood8Level + 1 > playerDataBase.RankLevel3)
             {
-                playerDataBase.RankLevel3 = GameStateManager.instance.RamenLevel + 1;
+                playerDataBase.RankLevel3 = GameStateManager.instance.JapaneseFood8Level + 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel3", playerDataBase.RankLevel3);
             }
 
-            if (GameStateManager.instance.FruitSkewersLevel + 1 > playerDataBase.RankLevel4)
+            if (GameStateManager.instance.Dessert10Level + 1 > playerDataBase.RankLevel4)
             {
-                playerDataBase.RankLevel4 = GameStateManager.instance.FruitSkewersLevel + 1;
+                playerDataBase.RankLevel4 = GameStateManager.instance.Dessert10Level + 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel4", playerDataBase.RankLevel4);
             }
 
             yield return waitForSeconds;
 
-            if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4 
-                > playerDataBase.TotalLevel)
+            switch (season)
             {
-                playerDataBase.TotalLevel = playerDataBase.RankLevel1 + playerDataBase.RankLevel2 
-                    + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
+                case 0:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel)
+                    {
+                        playerDataBase.TotalLevel = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
+                    }
+                    break;
+                case 1:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_1)
+                    {
+                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_1", playerDataBase.TotalLevel_1);
+                    }
+                    break;
+                case 2:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_2)
+                    {
+                        playerDataBase.TotalLevel_2 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_2", playerDataBase.TotalLevel_2);
+                    }
+                    break;
+                case 3:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_3)
+                    {
+                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_3", playerDataBase.TotalLevel_3);
+                    }
+                    break;
+                case 4:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_4)
+                    {
+                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_4", playerDataBase.TotalLevel_4);
+                    }
+                    break;
+                case 5:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_5)
+                    {
+                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_5", playerDataBase.TotalLevel_5);
+                    }
+                    break;
+                case 6:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_6)
+                    {
+                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_6", playerDataBase.TotalLevel_6);
+                    }
+                    break;
+                case 7:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_7)
+                    {
+                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_7", playerDataBase.TotalLevel_7);
+                    }
+                    break;
+                case 8:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_1)
+                    {
+                        playerDataBase.TotalLevel_8 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_8", playerDataBase.TotalLevel_8);
+                    }
+                    break;
+                case 9:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_9)
+                    {
+                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_9", playerDataBase.TotalLevel_9);
+                    }
+                    break;
+                case 10:
+                    if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
+    > playerDataBase.TotalLevel_10)
+                    {
+                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                            + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_10", playerDataBase.TotalLevel_10);
+                    }
+                    break;
             }
         }
 
@@ -1781,9 +1921,9 @@ public class GameManager : MonoBehaviour
                 switch (GameStateManager.instance.IslandType)
                 {
                     case IslandType.Island1:
-                        if (GameStateManager.instance.RibsLevel > playerDataBase.RankLevel1)
+                        if (GameStateManager.instance.Food8Level > playerDataBase.RankLevel1)
                         {
-                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.RibsLevel + 1);
+                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.Food8Level + 1);
                         }
                         else
                         {
@@ -1792,9 +1932,9 @@ public class GameManager : MonoBehaviour
 
                         break;
                     case IslandType.Island2:
-                        if (GameStateManager.instance.ChocolateLevel > playerDataBase.RankLevel2)
+                        if (GameStateManager.instance.Candy10Level > playerDataBase.RankLevel2)
                         {
-                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.ChocolateLevel + 1);
+                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.Candy10Level + 1);
                         }
                         else
                         {
@@ -1802,9 +1942,9 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case IslandType.Island3:
-                        if (GameStateManager.instance.RamenLevel > playerDataBase.RankLevel3)
+                        if (GameStateManager.instance.JapaneseFood8Level > playerDataBase.RankLevel3)
                         {
-                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.RamenLevel + 1);
+                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.JapaneseFood8Level + 1);
                         }
                         else
                         {
@@ -1812,9 +1952,9 @@ public class GameManager : MonoBehaviour
                         }
                         break;
                     case IslandType.Island4:
-                        if (GameStateManager.instance.FruitSkewersLevel > playerDataBase.RankLevel4)
+                        if (GameStateManager.instance.Dessert10Level > playerDataBase.RankLevel4)
                         {
-                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.FruitSkewersLevel + 1);
+                            highLevelText.text = LocalizationManager.instance.GetString("Best") + " : " + (GameStateManager.instance.Dessert10Level + 1);
                         }
                         else
                         {
@@ -2031,7 +2171,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             ribsArray[nextLevel].gameObject.SetActive(true);
-                            ribsArray[nextLevel].Initialize(GameStateManager.instance.RibsLevel - (5 * nextLevel));
+                            ribsArray[nextLevel].Initialize(GameStateManager.instance.Food8Level - (5 * nextLevel));
                         }
                         break;
                 }
@@ -2156,7 +2296,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             candy10Array[nextLevel].gameObject.SetActive(true);
-                            candy10Array[nextLevel].Initialize(GameStateManager.instance.ChocolateLevel - (5 * nextLevel));
+                            candy10Array[nextLevel].Initialize(GameStateManager.instance.Candy10Level - (5 * nextLevel));
                         }
                         break;
                 }
@@ -2257,7 +2397,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             japaneseFood8Array[nextLevel].gameObject.SetActive(true);
-                            japaneseFood8Array[nextLevel].Initialize(GameStateManager.instance.RamenLevel - (5 * nextLevel));
+                            japaneseFood8Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood8Level - (5 * nextLevel));
                         }
                         break;
                 }
@@ -2382,7 +2522,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             dessert10Array[nextLevel].gameObject.SetActive(true);
-                            dessert10Array[nextLevel].Initialize(GameStateManager.instance.FruitSkewersLevel - (5 * nextLevel));
+                            dessert10Array[nextLevel].Initialize(GameStateManager.instance.Dessert10Level - (5 * nextLevel));
                         }
                         break;
                 }
@@ -2915,7 +3055,7 @@ public class GameManager : MonoBehaviour
                             GameStateManager.instance.Food7Level = level;
                             break;
                         case FoodType.Ribs:
-                            GameStateManager.instance.RibsLevel = level;
+                            GameStateManager.instance.Food8Level = level;
                             break;
                     }
                     break;
@@ -2950,7 +3090,7 @@ public class GameManager : MonoBehaviour
                             GameStateManager.instance.Candy9Level = level;
                             break;
                         case CandyType.Chocolate:
-                            GameStateManager.instance.ChocolateLevel = level;
+                            GameStateManager.instance.Candy10Level = level;
                             break;
                     }
                     break;
@@ -2979,7 +3119,7 @@ public class GameManager : MonoBehaviour
                             GameStateManager.instance.JapaneseFood7Level = level;
                             break;
                         case JapaneseFoodType.Ramen:
-                            GameStateManager.instance.RamenLevel = level;
+                            GameStateManager.instance.JapaneseFood8Level = level;
                             break;
                     }
                     break;
@@ -3014,7 +3154,7 @@ public class GameManager : MonoBehaviour
                             GameStateManager.instance.Dessert9Level = level;
                             break;
                         case DessertType.FruitSkewers:
-                            GameStateManager.instance.FruitSkewersLevel = level;
+                            GameStateManager.instance.Dessert10Level = level;
                             break;
                     }
                     break;
@@ -3034,22 +3174,17 @@ public class GameManager : MonoBehaviour
 
                 if (GameStateManager.instance.Effect)
                 {
-                    level1UpParticle.gameObject.SetActive(false);
-                    level1UpParticle.gameObject.SetActive(true);
-                    level1UpParticle.Play();
+                    level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+                    level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+                    level1UpParticle[(int)GameStateManager.instance.IslandType].Play();
 
-                    level5UpParticle.gameObject.SetActive(false);
-                    level5UpParticle.gameObject.SetActive(true);
-                    level5UpParticle.Play();
+                    level5UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+                    level5UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+                    level5UpParticle[(int)GameStateManager.instance.IslandType].Play();
 
-                    levelMaxParticle.gameObject.SetActive(false);
-                    levelMaxParticle.gameObject.SetActive(true);
-                    levelMaxParticle.Play();
-                }
-
-                if (GameStateManager.instance.Vibration)
-                {
-                    Handheld.Vibrate();
+                    levelMaxParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+                    levelMaxParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+                    levelMaxParticle[(int)GameStateManager.instance.IslandType].Play();
                 }
             }
             else
@@ -3063,22 +3198,22 @@ public class GameManager : MonoBehaviour
 
                     if (GameStateManager.instance.Effect)
                     {
-                        level1UpParticle.gameObject.SetActive(false);
-                        level1UpParticle.gameObject.SetActive(true);
-                        level1UpParticle.Play();
+                        level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+                        level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+                        level1UpParticle[(int)GameStateManager.instance.IslandType].Play();
 
-                        level5UpParticle.gameObject.SetActive(false);
-                        level5UpParticle.gameObject.SetActive(true);
-                        level5UpParticle.Play();
+                        level5UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+                        level5UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+                        level5UpParticle[(int)GameStateManager.instance.IslandType].Play();
                     }
                 }
                 else
                 {
                     if (GameStateManager.instance.Effect)
                     {
-                        level1UpParticle.gameObject.SetActive(false);
-                        level1UpParticle.gameObject.SetActive(true);
-                        level1UpParticle.Play();
+                        level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+                        level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+                        level1UpParticle[(int)GameStateManager.instance.IslandType].Play();
                     }
 
                     SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
@@ -3144,7 +3279,7 @@ public class GameManager : MonoBehaviour
                                         GameStateManager.instance.Food7Level -= 1;
                                         break;
                                     case FoodType.Ribs:
-                                        GameStateManager.instance.RibsLevel -= 1;
+                                        GameStateManager.instance.Food8Level -= 1;
                                         break;
                                 }
                                 break;
@@ -3179,7 +3314,7 @@ public class GameManager : MonoBehaviour
                                         GameStateManager.instance.Candy9Level -= 1;
                                         break;
                                     case CandyType.Chocolate:
-                                        GameStateManager.instance.ChocolateLevel -= 1;
+                                        GameStateManager.instance.Candy10Level -= 1;
                                         break;
                                 }
                                 break;
@@ -3208,7 +3343,7 @@ public class GameManager : MonoBehaviour
                                         GameStateManager.instance.JapaneseFood7Level -= 1;
                                         break;
                                     case JapaneseFoodType.Ramen:
-                                        GameStateManager.instance.RamenLevel -= 1;
+                                        GameStateManager.instance.JapaneseFood8Level -= 1;
                                         break;
                                 }
                                 break;
@@ -3243,7 +3378,7 @@ public class GameManager : MonoBehaviour
                                         GameStateManager.instance.Dessert9Level -= 1;
                                         break;
                                     case DessertType.FruitSkewers:
-                                        GameStateManager.instance.FruitSkewersLevel -= 1;
+                                        GameStateManager.instance.Dessert10Level -= 1;
                                         break;
                                 }
                                 break;
@@ -3263,9 +3398,9 @@ public class GameManager : MonoBehaviour
 
             if (GameStateManager.instance.Effect)
             {
-                bombPartice.gameObject.SetActive(false);
-                bombPartice.gameObject.SetActive(true);
-                bombPartice.Play();
+                bombPartice[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+                bombPartice[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+                bombPartice[(int)GameStateManager.instance.IslandType].Play();
             }
 
             if(maxLevel >= 30 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
@@ -3336,7 +3471,7 @@ public class GameManager : MonoBehaviour
                 GameStateManager.instance.Food7Level = recoverLevel;
                 break;
             case FoodType.Ribs:
-                GameStateManager.instance.RibsLevel = recoverLevel;
+                GameStateManager.instance.Food8Level = recoverLevel;
                 break;
         }
 
@@ -3375,7 +3510,7 @@ public class GameManager : MonoBehaviour
                 GameStateManager.instance.Candy9Level = recoverLevel;
                 break;
             case CandyType.Chocolate:
-                GameStateManager.instance.ChocolateLevel = recoverLevel;
+                GameStateManager.instance.Candy10Level = recoverLevel;
                 break;
         }
 
@@ -3408,7 +3543,7 @@ public class GameManager : MonoBehaviour
                 GameStateManager.instance.JapaneseFood7Level = recoverLevel;
                 break;
             case JapaneseFoodType.Ramen:
-                GameStateManager.instance.RamenLevel = recoverLevel;
+                GameStateManager.instance.JapaneseFood8Level = recoverLevel;
                 break;
         }
 
@@ -3447,7 +3582,7 @@ public class GameManager : MonoBehaviour
                 GameStateManager.instance.Dessert9Level = recoverLevel;
                 break;
             case DessertType.FruitSkewers:
-                GameStateManager.instance.FruitSkewersLevel = recoverLevel;
+                GameStateManager.instance.Dessert10Level = recoverLevel;
                 break;
         }
 
@@ -3461,7 +3596,7 @@ public class GameManager : MonoBehaviour
             if(feverMode)
             {
                 yummyTimeParticle.gameObject.SetActive(true);
-                yummyTime2Particle.gameObject.SetActive(true);
+                yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
             }
         }
         else
@@ -3469,7 +3604,7 @@ public class GameManager : MonoBehaviour
             if (feverMode)
             {
                 yummyTimeParticle.gameObject.SetActive(false);
-                yummyTime2Particle.gameObject.SetActive(false);
+                yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
             }
         }
     }
@@ -3506,7 +3641,7 @@ public class GameManager : MonoBehaviour
                         GameStateManager.instance.Food7Level = 0;
                         break;
                     case FoodType.Ribs:
-                        GameStateManager.instance.RibsLevel = 0;
+                        GameStateManager.instance.Food8Level = 0;
                         break;
                 }
                 break;
@@ -3541,7 +3676,7 @@ public class GameManager : MonoBehaviour
                         GameStateManager.instance.Candy9Level = 0;
                         break;
                     case CandyType.Chocolate:
-                        GameStateManager.instance.RibsLevel = 0;
+                        GameStateManager.instance.Food8Level = 0;
                         break;
                 }
                 break;
@@ -3570,7 +3705,7 @@ public class GameManager : MonoBehaviour
                         GameStateManager.instance.JapaneseFood7Level = 0;
                         break;
                     case JapaneseFoodType.Ramen:
-                        GameStateManager.instance.RamenLevel = 0;
+                        GameStateManager.instance.JapaneseFood8Level = 0;
                         break;
                 }
                 break;
@@ -3605,7 +3740,7 @@ public class GameManager : MonoBehaviour
                         GameStateManager.instance.Dessert9Level = 0;
                         break;
                     case DessertType.FruitSkewers:
-                        GameStateManager.instance.FruitSkewersLevel = 0;
+                        GameStateManager.instance.Dessert10Level = 0;
                         break;
                 }
                 break;
@@ -3657,7 +3792,7 @@ public class GameManager : MonoBehaviour
         if (GameStateManager.instance.Effect)
         {
             yummyTimeParticle.gameObject.SetActive(true);
-            yummyTime2Particle.gameObject.SetActive(true);
+            yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
         }
 
         feverText.enabled = false;
@@ -3687,7 +3822,7 @@ public class GameManager : MonoBehaviour
         }
 
         yummyTimeParticle.gameObject.SetActive(false);
-        yummyTime2Particle.gameObject.SetActive(false);
+        yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
 
         feverMode = false;
         feverFillamount.fillAmount = 0;
@@ -4790,10 +4925,10 @@ public class GameManager : MonoBehaviour
             case 3:
                 buff4 = true;
 
-                if (!auto)
+                if (!buffAutoUpgrade)
                 {
-                    auto = true;
-                    StartCoroutine(AutoUpgradeCoroution());
+                    buffAutoUpgrade = true;
+                    StartCoroutine(BuffAutoUpgradeCoroution());
                 }
                 break;
         }
@@ -4824,7 +4959,7 @@ public class GameManager : MonoBehaviour
             case 3:
                 buff4 = false;
 
-                auto = false;
+                buffAutoUpgrade = false;
                 break;
         }
     }
@@ -4926,7 +5061,7 @@ public class GameManager : MonoBehaviour
         Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
 #endif
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
 
         FirebaseAnalytics.LogEvent("OpenAppReview");
 

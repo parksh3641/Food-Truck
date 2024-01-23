@@ -213,6 +213,7 @@ public enum ItemType
     BuffTicket,
     SkillTicket,
     RepairTicket,
+    RepairTicket10,
 }
 
 public enum PackageType

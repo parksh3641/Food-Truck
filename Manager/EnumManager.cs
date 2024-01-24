@@ -431,3 +431,31 @@ public enum FlowerType
     Flower6,
     Flower7,
 }
+
+public enum ChefType
+{
+    Cook1_1,
+    Cook1_2,
+    Cook1_3,
+    Cook1_4,
+    Cook2_1,
+    Cook2_2,
+    Cook2_3,
+    Cook2_4,
+    Cook3_1,
+    Cook3_2,
+    Cook3_3,
+    Cook3_4,
+    Cook4_1,
+    Cook4_2,
+    Cook4_3,
+    Cook4_4,
+    Cook5_1,
+    Cook5_2,
+    Cook5_3,
+    Cook5_4,
+    Cook6_1,
+    Cook6_2,
+    Cook6_3,
+    Cook6_4,
+}

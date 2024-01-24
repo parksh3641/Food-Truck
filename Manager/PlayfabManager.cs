@@ -56,6 +56,9 @@ public class PlayfabManager : MonoBehaviour
     public MoneyAnimation moneyAnimation;
     public MoneyAnimation moneyAnimation2;
     public OptionManager optionManager;
+    public RankingManager rankingManager;
+    public NewsManager newsManager;
+
 
     List<string> itemList = new List<string>();
 
@@ -211,7 +214,10 @@ public class PlayfabManager : MonoBehaviour
         else Debug.Log(message);
 #endif
     }
-    private void DisplayPlayfabError(PlayFabError error) => SetEditorOnlyMessage("error : " + error.GenerateErrorReport(), true);
+    private void DisplayPlayfabError(PlayFabError error)
+    {
+        SetEditorOnlyMessage("error : " + error.GenerateErrorReport(), true);
+    }
 
 #endregion
 #region GuestLogin
@@ -1386,6 +1392,9 @@ public class PlayfabManager : MonoBehaviour
                        case "PlayTime":
                            playerDataBase.PlayTime = statistics.Value;
                            break;
+                       case "Advancement":
+                           playerDataBase.Advancement = statistics.Value;
+                           break;
                        case "Michelin":
                            playerDataBase.Michelin = statistics.Value;
                            break;
@@ -2471,7 +2480,13 @@ public class PlayfabManager : MonoBehaviour
             }
         };
 
-        PlayFabClientAPI.GetLeaderboard(requestLeaderboard, successCalback, DisplayPlayfabError);
+        PlayFabClientAPI.GetLeaderboard(requestLeaderboard, successCalback, error =>
+        {
+            rankingManager.isDelay = false;
+
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+        });
     }
 
     public void GetLeaderboardMyRank(string name, Action<GetLeaderboardAroundPlayerResult> successCalback)
@@ -2560,7 +2575,13 @@ public class PlayfabManager : MonoBehaviour
             }
             action.Invoke(item);
 
-        }, error => Debug.LogError(error.GenerateErrorReport()));
+        }, error =>
+        {
+            newsManager.isDelay = false;
+
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+        });
     }
 
     public void ConsumeItem(string itemInstanceID)

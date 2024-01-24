@@ -20,7 +20,8 @@ public class RankEventManager : MonoBehaviour
 
     public TreasureManager treasureManager;
 
-    private int level = 10;
+    private int totalLevel = 0;
+    private int level = 20;
 
     PlayerDataBase playerDataBase;
 
@@ -51,7 +52,50 @@ public class RankEventManager : MonoBehaviour
             alarm.SetActive(false);
             mainAlarm.SetActive(false);
 
-            rankEventText.text = LocalizationManager.instance.GetString("Ranking2_Info") + " : " + playerDataBase.TotalLevel;
+            switch(SeasonManager.instance.CheckSeason_Ranking())
+            {
+                case -1:
+                    rankEventView.SetActive(false);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.SeasonWaitNotion);
+                    break;
+                case 0:
+                    totalLevel = playerDataBase.TotalLevel;
+                    break;
+                case 1:
+                    totalLevel = playerDataBase.TotalLevel_1;
+                    break;
+                case 2:
+                    totalLevel = playerDataBase.TotalLevel_2;
+                    break;
+                case 3:
+                    totalLevel = playerDataBase.TotalLevel_3;
+                    break;
+                case 4:
+                    totalLevel = playerDataBase.TotalLevel_4;
+                    break;
+                case 5:
+                    totalLevel = playerDataBase.TotalLevel_5;
+                    break;
+                case 6:
+                    totalLevel = playerDataBase.TotalLevel_6;
+                    break;
+                case 7:
+                    totalLevel = playerDataBase.TotalLevel_7;
+                    break;
+                case 8:
+                    totalLevel = playerDataBase.TotalLevel_8;
+                    break;
+                case 9:
+                    totalLevel = playerDataBase.TotalLevel_9;
+                    break;
+                case 10:
+                    totalLevel = playerDataBase.TotalLevel_10;
+                    break;
+            }
+
+            rankEventText.text = LocalizationManager.instance.GetString("Ranking2_Info") + " : " + totalLevel;
 
             CheckRankEvent();
 
@@ -69,7 +113,7 @@ public class RankEventManager : MonoBehaviour
     {
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
-            attendanceContentArray[i].InitializeRankEvent(i, level * (i + 1), playerDataBase.RankEventCount, playerDataBase.TotalLevel, this);
+            attendanceContentArray[i].InitializeRankEvent(i, level * (i + 1), playerDataBase.RankEventCount, totalLevel, this);
         }
     }
 
@@ -78,7 +122,7 @@ public class RankEventManager : MonoBehaviour
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.TreasureBox, 10);
+            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.TreasureBox, 3);
         }
     }
 
@@ -91,7 +135,7 @@ public class RankEventManager : MonoBehaviour
             return;
         }
 
-        treasureManager.OpenTreasure(10);
+        treasureManager.OpenTreasure(3);
 
         playerDataBase.RankEventCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankEventCount", playerDataBase.RankEventCount);

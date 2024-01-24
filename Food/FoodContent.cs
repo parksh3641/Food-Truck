@@ -11,11 +11,19 @@ public class FoodContent : MonoBehaviour
     public float posY = 0;
     public float posZ = 0;
 
-    public Rotation rotation;
+    private float sizeUp = 1.5f;
+
+    public bool speicalFood = false;
+
+    MeshRenderer meshRenderer;
+    Rotation rotation;
 
     private void Awake()
     {
         rotation = GetComponent<Rotation>();
+        meshRenderer = GetComponent<MeshRenderer>();
+
+        speicalFood = false;
     }
 
     private void OnEnable()
@@ -33,6 +41,10 @@ public class FoodContent : MonoBehaviour
 
     private void OnDisable()
     {
+        meshRenderer.material.color = new Color(1, 1, 1);
+
+        speicalFood = false;
+
         if (saveSize == 0)
         {
             saveSize = transform.localScale.x;
@@ -59,13 +71,27 @@ public class FoodContent : MonoBehaviour
             number = 5;
         }
 
-        transform.localScale = new Vector3(posX += (size * number), posY += (size * number), posZ += (size * number));
+        if(speicalFood)
+        {
+            transform.localScale = new Vector3(posX += ((size * number) * sizeUp), posY += ((size * number) * sizeUp), posZ += ((size * number) * sizeUp));
+        }
+        else
+        {
+            transform.localScale = new Vector3(posX += (size * number), posY += (size * number), posZ += (size * number));
+        }
     }
 
 
     public void LevelUp()
     {
-        transform.localScale = new Vector3(posX += size, posY += size, posZ += size);
+        if (speicalFood)
+        {
+            transform.localScale = new Vector3(posX += (size * sizeUp), posY += (size * sizeUp), posZ += (size * sizeUp));
+        }
+        else
+        {
+            transform.localScale = new Vector3(posX += size, posY += size, posZ += size);
+        }
     }
 
     public void LevelReset()
@@ -81,5 +107,23 @@ public class FoodContent : MonoBehaviour
     public void FeverOff()
     {
         rotation.rotationSpeed = 30;
+    }
+
+    public void SpeicalFood(bool check)
+    {
+        if(check)
+        {
+            if(!speicalFood)
+            {
+                speicalFood = true;
+                meshRenderer.material.color = new Color(Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f);
+            }
+        }
+        else
+        {
+            meshRenderer.material.color = new Color(1, 1, 1);
+
+            speicalFood = false;
+        }
     }
 }

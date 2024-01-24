@@ -148,13 +148,13 @@ public class ChestBoxManager : MonoBehaviour
 
             chestBoxArray[0].SetActive(true);
         }
-        else if (random > 26)
+        else if (random > 41)
         {
             rewardType = RewardType.PortionSet;
 
             chestBoxArray[1].SetActive(true);
         }
-        else if (random > 16)
+        else if (random > 21)
         {
             rewardType = RewardType.DefDestroyTicketPiece;
 
@@ -225,13 +225,13 @@ public class ChestBoxManager : MonoBehaviour
         switch (rewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddGold(500000);
+                PlayfabManager.instance.UpdateAddGold(1000000);
                 break;
             case RewardType.PortionSet:
-                PortionManager.instance.GetRandomPortion(5);
+                PortionManager.instance.GetRandomPortion(10);
                 break;
             case RewardType.DefDestroyTicketPiece:
-                PortionManager.instance.GetDefTickets(1);
+                PortionManager.instance.GetDefTickets(3);
                 break;
             case RewardType.Crystal:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);

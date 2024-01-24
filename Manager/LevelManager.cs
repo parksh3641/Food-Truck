@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject levelView;
 
+    public GameObject alarm;
+
     public Text titleText;
     public Text titleInfoText;
     public Text levelText;
@@ -22,6 +24,8 @@ public class LevelManager : MonoBehaviour
     private int nowExp = 0;
     private int nextExp = 0;
 
+    public AdvancementManager advancementManager;
+
     PlayerDataBase playerDataBase;
     LevelDataBase levelDataBase;
     AnimalDataBase animalDataBase;
@@ -34,6 +38,8 @@ public class LevelManager : MonoBehaviour
 
         levelDataBase.Initialize();
 
+        alarm.SetActive(true);
+
         levelView.SetActive(false);
     }
 
@@ -44,7 +50,11 @@ public class LevelManager : MonoBehaviour
         {
             levelView.SetActive(true);
 
+            alarm.SetActive(false);
+
             Initialize();
+
+            advancementManager.OpenView();
 
             infoText.ReLoad();
 
@@ -93,7 +103,7 @@ public class LevelManager : MonoBehaviour
         expFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
 
         infoText.localizationName = "SuccessPercent";
-        infoText.plusText = " : +" + (level * 0.1f).ToString("N1") + "%";
+        infoText.plusText = " : +" + (level * 0.05f).ToString("N1") + "%";
 
         accessDateText.text = LocalizationManager.instance.GetString("AccessDate") + " : " + playerDataBase.AccessDate;
     }

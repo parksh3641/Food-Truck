@@ -139,10 +139,6 @@ public class LocalizationManager : MonoBehaviour
                 ChangeEnglish();
             }
         }
-
-        //if (GameManager.instance != null) GameManager.instance.Initialize();
-
-        //if (country != null) country.sprite = countryArray[(int)GameStateManager.instance.Language - 1];
     }
 
 
@@ -417,6 +413,26 @@ public class LocalizationManager : MonoBehaviour
                 localizationContentList[i].GetComponent<Text>().font = normalFont;
             }
         }
+
+        string iso = "";
+
+        switch (type)
+        {
+            case LanguageType.Korean:
+                iso = "ko";
+                break;
+            //case LanguageType.English:
+            //    iso = "en";
+            //    break;
+            //case LanguageType.Japanese:
+            //    iso = "ja";
+            //    break;
+            default:
+                iso = "en";
+                break;
+        }
+
+        PlayfabManager.instance.SetProfileLanguage(iso);
 
         if (optionManager.optionView.activeInHierarchy)
         {

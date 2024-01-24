@@ -38,29 +38,11 @@ public class NoticeManager : MonoBehaviour
 
             alarm.SetActive(false);
 
-            checkMark.SetActive(GameStateManager.instance.HideNotice);
-
             FirebaseAnalytics.LogEvent("OpenNotice");
         }
         else
         {
             noticeView.SetActive(false);
-        }
-    }
-
-    public void HideCheck()
-    {
-        if(GameStateManager.instance.HideNotice)
-        {
-            GameStateManager.instance.HideNotice = false;
-
-            checkMark.SetActive(false);
-        }
-        else
-        {
-            GameStateManager.instance.HideNotice = true;
-
-            checkMark.SetActive(true);
         }
     }
 }

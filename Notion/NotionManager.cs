@@ -258,5 +258,9 @@ public enum NotionType
     ChangeNotion,
     RecoverNotion,
     LowRankPoint,
-    Levelup
+    Levelup,
+    SeasonWaitNotion,
+    SuccessPromotion,
+    NotEnoughConditions,
+    SpeicalFoodNotion
 }

@@ -196,6 +196,10 @@ public class GameManager : MonoBehaviour
 
     private float successX2 = 0;
 
+    private float speicalFoodCount = 0;
+    private float speicalFoodNeedCount = 5;
+    private float speicalFoodPlus = 50;
+
     private float portion1Time = 0;
     private float portion2Time = 0;
     private float portion3Time = 0;
@@ -229,6 +233,8 @@ public class GameManager : MonoBehaviour
     private bool isReady = false;
     private bool auto = false;
     private bool buffAutoUpgrade = false;
+
+    private bool speicalFood = false;
 
     public GameObject buff4Obj;
 
@@ -291,7 +297,7 @@ public class GameManager : MonoBehaviour
     WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
     WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.5f);
-    WaitForSeconds waitForSeconds4 = new WaitForSeconds(0.45f);
+    WaitForSeconds waitForSeconds4 = new WaitForSeconds(0.5f);
 
     private void Awake()
     {
@@ -455,6 +461,15 @@ public class GameManager : MonoBehaviour
 
     public void SuccessLogin()
     {
+        if (Application.systemLanguage == SystemLanguage.Korean)
+        {
+            PlayfabManager.instance.SetProfileLanguage("ko");
+        }
+        else
+        {
+            PlayfabManager.instance.SetProfileLanguage("en");
+        }
+
         isReady = false;
         isDelay_Camera = true;
 
@@ -1310,8 +1325,9 @@ public class GameManager : MonoBehaviour
 
         successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         successPlus += playerDataBase.Skill7 * 0.1f;
-        successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.1f;
+        successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.05f;
         successPlus += playerDataBase.Treasure1 * 0.2f;
+        successPlus += playerDataBase.Advancement * 0.1f;
 
         successX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         successX2 += playerDataBase.Treasure3 * 0.2f;
@@ -1319,14 +1335,15 @@ public class GameManager : MonoBehaviour
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 0.4f;
         sellPricePlus += playerDataBase.Proficiency * 1;
-        sellPricePlus += playerDataBase.Treasure7 * 0.4f;
+        sellPricePlus += playerDataBase.Treasure7 * 0.8f;
+        sellPricePlus += playerDataBase.Advancement * 0.4f;
 
         if (IsWeekend())
         {
             sellPricePlus += 30;
         }
 
-        sellPriceTip += 5;
+        sellPriceTip += 0;
         sellPriceTip += playerDataBase.Skill14 * 0.3f; //팁 확률
         sellPriceTip += playerDataBase.Treasure8 * 0.6f;
 
@@ -1335,6 +1352,7 @@ public class GameManager : MonoBehaviour
         defDestroy += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
         defDestroy += playerDataBase.Skill9 * 0.05f;
         defDestroy += playerDataBase.Treasure2 * 0.1f;
+        defDestroy += playerDataBase.Advancement * 0.05f;
 
         needPlus += playerDataBase.Skill10 * 0.5f;
 
@@ -1435,7 +1453,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator AutoUpgradeCoroution()
     {
-        if(!inGameUI.activeInHierarchy || GameStateManager.instance.GameType == GameType.Rank)
+        if(!inGameUI.activeInHierarchy || !GameStateManager.instance.AutoUpgrade || GameStateManager.instance.GameType == GameType.Rank)
         {
             auto = false;
         }
@@ -1723,6 +1741,8 @@ public class GameManager : MonoBehaviour
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
         changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
+        speicalFood = false;
+
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
@@ -1770,7 +1790,9 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.FoodType = type;
 
-        if(type == FoodType.Food4)
+        speicalFood = false;
+
+        if (type == FoodType.Food4)
         {
             if (!playerDataBase.AppReview)
             {
@@ -1870,7 +1892,12 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        sellPrice = sellPrice + (int)(sellPrice * 0.3f); //임시로 30% 증가
+        //sellPrice = sellPrice + (int)(sellPrice * 0.3f); //임시로 30% 증가
+
+        if(speicalFood)
+        {
+            sellPrice *= 2;
+        }
 
         recoverLevel = ((int)(maxLevel * 0.5f)) - 1;
 
@@ -2072,7 +2099,6 @@ public class GameManager : MonoBehaviour
         {
             foodArrayList[i].gameObject.SetActive(false);
         }
-
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
@@ -2083,11 +2109,13 @@ public class GameManager : MonoBehaviour
                         {
                             hamburgerArray[hamburgerArray.Length - 1].gameObject.SetActive(true);
                             hamburgerArray[hamburgerArray.Length - 1].Initialize(5);
+                            hamburgerArray[hamburgerArray.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             hamburgerArray[nextLevel].gameObject.SetActive(true);
                             hamburgerArray[nextLevel].Initialize(GameStateManager.instance.Food1Level - (5 * nextLevel));
+                            hamburgerArray[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case FoodType.Food2:
@@ -2095,11 +2123,13 @@ public class GameManager : MonoBehaviour
                         {
                             sandwichArray[sandwichArray.Length - 1].gameObject.SetActive(true);
                             sandwichArray[sandwichArray.Length - 1].Initialize(5);
+                            sandwichArray[sandwichArray.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             sandwichArray[nextLevel].gameObject.SetActive(true);
                             sandwichArray[nextLevel].Initialize(GameStateManager.instance.Food2Level - (5 * nextLevel));
+                            sandwichArray[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case FoodType.Food3:
@@ -2107,11 +2137,13 @@ public class GameManager : MonoBehaviour
                         {
                             snackLabArray[snackLabArray.Length - 1].gameObject.SetActive(true);
                             snackLabArray[snackLabArray.Length - 1].Initialize(5);
+                            snackLabArray[snackLabArray.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             snackLabArray[nextLevel].gameObject.SetActive(true);
                             snackLabArray[nextLevel].Initialize(GameStateManager.instance.Food3Level - (5 * nextLevel));
+                            snackLabArray[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case FoodType.Food4:
@@ -2119,11 +2151,14 @@ public class GameManager : MonoBehaviour
                         {
                             drinkArray[drinkArray.Length - 1].gameObject.SetActive(true);
                             drinkArray[drinkArray.Length - 1].Initialize(5);
+                            drinkArray[drinkArray.Length - 1].SpeicalFood(speicalFood);
+
                         }
                         else
                         {
                             drinkArray[nextLevel].gameObject.SetActive(true);
                             drinkArray[nextLevel].Initialize(GameStateManager.instance.Food4Level - (5 * nextLevel));
+                            drinkArray[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case FoodType.Food5:
@@ -2131,11 +2166,13 @@ public class GameManager : MonoBehaviour
                         {
                             pizzaArray[pizzaArray.Length - 1].gameObject.SetActive(true);
                             pizzaArray[pizzaArray.Length - 1].Initialize(5);
+                            pizzaArray[pizzaArray.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             pizzaArray[nextLevel].gameObject.SetActive(true);
                             pizzaArray[nextLevel].Initialize(GameStateManager.instance.Food5Level - (5 * nextLevel));
+                            pizzaArray[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case FoodType.Food6:
@@ -2143,11 +2180,13 @@ public class GameManager : MonoBehaviour
                         {
                             donutArray[donutArray.Length - 1].gameObject.SetActive(true);
                             donutArray[donutArray.Length - 1].Initialize(5);
+                            donutArray[donutArray.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             donutArray[nextLevel].gameObject.SetActive(true);
                             donutArray[nextLevel].Initialize(GameStateManager.instance.Food6Level - (5 * nextLevel));
+                            donutArray[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case FoodType.Food7:
@@ -2155,11 +2194,13 @@ public class GameManager : MonoBehaviour
                         {
                             friesArray[friesArray.Length - 1].gameObject.SetActive(true);
                             friesArray[friesArray.Length - 1].Initialize(5);
+                            friesArray[friesArray.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             friesArray[nextLevel].gameObject.SetActive(true);
                             friesArray[nextLevel].Initialize(GameStateManager.instance.Food7Level - (5 * nextLevel));
+                            friesArray[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case FoodType.Ribs:
@@ -2167,11 +2208,13 @@ public class GameManager : MonoBehaviour
                         {
                             ribsArray[ribsArray.Length - 1].gameObject.SetActive(true);
                             ribsArray[ribsArray.Length - 1].Initialize(5);
+                            ribsArray[ribsArray.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             ribsArray[nextLevel].gameObject.SetActive(true);
                             ribsArray[nextLevel].Initialize(GameStateManager.instance.Food8Level - (5 * nextLevel));
+                            ribsArray[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                 }
@@ -2184,11 +2227,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy1Array[candy1Array.Length - 1].gameObject.SetActive(true);
                             candy1Array[candy1Array.Length - 1].Initialize(5);
+                            candy1Array[candy1Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy1Array[nextLevel].gameObject.SetActive(true);
                             candy1Array[nextLevel].Initialize(GameStateManager.instance.Candy1Level - (5 * nextLevel));
+                            candy1Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case CandyType.Candy2:
@@ -2196,11 +2241,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy2Array[candy2Array.Length - 1].gameObject.SetActive(true);
                             candy2Array[candy2Array.Length - 1].Initialize(5);
+                            candy2Array[candy2Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy2Array[nextLevel].gameObject.SetActive(true);
                             candy2Array[nextLevel].Initialize(GameStateManager.instance.Candy2Level - (5 * nextLevel));
+                            candy2Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case CandyType.Candy3:
@@ -2208,11 +2255,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy3Array[candy3Array.Length - 1].gameObject.SetActive(true);
                             candy3Array[candy3Array.Length - 1].Initialize(5);
+                            candy3Array[candy3Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy3Array[nextLevel].gameObject.SetActive(true);
                             candy3Array[nextLevel].Initialize(GameStateManager.instance.Candy3Level - (5 * nextLevel));
+                            candy3Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case CandyType.Candy4:
@@ -2220,11 +2269,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy4Array[candy4Array.Length - 1].gameObject.SetActive(true);
                             candy4Array[candy4Array.Length - 1].Initialize(5);
+                            candy4Array[candy4Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy4Array[nextLevel].gameObject.SetActive(true);
                             candy4Array[nextLevel].Initialize(GameStateManager.instance.Candy4Level - (5 * nextLevel));
+                            candy4Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case CandyType.Candy5:
@@ -2232,11 +2283,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy5Array[candy5Array.Length - 1].gameObject.SetActive(true);
                             candy5Array[candy5Array.Length - 1].Initialize(5);
+                            candy5Array[candy5Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy5Array[nextLevel].gameObject.SetActive(true);
                             candy5Array[nextLevel].Initialize(GameStateManager.instance.Candy5Level - (5 * nextLevel));
+                            candy5Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case CandyType.Candy6:
@@ -2244,11 +2297,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy6Array[candy6Array.Length - 1].gameObject.SetActive(true);
                             candy6Array[candy6Array.Length - 1].Initialize(5);
+                            candy6Array[candy6Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy6Array[nextLevel].gameObject.SetActive(true);
                             candy6Array[nextLevel].Initialize(GameStateManager.instance.Candy6Level - (5 * nextLevel));
+                            candy6Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case CandyType.Candy7:
@@ -2256,11 +2311,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy7Array[candy7Array.Length - 1].gameObject.SetActive(true);
                             candy7Array[candy7Array.Length - 1].Initialize(5);
+                            candy7Array[candy7Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy7Array[nextLevel].gameObject.SetActive(true);
                             candy7Array[nextLevel].Initialize(GameStateManager.instance.Candy7Level - (5 * nextLevel));
+                            candy7Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case CandyType.Candy8:
@@ -2268,11 +2325,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy8Array[candy8Array.Length - 1].gameObject.SetActive(true);
                             candy8Array[candy8Array.Length - 1].Initialize(5);
+                            candy8Array[candy8Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy8Array[nextLevel].gameObject.SetActive(true);
                             candy8Array[nextLevel].Initialize(GameStateManager.instance.Candy8Level - (5 * nextLevel));
+                            candy8Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case CandyType.Candy9:
@@ -2280,11 +2339,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy9Array[candy9Array.Length - 1].gameObject.SetActive(true);
                             candy9Array[candy9Array.Length - 1].Initialize(5);
+                            candy9Array[candy9Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy9Array[nextLevel].gameObject.SetActive(true);
                             candy9Array[nextLevel].Initialize(GameStateManager.instance.Candy9Level - (5 * nextLevel));
+                            candy9Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case CandyType.Chocolate:
@@ -2292,11 +2353,13 @@ public class GameManager : MonoBehaviour
                         {
                             candy10Array[candy10Array.Length - 1].gameObject.SetActive(true);
                             candy10Array[candy10Array.Length - 1].Initialize(5);
+                            candy10Array[candy10Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             candy10Array[nextLevel].gameObject.SetActive(true);
                             candy10Array[nextLevel].Initialize(GameStateManager.instance.Candy10Level - (5 * nextLevel));
+                            candy10Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                 }
@@ -2309,11 +2372,13 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood1Array[japaneseFood1Array.Length - 1].gameObject.SetActive(true);
                             japaneseFood1Array[japaneseFood1Array.Length - 1].Initialize(5);
+                            japaneseFood1Array[japaneseFood1Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             japaneseFood1Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood1Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood1Level - (5 * nextLevel));
+                            japaneseFood1Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood2:
@@ -2321,11 +2386,13 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood2Array[japaneseFood2Array.Length - 1].gameObject.SetActive(true);
                             japaneseFood2Array[japaneseFood2Array.Length - 1].Initialize(5);
+                            japaneseFood2Array[japaneseFood2Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             japaneseFood2Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood2Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood2Level - (5 * nextLevel));
+                            japaneseFood2Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood3:
@@ -2333,11 +2400,13 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood3Array[japaneseFood3Array.Length - 1].gameObject.SetActive(true);
                             japaneseFood3Array[japaneseFood3Array.Length - 1].Initialize(5);
+                            japaneseFood3Array[japaneseFood3Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             japaneseFood3Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood3Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood3Level - (5 * nextLevel));
+                            japaneseFood3Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood4:
@@ -2345,11 +2414,13 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood4Array[japaneseFood4Array.Length - 1].gameObject.SetActive(true);
                             japaneseFood4Array[japaneseFood4Array.Length - 1].Initialize(5);
+                            japaneseFood4Array[japaneseFood4Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             japaneseFood4Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood4Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood4Level - (5 * nextLevel));
+                            japaneseFood4Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood5:
@@ -2357,11 +2428,13 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood5Array[japaneseFood5Array.Length - 1].gameObject.SetActive(true);
                             japaneseFood5Array[japaneseFood5Array.Length - 1].Initialize(5);
+                            japaneseFood5Array[japaneseFood5Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             japaneseFood5Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood5Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood5Level - (5 * nextLevel));
+                            japaneseFood5Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood6:
@@ -2369,11 +2442,13 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood6Array[japaneseFood6Array.Length - 1].gameObject.SetActive(true);
                             japaneseFood6Array[japaneseFood6Array.Length - 1].Initialize(5);
+                            japaneseFood6Array[japaneseFood6Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             japaneseFood6Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood6Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood6Level - (5 * nextLevel));
+                            japaneseFood6Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case JapaneseFoodType.JapaneseFood7:
@@ -2381,11 +2456,13 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood7Array[japaneseFood7Array.Length - 1].gameObject.SetActive(true);
                             japaneseFood7Array[japaneseFood7Array.Length - 1].Initialize(5);
+                            japaneseFood7Array[japaneseFood7Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             japaneseFood7Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood7Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood7Level - (5 * nextLevel));
+                            japaneseFood7Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case JapaneseFoodType.Ramen:
@@ -2393,11 +2470,13 @@ public class GameManager : MonoBehaviour
                         {
                             japaneseFood8Array[japaneseFood8Array.Length - 1].gameObject.SetActive(true);
                             japaneseFood8Array[japaneseFood8Array.Length - 1].Initialize(5);
+                            japaneseFood8Array[japaneseFood8Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             japaneseFood8Array[nextLevel].gameObject.SetActive(true);
                             japaneseFood8Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood8Level - (5 * nextLevel));
+                            japaneseFood8Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                 }
@@ -2410,11 +2489,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert1Array[dessert1Array.Length - 1].gameObject.SetActive(true);
                             dessert1Array[dessert1Array.Length - 1].Initialize(5);
+                            dessert1Array[dessert1Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert1Array[nextLevel].gameObject.SetActive(true);
                             dessert1Array[nextLevel].Initialize(GameStateManager.instance.Dessert1Level - (5 * nextLevel));
+                            dessert1Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case DessertType.Dessert2:
@@ -2422,11 +2503,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert2Array[dessert2Array.Length - 1].gameObject.SetActive(true);
                             dessert2Array[dessert2Array.Length - 1].Initialize(5);
+                            dessert2Array[dessert2Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert2Array[nextLevel].gameObject.SetActive(true);
                             dessert2Array[nextLevel].Initialize(GameStateManager.instance.Dessert2Level - (5 * nextLevel));
+                            dessert2Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case DessertType.Dessert3:
@@ -2434,11 +2517,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert3Array[dessert3Array.Length - 1].gameObject.SetActive(true);
                             dessert3Array[dessert3Array.Length - 1].Initialize(5);
+                            dessert3Array[dessert3Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert3Array[nextLevel].gameObject.SetActive(true);
                             dessert3Array[nextLevel].Initialize(GameStateManager.instance.Dessert3Level - (5 * nextLevel));
+                            dessert3Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case DessertType.Dessert4:
@@ -2446,11 +2531,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert4Array[dessert4Array.Length - 1].gameObject.SetActive(true);
                             dessert4Array[dessert4Array.Length - 1].Initialize(5);
+                            dessert4Array[dessert4Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert4Array[nextLevel].gameObject.SetActive(true);
                             dessert4Array[nextLevel].Initialize(GameStateManager.instance.Dessert4Level - (5 * nextLevel));
+                            dessert4Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case DessertType.Dessert5:
@@ -2458,11 +2545,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert5Array[dessert5Array.Length - 1].gameObject.SetActive(true);
                             dessert5Array[dessert5Array.Length - 1].Initialize(5);
+                            dessert5Array[dessert5Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert5Array[nextLevel].gameObject.SetActive(true);
                             dessert5Array[nextLevel].Initialize(GameStateManager.instance.Dessert5Level - (5 * nextLevel));
+                            dessert5Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case DessertType.Dessert6:
@@ -2470,11 +2559,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert6Array[dessert6Array.Length - 1].gameObject.SetActive(true);
                             dessert6Array[dessert6Array.Length - 1].Initialize(5);
+                            dessert6Array[dessert6Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert6Array[nextLevel].gameObject.SetActive(true);
                             dessert6Array[nextLevel].Initialize(GameStateManager.instance.Dessert6Level - (5 * nextLevel));
+                            dessert6Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case DessertType.Dessert7:
@@ -2482,11 +2573,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert7Array[dessert7Array.Length - 1].gameObject.SetActive(true);
                             dessert7Array[dessert7Array.Length - 1].Initialize(5);
+                            dessert7Array[dessert7Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert7Array[nextLevel].gameObject.SetActive(true);
                             dessert7Array[nextLevel].Initialize(GameStateManager.instance.Dessert7Level - (5 * nextLevel));
+                            dessert7Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case DessertType.Dessert8:
@@ -2494,11 +2587,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert8Array[dessert8Array.Length - 1].gameObject.SetActive(true);
                             dessert8Array[dessert8Array.Length - 1].Initialize(5);
+                            dessert8Array[dessert8Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert8Array[nextLevel].gameObject.SetActive(true);
                             dessert8Array[nextLevel].Initialize(GameStateManager.instance.Dessert8Level - (5 * nextLevel));
+                            dessert8Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case DessertType.Dessert9:
@@ -2506,11 +2601,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert9Array[dessert9Array.Length - 1].gameObject.SetActive(true);
                             dessert9Array[dessert9Array.Length - 1].Initialize(5);
+                            dessert9Array[dessert9Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert9Array[nextLevel].gameObject.SetActive(true);
                             dessert9Array[nextLevel].Initialize(GameStateManager.instance.Dessert9Level - (5 * nextLevel));
+                            dessert9Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                     case DessertType.FruitSkewers:
@@ -2518,11 +2615,13 @@ public class GameManager : MonoBehaviour
                         {
                             dessert10Array[dessert10Array.Length - 1].gameObject.SetActive(true);
                             dessert10Array[dessert10Array.Length - 1].Initialize(5);
+                            dessert10Array[dessert10Array.Length - 1].SpeicalFood(speicalFood);
                         }
                         else
                         {
                             dessert10Array[nextLevel].gameObject.SetActive(true);
                             dessert10Array[nextLevel].Initialize(GameStateManager.instance.Dessert10Level - (5 * nextLevel));
+                            dessert10Array[nextLevel].SpeicalFood(speicalFood);
                         }
                         break;
                 }
@@ -3403,7 +3502,7 @@ public class GameManager : MonoBehaviour
                 bombPartice[(int)GameStateManager.instance.IslandType].Play();
             }
 
-            if(maxLevel >= 30 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
+            if(maxLevel >= 35 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
             {
                 switch (GameStateManager.instance.IslandType)
                 {
@@ -4383,14 +4482,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if(level >= 9)
-        {
-            playerDataBase.SellCount += 1;
-            GameStateManager.instance.SellCount += 1;
-
-            //questManager.CheckGoal();
-        }
-
         if (playerDataBase.InGameTutorial == 0)
         {
             moveArrow2.SetActive(false);
@@ -4398,9 +4489,6 @@ public class GameManager : MonoBehaviour
 
             lockManager.ChangeFoodTutorial();
         }
-
-        DestoryFood();
-        CheckFoodState();
 
         if(sellPriceTip > 0)
         {
@@ -4422,11 +4510,41 @@ public class GameManager : MonoBehaviour
 
         PlayfabManager.instance.UpdateAddGold(sellPrice);
 
+        speicalFood = false;
+
+        if (level >= 9)
+        {
+            playerDataBase.SellCount += 1;
+            GameStateManager.instance.SellCount += 1;
+
+            if (!GameStateManager.instance.AutoUpgrade)
+            {
+                speicalFoodCount += 1;
+
+                if (speicalFoodCount >= speicalFoodNeedCount)
+                {
+                    speicalFoodCount = 0;
+
+                    if (Random.Range(0, 100) < speicalFoodPlus)
+                    {
+                        speicalFood = true;
+
+                        Debug.LogError("특별한 음식 등장!");
+
+                        SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
+                        NotionManager.instance.UseNotion3(NotionType.SpeicalFoodNotion);
+                    }
+                }
+            }
+        }
+
         myMoneyPlusText.gameObject.SetActive(false);
         myMoneyPlusText.gameObject.SetActive(true);
         myMoneyPlusText.color = Color.green;
         myMoneyPlusText.text = "+" + MoneyUnitString.ToCurrencyString(sellPrice);
 
+        DestoryFood();
+        CheckFoodState();
         UpgradeInitialize();
 
         SoundManager.instance.PlaySFX(GameSfxType.Sell);
@@ -4968,6 +5086,7 @@ public class GameManager : MonoBehaviour
     {
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
+        CheckFood();
         CheckFoodState();
     }
 
@@ -5129,7 +5248,7 @@ public class GameManager : MonoBehaviour
             && GameStateManager.instance.Dessert3Level <= 1 && GameStateManager.instance.Dessert4Level <= 1 && GameStateManager.instance.Dessert5Level <= 1
             && GameStateManager.instance.Dessert6Level <= 1 && GameStateManager.instance.Dessert7Level <= 1 && GameStateManager.instance.Dessert8Level <= 1
             && GameStateManager.instance.Dessert9Level <= 1
-            && playerDataBase.Coin < 3000)
+            && playerDataBase.Coin < 10000)
         {
             bankruptcyView.SetActive(true);
 

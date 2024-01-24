@@ -33,7 +33,7 @@ public class TreasureManager : MonoBehaviour
     private int price = 30;
     private bool oneMore = false;
 
-    WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
+    WaitForSeconds waitForSeconds = new WaitForSeconds(0.15f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(0.5f);
 
     PlayerDataBase playerDataBase;

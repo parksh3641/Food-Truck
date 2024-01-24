@@ -220,7 +220,7 @@ public class ReincarnationManager : MonoBehaviour
 
         playerDataBase.YummyTimeCount = 0;
 
-        gameManager.Reincarnation();
+        GameManager.instance.Reincarnation();
         tutorialManager.Reincarnation();
 
         yield return waitForSeconds;

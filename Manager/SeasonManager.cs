@@ -302,6 +302,9 @@ public class SeasonManager : MonoBehaviour
 
         yield return waitForSeconds;
 
+        playerDataBase.RankEventCount = 0;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankEventCount", playerDataBase.RankEventCount);
+
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
     }
@@ -350,67 +353,67 @@ public class SeasonManager : MonoBehaviour
                     switch(season)
                     {
                         case 1:
-                            if (playerDataBase.TotalLevel > 0)
+                            if (playerDataBase.TotalLevel > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 2:
-                            if (playerDataBase.TotalLevel_1 > 0)
+                            if (playerDataBase.TotalLevel_1 > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 3:
-                            if (playerDataBase.TotalLevel_2 > 0)
+                            if (playerDataBase.TotalLevel_2 > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 4:
-                            if (playerDataBase.TotalLevel_3 > 0)
+                            if (playerDataBase.TotalLevel_3 > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 5:
-                            if (playerDataBase.TotalLevel_4 > 0)
+                            if (playerDataBase.TotalLevel_4 > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 6:
-                            if (playerDataBase.TotalLevel_5 > 0)
+                            if (playerDataBase.TotalLevel_5 > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 7:
-                            if (playerDataBase.TotalLevel_6 > 0)
+                            if (playerDataBase.TotalLevel_6 > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 8:
-                            if (playerDataBase.TotalLevel_7 > 0)
+                            if (playerDataBase.TotalLevel_7 > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 9:
-                            if (playerDataBase.TotalLevel_8 > 0)
+                            if (playerDataBase.TotalLevel_8 > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 10:
-                            if (playerDataBase.TotalLevel_9 > 0)
+                            if (playerDataBase.TotalLevel_9 > 4)
                             {
                                 SetReward(6);
                             }
                             break;
                         case 11:
-                            if (playerDataBase.TotalLevel_10 > 0)
+                            if (playerDataBase.TotalLevel_10 > 4)
                             {
                                 SetReward(6);
                             }

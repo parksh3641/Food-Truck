@@ -104,7 +104,9 @@ public class WelcomeManager : MonoBehaviour
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
+            attendanceContentArray[i].receiveContent[1].gameObject.SetActive(true);
             attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 200 + (100 * (i + 1)));
+            attendanceContentArray[i].receiveContent[1].Initialize(RewardType.RepairTicket, 5);
         }
     }
 
@@ -116,6 +118,8 @@ public class WelcomeManager : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }
+
+        PortionManager.instance.GetRecoverTickets(5);
 
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200 + (100 * (index + 1)));
 

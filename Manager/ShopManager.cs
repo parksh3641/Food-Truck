@@ -15,6 +15,7 @@ public class ShopManager : MonoBehaviour
 
     public GameObject alarm;
     public GameObject ingameAlarm;
+    public GameObject packageAlarm;
 
     public GameObject goldx2;
     public GameObject removeAds;
@@ -166,6 +167,7 @@ public class ShopManager : MonoBehaviour
 
         alarm.SetActive(true);
         ingameAlarm.SetActive(true);
+        packageAlarm.SetActive(true);
 
         for (int i = 0; i < shopArray.Length; i++)
         {
@@ -411,6 +413,8 @@ public class ShopManager : MonoBehaviour
                 break;
             case 1:
                 packageThanks.SetActive(false);
+
+                packageAlarm.SetActive(false);
 
                 packageContents[0].Initialize(PackageType.Package5, this);
                 packageContents[1].Initialize(PackageType.Package1, this);

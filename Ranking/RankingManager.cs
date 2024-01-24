@@ -36,7 +36,7 @@ public class RankingManager : MonoBehaviour
     public RankContent myRankContent;
     public RectTransform rankContentParent;
 
-    private bool isDelay = false;
+    public bool isDelay = false;
 
     private int timerMinutes = 0;
     private int timerSeconds = 0;
@@ -114,8 +114,6 @@ public class RankingManager : MonoBehaviour
         {
             rankingRewardView.SetActive(true);
 
-            isDelay = true;
-
             rankingRewardDateText.text = LocalizationManager.instance.GetString("Date") + " : ";
 
             switch (SeasonManager.instance.CheckSeason_Ranking())
@@ -183,6 +181,8 @@ public class RankingManager : MonoBehaviour
 
             receiveContents[12].Initialize(RewardType.Crystal, 300);
             receiveContents[13].Initialize(RewardType.RankPoint, 100);
+
+            isDelay = true;
 
             if (SeasonManager.instance.CheckSeason_Ranking() == 0)
             {
@@ -283,7 +283,6 @@ public class RankingManager : MonoBehaviour
         rankingView.SetActive(true);
 
         isDelay = true;
-
         PlayfabManager.instance.GetLeaderboarder(type, SetRanking);
     }
 

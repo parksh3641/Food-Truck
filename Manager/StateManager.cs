@@ -14,7 +14,7 @@ public class StateManager : MonoBehaviour
     public ChestBoxManager chestBoxManager;
     public QuestManager questManager;
     public OfflineManager offlineManager;
-    public NoticeManager noticeManager;
+    public NewsManager newsManager;
     public ChangeFoodManager changeFoodManager;
     public AttendanceManager attendanceManager;
     public GourmetManager gourmetManager;
@@ -25,6 +25,7 @@ public class StateManager : MonoBehaviour
     public PlayTimeManager playTimeManager;
     public TreasureManager treasureManager;
     public WarningManager warningManager;
+    public AdvancementManager advancementManager;
 
     private void Awake()
     {
@@ -62,7 +63,7 @@ public class StateManager : MonoBehaviour
         chestBoxManager.Initialize();
         //questManager.Initialize();
         offlineManager.Initialize();
-        noticeManager.Initialize();
+        newsManager.Initialize();
         changeFoodManager.Initialize();
         attendanceManager.Initialize();
         welcomeManager.Initialize();
@@ -74,6 +75,7 @@ public class StateManager : MonoBehaviour
         gourmetManager.FirstInitialize();
         warningManager.Initialize();
         SeasonManager.instance.CheckSeason();
+        advancementManager.Initialize();
 
         Debug.LogError("Load Complete!");
     }

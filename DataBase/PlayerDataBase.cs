@@ -40,6 +40,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int playTime = 0;
     [SerializeField]
+    private int advancement = 0;
+    [SerializeField]
     private int getGold = 0;
     [SerializeField]
     private int consumeGold = 0;
@@ -953,6 +955,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             playTime = value;
+        }
+    }
+
+    public int Advancement
+    {
+        get
+        {
+            return advancement;
+        }
+        set
+        {
+            advancement = value;
         }
     }
 
@@ -4338,6 +4352,7 @@ public class PlayerDataBase : ScriptableObject
         level = 0;
         exp = 0;
         playTime = 0;
+        advancement = 0;
         michelin = 0;
         adCount = 0;
         treasureCount = 0;

@@ -19,7 +19,7 @@ public class LevelDataBase : ScriptableObject
     {
         levelInfoList.Clear();
 
-        for (int i = 0; i < 100; i ++)
+        for (int i = 0; i < 200; i ++)
         {
             LevelInfo levelInfo = new LevelInfo();
             levelInfo.level = i + 1;

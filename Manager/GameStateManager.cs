@@ -36,6 +36,8 @@ public class GameStateManager : MonoBehaviour
         public bool sfx = true;
         public bool vibration = true;
         public bool effect = true;
+        public bool backgroundEffect = true;
+
         public bool appReview = false;
         public bool rankingNotice = false;
         public bool hideNotice = false;
@@ -422,6 +424,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.effect = value;
+            SaveFile();
+        }
+    }
+
+    public bool BackgroundEffect
+    {
+        get
+        {
+            return gameSettings.backgroundEffect;
+        }
+        set
+        {
+            gameSettings.backgroundEffect = value;
             SaveFile();
         }
     }

@@ -104,6 +104,8 @@ public class RecoverManager : MonoBehaviour
                 break;
         }
 
+        FirebaseAnalytics.LogEvent("RecoverClear");
+
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.RecoverNotion);
     }

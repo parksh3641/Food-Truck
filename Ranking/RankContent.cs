@@ -5,19 +5,27 @@ using UnityEngine.UI;
 
 public class RankContent : MonoBehaviour
 {
+    ChefType chefType;
+
     public GameObject frame;
 
+    public Image iconImg;
     public Image banner;
     public Text indexText;
     public Image indexRankImg;
     public Sprite[] rankIconList;
     public Image countryImg;
     public Text nickNameText;
+    public Text titleText;
     public Text scoreText;
+
+    ImageDataBase imageDataBase;
 
 
     private void Awake()
     {
+        if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
+
         indexText.text = "";
         nickNameText.text = "";
     }
@@ -46,5 +54,18 @@ public class RankContent : MonoBehaviour
         }
 
         frame.SetActive(checkMy);
+    }
+
+    public void TitleState(int number)
+    {
+        chefType = ChefType.Cook1_1 + number;
+
+        titleText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 5)) + " <color=#FF0000>" +
+    chefType.ToString().Substring(6, 1) + "</color>";
+    }
+
+    public void IconState(IconType type)
+    {
+        iconImg.sprite = imageDataBase.GetIconArray(type);
     }
 }

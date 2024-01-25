@@ -34,7 +34,7 @@ public class IslandManager : MonoBehaviour
 
         changeIslandView.SetActive(false);
 
-        alarmObj.SetActive(false);
+        alarmObj.SetActive(true);
     }
 
     private void Start()
@@ -61,6 +61,8 @@ public class IslandManager : MonoBehaviour
         {
             changeIslandView.SetActive(true);
 
+            alarmObj.SetActive(false);
+
             if ((int)GameStateManager.instance.IslandType > playerDataBase.IslandNumber)
             {
                 playerDataBase.IslandNumber = (int)GameStateManager.instance.IslandType;
@@ -73,8 +75,6 @@ public class IslandManager : MonoBehaviour
         else
         {
             changeIslandView.SetActive(false);
-
-            alarmObj.SetActive(false);
         }
     }
 

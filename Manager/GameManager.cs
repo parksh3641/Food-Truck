@@ -197,8 +197,8 @@ public class GameManager : MonoBehaviour
     private float successX2 = 0;
 
     private float speicalFoodCount = 0;
-    private float speicalFoodNeedCount = 5;
-    private float speicalFoodPlus = 50;
+    private float speicalFoodNeedCount = 1;
+    private float speicalFoodPlus = 10;
 
     private float portion1Time = 0;
     private float portion2Time = 0;
@@ -271,6 +271,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem[] bombPartice;
     public ParticleSystem yummyTimeParticle;
     public ParticleSystem[] yummyTime2Particle;
+    public ParticleSystem speicalFoodParticle;
 
     public TutorialManager tutorialManager;
     public LockManager lockManager;
@@ -298,6 +299,10 @@ public class GameManager : MonoBehaviour
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
     WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.5f);
     WaitForSeconds waitForSeconds4 = new WaitForSeconds(0.5f);
+
+    DateTime currentDate = DateTime.Now;
+    DateTime decemberStart;
+    DateTime decemberEnd;
 
     private void Awake()
     {
@@ -357,6 +362,7 @@ public class GameManager : MonoBehaviour
         }
 
         yummyTimeParticle.gameObject.SetActive(false);
+        speicalFoodParticle.gameObject.SetActive(false);
 
         portion1 = false;
         portion2 = false;
@@ -387,22 +393,14 @@ public class GameManager : MonoBehaviour
 
         checkUpdate.SetActive(false);
 
-        System.DateTime currentDate = System.DateTime.Now;
-        System.DateTime decemberStart = new System.DateTime(currentDate.Year, 12, 1);
-        System.DateTime decemberEnd = new System.DateTime(currentDate.Year, 1, 31);
-
         christmasSnow.SetActive(false);
 
         moveArrow1.SetActive(false);
         moveArrow2.SetActive(false);
         moveArrow3.SetActive(false);
 
-        if (currentDate >= decemberStart || currentDate <= decemberEnd)
-        {
-            christmasSnow.SetActive(true);
-
-            Debug.Log("12월 달이라 눈이 내리기 시작합니다.");
-        }
+        decemberStart = new DateTime(currentDate.Year, 12, 1);
+        decemberEnd = new DateTime(currentDate.Year, 1, 31);
     }
 
     private void OnApplicationPause(bool pause)
@@ -457,6 +455,31 @@ public class GameManager : MonoBehaviour
         {
             privacypolicyView.SetActive(true);
         }
+
+        if (GameStateManager.instance.BackgroundEffect)
+        {
+            if (currentDate >= decemberStart || currentDate <= decemberEnd)
+            {
+                christmasSnow.SetActive(true);
+
+                Debug.LogError("12월 달이라 눈이 내리기 시작합니다.");
+            }
+        }
+    }
+
+    public void BackgroundEffect(bool check)
+    {
+        if (check)
+        {
+            if (currentDate >= decemberStart || currentDate <= decemberEnd)
+            {
+                christmasSnow.SetActive(true);
+            }
+        }
+        else
+        {
+            christmasSnow.SetActive(false);
+        }
     }
 
     public void SuccessLogin()
@@ -503,7 +526,48 @@ public class GameManager : MonoBehaviour
         levelManager.Initialize();
 
         bestRankLevelText.localizationName = "Best";
-        bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel;
+        bestRankLevelText.plusText = "";
+
+        switch (SeasonManager.instance.CheckSeason_Ranking())
+        {
+            case -1:
+                bestRankLevelText.localizationName = "SeasonWait";
+                break;
+            case 0:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel;
+                break;
+            case 1:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_1;
+                break;
+            case 2:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_2;
+                break;
+            case 3:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_3;
+                break;
+            case 4:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_4;
+                break;
+            case 5:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_5;
+                break;
+            case 6:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_6;
+                break;
+            case 7:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_7;
+                break;
+            case 8:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_8;
+                break;
+            case 9:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_9;
+                break;
+            case 10:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_10;
+                break;
+        }
+
         bestRankLevelText.ReLoad();
 
         CheckLocked();
@@ -1193,19 +1257,6 @@ public class GameManager : MonoBehaviour
         if (!isReady) return;
         if (!isDelay_Camera) return;
 
-        if (playerDataBase.LockTutorial == 1)
-        {
-            moveArrow2.SetActive(true);
-        }
-
-        isDelay_Camera = false;
-        cameraController.GoToB();
-
-        mainUI.SetActive(false);
-        inGameUI.SetActive(true);
-        languageUI.SetActive(false);
-        rankingNoticeButton.SetActive(false);
-
         GameStateManager.instance.GameType = GameType.Story + number;
 
         if (GameStateManager.instance.GameType == GameType.Story)
@@ -1242,6 +1293,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if(SeasonManager.instance.CheckSeason_Ranking() == -1)
+            {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                NotionManager.instance.UseNotion(NotionType.SeasonWaitNotion);
+
+                return;
+            }
+
             rankingNoticeButton.SetActive(true);
 
             switch (GameStateManager.instance.IslandType)
@@ -1269,6 +1328,19 @@ public class GameManager : MonoBehaviour
 
             FirebaseAnalytics.LogEvent("RankingMode");
         }
+
+        if (playerDataBase.LockTutorial == 1)
+        {
+            moveArrow2.SetActive(true);
+        }
+
+        isDelay_Camera = false;
+        cameraController.GoToB();
+
+        mainUI.SetActive(false);
+        inGameUI.SetActive(true);
+        languageUI.SetActive(false);
+        rankingNoticeButton.SetActive(false);
 
         season = SeasonManager.instance.CheckSeason();
 
@@ -1367,7 +1439,7 @@ public class GameManager : MonoBehaviour
         feverTime += (30 * (0.003f * playerDataBase.Skill1));
         feverTime += (30 * (0.004f * playerDataBase.Treasure9));
 
-        feverMaxCount = 300 - (300 * (0.003f * playerDataBase.Skill2));
+        feverMaxCount = 400 - (300 * (0.003f * playerDataBase.Skill2));
         feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
         portion1Time = 30 + (30 * (0.003f * playerDataBase.Skill4)) + (30 * (0.006f * playerDataBase.Treasure6));
@@ -1698,7 +1770,48 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.FeverCount = feverCount;
 
         bestRankLevelText.localizationName = "Best";
-        bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel;
+        bestRankLevelText.plusText = "";
+
+        switch (SeasonManager.instance.CheckSeason_Ranking())
+        {
+            case -1:
+                bestRankLevelText.localizationName = "SeasonWait";
+                break;
+            case 0:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel;
+                break;
+            case 1:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_1;
+                break;
+            case 2:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_2;
+                break;
+            case 3:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_3;
+                break;
+            case 4:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_4;
+                break;
+            case 5:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_5;
+                break;
+            case 6:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_6;
+                break;
+            case 7:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_7;
+                break;
+            case 8:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_8;
+                break;
+            case 9:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_9;
+                break;
+            case 10:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_10;
+                break;
+        }
+
         bestRankLevelText.ReLoad();
 
         CheckLocked();
@@ -1742,6 +1855,7 @@ public class GameManager : MonoBehaviour
         changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
         speicalFood = false;
+        speicalFoodParticle.gameObject.SetActive(false);
 
         switch (GameStateManager.instance.IslandType)
         {
@@ -1791,6 +1905,7 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.FoodType = type;
 
         speicalFood = false;
+        speicalFoodParticle.gameObject.SetActive(false);
 
         if (type == FoodType.Food4)
         {
@@ -1815,6 +1930,7 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.CandyType = type;
 
         speicalFood = false;
+        speicalFoodParticle.gameObject.SetActive(false);
 
         upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
 
@@ -1828,6 +1944,7 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.JapaneseFoodType = type;
 
         speicalFood = false;
+        speicalFoodParticle.gameObject.SetActive(false);
 
         upgradeJapaneseFood = upgradeDataBase.GetUpgradeJapaneseFood(GameStateManager.instance.JapaneseFoodType);
 
@@ -1841,6 +1958,7 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.DessertType = type;
 
         speicalFood = false;
+        speicalFoodParticle.gameObject.SetActive(false);
 
         upgradeDessert = upgradeDataBase.GetUpgradeDessert(GameStateManager.instance.DessertType);
 
@@ -3704,14 +3822,19 @@ public class GameManager : MonoBehaviour
                 yummyTimeParticle.gameObject.SetActive(true);
                 yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
             }
+
+            if (speicalFood)
+            {
+                speicalFoodParticle.gameObject.SetActive(false);
+                speicalFoodParticle.gameObject.SetActive(true);
+                speicalFoodParticle.Play();
+            }
         }
         else
         {
-            if (feverMode)
-            {
-                yummyTimeParticle.gameObject.SetActive(false);
-                yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
-            }
+            yummyTimeParticle.gameObject.SetActive(false);
+            yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+            speicalFoodParticle.gameObject.SetActive(false);
         }
     }
 
@@ -3897,6 +4020,7 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.Effect)
         {
+            yummyTimeParticle.gameObject.SetActive(false);
             yummyTimeParticle.gameObject.SetActive(true);
             yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
         }
@@ -4515,8 +4639,6 @@ public class GameManager : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.SuccessSell);
         }
 
-        PlayfabManager.instance.UpdateAddGold(sellPrice);
-
         if(speicalFood)
         {
             Debug.LogError("특별 음식 판매");
@@ -4524,30 +4646,37 @@ public class GameManager : MonoBehaviour
             PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 10 + (level / 5)));
         }
 
-        speicalFood = false;
+        PlayfabManager.instance.UpdateAddGold(sellPrice);
 
         if (level >= 9)
         {
             playerDataBase.SellCount += 1;
             GameStateManager.instance.SellCount += 1;
+        }
 
-            if (!GameStateManager.instance.AutoUpgrade)
+        speicalFood = false;
+        speicalFoodParticle.gameObject.SetActive(false);
+
+        speicalFoodCount += 1;
+
+        if (speicalFoodCount >= speicalFoodNeedCount)
+        {
+            speicalFoodCount = 0;
+
+            if (Random.Range(0, 100) < speicalFoodPlus)
             {
-                speicalFoodCount += 1;
+                speicalFood = true;
 
-                if (speicalFoodCount >= speicalFoodNeedCount)
+                Debug.LogError("특별 음식 등장!");
+
+                SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
+                NotionManager.instance.UseNotion3(NotionType.SpeicalFoodNotion);
+
+                if(GameStateManager.instance.Effect)
                 {
-                    speicalFoodCount = 0;
-
-                    if (Random.Range(0, 100) < speicalFoodPlus)
-                    {
-                        speicalFood = true;
-
-                        Debug.LogError("특별 음식 등장!");
-
-                        SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
-                        NotionManager.instance.UseNotion3(NotionType.SpeicalFoodNotion);
-                    }
+                    speicalFoodParticle.gameObject.SetActive(false);
+                    speicalFoodParticle.gameObject.SetActive(true);
+                    speicalFoodParticle.Play();
                 }
             }
         }
@@ -4562,6 +4691,8 @@ public class GameManager : MonoBehaviour
         UpgradeInitialize();
 
         SoundManager.instance.PlaySFX(GameSfxType.Sell);
+
+        FirebaseAnalytics.LogEvent("SellFood");
 
         isUpgradeDelay = true;
         Invoke("WaitSellDelay", 0.4f);
@@ -5558,11 +5689,15 @@ public class GameManager : MonoBehaviour
     public void DeveloperON()
     {
         GameStateManager.instance.Developer = true;
+
+        speicalFoodPlus = 100;
     }
 
     public void DeveloperOff()
     {
         GameStateManager.instance.Developer = false;
+
+        speicalFoodPlus = 10;
     }
 
     public void GetEnableAllItem()

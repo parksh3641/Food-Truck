@@ -15,6 +15,8 @@ public class TreasureManager : MonoBehaviour
 
     public RectTransform treasureRectTransform;
 
+    public Text treasureText;
+
     public Text treasure1Text;
     public Text treasure2Text;
 
@@ -240,6 +242,8 @@ public class TreasureManager : MonoBehaviour
     {
         treasureRewardView.SetActive(true);
         treasureButton.SetActive(false);
+
+        treasureText.text = MoneyUnitString.ToCurrencyString(playerDataBase.Crystal);
 
         playerDataBase.TreasureCount += count;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TreasureCount", playerDataBase.TreasureCount);

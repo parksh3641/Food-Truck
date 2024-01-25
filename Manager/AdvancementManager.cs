@@ -44,7 +44,7 @@ public class AdvancementManager : MonoBehaviour
     private float value3 = 0.05f;
 
     private bool isActive = false;
-
+    private bool isDelay = false;
 
     PlayerDataBase playerDataBase;
 
@@ -133,6 +133,8 @@ public class AdvancementManager : MonoBehaviour
 
     public void AdvencementLevelUp()
     {
+        if (isDelay) return;
+
         if (!isActive)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -153,7 +155,15 @@ public class AdvancementManager : MonoBehaviour
 
         GameManager.instance.CheckPercent();
 
+        isDelay = true;
+        Invoke("Delay", 0.4f);
+
         FirebaseAnalytics.LogEvent("AdvencementLevelUp");
+    }
+
+    void Delay()
+    {
+        isDelay = false;
     }
 
 }

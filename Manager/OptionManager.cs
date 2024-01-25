@@ -33,6 +33,11 @@ public class OptionManager : MonoBehaviour
     public Image effectButtonImg;
     public LocalizationContent effectText;
 
+    [Space]
+    [Title("Background Effect")]
+    public Image backgroundEffectButtonImg;
+    public LocalizationContent backgroundEffectText;
+
     public GameObject googleLink;
     public GameObject appleLink;
 
@@ -45,12 +50,9 @@ public class OptionManager : MonoBehaviour
         optionView.SetActive(false);
         languageView.SetActive(false);
 
-        versionText.text = "v" + Application.version + "  <size=10>(2024/01/19)</size>";
+        versionText.text = "v" + Application.version + "  <size=10>(2024/01/27)</size>";
     }
 
-    private void Start()
-    {
-    }
 
     public void OpenOptionView()
     {
@@ -62,6 +64,7 @@ public class OptionManager : MonoBehaviour
             OnSFX();
             OnVibration();
             OnEffect();
+            OnBackgroundEffect();
 
             googleLink.SetActive(false);
             appleLink.SetActive(false);
@@ -166,6 +169,20 @@ public class OptionManager : MonoBehaviour
         OnEffect();
     }
 
+    public void BackgroundEffectOnOff()
+    {
+        if (GameStateManager.instance.BackgroundEffect)
+        {
+            GameStateManager.instance.BackgroundEffect = false;
+        }
+        else
+        {
+            GameStateManager.instance.BackgroundEffect = true;
+        }
+
+        OnBackgroundEffect();
+    }
+
     public void OnBGM()
     {
         if (GameStateManager.instance.Music)
@@ -243,6 +260,28 @@ public class OptionManager : MonoBehaviour
             effectButtonImg.sprite = buttonImgArray[1];
 
             GameManager.instance.SetParticle(false);
+        }
+    }
+
+    public void OnBackgroundEffect()
+    {
+        if (GameStateManager.instance.BackgroundEffect)
+        {
+            backgroundEffectText.localizationName = "ON";
+            backgroundEffectText.ReLoad();
+
+            backgroundEffectButtonImg.sprite = buttonImgArray[0];
+
+            GameManager.instance.BackgroundEffect(true);
+        }
+        else
+        {
+            backgroundEffectText.localizationName = "OFF";
+            backgroundEffectText.ReLoad();
+
+            backgroundEffectButtonImg.sprite = buttonImgArray[1];
+
+            GameManager.instance.BackgroundEffect(false);
         }
     }
 

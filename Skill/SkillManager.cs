@@ -14,6 +14,7 @@ public class SkillManager : MonoBehaviour
     public GameObject lockedObj;
 
     public GameObject alarm;
+    public GameObject ingameAlarm;
 
     [Space]
     [Title("TopMenu")]
@@ -44,6 +45,7 @@ public class SkillManager : MonoBehaviour
         index = -1;
 
         alarm.SetActive(true);
+        ingameAlarm.SetActive(true);
     }
 
     public void OpenSkillView()
@@ -51,6 +53,9 @@ public class SkillManager : MonoBehaviour
         if (!skillView.activeInHierarchy && !lockedObj.activeInHierarchy)
         {
             skillView.SetActive(true);
+
+            alarm.SetActive(false);
+            ingameAlarm.SetActive(false);
 
             GameManager.instance.RenewalVC();
 
@@ -63,9 +68,7 @@ public class SkillManager : MonoBehaviour
                 skillContents[i].Initialize(this);
             }
 
-            alarm.SetActive(false);
-
-            FirebaseAnalytics.LogEvent("OpenSkill");
+            FirebaseAnalytics.LogEvent("OpenReceipe");
         }
         else
         {

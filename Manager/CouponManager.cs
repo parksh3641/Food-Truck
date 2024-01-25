@@ -90,25 +90,15 @@ public class CouponManager : MonoBehaviour
                     playerDataBase.Coupon1 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon1", 1);
 
-                    PlayfabManager.instance.UpdateAddGold(500000);
+                    PlayfabManager.instance.UpdateAddGold(1000000);
                     PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
-
-                    PortionManager.instance.GetAllPortion(5);
 
                     couponRewardView.SetActive(true);
                     receiveContents[0].gameObject.SetActive(true);
                     receiveContents[1].gameObject.SetActive(true);
-                    receiveContents[2].gameObject.SetActive(true);
-                    receiveContents[3].gameObject.SetActive(true);
-                    receiveContents[4].gameObject.SetActive(true);
-                    receiveContents[5].gameObject.SetActive(true);
 
-                    receiveContents[0].Initialize(RewardType.Gold, 500000);
+                    receiveContents[0].Initialize(RewardType.Gold, 1000000);
                     receiveContents[1].Initialize(RewardType.Crystal, 300);
-                    receiveContents[2].Initialize(RewardType.Portion1, 5);
-                    receiveContents[3].Initialize(RewardType.Portion2, 5);
-                    receiveContents[4].Initialize(RewardType.Portion3, 5);
-                    receiveContents[5].Initialize(RewardType.Portion4, 5);
 
                     FirebaseAnalytics.LogEvent("Coupon_Open");
 
@@ -458,7 +448,7 @@ public class CouponManager : MonoBehaviour
                 }
                 break;
             case "YUMMYRUSH":
-                if (DateTime.Now >= new DateTime(2024, 01, 31))
+                if (DateTime.Now >= new DateTime(2024, 02, 29))
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.CouponNotion4);
@@ -470,24 +460,15 @@ public class CouponManager : MonoBehaviour
                     playerDataBase.SpCoupon13 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("SpCoupon13", 1);
 
-                    PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
-
-                    PortionManager.instance.GetBuffTickets(5);
-                    PortionManager.instance.GetPortion(4, 10);
+                    PlayfabManager.instance.UpdateAddGold(2000000);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1000);
 
                     couponRewardView.SetActive(true);
                     receiveContents[0].gameObject.SetActive(true);
                     receiveContents[1].gameObject.SetActive(true);
-                    receiveContents[2].gameObject.SetActive(true);
-                    receiveContents[3].gameObject.SetActive(true);
-                    receiveContents[4].gameObject.SetActive(true);
 
-                    receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 500);
-                    receiveContents[2].Initialize(RewardType.BuffTicket, 5);
-                    receiveContents[3].Initialize(RewardType.Portion5, 10);
-                    receiveContents[4].Initialize(RewardType.SpeicalCharacter, -1);
+                    receiveContents[0].Initialize(RewardType.Gold, 2000000);
+                    receiveContents[1].Initialize(RewardType.Crystal, 1000);
 
                     if (playerDataBase.Character21 == 0)
                     {

@@ -477,3 +477,8 @@ public enum DungeonType
     Dungeon3,
     Dungeon4,
 }
+
+public enum IconType
+{
+    Icon1,
+}

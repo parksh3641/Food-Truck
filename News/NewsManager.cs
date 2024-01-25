@@ -101,12 +101,16 @@ public class NewsManager : MonoBehaviour
         {
             case 0:
                 noticeView.SetActive(true);
+
+                FirebaseAnalytics.LogEvent("OpenNotice");
                 break;
             case 1:
                 patchNoteView.SetActive(true);
 
                 isDelay = true;
                 PlayfabManager.instance.ReadTitleNews(ReadTitleNews);
+
+                FirebaseAnalytics.LogEvent("OpenPatchNote");
                 break;
         }
     }
@@ -124,8 +128,6 @@ public class NewsManager : MonoBehaviour
             }
 
             checkMark.SetActive(GameStateManager.instance.HideNotice);
-
-            FirebaseAnalytics.LogEvent("OpenNotice");
         }
         else
         {
@@ -184,6 +186,8 @@ public class NewsManager : MonoBehaviour
 
     public void OpenDiscord()
     {
+        Application.OpenURL("https://discord.gg/yEV33a8ajy");
+
         FirebaseAnalytics.LogEvent("OpenDiscord");
     }
 

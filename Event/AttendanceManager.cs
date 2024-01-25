@@ -155,8 +155,8 @@ public class AttendanceManager : MonoBehaviour
         attendanceContentArray[6].receiveContent[1].gameObject.SetActive(true);
         attendanceContentArray[6].receiveContent[2].gameObject.SetActive(true);
         attendanceContentArray[6].receiveContent[0].Initialize(RewardType.Gold, 500000);
-        attendanceContentArray[6].receiveContent[1].Initialize(RewardType.TreasureBox, 5);
-        attendanceContentArray[6].receiveContent[2].Initialize(RewardType.DefDestroyTicket, 1);
+        attendanceContentArray[6].receiveContent[1].Initialize(RewardType.Crystal, 300);
+        attendanceContentArray[6].receiveContent[2].Initialize(RewardType.DefDestroyTicket, 3);
     }
 
     public void ReceiveButton(int index, Action action)
@@ -204,8 +204,8 @@ public class AttendanceManager : MonoBehaviour
                 break;
             case 6:
                 PlayfabManager.instance.UpdateAddGold(500000);
-                treasureManager.OpenTreasure(5);
-                PortionManager.instance.GetDefTickets(1);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+                PortionManager.instance.GetDefTickets(3);
 
                 break;
         }

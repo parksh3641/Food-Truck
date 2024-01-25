@@ -358,7 +358,35 @@ public class RankingManager : MonoBehaviour
 
         isDelay = false;
 
+        PlayfabManager.instance.GetLeaderboarder("Advancement", SetTitle);
+
         rankContentParent.anchoredPosition = new Vector2(0, -9999);
+    }
+
+    void SetTitle(GetLeaderboardResult result)
+    {
+        var curBoard = result.Leaderboard;
+
+        foreach (PlayerLeaderboardEntry player in curBoard)
+        {
+            for (int i = 0; i < rankContentList.Count; i++)
+            {
+                rankContentList[i].TitleState(0);
+
+                if (rankContentList[i].nickNameText.text.Equals(player.DisplayName) ||
+                    rankContentList[i].nickNameText.text.Equals(player.PlayFabId))
+                {
+                    if (player.StatValue > 0)
+                    {
+                        rankContentList[i].TitleState(player.StatValue);
+                    }
+
+                    continue;
+                }
+            }
+        }
+
+        myRankContent.TitleState(playerDataBase.Advancement);
     }
 
     void CheckCountry(string code)
@@ -371,8 +399,11 @@ public class RankingManager : MonoBehaviour
                 number = playerDataBase.UpgradeCount;
                 break;
             case 1:
-                switch(SeasonManager.instance.CheckSeason())
+                switch(SeasonManager.instance.CheckSeason_Ranking())
                 {
+                    case -1:
+                        number = 0;
+                        break;
                     case 0:
                         number = playerDataBase.TotalLevel;
                         break;

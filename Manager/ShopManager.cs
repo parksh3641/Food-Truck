@@ -13,8 +13,12 @@ public class ShopManager : MonoBehaviour
     public GameObject shopView;
     public GameObject speicalShopView;
 
-    public GameObject alarm;
-    public GameObject ingameAlarm;
+    public GameObject shopAlarm;
+    public GameObject shopIngameAlarm;
+
+
+    public GameObject martAlarm;
+    public GameObject martIngameAlarm;
     public GameObject packageAlarm;
 
     public GameObject goldx2;
@@ -165,8 +169,12 @@ public class ShopManager : MonoBehaviour
         speicalShopView.SetActive(false);
         changeMoneyView.SetActive(false);
 
-        alarm.SetActive(true);
-        ingameAlarm.SetActive(true);
+        shopAlarm.SetActive(true);
+        shopIngameAlarm.SetActive(true);
+
+        martAlarm.SetActive(true);
+        martIngameAlarm.SetActive(true);
+
         packageAlarm.SetActive(true);
 
         for (int i = 0; i < shopArray.Length; i++)
@@ -240,8 +248,8 @@ public class ShopManager : MonoBehaviour
 
     public void SetAlarm()
     {
-        alarm.SetActive(true);
-        ingameAlarm.SetActive(true);
+        martAlarm.SetActive(true);
+        martIngameAlarm.SetActive(true);
     }
 
     public void OpenShopCoinView()
@@ -288,8 +296,8 @@ public class ShopManager : MonoBehaviour
 
             GameManager.instance.RenewalVC();
 
-            alarm.SetActive(false);
-            ingameAlarm.SetActive(false);
+            martAlarm.SetActive(false);
+            martIngameAlarm.SetActive(false);
 
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
@@ -1087,6 +1095,9 @@ public class ShopManager : MonoBehaviour
         if (!speicalShopView.activeInHierarchy)
         {
             speicalShopView.SetActive(true);
+
+            shopAlarm.SetActive(false);
+            shopIngameAlarm.SetActive(false);
 
             if (speicalIndex == -1)
             {

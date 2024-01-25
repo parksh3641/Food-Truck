@@ -73,6 +73,14 @@ public class PlayerDataBase : ScriptableObject
     private int defDestroyTicket = 0;
     [SerializeField]
     private int defDestroyTicketPiece = 0;
+    [SerializeField]
+    private int dungeonKey1 = 0;
+    [SerializeField]
+    private int dungeonKey2 = 0;
+    [SerializeField]
+    private int dungeonKey3 = 0;
+    [SerializeField]
+    private int dungeonKey4 = 0;
 
     [Space]
     [Title("Daily")]
@@ -500,6 +508,22 @@ public class PlayerDataBase : ScriptableObject
     private int island9 = 0;
     [SerializeField]
     private int island10 = 0;
+    [SerializeField]
+    private int island1Level = 0;
+    [SerializeField]
+    private int island2Level = 0;
+    [SerializeField]
+    private int island3Level = 0;
+    [SerializeField]
+    private int island4Level = 0;
+    [SerializeField]
+    private int island1Count = 0;
+    [SerializeField]
+    private int island2Count = 0;
+    [SerializeField]
+    private int island3Count = 0;
+    [SerializeField]
+    private int island4Count = 0;
 
     [Space]
     [Title("Rank")]
@@ -775,6 +799,54 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             defDestroyTicketPiece = value;
+        }
+    }
+
+    public int DungeonKey1
+    {
+        get
+        {
+            return dungeonKey1;
+        }
+        set
+        {
+            dungeonKey1 = value;
+        }
+    }
+
+    public int DungeonKey2
+    {
+        get
+        {
+            return dungeonKey2;
+        }
+        set
+        {
+            dungeonKey2 = value;
+        }
+    }
+
+    public int DungeonKey3
+    {
+        get
+        {
+            return dungeonKey3;
+        }
+        set
+        {
+            dungeonKey3 = value;
+        }
+    }
+
+    public int DungeonKey4
+    {
+        get
+        {
+            return dungeonKey4;
+        }
+        set
+        {
+            dungeonKey4 = value;
         }
     }
 
@@ -3656,6 +3728,101 @@ public class PlayerDataBase : ScriptableObject
             island10 = value;
         }
     }
+    public int Island1Level
+    {
+        get
+        {
+            return island1Level;
+        }
+        set
+        {
+            island1Level = value;
+        }
+    }
+
+    public int Island2Level
+    {
+        get
+        {
+            return island2Level;
+        }
+        set
+        {
+            island2Level = value;
+        }
+    }
+
+    public int Island3Level
+    {
+        get
+        {
+            return island3Level;
+        }
+        set
+        {
+            island3Level = value;
+        }
+    }
+
+    public int Island4Level
+    {
+        get
+        {
+            return island4Level;
+        }
+        set
+        {
+            island4Level = value;
+        }
+    }
+
+    public int Island1Count
+    {
+        get
+        {
+            return island1Count;
+        }
+        set
+        {
+            island1Count = value;
+        }
+    }
+
+    public int Island2Count
+    {
+        get
+        {
+            return island2Count;
+        }
+        set
+        {
+            island2Count = value;
+        }
+    }
+
+    public int Island3Count
+    {
+        get
+        {
+            return island3Count;
+        }
+        set
+        {
+            island3Count = value;
+        }
+    }
+
+    public int Island4Count
+    {
+        get
+        {
+            return island4Count;
+        }
+        set
+        {
+            island4Count = value;
+        }
+    }
 
     public int Portion1
     {
@@ -4337,6 +4504,10 @@ public class PlayerDataBase : ScriptableObject
         rankPoint = 0;
         defDestroyTicket = 0;
         defDestroyTicketPiece = 0;
+        dungeonKey1 = 0;
+        dungeonKey2 = 0;
+        dungeonKey3 = 0;
+        dungeonKey4 = 0;
         eventNumber = 0;
         lockTutorial = 0;
         inGameTutorial = 0;
@@ -4539,6 +4710,14 @@ public class PlayerDataBase : ScriptableObject
         island8 = 0;
         island9 = 0;
         island10 = 0;
+        island1Level = 0;
+        island2Level = 0;
+        island3Level = 0;
+        island4Level = 0;
+        island1Count = 0;
+        island2Count = 0;
+        island3Count = 0;
+        island4Count = 0;
 
         questCount = 0;
         reincarnationCount = 0;

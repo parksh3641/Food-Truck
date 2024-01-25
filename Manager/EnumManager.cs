@@ -214,6 +214,11 @@ public enum ItemType
     SkillTicket,
     RepairTicket,
     RepairTicket10,
+    EquipExp,
+    DungeonKey1,
+    DungeonKey2,
+    DungeonKey3,
+    DungeonKey4,
 }
 
 public enum PackageType
@@ -351,7 +356,12 @@ public enum RewardType
     Island2,
     Island3,
     Island4,
-    SpeicalCharacter
+    SpeicalCharacter,
+    EquipExp,
+    DungeonKey1,
+    DungeonKey2,
+    DungeonKey3,
+    DungeonKey4,
 }
 
 public enum QuestType
@@ -458,4 +468,12 @@ public enum ChefType
     Cook6_2,
     Cook6_3,
     Cook6_4,
+}
+
+public enum DungeonType
+{
+    Dungeon1,
+    Dungeon2,
+    Dungeon3,
+    Dungeon4,
 }

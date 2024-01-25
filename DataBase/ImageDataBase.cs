@@ -25,6 +25,8 @@ public class ImageDataBase : ScriptableObject
 
     public Sprite[] rankBackgroundArray;
 
+    public Sprite[] dungeonArray;
+
     public Sprite[] GetFoodChangeArray()
     {
         return foodChangeArray;
@@ -78,5 +80,10 @@ public class ImageDataBase : ScriptableObject
     public Sprite[] GetRankBackgroundArray()
     {
         return rankBackgroundArray;
+    }
+
+    public Sprite[] GetDungeonArray()
+    {
+        return dungeonArray;
     }
 }

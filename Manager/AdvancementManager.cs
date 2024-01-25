@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -151,6 +152,8 @@ public class AdvancementManager : MonoBehaviour
         Initialize();
 
         GameManager.instance.CheckPercent();
+
+        FirebaseAnalytics.LogEvent("AdvencementLevelUp");
     }
 
 }

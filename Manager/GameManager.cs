@@ -1814,6 +1814,8 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.CandyType = type;
 
+        speicalFood = false;
+
         upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
 
         CheckFood();
@@ -1825,6 +1827,8 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.JapaneseFoodType = type;
 
+        speicalFood = false;
+
         upgradeJapaneseFood = upgradeDataBase.GetUpgradeJapaneseFood(GameStateManager.instance.JapaneseFoodType);
 
         CheckFood();
@@ -1835,6 +1839,8 @@ public class GameManager : MonoBehaviour
     public void ChangeDessert(DessertType type)
     {
         GameStateManager.instance.DessertType = type;
+
+        speicalFood = false;
 
         upgradeDessert = upgradeDataBase.GetUpgradeDessert(GameStateManager.instance.DessertType);
 
@@ -1856,6 +1862,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
+                sellPrice += (int)(sellPrice * (playerDataBase.Island1Level * 0.02f));
                 break;
             case IslandType.Island2:
                 maxLevel = upgradeCandy.maxLevel;
@@ -1866,7 +1873,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice = sellPrice + (int)(sellPrice * 0.2f);
+                sellPrice += (int)(sellPrice * (0.2f + (playerDataBase.Island2Level * 0.02f)));
                 break;
             case IslandType.Island3:
                 maxLevel = upgradeJapaneseFood.maxLevel;
@@ -1877,7 +1884,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice = sellPrice + (int)(sellPrice * 0.4f);
+                sellPrice += (int)(sellPrice * (0.4f + (playerDataBase.Island3Level * 0.02f)));
                 break;
             case IslandType.Island4:
                 maxLevel = upgradeDessert.maxLevel;
@@ -1888,7 +1895,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice = sellPrice + (int)(sellPrice * 0.6f);
+                sellPrice += (int)(sellPrice * (0.6f + (playerDataBase.Island4Level * 0.02f)));
                 break;
         }
 
@@ -4510,6 +4517,13 @@ public class GameManager : MonoBehaviour
 
         PlayfabManager.instance.UpdateAddGold(sellPrice);
 
+        if(speicalFood)
+        {
+            Debug.LogError("특별 음식 판매");
+
+            PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 10 + (level / 5)));
+        }
+
         speicalFood = false;
 
         if (level >= 9)
@@ -4529,7 +4543,7 @@ public class GameManager : MonoBehaviour
                     {
                         speicalFood = true;
 
-                        Debug.LogError("특별한 음식 등장!");
+                        Debug.LogError("특별 음식 등장!");
 
                         SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
                         NotionManager.instance.UseNotion3(NotionType.SpeicalFoodNotion);

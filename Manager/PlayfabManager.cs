@@ -1560,6 +1560,18 @@ public class PlayfabManager : MonoBehaviour
                        case "LockTutorial":
                            playerDataBase.LockTutorial = statistics.Value;
                            break;
+                       case "DungeonKey1":
+                           playerDataBase.DungeonKey1 = statistics.Value;
+                           break;
+                       case "DungeonKey2":
+                           playerDataBase.DungeonKey2 = statistics.Value;
+                           break;
+                       case "DungeonKey3":
+                           playerDataBase.DungeonKey3 = statistics.Value;
+                           break;
+                       case "DungeonKey4":
+                           playerDataBase.DungeonKey4 = statistics.Value;
+                           break;
                        case "InGameTutorial":
                            playerDataBase.InGameTutorial = statistics.Value;
                            break;
@@ -1999,6 +2011,30 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "TotalLevel_10":
                            playerDataBase.TotalLevel_10 = statistics.Value;
+                           break;
+                       case "Island1Level":
+                           playerDataBase.Island1Level = statistics.Value;
+                           break;
+                       case "Island2Level":
+                           playerDataBase.Island2Level = statistics.Value;
+                           break;
+                       case "Island3Level":
+                           playerDataBase.Island3Level = statistics.Value;
+                           break;
+                       case "Island4Level":
+                           playerDataBase.Island4Level = statistics.Value;
+                           break;
+                       case "Island1Count":
+                           playerDataBase.Island1Count = statistics.Value;
+                           break;
+                       case "Island2Count":
+                           playerDataBase.Island2Count = statistics.Value;
+                           break;
+                       case "Island3Count":
+                           playerDataBase.Island3Count = statistics.Value;
+                           break;
+                       case "Island4Count":
+                           playerDataBase.Island4Count = statistics.Value;
                            break;
                    }
                }

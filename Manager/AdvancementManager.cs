@@ -135,6 +135,9 @@ public class AdvancementManager : MonoBehaviour
     {
         if (isDelay) return;
 
+        isDelay = true;
+        Invoke("Delay", 0.4f);
+
         if (!isActive)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -154,9 +157,6 @@ public class AdvancementManager : MonoBehaviour
         Initialize();
 
         GameManager.instance.CheckPercent();
-
-        isDelay = true;
-        Invoke("Delay", 0.4f);
 
         FirebaseAnalytics.LogEvent("AdvencementLevelUp");
     }

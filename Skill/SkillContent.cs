@@ -23,6 +23,8 @@ public class SkillContent : MonoBehaviour
     public GameObject buttonCrystal;
     public Text crystalText;
 
+    public GameObject buttonTicket;
+
     public Image buttonGoldImg;
     public Image buttonCrystalImg;
     public Image buttonTicketImg;

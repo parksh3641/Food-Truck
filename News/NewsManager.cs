@@ -11,7 +11,7 @@ public class NewsManager : MonoBehaviour
     public GameObject newsView;
 
     public GameObject alarm;
-    public GameObject mainAlarm;
+    public GameObject patchAlarm;
 
     public NewsContent newsContent;
     public RectTransform newsContentTransform;
@@ -47,8 +47,8 @@ public class NewsManager : MonoBehaviour
         newsView.SetActive(false);
         infoView.SetActive(false);
 
-        //alarm.SetActive(false);
-        //mainAlarm.SetActive(false);
+        alarm.SetActive(true);
+        patchAlarm.SetActive(true);
 
         newsContentList.Clear();
 
@@ -102,10 +102,14 @@ public class NewsManager : MonoBehaviour
             case 0:
                 noticeView.SetActive(true);
 
+                alarm.SetActive(false);
+
                 FirebaseAnalytics.LogEvent("OpenNotice");
                 break;
             case 1:
                 patchNoteView.SetActive(true);
+
+                patchAlarm.SetActive(false);
 
                 isDelay = true;
                 PlayfabManager.instance.ReadTitleNews(ReadTitleNews);
@@ -153,17 +157,6 @@ public class NewsManager : MonoBehaviour
             newsInfoList.Add(item[i]);
             newsContentList[i].gameObject.SetActive(true);
         }
-
-        //newsContentTransform.anchoredPosition = new Vector3(0, -999, 0);
-
-        //if (playerDataBase.NewsAlarm > 0)
-        //{
-        //    playerDataBase.NewsAlarm = 0;
-        //    PlayfabManager.instance.UpdatePlayerStatisticsInsert("NewsAlarm", 0);
-        //}
-
-        //alarm.SetActive(false);
-        //mainAlarm.SetActive(false);
 
         newsContentTransform.anchoredPosition = new Vector2(0, -9999);
 

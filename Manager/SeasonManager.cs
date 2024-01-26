@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using PlayFab.ClientModels;
 using System;
 using System.Collections;
@@ -307,6 +308,8 @@ public class SeasonManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+        FirebaseAnalytics.LogEvent("SeasonRewardClear");
     }
 
     public void SetRankingReward(GetLeaderboardResult result)

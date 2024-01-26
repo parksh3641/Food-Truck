@@ -78,13 +78,13 @@ public class ChangeIslandContent : MonoBehaviour
         switch (islandType)
         {
             case IslandType.Island1:
-                needPriceText.text = playerDataBase.Island1Count + "/" + ((playerDataBase.Island1Level + 1) * 50).ToString();
+                needPriceText.text = playerDataBase.Island1Count + "/" + ((playerDataBase.Island1Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island1Level + 1);
 
                 upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : 0%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (playerDataBase.Island1Level * 2) + "%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (playerDataBase.Island1Level * 1) + "%";
 
-                if (playerDataBase.Island1Count >= ((playerDataBase.Island1Level + 1) * 50))
+                if (playerDataBase.Island1Count >= ((playerDataBase.Island1Level + 1) * 100))
                 {
                     LevelUpButtonImg.sprite = buttonImgArray[2];
                 }
@@ -95,13 +95,13 @@ public class ChangeIslandContent : MonoBehaviour
 
                 break;
             case IslandType.Island2:
-                needPriceText.text = playerDataBase.Island2Count + "/" + ((playerDataBase.Island2Level + 1) * 50).ToString();
+                needPriceText.text = playerDataBase.Island2Count + "/" + ((playerDataBase.Island2Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island2Level + 1);
 
                 upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +5%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (10 + (playerDataBase.Island2Level * 2)) + "%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (10 + (playerDataBase.Island2Level * 1)) + "%";
 
-                if (playerDataBase.Island2Count >= ((playerDataBase.Island2Level + 1) * 50))
+                if (playerDataBase.Island2Count >= ((playerDataBase.Island2Level + 1) * 100))
                 {
                     LevelUpButtonImg.sprite = buttonImgArray[2];
                 }
@@ -111,13 +111,13 @@ public class ChangeIslandContent : MonoBehaviour
                 }
                 break;
             case IslandType.Island3:
-                needPriceText.text = playerDataBase.Island3Count + "/" + ((playerDataBase.Island3Level + 1) * 50).ToString();
+                needPriceText.text = playerDataBase.Island3Count + "/" + ((playerDataBase.Island3Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island3Level + 1);
 
                 upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +10%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (20 + (playerDataBase.Island3Level * 2)) + "%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (20 + (playerDataBase.Island3Level * 1)) + "%";
 
-                if (playerDataBase.Island3Count >= ((playerDataBase.Island3Level + 1) * 50))
+                if (playerDataBase.Island3Count >= ((playerDataBase.Island3Level + 1) * 100))
                 {
                     LevelUpButtonImg.sprite = buttonImgArray[2];
                 }
@@ -127,13 +127,13 @@ public class ChangeIslandContent : MonoBehaviour
                 }
                 break;
             case IslandType.Island4:
-                needPriceText.text = playerDataBase.Island4Count + "/" + ((playerDataBase.Island4Level + 1) * 50).ToString();
+                needPriceText.text = playerDataBase.Island4Count + "/" + ((playerDataBase.Island4Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island4Level + 1);
 
                 upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +15%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (30 + (playerDataBase.Island4Level * 2)) + "%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (30 + (playerDataBase.Island4Level * 1)) + "%";
 
-                if (playerDataBase.Island4Count >= ((playerDataBase.Island4Level + 1) * 50))
+                if (playerDataBase.Island4Count >= ((playerDataBase.Island4Level + 1) * 100))
                 {
                     LevelUpButtonImg.sprite = buttonImgArray[2];
                 }

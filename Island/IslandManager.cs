@@ -138,7 +138,7 @@ public class IslandManager : MonoBehaviour
                 }
                 else
                 {
-                    if(playerDataBase.Island1Count < (playerDataBase.Island1Level + 1) * 50)
+                    if(playerDataBase.Island1Count < (playerDataBase.Island1Level + 1) * 100)
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                         NotionManager.instance.UseNotion(NotionType.LowItemNotion);
@@ -146,7 +146,7 @@ public class IslandManager : MonoBehaviour
                     }
                 }
 
-                playerDataBase.Island1Count -= (playerDataBase.Island1Level + 1) * 50;
+                playerDataBase.Island1Count -= (playerDataBase.Island1Level + 1) * 100;
                 playerDataBase.Island1Level += 1;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island1Count", playerDataBase.Island1Count);
@@ -163,7 +163,7 @@ public class IslandManager : MonoBehaviour
                 }
                 else
                 {
-                    if (playerDataBase.Island2Count < (playerDataBase.Island2Level + 1) * 50)
+                    if (playerDataBase.Island2Count < (playerDataBase.Island2Level + 1) * 100)
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                         NotionManager.instance.UseNotion(NotionType.LowItemNotion);
@@ -171,7 +171,7 @@ public class IslandManager : MonoBehaviour
                     }
                 }
 
-                playerDataBase.Island2Count -= (playerDataBase.Island2Level + 1) * 50;
+                playerDataBase.Island2Count -= (playerDataBase.Island2Level + 1) * 100;
                 playerDataBase.Island2Level += 1;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island2Count", playerDataBase.Island2Count);
@@ -188,7 +188,7 @@ public class IslandManager : MonoBehaviour
                 }
                 else
                 {
-                    if (playerDataBase.Island3Count < (playerDataBase.Island3Level + 1) * 50)
+                    if (playerDataBase.Island3Count < (playerDataBase.Island3Level + 1) * 100)
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                         NotionManager.instance.UseNotion(NotionType.LowItemNotion);
@@ -196,7 +196,7 @@ public class IslandManager : MonoBehaviour
                     }
                 }
 
-                playerDataBase.Island3Count -= (playerDataBase.Island3Level + 1) * 50;
+                playerDataBase.Island3Count -= (playerDataBase.Island3Level + 1) * 100;
                 playerDataBase.Island3Level += 1;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island3Count", playerDataBase.Island3Count);
@@ -213,7 +213,7 @@ public class IslandManager : MonoBehaviour
                 }
                 else
                 {
-                    if (playerDataBase.Island4Count < (playerDataBase.Island4Level + 1) * 50)
+                    if (playerDataBase.Island4Count < (playerDataBase.Island4Level + 1) * 100)
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                         NotionManager.instance.UseNotion(NotionType.LowItemNotion);
@@ -221,7 +221,7 @@ public class IslandManager : MonoBehaviour
                     }
                 }
 
-                playerDataBase.Island4Count -= (playerDataBase.Island4Level + 1) * 50;
+                playerDataBase.Island4Count -= (playerDataBase.Island4Level + 1) * 100;
                 playerDataBase.Island4Level += 1;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island4Count", playerDataBase.Island4Count);

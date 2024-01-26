@@ -1893,6 +1893,19 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        if (GameStateManager.instance.Effect)
+        {
+            if (feverMode)
+            {
+                for (int i = 0; i < level1UpParticle.Length; i++)
+                {
+                    yummyTime2Particle[i].gameObject.SetActive(false);
+                }
+
+                yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+            }
+        }
+
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.ChangeIslandNotion);
 
@@ -1980,7 +1993,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (playerDataBase.Island1Level * 0.02f));
+                sellPrice += (int)(sellPrice * (playerDataBase.Island1Level * 0.01f));
                 break;
             case IslandType.Island2:
                 maxLevel = upgradeCandy.maxLevel;
@@ -1991,7 +2004,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (0.2f + (playerDataBase.Island2Level * 0.02f)));
+                sellPrice += (int)(sellPrice * (0.2f + (playerDataBase.Island2Level * 0.01f)));
                 break;
             case IslandType.Island3:
                 maxLevel = upgradeJapaneseFood.maxLevel;
@@ -2002,7 +2015,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (0.4f + (playerDataBase.Island3Level * 0.02f)));
+                sellPrice += (int)(sellPrice * (0.4f + (playerDataBase.Island3Level * 0.01f)));
                 break;
             case IslandType.Island4:
                 maxLevel = upgradeDessert.maxLevel;
@@ -2013,7 +2026,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (0.6f + (playerDataBase.Island4Level * 0.02f)));
+                sellPrice += (int)(sellPrice * (0.6f + (playerDataBase.Island4Level * 0.01f)));
                 break;
         }
 

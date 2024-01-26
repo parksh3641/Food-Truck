@@ -367,11 +367,16 @@ public class RankingManager : MonoBehaviour
     {
         var curBoard = result.Leaderboard;
 
+        for (int i = 0; i < rankContentList.Count; i++)
+        {
+            rankContentList[i].TitleState(0);
+        }
+
         foreach (PlayerLeaderboardEntry player in curBoard)
         {
             for (int i = 0; i < rankContentList.Count; i++)
             {
-                rankContentList[i].TitleState(0);
+                //rankContentList[i].TitleState(0);
 
                 if (rankContentList[i].nickNameText.text.Equals(player.DisplayName) ||
                     rankContentList[i].nickNameText.text.Equals(player.PlayFabId))

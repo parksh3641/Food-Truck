@@ -229,7 +229,7 @@ public class ChestBoxManager : MonoBehaviour
             case RewardType.Gold:
                 PlayfabManager.instance.UpdateAddGold(50000);
                 break;
-            case RewardType.PortionSet:
+            case RewardType.Portion1:
                 PortionManager.instance.GetPortion(0, 1);
                 break;
             case RewardType.DefDestroyTicketPiece:
@@ -257,7 +257,7 @@ public class ChestBoxManager : MonoBehaviour
             case RewardType.Gold:
                 PlayfabManager.instance.UpdateAddGold(1000000);
                 break;
-            case RewardType.PortionSet:
+            case RewardType.Portion1:
                 PortionManager.instance.GetRandomPortion(10);
                 break;
             case RewardType.DefDestroyTicketPiece:

@@ -15,13 +15,17 @@ public class FoodContent : MonoBehaviour
 
     public bool speicalFood = false;
 
-    MeshRenderer meshRenderer;
+    public MeshRenderer meshRenderer;
     Rotation rotation;
 
     private void Awake()
     {
         rotation = GetComponent<Rotation>();
-        meshRenderer = GetComponent<MeshRenderer>();
+
+        if (meshRenderer == null)
+        {
+            meshRenderer = GetComponent<MeshRenderer>();
+        }
 
         speicalFood = false;
     }
@@ -116,12 +120,12 @@ public class FoodContent : MonoBehaviour
             if(!speicalFood)
             {
                 speicalFood = true;
-                meshRenderer.material.color = new Color(Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f);
+                meshRenderer.materials[0].color = new Color(Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f);
             }
         }
         else
         {
-            meshRenderer.material.color = new Color(1, 1, 1);
+            meshRenderer.materials[0].color = new Color(1, 1, 1);
 
             speicalFood = false;
         }

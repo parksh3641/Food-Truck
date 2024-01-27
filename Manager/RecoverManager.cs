@@ -184,7 +184,7 @@ public class RecoverManager : MonoBehaviour
                 break;
         }
 
-        need = 2;
+        need = 3;
 
         need += ((maxLevel - 25) / 5);
 

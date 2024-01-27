@@ -118,9 +118,6 @@ public class AdmobReward : MonoBehaviour
                     shopManager.SuccessWatchAd_Crystal();
                     break;
             }
-
-            playerDataBase.AdCount += 1;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("AdCount", playerDataBase.AdCount);
         }
         else
         {

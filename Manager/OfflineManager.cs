@@ -320,11 +320,7 @@ public class OfflineManager : MonoBehaviour
 
             PlayfabManager.instance.UpdateAddGold(saveCoin);
 
-            playerDataBase.Exp += saveExp;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
-            levelManager.Initialize();
-
-            moneyAnimation.PlusMoney(10);
+            PortionManager.instance.GetExp(saveExp);
 
             StopAllCoroutines();
             StartCoroutine(TimerCoroution());

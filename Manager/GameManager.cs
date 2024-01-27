@@ -592,6 +592,14 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(DelayCoroution());
 
+        if(playerDataBase.Update == 1)
+        {
+            playerDataBase.Update = 0;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Update", playerDataBase.Update);
+
+            OnNeedUpdate();
+        }
+
         Invoke("ServerDelay", 1.0f);
     }
 
@@ -1161,11 +1169,11 @@ public class GameManager : MonoBehaviour
 
         yield return waitForSeconds3;
 
-        PortionManager.instance.GetBuffTickets(3);
+        PortionManager.instance.GetBuffTickets(1);
 
         yield return waitForSeconds3;
 
-        PortionManager.instance.GetSkillTickets(3);
+        PortionManager.instance.GetSkillTickets(1);
 
         yield return waitForSeconds3;
 
@@ -3640,7 +3648,7 @@ public class GameManager : MonoBehaviour
                 bombPartice[(int)GameStateManager.instance.IslandType].Play();
             }
 
-            if(maxLevel >= 35 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
+            if(maxLevel >= 25 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
             {
                 switch (GameStateManager.instance.IslandType)
                 {

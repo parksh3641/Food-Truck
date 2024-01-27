@@ -81,7 +81,7 @@ public class PlayTimeManager : MonoBehaviour
         attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Crystal, 10);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.BuffTicket, 1);
+        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Exp, 3000);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[3].receiveContent[0].Initialize(RewardType.TreasureBox, 1);
@@ -105,7 +105,7 @@ public class PlayTimeManager : MonoBehaviour
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
                 break;
             case 2:
-                PortionManager.instance.GetBuffTickets(1);
+                PortionManager.instance.GetExp(3000);
                 break;
             case 3:
                 treasureManager.OpenTreasure(1);

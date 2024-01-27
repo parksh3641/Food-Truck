@@ -111,12 +111,12 @@ public class ShopContent : MonoBehaviour
                 rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(100000) + "</size>";
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = MoneyUnitString.ToCurrencyString(200000) + "\n~ " + MoneyUnitString.ToCurrencyString(1000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(1000000);
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(100);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(500);
 
                 titleText.plusText = " x1";
 
@@ -352,7 +352,16 @@ public class ShopContent : MonoBehaviour
                 infoText.ReLoad();
                 break;
             case ItemType.DefDestroyTicketPiece:
-                rewardText.text = "<size=18>x1</size>";
+                lockedObj.SetActive(false);
+
+                titleText.plusText = " x1";
+
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(200);
+
+                infoText.localizationName = "Hold";
+                infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece;
+                infoText.ReLoad();
+
                 break;
             case ItemType.BuffTicketSet1:
                 lockedObj.SetActive(false);
@@ -434,7 +443,7 @@ public class ShopContent : MonoBehaviour
                 infoText.ReLoad();
                 break;
             case ItemType.AdReward_Crystal:
-                rewardText.text = "<size=18>30 ~ 100</size>";
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(60) + "</size>";
                 break;
             case ItemType.AutoUpgrade:
                 lockedObj.SetActive(false);
@@ -470,7 +479,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.SkillTicket:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(500);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(150);
 
                 titleText.plusText = " x1";
 

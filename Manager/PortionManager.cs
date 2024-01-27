@@ -9,6 +9,7 @@ public class PortionManager : MonoBehaviour
 
     public MoneyAnimation[] portionAnimation;
 
+    public MoneyAnimation expAnimation;
     public MoneyAnimation defTicketPieceAnimation;
     public MoneyAnimation defTicketAnimation;
     public MoneyAnimation buffTicketAnimation;
@@ -18,6 +19,8 @@ public class PortionManager : MonoBehaviour
     public MoneyAnimation[] islandCountAnimation;
 
     private int random = 0;
+
+    public LevelManager levelManager;
 
     PlayerDataBase playerDataBase;
 
@@ -106,6 +109,16 @@ public class PortionManager : MonoBehaviour
         portionAnimation[1].PlusMoney(number);
         portionAnimation[2].PlusMoney(number);
         portionAnimation[3].PlusMoney(number);
+    }
+
+    [Button]
+    public void GetExp(int number)
+    {
+        playerDataBase.Exp += number;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
+        levelManager.Initialize();
+
+        expAnimation.PlusMoney(number);
     }
 
     [Button]

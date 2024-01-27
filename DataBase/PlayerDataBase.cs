@@ -31,6 +31,8 @@ public class PlayerDataBase : ScriptableObject
     private int eventNumber = 0;
     [SerializeField]
     private int testAccount = 0;
+    [SerializeField]
+    private int update = 0;
 
     [Title("Info")]
     [SerializeField]
@@ -945,6 +947,18 @@ public class PlayerDataBase : ScriptableObject
             testAccount = value;
         }
     }
+    public int Update
+    {
+        get
+        {
+            return update;
+        }
+        set
+        {
+            update = value;
+        }
+    }
+
 
     public int BuffTicket
     {
@@ -4516,6 +4530,7 @@ public class PlayerDataBase : ScriptableObject
         firstServerDate = "";
         islandNumber = 0;
         testAccount = 0;
+        update = 0;
         buffTicket = 0;
         skillTicket = 0;
         recoverTicket = 0;

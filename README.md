@@ -6,6 +6,6 @@
 -------------
 **[구글 플레이 스토어 다운 받기](https://play.google.com/store/apps/details?id=com.whilili.foodtruck)**
 
-**[앱 스토어 다운 받기](https://apps.apple.com/us/app/food-truck-evolution/id6466390705)**
+**[앱 스토어 다운 받기](https://apps.apple.com/kr/app/food-truck-evolution/id6466390705)**
 
 -------------

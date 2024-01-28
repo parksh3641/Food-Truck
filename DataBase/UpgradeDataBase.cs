@@ -77,7 +77,7 @@ public class UpgradeDataBase : ScriptableObject
         return food;
     }
 
-    public int GetMaxLevel(FoodType type)
+    public int GetMaxLevelFastFood(FoodType type)
     {
         int number = 0;
         for(int i = 0; i < upgradeFoodList.Count; i ++)

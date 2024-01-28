@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     public GameObject autoPresent;
 
     public GameObject privacypolicyView;
+    public GameObject genderView;
+
+    public Sprite[] buttonImg;
+    public Image[] genderButton;
 
     public GameObject coupon;
     public GameObject deleteAccount;
@@ -198,7 +202,7 @@ public class GameManager : MonoBehaviour
 
     private float speicalFoodCount = 0;
     private float speicalFoodNeedCount = 1;
-    private float speicalFoodPlus = 10;
+    private float speicalFoodPlus = 10f;
 
     private float portion1Time = 0;
     private float portion2Time = 0;
@@ -235,6 +239,8 @@ public class GameManager : MonoBehaviour
     private bool buffAutoUpgrade = false;
 
     private bool speicalFood = false;
+
+    private int gender = 0;
 
     public GameObject buff4Obj;
 
@@ -388,6 +394,7 @@ public class GameManager : MonoBehaviour
         defTicketObj.SetActive(false);
         bankruptcyView.SetActive(false);
         privacypolicyView.SetActive(false);
+        genderView.SetActive(false);
         myMoneyPlusText.gameObject.SetActive(false);
         testMode.SetActive(false);
 
@@ -454,6 +461,11 @@ public class GameManager : MonoBehaviour
         if (!GameStateManager.instance.Privacypolicy)
         {
             privacypolicyView.SetActive(true);
+        }
+
+        if(!GameStateManager.instance.Gender)
+        {
+            genderView.SetActive(true);
         }
 
         if (GameStateManager.instance.BackgroundEffect)
@@ -1163,7 +1175,11 @@ public class GameManager : MonoBehaviour
     {
         yield return waitForSeconds3;
 
-        PortionManager.instance.GetAllPortion(10);
+        PortionManager.instance.GetAllPortion(3);
+
+        yield return waitForSeconds3;
+
+        PortionManager.instance.GetPortion(4,3);
 
         CheckPortion();
 
@@ -2042,7 +2058,7 @@ public class GameManager : MonoBehaviour
 
         if(speicalFood)
         {
-            sellPrice *= 2;
+            sellPrice += (int)(sellPrice * 1.5f);
         }
 
         recoverLevel = ((int)(maxLevel * 0.5f)) - 1;
@@ -3192,6 +3208,11 @@ public class GameManager : MonoBehaviour
                 return;
             }
 
+            if(buff4)
+            {
+                return;
+            }
+
             if (isUpgradeDelay) return;
         }
 
@@ -3255,18 +3276,27 @@ public class GameManager : MonoBehaviour
                         level += 2;
                     }
 
-                    NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX2);
+                    if (!changeFoodManager.changeFoodView.activeInHierarchy)
+                    {
+                        NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX2);
+                    }
                 }
                 else
                 {
                     level += 1;
-                    NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+                    if (!changeFoodManager.changeFoodView.activeInHierarchy)
+                    {
+                        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+                    }
                 }
             }
             else
             {
                 level += 1;
-                NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+                if (!changeFoodManager.changeFoodView.activeInHierarchy)
+                {
+                    NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+                }
             }
 
             GameStateManager.instance.UpgradeCount += 1;
@@ -3415,7 +3445,10 @@ public class GameManager : MonoBehaviour
                 MaxLevelUpgradeSuccess();
 
                 SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
-                NotionManager.instance.UseNotion(NotionType.MaxLevel);
+                if (!changeFoodManager.changeFoodView.activeInHierarchy)
+                {
+                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
+                }
 
                 if (GameStateManager.instance.Effect)
                 {
@@ -3648,7 +3681,7 @@ public class GameManager : MonoBehaviour
                 bombPartice[(int)GameStateManager.instance.IslandType].Play();
             }
 
-            if(maxLevel >= 25 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
+            if(maxLevel >= 30 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
             {
                 switch (GameStateManager.instance.IslandType)
                 {
@@ -3672,8 +3705,12 @@ public class GameManager : MonoBehaviour
             CheckFoodState();
             UpgradeInitialize();
 
+
             SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
-            NotionManager.instance.UseNotion(NotionType.FailUpgrade);
+            if (!changeFoodManager.changeFoodView.activeInHierarchy)
+            {
+                NotionManager.instance.UseNotion(NotionType.FailUpgrade);
+            }
         }
 
         if (feverFillamount.gameObject.activeInHierarchy)
@@ -4131,10 +4168,10 @@ public class GameManager : MonoBehaviour
                                 moveArrow3.SetActive(true);
                             }
 
-                            if (playerDataBase.HamburgerMaxValue == 1)
-                            {
-                                tutorialManager.Next1();
-                            }
+                            //if (playerDataBase.HamburgerMaxValue == 1)
+                            //{
+                            //    tutorialManager.Next1();
+                            //}
                         }
 
                         lockManager.UnLocked(1);
@@ -4617,7 +4654,7 @@ public class GameManager : MonoBehaviour
     {
         if (number < 2)
         {
-            if (GameStateManager.instance.AutoUpgrade)
+            if (GameStateManager.instance.AutoUpgrade || buff4)
             {
                 return;
             }
@@ -4648,16 +4685,25 @@ public class GameManager : MonoBehaviour
             {
                 sellPrice = sellPrice + (int)(sellPrice * 0.15f);
 
-                NotionManager.instance.UseNotion(NotionType.SuccessSellX2);
+                if (!changeFoodManager.changeFoodView.activeInHierarchy)
+                {
+                    NotionManager.instance.UseNotion(NotionType.SuccessSellX2);
+                }
             }
             else
             {
-                NotionManager.instance.UseNotion(NotionType.SuccessSell);
+                if (!changeFoodManager.changeFoodView.activeInHierarchy)
+                {
+                    NotionManager.instance.UseNotion(NotionType.SuccessSell);
+                }
             }
         }
         else
         {
-            NotionManager.instance.UseNotion(NotionType.SuccessSell);
+            if (!changeFoodManager.changeFoodView.activeInHierarchy)
+            {
+                NotionManager.instance.UseNotion(NotionType.SuccessSell);
+            }
         }
 
         if(speicalFood)
@@ -4684,14 +4730,18 @@ public class GameManager : MonoBehaviour
         {
             speicalFoodCount = 0;
 
-            if (Random.Range(0, 100) < speicalFoodPlus)
+            if (Random.Range(0, 100f) < speicalFoodPlus)
             {
                 speicalFood = true;
 
-                Debug.LogError("특별 음식 등장!");
+                Debug.LogError("레어 음식 등장!");
 
                 SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
-                NotionManager.instance.UseNotion3(NotionType.SpeicalFoodNotion);
+
+                if (!changeFoodManager.changeFoodView.activeInHierarchy)
+                {
+                    NotionManager.instance.UseNotion3(NotionType.SpeicalFoodNotion);
+                }
 
                 if(GameStateManager.instance.Effect)
                 {
@@ -5353,10 +5403,19 @@ public class GameManager : MonoBehaviour
         CloseAppReview();
     }
 
+    public void OpenReview()
+    {
+#if UNITY_ANDROID || UNITY_EDITOR
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.whilili.foodtruck");
+#elif UNITY_IOS
+        Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
+#endif
+
+        FirebaseAnalytics.LogEvent("OpenAppReviewEvent");
+    }
+
     public void FeedBack()
     {
-        FirebaseAnalytics.LogEvent("FeedBack");
-
         if(GameStateManager.instance.Language == LanguageType.Korean)
         {
             Application.OpenURL("https://forms.gle/RtZM83MWko6aJR5c6");
@@ -5365,16 +5424,22 @@ public class GameManager : MonoBehaviour
         {
             Application.OpenURL("https://forms.gle/dvMRSQkPJpmm9iJM9");
         }
+
+        FirebaseAnalytics.LogEvent("FeedBack");
     }
 
     public void OpenPrivacypolicyURL()
     {
         Application.OpenURL("https://sites.google.com/view/whilili-privacypolicy");
+
+        FirebaseAnalytics.LogEvent("Privacypolicy");
     }
 
     public void OpenTermsURL()
     {
         Application.OpenURL("https://sites.google.com/view/whilili-terms");
+
+        FirebaseAnalytics.LogEvent("Terms");
     }
 
     public void Agree()
@@ -5382,6 +5447,45 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.Privacypolicy = true;
 
         privacypolicyView.SetActive(false);
+    }
+
+    public void Gender_Male()
+    {
+        gender = 1;
+
+        genderButton[0].sprite = buttonImg[1];
+        genderButton[1].sprite = buttonImg[0];
+
+        genderButton[2].sprite = buttonImg[1];
+    }
+
+    public void Gender_Female()
+    {
+        gender = 2;
+
+        genderButton[0].sprite = buttonImg[0];
+        genderButton[1].sprite = buttonImg[1];
+
+        genderButton[2].sprite = buttonImg[1];
+    }
+
+    public void Gender_Clear()
+    {
+        if (gender == 0) return;
+
+        GameStateManager.instance.Gender = true;
+
+        genderView.SetActive(false);
+
+        if(gender == 1)
+        {
+            FirebaseAnalytics.LogEvent("Sex_Male");
+        }
+        else
+        {
+            FirebaseAnalytics.LogEvent("Sex_Female");
+        }
+
     }
 
     public void Decline()

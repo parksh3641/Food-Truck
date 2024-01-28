@@ -111,7 +111,23 @@ public class ShopContent : MonoBehaviour
                 rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(100000) + "</size>";
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = MoneyUnitString.ToCurrencyString(1000000);
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(300000) + "</size>";
+
+                if(playerDataBase.Candy1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
+                }
+
+                if(playerDataBase.JapaneseFood1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(3000000) + "</size>";
+                }
+
+                if(playerDataBase.Dessert1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
+                }
+
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);

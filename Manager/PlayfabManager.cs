@@ -1560,6 +1560,15 @@ public class PlayfabManager : MonoBehaviour
                        case "EventNumber":
                            playerDataBase.EventNumber = statistics.Value;
                            break;
+                       case "UpdateNumber":
+                           playerDataBase.UpdateNumber = statistics.Value;
+                           break;
+                       case "FriendsNumber":
+                           playerDataBase.FriendsNumber = statistics.Value;
+                           break;
+                       case "ReviewNumber":
+                           playerDataBase.ReviewNumber = statistics.Value;
+                           break;
                        case "LockTutorial":
                            playerDataBase.LockTutorial = statistics.Value;
                            break;

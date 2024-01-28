@@ -56,6 +56,8 @@ public class ChangeFoodManager : MonoBehaviour
     private int nowExp = 0;
     private int nextExp = 0;
 
+    private bool init = false;
+
     public LockManager lockManager;
 
     PlayerDataBase playerDataBase;
@@ -144,6 +146,8 @@ public class ChangeFoodManager : MonoBehaviour
             changeDessertList.Add(monster);
         }
 
+        init = true;
+
         changeFoodContentTransform.anchoredPosition = new Vector2(0, -9999);
     }
 
@@ -152,6 +156,11 @@ public class ChangeFoodManager : MonoBehaviour
         if(!changeFoodView.activeInHierarchy)
         {
             changeFoodView.SetActive(true);
+
+            if(!init)
+            {
+                Initialize();
+            }
 
             alarmObj.SetActive(false);
 
@@ -217,7 +226,7 @@ public class ChangeFoodManager : MonoBehaviour
             }
 
 
-            GameStateManager.instance.Pause = true;
+            //GameStateManager.instance.Pause = true;
 
             FirebaseAnalytics.LogEvent("OpenChangeFood");
         }
@@ -230,7 +239,7 @@ public class ChangeFoodManager : MonoBehaviour
             GameManager.instance.CheckPortion();
             GameManager.instance.CheckDefTicket();
 
-            GameStateManager.instance.Pause = false;
+            //GameStateManager.instance.Pause = false;
         }
     }
 
@@ -381,17 +390,17 @@ public class ChangeFoodManager : MonoBehaviour
             changeJapaneseFoodList[7].Locked();
             changeDessertList[9].Locked();
 
-            changeFoodContentList[7].SetLevel(GameStateManager.instance.Food8Level, upgradeDataBase.GetMaxLevel(FoodType.Ribs));
+            changeFoodContentList[7].SetLevel(GameStateManager.instance.Food8Level, upgradeDataBase.GetMaxLevelFastFood(FoodType.Ribs));
             changeCandyList[9].SetLevel(GameStateManager.instance.Candy10Level, upgradeDataBase.GetMaxLevelCandy(CandyType.Chocolate));
             changeJapaneseFoodList[7].SetLevel(GameStateManager.instance.JapaneseFood8Level, upgradeDataBase.GetMaxLevelJapaneseFood(JapaneseFoodType.Ramen));
             changeDessertList[9].SetLevel(GameStateManager.instance.Dessert10Level, upgradeDataBase.GetMaxLevelDessert(DessertType.FruitSkewers));
 
-            if (playerDataBase.IslandNumber > 0 || playerDataBase.HamburgerMaxValue > 0)
+            if (playerDataBase.IslandNumber > 0 || playerDataBase.Candy1MaxValue > 0)
             {
                 changeCandyList[9].UnLock();
             }
 
-            if (playerDataBase.IslandNumber > 1 || playerDataBase.Candy1MaxValue > 0)
+            if (playerDataBase.IslandNumber > 1 || playerDataBase.JapaneseFood1MaxValue > 0)
             {
                 changeJapaneseFoodList[7].UnLock();
             }
@@ -417,13 +426,13 @@ public class ChangeFoodManager : MonoBehaviour
                 }
 
                 changeFoodContentList[(int)GameStateManager.instance.FoodType].Selected();
-                changeFoodContentList[0].SetLevel(GameStateManager.instance.Food1Level, upgradeDataBase.GetMaxLevel(FoodType.Food1));
-                changeFoodContentList[1].SetLevel(GameStateManager.instance.Food2Level, upgradeDataBase.GetMaxLevel(FoodType.Food2));
-                changeFoodContentList[2].SetLevel(GameStateManager.instance.Food3Level, upgradeDataBase.GetMaxLevel(FoodType.Food3));
-                changeFoodContentList[3].SetLevel(GameStateManager.instance.Food4Level, upgradeDataBase.GetMaxLevel(FoodType.Food4));
-                changeFoodContentList[4].SetLevel(GameStateManager.instance.Food5Level, upgradeDataBase.GetMaxLevel(FoodType.Food5));
-                changeFoodContentList[5].SetLevel(GameStateManager.instance.Food6Level, upgradeDataBase.GetMaxLevel(FoodType.Food6));
-                changeFoodContentList[6].SetLevel(GameStateManager.instance.Food7Level, upgradeDataBase.GetMaxLevel(FoodType.Food7));
+                changeFoodContentList[0].SetLevel(GameStateManager.instance.Food1Level, upgradeDataBase.GetMaxLevelFastFood(FoodType.Food1));
+                changeFoodContentList[1].SetLevel(GameStateManager.instance.Food2Level, upgradeDataBase.GetMaxLevelFastFood(FoodType.Food2));
+                changeFoodContentList[2].SetLevel(GameStateManager.instance.Food3Level, upgradeDataBase.GetMaxLevelFastFood(FoodType.Food3));
+                changeFoodContentList[3].SetLevel(GameStateManager.instance.Food4Level, upgradeDataBase.GetMaxLevelFastFood(FoodType.Food4));
+                changeFoodContentList[4].SetLevel(GameStateManager.instance.Food5Level, upgradeDataBase.GetMaxLevelFastFood(FoodType.Food5));
+                changeFoodContentList[5].SetLevel(GameStateManager.instance.Food6Level, upgradeDataBase.GetMaxLevelFastFood(FoodType.Food6));
+                changeFoodContentList[6].SetLevel(GameStateManager.instance.Food7Level, upgradeDataBase.GetMaxLevelFastFood(FoodType.Food7));
                 changeFoodContentList[7].gameObject.SetActive(false);
 
                 changeFoodContentList[0].UnLock();

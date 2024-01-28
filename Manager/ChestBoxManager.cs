@@ -160,7 +160,22 @@ public class ChestBoxManager : MonoBehaviour
             normalRewardText.text = MoneyUnitString.ToCurrencyString(50000);
 
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
-            epicRewardText.text = MoneyUnitString.ToCurrencyString(1000000);
+            epicRewardText.text = MoneyUnitString.ToCurrencyString(300000);
+
+            if (playerDataBase.Candy1MaxValue > 0)
+            {
+                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
+            }
+
+            if (playerDataBase.JapaneseFood1MaxValue > 0)
+            {
+                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(3000000) + "</size>";
+            }
+
+            if (playerDataBase.Dessert1MaxValue > 0)
+            {
+                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
+            }
 
         }
         else if (random > 41)
@@ -252,10 +267,33 @@ public class ChestBoxManager : MonoBehaviour
 
     public void SuccessWatchAd()
     {
+        GameStateManager.instance.ChestBoxCount += 1;
+        Success();
+
+        FirebaseAnalytics.LogEvent("OpenChestBox_Ad");
+
         switch (normalRewardType)
         {
             case RewardType.Gold:
-                PlayfabManager.instance.UpdateAddGold(1000000);
+                if (playerDataBase.Dessert1MaxValue > 0)
+                {
+                    PlayfabManager.instance.UpdateAddGold(5000000);
+                    return;
+                }
+
+                if (playerDataBase.JapaneseFood1MaxValue > 0)
+                {
+                    PlayfabManager.instance.UpdateAddGold(3000000);
+                    return;
+                }
+
+                if (playerDataBase.Candy1MaxValue > 0)
+                {
+                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    return;
+                }
+
+                PlayfabManager.instance.UpdateAddGold(300000);
                 break;
             case RewardType.Portion1:
                 PortionManager.instance.GetRandomPortion(10);
@@ -267,11 +305,6 @@ public class ChestBoxManager : MonoBehaviour
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
                 break;
         }
-
-        GameStateManager.instance.ChestBoxCount += 1;
-        Success();
-
-        FirebaseAnalytics.LogEvent("OpenChestBox_Ad");
     }
 
     public void ReceiveInfo()

@@ -1036,10 +1036,28 @@ public class ShopManager : MonoBehaviour
 
         shopContents[1].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddGold(1000000);
-
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
+
+        if (playerDataBase.Dessert1MaxValue > 0)
+        {
+            PlayfabManager.instance.UpdateAddGold(5000000);
+            return;
+        }
+
+        if (playerDataBase.JapaneseFood1MaxValue > 0)
+        {
+            PlayfabManager.instance.UpdateAddGold(3000000);
+            return;
+        }
+
+        if (playerDataBase.Candy1MaxValue > 0)
+        {
+            PlayfabManager.instance.UpdateAddGold(1000000);
+            return;
+        }
+
+        PlayfabManager.instance.UpdateAddGold(300000);
     }
 
     public void SuccessWatchAd_Portion()
@@ -2962,6 +2980,8 @@ public class ShopManager : MonoBehaviour
 
                 PlayfabManager.instance.GrantItemToUser("Animal", itemList);
 
+                FirebaseAnalytics.LogEvent("BuyAnimal");
+
                 switch (animalInfo.animalType)
                 {
                     case AnimalType.Colobus:
@@ -3027,6 +3047,8 @@ public class ShopManager : MonoBehaviour
                 itemList.Add(truckInfo.truckType.ToString());
 
                 PlayfabManager.instance.GrantItemToUser("Truck", itemList);
+
+                FirebaseAnalytics.LogEvent("BuyTruck");
 
                 switch (truckInfo.truckType)
                 {
@@ -3099,6 +3121,8 @@ public class ShopManager : MonoBehaviour
                 itemList.Add(characterInfo.characterType.ToString());
 
                 PlayfabManager.instance.GrantItemToUser("Character", itemList);
+
+                FirebaseAnalytics.LogEvent("BuyCharacter");
 
                 switch (characterInfo.characterType)
                 {
@@ -3201,6 +3225,8 @@ public class ShopManager : MonoBehaviour
                 itemList.Add(butterflyInfo.butterflyType.ToString());
 
                 PlayfabManager.instance.GrantItemToUser("Butterfly", itemList);
+
+                FirebaseAnalytics.LogEvent("BuyButterfly");
 
                 switch (butterflyInfo.butterflyType)
                 {
@@ -3327,6 +3353,8 @@ public class ShopManager : MonoBehaviour
                 itemList.Add(totemsInfo.totemsType.ToString());
 
                 PlayfabManager.instance.GrantItemToUser("Totems", itemList);
+
+                FirebaseAnalytics.LogEvent("BuyTotems");
 
                 switch (totemsInfo.totemsType)
                 {

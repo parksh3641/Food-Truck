@@ -26,7 +26,7 @@ public class NickNameManager : MonoBehaviour
     public string[] lines;
     string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
 
-    public NoticeManager noticeManager;
+    public NewsManager newsManager;
 
     public PlayerDataBase playerDataBase;
 
@@ -174,7 +174,7 @@ public class NickNameManager : MonoBehaviour
 
         if(playerDataBase.LockTutorial == 0)
         {
-            noticeManager.OpenNoticeView();
+            newsManager.OpenNews();
         }
 
         playerDataBase.ChangeNicknameCount += 1;

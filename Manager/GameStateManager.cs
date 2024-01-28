@@ -139,6 +139,7 @@ public class GameStateManager : MonoBehaviour
         public int bankruptcy = 0;
 
         public bool privacypolicy = false;
+        public bool gender = false;
         public bool pause = false;
     }
 
@@ -1179,6 +1180,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.privacypolicy = value;
+            SaveFile();
+        }
+    }
+
+    public bool Gender
+    {
+        get
+        {
+            return gameSettings.gender;
+        }
+        set
+        {
+            gameSettings.gender = value;
             SaveFile();
         }
     }

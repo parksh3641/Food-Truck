@@ -23,6 +23,7 @@ public class AdvancementManager : MonoBehaviour
 
     public GameObject[] checkMarks;
 
+    public Image[] needImg;
     public Sprite[] buttonImg;
 
     public Image advenceLevelUpButton;
@@ -83,21 +84,28 @@ public class AdvancementManager : MonoBehaviour
         for (int i = 0; i < checkMarks.Length; i ++)
         {
             checkMarks[i].gameObject.SetActive(false);
+            needImg[i].color = Color.red;
         }
 
         if(playerDataBase.Level >= nowNeed1)
         {
             checkMarks[0].gameObject.SetActive(true);
+
+            needImg[0].color = Color.green;
         }
 
         if (playerDataBase.GourmetLevel >= nowNeed2)
         {
             checkMarks[1].gameObject.SetActive(true);
+
+            needImg[1].color = Color.green;
         }
 
         if (playerDataBase.Proficiency >= nowNeed3)
         {
             checkMarks[2].gameObject.SetActive(true);
+
+            needImg[2].color = Color.green;
         }
 
         if(playerDataBase.Level >= nowNeed1 && playerDataBase.GourmetLevel >= nowNeed2 && playerDataBase.Proficiency >= nowNeed3)

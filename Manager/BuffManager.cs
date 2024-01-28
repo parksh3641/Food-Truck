@@ -194,7 +194,7 @@ public class BuffManager : MonoBehaviour
                 buff4Anim.StopAnim();
 
                 buff4 = true;
-                buff4Time = time;
+                buff4Time = time / 2;
 
                 buff4Obj.SetActive(true);
                 StartCoroutine(Buff4Coroution());

@@ -30,6 +30,12 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int eventNumber = 0;
     [SerializeField]
+    private int updateNumber = 0;
+    [SerializeField]
+    private int friendsNumber = 0;
+    [SerializeField]
+    private int reviewNumber = 0;
+    [SerializeField]
     private int testAccount = 0;
     [SerializeField]
     private int update = 0;
@@ -885,6 +891,42 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             eventNumber = value;
+        }
+    }
+
+    public int UpdateNumber
+    {
+        get
+        {
+            return updateNumber;
+        }
+        set
+        {
+            updateNumber = value;
+        }
+    }
+
+    public int FriendsNumber
+    {
+        get
+        {
+            return friendsNumber;
+        }
+        set
+        {
+            friendsNumber = value;
+        }
+    }
+
+    public int ReviewNumber
+    {
+        get
+        {
+            return reviewNumber;
+        }
+        set
+        {
+            reviewNumber = value;
         }
     }
 
@@ -4523,6 +4565,9 @@ public class PlayerDataBase : ScriptableObject
         dungeonKey3 = 0;
         dungeonKey4 = 0;
         eventNumber = 0;
+        updateNumber = 0;
+        friendsNumber = 0;
+        reviewNumber = 0;
         lockTutorial = 0;
         inGameTutorial = 0;
         firstReward = 0;

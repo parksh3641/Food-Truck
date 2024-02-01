@@ -24,6 +24,7 @@ public class SeasonManager : MonoBehaviour
     private bool isDelay = false;
 
     DateTime currentDate;
+    DateTime serverDate;
     DateTime season1Date = new DateTime(2024, 1, 31, 23, 59, 59);
 
     DateTime season2Date_Start = new DateTime(2024, 2, 2);
@@ -87,8 +88,11 @@ public class SeasonManager : MonoBehaviour
 
     private void CheckSeason(DateTime time)
     {
-        if(DateTime.Compare(currentDate, time) == 0 || DateTime.Compare(currentDate.AddDays(1), time) == 0 
-            || DateTime.Compare(currentDate.AddDays(-1), time) == 0)
+        currentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+        serverDate = new DateTime(time.Year, time.Month, time.Day);
+
+        if (DateTime.Compare(currentDate, serverDate) == 0 || DateTime.Compare(currentDate.AddDays(1), serverDate) == 0 
+            || DateTime.Compare(currentDate.AddDays(-1), serverDate) == 0)
         {
             Debug.Log("서버와 날짜가 같습니다.");
 
@@ -600,6 +604,8 @@ public class SeasonManager : MonoBehaviour
         seasonText.localizationName = "Season";
         seasonText.plusText = (season + 1).ToString();
         seasonText.ReLoad();
+
+        Debug.Log("현재 시즌 : " + season);
 
         return season;
     }

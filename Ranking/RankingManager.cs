@@ -48,6 +48,8 @@ public class RankingManager : MonoBehaviour
 
     private string recordStr = "";
 
+    public string country = "";
+
     [Space]
     List<RankContent> rankContentList = new List<RankContent>();
 
@@ -251,6 +253,8 @@ public class RankingManager : MonoBehaviour
                         rankContentList[i].gameObject.SetActive(false);
                     }
 
+                    CheckCountry(country);
+
                     nextSeason.SetActive(true);
                 }
 
@@ -331,6 +335,8 @@ public class RankingManager : MonoBehaviour
                 isMine = true;
                 isCheck = true;
 
+                country = location;
+
                 myRankContent.InitState(index, location, nickName, recordStr, true);
             }
             else if(player.DisplayName != null)
@@ -339,6 +345,8 @@ public class RankingManager : MonoBehaviour
                 {
                     isMine = true;
                     isCheck = true;
+
+                    country = location;
 
                     myRankContent.InitState(index, location, nickName, recordStr, true);
                 }

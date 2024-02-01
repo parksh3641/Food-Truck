@@ -1283,6 +1283,8 @@ public class GameManager : MonoBehaviour
 
         GameStateManager.instance.GameType = GameType.Story + number;
 
+        rankingNoticeButton.SetActive(false);
+
         if (GameStateManager.instance.GameType == GameType.Story)
         {
             switch (GameStateManager.instance.IslandType)
@@ -1364,7 +1366,6 @@ public class GameManager : MonoBehaviour
         mainUI.SetActive(false);
         inGameUI.SetActive(true);
         languageUI.SetActive(false);
-        rankingNoticeButton.SetActive(false);
 
         season = SeasonManager.instance.CheckSeason();
 
@@ -5455,8 +5456,10 @@ public class GameManager : MonoBehaviour
 
         genderButton[0].sprite = buttonImg[1];
         genderButton[1].sprite = buttonImg[0];
+        genderButton[2].sprite = buttonImg[0];
+        genderButton[3].sprite = buttonImg[0];
 
-        genderButton[2].sprite = buttonImg[1];
+        genderButton[4].sprite = buttonImg[1];
     }
 
     public void Gender_Female()
@@ -5465,8 +5468,34 @@ public class GameManager : MonoBehaviour
 
         genderButton[0].sprite = buttonImg[0];
         genderButton[1].sprite = buttonImg[1];
+        genderButton[2].sprite = buttonImg[0];
+        genderButton[3].sprite = buttonImg[0];
 
+        genderButton[4].sprite = buttonImg[1];
+    }
+
+    public void Gender_DontKnow()
+    {
+        gender = 3;
+
+        genderButton[0].sprite = buttonImg[0];
+        genderButton[1].sprite = buttonImg[0];
         genderButton[2].sprite = buttonImg[1];
+        genderButton[3].sprite = buttonImg[0];
+
+        genderButton[4].sprite = buttonImg[1];
+    }
+
+    public void Gender_Other()
+    {
+        gender = 4;
+
+        genderButton[0].sprite = buttonImg[0];
+        genderButton[1].sprite = buttonImg[0];
+        genderButton[2].sprite = buttonImg[0];
+        genderButton[3].sprite = buttonImg[1];
+
+        genderButton[4].sprite = buttonImg[1];
     }
 
     public void Gender_Clear()
@@ -5477,15 +5506,21 @@ public class GameManager : MonoBehaviour
 
         genderView.SetActive(false);
 
-        if(gender == 1)
+        switch(gender)
         {
-            FirebaseAnalytics.LogEvent("Sex_Male");
+            case 0:
+                FirebaseAnalytics.LogEvent("Sex_Male");
+                break;
+            case 1:
+                FirebaseAnalytics.LogEvent("Sex_Female");
+                break;
+            case 2:
+                FirebaseAnalytics.LogEvent("Sex_DontKnow");
+                break;
+            case 3:
+                FirebaseAnalytics.LogEvent("Sex_Other");
+                break;
         }
-        else
-        {
-            FirebaseAnalytics.LogEvent("Sex_Female");
-        }
-
     }
 
     public void Decline()

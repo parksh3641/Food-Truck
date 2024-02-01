@@ -318,9 +318,9 @@ public class OfflineManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleDate", int.Parse("1" + playerDataBase.CastleDate));
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));
 
+            PortionManager.instance.GetExp(saveExp);
             PlayfabManager.instance.UpdateAddGold(saveCoin);
 
-            PortionManager.instance.GetExp(saveExp);
 
             StopAllCoroutines();
             StartCoroutine(TimerCoroution());
@@ -430,11 +430,8 @@ public class OfflineManager : MonoBehaviour
         int quickCoin = addCoin * 12;
         int quickExp = addExp * 12;
 
+        PortionManager.instance.GetExp(quickExp);
         PlayfabManager.instance.UpdateAddGold(quickCoin);
-
-        playerDataBase.Exp += quickExp;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
-        levelManager.Initialize();
 
         moneyAnimation.PlusMoney(10);
 

@@ -19,7 +19,7 @@ public class ShopManager : MonoBehaviour
 
     public GameObject martAlarm;
     public GameObject martIngameAlarm;
-    public GameObject packageAlarm;
+    public GameObject[] packageAlarm;
 
     public GameObject goldx2;
     public GameObject removeAds;
@@ -54,6 +54,9 @@ public class ShopManager : MonoBehaviour
     [Title("Content")]
     public ShopContent[] shopContents;
     public PackageContent[] packageContents;
+
+    public GameObject supportPackage;
+    public PackageContent supportPackageContent;
 
     [Space]
     public GameObject mainAnimal;
@@ -123,10 +126,13 @@ public class ShopManager : MonoBehaviour
     private int totemsIndex = 0;
     private int flowerIndex = 0;
 
+    private int needCrystal = 999;
+
     bool hold = false;
     bool buy = false;
     bool isDelay = false;
     bool isTimer = false;
+    bool isSupportDelay = false;
 
     private int price_Gold = 0;
     private int price_Crystal = 0;
@@ -169,13 +175,18 @@ public class ShopManager : MonoBehaviour
         speicalShopView.SetActive(false);
         changeMoneyView.SetActive(false);
 
+        supportPackage.SetActive(false);
+
         shopAlarm.SetActive(true);
         shopIngameAlarm.SetActive(true);
 
         martAlarm.SetActive(true);
         martIngameAlarm.SetActive(true);
 
-        packageAlarm.SetActive(true);
+        for(int i = 0; i < packageAlarm.Length; i ++)
+        {
+            packageAlarm[i].SetActive(true);
+        }
 
         for (int i = 0; i < shopArray.Length; i++)
         {
@@ -422,7 +433,7 @@ public class ShopManager : MonoBehaviour
             case 1:
                 packageThanks.SetActive(false);
 
-                packageAlarm.SetActive(false);
+                packageAlarm[0].SetActive(false);
 
                 packageContents[0].Initialize(PackageType.Package5, this);
                 packageContents[1].Initialize(PackageType.Package1, this);
@@ -508,6 +519,7 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 2:
+                packageAlarm[3].SetActive(false);
 
                 shopContents[8].Initialize(ItemType.PortionSet1, BuyType.Rm, this);
                 shopContents[9].Initialize(ItemType.PortionSet2, BuyType.Rm, this);
@@ -523,6 +535,8 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 3:
+                packageAlarm[1].SetActive(false);
+
                 shopContents[3].Initialize(ItemType.GoldShop1, BuyType.Crystal, this);
                 shopContents[4].Initialize(ItemType.GoldShop2, BuyType.Crystal, this);
                 shopContents[5].Initialize(ItemType.GoldShop3, BuyType.Crystal, this);
@@ -534,12 +548,15 @@ public class ShopManager : MonoBehaviour
                 shopContents[18].Initialize(ItemType.CrystalShop6, BuyType.Rm, this);
                 break;
             case 4:
+                packageAlarm[2].SetActive(false);
+
                 shopContents[19].Initialize(ItemType.Portion1, BuyType.RankPoint, this);
                 shopContents[20].Initialize(ItemType.Portion2, BuyType.RankPoint, this);
                 shopContents[21].Initialize(ItemType.Portion3, BuyType.RankPoint, this);
                 shopContents[22].Initialize(ItemType.Portion4, BuyType.RankPoint, this);
                 shopContents[23].Initialize(ItemType.Portion5, BuyType.RankPoint, this);
                 shopContents[36].Initialize(ItemType.BuffTicket, BuyType.RankPoint, this);
+                shopContents[36].gameObject.SetActive(false);
                 shopContents[37].Initialize(ItemType.SkillTicket, BuyType.RankPoint, this);
                 shopContents[38].Initialize(ItemType.RepairTicket, BuyType.RankPoint, this);
                 shopContents[39].Initialize(ItemType.RepairTicket10, BuyType.RankPoint, this);
@@ -662,9 +679,9 @@ public class ShopManager : MonoBehaviour
             case ItemType.CrystalShop6:
                 break;
             case ItemType.Portion1:
-                if (playerDataBase.RankPoint >= 20)
+                if (playerDataBase.RankPoint >= 30)
                 {
-                    playerDataBase.RankPoint -= 20;
+                    playerDataBase.RankPoint -= 30;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -683,9 +700,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion2:
-                if (playerDataBase.RankPoint >= 40)
+                if (playerDataBase.RankPoint >= 50)
                 {
-                    playerDataBase.RankPoint -= 40;
+                    playerDataBase.RankPoint -= 50;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -704,9 +721,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion3:
-                if (playerDataBase.RankPoint >= 40)
+                if (playerDataBase.RankPoint >= 50)
                 {
-                    playerDataBase.RankPoint -= 40;
+                    playerDataBase.RankPoint -= 50;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -725,9 +742,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion4:
-                if (playerDataBase.RankPoint >= 20)
+                if (playerDataBase.RankPoint >= 40)
                 {
-                    playerDataBase.RankPoint -= 20;
+                    playerDataBase.RankPoint -= 40;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -746,9 +763,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion5:
-                if (playerDataBase.RankPoint >= 50)
+                if (playerDataBase.RankPoint >= 80)
                 {
-                    playerDataBase.RankPoint -= 50;
+                    playerDataBase.RankPoint -= 80;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -818,11 +835,11 @@ public class ShopManager : MonoBehaviour
                 GoogleAdsManager.instance.admobReward_Portion.ShowAd(8);
                 break;
             case ItemType.AutoUpgrade:
-                if (playerDataBase.Crystal >= 4500)
+                if (playerDataBase.Crystal >= 6000)
                 {
                     if (playerDataBase.AutoUpgrade) return;
 
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 4500);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 6000);
 
                     PlayfabManager.instance.PurchaseAutoUpgrade();
 
@@ -838,11 +855,11 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.AutoPresent:
-                if (playerDataBase.Crystal >= 1500)
+                if (playerDataBase.Crystal >= 3000)
                 {
                     if (playerDataBase.AutoPresent) return;
 
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1500);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 3000);
 
                     PlayfabManager.instance.PurchaseAutoPresent();
 
@@ -858,9 +875,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.BuffTicket:
-                if (playerDataBase.RankPoint >= 300)
+                if (playerDataBase.RankPoint >= 500)
                 {
-                    playerDataBase.RankPoint -= 300;
+                    playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -879,9 +896,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.SkillTicket:
-                if (playerDataBase.RankPoint >= 150)
+                if (playerDataBase.RankPoint >= 200)
                 {
-                    playerDataBase.RankPoint -= 150;
+                    playerDataBase.RankPoint -= 200;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -1590,7 +1607,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 500)
+            if (price_Crystal > needCrystal)
             {
                 crystalButton.SetActive(true);
             }
@@ -1790,7 +1807,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 500)
+            if (price_Crystal > needCrystal)
             {
                 crystalButton.SetActive(true);
             }
@@ -1961,7 +1978,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 500)
+            if (price_Crystal > needCrystal)
             {
                 crystalButton.SetActive(true);
             }
@@ -2344,7 +2361,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 500)
+            if (price_Crystal > needCrystal)
             {
                 crystalButton.SetActive(true);
             }
@@ -2551,7 +2568,7 @@ public class ShopManager : MonoBehaviour
 
             crystalButton.SetActive(false);
 
-            if (price_Crystal > 500)
+            if (price_Crystal > needCrystal)
             {
                 crystalButton.SetActive(true);
             }
@@ -3755,6 +3772,25 @@ public class ShopManager : MonoBehaviour
 
                 PlayfabManager.instance.PurchaseAutoPresent();
                 break;
+            case PackageType.Package7:
+                playerDataBase.Package7 += 1;
+                Invoke("PackageDelay7", 0.5f);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package7", playerDataBase.Package7);
+
+                PlayfabManager.instance.UpdateAddGold(3000000);
+
+                yield return waitForSeconds;
+
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 600);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetAllPortion(10);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetBuffTickets(10);
+                break;
         }
 
         if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
@@ -3829,6 +3865,11 @@ public class ShopManager : MonoBehaviour
         packageContents[5].gameObject.SetActive(false);
     }
 
+    void PackageDelay7()
+    {
+        supportPackage.SetActive(false);
+    }
+
     public void Failed()
     {
         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -3852,5 +3893,29 @@ public class ShopManager : MonoBehaviour
                 shopButterflyArray[butterflyIndex].GetComponent<Animator>().SetBool("YummyTime", true);
                 break;
         }
+    }
+
+    public void OpenSupportPackage()
+    {
+        supportPackage.SetActive(true);
+
+        supportPackageContent.Initialize(PackageType.Package7, this);
+
+        isSupportDelay = true;
+        Invoke("SupportDelay", 3.0f);
+
+        Debug.LogError("보급 패키지 열림");
+    }
+
+    void SupportDelay()
+    {
+        isSupportDelay = false;
+    }
+
+    public void CloseSupportPackage()
+    {
+        if (isSupportDelay) return;
+
+        supportPackage.SetActive(false);
     }
 }

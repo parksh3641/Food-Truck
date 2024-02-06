@@ -8,6 +8,8 @@ public class PlayerDataBase : ScriptableObject
 {
     [Title("Player")]
     [SerializeField]
+    private long saveCoin = 0;
+    [SerializeField]
     private long coin = 0;
     [SerializeField]
     private long coinA = 0;
@@ -686,6 +688,8 @@ public class PlayerDataBase : ScriptableObject
     private bool package5 = false;
     [SerializeField]
     private bool package6 = false;
+    [SerializeField]
+    private int package7 = 0;
 
 
     [Space]
@@ -725,6 +729,19 @@ public class PlayerDataBase : ScriptableObject
     private bool autoUpgrade = false;
     [SerializeField]
     private bool autoPresent = false;
+
+
+    public long SaveCoin
+    {
+        get
+        {
+            return saveCoin;
+        }
+        set
+        {
+            saveCoin = value;
+        }
+    }
 
     public long Coin
     {
@@ -4337,6 +4354,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Package7
+    {
+        get
+        {
+            return package7;
+        }
+        set
+        {
+            package7 = value;
+        }
+    }
+
     public string AttendanceDay
     {
         get
@@ -4552,7 +4581,7 @@ public class PlayerDataBase : ScriptableObject
         totalLevel_9 = 0;
         totalLevel_10 = 0;
 
-
+        saveCoin = 0;
         coin = 0;
         coinA = 0;
         coinB = 0;
@@ -4862,6 +4891,7 @@ public class PlayerDataBase : ScriptableObject
         package4 = false;
         package5 = false;
         package6 = false;
+        package7 = 0;
 
         attendanceDay = "";
         attendanceCount = 0;

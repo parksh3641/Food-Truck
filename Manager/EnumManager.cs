@@ -228,7 +228,8 @@ public enum PackageType
     Package3,
     Package4,
     Package5,
-    Package6
+    Package6,
+    Package7
 }
 
 public enum BuyType

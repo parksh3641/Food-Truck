@@ -21,7 +21,8 @@ public class RankEventManager : MonoBehaviour
     public TreasureManager treasureManager;
 
     private int totalLevel = 0;
-    private int level = 20;
+    private int level = 10;
+    private int reward = 2;
 
     PlayerDataBase playerDataBase;
 
@@ -122,7 +123,7 @@ public class RankEventManager : MonoBehaviour
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.TreasureBox, 3);
+            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.TreasureBox, reward);
         }
     }
 
@@ -135,7 +136,7 @@ public class RankEventManager : MonoBehaviour
             return;
         }
 
-        treasureManager.OpenTreasure(3);
+        treasureManager.OpenTreasure(reward);
 
         playerDataBase.RankEventCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankEventCount", playerDataBase.RankEventCount);

@@ -24,6 +24,8 @@ public class LevelManager : MonoBehaviour
     private int nowExp = 0;
     private int nextExp = 0;
 
+    private int maxExp = 0;
+
     public AdvancementManager advancementManager;
 
     PlayerDataBase playerDataBase;
@@ -37,6 +39,11 @@ public class LevelManager : MonoBehaviour
         if (animalDataBase == null) animalDataBase = Resources.Load("AnimalDataBase") as AnimalDataBase;
 
         levelDataBase.Initialize();
+
+        for (int i = 0; i < levelDataBase.levelInfoList.Count; i++)
+        {
+            maxExp += levelDataBase.levelInfoList[i].needExp;
+        }
 
         alarm.SetActive(true);
 
@@ -63,6 +70,21 @@ public class LevelManager : MonoBehaviour
         else
         {
             levelView.SetActive(false);
+        }
+    }
+
+    public bool CheckMaxLevel()
+    {
+        if(playerDataBase.Exp > maxExp)
+        {
+            playerDataBase.Exp = maxExp;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
+
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

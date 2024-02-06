@@ -173,39 +173,39 @@ public class AttendanceManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                PlayfabManager.instance.UpdateAddGold(100000);
                 PortionManager.instance.GetPortion(0, 3);
+                PlayfabManager.instance.UpdateAddGold(100000);
 
                 break;
             case 1:
-                PlayfabManager.instance.UpdateAddGold(100000);
                 PortionManager.instance.GetPortion(1, 3);
+                PlayfabManager.instance.UpdateAddGold(100000);
 
                 break;
             case 2:
-                PlayfabManager.instance.UpdateAddGold(100000);
                 PortionManager.instance.GetPortion(2, 3);
+                PlayfabManager.instance.UpdateAddGold(100000);
 
                 break;
             case 3:
-                PlayfabManager.instance.UpdateAddGold(250000);
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
+                PlayfabManager.instance.UpdateAddGold(250000);
 
                 break;
             case 4:
-                PlayfabManager.instance.UpdateAddGold(100000);
                 PortionManager.instance.GetPortion(3, 3);
+                PlayfabManager.instance.UpdateAddGold(100000);
 
                 break;
             case 5:
-                PlayfabManager.instance.UpdateAddGold(100000);
                 PortionManager.instance.GetPortion(4, 3);
+                PlayfabManager.instance.UpdateAddGold(100000);
 
                 break;
             case 6:
-                PlayfabManager.instance.UpdateAddGold(500000);
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
                 PortionManager.instance.GetDefTickets(3);
+                PlayfabManager.instance.UpdateAddGold(500000);
 
                 break;
         }

@@ -68,10 +68,28 @@ public class AdvancementManager : MonoBehaviour
         chefType = ChefType.Cook1_1 + playerDataBase.Advancement;
         nextChefType = ChefType.Cook1_1 + playerDataBase.Advancement + 1;
 
-        nowAdvencementText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 5)) + " <color=#FFC800>" +
-            chefType.ToString().Substring(6, 1) + "</color>";
-        nextAdvencementText.text = LocalizationManager.instance.GetString(nextChefType.ToString().Substring(0, 5)) + " <color=#FFC800>" +
-            nextChefType.ToString().Substring(6, 1) + "</color>";
+        if(chefType.ToString().Length == 7)
+        {
+            nowAdvencementText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 5)) + " <color=#FFC800>" +
+    chefType.ToString().Substring(6, 1) + "</color>";
+        }
+        else
+        {
+            nowAdvencementText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 6)) + " <color=#FFC800>" +
+    chefType.ToString().Substring(7, 1) + "</color>";
+        }
+
+        if(nextChefType.ToString().Length == 7)
+        {
+            nextAdvencementText.text = LocalizationManager.instance.GetString(nextChefType.ToString().Substring(0, 5)) + " <color=#FFC800>" +
+    nextChefType.ToString().Substring(6, 1) + "</color>";
+        }
+        else
+        {
+            nextAdvencementText.text = LocalizationManager.instance.GetString(nextChefType.ToString().Substring(0, 6)) + " <color=#FFC800>" +
+    nextChefType.ToString().Substring(7, 1) + "</color>";
+        }
+
 
         nowNeed1 = (playerDataBase.Advancement + 1) * need1;
         nowNeed2 = (playerDataBase.Advancement + 1) * need2;

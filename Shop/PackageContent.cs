@@ -50,7 +50,10 @@ public class PackageContent : MonoBehaviour
 
         titleText.text = LocalizationManager.instance.GetString(type.ToString());
 
-        timerText.text = "";
+        if(timerText != null)
+        {
+            timerText.text = "";
+        }
 
         //for (int i = 0; i < receiveContents.Length; i++)
         //{
@@ -95,20 +98,28 @@ public class PackageContent : MonoBehaviour
                 receiveContents[2].Initialize(RewardType.AutoUpgrade, -1);
                 receiveContents[3].Initialize(RewardType.AutoPresent, -1);
                 break;
+            case PackageType.Package7:
+                receiveContents[0].Initialize(RewardType.Gold, 3000000);
+                receiveContents[1].Initialize(RewardType.Crystal, 600);
+                receiveContents[2].Initialize(RewardType.PortionSet, 10);
+                receiveContents[3].Initialize(RewardType.BuffTicket, 10);
+                break;
         }
 
-        for (int i = 0; i < buyRmObj.Length; i++)
+        if (buyRmObj.Length > 0)
         {
-            buyRmObj[i].SetActive(false);
+            for (int i = 0; i < buyRmObj.Length; i++)
+            {
+                buyRmObj[i].SetActive(false);
+            }
+
+            buyRmObj[(int)type].SetActive(true);
+            beforePriceText[(int)type].localizationName = type.ToString() + "_Before";
+            nowPriceText[(int)type].localizationName = type.ToString();
+
+            beforePriceText[(int)type].ReLoad();
+            nowPriceText[(int)type].ReLoad();
         }
-
-        buyRmObj[(int)type].SetActive(true);
-
-        beforePriceText[(int)type].localizationName = type.ToString() +"_Before";
-        nowPriceText[(int)type].localizationName = type.ToString();
-
-        beforePriceText[(int)type].ReLoad();
-        nowPriceText[(int)type].ReLoad();
 
         bestText.text = LocalizationManager.instance.GetString(type + "_Info");
     }

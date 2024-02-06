@@ -131,6 +131,8 @@ public class SeasonManager : MonoBehaviour
     {
         seasonRewardView.SetActive(true);
 
+        SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
+
         reward = number;
 
         receiveContents[0].gameObject.SetActive(true);
@@ -605,7 +607,7 @@ public class SeasonManager : MonoBehaviour
         seasonText.plusText = (season + 1).ToString();
         seasonText.ReLoad();
 
-        Debug.Log("ÇöÀç ½ÃÁð : " + season);
+        //Debug.Log("ÇöÀç ½ÃÁð : " + season);
 
         return season;
     }

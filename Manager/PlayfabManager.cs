@@ -52,6 +52,10 @@ public class PlayfabManager : MonoBehaviour
     private int getGoldA = 0;
     private int getGoldB = 0;
 
+    private int saveGold = 0;
+
+    private bool saveDelay = false;
+
     public NickNameManager nickNameManager;
     public MoneyAnimation moneyAnimation;
     public MoneyAnimation moneyAnimation2;
@@ -67,6 +71,8 @@ public class PlayfabManager : MonoBehaviour
     private IAppleAuthManager _appleAuthManager;
 
 #endif
+
+    WaitForSeconds waitForSeconds = new WaitForSeconds(2f);
 
     PlayerDataBase playerDataBase;
 
@@ -211,7 +217,7 @@ public class PlayfabManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         if (error) Debug.LogError("<color=red>" + message + "</color>");
-        else Debug.Log(message);
+        //else Debug.Log(message);
 #endif
     }
     private void DisplayPlayfabError(PlayFabError error)
@@ -1953,6 +1959,9 @@ public class PlayfabManager : MonoBehaviour
                        case "SpCoupon13":
                            playerDataBase.SpCoupon13 = statistics.Value;
                            break;
+                       case "Package7":
+                           playerDataBase.Package7 = statistics.Value;
+                           break;
                        case "UpgradeCount":
                            playerDataBase.UpgradeCount = statistics.Value;
                            break;
@@ -2164,9 +2173,51 @@ public class PlayfabManager : MonoBehaviour
         }
     }
 
+    public void UpdateSellPriceGold(int number)
+    {
+        playerDataBase.SaveCoin += number;
+        saveGold += number;
+
+        if(!saveDelay)
+        {
+            saveDelay = true;
+            StartCoroutine(SaveGoldCoroution());
+        }
+
+        GameManager.instance.RenewalVC();
+    }
+
+    IEnumerator SaveGoldCoroution()
+    {
+        yield return waitForSeconds;
+
+        playerDataBase.SaveCoin = 0;
+        GameManager.instance.RenewalVC();
+
+        if (saveGold > 0)
+        {
+            UpdateAddGold(saveGold);
+
+            //Debug.LogError(saveGold + "만큼 골드 증가");
+        }
+        else
+        {
+            UpdateSubtractGold(-saveGold);
+
+            //Debug.LogError(saveGold + "만큼 골드 감소");
+        }
+
+        saveGold = 0;
+        saveDelay = false;
+    }
+
+
     public void UpdateAddGold(int number)
     {
-        moneyAnimation.PlusMoney(number);
+        if(!saveDelay)
+        {
+            moneyAnimation.PlusMoney(number);
+        }
 
         coin = playerDataBase.Coin;
         coinA = playerDataBase.CoinA;
@@ -2295,12 +2346,10 @@ public class PlayfabManager : MonoBehaviour
                 {
                     case MoneyType.CoinA:
                         playerDataBase.CoinA += number;
-    
                         break;
                     case MoneyType.Crystal:
                         playerDataBase.Crystal += number;
                         moneyAnimation2.PlusMoney(number);
-
                         break;
                     case MoneyType.CoinB:
                         playerDataBase.CoinB += number;

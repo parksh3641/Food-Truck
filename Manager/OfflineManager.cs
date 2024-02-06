@@ -171,8 +171,8 @@ public class OfflineManager : MonoBehaviour
         castleLevelText.text = LocalizationManager.instance.GetString("CastleLevel") + " : " + (playerDataBase.CastleLevel + 1) + " / " + (playerDataBase.Level + 1);
 
         addCrystal = (playerDataBase.CastleLevel + 1) * 5;
-        addCoin = 50000 + playerDataBase.CastleLevel * 5000;
-        addExp = 500 + playerDataBase.CastleLevel * 50;
+        addCoin = 100000 + playerDataBase.CastleLevel * 5000;
+        addExp = 1000 + playerDataBase.CastleLevel * 50;
 
         addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.005f));
         addExp += (int)(addExp * (playerDataBase.Treasure5 * 0.005f));
@@ -432,8 +432,6 @@ public class OfflineManager : MonoBehaviour
 
         PortionManager.instance.GetExp(quickExp);
         PlayfabManager.instance.UpdateAddGold(quickCoin);
-
-        moneyAnimation.PlusMoney(10);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);

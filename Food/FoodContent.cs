@@ -7,9 +7,9 @@ public class FoodContent : MonoBehaviour
     public float size = 0f;
     public float saveSize = 0f;
 
-    public float posX = 0;
-    public float posY = 0;
-    public float posZ = 0;
+    private float posX = 0;
+    private float posY = 0;
+    private float posZ = 0;
 
     private float sizeUp = 1.5f;
 
@@ -35,11 +35,13 @@ public class FoodContent : MonoBehaviour
         if(saveSize == 0)
         {
             saveSize = transform.localScale.x;
-            size = saveSize * 0.15f;
+            size = saveSize * 0.3f;
 
             posX = saveSize;
             posY = saveSize;
             posZ = saveSize;
+
+            transform.localScale = new Vector3(saveSize, saveSize, saveSize);
         }
     }
 
@@ -52,7 +54,7 @@ public class FoodContent : MonoBehaviour
         if (saveSize == 0)
         {
             saveSize = transform.localScale.x;
-            size = saveSize * 0.05f;
+            size = saveSize * 0.3f;
 
             posX = saveSize;
             posY = saveSize;

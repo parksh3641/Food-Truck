@@ -112,6 +112,14 @@ public class RecoverManager : MonoBehaviour
 
     public void FoodInitialize(FoodType type, int level)
     {
+        need = 2;
+        need += ((maxLevel - 30) / 5);
+
+        if (playerDataBase.RecoverTicket >= need)
+        {
+            return;
+        }
+
         OpenRecoverView();
 
         index = 0;
@@ -184,9 +192,8 @@ public class RecoverManager : MonoBehaviour
                 break;
         }
 
-        need = 3;
-
-        need += ((maxLevel - 25) / 5);
+        need = 2;
+        need += ((maxLevel - 30) / 5);
 
         afterLevelText.text = "Lv. " + ((int)(maxLevel * 0.5f)).ToString();
         needText.text = need.ToString();

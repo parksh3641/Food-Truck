@@ -209,7 +209,15 @@ public class GameManager : MonoBehaviour
     private float portion3Time = 0;
     private float portion4Plus = 0;
     private float portion5Time = 0;
-    private float portion6Time = 30;
+    private float portion6Time = 0;
+
+    private int portion1Value = 40;
+    private int portion2Value = 20;
+    private int portion3Value = 3;
+    private int portion4Value = 40;
+    private int portion5Value = 10;
+    private int portion6Value = 0;
+
 
     public int level = 0;
     public int nextLevel = 0;
@@ -217,12 +225,19 @@ public class GameManager : MonoBehaviour
     private int recoverLevel = 0;
     private int playTime = 0;
 
+    private int supportPackageCount = 0;
+    private int supportPackageMaxCount = 999;
+
     public bool isDelay_Camera = false;
     public bool isUpgradeDelay = false;
     //public bool isSellDelay = false;
     public bool isDef = false;
 
+    private bool isExp = false;
+
     private bool feverMode = false;
+
+    private int serverCount = 0;
 
     private int nowExp = 0;
     private int nowUpgradeCount = 0;
@@ -279,6 +294,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem[] yummyTime2Particle;
     public ParticleSystem speicalFoodParticle;
 
+    public ShopManager shopManager;
     public TutorialManager tutorialManager;
     public LockManager lockManager;
     public QuestManager questManager;
@@ -301,10 +317,13 @@ public class GameManager : MonoBehaviour
     ImageDataBase imageDataBase;
     LevelDataBase levelDataBase;
 
-    WaitForSeconds waitForSeconds = new WaitForSeconds(3.0f);
-    WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
-    WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.5f);
-    WaitForSeconds waitForSeconds4 = new WaitForSeconds(0.5f);
+    WaitForSeconds serverSeconds = new WaitForSeconds(2.0f);
+    WaitForSeconds timerSeconds = new WaitForSeconds(1.0f);
+    WaitForSeconds firstSeconds = new WaitForSeconds(0.5f);
+    WaitForSeconds upgradeSecond;
+    WaitForSeconds buffUpgradeSecond = new WaitForSeconds(0.5f);
+
+    private float delay = 0.2f;
 
     DateTime currentDate = DateTime.Now;
     DateTime decemberStart;
@@ -408,6 +427,8 @@ public class GameManager : MonoBehaviour
 
         decemberStart = new DateTime(currentDate.Year, 12, 1);
         decemberEnd = new DateTime(currentDate.Year, 1, 31);
+
+        upgradeSecond = new WaitForSeconds(delay);
     }
 
     private void OnApplicationPause(bool pause)
@@ -523,6 +544,8 @@ public class GameManager : MonoBehaviour
 
         feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  0%";
 
+        isExp = levelManager.CheckMaxLevel();
+
         nowExp = playerDataBase.Exp;
         nowUpgradeCount = playerDataBase.UpgradeCount;
         nowSellCount = playerDataBase.SellCount;
@@ -602,7 +625,7 @@ public class GameManager : MonoBehaviour
         playTime = 0;
         StartCoroutine(PlayTimeCoroution());
 
-        StartCoroutine(DelayCoroution());
+        StartCoroutine(ServerDelayCoroution());
 
         if(playerDataBase.Update == 1)
         {
@@ -1173,29 +1196,29 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FirstDelay()
     {
-        yield return waitForSeconds3;
+        yield return firstSeconds;
 
         PortionManager.instance.GetAllPortion(3);
 
-        yield return waitForSeconds3;
+        yield return firstSeconds;
 
         PortionManager.instance.GetPortion(4,3);
 
         CheckPortion();
 
-        yield return waitForSeconds3;
+        yield return firstSeconds;
 
         PortionManager.instance.GetBuffTickets(1);
 
-        yield return waitForSeconds3;
+        yield return firstSeconds;
 
         PortionManager.instance.GetSkillTickets(1);
 
-        yield return waitForSeconds3;
+        yield return firstSeconds;
 
         PortionManager.instance.GetRecoverTickets(10);
 
-        yield return waitForSeconds3;
+        yield return firstSeconds;
 
         playerDataBase.FirstDate = "1" + DateTime.Now.ToString("MMddHHmm");
         playerDataBase.FirstServerDate = "1" + DateTime.Now.AddDays(3).ToString("MMddHHmm");
@@ -1215,7 +1238,16 @@ public class GameManager : MonoBehaviour
             playTime = 0;
             playerDataBase.PlayTime += 1;
             GameStateManager.instance.PlayTime += 1;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("PlayTime", playerDataBase.PlayTime);
+
+            if(serverCount == 0)
+            {
+                serverCount += 1;
+            }
+            else
+            {
+                serverCount = 0;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("PlayTime", playerDataBase.PlayTime);
+            }
 
             Debug.LogError("1ºÐ Áö³²");
         }
@@ -1224,7 +1256,7 @@ public class GameManager : MonoBehaviour
             playTime += 1;
         }
 
-        yield return waitForSeconds2;
+        yield return timerSeconds;
         StartCoroutine(PlayTimeCoroution());
     }
 
@@ -1265,7 +1297,7 @@ public class GameManager : MonoBehaviour
 
     public void RenewalVC()
     {
-        playerDataBase.Coin = playerDataBase.CoinA + (playerDataBase.CoinB * 100000000);
+        playerDataBase.Coin = playerDataBase.CoinA + (playerDataBase.CoinB * 100000000) + playerDataBase.SaveCoin;
 
         goldText.text = MoneyUnitString.ToCurrencyString(playerDataBase.Coin);
         crystalText.text = MoneyUnitString.ToCurrencyString(playerDataBase.Crystal);
@@ -1486,22 +1518,22 @@ public class GameManager : MonoBehaviour
 
         if (portion1)
         {
-            needPlus += 30;
+            needPlus += portion1Value;
         }
 
         if (portion2)
         {
-            sellPricePlus += 10;
+            sellPricePlus += portion2Value;
         }
 
         if (portion3)
         {
-            successPlus += 1;
+            successPlus += portion3Value;
         }
 
         if (portion5)
         {
-            defDestroy += 5;
+            defDestroy += portion5Value;
         }
 
         if (buff1)
@@ -1574,7 +1606,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        yield return waitForSeconds4;
+        yield return upgradeSecond;
 
         StartCoroutine(AutoUpgradeCoroution());
     }
@@ -1605,20 +1637,25 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        yield return waitForSeconds4;
+        yield return buffUpgradeSecond;
 
         StartCoroutine(BuffAutoUpgradeCoroution());
     }
 
-    IEnumerator DelayCoroution()
+    IEnumerator ServerDelayCoroution()
     {
-        yield return waitForSeconds;
+        yield return serverSeconds;
 
-        if (playerDataBase.Exp > nowExp)
+        if (!isExp)
         {
-            nowExp = playerDataBase.Exp;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
-            levelManager.Initialize();
+            if (playerDataBase.Exp > nowExp)
+            {
+                nowExp = playerDataBase.Exp;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
+                levelManager.Initialize();
+
+                isExp = levelManager.CheckMaxLevel();
+            }
         }
 
         if (playerDataBase.UpgradeCount > nowUpgradeCount)
@@ -1633,7 +1670,7 @@ public class GameManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("SellCount", playerDataBase.SellCount);
         }
 
-        yield return waitForSeconds;
+        yield return serverSeconds;
 
         if (GameStateManager.instance.GameType == GameType.Rank)
         {
@@ -1661,7 +1698,7 @@ public class GameManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel4", playerDataBase.RankLevel4);
             }
 
-            yield return waitForSeconds;
+            yield return serverSeconds;
 
             switch (season)
             {
@@ -1778,7 +1815,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        StartCoroutine(DelayCoroution());
+        StartCoroutine(ServerDelayCoroution());
     }
 
     public void GameStop()
@@ -3240,7 +3277,18 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        PlayfabManager.instance.UpdateSubtractGold(need);
+        if(supportPackageCount >= supportPackageMaxCount)
+        {
+            supportPackageCount = 0;
+
+            shopManager.OpenSupportPackage();
+        }
+        else
+        {
+            supportPackageCount += 1;
+        }
+
+        PlayfabManager.instance.UpdateSellPriceGold(-need);
 
         myMoneyPlusText.gameObject.SetActive(false);
         myMoneyPlusText.gameObject.SetActive(true);
@@ -3725,7 +3773,7 @@ public class GameManager : MonoBehaviour
         }
 
         isUpgradeDelay = true;
-        Invoke("WaitUpgradeDelay", 0.4f);
+        Invoke("WaitUpgradeDelay", delay);
     }
 
     public void RecoverFood(FoodType type)
@@ -4286,7 +4334,7 @@ public class GameManager : MonoBehaviour
                         break;
                 }
 
-                Debug.Log(GameStateManager.instance.FoodType + " : Max Level!");
+                //Debug.Log(GameStateManager.instance.FoodType + " : Max Level!");
 
                 break;
             case IslandType.Island2:
@@ -4714,7 +4762,8 @@ public class GameManager : MonoBehaviour
             PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 10 + (level / 5)));
         }
 
-        PlayfabManager.instance.UpdateAddGold(sellPrice);
+        PlayfabManager.instance.UpdateSellPriceGold(sellPrice);
+        PlayfabManager.instance.moneyAnimation.PlusMoney(sellPrice);
 
         if (level >= 9)
         {
@@ -4767,7 +4816,7 @@ public class GameManager : MonoBehaviour
         FirebaseAnalytics.LogEvent("SellFood");
 
         isUpgradeDelay = true;
-        Invoke("WaitSellDelay", 0.4f);
+        Invoke("WaitSellDelay", delay);
     }
 
     public void CheckDefTicket()
@@ -4926,7 +4975,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion1 = true;
 
-                        needPlus += 30;
+                        needPlus += portion1Value;
                         UpgradeInitialize();
 
                         playerDataBase.Portion1 -= 1;
@@ -4957,7 +5006,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion2 = true;
 
-                        sellPricePlus += 10;
+                        sellPricePlus += portion2Value;
                         UpgradeInitialize();
 
                         playerDataBase.Portion2 -= 1;
@@ -4988,7 +5037,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion3 = true;
 
-                        successPlus += 1;
+                        successPlus += portion3Value;
                         UpgradeInitialize();
 
                         playerDataBase.Portion3 -= 1;
@@ -5017,7 +5066,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (playerDataBase.Portion4 > 0)
                     {
-                        feverCount += (feverMaxCount * (0.35f + portion4Plus));
+                        feverCount += (feverMaxCount * ((portion4Value * 0.01f) + portion4Plus));
                         CheckFever();
 
                         playerDataBase.Portion4 -= 1;
@@ -5046,7 +5095,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion5 = true;
 
-                        defDestroy += 5;
+                        defDestroy += portion5Value;
                         UpgradeInitialize();
 
                         playerDataBase.Portion5 -= 1;

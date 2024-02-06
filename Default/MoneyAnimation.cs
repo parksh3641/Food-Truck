@@ -26,14 +26,13 @@ public class MoneyAnimation : MonoBehaviour
 
     PlayerDataBase playerDataBase;
 
-    WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
-    WaitForSeconds waitForSeconds2 = new WaitForSeconds(0.03f);
+    WaitForSeconds waitForSeconds = new WaitForSeconds(2.0f);
 
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
         {
             MoneyContent monster = Instantiate(moneyPrefab);
             monster.transform.SetParent(moneyTransform);
@@ -62,9 +61,9 @@ public class MoneyAnimation : MonoBehaviour
     {
         number = target;
 
-        if(number >= 10)
+        if(number >= 15)
         {
-            number = 10;
+            number = 15;
         }
 
         StopAllCoroutines();
@@ -87,7 +86,7 @@ public class MoneyAnimation : MonoBehaviour
             moneyPrefabList[i].GoToTarget(plusMoneyStartTransform.localPosition, plusMoneyEndTransform.localPosition);
         }
 
-        yield return new WaitForSeconds(2.0f);
+        yield return waitForSeconds;
 
         plusMoneyObj.gameObject.SetActive(false);
     }

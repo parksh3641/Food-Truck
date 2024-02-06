@@ -60,8 +60,16 @@ public class RankContent : MonoBehaviour
     {
         chefType = ChefType.Cook1_1 + number;
 
-        titleText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 5)) + " <color=#FF0000>" +
-    chefType.ToString().Substring(6, 1) + "</color>";
+        if(chefType.ToString().Length == 7)
+        {
+            titleText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 5)) + " <color=#FF0000>" +
+chefType.ToString().Substring(6, 1) + "</color>";
+        }
+        else
+        {
+            titleText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 6)) + " <color=#FF0000>" +
+chefType.ToString().Substring(7, 1) + "</color>";
+        }
     }
 
     public void IconState(IconType type)

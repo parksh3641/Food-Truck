@@ -2178,6 +2178,8 @@ public class PlayfabManager : MonoBehaviour
         playerDataBase.SaveCoin += number;
         saveGold += number;
 
+        GameStateManager.instance.SaveGold = saveGold;
+
         if(!saveDelay)
         {
             saveDelay = true;
@@ -2209,6 +2211,8 @@ public class PlayfabManager : MonoBehaviour
 
         saveGold = 0;
         saveDelay = false;
+
+        GameStateManager.instance.SaveGold = 0;
     }
 
 

@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using Firebase.Analytics;
 
 public class AdmobReward : MonoBehaviour
 {
@@ -166,42 +167,13 @@ public class AdmobReward : MonoBehaviour
                     playerDataBase.AdCount += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("AdCount", playerDataBase.AdCount);
 
+                    FirebaseAnalytics.LogEvent("Watch Ad");
+
                     //Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
                 });
             }
             else
             {
-                //switch (number)
-                //{
-                //    case 0:
-                //        shopManager.SuccessWatchAd();
-                //        break;
-                //    case 1:
-                //        shopManager.SuccessWatchAd_Portion();
-                //        break;
-                //    case 2:
-                //        chestBoxManager.SuccessWatchAd();
-                //        break;
-                //    case 3:
-                //        buffManager.SuccessWatchAd();
-                //        break;
-                //    case 4:
-                //        reincarnationManager.SuccessWatchAd();
-                //        break;
-                //    case 5:
-                //        offlineManager.SuccessWatchAd();
-                //        break;
-                //    case 6:
-                //        questManager.SuccessWatchAd();
-                //        break;
-                //    case 7:
-                //        treasureManager.SuccessWatchAd();
-                //        break;
-                //    case 8:
-                //        shopManager.SuccessWatchAd_Crystal();
-                //        break;
-                //}
-
                 LoadRewardedAd();
 
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);

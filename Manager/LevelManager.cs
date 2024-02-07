@@ -75,7 +75,7 @@ public class LevelManager : MonoBehaviour
 
     public bool CheckMaxLevel()
     {
-        if(playerDataBase.Exp > maxExp)
+        if(playerDataBase.Exp >= maxExp)
         {
             playerDataBase.Exp = maxExp;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
@@ -99,6 +99,8 @@ public class LevelManager : MonoBehaviour
 
             GameManager.instance.CheckPercent();
 
+            FirebaseAnalytics.LogEvent("LevelUp");
+
             Debug.LogError("·¹º§ ¾÷");
         }
 
@@ -112,8 +114,8 @@ public class LevelManager : MonoBehaviour
 
         GameStateManager.instance.Level = level;
 
-        titleText.text = "Lv." + (level + 1).ToString();
-        levelText.text = (level + 1).ToString();
+        titleText.text = "Lv." + level.ToString();
+        levelText.text = level.ToString();
 
         titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "  <color=#FFFF00>(+" +
             (10 + (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber())) +")</color>";
@@ -121,9 +123,17 @@ public class LevelManager : MonoBehaviour
         nowExp = levelDataBase.GetNowExp(playerDataBase.Exp);
         nextExp = levelDataBase.GetNextExp(level);
 
-        expText.text = nowExp + " / " + nextExp;
+        if(playerDataBase.Exp >= maxExp)
+        {
+            expText.text = LocalizationManager.instance.GetString("MaxLevel");
+            expFillamount.fillAmount = 1;
+        }
+        else
+        {
+            expText.text = nowExp + " / " + nextExp;
+            expFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
+        }
 
-        expFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
 
         infoText.localizationName = "SuccessPercent";
         infoText.plusText = " : +" + (level * 0.05f).ToString("N1") + "%";

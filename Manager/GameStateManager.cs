@@ -120,6 +120,8 @@ public class GameStateManager : MonoBehaviour
         public int openChestBox = 0;
         public int yummyTimeCount = 0;
         public int playTime = 0;
+        public long saveGold = 0;
+        public int supportCount = 0;
 
         [Space]
         [Title("Equip")]
@@ -1140,6 +1142,32 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.playTime = value;
+            SaveFile();
+        }
+    }
+
+    public long SaveGold
+    {
+        get
+        {
+            return gameSettings.saveGold;
+        }
+        set
+        {
+            gameSettings.saveGold = value;
+            SaveFile();
+        }
+    }
+
+    public int SupportCount
+    {
+        get
+        {
+            return gameSettings.supportCount;
+        }
+        set
+        {
+            gameSettings.supportCount = value;
             SaveFile();
         }
     }

@@ -225,8 +225,8 @@ public class GameManager : MonoBehaviour
     private int recoverLevel = 0;
     private int playTime = 0;
 
-    private int supportPackageCount = 0;
-    private int supportPackageMaxCount = 999;
+    private int supportCount = 0;
+    private int supportMaxCount = 999;
 
     public bool isDelay_Camera = false;
     public bool isUpgradeDelay = false;
@@ -439,6 +439,8 @@ public class GameManager : MonoBehaviour
             {
                 GameStateManager.instance.FeverCount = feverCount;
             }
+
+            GameStateManager.instance.SupportCount = supportCount;
         }
         else
         {
@@ -634,6 +636,19 @@ public class GameManager : MonoBehaviour
 
             OnNeedUpdate();
         }
+
+        supportCount = GameStateManager.instance.SupportCount;
+
+        if(GameStateManager.instance.SaveGold > 0)
+        {
+            PlayfabManager.instance.UpdateAddGold((int)GameStateManager.instance.SaveGold);
+        }
+        else if(GameStateManager.instance.SaveGold < 0)
+        {
+            PlayfabManager.instance.UpdateSubtractGold((int)GameStateManager.instance.SaveGold);
+        }
+
+        GameStateManager.instance.SaveGold = 0;
 
         Invoke("ServerDelay", 1.0f);
     }
@@ -3277,15 +3292,15 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if(supportPackageCount >= supportPackageMaxCount)
+        if(supportCount >= supportMaxCount)
         {
-            supportPackageCount = 0;
+            supportCount = 0;
 
             shopManager.OpenSupportPackage();
         }
         else
         {
-            supportPackageCount += 1;
+            supportCount += 1;
         }
 
         PlayfabManager.instance.UpdateSellPriceGold(-need);
@@ -3350,7 +3365,11 @@ public class GameManager : MonoBehaviour
 
             GameStateManager.instance.UpgradeCount += 1;
             playerDataBase.UpgradeCount += 1;
-            playerDataBase.Exp += 10 + expUp;
+
+            if (!isExp)
+            {
+                playerDataBase.Exp += 10 + expUp;
+            }
 
             switch (GameStateManager.instance.IslandType)
             {

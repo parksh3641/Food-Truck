@@ -122,41 +122,25 @@ public class AttendanceManager : MonoBehaviour
     public void CheckInitialize()
     {
         attendanceContentArray[0].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[0].receiveContent[1].gameObject.SetActive(true);
         attendanceContentArray[0].receiveContent[0].Initialize(RewardType.Gold, 100000);
-        attendanceContentArray[0].receiveContent[1].Initialize(RewardType.Portion1, 3);
 
         attendanceContentArray[1].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[1].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Gold, 100000);
-        attendanceContentArray[1].receiveContent[1].Initialize(RewardType.Portion2, 3);
+        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.PortionSet, 2);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Gold, 100000);
-        attendanceContentArray[2].receiveContent[1].Initialize(RewardType.Portion3, 3);
+        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Crystal, 100);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[3].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[3].receiveContent[0].Initialize(RewardType.Gold, 250000);
-        attendanceContentArray[3].receiveContent[1].Initialize(RewardType.Crystal, 100);
+        attendanceContentArray[3].receiveContent[0].Initialize(RewardType.BuffTicket, 2);
 
         attendanceContentArray[4].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[4].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[4].receiveContent[0].Initialize(RewardType.Gold, 100000);
-        attendanceContentArray[4].receiveContent[1].Initialize(RewardType.Portion4, 3);
+        attendanceContentArray[4].receiveContent[0].Initialize(RewardType.SkillTicket, 2);
 
         attendanceContentArray[5].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[5].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[5].receiveContent[0].Initialize(RewardType.Gold, 100000);
-        attendanceContentArray[5].receiveContent[1].Initialize(RewardType.Portion5, 3);
+        attendanceContentArray[5].receiveContent[0].Initialize(RewardType.Crystal, 200);
 
         attendanceContentArray[6].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[6].receiveContent[1].gameObject.SetActive(true);
-        attendanceContentArray[6].receiveContent[2].gameObject.SetActive(true);
-        attendanceContentArray[6].receiveContent[0].Initialize(RewardType.Gold, 500000);
-        attendanceContentArray[6].receiveContent[1].Initialize(RewardType.Crystal, 300);
-        attendanceContentArray[6].receiveContent[2].Initialize(RewardType.DefDestroyTicket, 3);
+        attendanceContentArray[6].receiveContent[0].Initialize(RewardType.DefDestroyTicket, 10);
     }
 
     public void ReceiveButton(int index, Action action)
@@ -173,39 +157,31 @@ public class AttendanceManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                PortionManager.instance.GetPortion(0, 3);
                 PlayfabManager.instance.UpdateAddGold(100000);
 
                 break;
             case 1:
-                PortionManager.instance.GetPortion(1, 3);
-                PlayfabManager.instance.UpdateAddGold(100000);
+                PortionManager.instance.GetAllPortion(2);
 
                 break;
             case 2:
-                PortionManager.instance.GetPortion(2, 3);
-                PlayfabManager.instance.UpdateAddGold(100000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
 
                 break;
             case 3:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
-                PlayfabManager.instance.UpdateAddGold(250000);
+                PortionManager.instance.GetBuffTickets(2);
 
                 break;
             case 4:
-                PortionManager.instance.GetPortion(3, 3);
-                PlayfabManager.instance.UpdateAddGold(100000);
+                PortionManager.instance.GetSkillTickets(2);
 
                 break;
             case 5:
-                PortionManager.instance.GetPortion(4, 3);
-                PlayfabManager.instance.UpdateAddGold(100000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200);
 
                 break;
             case 6:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
-                PortionManager.instance.GetDefTickets(3);
-                PlayfabManager.instance.UpdateAddGold(500000);
+                PortionManager.instance.GetDefTickets(10);
 
                 break;
         }

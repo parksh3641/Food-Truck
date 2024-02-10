@@ -30,6 +30,20 @@ public class RankContent : MonoBehaviour
         nickNameText.text = "";
     }
 
+    public void SetIndex(int index)
+    {
+        if (index <= 3)
+        {
+            indexRankImg.enabled = true;
+            indexRankImg.sprite = rankIconList[index - 1];
+        }
+        else
+        {
+            indexRankImg.enabled = false;
+            indexText.text = index.ToString();
+        }
+    }
+
     public void InitState(int index, string country, string nickName, string score, bool checkMy)
     {
         if(index <= 3)

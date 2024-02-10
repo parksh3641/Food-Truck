@@ -19,6 +19,7 @@ public class LevelUpEventManager : MonoBehaviour
     public AttendanceContent[] attendanceContentArray;
 
     private int level = 5;
+    private int reward = 500;
 
     PlayerDataBase playerDataBase;
 
@@ -76,7 +77,7 @@ public class LevelUpEventManager : MonoBehaviour
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 300);
+            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, reward);
         }
     }
 
@@ -89,7 +90,7 @@ public class LevelUpEventManager : MonoBehaviour
             return;
         }
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward);
 
         playerDataBase.LevelUpEventCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("LevelUpEventCount", playerDataBase.LevelUpEventCount);

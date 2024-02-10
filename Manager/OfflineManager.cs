@@ -183,9 +183,9 @@ public class OfflineManager : MonoBehaviour
             addExp += (int)(addExp * 0.1f);
         }
 
-        if(addCrystal >= 100)
+        if(addCrystal >= 50)
         {
-            addCrystal = 100;
+            addCrystal = 50;
         }
 
         levelUpCostText.text = addCrystal.ToString();

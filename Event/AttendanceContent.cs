@@ -240,6 +240,64 @@ public class AttendanceContent : MonoBehaviour
                     }
                 }
                 break;
+            case 4:
+                titleText.plusText = " : 25";
+
+                if (check == 4)
+                {
+                    selectObj.SetActive(true);
+
+                    if (number >= 25)
+                    {
+                        lockObj.SetActive(false);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (index > check)
+                    {
+                        lockObj.SetActive(true);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                        clearObj.SetActive(true);
+                    }
+                }
+                break;
+            case 5:
+                titleText.plusText = " : 30";
+
+                if (check == 5)
+                {
+                    selectObj.SetActive(true);
+
+                    if (number >= 30)
+                    {
+                        lockObj.SetActive(false);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (index > check)
+                    {
+                        lockObj.SetActive(true);
+                    }
+                    else
+                    {
+                        lockObj.SetActive(true);
+                        clearObj.SetActive(true);
+                    }
+                }
+                break;
         }
 
         titleText.ReLoad();

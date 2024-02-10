@@ -12,6 +12,8 @@ public class EventManager : MonoBehaviour
 
     public GameObject welcomeEvent;
     public GameObject weekendEvent;
+    public GameObject reviewEvent;
+
     public LocalizationContent weekendEventTitle;
 
     PlayerDataBase playerDataBase;
@@ -39,7 +41,8 @@ public class EventManager : MonoBehaviour
 
             eventView.SetActive(true);
 
-            if(playerDataBase.WelcomeCount > 6)
+            welcomeEvent.SetActive(true);
+            if (playerDataBase.WelcomeCount > 6)
             {
                 welcomeEvent.SetActive(false);
             }
@@ -56,6 +59,12 @@ public class EventManager : MonoBehaviour
             }
 
             weekendEventTitle.ReLoad();
+
+            reviewEvent.SetActive(true);
+            if (playerDataBase.ReviewNumber == 2)
+            {
+                reviewEvent.SetActive(false);
+            }
 
             FirebaseAnalytics.LogEvent("OpenEvent");
         }

@@ -320,7 +320,7 @@ public class GameManager : MonoBehaviour
     WaitForSeconds serverSeconds = new WaitForSeconds(2.0f);
     WaitForSeconds timerSeconds = new WaitForSeconds(1.0f);
     WaitForSeconds firstSeconds = new WaitForSeconds(0.5f);
-    WaitForSeconds upgradeSecond;
+    WaitForSeconds autoUpgradeSecond = new WaitForSeconds(0.3f);
     WaitForSeconds buffUpgradeSecond = new WaitForSeconds(0.5f);
 
     private float delay = 0.2f;
@@ -427,8 +427,6 @@ public class GameManager : MonoBehaviour
 
         decemberStart = new DateTime(currentDate.Year, 12, 1);
         decemberEnd = new DateTime(currentDate.Year, 1, 31);
-
-        upgradeSecond = new WaitForSeconds(delay);
     }
 
     private void OnApplicationPause(bool pause)
@@ -486,7 +484,7 @@ public class GameManager : MonoBehaviour
             privacypolicyView.SetActive(true);
         }
 
-        if(!GameStateManager.instance.Gender)
+        if(!GameStateManager.instance.Gender && playerDataBase.Gender == 0)
         {
             genderView.SetActive(true);
         }
@@ -1621,7 +1619,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        yield return upgradeSecond;
+        yield return autoUpgradeSecond;
 
         StartCoroutine(AutoUpgradeCoroution());
     }
@@ -3273,6 +3271,9 @@ public class GameManager : MonoBehaviour
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+
+            auto = false;
+            buffAutoUpgrade = false;
             return;
         }
 
@@ -5589,6 +5590,9 @@ public class GameManager : MonoBehaviour
                 FirebaseAnalytics.LogEvent("Sex_Other");
                 break;
         }
+
+        playerDataBase.Gender = gender;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Gender", playerDataBase.Gender);
     }
 
     public void Decline()

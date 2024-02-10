@@ -100,11 +100,11 @@ public class SeasonManager : MonoBehaviour
 
             if (season == 1)
             {
-                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString(), SetRankingReward);
+                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString(), 0, SetRankingReward);
             }
             else
             {
-                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString() + "_" + (season - 1), SetRankingReward);
+                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString() + "_" + (season - 1), 0, SetRankingReward);
             }
 
         }
@@ -117,11 +117,11 @@ public class SeasonManager : MonoBehaviour
 
             if (season == 1)
             {
-                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString(), SetRankingReward);
+                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString(), 0, SetRankingReward);
             }
             else
             {
-                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString() + "_" + (season - 1), SetRankingReward);
+                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString() + "_" + (season - 1), 0, SetRankingReward);
             }
 #endif
         }
@@ -516,7 +516,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 1;
 
-            if (playerDataBase.Season1Reward == 0)
+            if (playerDataBase.Season1Reward == 0 && playerDataBase.TotalLevel > 0)
             {
                 Initialize();
             }
@@ -525,7 +525,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 2;
 
-            if (playerDataBase.Season2Reward == 0)
+            if (playerDataBase.Season2Reward == 0 && playerDataBase.TotalLevel_1 > 0)
             {
                 Initialize();
             }
@@ -534,7 +534,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 3;
 
-            if (playerDataBase.Season3Reward == 0)
+            if (playerDataBase.Season3Reward == 0 && playerDataBase.TotalLevel_2 > 0)
             {
                 Initialize();
             }
@@ -543,7 +543,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 4;
 
-            if (playerDataBase.Season4Reward == 0)
+            if (playerDataBase.Season4Reward == 0 && playerDataBase.TotalLevel_3 > 0)
             {
                 Initialize();
             }
@@ -552,7 +552,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 5;
 
-            if (playerDataBase.Season5Reward == 0)
+            if (playerDataBase.Season5Reward == 0 && playerDataBase.TotalLevel_4 > 0)
             {
                 Initialize();
             }
@@ -561,7 +561,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 6;
 
-            if (playerDataBase.Season6Reward == 0)
+            if (playerDataBase.Season6Reward == 0 && playerDataBase.TotalLevel_5 > 0)
             {
                 Initialize();
             }
@@ -570,7 +570,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 7;
 
-            if (playerDataBase.Season7Reward == 0)
+            if (playerDataBase.Season7Reward == 0 && playerDataBase.TotalLevel_6 > 0)
             {
                 Initialize();
             }
@@ -579,7 +579,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 8;
 
-            if (playerDataBase.Season8Reward == 0)
+            if (playerDataBase.Season8Reward == 0 && playerDataBase.TotalLevel_7 > 0)
             {
                 Initialize();
             }
@@ -588,7 +588,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 9;
 
-            if (playerDataBase.Season9Reward == 0)
+            if (playerDataBase.Season9Reward == 0 && playerDataBase.TotalLevel_8 > 0)
             {
                 Initialize();
             }
@@ -597,7 +597,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 10;
 
-            if (playerDataBase.Season10Reward == 0)
+            if (playerDataBase.Season10Reward == 0 && playerDataBase.TotalLevel_9 > 0)
             {
                 Initialize();
             }

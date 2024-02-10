@@ -525,14 +525,17 @@ public class CouponManager : MonoBehaviour
     public void GetSpeicalReward()
     {
         PlayfabManager.instance.UpdateAddGold(1000000);
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+        PortionManager.instance.GetDefTickets(5);
 
         couponRewardView.SetActive(true);
         receiveContents[0].gameObject.SetActive(true);
         receiveContents[1].gameObject.SetActive(true);
+        receiveContents[2].gameObject.SetActive(true);
 
         receiveContents[0].Initialize(RewardType.Gold, 1000000);
-        receiveContents[1].Initialize(RewardType.Crystal, 100);
+        receiveContents[1].Initialize(RewardType.Crystal, 300);
+        receiveContents[2].Initialize(RewardType.DefDestroyTicket, 5);
 
         FirebaseAnalytics.LogEvent("Coupon_Speical");
 

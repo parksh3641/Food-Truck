@@ -91,6 +91,8 @@ public class PlayerDataBase : ScriptableObject
     private int dungeonKey3 = 0;
     [SerializeField]
     private int dungeonKey4 = 0;
+    [SerializeField]
+    private int gender = 0;
 
     [Space]
     [Title("Daily")]
@@ -872,6 +874,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             dungeonKey4 = value;
+        }
+    }
+
+    public int Gender
+    {
+        get
+        {
+            return gender;
+        }
+        set
+        {
+            gender = value;
         }
     }
 

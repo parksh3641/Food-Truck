@@ -1590,6 +1590,9 @@ public class PlayfabManager : MonoBehaviour
                        case "DungeonKey4":
                            playerDataBase.DungeonKey4 = statistics.Value;
                            break;
+                       case "Gender":
+                           playerDataBase.Gender = statistics.Value;
+                           break;
                        case "InGameTutorial":
                            playerDataBase.InGameTutorial = statistics.Value;
                            break;
@@ -2565,11 +2568,11 @@ public class PlayfabManager : MonoBehaviour
         );
     }
 
-    public void GetLeaderboarder(string name, Action<GetLeaderboardResult> successCalback)
+    public void GetLeaderboarder(string name, int min, Action<GetLeaderboardResult> successCalback)
     {
         var requestLeaderboard = new GetLeaderboardRequest
         {
-            StartPosition = 0,
+            StartPosition = min,
             StatisticName = name,
             MaxResultsCount = 100,
 
@@ -2584,6 +2587,7 @@ public class PlayfabManager : MonoBehaviour
         PlayFabClientAPI.GetLeaderboard(requestLeaderboard, successCalback, error =>
         {
             rankingManager.isDelay = false;
+            rankingManager.isDelay2 = false;
 
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);

@@ -19,6 +19,7 @@ public class RecipeEventManager : MonoBehaviour
     public AttendanceContent[] attendanceContentArray;
 
     private int level = 20;
+    private int reward = 3;
 
     PlayerDataBase playerDataBase;
 
@@ -76,7 +77,7 @@ public class RecipeEventManager : MonoBehaviour
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.SkillTicket, 2);
+            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.SkillTicket, reward);
         }
     }
 
@@ -89,7 +90,7 @@ public class RecipeEventManager : MonoBehaviour
             return;
         }
 
-        PortionManager.instance.GetSkillTickets(2);
+        PortionManager.instance.GetSkillTickets(reward);
 
         playerDataBase.RecipeEventCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RecipeEventCount", playerDataBase.RecipeEventCount);

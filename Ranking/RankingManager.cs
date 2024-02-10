@@ -37,21 +37,20 @@ public class RankingManager : MonoBehaviour
     public RectTransform rankContentParent;
 
     public bool isDelay = false;
-
-    private int timerMinutes = 0;
-    private int timerSeconds = 0;
-    private float timermilliseconds = 0;
+    public bool isDelay2 = false;
 
     private int record = 0;
-
     private int topNumber = 0;
 
     private string recordStr = "";
-
     public string country = "";
+
+    private int listNumber = 0;
+    private int listMaxNumber = 400;
 
     [Space]
     List<RankContent> rankContentList = new List<RankContent>();
+    public List<string> rankList = new List<string>();
 
     PlayerDataBase playerDataBase;
 
@@ -110,8 +109,6 @@ public class RankingManager : MonoBehaviour
 
     public void OpenRankingReward()
     {
-        if (isDelay) return;
-
         if (!rankingRewardView.activeSelf)
         {
             rankingRewardView.SetActive(true);
@@ -188,11 +185,11 @@ public class RankingManager : MonoBehaviour
 
             if (SeasonManager.instance.CheckSeason_Ranking() == 0)
             {
-                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString(), SetRankingReward);
+                PlayfabManager.instance.GetLeaderboarder(RankingType.TotalLevel.ToString(), 0, SetRankingReward);
             }
             else if (SeasonManager.instance.CheckSeason_Ranking() > 0)
             {
-                PlayfabManager.instance.GetLeaderboarder("TotalLevel_" + SeasonManager.instance.CheckSeason().ToString(), SetRankingReward);
+                PlayfabManager.instance.GetLeaderboarder("TotalLevel_" + SeasonManager.instance.CheckSeason().ToString(), 0, SetRankingReward);
             }
             else
             {
@@ -203,7 +200,7 @@ public class RankingManager : MonoBehaviour
         }
         else
         {
-            if (!isDelay)
+            if (!isDelay && !isDelay2)
             {
                 rankingRewardView.SetActive(false);
             }
@@ -212,9 +209,9 @@ public class RankingManager : MonoBehaviour
 
     public void ChangeTopToggle(int number)
     {
-        if (topNumber == number) return;
+        if (isDelay || isDelay2) return;
 
-        if (isDelay) return;
+        if (topNumber == number) return;
 
         topNumber = number;
 
@@ -287,8 +284,66 @@ public class RankingManager : MonoBehaviour
         rankingView.SetActive(true);
 
         isDelay = true;
-        PlayfabManager.instance.GetLeaderboarder(type, SetRanking);
+        PlayfabManager.instance.GetLeaderboarder(type, 0, SetRanking);
+
+        if (type.Equals("UpgradeCount"))
+        {
+            isDelay2 = true;
+            rankList.Clear();
+            listNumber = 0;
+
+            PlayfabManager.instance.GetLeaderboarder(type, listNumber, SetRankingList);
+        }
     }
+
+    public void SetRankingList(GetLeaderboardResult result)
+    {
+        var curBoard = result.Leaderboard;
+
+        foreach (PlayerLeaderboardEntry player in curBoard)
+        {
+            if (player.DisplayName == null)
+            {
+                rankList.Add(player.PlayFabId);
+            }
+            else
+            {
+                rankList.Add(player.DisplayName);
+            }
+        }
+
+        if(listNumber < listMaxNumber)
+        {
+            listNumber += 100;
+
+            PlayfabManager.instance.GetLeaderboarder("UpgradeCount", listNumber, SetRankingList);
+        }
+        else
+        {
+            int index = 0;
+
+            for(int i = 0; i < rankList.Count; i ++)
+            {
+                if(rankList[i].Equals(GameStateManager.instance.NickName))
+                {
+                    index = i + 1;
+                    break;
+                }
+            }
+
+            if(index != 0)
+            {
+                myRankContent.SetIndex(index - 1);
+            }
+            else
+            {
+                myRankContent.SetIndex(500);
+            }
+
+            isDelay2 = false;
+        }
+    }
+
 
     public void SetRanking(GetLeaderboardResult result)
     {
@@ -366,7 +421,7 @@ public class RankingManager : MonoBehaviour
 
         isDelay = false;
 
-        PlayfabManager.instance.GetLeaderboarder("Advancement", SetTitle);
+        PlayfabManager.instance.GetLeaderboarder("Advancement", 0, SetTitle);
 
         rankContentParent.anchoredPosition = new Vector2(0, -9999);
     }

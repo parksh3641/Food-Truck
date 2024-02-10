@@ -114,10 +114,10 @@ public class PackageContent : MonoBehaviour
             }
 
             buyRmObj[(int)type].SetActive(true);
-            beforePriceText[(int)type].localizationName = type.ToString() + "_Before";
+            //beforePriceText[(int)type].localizationName = type.ToString() + "_Before";
             nowPriceText[(int)type].localizationName = type.ToString();
 
-            beforePriceText[(int)type].ReLoad();
+            //beforePriceText[(int)type].ReLoad();
             nowPriceText[(int)type].ReLoad();
         }
 

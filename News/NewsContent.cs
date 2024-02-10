@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class NewsContent : MonoBehaviour
 {
+    public Image icon;
+
+    public Sprite[] iconArray;
     public int index = 0;
 
     public NewsManager newsManager;
@@ -61,7 +64,16 @@ public class NewsContent : MonoBehaviour
                 break;
         }
 
-        titleText.text = title + "\n(" + dateText + ")";
+        titleText.text = title + "\n<size=11>(" + dateText + ")</size>";
+
+        if(title.Contains("ÄíÆù") || title.Contains("Coupon"))
+        {
+            icon.sprite = iconArray[1];
+        }
+        else
+        {
+            icon.sprite = iconArray[0];
+        }
     }
 
     public void OpenReadMore()

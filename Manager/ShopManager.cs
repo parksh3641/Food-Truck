@@ -148,6 +148,18 @@ public class ShopManager : MonoBehaviour
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
+    Vector3 normalPos = new Vector3(-40, 1.1f, -3.5f);
+    Vector3 beforePos = new Vector3(-44, 1.1f, 2);
+    Vector3 afterPos = new Vector3(-36, 1.1f, 2);
+
+    Vector3 normalPos_Truck = new Vector3(-39, 1, -1.5f);
+    Vector3 beforePos_Truck = new Vector3(-45, 1, 3);
+    Vector3 afterPos_Truck = new Vector3(-35, 1, 3);
+
+    Vector3 normalPos_Butterfly = new Vector3(-40, 2.8f, -3.5f);
+    Vector3 beforePos_Butterfly = new Vector3(-45, 2.8f, 5);
+    Vector3 afterPos_Butterfly = new Vector3(-35, 2.8f, 5);
+
     DateTime time;
     DateTime serverTime;
     TimeSpan timeSpan;
@@ -1146,32 +1158,50 @@ public class ShopManager : MonoBehaviour
             switch (speicalIndex)
             {
                 case 0:
-                    shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    for(int i = 0; i < shopAnimalArray.Length; i ++)
+                    {
+                        shopAnimalArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    }
 
                     FirebaseAnalytics.LogEvent("OpenPet");
                     break;
                 case 1:
-                    shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    for (int i = 0; i < shopTruckArray.Length; i++)
+                    {
+                        shopTruckArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    }
 
                     FirebaseAnalytics.LogEvent("OpenFoodTruck");
                     break;
                 case 2:
-                    shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    for (int i = 0; i < shopCharacterArray.Length; i++)
+                    {
+                        shopCharacterArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    }
 
                     FirebaseAnalytics.LogEvent("OpenCharacter");
                     break;
                 case 3:
-                    shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    for (int i = 0; i < shopButterflyArray.Length; i++)
+                    {
+                        shopButterflyArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    }
 
                     FirebaseAnalytics.LogEvent("OpenButterfly");
                     break;
                 case 4:
-                    shopTotemsArray[totemsIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    for (int i = 0; i < shopTotemsArray.Length; i++)
+                    {
+                        shopTotemsArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    }
 
                     FirebaseAnalytics.LogEvent("OpenTotems");
                     break;
                 case 5:
-                    shopFlowerArray[flowerIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    for (int i = 0; i < shopFlowerArray.Length; i++)
+                    {
+                        shopFlowerArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                    }
 
                     FirebaseAnalytics.LogEvent("OpenFlower");
                     break;
@@ -1320,7 +1350,35 @@ public class ShopManager : MonoBehaviour
         }
 
         shopCharacterArray[characterIndex].gameObject.SetActive(true);
+        shopCharacterArray[characterIndex].transform.position = normalPos;
         shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+        if (characterIndex == 0)
+        {
+            shopCharacterArray[characterIndex + 1].gameObject.SetActive(true);
+            shopCharacterArray[characterIndex + 1].transform.position = afterPos;
+            shopCharacterArray[characterIndex + 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+        }
+        else if (characterIndex > 0)
+        {
+            if (characterIndex == shopCharacterArray.Length - 1)
+            {
+                shopCharacterArray[characterIndex - 1].gameObject.SetActive(true);
+                shopCharacterArray[characterIndex - 1].transform.position = beforePos;
+                shopCharacterArray[characterIndex - 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+            }
+            else
+            {
+                shopCharacterArray[characterIndex - 1].gameObject.SetActive(true);
+                shopCharacterArray[characterIndex - 1].transform.position = beforePos;
+                shopCharacterArray[characterIndex - 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                shopCharacterArray[characterIndex + 1].gameObject.SetActive(true);
+                shopCharacterArray[characterIndex + 1].transform.position = afterPos;
+                shopCharacterArray[characterIndex + 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+            }
+        }
+
 
         characterInfo = characterDataBase.GetCharacterInfo(CharacterType.Character1 + characterIndex);
 
@@ -1824,7 +1882,49 @@ public class ShopManager : MonoBehaviour
         }
 
         shopAnimalArray[animalIndex].gameObject.SetActive(true);
+        shopAnimalArray[animalIndex].transform.position = normalPos;
         shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+        if(animalIndex == 2) //청어 키 높이
+        {
+            shopAnimalArray[animalIndex].transform.position += new Vector3(0, 0.9f, 0);
+        }
+
+        if(animalIndex == 0)
+        {
+            shopAnimalArray[animalIndex + 1].gameObject.SetActive(true);
+            shopAnimalArray[animalIndex + 1].transform.position = afterPos;
+            shopAnimalArray[animalIndex + 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+        }
+        else if(animalIndex > 0)
+        {
+            if(animalIndex == shopAnimalArray.Length - 1)
+            {
+                shopAnimalArray[animalIndex - 1].gameObject.SetActive(true);
+                shopAnimalArray[animalIndex - 1].transform.position = beforePos;
+                shopAnimalArray[animalIndex - 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+            }
+            else
+            {
+                shopAnimalArray[animalIndex - 1].gameObject.SetActive(true);
+                shopAnimalArray[animalIndex - 1].transform.position = beforePos;
+                shopAnimalArray[animalIndex - 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                shopAnimalArray[animalIndex + 1].gameObject.SetActive(true);
+                shopAnimalArray[animalIndex + 1].transform.position = afterPos;
+                shopAnimalArray[animalIndex + 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                if (animalIndex - 1 == 2) //청어 키 높이
+                {
+                    shopAnimalArray[animalIndex - 1].transform.position += new Vector3(0, 0.9f, 0);
+                }
+
+                if (animalIndex + 1 == 2) //청어 키 높이
+                {
+                    shopAnimalArray[animalIndex + 1].transform.position += new Vector3(0, 0.9f, 0);
+                }
+            }
+        }
 
         animalInfo = animalDataBase.GetAnimalInfo(AnimalType.Colobus + animalIndex);
 
@@ -1995,7 +2095,34 @@ public class ShopManager : MonoBehaviour
         }
 
         shopButterflyArray[butterflyIndex].gameObject.SetActive(true);
+        shopButterflyArray[butterflyIndex].transform.position = normalPos_Butterfly;
         shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+        if (butterflyIndex == 0)
+        {
+            shopButterflyArray[butterflyIndex + 1].gameObject.SetActive(true);
+            shopButterflyArray[butterflyIndex + 1].transform.position = afterPos_Butterfly;
+            shopButterflyArray[butterflyIndex + 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+        }
+        else if (butterflyIndex > 0)
+        {
+            if (butterflyIndex == shopButterflyArray.Length - 1)
+            {
+                shopButterflyArray[butterflyIndex - 1].gameObject.SetActive(true);
+                shopButterflyArray[butterflyIndex - 1].transform.position = beforePos_Butterfly;
+                shopButterflyArray[butterflyIndex - 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+            }
+            else
+            {
+                shopButterflyArray[butterflyIndex - 1].gameObject.SetActive(true);
+                shopButterflyArray[butterflyIndex - 1].transform.position = beforePos_Butterfly;
+                shopButterflyArray[butterflyIndex - 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                shopButterflyArray[butterflyIndex + 1].gameObject.SetActive(true);
+                shopButterflyArray[butterflyIndex + 1].transform.position = afterPos_Butterfly;
+                shopButterflyArray[butterflyIndex + 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+            }
+        }
 
         butterflyInfo = butterflyDataBase.GetButterflyInfo(ButterflyType.Butterfly1 + butterflyIndex);
 
@@ -2378,7 +2505,35 @@ public class ShopManager : MonoBehaviour
         }
 
         shopTotemsArray[totemsIndex].gameObject.SetActive(true);
+        shopTotemsArray[totemsIndex].transform.position = new Vector3(-40, shopTotemsArray[totemsIndex].transform.position.y, -3);
         shopTotemsArray[totemsIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+        if (totemsIndex == 0)
+        {
+            shopTotemsArray[totemsIndex + 1].gameObject.SetActive(true);
+            shopTotemsArray[totemsIndex + 1].transform.position = new Vector3(-35, shopTotemsArray[totemsIndex + 1].transform.position.y, 2);
+            shopTotemsArray[totemsIndex + 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+        }
+        else if (totemsIndex > 0)
+        {
+            if (totemsIndex == shopTotemsArray.Length - 1)
+            {
+                shopTotemsArray[totemsIndex - 1].gameObject.SetActive(true);
+                shopTotemsArray[totemsIndex - 1].transform.position = new Vector3(-45, shopTotemsArray[totemsIndex - 1].transform.position.y, 2);
+                shopTotemsArray[totemsIndex - 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+            }
+            else
+            {
+                shopTotemsArray[totemsIndex - 1].gameObject.SetActive(true);
+                shopTotemsArray[totemsIndex - 1].transform.position = new Vector3(-45, shopTotemsArray[totemsIndex - 1].transform.position.y, 2);
+                shopTotemsArray[totemsIndex - 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+
+                shopTotemsArray[totemsIndex + 1].gameObject.SetActive(true);
+                shopTotemsArray[totemsIndex + 1].transform.position = new Vector3(-35, shopTotemsArray[totemsIndex + 1].transform.position.y, 2);
+                shopTotemsArray[totemsIndex + 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
+            }
+        }
+
 
         totemsInfo = totemsDataBase.GetTotemsInfo(TotemsType.Totems1 + totemsIndex);
 

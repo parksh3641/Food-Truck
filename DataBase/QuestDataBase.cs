@@ -16,6 +16,7 @@ public class QuestDataBase : ScriptableObject
 
     public RewardType rewardType = RewardType.Gold;
     public int reward = 0;
+    public int reward2 = 0;
 
     public QuestInfo GetQuestInfo(QuestType type)
     {

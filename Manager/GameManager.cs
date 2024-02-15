@@ -333,6 +333,8 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+        QualitySettings.SetQualityLevel(2);
+
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;

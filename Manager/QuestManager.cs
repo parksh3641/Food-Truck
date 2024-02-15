@@ -28,6 +28,8 @@ public class QuestManager : MonoBehaviour
     private int reward = 0;
     private int reward2 = 0;
 
+    private int crystal = 30;
+
     private bool isDelay = false;
 
     private int plus = 0;
@@ -80,16 +82,14 @@ public class QuestManager : MonoBehaviour
         if (IsWeekend())
         {
             reward = questDataBase.reward * 2;
+            reward2 = questDataBase.reward2 * 2;
 
             plus += 100;
-
-            reward2 = 40;
         }
         else
         {
             reward = questDataBase.reward;
-
-            reward2 = 20;
+            reward2 = questDataBase.reward2;
         }
 
         if((playerDataBase.QuestCount / 5) > 10)
@@ -218,7 +218,7 @@ public class QuestManager : MonoBehaviour
 
         questClearCountText.text = LocalizationManager.instance.GetString("ClearCount") + " : " + playerDataBase.QuestCount;
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 20);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 30);
 
         PlayfabManager.instance.UpdateAddGold(reward);
 

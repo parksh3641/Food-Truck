@@ -125,7 +125,7 @@ public class AttendanceManager : MonoBehaviour
         attendanceContentArray[0].receiveContent[0].Initialize(RewardType.Gold, 100000);
 
         attendanceContentArray[1].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.PortionSet, 2);
+        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.PortionSet, 1);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Crystal, 100);
@@ -161,7 +161,7 @@ public class AttendanceManager : MonoBehaviour
 
                 break;
             case 1:
-                PortionManager.instance.GetAllPortion(2);
+                PortionManager.instance.GetAllPortion(1);
 
                 break;
             case 2:

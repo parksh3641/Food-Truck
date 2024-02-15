@@ -198,6 +198,9 @@ public class SeasonManager : MonoBehaviour
 
         seasonRewardView.SetActive(false);
 
+        SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
+        NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
         StartCoroutine(ReceiveCoroution());
     }
 

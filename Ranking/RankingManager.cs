@@ -341,6 +341,13 @@ public class RankingManager : MonoBehaviour
             }
 
             isDelay2 = false;
+
+            for (int i = 0; i < rankContentList.Count; i++)
+            {
+                rankContentList[i].gameObject.SetActive(true);
+            }
+
+            rankContentParent.anchoredPosition = new Vector2(0, -9999);
         }
     }
 
@@ -408,7 +415,11 @@ public class RankingManager : MonoBehaviour
             }
 
             rankContentList[num].InitState(index, location, nickName, recordStr, isMine);
-            rankContentList[num].gameObject.SetActive(true);
+
+            if (!isDelay2)
+            {
+                rankContentList[num].gameObject.SetActive(true);
+            }
 
             index++;
             num++;

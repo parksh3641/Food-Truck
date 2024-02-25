@@ -262,5 +262,6 @@ public enum NotionType
     SeasonWaitNotion,
     SuccessPromotion,
     NotEnoughConditions,
-    SpeicalFoodNotion
+    SpeicalFoodNotion,
+    SaveNotion
 }

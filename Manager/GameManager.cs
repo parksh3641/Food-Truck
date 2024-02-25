@@ -257,6 +257,8 @@ public class GameManager : MonoBehaviour
 
     private int gender = 0;
 
+    private bool isWeekend = false;
+
     public GameObject buff4Obj;
 
     [Space]
@@ -1264,6 +1266,15 @@ public class GameManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("PlayTime", playerDataBase.PlayTime);
             }
 
+            if(isWeekend)
+            {
+                if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
+                {
+                    isWeekend = false;
+                    CheckPercent();
+                }
+            }
+
             Debug.LogError("1ºÐ Áö³²");
         }
         else
@@ -1472,6 +1483,7 @@ public class GameManager : MonoBehaviour
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.05f;
         successPlus += playerDataBase.Treasure1 * 0.2f;
         successPlus += playerDataBase.Advancement * 0.1f;
+        successPlus += playerDataBase.GetIconHoldNumber() * 0.1f;
 
         successX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         successX2 += playerDataBase.Treasure3 * 0.2f;
@@ -1485,6 +1497,8 @@ public class GameManager : MonoBehaviour
         if (IsWeekend())
         {
             sellPricePlus += 30;
+
+            isWeekend = true;
         }
 
         sellPriceTip += 0;

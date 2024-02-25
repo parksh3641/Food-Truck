@@ -822,6 +822,13 @@ public class PlayfabManager : MonoBehaviour
 
                 foreach (ItemInstance list in inventoryList)
                 {
+                    if (list.ItemId.Contains("Icon_"))
+                    {
+                        IconType icon = (IconType)Enum.Parse(typeof(IconType), list.ItemId);
+
+                        playerDataBase.SetIcon(icon, (int)list.RemainingUses);
+                    }
+
                     if (list.ItemId.Equals("RemoveAds"))
                     {
                         playerDataBase.RemoveAds = true;
@@ -1355,6 +1362,9 @@ public class PlayfabManager : MonoBehaviour
                        //    break;
                        case "RankPoint":
                            playerDataBase.RankPoint = statistics.Value;
+                           break;
+                       case "Icon":
+                           playerDataBase.Icon = statistics.Value;
                            break;
                        case "FirstReward":
                            playerDataBase.FirstReward = statistics.Value;

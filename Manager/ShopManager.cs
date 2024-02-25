@@ -611,9 +611,9 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case ItemType.DefDestroyTicket:
-                if (playerDataBase.RankPoint >= 500)
+                if (playerDataBase.RankPoint >= 1000)
                 {
-                    playerDataBase.RankPoint -= 500;
+                    playerDataBase.RankPoint -= 1000;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -691,9 +691,9 @@ public class ShopManager : MonoBehaviour
             case ItemType.CrystalShop6:
                 break;
             case ItemType.Portion1:
-                if (playerDataBase.RankPoint >= 30)
+                if (playerDataBase.RankPoint >= 100)
                 {
-                    playerDataBase.RankPoint -= 30;
+                    playerDataBase.RankPoint -= 100;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -712,9 +712,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion2:
-                if (playerDataBase.RankPoint >= 50)
+                if (playerDataBase.RankPoint >= 150)
                 {
-                    playerDataBase.RankPoint -= 50;
+                    playerDataBase.RankPoint -= 150;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -733,9 +733,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion3:
-                if (playerDataBase.RankPoint >= 50)
+                if (playerDataBase.RankPoint >= 150)
                 {
-                    playerDataBase.RankPoint -= 50;
+                    playerDataBase.RankPoint -= 150;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -754,9 +754,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion4:
-                if (playerDataBase.RankPoint >= 40)
+                if (playerDataBase.RankPoint >= 120)
                 {
-                    playerDataBase.RankPoint -= 40;
+                    playerDataBase.RankPoint -= 120;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -775,9 +775,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion5:
-                if (playerDataBase.RankPoint >= 80)
+                if (playerDataBase.RankPoint >= 200)
                 {
-                    playerDataBase.RankPoint -= 80;
+                    playerDataBase.RankPoint -= 200;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -908,9 +908,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.SkillTicket:
-                if (playerDataBase.RankPoint >= 200)
+                if (playerDataBase.RankPoint >= 300)
                 {
-                    playerDataBase.RankPoint -= 200;
+                    playerDataBase.RankPoint -= 300;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -929,9 +929,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.RepairTicket:
-                if (playerDataBase.RankPoint >= 10)
+                if (playerDataBase.RankPoint >= 20)
                 {
-                    playerDataBase.RankPoint -= 10;
+                    playerDataBase.RankPoint -= 20;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -951,14 +951,14 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.RepairTicket10:
-                if (playerDataBase.RankPoint >= 100)
+                if (playerDataBase.RankPoint >= 200)
                 {
-                    playerDataBase.RankPoint -= 100;
+                    playerDataBase.RankPoint -= 200;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
 
-                    PortionManager.instance.GetRecoverTickets(10);
+                    PortionManager.instance.GetRecoverTickets(11);
 
                     shopContents[38].Initialize(ItemType.RepairTicket, BuyType.RankPoint, this);
                     shopContents[39].Initialize(ItemType.RepairTicket10, BuyType.RankPoint, this);

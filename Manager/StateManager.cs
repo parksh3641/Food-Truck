@@ -26,6 +26,7 @@ public class StateManager : MonoBehaviour
     public TreasureManager treasureManager;
     public WarningManager warningManager;
     public AdvancementManager advancementManager;
+    public IconManager iconManager;
 
     private void Awake()
     {
@@ -76,6 +77,7 @@ public class StateManager : MonoBehaviour
         warningManager.Initialize();
         SeasonManager.instance.CheckSeason();
         advancementManager.Initialize();
+        iconManager.Initialize();
 
         Debug.LogError("Load Complete!");
     }

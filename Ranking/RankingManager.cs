@@ -46,11 +46,12 @@ public class RankingManager : MonoBehaviour
     public string country = "";
 
     private int listNumber = 0;
-    private int listMaxNumber = 400;
+    private int listMaxNumber = 200;
 
     [Space]
     List<RankContent> rankContentList = new List<RankContent>();
     public List<string> rankList = new List<string>();
+    public List<int> iconList = new List<int>();
 
     PlayerDataBase playerDataBase;
 
@@ -224,6 +225,13 @@ public class RankingManager : MonoBehaviour
 
         nextSeason.SetActive(false);
 
+        for (int i = 0; i < rankContentList.Count; i++)
+        {
+            rankContentList[i].transform.localScale = Vector3.one;
+            rankContentList[i].IconState(IconType.Icon_1);
+            rankContentList[i].gameObject.SetActive(false);
+        }
+
         switch (number)
         {
             case 0:
@@ -244,12 +252,6 @@ public class RankingManager : MonoBehaviour
                 }
                 else
                 {
-                    for (int i = 0; i < rankContentList.Count; i++)
-                    {
-                        rankContentList[i].transform.localScale = Vector3.one;
-                        rankContentList[i].gameObject.SetActive(false);
-                    }
-
                     CheckCountry(country);
 
                     nextSeason.SetActive(true);
@@ -337,7 +339,7 @@ public class RankingManager : MonoBehaviour
             }
             else
             {
-                myRankContent.SetIndex(500);
+                myRankContent.SetIndex(listMaxNumber);
             }
 
             isDelay2 = false;
@@ -466,6 +468,32 @@ public class RankingManager : MonoBehaviour
         }
 
         myRankContent.TitleState(playerDataBase.Advancement);
+
+        PlayfabManager.instance.GetLeaderboarder("Icon", 0, SetIcon);
+    }
+
+    void SetIcon(GetLeaderboardResult result)
+    {
+        var curBoard = result.Leaderboard;
+
+        foreach (PlayerLeaderboardEntry player in curBoard)
+        {
+            for (int i = 0; i < rankContentList.Count; i++)
+            {
+                if (rankContentList[i].nickNameText.text.Equals(player.DisplayName) ||
+                    rankContentList[i].nickNameText.text.Equals(player.PlayFabId))
+                {
+                    if (player.StatValue > 0)
+                    {
+                        rankContentList[i].IconState((IconType)player.StatValue);
+                    }
+
+                    continue;
+                }
+            }
+
+            myRankContent.IconState((IconType)playerDataBase.Icon);
+        }
     }
 
     void CheckCountry(string code)

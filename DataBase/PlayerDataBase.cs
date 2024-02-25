@@ -20,6 +20,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int rankPoint = 0;
     [SerializeField]
+    private int icon = 0;
+    [SerializeField]
     private int firstReward = 0;
     [SerializeField]
     private string firstDate = "";
@@ -497,6 +499,9 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int flower7 = 0;
 
+    [Space]
+    [Title("Icon")]
+    public List<IconClass> iconList = new List<IconClass>();
 
     [Space]
     [Title("Island")]
@@ -958,6 +963,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             reviewNumber = value;
+        }
+    }
+
+    public int Icon
+    {
+        get
+        {
+            return icon;
+        }
+        set
+        {
+            icon = value;
         }
     }
 
@@ -4613,6 +4630,7 @@ public class PlayerDataBase : ScriptableObject
         reviewNumber = 0;
         lockTutorial = 0;
         inGameTutorial = 0;
+        icon = 0;
         firstReward = 0;
         firstDate = "";
         firstServerDate = "";
@@ -4802,6 +4820,15 @@ public class PlayerDataBase : ScriptableObject
         flower5 = 0;
         flower6 = 0;
         flower7 = 0;
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(IconType)).Length; i++)
+        {
+            IconClass iconClass = new IconClass();
+            IconType iconType = IconType.Icon_1 + i;
+            iconClass.iconType = iconType;
+            iconClass.count = 0;
+            iconList.Add(iconClass);
+        }
 
         island1 = 0;
         island2 = 0;
@@ -5866,5 +5893,64 @@ public class PlayerDataBase : ScriptableObject
         number += Skill14;
 
         return number;
+    }
+
+    public void SetIcon(IconType type, int number)
+    {
+        for (int i = 0; i < iconList.Count; i++)
+        {
+            if (iconList[i].iconType.Equals(type))
+            {
+                iconList[i].count = number;
+                break;
+            }
+        }
+    }
+
+    public bool CheckIcon(IconType type)
+    {
+        bool check = false;
+
+        for (int i = 0; i < iconList.Count; i++)
+        {
+            if (iconList[i].iconType.Equals(type))
+            {
+                if(iconList[i].count > 0)
+                {
+                    check = true;
+                    break;
+                }
+            }
+        }
+
+        return check;
+    }
+
+    public IconClass GetIconState(IconType type)
+    {
+        IconClass iconClass = new IconClass();
+        for (int i = 0; i < iconList.Count; i++)
+        {
+            if (iconList[i].iconType.Equals(type))
+            {
+                iconClass = iconList[i];
+            }
+        }
+
+        return iconClass;
+    }
+
+    public int GetIconHoldNumber()
+    {
+        int number = 0;
+
+        for (int i = 0; i < iconList.Count; i++)
+        {
+            if (iconList[i].count >= 1)
+            {
+                number++;
+            }
+        }
+        return number + 1;
     }
 }

@@ -126,9 +126,9 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int questCount = 0;
     [SerializeField]
-    private int reincarnationCount = 0;
-    [SerializeField]
     private int buffCount = 0;
+    [SerializeField]
+    private int reincarnationCount = 0;
     [SerializeField]
     private int changeNicknameCount = 0;
 
@@ -144,6 +144,13 @@ public class PlayerDataBase : ScriptableObject
     private int openChestBox = 0;
     [SerializeField]
     private int yummyTimeCount = 0;
+
+    [Space]
+    [Title("GuideMisson")]
+    [SerializeField]
+    private int guiedFirstIndex = 0;
+    [SerializeField]
+    private int guiedIndex = 0;
 
     [Space]
     [Title("Season")]

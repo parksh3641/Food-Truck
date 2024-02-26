@@ -107,7 +107,7 @@ public class LockManager : MonoBehaviour
             menuIcon[10].SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 6) //택배 배송 해제
+        if (playerDataBase.LockTutorial >= 6) //오프라인 보상 해제
         {
             menuIcon[11].SetActive(false);
         }

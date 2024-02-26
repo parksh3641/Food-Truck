@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Purchasing;
 
 public class PackageContent : MonoBehaviour
 {
@@ -13,9 +14,8 @@ public class PackageContent : MonoBehaviour
 
     public ReceiveContent[] receiveContents;
 
-    public GameObject[] buyRmObj;
-    public LocalizationContent[] beforePriceText;
-    public LocalizationContent[] nowPriceText;
+    public CodelessIAPButton iapButton;
+    public LocalizationContent priceText;
 
     public Text bestText;
     public Text timerText;
@@ -63,42 +63,56 @@ public class PackageContent : MonoBehaviour
         switch (type)
         {
             case PackageType.Package1:
+                iapButton.productId = "shop.foodtruck.package1";
+
                 receiveContents[0].Initialize(RewardType.Gold, 3000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
                 receiveContents[3].Initialize(RewardType.BuffTicket, 10);
                 break;
             case PackageType.Package2:
+                iapButton.productId = "shop.foodtruck.package2";
+
                 receiveContents[0].Initialize(RewardType.Gold, 10000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 8000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 40);
                 receiveContents[3].Initialize(RewardType.BuffTicket, 60);
                 break;
             case PackageType.Package3:
+                iapButton.productId = "shop.foodtruck.package3";
+
                 receiveContents[0].Initialize(RewardType.Gold, 20000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 25000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 120);
                 receiveContents[3].Initialize(RewardType.BuffTicket, 120);
                 break;
             case PackageType.Package4:
+                iapButton.productId = "shop.foodtruck.package4";
+
                 receiveContents[0].Initialize(RewardType.Gold, 60000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 40000);
                 receiveContents[2].Initialize(RewardType.BuffTicket, 240);
                 receiveContents[3].Initialize(RewardType.DefDestroyTicket, 200);
                 break;
             case PackageType.Package5:
+                iapButton.productId = "shop.foodtruck.package5";
+
                 receiveContents[0].Initialize(RewardType.Gold, 6000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 1200);
                 receiveContents[2].Initialize(RewardType.PortionSet, 20);
                 receiveContents[3].Initialize(RewardType.BuffTicket, 20);
                 break;
             case PackageType.Package6:
+                iapButton.productId = "shop.foodtruck.package6";
+
                 receiveContents[0].Initialize(RewardType.RemoveAds, -1);
                 receiveContents[1].Initialize(RewardType.GoldX2, -1);
                 receiveContents[2].Initialize(RewardType.AutoUpgrade, -1);
                 receiveContents[3].Initialize(RewardType.AutoPresent, -1);
                 break;
             case PackageType.Package7:
+                iapButton.productId = "shop.foodtruck.package7";
+
                 receiveContents[0].Initialize(RewardType.Gold, 3000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
@@ -106,20 +120,8 @@ public class PackageContent : MonoBehaviour
                 break;
         }
 
-        if (buyRmObj.Length > 0)
-        {
-            for (int i = 0; i < buyRmObj.Length; i++)
-            {
-                buyRmObj[i].SetActive(false);
-            }
-
-            buyRmObj[(int)type].SetActive(true);
-            //beforePriceText[(int)type].localizationName = type.ToString() + "_Before";
-            nowPriceText[(int)type].localizationName = type.ToString();
-
-            //beforePriceText[(int)type].ReLoad();
-            nowPriceText[(int)type].ReLoad();
-        }
+        priceText.localizationName = type.ToString();
+        priceText.ReLoad();
 
         bestText.text = LocalizationManager.instance.GetString(type + "_Info");
     }

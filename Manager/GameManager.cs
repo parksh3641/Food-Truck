@@ -1483,16 +1483,16 @@ public class GameManager : MonoBehaviour
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.05f;
         successPlus += playerDataBase.Treasure1 * 0.2f;
         successPlus += playerDataBase.Advancement * 0.1f;
-        successPlus += playerDataBase.GetIconHoldNumber() * 0.1f;
 
         successX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
-        successX2 += playerDataBase.Treasure3 * 0.2f;
+        successX2 += playerDataBase.Treasure3 * 0.15f;
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 0.4f;
         sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.8f;
         sellPricePlus += playerDataBase.Advancement * 0.4f;
+        sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.3f;
 
         if (IsWeekend())
         {

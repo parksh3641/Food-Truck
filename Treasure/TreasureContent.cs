@@ -39,9 +39,9 @@ public class TreasureContent : MonoBehaviour
 
     private float treasure1Value = 0.2f;
     private float treasure2Value = 0.1f;
-    private float treasure3Value = 0.2f;
+    private float treasure3Value = 0.15f;
     private float treasure4Value = 0.3f;
-    private float treasure5Value = 0.5f;
+    private float treasure5Value = 0.3f;
     private float treasure6Value = 0.6f;
     private float treasure7Value = 0.8f;
     private float treasure8Value = 0.6f;
@@ -454,7 +454,14 @@ public class TreasureContent : MonoBehaviour
 
         infoText.text = LocalizationManager.instance.GetString(type.ToString() + "_Info");
 
-        effectText.text = nowValue.ToString("N1") + "%  ▶  " + nextValue.ToString("N1") + "%";
+        if(treasureType == TreasureType.Treasure3)
+        {
+            effectText.text = nowValue.ToString("N2") + "%  ▶  " + nextValue.ToString("N2") + "%";
+        }
+        else
+        {
+            effectText.text = nowValue.ToString("N1") + "%  ▶  " + nextValue.ToString("N1") + "%";
+        }
 
         upgradePercentText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + percent.ToString() + "%";
 

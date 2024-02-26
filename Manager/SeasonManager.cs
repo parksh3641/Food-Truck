@@ -137,27 +137,40 @@ public class SeasonManager : MonoBehaviour
 
         receiveContents[0].gameObject.SetActive(true);
         receiveContents[1].gameObject.SetActive(true);
+        receiveContents[2].gameObject.SetActive(false);
 
         switch (number)
         {
             case 0:
+                receiveContents[2].gameObject.SetActive(true);
+
                 receiveContents[0].Initialize(RewardType.Crystal, 10000);
                 receiveContents[1].Initialize(RewardType.RankPoint, 5000);
+                receiveContents[2].Initialize(RewardType.Icon_Ranking1, 1);
 
                 break;
             case 1:
+                receiveContents[2].gameObject.SetActive(true);
+
                 receiveContents[0].Initialize(RewardType.Crystal, 8000);
                 receiveContents[1].Initialize(RewardType.RankPoint, 4000);
+                receiveContents[2].Initialize(RewardType.Icon_Ranking2, 1);
 
                 break;
             case 2:
+                receiveContents[2].gameObject.SetActive(true);
+
                 receiveContents[0].Initialize(RewardType.Crystal, 6000);
                 receiveContents[1].Initialize(RewardType.RankPoint, 3000);
+                receiveContents[2].Initialize(RewardType.Icon_Ranking3, 1);
 
                 break;
             case 3:
+                receiveContents[2].gameObject.SetActive(true);
+
                 receiveContents[0].Initialize(RewardType.Crystal, 4000);
                 receiveContents[1].Initialize(RewardType.RankPoint, 2000);
+                receiveContents[2].Initialize(RewardType.Icon_Ranking4, 1);
 
                 break;
             case 4:
@@ -212,21 +225,45 @@ public class SeasonManager : MonoBehaviour
                 PortionManager.instance.GetRankPoint(5000);
 
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10000);
+
+                if (!playerDataBase.CheckIcon(IconType.Icon_39))
+                {
+                    playerDataBase.SetIcon(IconType.Icon_39, 1);
+                    PlayfabManager.instance.GrantItemsToUser((IconType.Icon_39).ToString(), "Icon");
+                }
                 break;
             case 1:
                 PortionManager.instance.GetRankPoint(4000);
 
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 8000);
+
+                if (!playerDataBase.CheckIcon(IconType.Icon_40))
+                {
+                    playerDataBase.SetIcon(IconType.Icon_40, 1);
+                    PlayfabManager.instance.GrantItemsToUser((IconType.Icon_40).ToString(), "Icon");
+                }
                 break;
             case 2:
                 PortionManager.instance.GetRankPoint(3000);
 
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 6000);
+
+                if (!playerDataBase.CheckIcon(IconType.Icon_41))
+                {
+                    playerDataBase.SetIcon(IconType.Icon_41, 1);
+                    PlayfabManager.instance.GrantItemsToUser((IconType.Icon_41).ToString(), "Icon");
+                }
                 break;
             case 3:
                 PortionManager.instance.GetRankPoint(2000);
 
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 4000);
+
+                if (!playerDataBase.CheckIcon(IconType.Icon_42))
+                {
+                    playerDataBase.SetIcon(IconType.Icon_42, 1);
+                    PlayfabManager.instance.GrantItemsToUser((IconType.Icon_42).ToString(), "Icon");
+                }
                 break;
             case 4:
                 PortionManager.instance.GetRankPoint(1000);

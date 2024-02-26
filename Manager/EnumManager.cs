@@ -363,6 +363,11 @@ public enum RewardType
     DungeonKey2,
     DungeonKey3,
     DungeonKey4,
+    Icon_Ranking1,
+    Icon_Ranking2,
+    Icon_Ranking3,
+    Icon_Ranking4,
+    Icon_SP,
 }
 
 public enum QuestType

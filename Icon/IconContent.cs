@@ -63,5 +63,142 @@ public class IconContent : MonoBehaviour
         {
             iconManager.UseIcon(iconType);
         }
+        else
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+
+            switch (iconType)
+            {
+                case IconType.Icon_1:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked1);
+                    break;
+                case IconType.Icon_2:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked1);
+                    break;
+                case IconType.Icon_3:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked1);
+                    break;
+                case IconType.Icon_4:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked1);
+                    break;
+                case IconType.Icon_5:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_6:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_7:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_8:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_9:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_10:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_11:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_12:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_13:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_14:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_15:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_16:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_17:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_18:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_19:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_20:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_21:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_22:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_23:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_24:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_25:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_26:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_27:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_28:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_29:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_30:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_31:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_32:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_33:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_34:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked2);
+                    break;
+                case IconType.Icon_35:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked3);
+                    break;
+                case IconType.Icon_36:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked3);
+                    break;
+                case IconType.Icon_37:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked3);
+                    break;
+                case IconType.Icon_38:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked3);
+                    break;
+                case IconType.Icon_39:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked4);
+                    break;
+                case IconType.Icon_40:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked5);
+                    break;
+                case IconType.Icon_41:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked6);
+                    break;
+                case IconType.Icon_42:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked7);
+                    break;
+                case IconType.Icon_43:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked8);
+                    break;
+            }
+        }
     }
 }

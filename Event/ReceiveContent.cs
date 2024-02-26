@@ -174,6 +174,31 @@ public class ReceiveContent : MonoBehaviour
             case RewardType.SpeicalCharacter:
                 mainBackground.sprite = rankBackgroundArray[3];
                 break;
+            case RewardType.EquipExp:
+                break;
+            case RewardType.DungeonKey1:
+                break;
+            case RewardType.DungeonKey2:
+                break;
+            case RewardType.DungeonKey3:
+                break;
+            case RewardType.DungeonKey4:
+                break;
+            case RewardType.Icon_Ranking1:
+                mainBackground.sprite = rankBackgroundArray[3];
+                break;
+            case RewardType.Icon_Ranking2:
+                mainBackground.sprite = rankBackgroundArray[3];
+                break;
+            case RewardType.Icon_Ranking3:
+                mainBackground.sprite = rankBackgroundArray[3];
+                break;
+            case RewardType.Icon_Ranking4:
+                mainBackground.sprite = rankBackgroundArray[3];
+                break;
+            case RewardType.Icon_SP:
+                mainBackground.sprite = rankBackgroundArray[3];
+                break;
         }
     }
 

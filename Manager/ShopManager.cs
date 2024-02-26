@@ -600,10 +600,28 @@ public class ShopManager : MonoBehaviour
 
                 shopContents[0].SetLocked(true);
 
-                PlayfabManager.instance.UpdateAddGold(100000);
-
                 SoundManager.instance.PlaySFX(GameSfxType.Success);
                 NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+                if (playerDataBase.Dessert1MaxValue > 0)
+                {
+                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    return;
+                }
+
+                if (playerDataBase.JapaneseFood1MaxValue > 0)
+                {
+                    PlayfabManager.instance.UpdateAddGold(500000);
+                    return;
+                }
+
+                if (playerDataBase.Candy1MaxValue > 0)
+                {
+                    PlayfabManager.instance.UpdateAddGold(300000);
+                    return;
+                }
+
+                PlayfabManager.instance.UpdateAddGold(100000);
 
                 break;
             case ItemType.AdReward_Gold:
@@ -611,9 +629,9 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case ItemType.DefDestroyTicket:
-                if (playerDataBase.RankPoint >= 1000)
+                if (playerDataBase.RankPoint >= 500)
                 {
-                    playerDataBase.RankPoint -= 1000;
+                    playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -775,9 +793,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion5:
-                if (playerDataBase.RankPoint >= 200)
+                if (playerDataBase.RankPoint >= 150)
                 {
-                    playerDataBase.RankPoint -= 200;
+                    playerDataBase.RankPoint -= 150;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();

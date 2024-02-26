@@ -109,6 +109,21 @@ public class ShopContent : MonoBehaviour
         {
             case ItemType.DailyReward:
                 rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(100000) + "</size>";
+
+                if (playerDataBase.Candy1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(300000) + "</size>";
+                }
+
+                if (playerDataBase.JapaneseFood1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(500000) + "</size>";
+                }
+
+                if (playerDataBase.Dessert1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
+                }
                 break;
             case ItemType.AdReward_Gold:
                 rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(300000) + "</size>";
@@ -132,7 +147,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(1000);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(500);
 
                 titleText.plusText = " x1";
 
@@ -339,7 +354,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion4:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(120);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(100);
 
                 titleText.plusText = " x1";
 
@@ -350,7 +365,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.Portion5:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(200);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(150);
 
                 titleText.plusText = " x1";
 

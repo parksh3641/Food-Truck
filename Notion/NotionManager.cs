@@ -263,5 +263,13 @@ public enum NotionType
     SuccessPromotion,
     NotEnoughConditions,
     SpeicalFoodNotion,
-    SaveNotion
+    SaveNotion,
+    Icon_Locked1,
+    Icon_Locked2,
+    Icon_Locked3,
+    Icon_Locked4,
+    Icon_Locked5,
+    Icon_Locked6,
+    Icon_Locked7,
+    Icon_Locked8,
 }

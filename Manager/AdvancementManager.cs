@@ -24,7 +24,8 @@ public class AdvancementManager : MonoBehaviour
     public GameObject[] checkMarks;
 
     public Image[] needImg;
-    public Sprite[] buttonImg;
+
+    public GameObject lockedObj;
 
     public Image advenceLevelUpButton;
 
@@ -52,6 +53,8 @@ public class AdvancementManager : MonoBehaviour
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
+
+        lockedObj.SetActive(false);
     }
 
     public void Initialize()
@@ -128,13 +131,13 @@ public class AdvancementManager : MonoBehaviour
 
         if(playerDataBase.Level >= nowNeed1 && playerDataBase.GourmetLevel >= nowNeed2 && playerDataBase.Proficiency >= nowNeed3)
         {
-            advenceLevelUpButton.sprite = buttonImg[1];
+            lockedObj.SetActive(false);
 
             isActive = true;
         }
         else
         {
-            advenceLevelUpButton.sprite = buttonImg[0];
+            lockedObj.SetActive(true);
 
             isActive = false;
         }

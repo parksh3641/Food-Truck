@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
     public GameObject moveArrow2;
     public GameObject moveArrow3;
 
+    public GameObject rareFood;
+
     [Space]
     [Title("Buff")]
     public Text buff1Text;
@@ -429,6 +431,8 @@ public class GameManager : MonoBehaviour
         moveArrow2.SetActive(false);
         moveArrow3.SetActive(false);
 
+        rareFood.SetActive(false);
+
         decemberStart = new DateTime(currentDate.Year, 12, 1);
         decemberEnd = new DateTime(currentDate.Year, 1, 31);
     }
@@ -564,7 +568,7 @@ public class GameManager : MonoBehaviour
 
         levelManager.Initialize();
 
-        bestRankLevelText.localizationName = "Best";
+        bestRankLevelText.localizationName = "TotalLevel";
         bestRankLevelText.plusText = "";
 
         switch (SeasonManager.instance.CheckSeason_Ranking())
@@ -1492,7 +1496,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.8f;
         sellPricePlus += playerDataBase.Advancement * 0.4f;
-        sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.3f;
+        sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.2f;
 
         if (IsWeekend())
         {
@@ -1908,7 +1912,7 @@ public class GameManager : MonoBehaviour
         CheckLocked();
 
         questManager.CheckingAlarm();
-        gourmetManager.Initialize();
+        GourmetManager.instance.Initialize();
     }
 
     public void Initialize()
@@ -1938,6 +1942,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void OFFSpeicalFood()
+    {
+        speicalFood = false;
+        speicalFoodParticle.gameObject.SetActive(false);
+        rareFood.SetActive(false);
+    }
+
     public void ChangeIsland(IslandType type)
     {
         GameStateManager.instance.IslandType = type;
@@ -1945,8 +1956,7 @@ public class GameManager : MonoBehaviour
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
         changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
-        speicalFood = false;
-        speicalFoodParticle.gameObject.SetActive(false);
+        OFFSpeicalFood();
 
         switch (GameStateManager.instance.IslandType)
         {
@@ -2008,8 +2018,7 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.FoodType = type;
 
-        speicalFood = false;
-        speicalFoodParticle.gameObject.SetActive(false);
+        OFFSpeicalFood();
 
         if (type == FoodType.Food4)
         {
@@ -2033,8 +2042,7 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.CandyType = type;
 
-        speicalFood = false;
-        speicalFoodParticle.gameObject.SetActive(false);
+        OFFSpeicalFood();
 
         upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
 
@@ -2047,8 +2055,7 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.JapaneseFoodType = type;
 
-        speicalFood = false;
-        speicalFoodParticle.gameObject.SetActive(false);
+        OFFSpeicalFood();
 
         upgradeJapaneseFood = upgradeDataBase.GetUpgradeJapaneseFood(GameStateManager.instance.JapaneseFoodType);
 
@@ -2061,8 +2068,7 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.DessertType = type;
 
-        speicalFood = false;
-        speicalFoodParticle.gameObject.SetActive(false);
+        OFFSpeicalFood();
 
         upgradeDessert = upgradeDataBase.GetUpgradeDessert(GameStateManager.instance.DessertType);
 
@@ -3977,7 +3983,9 @@ public class GameManager : MonoBehaviour
         {
             yummyTimeParticle.gameObject.SetActive(false);
             yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+
             speicalFoodParticle.gameObject.SetActive(false);
+            rareFood.SetActive(false);
         }
     }
 
@@ -4807,8 +4815,7 @@ public class GameManager : MonoBehaviour
             GameStateManager.instance.SellCount += 1;
         }
 
-        speicalFood = false;
-        speicalFoodParticle.gameObject.SetActive(false);
+        OFFSpeicalFood();
 
         speicalFoodCount += 1;
 
@@ -4834,6 +4841,7 @@ public class GameManager : MonoBehaviour
                     speicalFoodParticle.gameObject.SetActive(false);
                     speicalFoodParticle.gameObject.SetActive(true);
                     speicalFoodParticle.Play();
+                    rareFood.SetActive(true);
                 }
             }
         }
@@ -5017,9 +5025,12 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Portion1 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion1", playerDataBase.Portion1);
 
-                        playerDataBase.UseSources += 1;
+                        playerDataBase.UseSauceCount += 1;
                         GameStateManager.instance.UseSauce += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSauceCount);
+
+                        playerDataBase.UseSauce1 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSauce1", playerDataBase.UseSauce1);
 
                         StartCoroutine(PortionCoroution1());
 
@@ -5048,9 +5059,12 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Portion2 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion2", playerDataBase.Portion2);
 
-                        playerDataBase.UseSources += 1;
+                        playerDataBase.UseSauceCount += 1;
                         GameStateManager.instance.UseSauce += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSauceCount);
+
+                        playerDataBase.UseSauce2 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSauce2", playerDataBase.UseSauce2);
 
                         StartCoroutine(PortionCoroution2());
 
@@ -5079,9 +5093,12 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Portion3 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion3", playerDataBase.Portion3);
 
-                        playerDataBase.UseSources += 1;
+                        playerDataBase.UseSauceCount += 1;
                         GameStateManager.instance.UseSauce += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSauceCount);
+
+                        playerDataBase.UseSauce3 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSauce3", playerDataBase.UseSauce3);
 
                         StartCoroutine(PortionCoroution3());
 
@@ -5108,9 +5125,12 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Portion4 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion4", playerDataBase.Portion4);
 
-                        playerDataBase.UseSources += 1;
+                        playerDataBase.UseSauceCount += 1;
                         GameStateManager.instance.UseSauce += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSauceCount);
+
+                        playerDataBase.UseSauce4 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSauce4", playerDataBase.UseSauce4);
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion(NotionType.UsePortionNotion4);
@@ -5137,9 +5157,12 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Portion5 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
 
-                        playerDataBase.UseSources += 1;
+                        playerDataBase.UseSauceCount += 1;
                         GameStateManager.instance.UseSauce += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSauceCount);
+
+                        playerDataBase.UseSauce5 += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSauce5", playerDataBase.UseSauce5);
 
                         StartCoroutine(PortionCoroution5());
 
@@ -5174,8 +5197,8 @@ public class GameManager : MonoBehaviour
                         playerDataBase.Portion6 -= 1;
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion6", playerDataBase.Portion6);
 
-                        playerDataBase.UseSources += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSources);
+                        playerDataBase.UseSauceCount += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSources", playerDataBase.UseSauceCount);
 
                         StartCoroutine(PortionCoroution6());
 

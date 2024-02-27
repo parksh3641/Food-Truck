@@ -390,30 +390,54 @@ public class ShopManager : MonoBehaviour
                 {
                     shopContents[0].SetLocked(false);
                 }
+                else
+                {
+                    shopContents[0].SetLocked(true);
+                }
 
                 if (playerDataBase.DailyReward_Portion == 0)
                 {
                     shopContents[11].SetLocked(false);
+                }
+                else
+                {
+                    shopContents[11].SetLocked(true);
                 }
 
                 if (playerDataBase.DailyReward_DefTicket == 0)
                 {
                     shopContents[25].SetLocked(false);
                 }
+                else
+                {
+                    shopContents[25].SetLocked(true);
+                }
 
                 if (playerDataBase.DailyReward_Crystal == 0)
                 {
                     shopContents[33].SetLocked(false);
+                }
+                else
+                {
+                    shopContents[33].SetLocked(true);
                 }
 
                 if (playerDataBase.DailyAdsReward == 0)
                 {
                     shopContents[1].SetLocked(false);
                 }
+                else
+                {
+                    shopContents[1].SetLocked(true);
+                }
 
                 if (playerDataBase.DailyAdsReward2 == 0)
                 {
                     shopContents[6].SetLocked(false);
+                }
+                else
+                {
+                    shopContents[6].SetLocked(true);
                 }
 
                 if (playerDataBase.RemoveAds)
@@ -3112,6 +3136,8 @@ public class ShopManager : MonoBehaviour
         selectText.text = LocalizationManager.instance.GetString("Selected");
 
         selectCheckMarkObj.SetActive(true);
+
+        GourmetManager.instance.Initialize();
     }
 
     public void BuyItem(int number)
@@ -3867,7 +3893,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetBuffTickets(60);
+                PortionManager.instance.GetBuffTickets(40);
                 break;
             case PackageType.Package3:
                 playerDataBase.Package3 = true;
@@ -3882,11 +3908,11 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetAllPortion(120);
+                PortionManager.instance.GetAllPortion(60);
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetBuffTickets(120);
+                PortionManager.instance.GetBuffTickets(60);
                 break;
             case PackageType.Package4:
                 playerDataBase.Package4 = true;
@@ -3897,15 +3923,15 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 40000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50000);
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetBuffTickets(240);
+                PortionManager.instance.GetBuffTickets(120);
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetDefTickets(200);
+                PortionManager.instance.GetDefTickets(100);
                 break;
             case PackageType.Package5:
                 playerDataBase.Package5 = true;

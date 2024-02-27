@@ -95,6 +95,7 @@ public class LevelManager : MonoBehaviour
 
         if(nowLevel != 0 && level > nowLevel)
         {
+            SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
             NotionManager.instance.UseNotion3(NotionType.Levelup);
 
             GameManager.instance.CheckPercent();
@@ -139,5 +140,7 @@ public class LevelManager : MonoBehaviour
         infoText.plusText = " : +" + (level * 0.05f).ToString("N1") + "%";
 
         accessDateText.text = LocalizationManager.instance.GetString("AccessDate") + " : " + playerDataBase.AccessDate;
+
+        GourmetManager.instance.Initialize();
     }
 }

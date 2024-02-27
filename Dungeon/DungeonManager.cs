@@ -88,9 +88,9 @@ public class DungeonManager : MonoBehaviour
     void Initialize()
     {
         dungeonContents[0].Initialize(DungeonType.Dungeon1, RewardType.Gold, RewardType.EquipExp, ItemType.DungeonKey1);
-        dungeonContents[1].Initialize(DungeonType.Dungeon2, RewardType.Exp, RewardType.EquipExp, ItemType.DungeonKey2);
-        dungeonContents[2].Initialize(DungeonType.Dungeon3, RewardType.Crystal, RewardType.EquipExp, ItemType.DungeonKey3);
-        dungeonContents[3].Initialize(DungeonType.Dungeon4, RewardType.TreasureBox, RewardType.EquipExp, ItemType.DungeonKey4);
+        dungeonContents[1].Initialize(DungeonType.Dungeon2, RewardType.Crystal, RewardType.EquipExp, ItemType.DungeonKey2);
+        dungeonContents[2].Initialize(DungeonType.Dungeon3, RewardType.BuffTicket, RewardType.EquipExp, ItemType.DungeonKey3);
+        dungeonContents[3].Initialize(DungeonType.Dungeon4, RewardType.SkillTicket, RewardType.EquipExp, ItemType.DungeonKey4);
     }
     IEnumerator TimerCoroution()
     {

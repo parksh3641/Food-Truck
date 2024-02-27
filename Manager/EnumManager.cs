@@ -353,10 +353,10 @@ public enum RewardType
     GoldX2,
     AutoUpgrade,
     AutoPresent,
-    Island1,
-    Island2,
-    Island3,
-    Island4,
+    Island1_Heart,
+    Island2_Heart,
+    Island3_Heart,
+    Island4_Heart,
     SpeicalCharacter,
     EquipExp,
     DungeonKey1,
@@ -368,6 +368,7 @@ public enum RewardType
     Icon_Ranking3,
     Icon_Ranking4,
     Icon_SP,
+    DungeonBox
 }
 
 public enum QuestType
@@ -565,4 +566,13 @@ public enum IconType
     Icon_41,
     Icon_42,
     Icon_43,
+    Icon_44,
+    Icon_45,
+    Icon_46,
+    Icon_47,
+    Icon_48,
+    Icon_49,
+    Icon_50,
+    Icon_51,
+    Icon_52,
 }

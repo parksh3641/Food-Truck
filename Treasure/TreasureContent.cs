@@ -452,7 +452,7 @@ public class TreasureContent : MonoBehaviour
 
         levelText.text = "Lv. " + level + " / " + maxLevel;
 
-        infoText.text = LocalizationManager.instance.GetString(type.ToString() + "_Info");
+        infoText.text = LocalizationManager.instance.GetString(type.ToString() + "_Effect");
 
         if(treasureType == TreasureType.Treasure3)
         {
@@ -645,7 +645,10 @@ public class TreasureContent : MonoBehaviour
                 }
                 break;
         }
+
         Initialize(treasureType, treasureManager);
+
+        GourmetManager.instance.Initialize();
 
         isDelay = true;
         Invoke("Delay", 0.3f);

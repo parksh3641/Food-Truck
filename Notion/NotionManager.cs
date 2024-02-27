@@ -13,7 +13,7 @@ public class NotionManager : MonoBehaviour
     public Notion notion;
 
     public Notion notion2; //선물 등장
-    public Notion notion3; //레벨 업
+    public Notion notion3; //레벨 업, 미식 점수
     public Notion notion4; //파괴 방어
 
 
@@ -54,6 +54,16 @@ public class NotionManager : MonoBehaviour
         }    
 
         notion.gameObject.SetActive(true);
+    }
+
+    public void UseNotion3(Color color, string txt)
+    {
+        notion3.gameObject.SetActive(false);
+
+        notion3.txt.text = txt;
+        notion3.txt.color = color;
+
+        notion3.gameObject.SetActive(true);
     }
 
     public void UseNotion2(NotionType type)
@@ -272,4 +282,9 @@ public enum NotionType
     Icon_Locked6,
     Icon_Locked7,
     Icon_Locked8,
+    Icon_Locked9,
+    Icon_Locked10,
+    Icon_Locked11,
+    Icon_Locked12,
+    Icon_Locked13,
 }

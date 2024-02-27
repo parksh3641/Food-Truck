@@ -20,6 +20,8 @@ public class ChangeIslandContent : MonoBehaviour
     public GameObject lockedObj;
     public GameObject selectedObj;
 
+    public GameObject levelUpLockedObj;
+
     public Sprite[] buttonImgArray;
 
     public Image buttonImg;
@@ -86,13 +88,12 @@ public class ChangeIslandContent : MonoBehaviour
 
                 if (playerDataBase.Island1Count >= ((playerDataBase.Island1Level + 1) * 100))
                 {
-                    LevelUpButtonImg.sprite = buttonImgArray[2];
+                    levelUpLockedObj.SetActive(false);
                 }
                 else
                 {
-                    LevelUpButtonImg.sprite = buttonImgArray[0];
+                    levelUpLockedObj.SetActive(true);
                 }
-
                 break;
             case IslandType.Island2:
                 needPriceText.text = playerDataBase.Island2Count + "/" + ((playerDataBase.Island2Level + 1) * 100).ToString();
@@ -103,11 +104,11 @@ public class ChangeIslandContent : MonoBehaviour
 
                 if (playerDataBase.Island2Count >= ((playerDataBase.Island2Level + 1) * 100))
                 {
-                    LevelUpButtonImg.sprite = buttonImgArray[2];
+                    levelUpLockedObj.SetActive(false);
                 }
                 else
                 {
-                    LevelUpButtonImg.sprite = buttonImgArray[0];
+                    levelUpLockedObj.SetActive(true);
                 }
                 break;
             case IslandType.Island3:
@@ -119,11 +120,11 @@ public class ChangeIslandContent : MonoBehaviour
 
                 if (playerDataBase.Island3Count >= ((playerDataBase.Island3Level + 1) * 100))
                 {
-                    LevelUpButtonImg.sprite = buttonImgArray[2];
+                    levelUpLockedObj.SetActive(false);
                 }
                 else
                 {
-                    LevelUpButtonImg.sprite = buttonImgArray[0];
+                    levelUpLockedObj.SetActive(true);
                 }
                 break;
             case IslandType.Island4:
@@ -135,11 +136,11 @@ public class ChangeIslandContent : MonoBehaviour
 
                 if (playerDataBase.Island4Count >= ((playerDataBase.Island4Level + 1) * 100))
                 {
-                    LevelUpButtonImg.sprite = buttonImgArray[2];
+                    levelUpLockedObj.SetActive(false);
                 }
                 else
                 {
-                    LevelUpButtonImg.sprite = buttonImgArray[0];
+                    levelUpLockedObj.SetActive(true);
                 }
                 break;
         }

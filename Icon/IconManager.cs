@@ -14,7 +14,11 @@ public class IconManager : MonoBehaviour
 {
     IconType iconType = IconType.Icon_1;
 
+    public GameObject alarm;
+
     public GameObject iconView;
+
+    public Text titleText;
 
     public IconContent iconPrefab;
 
@@ -59,6 +63,8 @@ public class IconManager : MonoBehaviour
         iconView.SetActive(false);
         saveLockObject.SetActive(true);
 
+        alarm.SetActive(true);
+
         iconContentTransform.anchoredPosition = new Vector2(0, -9999);
     }
 
@@ -67,6 +73,8 @@ public class IconManager : MonoBehaviour
         if (!iconView.activeSelf)
         {
             iconView.SetActive(true);
+
+            alarm.SetActive(false);
 
             CheckMyIcon();
         }
@@ -84,6 +92,8 @@ public class IconManager : MonoBehaviour
 
     public void CheckMyIcon()
     {
+        titleText.text = LocalizationManager.instance.GetString("ChangeIcon") + " ( " + playerDataBase.GetIconHoldNumber() +" / " + System.Enum.GetValues(typeof(IconType)).Length + " )";
+
         for (int i = 0; i < iconContentList.Count; i++)
         {
             iconContentList[i].CheckMark(false);
@@ -93,7 +103,7 @@ public class IconManager : MonoBehaviour
 
         int plusScore = playerDataBase.GetIconHoldNumber();
 
-        plusText.text = LocalizationManager.instance.GetString("NowPrice") + " +" + (0.3f * plusScore).ToString() + "%  (+0.3%)";
+        plusText.text = LocalizationManager.instance.GetString("NowPrice") + " +" + (0.2f * plusScore).ToString() + "%  (+0.2%)";
 
         CheckInitialize();
     }
@@ -375,6 +385,60 @@ public class IconManager : MonoBehaviour
 
         number++;
         if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.GetPetNumber() > 6 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.GetFoodTruckNumber() > 8 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.GetCharacterNumber() > 18 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.GetButterflyNumber() > 26 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.UseSauce1 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.UseSauce2 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.UseSauce3 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.UseSauce4 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.UseSauce5 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }

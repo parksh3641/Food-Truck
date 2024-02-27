@@ -159,16 +159,16 @@ public class ReceiveContent : MonoBehaviour
                 countText.text = LocalizationManager.instance.GetString("AutoPresent");
                 countText.alignment = TextAnchor.MiddleCenter;
                 break;
-            case RewardType.Island1:
+            case RewardType.Island1_Heart:
                 mainBackground.sprite = rankBackgroundArray[0];
                 break;
-            case RewardType.Island2:
+            case RewardType.Island2_Heart:
                 mainBackground.sprite = rankBackgroundArray[0];
                 break;
-            case RewardType.Island3:
+            case RewardType.Island3_Heart:
                 mainBackground.sprite = rankBackgroundArray[0];
                 break;
-            case RewardType.Island4:
+            case RewardType.Island4_Heart:
                 mainBackground.sprite = rankBackgroundArray[0];
                 break;
             case RewardType.SpeicalCharacter:

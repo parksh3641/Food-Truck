@@ -196,7 +196,34 @@ public class IconContent : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.Icon_Locked7);
                     break;
                 case IconType.Icon_43:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked9);
+                    break;
+                case IconType.Icon_44:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked10);
+                    break;
+                case IconType.Icon_45:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked11);
+                    break;
+                case IconType.Icon_46:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked12);
+                    break;
+                case IconType.Icon_47:
                     NotionManager.instance.UseNotion(NotionType.Icon_Locked8);
+                    break;
+                case IconType.Icon_48:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked13);
+                    break;
+                case IconType.Icon_49:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked13);
+                    break;
+                case IconType.Icon_50:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked13);
+                    break;
+                case IconType.Icon_51:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked13);
+                    break;
+                case IconType.Icon_52:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked13);
                     break;
             }
         }

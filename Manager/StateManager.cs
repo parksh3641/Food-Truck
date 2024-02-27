@@ -78,6 +78,7 @@ public class StateManager : MonoBehaviour
         SeasonManager.instance.CheckSeason();
         advancementManager.Initialize();
         iconManager.Initialize();
+        GourmetManager.instance.Initialize();
 
         Debug.LogError("Load Complete!");
     }

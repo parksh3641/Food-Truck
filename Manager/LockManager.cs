@@ -93,18 +93,18 @@ public class LockManager : MonoBehaviour
         {
             menuIcon[4].SetActive(true);
             menuIcon[6].SetActive(true);
-            menuIcon[8].SetActive(true);
-            menuIcon[9].SetActive(true);
         }
 
         if (playerDataBase.LockTutorial >= 4) //레시피 해제
         {
             menuIcon[7].SetActive(false);
+            menuIcon[8].SetActive(true);
         }
 
         if (playerDataBase.LockTutorial >= 5) //퀘스트 해제
         {
             menuIcon[10].SetActive(false);
+            menuIcon[9].SetActive(true);
         }
 
         if (playerDataBase.LockTutorial >= 6) //오프라인 보상 해제

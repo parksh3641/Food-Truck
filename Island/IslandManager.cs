@@ -233,5 +233,7 @@ public class IslandManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+
+        GourmetManager.instance.Initialize();
     }
 }

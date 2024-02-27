@@ -45,10 +45,10 @@ public class InventoryManager : MonoBehaviour
 
     void Initialize()
     {
-        receiveContents[0].Initialize(RewardType.Island1, playerDataBase.Island1Count);
-        receiveContents[1].Initialize(RewardType.Island2, playerDataBase.Island2Count);
-        receiveContents[2].Initialize(RewardType.Island3, playerDataBase.Island3Count);
-        receiveContents[3].Initialize(RewardType.Island4, playerDataBase.Island4Count);
+        receiveContents[0].Initialize(RewardType.Island1_Heart, playerDataBase.Island1Count);
+        receiveContents[1].Initialize(RewardType.Island2_Heart, playerDataBase.Island2Count);
+        receiveContents[2].Initialize(RewardType.Island3_Heart, playerDataBase.Island3Count);
+        receiveContents[3].Initialize(RewardType.Island4_Heart, playerDataBase.Island4Count);
         receiveContents[4].Initialize(RewardType.Portion1, playerDataBase.Portion1);
         receiveContents[5].Initialize(RewardType.Portion2, playerDataBase.Portion2);
         receiveContents[6].Initialize(RewardType.Portion3, playerDataBase.Portion3);

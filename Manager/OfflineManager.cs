@@ -254,6 +254,8 @@ public class OfflineManager : MonoBehaviour
 
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
                 NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+
+                GourmetManager.instance.Initialize();
             }
             else
             {

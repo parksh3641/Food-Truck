@@ -218,18 +218,10 @@ public class QuestManager : MonoBehaviour
 
         questClearCountText.text = LocalizationManager.instance.GetString("ClearCount") + " : " + playerDataBase.QuestCount;
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 30);
-
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward2);
         PlayfabManager.instance.UpdateAddGold(reward);
 
-        NotionManager.instance.UseNotion(NotionType.QuestNotion);
-        SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
-
-        Initialize();
-
-        alarm.SetActive(false);
-
-        FirebaseAnalytics.LogEvent("QuestClear");
+        QuestClear();
     }
 
     public void ClearAdButton()
@@ -290,8 +282,14 @@ public class QuestManager : MonoBehaviour
             number = 10;
         }
 
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward2);
         PlayfabManager.instance.UpdateAddGold(reward * number);
 
+        QuestClear();
+    }
+
+    void QuestClear()
+    {
         NotionManager.instance.UseNotion(NotionType.QuestNotion);
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
 
@@ -300,6 +298,8 @@ public class QuestManager : MonoBehaviour
         alarm.SetActive(false);
 
         FirebaseAnalytics.LogEvent("QuestClear");
+
+        GourmetManager.instance.Initialize();
     }
 
     bool IsWeekend()

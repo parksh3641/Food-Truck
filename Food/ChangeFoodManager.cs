@@ -318,7 +318,7 @@ public class ChangeFoodManager : MonoBehaviour
 
         proficiencyLevelText.text = level.ToString();
 
-        proficiencyValueText.text = nowExp + " / " + nextExp;
+        proficiencyValueText.text = LocalizationManager.instance.GetString("Total") + " : ( " + nowExp + " / " + nextExp + " )";
         proficiencyFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
 
         proficiencyEffectText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (level * 1) + "%   (+1%)";

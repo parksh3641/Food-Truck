@@ -215,7 +215,7 @@ public class UpgradeDataBase : ScriptableObject
                     need = level * value * needList[level].value;
                     break;
                 case GameType.Rank:
-                    need = 400 * level;
+                    need = 500 * level;
                     break;
             }
 

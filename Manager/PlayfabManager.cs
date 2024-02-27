@@ -1426,6 +1426,21 @@ public class PlayfabManager : MonoBehaviour
                        case "ChangeNicknameCount":
                            playerDataBase.ChangeNicknameCount = statistics.Value;
                            break;
+                       case "UseSauce1":
+                           playerDataBase.UseSauce1 = statistics.Value;
+                           break;
+                       case "UseSauce2":
+                           playerDataBase.UseSauce2 = statistics.Value;
+                           break;
+                       case "UseSauce3":
+                           playerDataBase.UseSauce3 = statistics.Value;
+                           break;
+                       case "UseSauce4":
+                           playerDataBase.UseSauce4 = statistics.Value;
+                           break;
+                       case "UseSauce5":
+                           playerDataBase.UseSauce5 = statistics.Value;
+                           break;
                        case "AccessDate":
                            playerDataBase.AccessDate = statistics.Value;
                            break;
@@ -1790,7 +1805,7 @@ public class PlayfabManager : MonoBehaviour
                            playerDataBase.SellCount = statistics.Value;
                            break;
                        case "UseSources":
-                           playerDataBase.UseSources = statistics.Value;
+                           playerDataBase.UseSauceCount = statistics.Value;
                            break;
                        case "OpenChestBox":
                            playerDataBase.OpenChestBox = statistics.Value;

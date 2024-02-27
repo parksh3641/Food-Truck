@@ -131,6 +131,16 @@ public class PlayerDataBase : ScriptableObject
     private int reincarnationCount = 0;
     [SerializeField]
     private int changeNicknameCount = 0;
+    [SerializeField]
+    private int useSauce1 = 0;
+    [SerializeField]
+    private int useSauce2 = 0;
+    [SerializeField]
+    private int useSauce3 = 0;
+    [SerializeField]
+    private int useSauce4 = 0;
+    [SerializeField]
+    private int useSauce5 = 0;
 
     [Space]
     [Title("Quest")]
@@ -139,7 +149,7 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int sellCount = 0;
     [SerializeField]
-    private int useSources = 0;
+    private int useSauceCount = 0;
     [SerializeField]
     private int openChestBox = 0;
     [SerializeField]
@@ -2341,15 +2351,15 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int UseSources
+    public int UseSauceCount
     {
         get
         {
-            return useSources;
+            return useSauceCount;
         }
         set
         {
-            useSources = value;
+            useSauceCount = value;
         }
     }
 
@@ -2555,6 +2565,36 @@ public class PlayerDataBase : ScriptableObject
         {
             changeNicknameCount = value;
         }
+    }
+
+    public int UseSauce1
+    {
+        get{ return useSauce1; }
+        set { useSauce1 = value; }
+    }
+
+    public int UseSauce2
+    {
+        get { return useSauce2; }
+        set { useSauce2 = value; }
+    }
+
+    public int UseSauce3
+    {
+        get { return useSauce3; }
+        set { useSauce3 = value; }
+    }
+
+    public int UseSauce4
+    {
+        get { return useSauce4; }
+        set { useSauce4 = value; }
+    }
+
+    public int UseSauce5
+    {
+        get { return useSauce5; }
+        set { useSauce5 = value; }
     }
 
     public int GetGold
@@ -4863,11 +4903,17 @@ public class PlayerDataBase : ScriptableObject
         consumeGold = 0;
         buyCrystal = 0;
         gourmetLevel = 0;
-        ChangeNicknameCount = 0;
+        changeNicknameCount = 0;
+
+        useSauce1 = 0;
+        useSauce2 = 0;
+        useSauce3 = 0;
+        useSauce4 = 0;
+        useSauce5 = 0;
 
         upgradeCount = 0;
         sellCount = 0;
-        useSources = 0;
+        useSauceCount = 0;
         openChestBox = 0;
         yummyTimeCount = 0;
 
@@ -5030,7 +5076,7 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int GetTruckNumber()
+    public int GetFoodTruckNumber()
     {
         int count = 0;
 
@@ -5077,7 +5123,7 @@ public class PlayerDataBase : ScriptableObject
         return count;
     }
 
-    public int GetAnimalNumber()
+    public int GetPetNumber()
     {
         int count = 0;
 

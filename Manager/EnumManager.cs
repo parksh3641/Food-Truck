@@ -309,11 +309,11 @@ public enum PassiveEffect
     None,
     UpgradePercentUp,
     DefDestroyPercentUp,
-    SellPriceX2Up,
+    SellPriceX2Up, //¾Æ¹«µµ ¾È¾¸
     SellPricePercentUp,
     ExpUp,
     SuccessX2PercentUp,
-    TotalPercentUp
+    UpgradeSpeedUp, //²É (¹ÌÁ¤)
 }
 
 public enum RewardType
@@ -358,7 +358,7 @@ public enum RewardType
     Island3_Heart,
     Island4_Heart,
     SpeicalCharacter,
-    EquipExp,
+    AbilityPoint,
     DungeonKey1,
     DungeonKey2,
     DungeonKey3,
@@ -367,8 +367,8 @@ public enum RewardType
     Icon_Ranking2,
     Icon_Ranking3,
     Icon_Ranking4,
-    Icon_SP,
-    DungeonBox
+    SliverBox,
+    GoldBox
 }
 
 public enum QuestType

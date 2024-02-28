@@ -10,7 +10,7 @@ public class FlowerInfo
     public int crystal = 0;
 
     [Space]
-    public PassiveEffect passiveEffect = PassiveEffect.TotalPercentUp;
+    public PassiveEffect passiveEffect = PassiveEffect.UpgradeSpeedUp;
     public float effectNumber = 0;
 }
 

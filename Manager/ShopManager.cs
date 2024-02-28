@@ -126,7 +126,7 @@ public class ShopManager : MonoBehaviour
     private int totemsIndex = 0;
     private int flowerIndex = 0;
 
-    private int needCrystal = 999;
+    private int needCrystal = 99999;
 
     bool hold = false;
     bool buy = false;
@@ -670,7 +670,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
             case ItemType.GoldShop1:
@@ -750,7 +750,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
             case ItemType.Portion2:
@@ -771,7 +771,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
             case ItemType.Portion3:
@@ -792,7 +792,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
             case ItemType.Portion4:
@@ -813,7 +813,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
             case ItemType.Portion5:
@@ -834,7 +834,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
             case ItemType.DefDestroyTicketSlices:
@@ -946,7 +946,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
             case ItemType.SkillTicket:
@@ -967,7 +967,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
             case ItemType.RepairTicket:
@@ -989,7 +989,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
             case ItemType.RepairTicket10:
@@ -1011,7 +1011,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowRankPoint);
+                    NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
         }

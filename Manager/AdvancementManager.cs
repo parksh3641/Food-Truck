@@ -34,7 +34,7 @@ public class AdvancementManager : MonoBehaviour
     private int nowNeed3 = 0;
 
     private int need1 = 5;
-    private int need2 = 100000;
+    private int need2 = 50000;
     private int need3 = 3;
 
     private float nowValue1 = 0;

@@ -86,6 +86,13 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int defDestroyTicketPiece = 0;
     [SerializeField]
+    private int gender = 0;
+
+    [Space]
+    [Title("Dungeon")]
+    [SerializeField]
+    private int abilityPoint = 0;
+    [SerializeField]
     private int dungeonKey1 = 0;
     [SerializeField]
     private int dungeonKey2 = 0;
@@ -94,7 +101,7 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int dungeonKey4 = 0;
     [SerializeField]
-    private int gender = 0;
+    private int abilityLevel = 0;
 
     [Space]
     [Title("Daily")]
@@ -141,6 +148,14 @@ public class PlayerDataBase : ScriptableObject
     private int useSauce4 = 0;
     [SerializeField]
     private int useSauce5 = 0;
+    [SerializeField]
+    private int dungeon1Count = 0;
+    [SerializeField]
+    private int dungeon2Count = 0;
+    [SerializeField]
+    private int dungeon3Count = 0;
+    [SerializeField]
+    private int dungeon4Count = 0;
 
     [Space]
     [Title("Quest")]
@@ -909,6 +924,42 @@ public class PlayerDataBase : ScriptableObject
         {
             gender = value;
         }
+    }
+
+    public int AbilityPoint
+    {
+        get { return abilityPoint; }
+        set { abilityPoint = value; }
+    }
+
+    public int AbilityLevel
+    {
+        get { return abilityLevel; }
+        set { abilityLevel = value; }
+    }
+
+    public int Dungeon1Count
+    {
+        get { return dungeon1Count; }
+        set { dungeon1Count = value; }
+    }
+
+    public int Dungeon2Count
+    {
+        get { return dungeon2Count; }
+        set { dungeon2Count = value; }
+    }
+
+    public int Dungeon3Count
+    {
+        get { return dungeon3Count; }
+        set { dungeon3Count = value; }
+    }
+
+    public int Dungeon4Count
+    {
+        get { return dungeon4Count; }
+        set { dungeon4Count = value; }
     }
 
     public int LockTutorial
@@ -4916,6 +4967,10 @@ public class PlayerDataBase : ScriptableObject
         useSauceCount = 0;
         openChestBox = 0;
         yummyTimeCount = 0;
+        dungeon1Count = 0;
+        dungeon2Count = 0;
+        dungeon3Count = 0;
+        dungeon4Count = 0;
 
         season1Reward = 0;
         season2Reward = 0;

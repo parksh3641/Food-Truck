@@ -137,25 +137,21 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.RemoveAds:
                 mainBackground.sprite = rankBackgroundArray[3];
-
                 countText.text = LocalizationManager.instance.GetString("RemoveAds");
                 countText.alignment = TextAnchor.MiddleCenter;
                 break;
             case RewardType.GoldX2:
                 mainBackground.sprite = rankBackgroundArray[3];
-
                 countText.text = LocalizationManager.instance.GetString("GoldX2");
                 countText.alignment = TextAnchor.MiddleCenter;
                 break;
             case RewardType.AutoUpgrade:
                 mainBackground.sprite = rankBackgroundArray[3];
-
                 countText.text = LocalizationManager.instance.GetString("AutoUpgrade");
                 countText.alignment = TextAnchor.MiddleCenter;
                 break;
             case RewardType.AutoPresent:
                 mainBackground.sprite = rankBackgroundArray[3];
-
                 countText.text = LocalizationManager.instance.GetString("AutoPresent");
                 countText.alignment = TextAnchor.MiddleCenter;
                 break;
@@ -174,7 +170,8 @@ public class ReceiveContent : MonoBehaviour
             case RewardType.SpeicalCharacter:
                 mainBackground.sprite = rankBackgroundArray[3];
                 break;
-            case RewardType.EquipExp:
+            case RewardType.AbilityPoint:
+                mainBackground.sprite = rankBackgroundArray[1];
                 break;
             case RewardType.DungeonKey1:
                 break;
@@ -196,8 +193,11 @@ public class ReceiveContent : MonoBehaviour
             case RewardType.Icon_Ranking4:
                 mainBackground.sprite = rankBackgroundArray[3];
                 break;
-            case RewardType.Icon_SP:
-                mainBackground.sprite = rankBackgroundArray[3];
+            case RewardType.SliverBox:
+                mainBackground.sprite = rankBackgroundArray[1];
+                break;
+            case RewardType.GoldBox:
+                mainBackground.sprite = rankBackgroundArray[2];
                 break;
         }
     }

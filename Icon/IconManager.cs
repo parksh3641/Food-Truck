@@ -24,6 +24,7 @@ public class IconManager : MonoBehaviour
 
     public RectTransform iconContentTransform;
 
+    public Image icon;
     public Image mainIcon; //간판 아이콘
     public Image profileIcon;
 
@@ -86,6 +87,7 @@ public class IconManager : MonoBehaviour
 
     public void Initialize()
     {
+        icon.sprite = imageDataBase.GetIconArray(iconType + playerDataBase.Icon);
         mainIcon.sprite = imageDataBase.GetIconArray(iconType + playerDataBase.Icon);
         profileIcon.sprite = imageDataBase.GetIconArray(iconType + playerDataBase.Icon);
     }
@@ -131,6 +133,7 @@ public class IconManager : MonoBehaviour
 
         iconType = IconType.Icon_1;
 
+        icon.sprite = imageDataBase.GetIconArray(iconType + playerDataBase.Icon);
         mainIcon.sprite = imageDataBase.GetIconArray(iconType + playerDataBase.Icon);
         profileIcon.sprite = imageDataBase.GetIconArray(iconType + playerDataBase.Icon);
     }
@@ -480,8 +483,9 @@ public class IconManager : MonoBehaviour
     {
         playerDataBase.Icon = (int)iconType;
 
-        mainIcon.sprite = imageDataBase.GetIconArray(iconType + playerDataBase.Icon);
-        profileIcon.sprite = imageDataBase.GetIconArray(iconType + playerDataBase.Icon);
+        icon.sprite = imageDataBase.GetIconArray(IconType.Icon_1 + playerDataBase.Icon);
+        mainIcon.sprite = imageDataBase.GetIconArray(IconType.Icon_1 + playerDataBase.Icon);
+        profileIcon.sprite = imageDataBase.GetIconArray(IconType.Icon_1 + playerDataBase.Icon);
 
         for (int i = 0; i < iconContentList.Count; i++)
         {

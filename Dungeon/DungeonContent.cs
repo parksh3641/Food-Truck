@@ -8,7 +8,7 @@ public class DungeonContent : MonoBehaviour
     public DungeonType dungeonType = DungeonType.Dungeon1;
 
     public RewardType rewardType = RewardType.Gold;
-    public RewardType rewardType2 = RewardType.EquipExp;
+    public RewardType rewardType2 = RewardType.AbilityPoint;
     public ItemType itemType = ItemType.DungeonKey1;
 
     public LocalizationContent titleText;
@@ -22,9 +22,16 @@ public class DungeonContent : MonoBehaviour
     public Image itemImg;
     public Text itemNumberText;
 
+    public GameObject lockedObj;
+    public Text lockedObjText;
+
+    private int need = 0;
+
     Sprite[] rewardArray;
     Sprite[] itemArray;
     Sprite[] dungeonArray;
+
+    DungeonManager dungeonManager;
 
     PlayerDataBase playerDataBase;
     ImageDataBase imageDataBase;
@@ -40,8 +47,10 @@ public class DungeonContent : MonoBehaviour
         dungeonArray = imageDataBase.GetDungeonArray();
     }
 
-    public void Initialize(DungeonType type, RewardType type1, RewardType type2, ItemType item)
+    public void Initialize(DungeonManager manager, DungeonType type, RewardType type1, RewardType type2, ItemType item, int need)
     {
+        dungeonManager = manager;
+
         dungeonType = type;
         rewardType = type1;
         rewardType2 = type2;
@@ -82,6 +91,16 @@ public class DungeonContent : MonoBehaviour
         rewardImg1.sprite = rewardArray[(int)rewardType];
         rewardImg2.sprite = rewardArray[(int)rewardType2];
         itemImg.sprite = itemArray[(int)itemType];
+
+        if(playerDataBase.GourmetLevel >= need)
+        {
+            lockedObj.SetActive(false);
+        }
+        else
+        {
+            lockedObj.SetActive(true);
+            lockedObjText.text = MoneyUnitString.ToCurrencyString(need) + " ก่";
+        }
     }
 
     public void EnterDungeon()
@@ -121,6 +140,7 @@ public class DungeonContent : MonoBehaviour
                 }
                 break;
         }
-    }
 
+        dungeonManager.EnterDungeon(dungeonType);
+    }
 }

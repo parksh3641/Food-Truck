@@ -1441,6 +1441,18 @@ public class PlayfabManager : MonoBehaviour
                        case "UseSauce5":
                            playerDataBase.UseSauce5 = statistics.Value;
                            break;
+                       case "Dungeon1Count":
+                           playerDataBase.Dungeon1Count = statistics.Value;
+                           break;
+                       case "Dungeon2Count":
+                           playerDataBase.Dungeon2Count = statistics.Value;
+                           break;
+                       case "Dungeon3Count":
+                           playerDataBase.Dungeon3Count = statistics.Value;
+                           break;
+                       case "Dungeon4Count":
+                           playerDataBase.Dungeon4Count = statistics.Value;
+                           break;
                        case "AccessDate":
                            playerDataBase.AccessDate = statistics.Value;
                            break;

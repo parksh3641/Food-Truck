@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,14 +10,20 @@ public class DungeonManager : MonoBehaviour
     public GameObject dungeonView;
     public GameObject dungeonInfoView;
 
-    public Text timerText;
-
     public RectTransform rectTransform;
 
     public GameObject alarm;
     public GameObject ingameAlarm;
 
     public DungeonContent[] dungeonContents;
+
+    public ReceiveContent[] receiveContents;
+
+    [Space]
+    [Title("Text")]
+    public Text gourmetPointText;
+    public Text timerText;
+
 
     bool isTimer = false;
 
@@ -87,10 +94,16 @@ public class DungeonManager : MonoBehaviour
 
     void Initialize()
     {
-        dungeonContents[0].Initialize(DungeonType.Dungeon1, RewardType.Gold, RewardType.EquipExp, ItemType.DungeonKey1);
-        dungeonContents[1].Initialize(DungeonType.Dungeon2, RewardType.Crystal, RewardType.EquipExp, ItemType.DungeonKey2);
-        dungeonContents[2].Initialize(DungeonType.Dungeon3, RewardType.BuffTicket, RewardType.EquipExp, ItemType.DungeonKey3);
-        dungeonContents[3].Initialize(DungeonType.Dungeon4, RewardType.SkillTicket, RewardType.EquipExp, ItemType.DungeonKey4);
+        gourmetPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.GourmetLevel);
+
+        dungeonContents[0].Initialize(this, DungeonType.Dungeon1, RewardType.Crystal, RewardType.AbilityPoint, ItemType.DungeonKey1, 0);
+        dungeonContents[1].Initialize(this, DungeonType.Dungeon2, RewardType.TreasureBox, RewardType.AbilityPoint, ItemType.DungeonKey2, 50000);
+        dungeonContents[2].Initialize(this, DungeonType.Dungeon3, RewardType.SliverBox, RewardType.AbilityPoint, ItemType.DungeonKey3, 250000);
+        dungeonContents[3].Initialize(this, DungeonType.Dungeon4, RewardType.GoldBox, RewardType.AbilityPoint, ItemType.DungeonKey4, 500000);
+
+        receiveContents[0].Initialize(RewardType.AbilityPoint, 0);
+        receiveContents[1].Initialize(RewardType.SliverBox, 0);
+        receiveContents[2].Initialize(RewardType.GoldBox, 0);
     }
     IEnumerator TimerCoroution()
     {
@@ -114,4 +127,40 @@ public class DungeonManager : MonoBehaviour
         StartCoroutine(TimerCoroution());
     }
 
+    public void EnterDungeon(DungeonType type)
+    {
+        Debug.LogError(type + " ¿‘¿Â");
+
+        switch (type)
+        {
+            case DungeonType.Dungeon1:
+                playerDataBase.DungeonKey1 -= 1;
+                playerDataBase.Dungeon1Count += 1;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey1", playerDataBase.DungeonKey1);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon1Count", playerDataBase.Dungeon1Count);
+                break;
+            case DungeonType.Dungeon2:
+                playerDataBase.DungeonKey2 -= 1;
+                playerDataBase.Dungeon2Count += 1;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey2", playerDataBase.DungeonKey2);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon2Count", playerDataBase.Dungeon2Count);
+                break;
+            case DungeonType.Dungeon3:
+                playerDataBase.DungeonKey3 -= 1;
+                playerDataBase.Dungeon3Count += 1;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey3", playerDataBase.DungeonKey3);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon3Count", playerDataBase.Dungeon3Count);
+                break;
+            case DungeonType.Dungeon4:
+                playerDataBase.DungeonKey4 -= 1;
+                playerDataBase.Dungeon4Count += 1;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey4", playerDataBase.DungeonKey4);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon4Count", playerDataBase.Dungeon4Count);
+                break;
+        }
+    }
 }

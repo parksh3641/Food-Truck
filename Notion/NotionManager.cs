@@ -267,7 +267,7 @@ public enum NotionType
     BuyShopNotion,
     ChangeNotion,
     RecoverNotion,
-    LowRankPoint,
+    LowPoint,
     Levelup,
     SeasonWaitNotion,
     SuccessPromotion,
@@ -287,4 +287,5 @@ public enum NotionType
     Icon_Locked11,
     Icon_Locked12,
     Icon_Locked13,
+    SetRandomAbility
 }

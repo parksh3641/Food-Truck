@@ -368,7 +368,8 @@ public enum RewardType
     Icon_Ranking3,
     Icon_Ranking4,
     SliverBox,
-    GoldBox
+    GoldBox,
+    EventTicket,
 }
 
 public enum QuestType

@@ -1423,6 +1423,9 @@ public class PlayfabManager : MonoBehaviour
                        case "TreasureCount":
                            playerDataBase.TreasureCount = statistics.Value;
                            break;
+                       case "GuideIndex":
+                           playerDataBase.GuideIndex = statistics.Value;
+                           break;
                        case "ChangeNicknameCount":
                            playerDataBase.ChangeNicknameCount = statistics.Value;
                            break;
@@ -1452,6 +1455,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Dungeon4Count":
                            playerDataBase.Dungeon4Count = statistics.Value;
+                           break;
+                       case "OfflineCount":
+                           playerDataBase.OfflineCount = statistics.Value;
                            break;
                        case "AccessDate":
                            playerDataBase.AccessDate = statistics.Value;
@@ -1503,6 +1509,24 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "GourmetLevel":
                            playerDataBase.GourmetLevel = statistics.Value;
+                           break;
+                       case "EventTicket":
+                           playerDataBase.EventTicket = statistics.Value;
+                           break;
+                       case "EventTicketCount":
+                           playerDataBase.EventTicketCount = statistics.Value;
+                           break;
+                       case "EventEnter1":
+                           playerDataBase.EventEnter1 = statistics.Value;
+                           break;
+                       case "EventEnter2":
+                           playerDataBase.EventEnter2 = statistics.Value;
+                           break;
+                       case "EventEnter3":
+                           playerDataBase.EventEnter3 = statistics.Value;
+                           break;
+                       case "EventEnter4":
+                           playerDataBase.EventEnter4 = statistics.Value;
                            break;
                        case "Package1":
                            if (statistics.Value == 1)

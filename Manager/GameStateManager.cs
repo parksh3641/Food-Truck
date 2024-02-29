@@ -122,6 +122,7 @@ public class GameStateManager : MonoBehaviour
         public int playTime = 0;
         public long saveGold = 0;
         public int supportCount = 0;
+        public int getSellGold = 0; //판매 후 얻은 골드
 
         [Space]
         [Title("Equip")]
@@ -1168,6 +1169,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.supportCount = value;
+            SaveFile();
+        }
+    }
+
+    public int GetSellGold
+    {
+        get
+        {
+            return gameSettings.getSellGold;
+        }
+        set
+        {
+            gameSettings.getSellGold = value;
             SaveFile();
         }
     }

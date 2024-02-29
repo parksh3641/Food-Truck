@@ -13,6 +13,7 @@ public class EventManager : MonoBehaviour
     public GameObject welcomeEvent;
     public GameObject weekendEvent;
     public GameObject reviewEvent;
+    public GameObject gifticonEvent;
 
     public LocalizationContent weekendEventTitle;
 
@@ -23,6 +24,7 @@ public class EventManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         eventView.SetActive(false);
+        gifticonEvent.SetActive(true);
     }
 
     private void Start()
@@ -64,6 +66,11 @@ public class EventManager : MonoBehaviour
             if (playerDataBase.ReviewNumber == 2)
             {
                 reviewEvent.SetActive(false);
+            }
+
+            if(playerDataBase.Level > 9)
+            {
+                gifticonEvent.SetActive(false);
             }
 
             FirebaseAnalytics.LogEvent("OpenEvent");

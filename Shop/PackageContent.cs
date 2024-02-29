@@ -69,6 +69,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
                 receiveContents[3].Initialize(RewardType.BuffTicket, 10);
+                receiveContents[4].Initialize(RewardType.EventTicket, 10);
                 break;
             case PackageType.Package2:
                 iapButton.productId = "shop.foodtruck.package2";
@@ -77,6 +78,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 8000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 40);
                 receiveContents[3].Initialize(RewardType.BuffTicket, 40);
+                receiveContents[4].Initialize(RewardType.EventTicket, 50);
                 break;
             case PackageType.Package3:
                 iapButton.productId = "shop.foodtruck.package3";
@@ -85,6 +87,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 25000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 60);
                 receiveContents[3].Initialize(RewardType.BuffTicket, 60);
+                receiveContents[4].Initialize(RewardType.EventTicket, 100);
                 break;
             case PackageType.Package4:
                 iapButton.productId = "shop.foodtruck.package4";
@@ -93,6 +96,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 50000);
                 receiveContents[2].Initialize(RewardType.BuffTicket, 120);
                 receiveContents[3].Initialize(RewardType.DefDestroyTicket, 100);
+                receiveContents[4].Initialize(RewardType.EventTicket, 200);
                 break;
             case PackageType.Package5:
                 iapButton.productId = "shop.foodtruck.package5";
@@ -101,6 +105,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 1200);
                 receiveContents[2].Initialize(RewardType.PortionSet, 20);
                 receiveContents[3].Initialize(RewardType.BuffTicket, 20);
+                receiveContents[4].Initialize(RewardType.EventTicket, 10);
                 break;
             case PackageType.Package6:
                 iapButton.productId = "shop.foodtruck.package6";
@@ -109,6 +114,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.GoldX2, -1);
                 receiveContents[2].Initialize(RewardType.AutoUpgrade, -1);
                 receiveContents[3].Initialize(RewardType.AutoPresent, -1);
+                receiveContents[4].Initialize(RewardType.EventTicket, 200);
                 break;
             case PackageType.Package7:
                 iapButton.productId = "shop.foodtruck.package7";
@@ -117,6 +123,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
                 receiveContents[3].Initialize(RewardType.BuffTicket, 10);
+                receiveContents[4].Initialize(RewardType.EventTicket, 10);
                 break;
         }
 

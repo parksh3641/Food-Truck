@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuiedDataBase : MonoBehaviour
+[CreateAssetMenu(fileName = "GuiedDataBase", menuName = "ScriptableObjects/GuiedDataBase")]
+public class GuiedDataBase : ScriptableObject
 {
 
 

@@ -24,9 +24,6 @@ public class DungeonManager : MonoBehaviour
     public Text gourmetPointText;
     public Text timerText;
 
-
-    bool isTimer = false;
-
     string localization_Reset = "";
     string localization_Days = "";
     string localization_Hours = "";
@@ -34,6 +31,8 @@ public class DungeonManager : MonoBehaviour
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
+    DateTime f, g;
+    TimeSpan h;
 
     PlayerDataBase playerDataBase;
 
@@ -51,12 +50,6 @@ public class DungeonManager : MonoBehaviour
         rectTransform.anchoredPosition = new Vector2(0, -9999);
     }
 
-    private void Start()
-    {
-        isTimer = true;
-        timerText.text = "";
-        StartCoroutine(TimerCoroution());
-    }
 
     public void OpenDungeonView()
     {
@@ -72,23 +65,23 @@ public class DungeonManager : MonoBehaviour
                 ResetManager.instance.Initialize();
             }
 
-            if (!isTimer)
-            {
-                isTimer = true;
-                StartCoroutine(TimerCoroution());
-            }
-
             localization_Reset = LocalizationManager.instance.GetString("Reset");
             localization_Days = LocalizationManager.instance.GetString("Days");
             localization_Hours = LocalizationManager.instance.GetString("Hours");
             localization_Minutes = LocalizationManager.instance.GetString("Minutes");
 
+            timerText.text = "";
+            f = DateTime.Now;
+            g = DateTime.Today.AddDays(1);
+            StartCoroutine(TimerCoroution());
+
             Initialize();
         }
         else
         {
-            dungeonView.SetActive(false);
+            StopAllCoroutines();
 
+            dungeonView.SetActive(false);
         }
     }
 
@@ -109,15 +102,12 @@ public class DungeonManager : MonoBehaviour
     {
         if (timerText.gameObject.activeInHierarchy)
         {
-            System.DateTime f = System.DateTime.Now;
-            System.DateTime g = System.DateTime.Today.AddDays(1);
-            System.TimeSpan h = g - f;
+            h = g - f;
 
             timerText.text = localization_Reset + " : " + h.Hours.ToString("D2") + localization_Hours + " " + h.Minutes.ToString("D2") + localization_Minutes;
 
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
-                isTimer = false;
                 ResetManager.instance.Initialize();
                 yield break;
             }

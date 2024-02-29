@@ -121,6 +121,16 @@ public class OfflineManager : MonoBehaviour
         {
             if (playerDataBase.CastleDate.Length > 1)
             {
+                if (playerDataBase.CastleDate.Length > 9)
+                {
+                    playerDataBase.CastleDate = playerDataBase.CastleDate.Substring(1, playerDataBase.CastleDate.Length - 1);
+                }
+
+                if (playerDataBase.CastleServerDate.Length > 9)
+                {
+                    playerDataBase.CastleServerDate = playerDataBase.CastleServerDate.Substring(1, playerDataBase.CastleServerDate.Length - 1);
+                }
+
                 time = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.CastleDate.Substring(1, playerDataBase.CastleDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
                 serverTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.CastleServerDate.Substring(1, playerDataBase.CastleServerDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
 
@@ -323,6 +333,8 @@ public class OfflineManager : MonoBehaviour
             PortionManager.instance.GetExp(saveExp);
             PlayfabManager.instance.UpdateAddGold(saveCoin);
 
+            playerDataBase.OfflineCount += 1;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("OfflineCount", playerDataBase.OfflineCount);
 
             StopAllCoroutines();
             StartCoroutine(TimerCoroution());
@@ -431,6 +443,14 @@ public class OfflineManager : MonoBehaviour
 
         int quickCoin = addCoin * 12;
         int quickExp = addExp * 12;
+
+        playerDataBase.OfflineCount += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OfflineCount", playerDataBase.OfflineCount);
+
+        StopAllCoroutines();
+        StartCoroutine(TimerCoroution());
+
+        OnCheckAlarm();
 
         PortionManager.instance.GetExp(quickExp);
         PlayfabManager.instance.UpdateAddGold(quickCoin);

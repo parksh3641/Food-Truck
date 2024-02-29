@@ -188,16 +188,16 @@ public class GameManager : MonoBehaviour
     private float defDestroy = 0;
     private float defDestroyPlus = 100;
 
-    public int need = 0;
+    private int need = 0;
     private float needPlus = 0;
 
-    public int sellPrice = 0;
+    private int sellPrice = 0;
     private float sellPricePlus = 0;
 
     private float sellPriceTip = 0;
     private int expUp = 0;
 
-    public float success = 0;
+    private float success = 0;
     private float successPlus = 0;
 
     private float successX2 = 0;
@@ -220,9 +220,8 @@ public class GameManager : MonoBehaviour
     private int portion5Value = 10;
     private int portion6Value = 0;
 
-
-    public int level = 0;
-    public int nextLevel = 0;
+    private int level = 0;
+    private int nextLevel = 0;
     private int maxLevel = 0;
     private int recoverLevel = 0;
     private int playTime = 0;
@@ -231,35 +230,30 @@ public class GameManager : MonoBehaviour
     private int supportMaxCount = 999;
 
     public bool isDelay_Camera = false;
-    public bool isUpgradeDelay = false;
+    private bool isUpgradeDelay = false;
     //public bool isSellDelay = false;
-    public bool isDef = false;
-
+    private bool isDef = false;
     private bool isExp = false;
-
     private bool feverMode = false;
 
     private int serverCount = 0;
-
     private int nowExp = 0;
     private int nowUpgradeCount = 0;
     private int nowSellCount = 0;
-
     private int defaultNeed = 150;
     private int defaultSellPrice = 2000;
-
     private int season = 0;
+    private int gender = 0;
+    protected float repairTicket = 10.0f;
+    protected float eventTicket = 3.0f;
 
     private bool clickDelay = false;
     private bool isReady = false;
     private bool auto = false;
     private bool buffAutoUpgrade = false;
-
     private bool speicalFood = false;
-
-    private int gender = 0;
-
     private bool isWeekend = false;
+    private bool checkGender = false;
 
     public GameObject buff4Obj;
 
@@ -307,6 +301,7 @@ public class GameManager : MonoBehaviour
     public GourmetManager gourmetManager;
     public ChestBoxManager chestBoxManager;
     public RecoverManager recoverManager;
+    public GuideMissionManager guideMissionManager;
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
@@ -532,6 +527,12 @@ public class GameManager : MonoBehaviour
         else
         {
             PlayfabManager.instance.SetProfileLanguage("en");
+        }
+
+        if (checkGender)
+        {
+            checkGender = false;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Gender", playerDataBase.Gender);
         }
 
         isReady = false;
@@ -1431,6 +1432,8 @@ public class GameManager : MonoBehaviour
 
         season = SeasonManager.instance.CheckSeason();
 
+        guideMissionManager.Initialize();
+
         lockManager.Localization();
 
         CheckPercent();
@@ -2326,6 +2329,8 @@ public class GameManager : MonoBehaviour
             successText.text = LocalizationManager.instance.GetString("MaxLevel");
             needText.text = "<size=45>" + LocalizationManager.instance.GetString("NeedPrice") + "</size>\n-";
         }
+
+        guideMissionManager.Initialize();
     }
 
     void CheckFoodState()
@@ -3607,7 +3612,7 @@ public class GameManager : MonoBehaviour
             {
                 if (maxLevel >= 20)
                 {
-                    if (Random.Range(0, 100) < 10)
+                    if (Random.Range(0, 100f) < repairTicket)
                     {
                         PortionManager.instance.GetRecoverTickets(1);
 
@@ -4184,7 +4189,7 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.YummyTimeCount += 1;
 
         playerDataBase.YummyTimeCount += 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FeverModeCount", playerDataBase.YummyTimeCount);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("YummyTimeCount", playerDataBase.YummyTimeCount);
 
         float currentTime = 0f;
         float fillAmount = 0;
@@ -4809,10 +4814,25 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdateSellPriceGold(sellPrice);
         PlayfabManager.instance.moneyAnimation.PlusMoney(sellPrice);
 
+        if(playerDataBase.GuideIndex < 22)
+        {
+            GameStateManager.instance.GetSellGold += sellPrice;
+        }
+
         if (level >= 9)
         {
             playerDataBase.SellCount += 1;
             GameStateManager.instance.SellCount += 1;
+
+            if (Random.Range(0, 100f) < eventTicket)
+            {
+                PortionManager.instance.GetEventTicket(1);
+
+                playerDataBase.EventTicketCount += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
+
+                Debug.LogError("ÀÌº¥Æ® Æ¼ÄÏ È¹µæ");
+            }
         }
 
         OFFSpeicalFood();
@@ -5003,6 +5023,7 @@ public class GameManager : MonoBehaviour
             portionText6.text = playerDataBase.Portion6.ToString();
         }
 
+        guideMissionManager.Initialize();
         //questManager.CheckGoal();
     }
 
@@ -5375,6 +5396,8 @@ public class GameManager : MonoBehaviour
                 }
                 break;
         }
+
+        guideMissionManager.Initialize();
     }
 
     public void OffBuff(int number)
@@ -5631,7 +5654,7 @@ public class GameManager : MonoBehaviour
         }
 
         playerDataBase.Gender = gender;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Gender", playerDataBase.Gender);
+        checkGender = true;
     }
 
     public void Decline()

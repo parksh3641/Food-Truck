@@ -50,4 +50,9 @@ public class LocalizationContent : MonoBehaviour
             }
         }
     }
+
+    public Text GetText()
+    {
+        return localizationText;
+    }
 }

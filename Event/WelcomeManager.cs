@@ -18,14 +18,15 @@ public class WelcomeManager : MonoBehaviour
     string localization_Hours = "";
     string localization_Minutes = "";
 
-    bool isTimer = false;
-
     public GameObject mainAlarm;
     public GameObject alarm;
 
     public AttendanceContent[] attendanceContentArray;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+
+    DateTime f, g;
+    TimeSpan h;
 
     PlayerDataBase playerDataBase;
 
@@ -42,13 +43,6 @@ public class WelcomeManager : MonoBehaviour
 
         mainAlarm.SetActive(false);
         alarm.SetActive(false);
-    }
-
-    private void Start()
-    {
-        isTimer = true;
-        timerText.text = "";
-        StartCoroutine(TimerCoroution());
     }
 
     public void Initialize()
@@ -68,16 +62,20 @@ public class WelcomeManager : MonoBehaviour
         {
             welcomeView.SetActive(true);
 
-            if (!isTimer)
+            if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
-                isTimer = true;
-                StartCoroutine(TimerCoroution());
+                ResetManager.instance.Initialize();
             }
 
             localization_Reset = LocalizationManager.instance.GetString("Reset");
             localization_Days = LocalizationManager.instance.GetString("Days");
             localization_Hours = LocalizationManager.instance.GetString("Hours");
             localization_Minutes = LocalizationManager.instance.GetString("Minutes");
+
+            timerText.text = "";
+            f = DateTime.Now;
+            g = DateTime.Today.AddDays(1);
+            StartCoroutine(TimerCoroution());
 
             CheckWelcome();
 
@@ -87,6 +85,8 @@ public class WelcomeManager : MonoBehaviour
         }
         else
         {
+            StopAllCoroutines();
+
             welcomeView.SetActive(false);
         }
     }
@@ -105,8 +105,10 @@ public class WelcomeManager : MonoBehaviour
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
             attendanceContentArray[i].receiveContent[1].gameObject.SetActive(true);
+            attendanceContentArray[i].receiveContent[2].gameObject.SetActive(true);
             attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 200 + (100 * (i + 1)));
-            attendanceContentArray[i].receiveContent[1].Initialize(RewardType.RepairTicket, 5);
+            attendanceContentArray[i].receiveContent[1].Initialize(RewardType.RepairTicket, 3);
+            attendanceContentArray[i].receiveContent[2].Initialize(RewardType.EventTicket, 10);
         }
     }
 
@@ -119,9 +121,12 @@ public class WelcomeManager : MonoBehaviour
             return;
         }
 
-        PortionManager.instance.GetRecoverTickets(5);
-
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200 + (100 * (index + 1)));
+        PortionManager.instance.GetRecoverTickets(3);
+        PortionManager.instance.GetEventTicket(10);
+
+        playerDataBase.EventTicketCount += 10;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
 
         playerDataBase.WelcomeCount += 1;
         playerDataBase.WelcomeCheck = true;
@@ -157,15 +162,12 @@ public class WelcomeManager : MonoBehaviour
     {
         if (timerText.gameObject.activeInHierarchy)
         {
-            System.DateTime f = System.DateTime.Now;
-            System.DateTime g = System.DateTime.Today.AddDays(1);
-            System.TimeSpan h = g - f;
+            h = g - f;
 
             timerText.text = localization_Reset + " : " + h.Hours.ToString("D2") + localization_Hours + " " + h.Minutes.ToString("D2") + localization_Minutes;
 
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
-                isTimer = false;
                 ResetManager.instance.Initialize();
                 yield break;
             }

@@ -23,13 +23,14 @@ public class AttendanceManager : MonoBehaviour
     string localization_Hours = "";
     string localization_Minutes = "";
 
-    bool isTimer = false;
-
     public AttendanceContent[] attendanceContentArray;
 
     public TreasureManager treasureManager;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+
+    DateTime f, g;
+    TimeSpan h;
 
     PlayerDataBase playerDataBase;
 
@@ -48,12 +49,6 @@ public class AttendanceManager : MonoBehaviour
         alarm.SetActive(false);
     }
 
-    private void Start()
-    {
-        isTimer = true;
-        timerText.text = "";
-        StartCoroutine(TimerCoroution());
-    }
 
     [Button]
     void OpenTreasureBox()
@@ -88,11 +83,9 @@ public class AttendanceManager : MonoBehaviour
         {
             attendanceView.SetActive(true);
 
-            if (!isTimer)
-            {
-                isTimer = true;
-                StartCoroutine(TimerCoroution());
-            }
+            f = DateTime.Now;
+            g = DateTime.Today.AddDays(1);
+            StartCoroutine(TimerCoroution());
 
             localization_Reset = LocalizationManager.instance.GetString("Reset");
             localization_Days = LocalizationManager.instance.GetString("Days");
@@ -107,6 +100,8 @@ public class AttendanceManager : MonoBehaviour
         }
         else
         {
+            StopAllCoroutines();
+
             attendanceView.SetActive(false);
         }
     }
@@ -206,15 +201,12 @@ public class AttendanceManager : MonoBehaviour
     {
         if (timerText.gameObject.activeInHierarchy)
         {
-            System.DateTime f = System.DateTime.Now;
-            System.DateTime g = System.DateTime.Today.AddDays(1);
-            System.TimeSpan h = g - f;
+            h = g - f;
 
             timerText.text = localization_Reset + " : " + h.Hours.ToString("D2") + localization_Hours + " " + h.Minutes.ToString("D2") + localization_Minutes;
 
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
-                isTimer = false;
                 ResetManager.instance.Initialize();
                 yield break;
             }

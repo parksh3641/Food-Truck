@@ -213,21 +213,6 @@ public class ChestBoxManager : MonoBehaviour
         }
     }
 
-    void Success()
-    {
-        playerDataBase.OpenChestBox += 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
-
-        GameStateManager.instance.OpenChestBox += 1;
-
-        gameManager.CheckPortion();
-
-        SoundManager.instance.PlaySFX(GameSfxType.Success);
-        NotionManager.instance.UseNotion(NotionType.SuccessReward);
-
-        Initialize();
-    }
-
     public void GetFreeReward()
     {
         //if(Random.Range(0, 10) > 7)
@@ -305,6 +290,21 @@ public class ChestBoxManager : MonoBehaviour
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
                 break;
         }
+    }
+
+    void Success()
+    {
+        playerDataBase.OpenChestBox += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenChestBox", playerDataBase.OpenChestBox);
+
+        GameStateManager.instance.OpenChestBox += 1;
+
+        gameManager.CheckPortion();
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+        Initialize();
     }
 
     public void ReceiveInfo()

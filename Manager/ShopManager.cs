@@ -148,6 +148,9 @@ public class ShopManager : MonoBehaviour
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
+    DateTime f, g;
+    TimeSpan h;
+
     Vector3 normalPos = new Vector3(-40, 1.1f, -3.5f);
     Vector3 beforePos = new Vector3(-44, 1.1f, 2);
     Vector3 afterPos = new Vector3(-36, 1.1f, 2);
@@ -186,6 +189,8 @@ public class ShopManager : MonoBehaviour
         shopView.SetActive(false);
         speicalShopView.SetActive(false);
         changeMoneyView.SetActive(false);
+
+        dailyShopCountText.text = "";
 
         supportPackage.SetActive(false);
 
@@ -238,10 +243,6 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        isTimer = true;
-        dailyShopCountText.text = "";
-        StartCoroutine(DailyShopTimer());
-
         for(int i = 0; i < shopRectTransform.Length; i ++)
         {
             shopRectTransform[i].anchoredPosition = new Vector2(0, -9999);
@@ -327,16 +328,15 @@ public class ShopManager : MonoBehaviour
                 ResetManager.instance.Initialize();
             }
 
-            if (!isTimer)
-            {
-                isTimer = true;
-                StartCoroutine(DailyShopTimer());
-            }
-
             localization_Reset = LocalizationManager.instance.GetString("Reset");
             localization_Days = LocalizationManager.instance.GetString("Days");
             localization_Hours = LocalizationManager.instance.GetString("Hours");
             localization_Minutes = LocalizationManager.instance.GetString("Minutes");
+
+            dailyShopCountText.text = "";
+            f = DateTime.Now;
+            g = DateTime.Today.AddDays(1);
+            StartCoroutine(TimerCoroution());
 
             if (index == - 1)
             {
@@ -349,6 +349,8 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
+            StopAllCoroutines();
+
             shopView.SetActive(false);
         }
     }
@@ -495,7 +497,17 @@ public class ShopManager : MonoBehaviour
                         Debug.Log("한정 패키지 구매 날짜 설정");
                     }
 
-                    if(playerDataBase.FirstDate[0] == '0')
+                    if(playerDataBase.FirstDate.Length > 9)
+                    {
+                        playerDataBase.FirstDate = playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1);
+                    }
+
+                    if (playerDataBase.FirstServerDate.Length > 9)
+                    {
+                        playerDataBase.FirstServerDate = playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1);
+                    }
+
+                    if (playerDataBase.FirstDate[0] == '0')
                     {
                         playerDataBase.FirstDate = "1" + playerDataBase.FirstDate;
                     }
@@ -1161,26 +1173,23 @@ public class ShopManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
     }
 
-    IEnumerator DailyShopTimer()
+    IEnumerator TimerCoroution()
     {
         if (dailyShopCountText.gameObject.activeInHierarchy)
         {
-            System.DateTime f = System.DateTime.Now;
-            System.DateTime g = System.DateTime.Today.AddDays(1);
-            System.TimeSpan h = g - f;
+            h = g - f;
 
             dailyShopCountText.text = localization_Reset + " : " + h.Hours.ToString("D2") + localization_Hours + " " + h.Minutes.ToString("D2") + localization_Minutes;
 
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
-                isTimer = false;
                 ResetManager.instance.Initialize();
                 yield break;
             }
         }
 
         yield return waitForSeconds;
-        StartCoroutine(DailyShopTimer());
+        StartCoroutine(TimerCoroution());
     }
 
     public void OpenSpeicalShop()
@@ -3875,6 +3884,10 @@ public class ShopManager : MonoBehaviour
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetBuffTickets(10);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetEventTicket(10);
                 break;
             case PackageType.Package2:
                 playerDataBase.Package2 = true;
@@ -3894,6 +3907,10 @@ public class ShopManager : MonoBehaviour
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetBuffTickets(40);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetEventTicket(50);
                 break;
             case PackageType.Package3:
                 playerDataBase.Package3 = true;
@@ -3913,6 +3930,10 @@ public class ShopManager : MonoBehaviour
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetBuffTickets(60);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetEventTicket(100);
                 break;
             case PackageType.Package4:
                 playerDataBase.Package4 = true;
@@ -3932,8 +3953,12 @@ public class ShopManager : MonoBehaviour
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetDefTickets(100);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetEventTicket(200);
                 break;
-            case PackageType.Package5:
+            case PackageType.Package5: //서포트 패키지
                 playerDataBase.Package5 = true;
                 Invoke("PackageDelay5", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package5", 1);
@@ -3951,8 +3976,12 @@ public class ShopManager : MonoBehaviour
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetBuffTickets(20);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetEventTicket(10);
                 break;
-            case PackageType.Package6:
+            case PackageType.Package6: //울트라 패키지
                 playerDataBase.Package6 = true;
                 Invoke("PackageDelay6", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package6", 1);
@@ -3970,8 +3999,12 @@ public class ShopManager : MonoBehaviour
                 yield return waitForSeconds;
 
                 PlayfabManager.instance.PurchaseAutoPresent();
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetEventTicket(200);
                 break;
-            case PackageType.Package7:
+            case PackageType.Package7: //서포트 패키지
                 playerDataBase.Package7 += 1;
                 Invoke("PackageDelay7", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package7", playerDataBase.Package7);
@@ -3989,6 +4022,10 @@ public class ShopManager : MonoBehaviour
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetBuffTickets(10);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetEventTicket(10);
                 break;
         }
 

@@ -199,6 +199,9 @@ public class ReceiveContent : MonoBehaviour
             case RewardType.GoldBox:
                 mainBackground.sprite = rankBackgroundArray[2];
                 break;
+            case RewardType.EventTicket:
+                mainBackground.sprite = rankBackgroundArray[3];
+                break;
         }
     }
 

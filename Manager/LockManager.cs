@@ -73,6 +73,9 @@ public class LockManager : MonoBehaviour
         menuIcon[10].SetActive(true);
         menuIcon[11].SetActive(true);
         menuIcon[12].SetActive(true);
+        menuIcon[13].SetActive(true);
+        menuIcon[14].SetActive(true);
+        menuIcon[15].SetActive(true);
 
         if (playerDataBase.LockTutorial >= 1) //음식 변경
         {
@@ -89,32 +92,35 @@ public class LockManager : MonoBehaviour
             tutorial.SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 3) //피버모드, 버프 해제
+        if (playerDataBase.LockTutorial >= 3) //피버모드 해제
         {
             menuIcon[4].SetActive(true);
             menuIcon[6].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 4) //레시피 해제
+        if (playerDataBase.LockTutorial >= 4) //레시피, 버프 해제
         {
             menuIcon[7].SetActive(false);
             menuIcon[8].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 5) //퀘스트 해제
+        if (playerDataBase.LockTutorial >= 5) //퀘스트, 가방, 패키지(이벤트) 해제
         {
-            menuIcon[10].SetActive(false);
             menuIcon[9].SetActive(true);
+            menuIcon[10].SetActive(false);
+            menuIcon[11].SetActive(false);
+            menuIcon[12].SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 6) //오프라인 보상 해제
         {
-            menuIcon[11].SetActive(false);
+            menuIcon[13].SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 7) //챌린지 해제
+        if (playerDataBase.LockTutorial >= 7) //챌린지, 섬 이동 해제
         {
-            menuIcon[12].SetActive(false);
+            menuIcon[14].SetActive(false);
+            menuIcon[15].SetActive(false);
         }
     }
 
@@ -169,19 +175,21 @@ public class LockManager : MonoBehaviour
                 break;
             case 4:
                 lockIcon[7].SetActive(true);
-
-                break;
-            case 5:
                 lockIcon[8].SetActive(true);
 
                 break;
-            case 6:
+            case 5:
                 lockIcon[9].SetActive(true);
+                lockIcon[10].SetActive(true);
+
+                break;
+            case 6:
+                lockIcon[11].SetActive(true);
 
                 break;
             case 7:
-                lockIcon[10].SetActive(true);
-
+                lockIcon[12].SetActive(true);
+                lockIcon[13].SetActive(true);
                 break;
         }
     }

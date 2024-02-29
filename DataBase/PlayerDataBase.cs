@@ -89,6 +89,22 @@ public class PlayerDataBase : ScriptableObject
     private int gender = 0;
 
     [Space]
+    [Title("Event")]
+    [SerializeField]
+    private int eventTicket = 0;
+    [SerializeField]
+    private int eventTicketCount = 0;
+    [SerializeField]
+    private int eventEnter1 = 0;
+    [SerializeField]
+    private int eventEnter2 = 0;
+    [SerializeField]
+    private int eventEnter3 = 0;
+    [SerializeField]
+    private int eventEnter4 = 0;
+
+
+    [Space]
     [Title("Dungeon")]
     [SerializeField]
     private int abilityPoint = 0;
@@ -156,6 +172,8 @@ public class PlayerDataBase : ScriptableObject
     private int dungeon3Count = 0;
     [SerializeField]
     private int dungeon4Count = 0;
+    [SerializeField]
+    private int offlineCount = 0;
 
     [Space]
     [Title("Quest")]
@@ -173,9 +191,7 @@ public class PlayerDataBase : ScriptableObject
     [Space]
     [Title("GuideMisson")]
     [SerializeField]
-    private int guiedFirstIndex = 0;
-    [SerializeField]
-    private int guiedIndex = 0;
+    private int guideIndex = 0;
 
     [Space]
     [Title("Season")]
@@ -866,6 +882,78 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int EventTicket
+    {
+        get
+        {
+            return eventTicket;
+        }
+        set
+        {
+            eventTicket = value;
+        }
+    }
+
+    public int EventTicketCount
+    {
+        get
+        {
+            return eventTicketCount;
+        }
+        set
+        {
+            eventTicketCount = value;
+        }
+    }
+
+    public int EventEnter1
+    {
+        get
+        {
+            return eventEnter1;
+        }
+        set
+        {
+            eventEnter1 = value;
+        }
+    }
+
+    public int EventEnter2
+    {
+        get
+        {
+            return eventEnter2;
+        }
+        set
+        {
+            eventEnter2 = value;
+        }
+    }
+
+    public int EventEnter3
+    {
+        get
+        {
+            return eventEnter3;
+        }
+        set
+        {
+            eventEnter3 = value;
+        }
+    }
+
+    public int EventEnter4
+    {
+        get
+        {
+            return eventEnter4;
+        }
+        set
+        {
+            eventEnter4 = value;
+        }
+    }
+
     public int DungeonKey1
     {
         get
@@ -960,6 +1048,12 @@ public class PlayerDataBase : ScriptableObject
     {
         get { return dungeon4Count; }
         set { dungeon4Count = value; }
+    }
+
+    public int OfflineCount
+    {
+        get { return offlineCount; }
+        set { offlineCount = value; }
     }
 
     public int LockTutorial
@@ -2435,6 +2529,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             yummyTimeCount = value;
+        }
+    }
+
+    public int GuideIndex
+    {
+        get
+        {
+            return guideIndex;
+        }
+        set
+        {
+            guideIndex = value;
         }
     }
 
@@ -4718,6 +4824,14 @@ public class PlayerDataBase : ScriptableObject
         rankPoint = 0;
         defDestroyTicket = 0;
         defDestroyTicketPiece = 0;
+
+        eventTicket = 0;
+        eventTicketCount = 0;
+        eventEnter1 = 0;
+        eventEnter2 = 0;
+        eventEnter3 = 0;
+        eventEnter4 = 0;
+
         dungeonKey1 = 0;
         dungeonKey2 = 0;
         dungeonKey3 = 0;
@@ -4971,6 +5085,9 @@ public class PlayerDataBase : ScriptableObject
         dungeon2Count = 0;
         dungeon3Count = 0;
         dungeon4Count = 0;
+        offlineCount = 0;
+
+        guideIndex = 0;
 
         season1Reward = 0;
         season2Reward = 0;
@@ -5054,7 +5171,7 @@ public class PlayerDataBase : ScriptableObject
         nextMonday = "";
     }
 
-    public bool CheckCharacter(TruckType type)
+    public bool CheckFoodTruck(TruckType type)
     {
         bool check = false;
 
@@ -5102,33 +5219,6 @@ public class PlayerDataBase : ScriptableObject
         }
 
         return check;
-    }
-
-    public void BuyCharacter(TruckType type)
-    {
-        switch (type)
-        {
-            case TruckType.Bread:
-                break;
-            case TruckType.Chips:
-                ChipsTruck = 1;
-                break;
-            case TruckType.Donut:
-                DonutTruck = 1;
-                break;
-            case TruckType.Hamburger:
-                HamburgerTruck = 1;
-                break;
-            case TruckType.Hotdog:
-                IcecreamTruck = 1;
-                break;
-            case TruckType.Icecream:
-                LemonadeTruck = 1;
-                break;
-            case TruckType.Lemonade:
-                NoodlesTruck = 1;
-                break;
-        }
     }
 
     public int GetFoodTruckNumber()

@@ -48,60 +48,60 @@ public class GourmetManager : MonoBehaviour
         value += playerDataBase.Island3Level * 1500;
         value += playerDataBase.Island4Level * 1500;
 
-        //if (playerDataBase.Package1)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.Package1)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.Package2)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.Package2)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.Package3)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.Package3)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.Package4)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.Package4)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.Package5)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.Package5)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.Package6)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.Package6)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.RemoveAds)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.RemoveAds)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.GoldX2)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.GoldX2)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.AutoUpgrade)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.AutoUpgrade)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.AutoPresent)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.AutoPresent)
+        {
+            value += 10000;
+        }
 
-        //if (playerDataBase.SuperOffline)
-        //{
-        //    value += 10000;
-        //}
+        if (playerDataBase.SuperOffline)
+        {
+            value += 10000;
+        }
 
         if (playerDataBase.TestAccount == 0)
         {
@@ -136,9 +136,9 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.GetCharacterNumber() * 5000;
             value += playerDataBase.GetPetNumber() * 5000;
             value += playerDataBase.GetFoodTruckNumber() * 5000;
-            value += playerDataBase.GetButterflyNumber() * 10000;
-            value += playerDataBase.GetTotemsNumber() * 20000;
-            value += playerDataBase.GetFlowerNumber() * 30000;
+            value += playerDataBase.GetButterflyNumber() * 5000;
+            value += playerDataBase.GetTotemsNumber() * 10000;
+            value += playerDataBase.GetFlowerNumber() * 10000;
         }
 
         //Debug.LogError(value);

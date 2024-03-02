@@ -65,47 +65,47 @@ public class PackageContent : MonoBehaviour
             case PackageType.Package1:
                 iapButton.productId = "shop.foodtruck.package1";
 
-                receiveContents[0].Initialize(RewardType.Gold, 3000000);
+                receiveContents[0].Initialize(RewardType.Gold, 6000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
-                receiveContents[3].Initialize(RewardType.BuffTicket, 10);
-                receiveContents[4].Initialize(RewardType.EventTicket, 10);
+                receiveContents[3].Initialize(RewardType.EventTicket, 10);
+                receiveContents[4].gameObject.SetActive(false);
                 break;
             case PackageType.Package2:
-                iapButton.productId = "shop.foodtruck.package2";
+                iapButton.productId = "shop.foodtruck.package2"; //20000
 
-                receiveContents[0].Initialize(RewardType.Gold, 10000000);
-                receiveContents[1].Initialize(RewardType.Crystal, 8000);
-                receiveContents[2].Initialize(RewardType.PortionSet, 40);
-                receiveContents[3].Initialize(RewardType.BuffTicket, 40);
-                receiveContents[4].Initialize(RewardType.EventTicket, 50);
+                receiveContents[0].Initialize(RewardType.Gold, 180000000); //3000
+                receiveContents[1].Initialize(RewardType.Crystal, 8500); //14000
+                receiveContents[2].Initialize(RewardType.PortionSet, 40); //3000
+                receiveContents[3].Initialize(RewardType.EventTicket, 50);
+                receiveContents[4].gameObject.SetActive(false);
                 break;
             case PackageType.Package3:
-                iapButton.productId = "shop.foodtruck.package3";
+                iapButton.productId = "shop.foodtruck.package3"; //60000
 
-                receiveContents[0].Initialize(RewardType.Gold, 20000000);
-                receiveContents[1].Initialize(RewardType.Crystal, 25000);
-                receiveContents[2].Initialize(RewardType.PortionSet, 60);
-                receiveContents[3].Initialize(RewardType.BuffTicket, 60);
-                receiveContents[4].Initialize(RewardType.EventTicket, 100);
+                receiveContents[0].Initialize(RewardType.Gold, 600000000); //10000
+                receiveContents[1].Initialize(RewardType.Crystal, 30000); //50000
+                receiveContents[2].Initialize(RewardType.PortionSet, 100); //10000
+                receiveContents[3].Initialize(RewardType.EventTicket, 100);
+                receiveContents[4].gameObject.SetActive(false);
                 break;
             case PackageType.Package4:
-                iapButton.productId = "shop.foodtruck.package4";
+                iapButton.productId = "shop.foodtruck.package4"; //100000
 
-                receiveContents[0].Initialize(RewardType.Gold, 60000000);
-                receiveContents[1].Initialize(RewardType.Crystal, 50000);
-                receiveContents[2].Initialize(RewardType.BuffTicket, 120);
-                receiveContents[3].Initialize(RewardType.DefDestroyTicket, 100);
-                receiveContents[4].Initialize(RewardType.EventTicket, 200);
+                receiveContents[0].Initialize(RewardType.Gold, 600000000); //10000
+                receiveContents[1].Initialize(RewardType.Crystal, 42000); //70000
+                receiveContents[2].Initialize(RewardType.DefDestroyTicket, 200); //20000
+                receiveContents[3].Initialize(RewardType.EventTicket, 200);
+                receiveContents[4].gameObject.SetActive(false);
                 break;
-            case PackageType.Package5:
+            case PackageType.Package5: //한정 패키지
                 iapButton.productId = "shop.foodtruck.package5";
 
-                receiveContents[0].Initialize(RewardType.Gold, 6000000);
+                receiveContents[0].Initialize(RewardType.Gold, 12000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 1200);
                 receiveContents[2].Initialize(RewardType.PortionSet, 20);
-                receiveContents[3].Initialize(RewardType.BuffTicket, 20);
-                receiveContents[4].Initialize(RewardType.EventTicket, 10);
+                receiveContents[3].Initialize(RewardType.EventTicket, 10);
+                receiveContents[4].gameObject.SetActive(false);
                 break;
             case PackageType.Package6:
                 iapButton.productId = "shop.foodtruck.package6";
@@ -113,17 +113,17 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.RemoveAds, -1);
                 receiveContents[1].Initialize(RewardType.GoldX2, -1);
                 receiveContents[2].Initialize(RewardType.AutoUpgrade, -1);
-                receiveContents[3].Initialize(RewardType.AutoPresent, -1);
-                receiveContents[4].Initialize(RewardType.EventTicket, 200);
+                receiveContents[3].Initialize(RewardType.EventTicket, 200);
+                receiveContents[4].gameObject.SetActive(false);
                 break;
-            case PackageType.Package7:
+            case PackageType.Package7: //서포트 패키지
                 iapButton.productId = "shop.foodtruck.package7";
 
-                receiveContents[0].Initialize(RewardType.Gold, 3000000);
+                receiveContents[0].Initialize(RewardType.Gold, 6000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
-                receiveContents[3].Initialize(RewardType.BuffTicket, 10);
-                receiveContents[4].Initialize(RewardType.EventTicket, 10);
+                receiveContents[3].Initialize(RewardType.EventTicket, 10);
+                receiveContents[4].gameObject.SetActive(false);
                 break;
         }
 

@@ -1651,6 +1651,18 @@ public class PlayfabManager : MonoBehaviour
                        case "DungeonKey4":
                            playerDataBase.DungeonKey4 = statistics.Value;
                            break;
+                       case "Dungeon1Level":
+                           playerDataBase.Dungeon1Level = statistics.Value;
+                           break;
+                       case "Dungeon2Level":
+                           playerDataBase.Dungeon2Level = statistics.Value;
+                           break;
+                       case "Dungeon3Level":
+                           playerDataBase.Dungeon3Level = statistics.Value;
+                           break;
+                       case "Dungeon4Level":
+                           playerDataBase.Dungeon4Level = statistics.Value;
+                           break;
                        case "Gender":
                            playerDataBase.Gender = statistics.Value;
                            break;

@@ -243,6 +243,11 @@ public class ChangeFoodManager : MonoBehaviour
         }
     }
 
+    public void CloseChangeFoodView()
+    {
+        changeFoodView.SetActive(false);
+    }
+
     public void OpenAutoUpgradeView()
     {
         if (!playerDataBase.AutoUpgrade) return;

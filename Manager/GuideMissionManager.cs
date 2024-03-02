@@ -18,15 +18,13 @@ public class GuideMissionManager : MonoBehaviour
     private bool clear = false;
     private bool firstReset = false;
 
-    private int reward = 20;
+    private int reward = 10;
 
     PlayerDataBase playerDataBase;
-    GuiedDataBase guiedDataBase;
 
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
-        if (guiedDataBase == null) guiedDataBase = Resources.Load("GuiedDataBase") as GuiedDataBase;
 
         guideMissonView.SetActive(false);
         clearObj.SetActive(false);

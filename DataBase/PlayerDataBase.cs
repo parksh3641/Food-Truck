@@ -109,6 +109,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int abilityPoint = 0;
     [SerializeField]
+    private int abilityLevel = 0; //사용 안함
+    [SerializeField]
     private int dungeonKey1 = 0;
     [SerializeField]
     private int dungeonKey2 = 0;
@@ -117,7 +119,13 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int dungeonKey4 = 0;
     [SerializeField]
-    private int abilityLevel = 0;
+    private int dungeon1Level = 0;
+    [SerializeField]
+    private int dungeon2Level = 0;
+    [SerializeField]
+    private int dungeon3Level = 0;
+    [SerializeField]
+    private int dungeon4Level = 0;
 
     [Space]
     [Title("Daily")]
@@ -1048,6 +1056,30 @@ public class PlayerDataBase : ScriptableObject
     {
         get { return dungeon4Count; }
         set { dungeon4Count = value; }
+    }
+
+    public int Dungeon1Level
+    {
+        get { return dungeon1Level; }
+        set { dungeon1Level = value; }
+    }
+
+    public int Dungeon2Level
+    {
+        get { return dungeon2Level; }
+        set { dungeon2Level = value; }
+    }
+
+    public int Dungeon3Level
+    {
+        get { return dungeon3Level; }
+        set { dungeon3Level = value; }
+    }
+
+    public int Dungeon4Level
+    {
+        get { return dungeon4Level; }
+        set { dungeon4Level = value; }
     }
 
     public int OfflineCount
@@ -4831,11 +4863,6 @@ public class PlayerDataBase : ScriptableObject
         eventEnter2 = 0;
         eventEnter3 = 0;
         eventEnter4 = 0;
-
-        dungeonKey1 = 0;
-        dungeonKey2 = 0;
-        dungeonKey3 = 0;
-        dungeonKey4 = 0;
         eventNumber = 0;
         updateNumber = 0;
         friendsNumber = 0;
@@ -5088,6 +5115,16 @@ public class PlayerDataBase : ScriptableObject
         offlineCount = 0;
 
         guideIndex = 0;
+
+        dungeonKey1 = 0;
+        dungeonKey2 = 0;
+        dungeonKey3 = 0;
+        dungeonKey4 = 0;
+
+        dungeon1Level = 0;
+        dungeon2Level = 0;
+        dungeon3Level = 0;
+        dungeon4Level = 0;
 
         season1Reward = 0;
         season2Reward = 0;

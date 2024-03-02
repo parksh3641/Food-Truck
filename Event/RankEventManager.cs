@@ -21,7 +21,7 @@ public class RankEventManager : MonoBehaviour
     public TreasureManager treasureManager;
 
     private int totalLevel = 0;
-    private int level = 10;
+    private int level = 20;
     private int reward = 3;
 
     PlayerDataBase playerDataBase;

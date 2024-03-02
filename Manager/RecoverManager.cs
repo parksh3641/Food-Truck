@@ -15,6 +15,7 @@ public class RecoverManager : MonoBehaviour
     public Text countText;
 
     public Text needText;
+    public Text crystalText;
 
     private int index = 0;
     private int need = 0;
@@ -63,7 +64,7 @@ public class RecoverManager : MonoBehaviour
         }
     }
 
-    public void Recover()
+    public void Recover(int number)
     {
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
@@ -72,19 +73,38 @@ public class RecoverManager : MonoBehaviour
             return;
         }
 
-        if(playerDataBase.RecoverTicket < need)
+        if (number == 0)
         {
-            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-            NotionManager.instance.UseNotion(NotionType.LowItemNotion);
-            return;
+            if (playerDataBase.RecoverTicket < need)
+            {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                return;
+            }
+
+            playerDataBase.RecoverTicket -= need;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("RecoverTicket", playerDataBase.RecoverTicket);
+        }
+        else
+        {
+            if (playerDataBase.Crystal < need * 10)
+            {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                return;
+            }
+
+            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, need * 10);
         }
 
-        playerDataBase.RecoverTicket -= need;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RecoverTicket", playerDataBase.RecoverTicket);
+        SuccessRecover();
+    }
 
+    void SuccessRecover()
+    {
         OpenRecoverView();
 
-        switch(index)
+        switch (index)
         {
             case 0:
                 GameManager.instance.RecoverFood(foodType);
@@ -104,7 +124,7 @@ public class RecoverManager : MonoBehaviour
                 break;
         }
 
-        FirebaseAnalytics.LogEvent("RecoverClear");
+        FirebaseAnalytics.LogEvent("Recover_Success");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.RecoverNotion);
@@ -197,5 +217,7 @@ public class RecoverManager : MonoBehaviour
 
         afterLevelText.text = "Lv. " + ((int)(maxLevel * 0.5f)).ToString();
         needText.text = need.ToString();
+
+        crystalText.text = (need * 10).ToString();
     }
 }

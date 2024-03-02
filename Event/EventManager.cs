@@ -14,8 +14,12 @@ public class EventManager : MonoBehaviour
     public GameObject weekendEvent;
     public GameObject reviewEvent;
     public GameObject gifticonEvent;
+    public GameObject gifticonEventLocked;
 
     public LocalizationContent weekendEventTitle;
+
+    DateTime currentDate = DateTime.Now;
+    DateTime targetDate;
 
     PlayerDataBase playerDataBase;
 
@@ -23,8 +27,9 @@ public class EventManager : MonoBehaviour
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
+        targetDate = new DateTime(currentDate.Year, 3, 31);
+
         eventView.SetActive(false);
-        gifticonEvent.SetActive(true);
     }
 
     private void Start()
@@ -68,7 +73,14 @@ public class EventManager : MonoBehaviour
                 reviewEvent.SetActive(false);
             }
 
-            if(playerDataBase.Level > 9)
+            gifticonEventLocked.SetActive(true);
+            if (playerDataBase.Level > 9)
+            {
+                gifticonEventLocked.SetActive(false);
+            }
+
+            gifticonEvent.SetActive(true);
+            if (currentDate > targetDate)
             {
                 gifticonEvent.SetActive(false);
             }

@@ -8,6 +8,8 @@ public class GifticonManager : MonoBehaviour
 {
     public GameObject gifticonView;
 
+    public GameObject gifticonInfoView;
+
     public RectTransform gifticonGrid;
 
     public GifticonContent[] gifticonContents;
@@ -18,6 +20,8 @@ public class GifticonManager : MonoBehaviour
     string localization_Days = "";
     string localization_Hours = "";
     string localization_Minutes = "";
+
+    public Text ticketText;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
@@ -32,6 +36,7 @@ public class GifticonManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         gifticonView.SetActive(false);
+        gifticonInfoView.SetActive(false);
 
         gifticonGrid.anchoredPosition = new Vector2(0, -9999);
     }
@@ -41,6 +46,8 @@ public class GifticonManager : MonoBehaviour
         if (!gifticonView.activeInHierarchy)
         {
             gifticonView.SetActive(true);
+
+            Initialize();
 
             localization_Reset = LocalizationManager.instance.GetString("Reset");
             localization_Days = LocalizationManager.instance.GetString("Days");
@@ -71,5 +78,27 @@ public class GifticonManager : MonoBehaviour
         }
         yield return waitForSeconds;
         StartCoroutine(TimerCoroution());
+    }
+
+    public void Initialize()
+    {
+        ticketText.text = playerDataBase.EventTicket.ToString();
+
+        for (int i = 0; i < gifticonContents.Length; i ++)
+        {
+            gifticonContents[i].Initialize(GifticonType.Gifticon_1 + i, this);
+        }
+    }
+
+    public void OpenGifticonInfoView()
+    {
+        if (!gifticonInfoView.activeInHierarchy)
+        {
+            gifticonInfoView.SetActive(true);
+        }
+        else
+        {
+            gifticonInfoView.SetActive(false);
+        }
     }
 }

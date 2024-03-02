@@ -287,5 +287,11 @@ public enum NotionType
     Icon_Locked11,
     Icon_Locked12,
     Icon_Locked13,
-    SetRandomAbility
+    SetRandomAbility,
+    LowEventTicket,
+    SuccessEnter,
+    SuccessAttack,
+    FailAttack,
+    SuccessAttackX2,
+    SuccessSleepFood
 }

@@ -181,7 +181,7 @@ public class OfflineManager : MonoBehaviour
         castleLevelText.text = LocalizationManager.instance.GetString("CastleLevel") + " : " + playerDataBase.CastleLevel + " / " + playerDataBase.Level;
 
         addCrystal = (playerDataBase.CastleLevel + 1) * 5;
-        addCoin = 100000 + playerDataBase.CastleLevel * 5000;
+        addCoin = 200000 + playerDataBase.CastleLevel * 5000;
         addExp = 1000 + playerDataBase.CastleLevel * 50;
 
         addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.003f));
@@ -193,9 +193,9 @@ public class OfflineManager : MonoBehaviour
             addExp += (int)(addExp * 0.1f);
         }
 
-        if(addCrystal >= 50)
+        if(addCrystal >= 30)
         {
-            addCrystal = 50;
+            addCrystal = 30;
         }
 
         levelUpCostText.text = addCrystal.ToString();

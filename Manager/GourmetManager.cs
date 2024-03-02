@@ -41,7 +41,7 @@ public class GourmetManager : MonoBehaviour
         value += playerDataBase.AccessDate * 300;
         value += playerDataBase.Level * 500;
         value += playerDataBase.QuestCount * 500;
-        value += playerDataBase.CastleLevel * 500;
+        value += playerDataBase.CastleLevel * 200;
 
         value += playerDataBase.Island1Level * 1000;
         value += playerDataBase.Island2Level * 1000;
@@ -165,7 +165,7 @@ public class GourmetManager : MonoBehaviour
                 plusValue = value - saveValue;
 
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-                NotionManager.instance.UseNotion3(Color.green, "<size=45>" + MoneyUnitString.ToCurrencyString(saveValue) + " ¢º " + MoneyUnitString.ToCurrencyString(value)
+                NotionManager.instance.UseNotion3(Color.green, "<size=45>" + MoneyUnitString.ToCurrencyString(saveValue) + "  ¢º  " + MoneyUnitString.ToCurrencyString(value)
                     + "</size>\n" + LocalizationManager.instance.GetString("GourmetScore") + " +" + MoneyUnitString.ToCurrencyString(plusValue));
 
                 saveValue = value;

@@ -18,6 +18,7 @@ public class PortionManager : MonoBehaviour
     public MoneyAnimation rankPointAnimation;
     public MoneyAnimation[] islandCountAnimation;
     public MoneyAnimation eventTicketAnimation;
+    public MoneyAnimation abilityPointAnimation;
 
     private int random = 0;
 
@@ -209,5 +210,14 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicket", playerDataBase.EventTicket);
 
         eventTicketAnimation.PlusMoney(number);
+    }
+
+    [Button]
+    public void GetAbilityPoint(int number)
+    {
+        playerDataBase.AbilityPoint += number;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("AbilityPoint", playerDataBase.AbilityPoint);
+
+        abilityPointAnimation.PlusMoney(number);
     }
 }

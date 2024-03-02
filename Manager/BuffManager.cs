@@ -33,7 +33,7 @@ public class BuffManager : MonoBehaviour
     private bool buff3;
     private bool buff4;
 
-    private int time = 600;
+    private int time = 300;
 
     private int buff1Time = 0;
     private int buff2Time = 0;
@@ -194,7 +194,7 @@ public class BuffManager : MonoBehaviour
                 buff4Anim.StopAnim();
 
                 buff4 = true;
-                buff4Time = time / 2;
+                buff4Time = time;
 
                 buff4Obj.SetActive(true);
                 StartCoroutine(Buff4Coroution());

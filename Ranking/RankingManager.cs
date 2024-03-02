@@ -339,7 +339,7 @@ public class RankingManager : MonoBehaviour
 
             if(index != 0)
             {
-                myRankContent.SetIndex(index - 1);
+                myRankContent.SetIndex(index);
             }
             else
             {

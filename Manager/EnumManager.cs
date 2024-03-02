@@ -577,3 +577,11 @@ public enum IconType
     Icon_51,
     Icon_52,
 }
+
+public enum GifticonType
+{
+    Gifticon_1,
+    Gifticon_2,
+    Gifticon_3,
+    Gifticon_4,
+}

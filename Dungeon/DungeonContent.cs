@@ -9,6 +9,8 @@ public class DungeonContent : MonoBehaviour
 
     public RewardType rewardType = RewardType.Gold;
     public RewardType rewardType2 = RewardType.AbilityPoint;
+    public RewardType rewardType3 = RewardType.SliverBox;
+
     public ItemType itemType = ItemType.DungeonKey1;
 
     public LocalizationContent titleText;
@@ -18,7 +20,8 @@ public class DungeonContent : MonoBehaviour
 
     public Image rewardImg1;
     public Image rewardImg2;
-    
+    public Image rewardImg3;
+
     public Image itemImg;
     public Text itemNumberText;
 
@@ -47,37 +50,43 @@ public class DungeonContent : MonoBehaviour
         dungeonArray = imageDataBase.GetDungeonArray();
     }
 
-    public void Initialize(DungeonManager manager, DungeonType type, RewardType type1, RewardType type2, ItemType item, int need)
+    public void Initialize(DungeonManager manager, DungeonType type, RewardType type1, RewardType type2, RewardType type3, ItemType item, int need)
     {
         dungeonManager = manager;
 
         dungeonType = type;
         rewardType = type1;
         rewardType2 = type2;
+        rewardType3 = type3;
+
         itemType = item;
 
         switch (dungeonType)
         {
             case DungeonType.Dungeon1:
                 titleText.localizationName = "Dungeon1Title";
+                titleText.plusText = " Lv." + (playerDataBase.Dungeon1Level + 1);
                 infoText.localizationName = "Dungeon1_Info";
 
                 itemNumberText.text = playerDataBase.DungeonKey1 + "/2";
                 break;
             case DungeonType.Dungeon2:
                 titleText.localizationName = "Dungeon2Title";
+                titleText.plusText = " Lv." + (playerDataBase.Dungeon2Level + 1);
                 infoText.localizationName = "Dungeon2_Info";
 
                 itemNumberText.text = playerDataBase.DungeonKey2 + "/2";
                 break;
             case DungeonType.Dungeon3:
                 titleText.localizationName = "Dungeon3Title";
+                titleText.plusText = " Lv." + (playerDataBase.Dungeon3Level + 1);
                 infoText.localizationName = "Dungeon3_Info";
 
                 itemNumberText.text = playerDataBase.DungeonKey3 + "/2";
                 break;
             case DungeonType.Dungeon4:
                 titleText.localizationName = "Dungeon4Title";
+                titleText.plusText = " Lv." + (playerDataBase.Dungeon4Level + 1);
                 infoText.localizationName = "Dungeon4_Info";
 
                 itemNumberText.text = playerDataBase.DungeonKey4 + "/2";
@@ -90,6 +99,7 @@ public class DungeonContent : MonoBehaviour
         icon.sprite = dungeonArray[(int)dungeonType];
         rewardImg1.sprite = rewardArray[(int)rewardType];
         rewardImg2.sprite = rewardArray[(int)rewardType2];
+        //rewardImg3.sprite = rewardArray[(int)rewardType3];
         itemImg.sprite = itemArray[(int)itemType];
 
         if(playerDataBase.GourmetLevel >= need)

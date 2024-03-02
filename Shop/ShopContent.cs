@@ -202,10 +202,12 @@ public class ShopContent : MonoBehaviour
             case ItemType.PortionSet1:
                 lockedObj.SetActive(false);
 
-                iapButton.productId = "shop.foodtruck.portionset1";
+                //iapButton.productId = "shop.foodtruck.portionset1";
 
-                priceText.localizationName = itemType + "_Price";
-                priceText.ReLoad();
+                //priceText.localizationName = itemType + "_Price";
+                //priceText.ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(600);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
@@ -218,10 +220,12 @@ public class ShopContent : MonoBehaviour
             case ItemType.PortionSet2:
                 lockedObj.SetActive(false);
 
-                iapButton.productId = "shop.foodtruck.portionset2";
+                //iapButton.productId = "shop.foodtruck.portionset2";
 
-                priceText.localizationName = itemType + "_Price";
-                priceText.ReLoad();
+                //priceText.localizationName = itemType + "_Price";
+                //priceText.ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(1200);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
@@ -231,10 +235,12 @@ public class ShopContent : MonoBehaviour
             case ItemType.PortionSet3:
                 lockedObj.SetActive(false);
 
-                iapButton.productId = "shop.foodtruck.portionset3";
+                //iapButton.productId = "shop.foodtruck.portionset3";
 
-                priceText.localizationName = itemType + "_Price";
-                priceText.ReLoad();
+                //priceText.localizationName = itemType + "_Price";
+                //priceText.ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(1800);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
@@ -429,10 +435,12 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicketSet1:
                 lockedObj.SetActive(false);
 
-                iapButton.productId = "shop.foodtruck.buff1";
+                //iapButton.productId = "shop.foodtruck.buff1";
 
-                priceText.localizationName = itemType + "_Price";
-                priceText.ReLoad();
+                //priceText.localizationName = itemType + "_Price";
+                //priceText.ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(600);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
@@ -442,10 +450,12 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicketSet2:
                 lockedObj.SetActive(false);
 
-                iapButton.productId = "shop.foodtruck.buff2";
+                //iapButton.productId = "shop.foodtruck.buff2";
 
-                priceText.localizationName = itemType + "_Price";
-                priceText.ReLoad();
+                //priceText.localizationName = itemType + "_Price";
+                //priceText.ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(1200);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
@@ -455,26 +465,30 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicketSet3:
                 lockedObj.SetActive(false);
 
-                iapButton.productId = "shop.foodtruck.buff3";
+                //iapButton.productId = "shop.foodtruck.buff3";
 
-                priceText.localizationName = itemType + "_Price";
-                priceText.ReLoad();
+                //priceText.localizationName = itemType + "_Price";
+                //priceText.ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(1800);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
+                index = 16;
+
                 bestObj.SetActive(true);
                 bestText.text = "BEST";
-
-                index = 16;
                 break;
             case ItemType.DefTicketSet1:
                 lockedObj.SetActive(false);
 
-                iapButton.productId = "shop.foodtruck.defticket1";
+                //iapButton.productId = "shop.foodtruck.defticket1";
 
-                priceText.localizationName = itemType + "_Price";
-                priceText.ReLoad();
+                //priceText.localizationName = itemType + "_Price";
+                //priceText.ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(1800);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
@@ -484,10 +498,12 @@ public class ShopContent : MonoBehaviour
             case ItemType.DefTicketSet2:
                 lockedObj.SetActive(false);
 
-                iapButton.productId = "shop.foodtruck.defticket2";
+                //iapButton.productId = "shop.foodtruck.defticket2";
 
-                priceText.localizationName = itemType + "_Price";
-                priceText.ReLoad();
+                //priceText.localizationName = itemType + "_Price";
+                //priceText.ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(3600);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
@@ -497,16 +513,18 @@ public class ShopContent : MonoBehaviour
             case ItemType.DefTicketSet3:
                 lockedObj.SetActive(false);
 
-                iapButton.productId = "shop.foodtruck.defticket3";
+                //iapButton.productId = "shop.foodtruck.defticket3";
 
-                priceText.localizationName = itemType + "_Price";
-                priceText.ReLoad();
+                //priceText.localizationName = itemType + "_Price";
+                //priceText.ReLoad();
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(6000);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
-                //bestObj.SetActive(true);
-                //bestText.text = "BEST";
+                bestObj.SetActive(true);
+                bestText.text = "BEST";
 
                 index = 19;
                 break;
@@ -524,16 +542,15 @@ public class ShopContent : MonoBehaviour
                 index = 20;
                 break;
             case ItemType.AdReward_Crystal:
-                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(60) + "</size>";
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(100) + "</size>";
                 break;
             case ItemType.AutoUpgrade:
                 lockedObj.SetActive(false);
 
-                //buyRmObj[21].SetActive(true);
-                //buyRmText[21].localizationName = itemType.ToString();
-                //buyRmText[21].ReLoad();
+                iapButton.productId = "shop.foodtruck.autoupgrade";
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(6000);
+                priceText.localizationName = itemType + "_Price";
+                priceText.ReLoad();
 
                 infoText.localizationName = itemType + "_Info2";
                 infoText.ReLoad();
@@ -543,7 +560,10 @@ public class ShopContent : MonoBehaviour
             case ItemType.AutoPresent:
                 lockedObj.SetActive(false);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(3000);
+                iapButton.productId = "shop.foodtruck.autopresent";
+
+                priceText.localizationName = itemType + "_Price";
+                priceText.ReLoad();
 
                 infoText.localizationName = itemType + "_Info2";
                 infoText.ReLoad();

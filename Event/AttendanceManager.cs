@@ -123,7 +123,7 @@ public class AttendanceManager : MonoBehaviour
         attendanceContentArray[1].receiveContent[0].Initialize(RewardType.PortionSet, 1);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Crystal, 100);
+        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Crystal, 50);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[3].receiveContent[0].Initialize(RewardType.BuffTicket, 2);
@@ -132,10 +132,10 @@ public class AttendanceManager : MonoBehaviour
         attendanceContentArray[4].receiveContent[0].Initialize(RewardType.SkillTicket, 2);
 
         attendanceContentArray[5].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[5].receiveContent[0].Initialize(RewardType.Crystal, 200);
+        attendanceContentArray[5].receiveContent[0].Initialize(RewardType.Crystal, 100);
 
         attendanceContentArray[6].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[6].receiveContent[0].Initialize(RewardType.DefDestroyTicket, 10);
+        attendanceContentArray[6].receiveContent[0].Initialize(RewardType.DefDestroyTicket, 5);
     }
 
     public void ReceiveButton(int index, Action action)
@@ -160,7 +160,7 @@ public class AttendanceManager : MonoBehaviour
 
                 break;
             case 2:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
 
                 break;
             case 3:
@@ -172,11 +172,11 @@ public class AttendanceManager : MonoBehaviour
 
                 break;
             case 5:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
 
                 break;
             case 6:
-                PortionManager.instance.GetDefTickets(10);
+                PortionManager.instance.GetDefTickets(5);
 
                 break;
         }

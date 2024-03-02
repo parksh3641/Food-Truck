@@ -10,7 +10,8 @@ public class ReincarnationManager : MonoBehaviour
 
     public GameObject alarm;
 
-    public Text crystalText;
+    public ReceiveContent receiveContent;
+
     public Text countText;
     public Text passiveText;
     public Text adText;
@@ -20,7 +21,7 @@ public class ReincarnationManager : MonoBehaviour
     public ButtonScaleAnimation buttonScaleAnim;
 
 
-    private float crystal = 0;
+    private float abilityPoint = 0;
     private float plus = 0;
     private int number = 0;
 
@@ -63,28 +64,28 @@ public class ReincarnationManager : MonoBehaviour
 
     void Initialize()
     {
-        crystal = 0;
+        abilityPoint = 0;
 
         lockedObj.SetActive(true);
         lockedAdObj.SetActive(true);
 
         if (playerDataBase.IslandNumber > 0)
         {
-            crystal += 30;
+            abilityPoint += 30;
 
             if (playerDataBase.NextFoodNumber2 > 7)
             {
-                crystal += 50;
+                abilityPoint += 50;
             }
 
             if (playerDataBase.NextFoodNumber3 > 5)
             {
-                crystal += 70;
+                abilityPoint += 70;
             }
 
             if (playerDataBase.NextFoodNumber4 > 7)
             {
-                crystal += 100;
+                abilityPoint += 100;
             }
 
             lockedObj.SetActive(false);
@@ -109,9 +110,9 @@ public class ReincarnationManager : MonoBehaviour
         //    passiveText.text = "";
         //}
 
-        if (crystal > 0 && plus > 0)
+        if (abilityPoint > 0 && plus > 0)
         {
-            passiveText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
+            passiveText.text = MoneyUnitString.ToCurrencyString((int)abilityPoint).ToString();
             passiveText.text += " (+" + plus.ToString() + "%)";
         }
         else
@@ -119,19 +120,19 @@ public class ReincarnationManager : MonoBehaviour
             passiveText.text = "";
         }
 
-        crystal = crystal + (crystal * (0.005f * playerDataBase.Skill11));
-        crystal = crystal + (crystal * (0.01f * playerDataBase.Treasure10));
+        abilityPoint = abilityPoint + (abilityPoint * (0.005f * playerDataBase.Skill11));
+        abilityPoint = abilityPoint + (abilityPoint * (0.01f * playerDataBase.Treasure10));
 
-        crystalText.text = MoneyUnitString.ToCurrencyString((int)crystal).ToString();
+        receiveContent.Initialize(RewardType.AbilityPoint, (int)abilityPoint);
 
         countText.text = LocalizationManager.instance.GetString("Reincarnation_Count") + " : " + playerDataBase.ReincarnationCount;
 
-        adText.text = LocalizationManager.instance.GetString("Reincarnation_Ad") + "\n+" + MoneyUnitString.ToCurrencyString((int)crystal * 2).ToString();
+        adText.text = LocalizationManager.instance.GetString("Reincarnation_Ad") + "\n+" + MoneyUnitString.ToCurrencyString((int)abilityPoint * 2).ToString();
     }
 
     public void Free()
     {
-        if (crystal == 0) return;
+        if (abilityPoint == 0) return;
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
 
@@ -141,7 +142,7 @@ public class ReincarnationManager : MonoBehaviour
 
     public void Ad()
     {
-        if (crystal == 0) return;
+        if (abilityPoint == 0) return;
 
         GoogleAdsManager.instance.admobReward_ReincarnationX2.ShowAd(4);
     }
@@ -227,11 +228,11 @@ public class ReincarnationManager : MonoBehaviour
 
         if (number == 0)
         {
-            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (int)crystal);
+            PortionManager.instance.GetAbilityPoint((int)abilityPoint);
         }
         else
         {
-            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (int)crystal * 2);
+            PortionManager.instance.GetAbilityPoint((int)abilityPoint * 2);
         }
 
         yield return waitForSeconds;

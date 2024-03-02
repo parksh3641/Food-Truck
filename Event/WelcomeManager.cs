@@ -106,7 +106,7 @@ public class WelcomeManager : MonoBehaviour
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
             attendanceContentArray[i].receiveContent[1].gameObject.SetActive(true);
             attendanceContentArray[i].receiveContent[2].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 200 + (100 * (i + 1)));
+            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, (100 * (i + 1)));
             attendanceContentArray[i].receiveContent[1].Initialize(RewardType.RepairTicket, 3);
             attendanceContentArray[i].receiveContent[2].Initialize(RewardType.EventTicket, 10);
         }
@@ -121,7 +121,7 @@ public class WelcomeManager : MonoBehaviour
             return;
         }
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200 + (100 * (index + 1)));
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (100 * (index + 1)));
         PortionManager.instance.GetRecoverTickets(3);
         PortionManager.instance.GetEventTicket(10);
 

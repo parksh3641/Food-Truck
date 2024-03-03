@@ -29,6 +29,8 @@ public class ChestBoxManager : MonoBehaviour
     private int goalCount = 0;
     private int random = 0;
 
+    private int portion = 0;
+
     public QuestManager questManager;
     public GameManager gameManager;
 
@@ -149,9 +151,9 @@ public class ChestBoxManager : MonoBehaviour
 
         random = Random.Range(0, 100);
 
-        Debug.LogError(random);
+        //Debug.LogError(random);
 
-        if (random >= 61)
+        if (random >= 71)
         {
             normalRewardType = RewardType.Gold;
             epicRewardType = RewardType.Gold2;
@@ -160,7 +162,7 @@ public class ChestBoxManager : MonoBehaviour
             normalRewardText.text = MoneyUnitString.ToCurrencyString(50000);
 
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
-            epicRewardText.text = MoneyUnitString.ToCurrencyString(300000);
+            epicRewardText.text = MoneyUnitString.ToCurrencyString(500000);
 
             if (playerDataBase.Candy1MaxValue > 0)
             {
@@ -178,18 +180,41 @@ public class ChestBoxManager : MonoBehaviour
             }
 
         }
-        else if (random > 41)
+        else if (random > 31)
         {
-            normalRewardType = RewardType.Portion1;
-            epicRewardType = RewardType.PortionSet;
+            portion = Random.Range(0, 5);
+
+            switch(portion)
+            {
+                case 0:
+                    normalRewardType = RewardType.Portion1;
+                    epicRewardType = RewardType.Portion1;
+                    break;
+                case 1:
+                    normalRewardType = RewardType.Portion2;
+                    epicRewardType = RewardType.Portion2;
+                    break;
+                case 2:
+                    normalRewardType = RewardType.Portion3;
+                    epicRewardType = RewardType.Portion3;
+                    break;
+                case 3:
+                    normalRewardType = RewardType.Portion4;
+                    epicRewardType = RewardType.Portion4;
+                    break;
+                case 4:
+                    normalRewardType = RewardType.Portion5;
+                    epicRewardType = RewardType.Portion5;
+                    break;
+            }
 
             normalRewardIcon.sprite = rewardArray[(int)normalRewardType];
             normalRewardText.text = MoneyUnitString.ToCurrencyString(1);
 
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
-            epicRewardText.text = MoneyUnitString.ToCurrencyString(10);
+            epicRewardText.text = MoneyUnitString.ToCurrencyString(5);
         }
-        else if (random > 21)
+        else if (random > 11)
         {
             normalRewardType = RewardType.DefDestroyTicketPiece;
             epicRewardType = RewardType.DefDestroyTicket;
@@ -232,6 +257,18 @@ public class ChestBoxManager : MonoBehaviour
             case RewardType.Portion1:
                 PortionManager.instance.GetPortion(0, 1);
                 break;
+            case RewardType.Portion2:
+                PortionManager.instance.GetPortion(1, 1);
+                break;
+            case RewardType.Portion3:
+                PortionManager.instance.GetPortion(2, 1);
+                break;
+            case RewardType.Portion4:
+                PortionManager.instance.GetPortion(3, 1);
+                break;
+            case RewardType.Portion5:
+                PortionManager.instance.GetPortion(4, 1);
+                break;
             case RewardType.DefDestroyTicketPiece:
                 PortionManager.instance.GetDefTicketPiece(1);
                 break;
@@ -257,9 +294,9 @@ public class ChestBoxManager : MonoBehaviour
 
         FirebaseAnalytics.LogEvent("OpenChestBox_Ad");
 
-        switch (normalRewardType)
+        switch (epicRewardType)
         {
-            case RewardType.Gold:
+            case RewardType.Gold2:
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
                     PlayfabManager.instance.UpdateAddGold(5000000);
@@ -281,7 +318,19 @@ public class ChestBoxManager : MonoBehaviour
                 PlayfabManager.instance.UpdateAddGold(300000);
                 break;
             case RewardType.Portion1:
-                PortionManager.instance.GetRandomPortion(10);
+                PortionManager.instance.GetPortion(0, 5);
+                break;
+            case RewardType.Portion2:
+                PortionManager.instance.GetPortion(1, 5);
+                break;
+            case RewardType.Portion3:
+                PortionManager.instance.GetPortion(2, 5);
+                break;
+            case RewardType.Portion4:
+                PortionManager.instance.GetPortion(3, 5);
+                break;
+            case RewardType.Portion5:
+                PortionManager.instance.GetPortion(4, 5);
                 break;
             case RewardType.DefDestroyTicketPiece:
                 PortionManager.instance.GetDefTickets(3);

@@ -293,5 +293,6 @@ public enum NotionType
     SuccessAttack,
     FailAttack,
     SuccessAttackX2,
-    SuccessSleepFood
+    SuccessSleepFood,
+    LimitIslandHeart
 }

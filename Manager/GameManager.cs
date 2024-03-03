@@ -258,6 +258,8 @@ public class GameManager : MonoBehaviour
     private bool isWeekend = false;
     private bool checkGender = false;
 
+    private bool checkInGame = false;
+
     public GameObject buff4Obj;
 
     [Space]
@@ -1345,6 +1347,9 @@ public class GameManager : MonoBehaviour
         if (!isReady) return;
         if (!isDelay_Camera) return;
 
+        mainUI.SetActive(false);
+        inGameUI.SetActive(true);
+
         GameStateManager.instance.GameType = GameType.Story + number;
 
         rankingNoticeButton.SetActive(false);
@@ -1426,9 +1431,6 @@ public class GameManager : MonoBehaviour
 
         isDelay_Camera = false;
         cameraController.GoToB();
-
-        mainUI.SetActive(false);
-        inGameUI.SetActive(true);
 
         season = SeasonManager.instance.CheckSeason();
 
@@ -1540,8 +1542,17 @@ public class GameManager : MonoBehaviour
     {
         if (!isDelay_Camera) return;
 
-        isDelay_Camera = false;
-        cameraController.GoToB();
+        if(inGameUI.activeSelf)
+        {
+            checkInGame = true;
+        }
+        else
+        {
+            checkInGame = false;
+
+            isDelay_Camera = false;
+            cameraController.GoToB();
+        }
 
         island.SetActive(false);
         dungeon.SetActive(true);
@@ -1555,19 +1566,30 @@ public class GameManager : MonoBehaviour
     {
         if (!isDelay_Camera) return;
 
-        isDelay_Camera = false;
-        cameraController.GoToA();
+        if(!checkInGame)
+        {
+            isDelay_Camera = false;
+            cameraController.GoToA();
+
+            mainUI.SetActive(true);
+            inGameUI.SetActive(false);
+            dungeonUI.SetActive(false);
+        }
+        else
+        {
+            mainUI.SetActive(false);
+            inGameUI.SetActive(true);
+            dungeonUI.SetActive(false);
+        }
 
         island.SetActive(true);
         dungeon.SetActive(false);
-
-        mainUI.SetActive(true);
-        inGameUI.SetActive(false);
-        dungeonUI.SetActive(false);
     }
 
     public void CheckPercent()
     {
+        if (!inGameUI.activeInHierarchy) return;
+
         successPlus = 0;
         successX2 = 0;
         needPlus = 0;
@@ -1585,7 +1607,7 @@ public class GameManager : MonoBehaviour
         successPlus += playerDataBase.Advancement * 0.1f;
 
         successX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
-        successX2 += playerDataBase.Treasure3 * 0.15f;
+        successX2 += playerDataBase.Treasure3 * 0.2f;
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 0.4f;
@@ -3376,7 +3398,7 @@ public class GameManager : MonoBehaviour
         {
             supportCount = 0;
 
-            shopManager.OpenSupportPackage();
+            shopManager.OpenPackage(PackageType.Package7);
         }
         else
         {

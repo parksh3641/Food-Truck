@@ -135,6 +135,26 @@ public class PackageContent : MonoBehaviour
 
     public void BuyLimitDate()
     {
+        if (playerDataBase.FirstDate.Length > 9)
+        {
+            playerDataBase.FirstDate = playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1);
+        }
+
+        if (playerDataBase.FirstServerDate.Length > 9)
+        {
+            playerDataBase.FirstServerDate = playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1);
+        }
+
+        if (playerDataBase.FirstDate[0] == '0')
+        {
+            playerDataBase.FirstDate = "1" + playerDataBase.FirstDate;
+        }
+
+        if (playerDataBase.FirstServerDate[0] == '0')
+        {
+            playerDataBase.FirstServerDate = "1" + playerDataBase.FirstServerDate;
+        }
+
         time = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
         serverTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
 

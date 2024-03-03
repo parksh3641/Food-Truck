@@ -434,10 +434,10 @@ public class OfflineManager : MonoBehaviour
 
     public void SuccessWatchAd()
     {
+        quickLockObj.SetActive(true);
+
         playerDataBase.DailyCastleReward = 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyCastleReward", playerDataBase.DailyCastleReward);
-
-        quickLockObj.SetActive(true);
 
         button.StopAnim();
 

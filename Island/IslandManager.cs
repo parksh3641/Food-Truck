@@ -141,7 +141,7 @@ public class IslandManager : MonoBehaviour
                     if(playerDataBase.Island1Count < (playerDataBase.Island1Level + 1) * 100)
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                        NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                        NotionManager.instance.UseNotion(NotionType.LimitIslandHeart);
                         return;
                     }
                 }
@@ -166,7 +166,7 @@ public class IslandManager : MonoBehaviour
                     if (playerDataBase.Island2Count < (playerDataBase.Island2Level + 1) * 100)
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                        NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                        NotionManager.instance.UseNotion(NotionType.LimitIslandHeart);
                         return;
                     }
                 }
@@ -191,7 +191,7 @@ public class IslandManager : MonoBehaviour
                     if (playerDataBase.Island3Count < (playerDataBase.Island3Level + 1) * 100)
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                        NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                        NotionManager.instance.UseNotion(NotionType.LimitIslandHeart);
                         return;
                     }
                 }
@@ -216,7 +216,7 @@ public class IslandManager : MonoBehaviour
                     if (playerDataBase.Island4Count < (playerDataBase.Island4Level + 1) * 100)
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                        NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                        NotionManager.instance.UseNotion(NotionType.LimitIslandHeart);
                         return;
                     }
                 }

@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource musicAudio2;
 
     public AudioClip musicFever;
+    public AudioClip boss;
 
     public AudioClip[] musicArray;
 
@@ -102,6 +103,20 @@ public class SoundManager : MonoBehaviour
     {
         fever = false;
 
+        ResetBGM();
+    }
+
+    public void PlayBoss()
+    {
+        if (!GameStateManager.instance.Music) return;
+
+        musicAudio.Stop();
+        musicAudio.clip = boss;
+        musicAudio.Play();
+    }
+
+    public void StopBoss()
+    {
         ResetBGM();
     }
 

@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -55,11 +56,10 @@ public class ShopManager : MonoBehaviour
     public ShopContent[] shopContents;
     public PackageContent[] packageContents;
 
-    public GameObject supportPackage;
-    public PackageContent supportPackageContent;
+    public GameObject package;
+    public PackageContent packageContent;
+    public GameObject packageBuyIcon;
 
-    public GameObject limitPackage;
-    public PackageContent limitPackageContent;
 
     [Space]
     public GameObject mainAnimal;
@@ -135,7 +135,7 @@ public class ShopManager : MonoBehaviour
     bool buy = false;
     bool isDelay = false;
     bool isTimer = false;
-    bool isSupportDelay = false;
+    bool isPackageDelay = false;
 
     private int price_Gold = 0;
     private int price_Crystal = 0;
@@ -196,8 +196,7 @@ public class ShopManager : MonoBehaviour
 
         dailyShopCountText.text = "";
 
-        supportPackage.SetActive(false);
-        limitPackage.SetActive(false);
+        package.SetActive(false);
 
         shopAlarm.SetActive(true);
         shopIngameAlarm.SetActive(true);
@@ -205,7 +204,9 @@ public class ShopManager : MonoBehaviour
         martAlarm.SetActive(true);
         martIngameAlarm.SetActive(true);
 
-        for(int i = 0; i < packageAlarm.Length; i ++)
+        packageBuyIcon.SetActive(false);
+
+        for (int i = 0; i < packageAlarm.Length; i ++)
         {
             packageAlarm[i].SetActive(true);
         }
@@ -272,6 +273,64 @@ public class ShopManager : MonoBehaviour
             mainButterflyArray[(int)GameStateManager.instance.ButterflyType].SetActive(true);
             mainTotemsArray[(int)GameStateManager.instance.TotemsType].SetActive(true);
             //mainFlowerArray[(int)GameStateManager.instance.FlowerType].SetActive(true);
+        }
+
+        if (!playerDataBase.Package5)
+        {
+
+            if (playerDataBase.FirstDate.Length < 1)
+            {
+                playerDataBase.FirstDate = "1" + DateTime.Now.ToString("MMddHHmm");
+                playerDataBase.FirstServerDate = "1" + DateTime.Now.AddDays(3).ToString("MMddHHmm");
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstDate", int.Parse(playerDataBase.FirstDate));
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstServerDate", int.Parse(playerDataBase.FirstServerDate));
+
+                Debug.Log("한정 패키지 구매 날짜 설정");
+            }
+
+            if (playerDataBase.FirstDate.Length > 9)
+            {
+                playerDataBase.FirstDate = playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1);
+            }
+
+            if (playerDataBase.FirstServerDate.Length > 9)
+            {
+                playerDataBase.FirstServerDate = playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1);
+            }
+
+            if (playerDataBase.FirstDate[0] == '0')
+            {
+                playerDataBase.FirstDate = "1" + playerDataBase.FirstDate;
+            }
+
+            if (playerDataBase.FirstServerDate[0] == '0')
+            {
+                playerDataBase.FirstServerDate = "1" + playerDataBase.FirstServerDate;
+            }
+
+            time = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
+            serverTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
+
+            if (DateTime.Compare(DateTime.Now, serverTime) == -1)
+            {
+                Debug.Log("한정 패키지 구매 가능");
+
+                packageContents[0].BuyLimitDate();
+            }
+            else
+            {
+                packageContents[0].gameObject.SetActive(false);
+
+                Debug.Log("한정 패키지 구매 가능 날짜가 지났습니다.");
+            }
+        }
+        else
+        {
+            if (playerDataBase.InGameTutorial == 1)
+            {
+                OpenLimitPackage();
+            }
         }
     }
 
@@ -478,12 +537,41 @@ public class ShopManager : MonoBehaviour
 
                 packageAlarm[0].SetActive(false);
 
-                packageContents[0].Initialize(PackageType.Package5, this);
-                packageContents[1].Initialize(PackageType.Package1, this);
-                packageContents[2].Initialize(PackageType.Package2, this);
-                packageContents[3].Initialize(PackageType.Package3, this);
-                packageContents[4].Initialize(PackageType.Package4, this);
-                packageContents[5].Initialize(PackageType.Package6, this);
+                if (playerDataBase.Package1)
+                {
+                    packageContents[1].gameObject.SetActive(false);
+                }
+                else
+                {
+                    packageContents[1].Initialize(PackageType.Package1, this);
+                }
+
+                if (playerDataBase.Package2)
+                {
+                    packageContents[2].gameObject.SetActive(false);
+                }
+                else
+                {
+                    packageContents[2].Initialize(PackageType.Package2, this);
+                }
+
+                if (playerDataBase.Package3)
+                {
+                    packageContents[3].gameObject.SetActive(false);
+                }
+                else
+                {
+                    packageContents[3].Initialize(PackageType.Package3, this);
+                }
+
+                if (playerDataBase.Package4)
+                {
+                    packageContents[4].gameObject.SetActive(false);
+                }
+                else
+                {
+                    packageContents[4].Initialize(PackageType.Package4, this);
+                }
 
                 if (playerDataBase.Package5)
                 {
@@ -491,77 +579,19 @@ public class ShopManager : MonoBehaviour
                 }
                 else
                 {
-                    if (playerDataBase.FirstDate.Length < 1)
+                    if (packageContents[0].gameObject.activeInHierarchy)
                     {
-                        playerDataBase.FirstDate = "1" + DateTime.Now.ToString("MMddHHmm");
-                        playerDataBase.FirstServerDate = "1" + DateTime.Now.AddDays(3).ToString("MMddHHmm");
-
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstDate", int.Parse(playerDataBase.FirstDate));
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstServerDate", int.Parse(playerDataBase.FirstServerDate));
-
-                        Debug.Log("한정 패키지 구매 날짜 설정");
+                        packageContents[0].Initialize(PackageType.Package5, this);
                     }
-
-                    if(playerDataBase.FirstDate.Length > 9)
-                    {
-                        playerDataBase.FirstDate = playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1);
-                    }
-
-                    if (playerDataBase.FirstServerDate.Length > 9)
-                    {
-                        playerDataBase.FirstServerDate = playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1);
-                    }
-
-                    if (playerDataBase.FirstDate[0] == '0')
-                    {
-                        playerDataBase.FirstDate = "1" + playerDataBase.FirstDate;
-                    }
-
-                    if (playerDataBase.FirstServerDate[0] == '0')
-                    {
-                        playerDataBase.FirstServerDate = "1" + playerDataBase.FirstServerDate;
-                    }
-
-                    time = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
-                    serverTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
-
-                    if (DateTime.Compare(DateTime.Now, serverTime) == -1)
-                    {
-                        Debug.Log("한정 패키지 구매 가능");
-
-                        packageContents[0].BuyLimitDate();
-                    }
-                    else
-                    {
-                        packageContents[0].gameObject.SetActive(false);
-
-                        Debug.Log("한정 패키지 구매 가능 날짜가 지났습니다.");
-                    }
-                }
-
-                if (playerDataBase.Package1)
-                {
-                    packageContents[1].gameObject.SetActive(false);
-                }
-
-                if (playerDataBase.Package2)
-                {
-                    packageContents[2].gameObject.SetActive(false);
-                }
-
-                if (playerDataBase.Package3)
-                {
-                    packageContents[3].gameObject.SetActive(false);
-                }
-
-                if (playerDataBase.Package4)
-                {
-                    packageContents[4].gameObject.SetActive(false);
                 }
 
                 if (playerDataBase.Package6)
                 {
                     packageContents[5].gameObject.SetActive(false);
+                }
+                else
+                {
+                    packageContents[5].Initialize(PackageType.Package6, this);
                 }
 
                 if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
@@ -1285,7 +1315,7 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
-        PlayfabManager.instance.UpdateAddGold(300000);
+        PlayfabManager.instance.UpdateAddGold(500000);
     }
 
     public void SuccessWatchAd_Portion()
@@ -4018,7 +4048,7 @@ public class ShopManager : MonoBehaviour
         {
             case PackageType.Package1:
                 playerDataBase.Package1 = true;
-                Invoke("PackageDelay", 0.5f);
+                Invoke("PackageDelay1", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package1", 1);
 
                 PlayfabManager.instance.UpdateAddGold(6000000);
@@ -4193,7 +4223,7 @@ public class ShopManager : MonoBehaviour
         autoPresent.SetActive(true);
     }
 
-    void PackageDelay()
+    void PackageDelay1()
     {
         packageContents[1].gameObject.SetActive(false);
     }
@@ -4225,12 +4255,7 @@ public class ShopManager : MonoBehaviour
 
     void PackageDelay7()
     {
-        supportPackage.SetActive(false);
-    }
-
-    void PackageDelay_Limit()
-    {
-        limitPackage.SetActive(false);
+        package.SetActive(false);
     }
 
     public void Failed()
@@ -4258,27 +4283,43 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void OpenSupportPackage()
+    public void OpenPackage(PackageType type)
     {
-        supportPackage.SetActive(true);
+        package.SetActive(true);
 
-        supportPackageContent.Initialize(PackageType.Package7, this);
+        packageContent.Initialize(type, this);
 
-        isSupportDelay = true;
-        Invoke("SupportDelay", 3.0f);
+        if(type == PackageType.Package5)
+        {
+            packageContent.BuyLimitDate();
+        }
 
-        Debug.LogError("보급 패키지 열림");
+        isPackageDelay = true;
+        Invoke("PackageDelay", 2.0f);
     }
 
-    void SupportDelay()
+    void PackageDelay()
     {
-        isSupportDelay = false;
+        isPackageDelay = false;
     }
 
-    public void CloseSupportPackage()
+    public void ClosePackage()
     {
-        if (isSupportDelay) return;
+        if (isPackageDelay) return;
 
-        supportPackage.SetActive(false);
+        package.SetActive(false);
+    }
+
+    public void OpenLimitPackage()
+    {
+        if (playerDataBase.Package5 || !packageContents[0].gameObject.activeSelf)
+        {
+            package.SetActive(false);
+            return;
+        }
+
+        OpenPackage(PackageType.Package5);
+
+        packageBuyIcon.SetActive(true);
     }
 }

@@ -19,10 +19,6 @@ public class DungeonInfo
     public int health = 100;
     public int timer = 30;
 
-    [Header("Level")]
-    public int addPercent = 0;
-    public int addHelath = 0;
-
     [Header("Reward")]
     public List<RewardInfo> rewardInfos = new List<RewardInfo>();
 }

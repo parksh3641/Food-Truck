@@ -127,7 +127,7 @@ public class ShopContent : MonoBehaviour
                 }
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(300000) + "</size>";
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(500000) + "</size>";
 
                 if(playerDataBase.Candy1MaxValue > 0)
                 {

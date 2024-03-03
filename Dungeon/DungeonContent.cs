@@ -54,8 +54,9 @@ public class DungeonContent : MonoBehaviour
         dungeonManager = manager;
 
         dungeonType = type;
-
         itemType = item;
+
+        watchAdObj.SetActive(false);
 
         switch (dungeonType)
         {
@@ -68,6 +69,11 @@ public class DungeonContent : MonoBehaviour
 
                 plusNumber1 = info.rewardInfos[0].addNumber * playerDataBase.Dungeon1Level;
                 plusNumber2 = info.rewardInfos[1].addNumber * playerDataBase.Dungeon1Level;
+
+                if(playerDataBase.DungeonKey1 == 0 && playerDataBase.DailyDungeonKey1 == 0)
+                {
+                    watchAdObj.SetActive(true);
+                }
                 break;
             case DungeonType.Dungeon2:
                 titleText.localizationName = "Dungeon2Title";
@@ -78,6 +84,11 @@ public class DungeonContent : MonoBehaviour
 
                 plusNumber1 = info.rewardInfos[0].addNumber * playerDataBase.Dungeon2Level;
                 plusNumber2 = info.rewardInfos[1].addNumber * playerDataBase.Dungeon2Level;
+
+                if (playerDataBase.DungeonKey2 == 0 && playerDataBase.DailyDungeonKey2 == 0)
+                {
+                    watchAdObj.SetActive(true);
+                }
                 break;
             case DungeonType.Dungeon3:
                 titleText.localizationName = "Dungeon3Title";
@@ -88,6 +99,11 @@ public class DungeonContent : MonoBehaviour
 
                 plusNumber1 = info.rewardInfos[0].addNumber * playerDataBase.Dungeon3Level;
                 plusNumber2 = info.rewardInfos[1].addNumber * playerDataBase.Dungeon3Level;
+
+                if (playerDataBase.DungeonKey3 == 0 && playerDataBase.DailyDungeonKey3 == 0)
+                {
+                    watchAdObj.SetActive(true);
+                }
                 break;
             case DungeonType.Dungeon4:
                 titleText.localizationName = "Dungeon4Title";
@@ -98,6 +114,11 @@ public class DungeonContent : MonoBehaviour
 
                 plusNumber1 = info.rewardInfos[0].addNumber * playerDataBase.Dungeon4Level;
                 plusNumber2 = info.rewardInfos[1].addNumber * playerDataBase.Dungeon4Level;
+
+                if (playerDataBase.DungeonKey4 == 0 && playerDataBase.DailyDungeonKey4 == 0)
+                {
+                    watchAdObj.SetActive(true);
+                }
                 break;
         }
 
@@ -128,7 +149,7 @@ public class DungeonContent : MonoBehaviour
         else
         {
             lockedObj.SetActive(true);
-            lockedObjText.text = MoneyUnitString.ToCurrencyString(need) + " ก่";
+            lockedObjText.text = MoneyUnitString.ToCurrencyString(need);
         }
     }
 
@@ -171,5 +192,32 @@ public class DungeonContent : MonoBehaviour
         }
 
         dungeonManager.EnterDungeon(dungeonType);
+    }
+
+    public void WatchAd()
+    {
+        switch (dungeonType)
+        {
+            case DungeonType.Dungeon1:
+                if (playerDataBase.DailyDungeonKey1 == 1) return;
+
+                GoogleAdsManager.instance.admobReward_Dungeon.ShowAd(9);
+                break;
+            case DungeonType.Dungeon2:
+                if (playerDataBase.DailyDungeonKey2 == 1) return;
+
+                GoogleAdsManager.instance.admobReward_Dungeon.ShowAd(10);
+                break;
+            case DungeonType.Dungeon3:
+                if (playerDataBase.DailyDungeonKey3 == 1) return;
+
+                GoogleAdsManager.instance.admobReward_Dungeon.ShowAd(11);
+                break;
+            case DungeonType.Dungeon4:
+                if (playerDataBase.DailyDungeonKey4 == 1) return;
+
+                GoogleAdsManager.instance.admobReward_Dungeon.ShowAd(12);
+                break;
+        }
     }
 }

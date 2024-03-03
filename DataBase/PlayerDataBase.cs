@@ -147,6 +147,14 @@ public class PlayerDataBase : ScriptableObject
     private int dailyTreasureReward = 0;
     [SerializeField]
     private int dailyReward_Crystal = 0;
+    [SerializeField]
+    private int dailyDungeonKey1 = 0;
+    [SerializeField]
+    private int dailyDungeonKey2 = 0;
+    [SerializeField]
+    private int dailyDungeonKey3 = 0;
+    [SerializeField]
+    private int dailyDungeonKey4 = 0;
 
     [Space]
     [Title("Count")]
@@ -1445,6 +1453,30 @@ public class PlayerDataBase : ScriptableObject
         {
             dailyReward_Crystal = value;
         }
+    }
+
+    public int DailyDungeonKey1
+    {
+        get { return dailyDungeonKey1; }
+        set { dailyDungeonKey1 = value; }
+    }
+
+    public int DailyDungeonKey2
+    {
+        get { return dailyDungeonKey2; }
+        set { dailyDungeonKey2 = value; }
+    }
+
+    public int DailyDungeonKey3
+    {
+        get { return dailyDungeonKey3; }
+        set { dailyDungeonKey3 = value; }
+    }
+
+    public int DailyDungeonKey4
+    {
+        get { return dailyDungeonKey4; }
+        set { dailyDungeonKey4 = value; }
     }
 
     public int DailyAdsReward
@@ -4901,6 +4933,10 @@ public class PlayerDataBase : ScriptableObject
         dailyCastleReward = 0;
         dailyQuestReward = 0;
         dailyTreasureReward = 0;
+        dailyDungeonKey1 = 0;
+        dailyDungeonKey2 = 0;
+        dailyDungeonKey3 = 0;
+        dailyDungeonKey4 = 0;
 
         nextFoodNumber = 0;
         nextFoodNumber2 = 0;
@@ -5060,6 +5096,8 @@ public class PlayerDataBase : ScriptableObject
         flower6 = 0;
         flower7 = 0;
 
+        iconList.Clear();
+
         for (int i = 0; i < System.Enum.GetValues(typeof(IconType)).Length; i++)
         {
             IconClass iconClass = new IconClass();
@@ -5115,6 +5153,8 @@ public class PlayerDataBase : ScriptableObject
         offlineCount = 0;
 
         guideIndex = 0;
+
+        gender = 0;
 
         dungeonKey1 = 0;
         dungeonKey2 = 0;
@@ -6186,6 +6226,6 @@ public class PlayerDataBase : ScriptableObject
                 number++;
             }
         }
-        return number + 1;
+        return number;
     }
 }

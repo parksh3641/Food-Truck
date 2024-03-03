@@ -290,7 +290,6 @@ public class ChestBoxManager : MonoBehaviour
     public void SuccessWatchAd()
     {
         GameStateManager.instance.ChestBoxCount += 1;
-        Success();
 
         FirebaseAnalytics.LogEvent("OpenChestBox_Ad");
 
@@ -339,6 +338,8 @@ public class ChestBoxManager : MonoBehaviour
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
                 break;
         }
+
+        Success();
     }
 
     void Success()
@@ -348,7 +349,7 @@ public class ChestBoxManager : MonoBehaviour
 
         GameStateManager.instance.OpenChestBox += 1;
 
-        gameManager.CheckPortion();
+        GameManager.instance.CheckPortion();
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

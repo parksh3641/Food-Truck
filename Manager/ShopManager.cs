@@ -141,6 +141,8 @@ public class ShopManager : MonoBehaviour
     private int price_Crystal = 0;
     private int exchagne = 100000;
 
+    public GuideMissionManager guideMissionManager;
+
     CharacterInfo characterInfo = new CharacterInfo();
     TruckInfo truckInfo = new TruckInfo();
     AnimalInfo animalInfo = new AnimalInfo();
@@ -277,7 +279,6 @@ public class ShopManager : MonoBehaviour
 
         if (!playerDataBase.Package5)
         {
-
             if (playerDataBase.FirstDate.Length < 1)
             {
                 playerDataBase.FirstDate = "1" + DateTime.Now.ToString("MMddHHmm");
@@ -289,44 +290,6 @@ public class ShopManager : MonoBehaviour
                 Debug.Log("한정 패키지 구매 날짜 설정");
             }
 
-            if (playerDataBase.FirstDate.Length > 9)
-            {
-                playerDataBase.FirstDate = playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1);
-            }
-
-            if (playerDataBase.FirstServerDate.Length > 9)
-            {
-                playerDataBase.FirstServerDate = playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1);
-            }
-
-            if (playerDataBase.FirstDate[0] == '0')
-            {
-                playerDataBase.FirstDate = "1" + playerDataBase.FirstDate;
-            }
-
-            if (playerDataBase.FirstServerDate[0] == '0')
-            {
-                playerDataBase.FirstServerDate = "1" + playerDataBase.FirstServerDate;
-            }
-
-            time = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstDate.Substring(1, playerDataBase.FirstDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
-            serverTime = DateTime.ParseExact(DateTime.Now.ToString("yyyy") + playerDataBase.FirstServerDate.Substring(1, playerDataBase.FirstServerDate.Length - 1), "yyyyMMddHHmm", CultureInfo.CurrentCulture);
-
-            if (DateTime.Compare(DateTime.Now, serverTime) == -1)
-            {
-                Debug.Log("한정 패키지 구매 가능");
-
-                packageContents[0].BuyLimitDate();
-            }
-            else
-            {
-                packageContents[0].gameObject.SetActive(false);
-
-                Debug.Log("한정 패키지 구매 가능 날짜가 지났습니다.");
-            }
-        }
-        else
-        {
             if (playerDataBase.InGameTutorial == 1)
             {
                 OpenLimitPackage();
@@ -537,6 +500,11 @@ public class ShopManager : MonoBehaviour
 
                 packageAlarm[0].SetActive(false);
 
+                if (packageContents[0].gameObject.activeSelf)
+                {
+                    packageContents[0].Initialize(PackageType.Package5, this);
+                }
+
                 if (playerDataBase.Package1)
                 {
                     packageContents[1].gameObject.SetActive(false);
@@ -573,18 +541,6 @@ public class ShopManager : MonoBehaviour
                     packageContents[4].Initialize(PackageType.Package4, this);
                 }
 
-                if (playerDataBase.Package5)
-                {
-                    packageContents[0].gameObject.SetActive(false);
-                }
-                else
-                {
-                    if (packageContents[0].gameObject.activeInHierarchy)
-                    {
-                        packageContents[0].Initialize(PackageType.Package5, this);
-                    }
-                }
-
                 if (playerDataBase.Package6)
                 {
                     packageContents[5].gameObject.SetActive(false);
@@ -594,11 +550,11 @@ public class ShopManager : MonoBehaviour
                     packageContents[5].Initialize(PackageType.Package6, this);
                 }
 
-                if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
-                    && playerDataBase.Package5 && playerDataBase.Package6)
-                {
-                    packageThanks.SetActive(true);
-                }
+                //if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
+                //    && playerDataBase.Package5 && playerDataBase.Package6)
+                //{
+                //    packageThanks.SetActive(true);
+                //}
 
                 break;
             case 2:
@@ -1367,6 +1323,13 @@ public class ShopManager : MonoBehaviour
         StartCoroutine(TimerCoroution());
     }
 
+    public void OpenSpeicalShop_Guide(int number)
+    {
+        speicalShopView.SetActive(true);
+
+        ChangeSpeicalTopToggle(number);
+    }
+
     public void OpenSpeicalShop()
     {
         if (!speicalShopView.activeInHierarchy)
@@ -1435,6 +1398,8 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
+            guideMissionManager.Initialize();
+
             speicalShopView.SetActive(false);
         }
     }
@@ -1449,6 +1414,8 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
+            guideMissionManager.Initialize();
+
             speicalShopView.SetActive(false);
         }
     }
@@ -3366,7 +3333,7 @@ public class ShopManager : MonoBehaviour
                         }
                         break;
                     case 1:
-                        if (playerDataBase.Crystal < animalInfo.crystal)
+                        if (playerDataBase.Crystal < price_Crystal)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCrystal);
@@ -3434,7 +3401,7 @@ public class ShopManager : MonoBehaviour
                         }
                         break;
                     case 1:
-                        if (playerDataBase.Crystal < truckInfo.crystal)
+                        if (playerDataBase.Crystal < price_Crystal)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCrystal);
@@ -3508,7 +3475,7 @@ public class ShopManager : MonoBehaviour
                         }
                         break;
                     case 1:
-                        if (playerDataBase.Crystal < characterInfo.crystal)
+                        if (playerDataBase.Crystal < price_Crystal)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCrystal);
@@ -3612,7 +3579,7 @@ public class ShopManager : MonoBehaviour
                         }
                         break;
                     case 1:
-                        if (playerDataBase.Crystal < butterflyInfo.crystal)
+                        if (playerDataBase.Crystal < price_Crystal)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCrystal);
@@ -3740,7 +3707,7 @@ public class ShopManager : MonoBehaviour
                         }
                         break;
                     case 1:
-                        if (playerDataBase.Crystal < totemsInfo.crystal)
+                        if (playerDataBase.Crystal < price_Crystal)
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCrystal);
@@ -4289,11 +4256,6 @@ public class ShopManager : MonoBehaviour
 
         packageContent.Initialize(type, this);
 
-        if(type == PackageType.Package5)
-        {
-            packageContent.BuyLimitDate();
-        }
-
         isPackageDelay = true;
         Invoke("PackageDelay", 2.0f);
     }
@@ -4312,14 +4274,17 @@ public class ShopManager : MonoBehaviour
 
     public void OpenLimitPackage()
     {
-        if (playerDataBase.Package5 || !packageContents[0].gameObject.activeSelf)
-        {
-            package.SetActive(false);
-            return;
-        }
-
         OpenPackage(PackageType.Package5);
 
         packageBuyIcon.SetActive(true);
+    }
+
+    public void OffLimitPackage()
+    {
+        packageContents[0].gameObject.SetActive(false);
+
+        package.SetActive(false);
+
+        packageBuyIcon.SetActive(false);
     }
 }

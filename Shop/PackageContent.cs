@@ -106,6 +106,8 @@ public class PackageContent : MonoBehaviour
                 receiveContents[2].Initialize(RewardType.PortionSet, 20);
                 receiveContents[3].Initialize(RewardType.EventTicket, 10);
                 receiveContents[4].gameObject.SetActive(false);
+
+                BuyLimitDate();
                 break;
             case PackageType.Package6:
                 iapButton.productId = "shop.foodtruck.package6";
@@ -199,7 +201,7 @@ public class PackageContent : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            shopManager.OffLimitPackage();
         }
 
         yield return waitForSeconds;

@@ -18,7 +18,12 @@ public class GuideMissionManager : MonoBehaviour
     private bool clear = false;
     private bool firstReset = false;
 
-    private int reward = 10;
+    private int reward = 20;
+
+    public ChangeFoodManager changeFoodManager;
+    public ShopManager shopManager;
+    public SkillManager skillManager;
+    public TreasureManager treasureManager;
 
     PlayerDataBase playerDataBase;
 
@@ -34,10 +39,9 @@ public class GuideMissionManager : MonoBehaviour
 
     public void Initialize()
     {
-        if(playerDataBase.GuideIndex > 21)
-        {
-            return;
-        }
+        if (!guideMissonView.activeInHierarchy) return;
+
+        if (playerDataBase.GuideIndex > 22) return;
 
         guideMissonView.SetActive(true);
 
@@ -55,6 +59,10 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 2:
+                now = playerDataBase.UseSauceCount;
+                need = 2;
+                break;
+            case 3:
                 if(!firstReset)
                 {
                     firstReset = true;
@@ -62,37 +70,21 @@ public class GuideMissionManager : MonoBehaviour
                 }
 
                 now = GameStateManager.instance.GetSellGold;
-                need = 500000;
+                need = 200000;
                 break;
-            case 3:
+            case 4:
                 now = playerDataBase.Character2;
                 need = 1;
                 break;
-            case 4:
+            case 5:
+                now = playerDataBase.SnackLabMaxValue;
+                need = 1;
+                break;
+            case 6:
                 now = playerDataBase.YummyTimeCount;
                 need = 1;
                 break;
-            case 5:
-                now = playerDataBase.GetRecipeUpgradeCount();
-                need = 5;
-                break;
-            case 6:
-                now = playerDataBase.BuffCount;
-                need = 1;
-                break;
             case 7:
-                now = playerDataBase.QuestCount;
-                need = 1;
-                break;
-            case 8:
-                now = playerDataBase.SnackLabMaxValue;
-                need = 2;
-                break;
-            case 9:
-                now = playerDataBase.DrinkMaxValue;
-                need = 2;
-                break;
-            case 10:
                 if (!firstReset)
                 {
                     firstReset = true;
@@ -100,29 +92,45 @@ public class GuideMissionManager : MonoBehaviour
                 }
 
                 now = GameStateManager.instance.GetSellGold;
-                need = 1000000;
+                need = 600000;
                 break;
-            case 11:
+            case 8:
                 now = playerDataBase.Character3;
                 need = 1;
                 break;
+            case 9:
+                now = playerDataBase.DrinkMaxValue;
+                need = 1;
+                break;
+            case 10:
+                now = playerDataBase.GetRecipeUpgradeCount();
+                need = 5;
+                break;
+            case 11:
+                now = playerDataBase.BuffCount;
+                need = 1;
+                break;
             case 12:
-                now = playerDataBase.OpenChestBox;
-                need = 2;
+                now = playerDataBase.PizzaMaxValue;
+                need = 1;
                 break;
             case 13:
-                now = playerDataBase.Character4;
+                now = playerDataBase.QuestCount;
                 need = 1;
                 break;
             case 14:
-                now = playerDataBase.PizzaMaxValue;
+                now = playerDataBase.OpenChestBox;
                 need = 2;
                 break;
             case 15:
-                now = playerDataBase.DonutMaxValue;
+                now = playerDataBase.Character4;
                 need = 1;
                 break;
             case 16:
+                now = playerDataBase.DonutMaxValue;
+                need = 1;
+                break;
+            case 17:
                 if (!firstReset)
                 {
                     firstReset = true;
@@ -130,25 +138,25 @@ public class GuideMissionManager : MonoBehaviour
                 }
 
                 now = GameStateManager.instance.GetSellGold;
-                need = 5000000;
+                need = 3000000;
                 break;
-            case 17:
+            case 18:
                 now = playerDataBase.GeckoAnimal;
                 need = 1;
                 break;
-            case 18:
+            case 19:
                 now = playerDataBase.OfflineCount;
                 need = 1;
                 break;
-            case 19:
+            case 20:
                 now = playerDataBase.FriesMaxValue;
                 need = 1;
                 break;
-            case 20:
+            case 21:
                 now = playerDataBase.Candy1MaxValue;
                 need = 1;
                 break;
-            case 21:
+            case 22:
                 now = playerDataBase.TreasureCount;
                 need = 10;
                 break;
@@ -187,12 +195,60 @@ public class GuideMissionManager : MonoBehaviour
             playerDataBase.GuideIndex += 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("GuideIndex", playerDataBase.GuideIndex);
 
-            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
+            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward);
 
             SoundManager.instance.PlaySFX(GameSfxType.Success);
             NotionManager.instance.UseNotion(NotionType.SuccessReward);
 
             Initialize();
+        }
+        else
+        {
+            switch(playerDataBase.GuideIndex)
+            {
+                case 0:
+                    changeFoodManager.OpenChangeFoodView();
+                    break;
+                case 1:
+                    changeFoodManager.OpenChangeFoodView();
+                    break;
+                case 4:
+                    shopManager.OpenSpeicalShop_Guide(2);
+                    break;
+                case 5:
+                    changeFoodManager.OpenChangeFoodView();
+                    break;
+                case 8:
+                    shopManager.OpenSpeicalShop_Guide(2);
+                    break;
+                case 9:
+                    changeFoodManager.OpenChangeFoodView();
+                    break;
+                case 10:
+                    skillManager.OpenSkillView();
+                    break;
+                case 12:
+                    changeFoodManager.OpenChangeFoodView();
+                    break;
+                case 15:
+                    shopManager.OpenSpeicalShop_Guide(2);
+                    break;
+                case 16:
+                    changeFoodManager.OpenChangeFoodView();
+                    break;
+                case 18:
+                    shopManager.OpenSpeicalShop_Guide(0);
+                    break;
+                case 20:
+                    changeFoodManager.OpenChangeFoodView();
+                    break;
+                case 21:
+                    changeFoodManager.OpenChangeFoodView();
+                    break;
+                case 22:
+                    treasureManager.OpenTreasureView();
+                    break;
+            }
         }
     }
 

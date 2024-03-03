@@ -123,10 +123,10 @@ public class BuffManager : MonoBehaviour
         switch(index)
         {
             case 0:
-                GoogleAdsManager.instance.admobReward_SellPriceTime.ShowAd(3);
+                GoogleAdsManager.instance.admobReward_Buff1.ShowAd(3);
                 break;
             case 1:
-                GoogleAdsManager.instance.admobReward_DefDestroyTime.ShowAd(3);
+                GoogleAdsManager.instance.admobReward_Buff2.ShowAd(3);
                 break;
             case 2:
                 GoogleAdsManager.instance.admobReward_Buff3.ShowAd(3);
@@ -141,7 +141,10 @@ public class BuffManager : MonoBehaviour
     {
         buffView.SetActive(false);
 
-        switch(index)
+        playerDataBase.BuffCount += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffCount", playerDataBase.BuffCount);
+
+        switch (index)
         {
             case 0:
                 if (buff1) return;
@@ -204,9 +207,6 @@ public class BuffManager : MonoBehaviour
                 FirebaseAnalytics.LogEvent("UseBuff4");
                 break;
         }
-
-        playerDataBase.BuffCount += 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffCount", playerDataBase.BuffCount);
     }
 
     public void SuccessWatchAd()

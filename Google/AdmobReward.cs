@@ -22,6 +22,7 @@ public class AdmobReward : MonoBehaviour
     public OfflineManager offlineManager;
     public QuestManager questManager;
     public TreasureManager treasureManager;
+    public DungeonManager dungeonManager;
 
     PlayerDataBase playerDataBase;
 
@@ -118,6 +119,18 @@ public class AdmobReward : MonoBehaviour
                 case 8:
                     shopManager.SuccessWatchAd_Crystal();
                     break;
+                case 9:
+                    dungeonManager.SuccessWatchAd(0);
+                    break;
+                case 10:
+                    dungeonManager.SuccessWatchAd(1);
+                    break;
+                case 11:
+                    dungeonManager.SuccessWatchAd(2);
+                    break;
+                case 12:
+                    dungeonManager.SuccessWatchAd(3);
+                    break;
             }
         }
         else
@@ -159,6 +172,18 @@ public class AdmobReward : MonoBehaviour
                             break;
                         case 8:
                             shopManager.SuccessWatchAd_Crystal();
+                            break;
+                        case 9:
+                            dungeonManager.SuccessWatchAd(0);
+                            break;
+                        case 10:
+                            dungeonManager.SuccessWatchAd(1);
+                            break;
+                        case 11:
+                            dungeonManager.SuccessWatchAd(2);
+                            break;
+                        case 12:
+                            dungeonManager.SuccessWatchAd(3);
                             break;
                     }
 

@@ -28,9 +28,13 @@ public class LevelDataBase : ScriptableObject
             {
                 levelInfo.needExp = (300 + (85 * i)) * 5;
             }
-            else
+            else if (i < 100)
             {
                 levelInfo.needExp = (300 + (830 * (i - 9))) * 10;
+            }
+            else
+            {
+                levelInfo.needExp = (300 + (830 * (i - 9))) * 20;
             }
 
             levelInfoList.Add(levelInfo);

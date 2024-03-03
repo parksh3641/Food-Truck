@@ -103,9 +103,7 @@ public class IconManager : MonoBehaviour
 
         iconContentList[playerDataBase.Icon].CheckMark(true);
 
-        int plusScore = playerDataBase.GetIconHoldNumber();
-
-        plusText.text = LocalizationManager.instance.GetString("NowPrice") + " +" + (0.2f * plusScore).ToString() + "%  (+0.2%)";
+        plusText.text = LocalizationManager.instance.GetString("NowPrice") + " +" + (playerDataBase.GetIconHoldNumber() * 0.2f).ToString() + "%  (+0.2%)";
 
         CheckInitialize();
     }
@@ -417,31 +415,31 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.UseSauce1 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UseSauce1 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.UseSauce2 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UseSauce2 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.UseSauce3 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UseSauce3 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.UseSauce4 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UseSauce4 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.UseSauce5 > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UseSauce5 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }

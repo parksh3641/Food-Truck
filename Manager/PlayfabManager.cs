@@ -1498,6 +1498,18 @@ public class PlayfabManager : MonoBehaviour
                        case "DailyTreasureReward":
                            playerDataBase.DailyTreasureReward = statistics.Value;
                            break;
+                       case "DailyDungeonKey1":
+                           playerDataBase.DailyDungeonKey1 = statistics.Value;
+                           break;
+                       case "DailyDungeonKey2":
+                           playerDataBase.DailyDungeonKey2 = statistics.Value;
+                           break;
+                       case "DailyDungeonKey3":
+                           playerDataBase.DailyDungeonKey3 = statistics.Value;
+                           break;
+                       case "DailyDungeonKey4":
+                           playerDataBase.DailyDungeonKey4 = statistics.Value;
+                           break;
                        case "GetGold":
                            playerDataBase.GetGold = statistics.Value;
                            break;

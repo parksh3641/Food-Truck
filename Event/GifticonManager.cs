@@ -56,7 +56,7 @@ public class GifticonManager : MonoBehaviour
 
             timerText.text = "";
             f = DateTime.Now;
-            g = new DateTime(2024, 3, 31);
+            g = new DateTime(2024, 4, 13);
             StartCoroutine(TimerCoroution());
         }
         else

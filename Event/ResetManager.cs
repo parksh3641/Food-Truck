@@ -197,6 +197,11 @@ public class ResetManager : MonoBehaviour
         playerDataBase.DailyCastleReward = 0;
         playerDataBase.DailyQuestReward = 0;
         playerDataBase.DailyTreasureReward = 0;
+        playerDataBase.DailyDungeonKey1 = 0;
+        playerDataBase.DailyDungeonKey2 = 0;
+        playerDataBase.DailyDungeonKey3 = 0;
+        playerDataBase.DailyDungeonKey4 = 0;
+
         playerDataBase.PlayTimeCount = 0;
         playerDataBase.DungeonKey1 = 2;
         playerDataBase.DungeonKey2 = 2;
@@ -248,5 +253,12 @@ public class ResetManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey2", playerDataBase.DungeonKey2);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey3", playerDataBase.DungeonKey3);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey4", playerDataBase.DungeonKey4);
+
+        yield return waitForSeconds;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey1", playerDataBase.DailyDungeonKey1);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey2", playerDataBase.DailyDungeonKey2);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey3", playerDataBase.DailyDungeonKey3);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey4", playerDataBase.DailyDungeonKey4);
     }
 }

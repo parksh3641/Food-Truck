@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
     public Text testModeText;
     public GameObject testMode;
 
+    public GameObject homeButton;
+
     public GameObject moveArrow1;
     public GameObject moveArrow2;
     public GameObject moveArrow3;
@@ -256,7 +258,6 @@ public class GameManager : MonoBehaviour
     private bool buffAutoUpgrade = false;
     private bool speicalFood = false;
     private bool isWeekend = false;
-    private bool checkGender = false;
 
     private bool checkInGame = false;
 
@@ -433,6 +434,8 @@ public class GameManager : MonoBehaviour
 
         christmasSnow.SetActive(false);
 
+        homeButton.SetActive(true);
+
         moveArrow1.SetActive(false);
         moveArrow2.SetActive(false);
         moveArrow3.SetActive(false);
@@ -498,11 +501,6 @@ public class GameManager : MonoBehaviour
             privacypolicyView.SetActive(true);
         }
 
-        if(!GameStateManager.instance.Gender && playerDataBase.Gender == 0)
-        {
-            genderView.SetActive(true);
-        }
-
         if (GameStateManager.instance.BackgroundEffect)
         {
             if (currentDate >= decemberStart || currentDate <= decemberEnd)
@@ -540,10 +538,9 @@ public class GameManager : MonoBehaviour
             PlayfabManager.instance.SetProfileLanguage("en");
         }
 
-        if (checkGender)
+        if (!GameStateManager.instance.Gender && playerDataBase.Gender == 0)
         {
-            checkGender = false;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("Gender", playerDataBase.Gender);
+            genderView.SetActive(true);
         }
 
         isReady = false;
@@ -1982,6 +1979,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerDataBase.FirstReward == 0)
         {
+            homeButton.SetActive(false);
             moveArrow1.SetActive(true);
 
             playerDataBase.FirstReward = 1;
@@ -2212,7 +2210,6 @@ public class GameManager : MonoBehaviour
         {
             case IslandType.Island1:
                 titleText.localizationName = GameStateManager.instance.FoodType.ToString();
-                titleText.plusText = " ( " + (level + 1) + " / " + maxLevel + " )";
                 break;
             case IslandType.Island2:
                 titleText.localizationName = GameStateManager.instance.CandyType.ToString();
@@ -2391,6 +2388,7 @@ public class GameManager : MonoBehaviour
             notUpgrade.SetActive(true);
             defTicketObj.SetActive(false);
             successText.localizationName = "MaxLevel";
+            successText.plusText = "";
             needText.localizationName = "NeedPrice";
             needText.plusText = "\n-";
         }
@@ -4321,7 +4319,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void MaxLevelUpgradeSuccess()
+    void MaxLevelUpgradeSuccess() //¸¸·¾
     {
         switch (GameStateManager.instance.IslandType)
         {
@@ -4364,6 +4362,8 @@ public class GameManager : MonoBehaviour
 
                             changeFoodAlarmObj.SetActive(true);
                             moveArrow3.SetActive(true);
+
+                            homeButton.SetActive(true);
                         }
 
                         lockManager.UnLocked(2);
@@ -4397,10 +4397,10 @@ public class GameManager : MonoBehaviour
                             changeFoodAlarmObj.SetActive(true);
                             moveArrow3.SetActive(true);
 
-                            if (playerDataBase.DrinkMaxValue == 1)
-                            {
-                                tutorialManager.Next2();
-                            }
+                            //if (playerDataBase.DrinkMaxValue == 1)
+                            //{
+                            //    tutorialManager.Next2();
+                            //}
                         }
 
                         lockManager.UnLocked(4);
@@ -4447,10 +4447,10 @@ public class GameManager : MonoBehaviour
                             playerDataBase.IslandNumber = 1;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
 
-                            if (playerDataBase.Candy1MaxValue == 0)
-                            {
-                                tutorialManager.Next3();
-                            }
+                            //if (playerDataBase.Candy1MaxValue == 0)
+                            //{
+                            //    tutorialManager.Next3();
+                            //}
                         }
 
                         lockManager.UnLocked(7);
@@ -4892,7 +4892,7 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdateSellPriceGold(sellPrice);
         PlayfabManager.instance.moneyAnimation.PlusMoney(sellPrice);
 
-        if(playerDataBase.GuideIndex < 22)
+        if(playerDataBase.GuideIndex < 23)
         {
             GameStateManager.instance.GetSellGold += sellPrice;
         }
@@ -5748,7 +5748,7 @@ public class GameManager : MonoBehaviour
         }
 
         playerDataBase.Gender = gender;
-        checkGender = true;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Gender", playerDataBase.Gender);
     }
 
     public void Decline()
@@ -5925,6 +5925,10 @@ public class GameManager : MonoBehaviour
         playerDataBase.DailyCastleReward = 0;
         playerDataBase.DailyQuestReward = 0;
         playerDataBase.DailyTreasureReward = 0;
+        playerDataBase.DailyDungeonKey1 = 0;
+        playerDataBase.DailyDungeonKey2 = 0;
+        playerDataBase.DailyDungeonKey3 = 0;
+        playerDataBase.DailyDungeonKey4 = 0;
 
         GameStateManager.instance.UpgradeCount = 0;
         GameStateManager.instance.SellCount = 0;
@@ -5984,6 +5988,11 @@ public class GameManager : MonoBehaviour
         playerDataBase.AbilityPoint += 10000;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("AbilityPoint", playerDataBase.AbilityPoint);
+    }
+
+    public void GetGourmetLevel()
+    {
+        playerDataBase.GourmetLevel += 1000000;
     }
 
     public void GetUnLocked()
@@ -6063,7 +6072,7 @@ public class GameManager : MonoBehaviour
     public void CheckLocked()
     {
         butterflyLocked.SetActive(false);
-        treasureLocked.SetActive(false);
+        treasureLocked.SetActive(true);
         rankLocked.SetActive(true);
 
         //if (levelDataBase.GetLevel(playerDataBase.Exp) > 1)
@@ -6071,12 +6080,12 @@ public class GameManager : MonoBehaviour
         //    butterflyLocked.SetActive(false);
         //}
 
-        //if (levelDataBase.GetLevel(playerDataBase.Exp) > 1)
-        //{
-        //    treasureLocked.SetActive(false);
-        //}
+        if (playerDataBase.Level > 4)
+        {
+            treasureLocked.SetActive(false);
+        }
 
-        if (levelDataBase.GetLevel(playerDataBase.Exp) > 3)
+        if (playerDataBase.Level > 7)
         {
             rankLocked.SetActive(false);
         }
@@ -6284,6 +6293,11 @@ public class GameManager : MonoBehaviour
         playerDataBase.Portion4 = 0;
         playerDataBase.Portion5 = 0;
         playerDataBase.Portion6 = 0;
+
+        playerDataBase.DungeonKey1 = 0;
+        playerDataBase.DungeonKey2 = 0;
+        playerDataBase.DungeonKey3 = 0;
+        playerDataBase.DungeonKey4 = 0;
 
         playerDataBase.BuffCount = 0;
         playerDataBase.DefDestroyTicket = 0;

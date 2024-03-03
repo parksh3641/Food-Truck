@@ -13,6 +13,7 @@ public class DungeonManager : MonoBehaviour
 
     public GameObject dungeonView;
     public GameObject dungeonInfoView;
+    public GameObject dungeonLevelView;
 
     public GameObject dungeonClearView;
     public ReceiveContent[] clearReceiveContents;
@@ -23,19 +24,25 @@ public class DungeonManager : MonoBehaviour
     public GameObject ingameAlarm;
 
     public DungeonContent[] dungeonContents;
-
     public ReceiveContent[] receiveContents;
-
     public BossFoodContent[] bossFoodContents;
 
     public FadeInOut fadeInOut;
-
-    public ChangeFoodManager changeFoodManager;
 
     [Space]
     [Title("Text")]
     public Text gourmetPointText;
     public Text timerText;
+
+    [Space]
+    [Title("Dungeon Level Select")]
+    public Text targetText;
+    public Text levelText;
+
+    public ReceiveContent[] levelReceiveContents;
+
+    public GameObject leftButton;
+    public GameObject rightButton;
 
     [Space]
     [Title("Dungeon UI")]
@@ -71,8 +78,12 @@ public class DungeonManager : MonoBehaviour
     private int plusNumber1 = 0;
     private int plusNumber2 = 0;
 
+    private int nowLevel = 0;
+    private int highLevel = 0;
+
     DungeonInfo dungeonInfo = new DungeonInfo();
 
+    public ChangeFoodManager changeFoodManager;
 
     public ParticleSystem successParticle;
 
@@ -105,6 +116,7 @@ public class DungeonManager : MonoBehaviour
 
         dungeonView.SetActive(false);
         dungeonInfoView.SetActive(false);
+        dungeonLevelView.SetActive(false);
         dungeonClearView.SetActive(false);
 
         alarm.SetActive(true);
@@ -168,6 +180,7 @@ public class DungeonManager : MonoBehaviour
         //receiveContents[1].Initialize(RewardType.GoldBox, 0);
         //receiveContents[2].gameObject.SetActive(false);
     }
+
     IEnumerator TimerCoroution()
     {
         if (timerText.gameObject.activeInHierarchy)
@@ -189,13 +202,153 @@ public class DungeonManager : MonoBehaviour
 
     public void EnterDungeon(DungeonType type)
     {
-        Debug.LogError(type + " 입장");
-
-        SoundManager.instance.PlayBoss();
+        Debug.LogError(type + " 입장 전");
 
         dungeonType = type;
-
         dungeonInfo = dungeonDataBase.GetDungeonInfo(type);
+
+        dungeonLevelView.SetActive(true);
+
+        targetText.text = LocalizationManager.instance.GetString(type.ToString() + "Title");
+
+        switch (dungeonType)
+        {
+            case DungeonType.Dungeon1:
+                nowLevel = playerDataBase.Dungeon1Level;
+                highLevel = playerDataBase.Dungeon1Level;
+
+                break;
+            case DungeonType.Dungeon2:
+                nowLevel = playerDataBase.Dungeon2Level;
+                highLevel = playerDataBase.Dungeon2Level;
+
+                break;
+            case DungeonType.Dungeon3:
+                nowLevel = playerDataBase.Dungeon3Level;
+                highLevel = playerDataBase.Dungeon3Level;
+
+                break;
+            case DungeonType.Dungeon4:
+                nowLevel = playerDataBase.Dungeon4Level;
+                highLevel = playerDataBase.Dungeon4Level;
+
+                break;
+        }
+
+        LevelInitialize(nowLevel);
+    }
+
+    void LevelInitialize(int level)
+    {
+        nowLevel = level;
+
+        leftButton.SetActive(true);
+        rightButton.SetActive(true);
+
+        if (level == 0)
+        {
+            leftButton.SetActive(false);
+            rightButton.SetActive(false);
+
+            if(level < highLevel)
+            {
+                rightButton.SetActive(true);
+            }
+        }
+
+        if(nowLevel == highLevel)
+        {
+            rightButton.SetActive(false);
+        }
+
+        levelText.text = "Lv. " + (level + 1).ToString();
+
+        for (int i = 0; i < levelReceiveContents.Length; i++)
+        {
+            levelReceiveContents[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < dungeonInfo.rewardInfos.Count; i++)
+        {
+            levelReceiveContents[i].gameObject.SetActive(true);
+
+            levelReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, dungeonInfo.rewardInfos[i].number +
+                (dungeonInfo.rewardInfos[i].addNumber * nowLevel));
+        }
+    }
+
+    public void LeftButton()
+    {
+        if (nowLevel == 0) return;
+
+        if(nowLevel > 0)
+        {
+            nowLevel -= 1;
+        }
+
+        LevelInitialize(nowLevel);
+    }
+
+    public void RightButton()
+    {
+        if (nowLevel == highLevel) return;
+
+        if(nowLevel < highLevel)
+        {
+            nowLevel += 1;
+        }
+
+        LevelInitialize(nowLevel);
+    }
+
+    public void GameStart()
+    {
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
+        switch (dungeonType)
+        {
+            case DungeonType.Dungeon1:
+                if (playerDataBase.DungeonKey1 <= 0)
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                    return;
+                }
+                break;
+            case DungeonType.Dungeon2:
+                if (playerDataBase.DungeonKey2 <= 0)
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                    return;
+                }
+                break;
+            case DungeonType.Dungeon3:
+                if (playerDataBase.DungeonKey3 <= 0)
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                    return;
+                }
+                break;
+            case DungeonType.Dungeon4:
+                if (playerDataBase.DungeonKey4 <= 0)
+                {
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+                    return;
+                }
+                break;
+        }
+
+        Debug.LogError(dungeonType + " 시작");
+
+        SoundManager.instance.PlayBoss();
 
         switch (dungeonType)
         {
@@ -204,32 +357,32 @@ public class DungeonManager : MonoBehaviour
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon1Count", playerDataBase.Dungeon1Count);
 
-                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * playerDataBase.Dungeon1Level;
-                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * playerDataBase.Dungeon1Level;
+                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * nowLevel;
+                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * nowLevel;
                 break;
             case DungeonType.Dungeon2:
                 playerDataBase.Dungeon2Count += 1;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon2Count", playerDataBase.Dungeon2Count);
 
-                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * playerDataBase.Dungeon2Level;
-                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * playerDataBase.Dungeon2Level;
+                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * nowLevel;
+                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * nowLevel;
                 break;
             case DungeonType.Dungeon3:
                 playerDataBase.Dungeon3Count += 1;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon3Count", playerDataBase.Dungeon3Count);
 
-                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * playerDataBase.Dungeon3Level;
-                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * playerDataBase.Dungeon3Level;
+                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * nowLevel;
+                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * nowLevel;
                 break;
             case DungeonType.Dungeon4:
                 playerDataBase.Dungeon4Count += 1;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon4Count", playerDataBase.Dungeon4Count);
 
-                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * playerDataBase.Dungeon4Level;
-                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * playerDataBase.Dungeon4Level;
+                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * nowLevel;
+                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * nowLevel;
                 break;
         }
 
@@ -244,6 +397,8 @@ public class DungeonManager : MonoBehaviour
         fadeInOut.FadeOut();
 
         yield return waitForSeconds;
+
+        dungeonLevelView.SetActive(false);
 
         OpenDungeonView();
         changeFoodManager.CloseChangeFoodView();
@@ -271,7 +426,6 @@ public class DungeonManager : MonoBehaviour
         attackSpeed += playerDataBase.Skill9 * 0.05f;
         attackSpeed += playerDataBase.Treasure2 * 0.1f;
         attackSpeed += playerDataBase.Advancement * 0.05f;
-        attackSpeed *= 10;
 
         attackX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         attackX2 += playerDataBase.Treasure3 * 0.2f;
@@ -284,7 +438,11 @@ public class DungeonManager : MonoBehaviour
 
         attackSpeedText.localizationName = "AttackSpeedPercent";
         attackSpeedText.plusText = " : " + attackDelay.ToString("N2");
-        attackSpeedText.plusText += " (-" + attackSpeed.ToString("N2") + "%)";
+
+        if (attackSpeed > 0)
+        {
+            attackSpeedText.plusText += " (-" + attackSpeed.ToString("N2") + "%)";
+        }
 
         attackX2Text.localizationName = "AttackX2Percent";
         attackX2Text.plusText = " : " + attackX2.ToString("N1") + "%";
@@ -304,31 +462,13 @@ public class DungeonManager : MonoBehaviour
         bossFoodContents[(int)dungeonType].gameObject.SetActive(true);
         bossFoodContents[(int)dungeonType].Initialize();
 
-
         titleText.localizationName = dungeonInfo.dungeonType.ToString() + "Title";
+        titleText.plusText = "  Lv." + (nowLevel + 1);
         titleText.ReLoad();
 
         success = dungeonInfo.percent;
         health = dungeonInfo.health;
-
-        switch (dungeonType)
-        {
-            case DungeonType.Dungeon1:
-                titleText.plusText = "  Lv." + (playerDataBase.Dungeon1Level + 1);
-
-                health += (playerDataBase.Dungeon1Level * (health / 10));
-
-                break;
-            case DungeonType.Dungeon2:
-                titleText.plusText = "  Lv." + (playerDataBase.Dungeon2Level + 1);
-                break;
-            case DungeonType.Dungeon3:
-                titleText.plusText = "  Lv." + (playerDataBase.Dungeon3Level + 1);
-                break;
-            case DungeonType.Dungeon4:
-                titleText.plusText = "  Lv." + (playerDataBase.Dungeon4Level + 1);
-                break;
-        }
+        health += nowLevel * (health / 10);
 
         saveHealth = health;
 
@@ -375,17 +515,9 @@ public class DungeonManager : MonoBehaviour
 
     public void AttackButton()
     {
-        if (!NetworkConnect.instance.CheckConnectInternet())
-        {
-            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
-            return;
-        }
-
         if (clear) return;
 
         if (delay) return;
-
 
         if (Random.Range(0, 100f) >= 100 - success)
         {
@@ -415,20 +547,19 @@ public class DungeonManager : MonoBehaviour
 
     void Damage()
     {
+        if (health <= 0)
+        {
+            health = 0;
+
+            Debug.Log("던전 성공!");
+            StartCoroutine(SuccessCoroution());
+        }
+
         healthText.text = health + "/" + saveHealth;
-
         healthPercent = health * 1.0f / saveHealth * 1.0f;
-
         healthFillamount.fillAmount = healthPercent;
 
         bossFoodContents[(int)dungeonType].SetSize(healthPercent);
-
-        if(health == 0)
-        {
-            Debug.Log("던전 성공!");
-
-            StartCoroutine(SuccessCoroution());
-        }
 
         delay = true;
         Invoke("Delay", attackDelay);
@@ -454,10 +585,12 @@ public class DungeonManager : MonoBehaviour
             successParticle.Play();
         }
 
+        SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
+
         yield return waitForSeconds;
 
         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
-        NotionManager.instance.UseNotion(NotionType.SuccessSleepFood); //폭주 음식을 잠재우는데 성공했습니다!
+        NotionManager.instance.UseNotion(NotionType.SuccessSleepFood);
 
         yield return waitForSeconds;
 
@@ -477,62 +610,64 @@ public class DungeonManager : MonoBehaviour
         {
             clearReceiveContents[i].gameObject.SetActive(true);
 
-            switch (dungeonType)
-            {
-                case DungeonType.Dungeon1:
-                    clearReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, dungeonInfo.rewardInfos[i].number +
-                        (dungeonInfo.rewardInfos[i].addNumber * playerDataBase.Dungeon1Level));
-                    break;
-                case DungeonType.Dungeon2:
-                    clearReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, dungeonInfo.rewardInfos[i].number +
-                        (dungeonInfo.rewardInfos[i].addNumber * playerDataBase.Dungeon2Level));
-                    break;
-                case DungeonType.Dungeon3:
-                    clearReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, dungeonInfo.rewardInfos[i].number +
-                        (dungeonInfo.rewardInfos[i].addNumber * playerDataBase.Dungeon3Level));
-                    break;
-                case DungeonType.Dungeon4:
-                    clearReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, dungeonInfo.rewardInfos[i].number +
-                        (dungeonInfo.rewardInfos[i].addNumber * playerDataBase.Dungeon4Level));
-                    break;
-            }
+            clearReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, dungeonInfo.rewardInfos[i].number +
+                (dungeonInfo.rewardInfos[i].addNumber * nowLevel));
         }
 
         switch (dungeonType)
         {
             case DungeonType.Dungeon1:
                 playerDataBase.DungeonKey1 -= 1;
-                playerDataBase.Dungeon1Level += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey1", playerDataBase.DungeonKey1);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon1Level", playerDataBase.Dungeon1Level);
+
+                if(playerDataBase.Dungeon1Level < nowLevel + 1)
+                {
+                    playerDataBase.Dungeon1Level += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon1Level", playerDataBase.Dungeon1Level);
+                }
                 break;
             case DungeonType.Dungeon2:
                 playerDataBase.DungeonKey2 -= 1;
-                playerDataBase.Dungeon2Level += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey2", playerDataBase.DungeonKey2);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon2Level", playerDataBase.Dungeon2Level);
+
+                if (playerDataBase.Dungeon2Level < nowLevel + 1)
+                {
+                    playerDataBase.Dungeon2Level += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon2Level", playerDataBase.Dungeon2Level);
+                }
                 break;
             case DungeonType.Dungeon3:
                 playerDataBase.DungeonKey3 -= 1;
-                playerDataBase.Dungeon3Level += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey3", playerDataBase.DungeonKey3);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon3Level", playerDataBase.Dungeon3Level);
+
+                if (playerDataBase.Dungeon3Level < nowLevel + 1)
+                {
+                    playerDataBase.Dungeon3Level += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon3Level", playerDataBase.Dungeon3Level);
+                }
                 break;
             case DungeonType.Dungeon4:
                 playerDataBase.DungeonKey4 -= 1;
-                playerDataBase.Dungeon4Level += 1;
-
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey4", playerDataBase.DungeonKey4);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon4Level", playerDataBase.Dungeon4Level);
+
+                if (playerDataBase.Dungeon4Level < nowLevel + 1)
+                {
+                    playerDataBase.Dungeon4Level += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon4Level", playerDataBase.Dungeon4Level);
+                }
                 break;
         }
     }
 
     public void ReceiveButton()
     {
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
         dungeonClearView.SetActive(false);
 
         for (int i = 0; i < dungeonInfo.rewardInfos.Count; i++)
@@ -661,6 +796,9 @@ public class DungeonManager : MonoBehaviour
             }
         }
 
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
         GameOver();
     }
 
@@ -692,5 +830,50 @@ public class DungeonManager : MonoBehaviour
         {
             dungeonInfoView.SetActive(false);
         }
+    }
+
+    public void CloseDungeonLevelView()
+    {
+        dungeonLevelView.SetActive(false);
+    }
+
+    public void SuccessWatchAd(int number)
+    {
+        switch(number)
+        {
+            case 0:
+                playerDataBase.DailyDungeonKey1 += 1;
+                playerDataBase.DungeonKey1 += 1;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey1", playerDataBase.DailyDungeonKey1);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey1", playerDataBase.DungeonKey1);
+                break;
+            case 1:
+                playerDataBase.DailyDungeonKey2 += 1;
+                playerDataBase.DungeonKey2 += 1;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey2", playerDataBase.DailyDungeonKey2);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey2", playerDataBase.DungeonKey2);
+                break;
+            case 2:
+                playerDataBase.DailyDungeonKey3 += 1;
+                playerDataBase.DungeonKey3 += 1;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey3", playerDataBase.DailyDungeonKey3);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey3", playerDataBase.DungeonKey3);
+                break;
+            case 3:
+                playerDataBase.DailyDungeonKey4 += 1;
+                playerDataBase.DungeonKey4 += 1;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey4", playerDataBase.DailyDungeonKey4);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey4", playerDataBase.DungeonKey4);
+                break;
+        }
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
+
+        ContentInitialize();
     }
 }

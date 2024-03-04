@@ -1,4 +1,5 @@
 # 야미 러시 : 음식 강화하기
+![아이콘](https://github.com/parksh3641/Food-Truck/assets/62498013/e9e11bc6-cf20-4ba1-bad8-de920ca78242)
 ### 개발 기간 : 2023/07 ~
 ### 사용한 엔진 : Unity3D 2021.3.23f1
 ### 작성된 언어 : C#

@@ -65,7 +65,7 @@ public class SkillContent : MonoBehaviour
 
     private int priceCP = 10;
     private int addPriceCP = 10;
-    private int maxCP = 100;
+    private int maxCP = 200;
 
     private int maxLevelGold = 100;
     private int maxLevelCrystal = 100;

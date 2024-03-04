@@ -13,13 +13,14 @@ public class EventManager : MonoBehaviour
     public GameObject welcomeEvent;
     public GameObject weekendEvent;
     public GameObject reviewEvent;
+
     public GameObject gifticonEvent;
     public GameObject gifticonEventLocked;
 
     public LocalizationContent weekendEventTitle;
 
     DateTime currentDate = DateTime.Now;
-    DateTime targetDate;
+    public DateTime targetDate;
 
     PlayerDataBase playerDataBase;
 
@@ -27,26 +28,23 @@ public class EventManager : MonoBehaviour
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
-        targetDate = new DateTime(currentDate.Year, 3, 31);
-
         eventView.SetActive(false);
-    }
 
-    private void Start()
-    {
-        eventTransform.anchoredPosition = new Vector2(0, -9999);
+        eventTransform.anchoredPosition = new Vector2(0, -999);
     }
 
     public void OpenEventView()
     {
         if (!eventView.activeInHierarchy)
         {
+            eventView.SetActive(true);
+
+            gifticonEvent.SetActive(false);
+
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
                 ResetManager.instance.Initialize();
             }
-
-            eventView.SetActive(true);
 
             welcomeEvent.SetActive(true);
             if (playerDataBase.WelcomeCount > 6)
@@ -55,7 +53,6 @@ public class EventManager : MonoBehaviour
             }
 
             weekendEvent.SetActive(true);
-
             if (IsWeekend())
             {
                 weekendEventTitle.localizationName = "Event5Title_Now";
@@ -64,8 +61,8 @@ public class EventManager : MonoBehaviour
             {
                 weekendEventTitle.localizationName = "Event5Title_Before";
             }
-
             weekendEventTitle.ReLoad();
+
 
             reviewEvent.SetActive(true);
             if (playerDataBase.ReviewNumber == 2)
@@ -73,19 +70,14 @@ public class EventManager : MonoBehaviour
                 reviewEvent.SetActive(false);
             }
 
+
             gifticonEventLocked.SetActive(true);
             if (playerDataBase.Level > 9)
             {
                 gifticonEventLocked.SetActive(false);
             }
 
-            gifticonEvent.SetActive(true);
-            if (currentDate > targetDate || GameStateManager.instance.Language != LanguageType.Korean)
-            {
-                gifticonEvent.SetActive(false);
-            }
-
-            gifticonEvent.SetActive(false);
+            PlayfabManager.instance.GetTitleInternalData("Gifticon", CheckGifticon);
 
             FirebaseAnalytics.LogEvent("OpenEvent");
         }
@@ -93,6 +85,28 @@ public class EventManager : MonoBehaviour
         {
             eventView.SetActive(false);
         }
+    }
+
+    void CheckGifticon(bool check)
+    {
+        if (check)
+        {
+            PlayfabManager.instance.GetTitleInternalData("GifticonDate", CheckGifticonDate);
+        }
+    }
+
+    void CheckGifticonDate(string date)
+    {
+        gifticonEvent.SetActive(true);
+
+        targetDate = DateTime.ParseExact(date, "yyyyMMdd", null);
+
+        if (currentDate > targetDate || GameStateManager.instance.Language != LanguageType.Korean)
+        {
+            gifticonEvent.SetActive(false);
+        }
+
+        eventTransform.anchoredPosition = new Vector2(0, -499);
     }
 
     bool IsWeekend()

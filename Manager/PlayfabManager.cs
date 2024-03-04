@@ -2635,6 +2635,17 @@ public class PlayfabManager : MonoBehaviour
                         action?.Invoke(false);
                     }
                 }
+                else if(name.Equals("Gifticon"))
+                {
+                    if (result.Data[name].Equals("ON"))
+                    {
+                        action?.Invoke(true);
+                    }
+                    else
+                    {
+                        action?.Invoke(false);
+                    }
+                }
             },
             error =>
             {
@@ -2654,10 +2665,6 @@ public class PlayfabManager : MonoBehaviour
                 if(result.Data.ContainsKey(name))
                 {
                     action.Invoke(result.Data[name]);
-                }
-                else
-                {
-                    Debug.Log(name + " ?? ???????? ???? ???????? ?????? ?? ????????");
                 }
             },
             error =>

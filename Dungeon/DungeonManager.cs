@@ -605,7 +605,7 @@ public class DungeonManager : MonoBehaviour
         yield return waitForSeconds;
 
         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
-        NotionManager.instance.UseNotion(NotionType.SuccessSleepFood);
+        NotionManager.instance.UseNotion2(NotionType.SuccessSleepFood);
 
         yield return waitForSeconds;
 

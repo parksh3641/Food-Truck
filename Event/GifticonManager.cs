@@ -28,6 +28,8 @@ public class GifticonManager : MonoBehaviour
     DateTime f, g;
     TimeSpan h;
 
+    public EventManager eventManager;
+
     PlayerDataBase playerDataBase;
 
 
@@ -56,7 +58,7 @@ public class GifticonManager : MonoBehaviour
 
             timerText.text = "";
             f = DateTime.Now;
-            g = new DateTime(2024, 4, 13);
+            g = eventManager.targetDate;
             StartCoroutine(TimerCoroution());
         }
         else

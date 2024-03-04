@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,13 +40,15 @@ public class GourmetManager : MonoBehaviour
 
         //value += playerDataBase.AccessDate * 300;
         value += playerDataBase.Level * 500;
-        value += playerDataBase.QuestCount * 500;
+        //value += playerDataBase.QuestCount * 500;
         value += playerDataBase.CastleLevel * 200;
 
-        value += playerDataBase.Island1Level * 1000;
-        value += playerDataBase.Island2Level * 1000;
-        value += playerDataBase.Island3Level * 1500;
-        value += playerDataBase.Island4Level * 1500;
+        value += playerDataBase.Island1Level * 500;
+        value += playerDataBase.Island2Level * 500;
+        value += playerDataBase.Island3Level * 1000;
+        value += playerDataBase.Island4Level * 1000;
+
+        value += playerDataBase.GetIconHoldNumber() * 300;
 
         //if (playerDataBase.Package1)
         //{
@@ -170,7 +172,7 @@ public class GourmetManager : MonoBehaviour
                 plusValue = value - saveValue;
 
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-                NotionManager.instance.UseNotion3(Color.green, "<size=45>" + MoneyUnitString.ToCurrencyString(saveValue) + "  ¢º  " + MoneyUnitString.ToCurrencyString(value)
+                NotionManager.instance.UseNotion3(Color.green, "<size=45>" + MoneyUnitString.ToCurrencyString(saveValue) + "  â–¶  " + MoneyUnitString.ToCurrencyString(value)
                     + "</size>\n" + LocalizationManager.instance.GetString("GourmetScore") + " +" + MoneyUnitString.ToCurrencyString(plusValue));
 
                 saveValue = value;

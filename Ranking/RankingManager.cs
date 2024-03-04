@@ -551,7 +551,7 @@ public class RankingManager : MonoBehaviour
                 }
                 break;
             case 2:
-                number = playerDataBase.Michelin;
+                number = playerDataBase.ChallengePoint;
                 break;
             case 3:
                 number = playerDataBase.Level;

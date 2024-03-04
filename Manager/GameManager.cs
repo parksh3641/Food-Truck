@@ -1599,6 +1599,7 @@ public class GameManager : MonoBehaviour
 
         successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         successPlus += playerDataBase.Skill7 * 0.1f;
+        successPlus += playerDataBase.Skill17 * 0.05f;
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.05f;
         successPlus += playerDataBase.Treasure1 * 0.2f;
         successPlus += playerDataBase.Advancement * 0.1f;
@@ -1608,6 +1609,7 @@ public class GameManager : MonoBehaviour
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 0.4f;
+        sellPricePlus += playerDataBase.Skill18 * 0.2f;
         sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.8f;
         sellPricePlus += playerDataBase.Advancement * 0.4f;
@@ -1628,6 +1630,7 @@ public class GameManager : MonoBehaviour
 
         defDestroy += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
         defDestroy += playerDataBase.Skill9 * 0.05f;
+        defDestroy += playerDataBase.Skill19 * 0.02f;
         defDestroy += playerDataBase.Treasure2 * 0.1f;
         defDestroy += playerDataBase.Advancement * 0.05f;
 
@@ -4892,7 +4895,7 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdateSellPriceGold(sellPrice);
         PlayfabManager.instance.moneyAnimation.PlusMoney(sellPrice);
 
-        if(playerDataBase.GuideIndex < 23)
+        if(playerDataBase.GuideIndex < 22)
         {
             GameStateManager.instance.GetSellGold += sellPrice;
         }
@@ -5605,14 +5608,9 @@ public class GameManager : MonoBehaviour
 #elif UNITY_IOS
         Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
 #endif
+
+        FirebaseAnalytics.LogEvent("OpenUpdate");
     }
-
-    //public void MoreGame()
-    //{
-    //    FirebaseAnalytics.LogEvent("MoreGame");
-
-    //    Application.OpenURL("https://play.google.com/store/apps/dev?id=6063135311448213232");
-    //}
 
     public void OpenURL()
     {
@@ -5864,6 +5862,11 @@ public class GameManager : MonoBehaviour
         playerDataBase.Skill12 = 100;
         playerDataBase.Skill13 = 100;
         playerDataBase.Skill14 = 100;
+        playerDataBase.Skill15 = 100;
+        playerDataBase.Skill16 = 100;
+        playerDataBase.Skill17 = 100;
+        playerDataBase.Skill18 = 100;
+        playerDataBase.Skill19 = 100;
 
         playerDataBase.Treasure1 = 100;
         playerDataBase.Treasure2 = 100;
@@ -5899,6 +5902,11 @@ public class GameManager : MonoBehaviour
         playerDataBase.Skill12 = 0;
         playerDataBase.Skill13 = 0;
         playerDataBase.Skill14 = 0;
+        playerDataBase.Skill15 = 0;
+        playerDataBase.Skill16 = 0;
+        playerDataBase.Skill17 = 0;
+        playerDataBase.Skill18 = 0;
+        playerDataBase.Skill19 = 0;
 
         playerDataBase.Treasure1 = 0;
         playerDataBase.Treasure2 = 0;
@@ -6038,7 +6046,7 @@ public class GameManager : MonoBehaviour
 
     public void TipInfo()
     {
-        NotionManager.instance.UseNotion(NotionType.TipInfoNotion);
+        NotionManager.instance.UseNotion2(NotionType.TipInfoNotion);
     }
 
     public void LockedInfo(int number)

@@ -13,6 +13,8 @@ public class DungeonManager : MonoBehaviour
 
     public GameObject dungeonView;
     public GameObject dungeonInfoView;
+    public GameObject dungeonInfo2View;
+
     public GameObject dungeonLevelView;
 
     public GameObject dungeonClearView;
@@ -116,6 +118,7 @@ public class DungeonManager : MonoBehaviour
 
         dungeonView.SetActive(false);
         dungeonInfoView.SetActive(false);
+        dungeonInfo2View.SetActive(false);
         dungeonLevelView.SetActive(false);
         dungeonClearView.SetActive(false);
 
@@ -422,19 +425,31 @@ public class DungeonManager : MonoBehaviour
 
         success += attackPlus;
 
+        if(success > 100)
+        {
+            success = 100;
+        }
+
         attackSpeed += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
         attackSpeed += playerDataBase.Skill9 * 0.05f;
+        attackSpeed += playerDataBase.Skill15 * 0.5f;
         attackSpeed += playerDataBase.Treasure2 * 0.1f;
         attackSpeed += playerDataBase.Advancement * 0.05f;
 
         attackX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         attackX2 += playerDataBase.Treasure3 * 0.2f;
+        attackX2 += playerDataBase.Skill16 * 0.3f;
 
         attackText.localizationName = "AttackPercent";
         attackText.plusText = " : " + success.ToString("N1") + "%";
         attackText.plusText += " (+" + attackPlus.ToString("N1") + "%)";
 
         attackDelay = 0.4f - (0.4f * (attackSpeed * 0.01f));
+
+        if(attackDelay < 0.1f)
+        {
+            attackDelay = 0.1f;
+        }
 
         attackSpeedText.localizationName = "AttackSpeedPercent";
         attackSpeedText.plusText = " : " + attackDelay.ToString("N2");
@@ -704,7 +719,7 @@ public class DungeonManager : MonoBehaviour
                     PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal,dungeonInfo.rewardInfos[i].number + plusNumber);
                     break;
                 case RewardType.Exp:
-                    PortionManager.instance.GetAbilityPoint(dungeonInfo.rewardInfos[i].number + plusNumber);
+                    PortionManager.instance.GetExp(dungeonInfo.rewardInfos[i].number + plusNumber);
                     break;
                 case RewardType.Treasure1:
                     break;
@@ -829,6 +844,18 @@ public class DungeonManager : MonoBehaviour
         else
         {
             dungeonInfoView.SetActive(false);
+        }
+    }
+
+    public void OpenHelp2View()
+    {
+        if (!dungeonInfo2View.activeInHierarchy)
+        {
+            dungeonInfo2View.SetActive(true);
+        }
+        else
+        {
+            dungeonInfo2View.SetActive(false);
         }
     }
 

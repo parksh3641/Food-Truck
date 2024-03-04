@@ -4274,9 +4274,9 @@ public class ShopManager : MonoBehaviour
 
     public void OpenLimitPackage()
     {
-        OpenPackage(PackageType.Package5);
-
         packageBuyIcon.SetActive(true);
+
+        OpenPackage(PackageType.Package5);
     }
 
     public void OffLimitPackage()

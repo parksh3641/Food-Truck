@@ -54,6 +54,10 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int advancement = 0;
     [SerializeField]
+    private int abilityPoint = 0;
+    [SerializeField]
+    private int challengePoint = 0;
+    [SerializeField]
     private int getGold = 0;
     [SerializeField]
     private int consumeGold = 0;
@@ -71,8 +75,6 @@ public class PlayerDataBase : ScriptableObject
     private int recoverTicket = 0;
     [SerializeField]
     private int proficiency = 0;
-    [SerializeField]
-    private int michelin = 0;
     [SerializeField]
     private int accessDate = 0;
     [SerializeField]
@@ -106,8 +108,6 @@ public class PlayerDataBase : ScriptableObject
 
     [Space]
     [Title("Dungeon")]
-    [SerializeField]
-    private int abilityPoint = 0;
     [SerializeField]
     private int abilityLevel = 0; //사용 안함
     [SerializeField]
@@ -671,6 +671,16 @@ public class PlayerDataBase : ScriptableObject
     private int skill13 = 0;
     [SerializeField]
     private int skill14 = 0;
+    [SerializeField]
+    private int skill15 = 0;
+    [SerializeField]
+    private int skill16 = 0;
+    [SerializeField]
+    private int skill17 = 0;
+    [SerializeField]
+    private int skill18 = 0;
+    [SerializeField]
+    private int skill19 = 0;
 
     [Space]
     [Title("Portion")]
@@ -1348,15 +1358,15 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int Michelin
+    public int ChallengePoint
     {
         get
         {
-            return michelin;
+            return challengePoint;
         }
         set
         {
-            michelin = value;
+            challengePoint = value;
         }
     }
 
@@ -3203,14 +3213,38 @@ public class PlayerDataBase : ScriptableObject
 
     public int Skill14
     {
-        get
-        {
-            return skill14;
-        }
-        set
-        {
-            skill14 = value;
-        }
+        get { return skill14; }
+        set { skill14 = value; }
+    }
+
+    public int Skill15
+    {
+        get { return skill15; }
+        set { skill15 = value; }
+    }
+
+    public int Skill16
+    {
+        get { return skill16; }
+        set { skill16 = value; }
+    }
+
+    public int Skill17
+    {
+        get { return skill17; }
+        set { skill17 = value; }
+    }
+
+    public int Skill18
+    {
+        get { return skill18; }
+        set { skill18 = value; }
+    }
+
+    public int Skill19
+    {
+        get { return skill19; }
+        set { skill19 = value; }
     }
 
     public int ChipsTruck
@@ -4916,7 +4950,7 @@ public class PlayerDataBase : ScriptableObject
         exp = 0;
         playTime = 0;
         advancement = 0;
-        michelin = 0;
+        challengePoint = 0;
         adCount = 0;
         treasureCount = 0;
         accessDate = 0;
@@ -5192,6 +5226,11 @@ public class PlayerDataBase : ScriptableObject
         skill12 = 0;
         skill13 = 0;
         skill14 = 0;
+        skill15 = 0;
+        skill16 = 0;
+        skill17 = 0;
+        skill18 = 0;
+        skill19 = 0;
 
         portion1 = 0;
         portion2 = 0;

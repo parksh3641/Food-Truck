@@ -7,6 +7,8 @@ public class GuideMissionManager : MonoBehaviour
 {
     public GameObject guideMissonView;
 
+    public GameObject defTickets;
+
     public GameObject clearObj;
 
     public LocalizationContent titleText;
@@ -41,7 +43,7 @@ public class GuideMissionManager : MonoBehaviour
     {
         if (!guideMissonView.activeInHierarchy) return;
 
-        if (playerDataBase.GuideIndex > 22) return;
+        if (playerDataBase.GuideIndex > 21) return;
 
         guideMissonView.SetActive(true);
 
@@ -104,7 +106,7 @@ public class GuideMissionManager : MonoBehaviour
                 break;
             case 10:
                 now = playerDataBase.GetRecipeUpgradeCount();
-                need = 5;
+                need = 3;
                 break;
             case 11:
                 now = playerDataBase.BuffCount;
@@ -251,5 +253,4 @@ public class GuideMissionManager : MonoBehaviour
             }
         }
     }
-
 }

@@ -92,13 +92,15 @@ public class GifticonManager : MonoBehaviour
 
     public void OpenGifticonInfoView()
     {
-        if (!gifticonInfoView.activeInHierarchy)
-        {
-            gifticonInfoView.SetActive(true);
-        }
-        else
-        {
-            gifticonInfoView.SetActive(false);
-        }
+        Application.OpenURL("https://sites.google.com/view/whilili-gifticon");
+
+        //if (!gifticonInfoView.activeInHierarchy)
+        //{
+        //    gifticonInfoView.SetActive(true);
+        //}
+        //else
+        //{
+        //    gifticonInfoView.SetActive(false);
+        //}
     }
 }

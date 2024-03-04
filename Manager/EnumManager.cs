@@ -16,7 +16,8 @@ public enum MoneyType
 {
     CoinA,
     Crystal,
-    CoinB
+    CoinB,
+    CP
 }
 
 public enum LevelType
@@ -370,6 +371,7 @@ public enum RewardType
     SliverBox,
     GoldBox,
     EventTicket,
+    ChallengePoint
 }
 
 public enum QuestType
@@ -396,7 +398,12 @@ public enum SkillType
     Skill11,
     Skill12,
     Skill13,
-    Skill14
+    Skill14,
+    Skill15,
+    Skill16,
+    Skill17,
+    Skill18,
+    Skill19,
 }
 
 public enum IslandType

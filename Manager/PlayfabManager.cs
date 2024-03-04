@@ -1414,8 +1414,8 @@ public class PlayfabManager : MonoBehaviour
                        case "Advancement":
                            playerDataBase.Advancement = statistics.Value;
                            break;
-                       case "Michelin":
-                           playerDataBase.Michelin = statistics.Value;
+                       case "ChallengePoint":
+                           playerDataBase.ChallengePoint = statistics.Value;
                            break;
                        case "AdCount":
                            playerDataBase.AdCount = statistics.Value;
@@ -1950,6 +1950,21 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Skill14":
                            playerDataBase.Skill14 = statistics.Value;
+                           break;
+                       case "Skill15":
+                           playerDataBase.Skill15 = statistics.Value;
+                           break;
+                       case "Skill16":
+                           playerDataBase.Skill16 = statistics.Value;
+                           break;
+                       case "Skill17":
+                           playerDataBase.Skill17 = statistics.Value;
+                           break;
+                       case "Skill18":
+                           playerDataBase.Skill18 = statistics.Value;
+                           break;
+                       case "Skill19":
+                           playerDataBase.Skill19 = statistics.Value;
                            break;
                        case "Portion1":
                            playerDataBase.Portion1 = statistics.Value;

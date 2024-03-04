@@ -16,17 +16,18 @@ public class SkillManager : MonoBehaviour
     public GameObject alarm;
     public GameObject ingameAlarm;
 
+    public Text challengePointText;
+
     [Space]
     [Title("TopMenu")]
     public Image[] topMenuImgArray;
     public Sprite[] topMenuSpriteArray;
 
     public GameObject[] skillArray;
-
-    public RectTransform skillGrid;
-    public RectTransform skillGrid2;
+    public RectTransform[] skillGrid;
 
     private int index = -1;
+    private int challengePoint = 0;
 
     public SkillContent[] skillContents;
 
@@ -39,8 +40,10 @@ public class SkillManager : MonoBehaviour
 
         skillView.SetActive(false);
 
-        skillGrid.anchoredPosition = new Vector2(0, -9999);
-        skillGrid2.anchoredPosition = new Vector2(0, -9999);
+        for(int i = 0; i < skillGrid.Length; i ++)
+        {
+            skillGrid[i].anchoredPosition = new Vector2(0, -9999);
+        }
 
         index = -1;
 
@@ -63,11 +66,6 @@ public class SkillManager : MonoBehaviour
 
             ChangeTopToggle(0);
 
-            for (int i = 0; i < skillContents.Length; i++)
-            {
-                skillContents[i].Initialize(this);
-            }
-
             FirebaseAnalytics.LogEvent("OpenReceipe");
         }
         else
@@ -82,8 +80,13 @@ public class SkillManager : MonoBehaviour
 
         for (int i = 0; i < skillContents.Length; i++)
         {
-            skillContents[i].Checking();
+            if(skillContents[i].gameObject.activeInHierarchy)
+            {
+                skillContents[i].Checking();
+            }
         }
+
+        challengePointText.text = playerDataBase.ChallengePoint.ToString();
     }
 
     public void ChangeTopToggle(int number)
@@ -100,6 +103,16 @@ public class SkillManager : MonoBehaviour
 
         topMenuImgArray[number].sprite = topMenuSpriteArray[1];
         skillArray[number].gameObject.SetActive(true);
+
+        for (int i = 0; i < skillContents.Length; i++)
+        {
+            if (skillContents[i].gameObject.activeInHierarchy)
+            {
+                skillContents[i].Initialize(this);
+            }
+        }
+
+        Initialize();
     }
 }
 

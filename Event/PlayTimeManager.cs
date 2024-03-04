@@ -75,13 +75,13 @@ public class PlayTimeManager : MonoBehaviour
     void CheckInitialize()
     {
         attendanceContentArray[0].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[0].receiveContent[0].Initialize(RewardType.Gold, 100000);
+        attendanceContentArray[0].receiveContent[0].Initialize(RewardType.RepairTicket, 3);
 
         attendanceContentArray[1].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Crystal, 10);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Exp, 3000);
+        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Exp, 5000);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[3].receiveContent[0].Initialize(RewardType.Crystal, 20);
@@ -105,13 +105,13 @@ public class PlayTimeManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                PlayfabManager.instance.UpdateAddGold(100000);
+                PortionManager.instance.GetRecoverTickets(3);
                 break;
             case 1:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
                 break;
             case 2:
-                PortionManager.instance.GetExp(3000);
+                PortionManager.instance.GetExp(5000);
                 break;
             case 3:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 20);

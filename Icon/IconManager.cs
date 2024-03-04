@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -78,6 +79,8 @@ public class IconManager : MonoBehaviour
             alarm.SetActive(false);
 
             CheckMyIcon();
+
+            FirebaseAnalytics.LogEvent("OpenIcon");
         }
         else
         {
@@ -495,6 +498,8 @@ public class IconManager : MonoBehaviour
         saveLockObject.SetActive(true);
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Icon", (int)iconType);
+
+        FirebaseAnalytics.LogEvent("ChangeIcon");
 
         NotionManager.instance.UseNotion(NotionType.SaveNotion);
         SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);

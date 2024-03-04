@@ -19,7 +19,7 @@ public class LevelUpEventManager : MonoBehaviour
     public AttendanceContent[] attendanceContentArray;
 
     private int level = 5;
-    private int reward = 500;
+    private int reward = 300;
 
     PlayerDataBase playerDataBase;
 

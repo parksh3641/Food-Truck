@@ -212,7 +212,7 @@ public class ChestBoxManager : MonoBehaviour
             normalRewardText.text = MoneyUnitString.ToCurrencyString(1);
 
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
-            epicRewardText.text = MoneyUnitString.ToCurrencyString(5);
+            epicRewardText.text = "5 ~ 10";
         }
         else if (random > 11)
         {
@@ -314,22 +314,22 @@ public class ChestBoxManager : MonoBehaviour
                     return;
                 }
 
-                PlayfabManager.instance.UpdateAddGold(300000);
+                PlayfabManager.instance.UpdateAddGold(500000);
                 break;
             case RewardType.Portion1:
-                PortionManager.instance.GetPortion(0, 5);
+                PortionManager.instance.GetPortion(0, Random.Range(5, 11));
                 break;
             case RewardType.Portion2:
-                PortionManager.instance.GetPortion(1, 5);
+                PortionManager.instance.GetPortion(1, Random.Range(5, 11));
                 break;
             case RewardType.Portion3:
-                PortionManager.instance.GetPortion(2, 5);
+                PortionManager.instance.GetPortion(2, Random.Range(5, 11));
                 break;
             case RewardType.Portion4:
-                PortionManager.instance.GetPortion(3, 5);
+                PortionManager.instance.GetPortion(3, Random.Range(5, 11));
                 break;
             case RewardType.Portion5:
-                PortionManager.instance.GetPortion(4, 5);
+                PortionManager.instance.GetPortion(4, Random.Range(5, 11));
                 break;
             case RewardType.DefDestroyTicketPiece:
                 PortionManager.instance.GetDefTickets(3);

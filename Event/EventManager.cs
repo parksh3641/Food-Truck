@@ -80,10 +80,12 @@ public class EventManager : MonoBehaviour
             }
 
             gifticonEvent.SetActive(true);
-            if (currentDate > targetDate)
+            if (currentDate > targetDate || GameStateManager.instance.Language != LanguageType.Korean)
             {
                 gifticonEvent.SetActive(false);
             }
+
+            gifticonEvent.SetActive(false);
 
             FirebaseAnalytics.LogEvent("OpenEvent");
         }

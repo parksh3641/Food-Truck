@@ -21,7 +21,7 @@ public class ReincarnationManager : MonoBehaviour
     public ButtonScaleAnimation buttonScaleAnim;
 
 
-    private float abilityPoint = 0;
+    private float point = 0;
     private float plus = 0;
     private int number = 0;
 
@@ -64,28 +64,28 @@ public class ReincarnationManager : MonoBehaviour
 
     void Initialize()
     {
-        abilityPoint = 0;
+        point = 0;
 
         lockedObj.SetActive(true);
         lockedAdObj.SetActive(true);
 
         if (playerDataBase.IslandNumber > 0)
         {
-            abilityPoint += 30;
+            point += 50;
 
             if (playerDataBase.NextFoodNumber2 > 7)
             {
-                abilityPoint += 50;
+                point += 100;
             }
 
             if (playerDataBase.NextFoodNumber3 > 5)
             {
-                abilityPoint += 70;
+                point += 150;
             }
 
             if (playerDataBase.NextFoodNumber4 > 7)
             {
-                abilityPoint += 100;
+                point += 250;
             }
 
             lockedObj.SetActive(false);
@@ -110,9 +110,9 @@ public class ReincarnationManager : MonoBehaviour
         //    passiveText.text = "";
         //}
 
-        if (abilityPoint > 0 && plus > 0)
+        if (point > 0 && plus > 0)
         {
-            passiveText.text = MoneyUnitString.ToCurrencyString((int)abilityPoint).ToString();
+            passiveText.text = MoneyUnitString.ToCurrencyString((int)point).ToString();
             passiveText.text += " (+" + plus.ToString() + "%)";
         }
         else
@@ -120,19 +120,19 @@ public class ReincarnationManager : MonoBehaviour
             passiveText.text = "";
         }
 
-        abilityPoint = abilityPoint + (abilityPoint * (0.005f * playerDataBase.Skill11));
-        abilityPoint = abilityPoint + (abilityPoint * (0.01f * playerDataBase.Treasure10));
+        point = point + (point * (0.005f * playerDataBase.Skill11));
+        point = point + (point * (0.01f * playerDataBase.Treasure10));
 
-        receiveContent.Initialize(RewardType.AbilityPoint, (int)abilityPoint);
+        receiveContent.Initialize(RewardType.ChallengePoint, (int)point);
 
         countText.text = LocalizationManager.instance.GetString("Reincarnation_Count") + " : " + playerDataBase.ReincarnationCount;
 
-        adText.text = LocalizationManager.instance.GetString("Reincarnation_Ad") + "\n+" + MoneyUnitString.ToCurrencyString((int)abilityPoint * 2).ToString();
+        adText.text = LocalizationManager.instance.GetString("Reincarnation_Ad") + "\n+" + MoneyUnitString.ToCurrencyString((int)point * 2).ToString();
     }
 
     public void Free()
     {
-        if (abilityPoint == 0) return;
+        if (point == 0) return;
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
 
@@ -142,7 +142,7 @@ public class ReincarnationManager : MonoBehaviour
 
     public void Ad()
     {
-        if (abilityPoint == 0) return;
+        if (point == 0) return;
 
         GoogleAdsManager.instance.admobReward_ReincarnationX2.ShowAd(4);
     }
@@ -220,6 +220,7 @@ public class ReincarnationManager : MonoBehaviour
         playerDataBase.NextFoodNumber4 = 0;
 
         playerDataBase.YummyTimeCount = 0;
+        GameStateManager.instance.YummyTimeCount = 0;
 
         GameManager.instance.Reincarnation();
         tutorialManager.Reincarnation();
@@ -228,11 +229,11 @@ public class ReincarnationManager : MonoBehaviour
 
         if (number == 0)
         {
-            PortionManager.instance.GetAbilityPoint((int)abilityPoint);
+            PortionManager.instance.GetChallengePoint((int)point);
         }
         else
         {
-            PortionManager.instance.GetAbilityPoint((int)abilityPoint * 2);
+            PortionManager.instance.GetChallengePoint((int)point * 2);
         }
 
         yield return waitForSeconds;

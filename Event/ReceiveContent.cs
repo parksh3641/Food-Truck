@@ -202,6 +202,9 @@ public class ReceiveContent : MonoBehaviour
             case RewardType.EventTicket:
                 mainBackground.sprite = rankBackgroundArray[3];
                 break;
+            case RewardType.ChallengePoint:
+                mainBackground.sprite = rankBackgroundArray[2];
+                break;
         }
     }
 

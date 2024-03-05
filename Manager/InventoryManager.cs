@@ -51,17 +51,17 @@ public class InventoryManager : MonoBehaviour
         receiveContents[3].Initialize(RewardType.Island4_Heart, playerDataBase.Island4Count);
         receiveContents[4].Initialize(RewardType.DefDestroyTicketPiece, playerDataBase.DefDestroyTicketPiece);
         receiveContents[5].Initialize(RewardType.AbilityPoint, playerDataBase.AbilityPoint);
-        receiveContents[6].Initialize(RewardType.ChallengePoint, playerDataBase.ChallengePoint);
-        receiveContents[7].Initialize(RewardType.EventTicket, playerDataBase.EventTicket);
-        receiveContents[8].Initialize(RewardType.Portion1, playerDataBase.Portion1);
-        receiveContents[9].Initialize(RewardType.Portion2, playerDataBase.Portion2);
-        receiveContents[10].Initialize(RewardType.Portion3, playerDataBase.Portion3);
-        receiveContents[11].Initialize(RewardType.Portion4, playerDataBase.Portion4);
-        receiveContents[12].Initialize(RewardType.Portion5, playerDataBase.Portion5);
-        receiveContents[13].Initialize(RewardType.RankPoint, playerDataBase.RankPoint);
-        receiveContents[14].Initialize(RewardType.BuffTicket, playerDataBase.BuffTicket);
-        receiveContents[15].Initialize(RewardType.SkillTicket, playerDataBase.SkillTicket);
-        receiveContents[16].Initialize(RewardType.RepairTicket, playerDataBase.RecoverTicket);
+        receiveContents[6].Initialize(RewardType.Portion1, playerDataBase.Portion1);
+        receiveContents[7].Initialize(RewardType.Portion2, playerDataBase.Portion2);
+        receiveContents[8].Initialize(RewardType.Portion3, playerDataBase.Portion3);
+        receiveContents[9].Initialize(RewardType.Portion4, playerDataBase.Portion4);
+        receiveContents[10].Initialize(RewardType.Portion5, playerDataBase.Portion5);
+        receiveContents[11].Initialize(RewardType.ChallengePoint, playerDataBase.ChallengePoint);
+        receiveContents[12].Initialize(RewardType.RankPoint, playerDataBase.RankPoint);
+        receiveContents[13].Initialize(RewardType.BuffTicket, playerDataBase.BuffTicket);
+        receiveContents[14].Initialize(RewardType.SkillTicket, playerDataBase.SkillTicket);
+        receiveContents[15].Initialize(RewardType.RepairTicket, playerDataBase.RecoverTicket);
+        receiveContents[16].Initialize(RewardType.EventTicket, playerDataBase.EventTicket);
         receiveContents[17].Initialize(RewardType.DefDestroyTicket, playerDataBase.DefDestroyTicket);
     }
 

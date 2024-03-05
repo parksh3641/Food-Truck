@@ -4287,4 +4287,9 @@ public class ShopManager : MonoBehaviour
 
         packageBuyIcon.SetActive(false);
     }
+
+    public void OpenRankPointInfo()
+    {
+        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.RankPoint, 2);
+    }
 }

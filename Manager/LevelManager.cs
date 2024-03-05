@@ -119,7 +119,7 @@ public class LevelManager : MonoBehaviour
         levelText.text = level.ToString();
 
         titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "  <color=#FFFF00>(+" +
-            (10 + (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber())) +")</color>";
+            (20 + (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber())) +")</color>";
 
         nowExp = levelDataBase.GetNowExp(playerDataBase.Exp);
         nextExp = levelDataBase.GetNextExp(level);

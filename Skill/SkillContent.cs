@@ -807,7 +807,7 @@ public class SkillContent : MonoBehaviour
             case MoneyType.CP:
                 if (playerDataBase.ChallengePoint >= value)
                 {
-                    buttonCrystalImg.sprite = buttonImgArray[3];
+                    buttonCPImg.sprite = buttonImgArray[3];
                 }
                 break;
         }

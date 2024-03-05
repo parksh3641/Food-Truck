@@ -250,7 +250,11 @@ public class ChangeFoodManager : MonoBehaviour
 
     public void OpenAutoUpgradeView()
     {
-        if (!playerDataBase.AutoUpgrade) return;
+        if (!playerDataBase.AutoUpgrade)
+        {
+            BuyShopNotion();
+            return;
+        }
 
         if (!autoUpgradeView.activeInHierarchy)
         {
@@ -282,8 +286,8 @@ public class ChangeFoodManager : MonoBehaviour
         {
             GameStateManager.instance.AutoUpgradeLevel = number;
 
-            NotionManager.instance.UseNotion(NotionType.ChangeNotion);
             SoundManager.instance.PlaySFX(GameSfxType.Success);
+            NotionManager.instance.UseNotion(NotionType.ChangeNotion);
         }
     }
 

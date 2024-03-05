@@ -58,13 +58,13 @@ public class StateManager : MonoBehaviour
     {
         fadeInOut.FadeIn();
         ResetManager.instance.Initialize();
+        newsManager.Initialize();
         shopManager.Initialize();
         gameManager.Initialize();
         lockManager.Initialize();
         chestBoxManager.Initialize();
         //questManager.Initialize();
         offlineManager.Initialize();
-        newsManager.Initialize();
         changeFoodManager.Initialize();
         attendanceManager.Initialize();
         welcomeManager.Initialize();

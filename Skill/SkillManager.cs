@@ -114,5 +114,15 @@ public class SkillManager : MonoBehaviour
 
         Initialize();
     }
+
+    public void OpenSkillTicketInfo()
+    {
+        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.SkillTicket, 2);
+    }
+
+    public void OpenCPInfo()
+    {
+        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.ChallengePoint, 2);
+    }
 }
 

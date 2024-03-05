@@ -52,6 +52,20 @@ public class ReceiveInfoManager : MonoBehaviour
         }
     }
 
+    public void OpenReceiveInfo(RewardType rewardType, int number)
+    {
+        if (!receiveInfoView.activeInHierarchy)
+        {
+            receiveInfoView.SetActive(true);
+
+            Initialize(rewardType, rankBackgroundArray[number]);
+        }
+        else
+        {
+            receiveInfoView.SetActive(false);
+        }
+    }
+
     void Initialize(RewardType rewardType, Sprite image)
     {
         titleText.text = LocalizationManager.instance.GetString(rewardType.ToString());

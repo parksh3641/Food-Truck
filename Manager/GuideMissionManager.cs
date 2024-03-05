@@ -20,7 +20,7 @@ public class GuideMissionManager : MonoBehaviour
     private bool clear = false;
     private bool firstReset = false;
 
-    private int reward = 20;
+    private int reward = 10;
 
     public ChangeFoodManager changeFoodManager;
     public ShopManager shopManager;

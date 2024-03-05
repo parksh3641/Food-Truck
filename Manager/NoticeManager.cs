@@ -45,4 +45,9 @@ public class NoticeManager : MonoBehaviour
             noticeView.SetActive(false);
         }
     }
+
+    public void CloseNoticeView()
+    {
+        noticeView.SetActive(false);
+    }
 }

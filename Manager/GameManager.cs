@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject coupon;
     public GameObject deleteAccount;
+    public GameObject notice;
 
     public GameObject changeFoodAlarmObj;
 
@@ -309,6 +310,7 @@ public class GameManager : MonoBehaviour
     public ChestBoxManager chestBoxManager;
     public RecoverManager recoverManager;
     public GuideMissionManager guideMissionManager;
+    public NoticeManager noticeManager;
 
     UpgradeDataBase upgradeDataBase;
     PlayerDataBase playerDataBase;
@@ -507,7 +509,7 @@ public class GameManager : MonoBehaviour
             {
                 christmasSnow.SetActive(true);
 
-                Debug.LogError("12월 달이라 눈이 내리기 시작합니다.");
+                Debug.LogError("12?? ?????? ???? ?????? ??????????.");
             }
         }
     }
@@ -1280,7 +1282,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            Debug.LogError("1분 지남");
+            Debug.LogError("1?? ????");
         }
         else
         {
@@ -1309,6 +1311,8 @@ public class GameManager : MonoBehaviour
         {
             coupon.SetActive(false);
             deleteAccount.SetActive(true);
+            notice.SetActive(false);
+            noticeManager.CloseNoticeView();
         }
 #endif
     }
@@ -1623,7 +1627,7 @@ public class GameManager : MonoBehaviour
         }
 
         sellPriceTip += 0;
-        sellPriceTip += playerDataBase.Skill14 * 0.3f; //팁 확률
+        sellPriceTip += playerDataBase.Skill14 * 0.3f; //?? ????
         sellPriceTip += playerDataBase.Treasure8 * 0.6f;
 
         expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
@@ -2182,7 +2186,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        //sellPrice = sellPrice + (int)(sellPrice * 0.3f); //임시로 30% 증가
+        //sellPrice = sellPrice + (int)(sellPrice * 0.3f); //?????? 30% ????
 
         if(speicalFood)
         {
@@ -3471,7 +3475,7 @@ public class GameManager : MonoBehaviour
 
             if (!isExp)
             {
-                playerDataBase.Exp += 10 + expUp;
+                playerDataBase.Exp += 20 + expUp;
             }
 
             switch (GameStateManager.instance.IslandType)
@@ -3691,7 +3695,7 @@ public class GameManager : MonoBehaviour
                     {
                         PortionManager.instance.GetRecoverTickets(1);
 
-                        Debug.LogError("복구 열쇠 획득");
+                        Debug.LogError("???? ???? ????");
                     }
                 }
 
@@ -4322,7 +4326,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void MaxLevelUpgradeSuccess() //만렙
+    void MaxLevelUpgradeSuccess() //????
     {
         switch (GameStateManager.instance.IslandType)
         {
@@ -4887,7 +4891,7 @@ public class GameManager : MonoBehaviour
 
         if(speicalFood)
         {
-            Debug.LogError("특별 음식 판매");
+            Debug.LogError("???? ???? ????");
 
             PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 10 + (level / 5)));
         }
@@ -4912,7 +4916,7 @@ public class GameManager : MonoBehaviour
                 playerDataBase.EventTicketCount += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
 
-                Debug.LogError("이벤트 티켓 획득");
+                Debug.LogError("?????? ???? ????");
             }
         }
 
@@ -4928,7 +4932,7 @@ public class GameManager : MonoBehaviour
             {
                 speicalFood = true;
 
-                Debug.LogError("레어 음식 등장!");
+                Debug.LogError("???? ???? ????!");
 
                 SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
 

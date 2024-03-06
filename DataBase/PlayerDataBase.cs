@@ -6205,6 +6205,11 @@ public class PlayerDataBase : ScriptableObject
         number += Skill12;
         number += Skill13;
         number += Skill14;
+        number += Skill15;
+        number += Skill16;
+        number += Skill17;
+        number += Skill18;
+        number += Skill19;
 
         return number;
     }

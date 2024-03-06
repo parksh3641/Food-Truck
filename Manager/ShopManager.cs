@@ -803,9 +803,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion2:
-                if (playerDataBase.RankPoint >= 150)
+                if (playerDataBase.RankPoint >= 100)
                 {
-                    playerDataBase.RankPoint -= 150;
+                    playerDataBase.RankPoint -= 100;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -824,9 +824,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion3:
-                if (playerDataBase.RankPoint >= 150)
+                if (playerDataBase.RankPoint >= 100)
                 {
-                    playerDataBase.RankPoint -= 150;
+                    playerDataBase.RankPoint -= 100;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -845,9 +845,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion4:
-                if (playerDataBase.RankPoint >= 120)
+                if (playerDataBase.RankPoint >= 100)
                 {
-                    playerDataBase.RankPoint -= 120;
+                    playerDataBase.RankPoint -= 100;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -1111,7 +1111,7 @@ public class ShopManager : MonoBehaviour
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
 
-                    PortionManager.instance.GetRecoverTickets(1);
+                    PortionManager.instance.GetRepairTickets(1);
 
                     shopContents[38].Initialize(ItemType.RepairTicket, BuyType.RankPoint, this);
                     shopContents[39].Initialize(ItemType.RepairTicket10, BuyType.RankPoint, this);
@@ -1133,7 +1133,7 @@ public class ShopManager : MonoBehaviour
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
 
-                    PortionManager.instance.GetRecoverTickets(11);
+                    PortionManager.instance.GetRepairTickets(10);
 
                     shopContents[38].Initialize(ItemType.RepairTicket, BuyType.RankPoint, this);
                     shopContents[39].Initialize(ItemType.RepairTicket10, BuyType.RankPoint, this);
@@ -1423,6 +1423,25 @@ public class ShopManager : MonoBehaviour
     public void ChangeSpeicalTopToggle(int number)
     {
         if (speicalIndex == number) return;
+
+        if (number == 3)
+        {
+            if (playerDataBase.Level < 15)
+            {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("BufferflyLocked"));
+                return;
+            }
+        }
+        else if (number == 4)
+        {
+            if (playerDataBase.Level < 20)
+            {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("TotemLocked"));
+                return;
+            }
+        }
 
         speicalIndex = number;
 
@@ -3951,13 +3970,13 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
                 break;
             case 14:
-                PortionManager.instance.GetBuffTickets(20);
+                PortionManager.instance.GetBuffTickets(10);
                 break;
             case 15:
-                PortionManager.instance.GetBuffTickets(40);
+                PortionManager.instance.GetBuffTickets(20);
                 break;
             case 16:
-                PortionManager.instance.GetBuffTickets(60);
+                PortionManager.instance.GetBuffTickets(40);
                 break;
             case 17:
                 PortionManager.instance.GetDefTickets(30);
@@ -3966,7 +3985,7 @@ public class ShopManager : MonoBehaviour
                 PortionManager.instance.GetDefTickets(60);
                 break;
             case 19:
-                PortionManager.instance.GetDefTickets(100);
+                PortionManager.instance.GetDefTickets(120);
                 break;
             case 20:
                 if (playerDataBase.SuperOffline) return;

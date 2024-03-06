@@ -35,6 +35,7 @@ public class IconManager : MonoBehaviour
 
     private int number = 0;
     private int maxProficiency = 9;
+    private float reward = 0.5f;
 
 
     public List<IconContent> iconContentList = new List<IconContent>();
@@ -106,7 +107,7 @@ public class IconManager : MonoBehaviour
 
         iconContentList[playerDataBase.Icon].CheckMark(true);
 
-        plusText.text = LocalizationManager.instance.GetString("NowPrice") + " +" + (playerDataBase.GetIconHoldNumber() * 0.2f).ToString() + "%  (+0.2%)";
+        plusText.text = LocalizationManager.instance.GetString("NowPrice") + " +" + (playerDataBase.GetIconHoldNumber() * reward).ToString() + "%  (+" + reward + "%)";
 
         CheckInitialize();
     }

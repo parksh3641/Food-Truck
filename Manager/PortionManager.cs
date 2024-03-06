@@ -161,7 +161,7 @@ public class PortionManager : MonoBehaviour
     }
 
     [Button]
-    public void GetRecoverTickets(int number)
+    public void GetRepairTickets(int number)
     {
         playerDataBase.RecoverTicket += number;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RecoverTicket", playerDataBase.RecoverTicket);

@@ -105,7 +105,7 @@ public class PlayTimeManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                PortionManager.instance.GetRecoverTickets(3);
+                PortionManager.instance.GetRepairTickets(3);
                 break;
             case 1:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);

@@ -64,7 +64,12 @@ public class SkillManager : MonoBehaviour
 
             countText.text = playerDataBase.SkillTicket.ToString();
 
-            ChangeTopToggle(0);
+            if(index == -1)
+            {
+                ChangeTopToggle(0);
+            }
+
+            Initialize();
 
             FirebaseAnalytics.LogEvent("OpenReceipe");
         }

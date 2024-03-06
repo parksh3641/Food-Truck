@@ -142,13 +142,13 @@ public class DungeonManager : MonoBehaviour
         {
             dungeonView.SetActive(true);
 
-            alarm.SetActive(false);
-            ingameAlarm.SetActive(false);
-
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
                 ResetManager.instance.Initialize();
             }
+
+            alarm.SetActive(false);
+            ingameAlarm.SetActive(false);
 
             localization_Reset = LocalizationManager.instance.GetString("Reset");
             localization_Days = LocalizationManager.instance.GetString("Days");

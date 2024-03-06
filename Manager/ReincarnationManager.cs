@@ -127,7 +127,7 @@ public class ReincarnationManager : MonoBehaviour
 
         countText.text = LocalizationManager.instance.GetString("Reincarnation_Count") + " : " + playerDataBase.ReincarnationCount;
 
-        adText.text = LocalizationManager.instance.GetString("Reincarnation_Ad") + "\n+" + MoneyUnitString.ToCurrencyString((int)point * 2).ToString();
+        adText.text = MoneyUnitString.ToCurrencyString((int)point * 2).ToString();
     }
 
     public void Free()

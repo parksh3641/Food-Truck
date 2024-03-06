@@ -120,13 +120,13 @@ public class AttendanceManager : MonoBehaviour
         attendanceContentArray[0].receiveContent[0].Initialize(RewardType.RepairTicket, 10);
 
         attendanceContentArray[1].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.PortionSet, 1);
+        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.PortionSet, 2);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Crystal, 100);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[3].receiveContent[0].Initialize(RewardType.BuffTicket, 2);
+        attendanceContentArray[3].receiveContent[0].Initialize(RewardType.BuffTicket, 3);
 
         attendanceContentArray[4].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[4].receiveContent[0].Initialize(RewardType.SkillTicket, 5);
@@ -152,11 +152,11 @@ public class AttendanceManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                PortionManager.instance.GetRecoverTickets(10);
+                PortionManager.instance.GetRepairTickets(10);
 
                 break;
             case 1:
-                PortionManager.instance.GetAllPortion(1);
+                PortionManager.instance.GetAllPortion(2);
 
                 break;
             case 2:
@@ -164,7 +164,7 @@ public class AttendanceManager : MonoBehaviour
 
                 break;
             case 3:
-                PortionManager.instance.GetBuffTickets(2);
+                PortionManager.instance.GetBuffTickets(3);
 
                 break;
             case 4:

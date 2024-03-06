@@ -122,7 +122,7 @@ public class WelcomeManager : MonoBehaviour
         }
 
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (100 * (index + 1)));
-        PortionManager.instance.GetRecoverTickets(3);
+        PortionManager.instance.GetRepairTickets(3);
         PortionManager.instance.GetEventTicket(10);
 
         playerDataBase.EventTicketCount += 10;

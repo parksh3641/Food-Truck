@@ -111,7 +111,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill1 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill1Value * (playerDataBase.Skill1 + 1)).ToString() + "%";
+                    nextValueText.text = (skill1Value * (playerDataBase.Skill1 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -126,7 +126,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill2 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill2Value * (playerDataBase.Skill2 + 1)).ToString() + "%";
+                    nextValueText.text = (skill2Value * (playerDataBase.Skill2 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -140,7 +140,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill3 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill3Value * (playerDataBase.Skill3 + 1)).ToString() + "%";
+                    nextValueText.text = (skill3Value * (playerDataBase.Skill3 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -154,7 +154,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill4 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill4Value * (playerDataBase.Skill4 + 1)).ToString() + "%";
+                    nextValueText.text = (skill4Value * (playerDataBase.Skill4 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -168,7 +168,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill5 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill5Value * (playerDataBase.Skill5 + 1)).ToString() + "%";
+                    nextValueText.text = (skill5Value * (playerDataBase.Skill5 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -182,7 +182,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill6 < maxLevelGold - 1)
                 {
-                    nextValueText.text = (skill6Value * (playerDataBase.Skill6 + 1)).ToString() + "%";
+                    nextValueText.text = (skill6Value * (playerDataBase.Skill6 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -196,7 +196,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill7 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill7Value * (playerDataBase.Skill7 + 1)).ToString() + "%";
+                    nextValueText.text = (skill7Value * (playerDataBase.Skill7 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -210,7 +210,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill8 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill8Value * (playerDataBase.Skill8 + 1)).ToString() + "%";
+                    nextValueText.text = (skill8Value * (playerDataBase.Skill8 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -224,7 +224,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill9 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill9Value * (playerDataBase.Skill9 + 1)).ToString() + "%";
+                    nextValueText.text = (skill9Value * (playerDataBase.Skill9 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -238,7 +238,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill10 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill10Value * (playerDataBase.Skill10 + 1)).ToString() + "%";
+                    nextValueText.text = (skill10Value * (playerDataBase.Skill10 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -252,7 +252,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill11 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill11Value * (playerDataBase.Skill11 + 1)).ToString() + "%";
+                    nextValueText.text = (skill11Value * (playerDataBase.Skill11 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -266,7 +266,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill12 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill12Value * (playerDataBase.Skill12 + 1)).ToString() + "%";
+                    nextValueText.text = (skill12Value * (playerDataBase.Skill12 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -280,7 +280,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill13 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill13Value * (playerDataBase.Skill13 + 1)).ToString() + "%";
+                    nextValueText.text = (skill13Value * (playerDataBase.Skill13 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -294,7 +294,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill14 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill14Value * (playerDataBase.Skill14 + 1)).ToString() + "%";
+                    nextValueText.text = (skill14Value * (playerDataBase.Skill14 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -308,7 +308,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill15 < maxLevelChallenge - 1)
                 {
-                    nextValueText.text = (skill15Value * (playerDataBase.Skill15 + 1)).ToString() + "%";
+                    nextValueText.text = (skill15Value * (playerDataBase.Skill15 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -322,7 +322,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill16 < maxLevelChallenge - 1)
                 {
-                    nextValueText.text = (skill16Value * (playerDataBase.Skill16 + 1)).ToString() + "%";
+                    nextValueText.text = (skill16Value * (playerDataBase.Skill16 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -336,7 +336,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill17 < maxLevelChallenge - 1)
                 {
-                    nextValueText.text = (skill17Value * (playerDataBase.Skill17 + 1)).ToString() + "%";
+                    nextValueText.text = (skill17Value * (playerDataBase.Skill17 + 1)).ToString("N2") + "%";
                 }
                 else
                 {
@@ -350,7 +350,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill18 < maxLevelChallenge - 1)
                 {
-                    nextValueText.text = (skill18Value * (playerDataBase.Skill18 + 1)).ToString() + "%";
+                    nextValueText.text = (skill18Value * (playerDataBase.Skill18 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -364,7 +364,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill19 < maxLevelChallenge - 1)
                 {
-                    nextValueText.text = (skill19Value * (playerDataBase.Skill19 + 1)).ToString() + "%";
+                    nextValueText.text = (skill19Value * (playerDataBase.Skill19 + 1)).ToString("N2") + "%";
                 }
                 else
                 {
@@ -378,6 +378,11 @@ public class SkillContent : MonoBehaviour
         {
             case MoneyType.CoinA:
                 value = (int)(priceGold * (1.0f - (0.003f * playerDataBase.Treasure4)));
+
+                if(level > 49)
+                {
+                    value *= 2;
+                }
 
                 levelText.text = "Lv. " + level + " / " + maxLevelGold.ToString();
 
@@ -423,7 +428,14 @@ public class SkillContent : MonoBehaviour
                 break;
         }
 
-        nowValueText.text = nowValue.ToString() + "%";
+        if (skillType == SkillType.Skill17 || skillType == SkillType.Skill19)
+        {
+            nowValueText.text = nowValue.ToString("N2") + "%";
+        }
+        else
+        {
+            nowValueText.text = nowValue.ToString("N1") + "%";
+        }
 
         buttonTicket.SetActive(true);
 

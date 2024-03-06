@@ -10,6 +10,7 @@ public class ReceiveContent : MonoBehaviour
     public Image mainBackground;
     public Image icon;
     public Text countText;
+    public GameObject effect;
 
     ImageDataBase imageDataBase;
 
@@ -40,13 +41,17 @@ public class ReceiveContent : MonoBehaviour
 
         mainBackground.sprite = rankBackgroundArray[0];
 
+        effect.SetActive(false);
+
         switch (type)
         {
             case RewardType.Gold:
                 mainBackground.sprite = rankBackgroundArray[0];
+                effect.SetActive(true);
                 break;
             case RewardType.DefDestroyTicket:
                 mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.Portion1:
                 mainBackground.sprite = rankBackgroundArray[1];
@@ -65,6 +70,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Crystal:
                 mainBackground.sprite = rankBackgroundArray[1];
+                effect.SetActive(true);
                 break;
             case RewardType.Exp:
                 mainBackground.sprite = rankBackgroundArray[1];
@@ -101,6 +107,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.TreasureBox:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
                 break;
             case RewardType.DefDestroyTicketPiece:
                 mainBackground.sprite = rankBackgroundArray[0];
@@ -139,21 +146,25 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[3];
                 countText.text = LocalizationManager.instance.GetString("RemoveAds");
                 countText.alignment = TextAnchor.MiddleCenter;
+                effect.SetActive(true);
                 break;
             case RewardType.GoldX2:
                 mainBackground.sprite = rankBackgroundArray[3];
                 countText.text = LocalizationManager.instance.GetString("GoldX2");
                 countText.alignment = TextAnchor.MiddleCenter;
+                effect.SetActive(true);
                 break;
             case RewardType.AutoUpgrade:
                 mainBackground.sprite = rankBackgroundArray[3];
                 countText.text = LocalizationManager.instance.GetString("AutoUpgrade");
                 countText.alignment = TextAnchor.MiddleCenter;
+                effect.SetActive(true);
                 break;
             case RewardType.AutoPresent:
                 mainBackground.sprite = rankBackgroundArray[3];
                 countText.text = LocalizationManager.instance.GetString("AutoPresent");
                 countText.alignment = TextAnchor.MiddleCenter;
+                effect.SetActive(true);
                 break;
             case RewardType.Island1_Heart:
                 mainBackground.sprite = rankBackgroundArray[0];
@@ -201,6 +212,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.EventTicket:
                 mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.ChallengePoint:
                 mainBackground.sprite = rankBackgroundArray[2];

@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
 
     public LocalizationContent bestRankLevelText;
 
-    public GameObject butterflyLocked;
     public GameObject rankLocked;
     public GameObject treasureLocked;
 
@@ -509,7 +508,7 @@ public class GameManager : MonoBehaviour
             {
                 christmasSnow.SetActive(true);
 
-                Debug.LogError("12?? ?????? ???? ?????? ??????????.");
+                Debug.LogError("December is Open");
             }
         }
     }
@@ -1240,7 +1239,7 @@ public class GameManager : MonoBehaviour
 
         yield return firstSeconds;
 
-        PortionManager.instance.GetBuffTickets(1);
+        PortionManager.instance.GetBuffTickets(2);
 
         yield return firstSeconds;
 
@@ -1282,7 +1281,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            Debug.LogError("1?? ????");
+            Debug.LogError("1 Min Passed");
         }
         else
         {
@@ -1617,7 +1616,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.Proficiency * 1;
         sellPricePlus += playerDataBase.Treasure7 * 0.8f;
         sellPricePlus += playerDataBase.Advancement * 0.4f;
-        sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.2f;
+        sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.5f;
 
         if (IsWeekend())
         {
@@ -1993,9 +1992,6 @@ public class GameManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
 
             PlayfabManager.instance.UpdateAddGold(100000);
-            //PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
-
-            SoundManager.instance.PlaySFX(GameSfxType.Sell);
 
             StartCoroutine(FirstDelay());
         }
@@ -3693,9 +3689,9 @@ public class GameManager : MonoBehaviour
                 {
                     if (Random.Range(0, 100f) < repairTicket)
                     {
-                        PortionManager.instance.GetRecoverTickets(1);
+                        PortionManager.instance.GetRepairTickets(1);
 
-                        Debug.LogError("???? ???? ????");
+                        Debug.LogError("Get Repair Ticket");
                     }
                 }
 
@@ -4891,7 +4887,7 @@ public class GameManager : MonoBehaviour
 
         if(speicalFood)
         {
-            Debug.LogError("???? ???? ????");
+            Debug.LogError("Sell Rare Food");
 
             PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 10 + (level / 5)));
         }
@@ -4916,7 +4912,7 @@ public class GameManager : MonoBehaviour
                 playerDataBase.EventTicketCount += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
 
-                Debug.LogError("?????? ???? ????");
+                Debug.LogError("Get Event Ticket");
             }
         }
 
@@ -4932,7 +4928,7 @@ public class GameManager : MonoBehaviour
             {
                 speicalFood = true;
 
-                Debug.LogError("???? ???? ????!");
+                Debug.LogError("Rare Food is Open !");
 
                 SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
 
@@ -6002,6 +5998,13 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("AbilityPoint", playerDataBase.AbilityPoint);
     }
 
+    public void GetChallengePoint()
+    {
+        playerDataBase.ChallengePoint += 10000;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("ChallengePoint", playerDataBase.ChallengePoint);
+    }
+
     public void GetGourmetLevel()
     {
         playerDataBase.GourmetLevel += 1000000;
@@ -6083,14 +6086,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckLocked()
     {
-        butterflyLocked.SetActive(false);
         treasureLocked.SetActive(true);
         rankLocked.SetActive(true);
-
-        //if (levelDataBase.GetLevel(playerDataBase.Exp) > 1)
-        //{
-        //    butterflyLocked.SetActive(false);
-        //}
 
         if (playerDataBase.Level > 4)
         {

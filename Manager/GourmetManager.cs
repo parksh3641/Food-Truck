@@ -33,77 +33,14 @@ public class GourmetManager : MonoBehaviour
     {
         value = 0;
 
-        //value += playerDataBase.UpgradeCount * 1;
-        //value += playerDataBase.SellCount * 3;
-        //value += playerDataBase.UseSources * 5;
-        //value += playerDataBase.BuffCount * 10;
-
-        //value += playerDataBase.AccessDate * 300;
-        value += playerDataBase.Level * 500;
-        //value += playerDataBase.QuestCount * 500;
+        value += playerDataBase.Level * 200;
         value += playerDataBase.CastleLevel * 200;
+        value += playerDataBase.GetIconHoldNumber() * 1000;
 
         value += playerDataBase.Island1Level * 500;
         value += playerDataBase.Island2Level * 500;
-        value += playerDataBase.Island3Level * 1000;
-        value += playerDataBase.Island4Level * 1000;
-
-        value += playerDataBase.GetIconHoldNumber() * 300;
-
-        //if (playerDataBase.Package1)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.Package2)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.Package3)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.Package4)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.Package5)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.Package6)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.RemoveAds)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.GoldX2)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.AutoUpgrade)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.AutoPresent)
-        //{
-        //    value += 10000;
-        //}
-
-        //if (playerDataBase.SuperOffline)
-        //{
-        //    value += 10000;
-        //}
+        value += playerDataBase.Island3Level * 500;
+        value += playerDataBase.Island4Level * 500;
 
         if (playerDataBase.TestAccount == 0)
         {
@@ -127,18 +64,18 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.Skill18 * 100;
             value += playerDataBase.Skill19 * 100;
 
-            value += playerDataBase.Treasure1 * 500;
-            value += playerDataBase.Treasure2 * 500;
-            value += playerDataBase.Treasure3 * 500;
-            value += playerDataBase.Treasure4 * 500;
-            value += playerDataBase.Treasure5 * 500;
-            value += playerDataBase.Treasure6 * 500;
-            value += playerDataBase.Treasure7 * 500;
-            value += playerDataBase.Treasure8 * 500;
-            value += playerDataBase.Treasure9 * 500;
-            value += playerDataBase.Treasure10 * 500;
-            value += playerDataBase.Treasure11 * 500;
-            value += playerDataBase.Treasure12 * 500;
+            value += playerDataBase.Treasure1 * 300;
+            value += playerDataBase.Treasure2 * 300;
+            value += playerDataBase.Treasure3 * 300;
+            value += playerDataBase.Treasure4 * 300;
+            value += playerDataBase.Treasure5 * 300;
+            value += playerDataBase.Treasure6 * 300;
+            value += playerDataBase.Treasure7 * 300;
+            value += playerDataBase.Treasure8 * 300;
+            value += playerDataBase.Treasure9 * 300;
+            value += playerDataBase.Treasure10 * 300;
+            value += playerDataBase.Treasure11 * 300;
+            value += playerDataBase.Treasure12 * 300;
 
             value += playerDataBase.GetCharacterNumber() * 5000;
             value += playerDataBase.GetPetNumber() * 5000;

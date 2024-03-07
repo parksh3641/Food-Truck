@@ -225,6 +225,9 @@ public class IconContent : MonoBehaviour
                 case IconType.Icon_52:
                     NotionManager.instance.UseNotion(NotionType.Icon_Locked13);
                     break;
+                default:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked8);
+                    break;
             }
         }
     }

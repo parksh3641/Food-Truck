@@ -194,15 +194,19 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Icon_Ranking1:
                 mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.Icon_Ranking2:
                 mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.Icon_Ranking3:
                 mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.Icon_Ranking4:
                 mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.SliverBox:
                 mainBackground.sprite = rankBackgroundArray[1];

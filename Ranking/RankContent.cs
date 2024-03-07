@@ -8,6 +8,7 @@ public class RankContent : MonoBehaviour
     ChefType chefType;
 
     public GameObject frame;
+    public GameObject effect;
 
     public Image iconImg;
     public Image banner;
@@ -36,11 +37,13 @@ public class RankContent : MonoBehaviour
         {
             indexRankImg.enabled = true;
             indexRankImg.sprite = rankIconList[index - 1];
+            effect.SetActive(true);
         }
         else
         {
             indexRankImg.enabled = false;
             indexText.text = index.ToString();
+            effect.SetActive(false);
         }
     }
 
@@ -50,11 +53,13 @@ public class RankContent : MonoBehaviour
         {
             indexRankImg.enabled = true;
             indexRankImg.sprite = rankIconList[index - 1];
+            effect.SetActive(true);
         }
         else
         {
             indexRankImg.enabled = false;
             indexText.text = index.ToString();
+            effect.SetActive(false);
         }
 
         nickNameText.text = nickName;

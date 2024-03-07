@@ -110,16 +110,6 @@ public class ReincarnationManager : MonoBehaviour
         //    passiveText.text = "";
         //}
 
-        if (point > 0 && plus > 0)
-        {
-            passiveText.text = MoneyUnitString.ToCurrencyString((int)point).ToString();
-            passiveText.text += " (+" + plus.ToString() + "%)";
-        }
-        else
-        {
-            passiveText.text = "";
-        }
-
         point = point + (point * (0.005f * playerDataBase.Skill11));
         point = point + (point * (0.01f * playerDataBase.Treasure10));
 
@@ -127,7 +117,17 @@ public class ReincarnationManager : MonoBehaviour
 
         countText.text = LocalizationManager.instance.GetString("Reincarnation_Count") + " : " + playerDataBase.ReincarnationCount;
 
-        adText.text = MoneyUnitString.ToCurrencyString((int)point * 2).ToString();
+        adText.text = "+" + MoneyUnitString.ToCurrencyString((int)point * 2).ToString();
+
+        if (point > 0 && plus > 0)
+        {
+            passiveText.text = MoneyUnitString.ToCurrencyString((int)point).ToString();
+            passiveText.text += " (+" + plus.ToString() + "%) = " + MoneyUnitString.ToCurrencyString((int)point * 2).ToString();
+        }
+        else
+        {
+            passiveText.text = "";
+        }
     }
 
     public void Free()

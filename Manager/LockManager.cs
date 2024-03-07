@@ -94,13 +94,13 @@ public class LockManager : MonoBehaviour
             tutorial.SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 3) //피버모드 해제
+        if (playerDataBase.LockTutorial >= 3) //피버모드 해제 (핫도그 최대 레벨 달성)
         {
             menuIcon[4].SetActive(true);
             menuIcon[6].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 4) //레시피, 주방 청소, 버프 해제
+        if (playerDataBase.LockTutorial >= 4) //레시피, 주방 청소, 버프 해제 (음료수 최대 레벨 달성)
         {
             menuIcon[7].SetActive(false);
             menuIcon[8].SetActive(false);
@@ -108,7 +108,7 @@ public class LockManager : MonoBehaviour
             menuIcon[10].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 5) //퀘스트, 가방, 패키지(이벤트) 해제
+        if (playerDataBase.LockTutorial >= 5) //퀘스트, 가방, 패키지(이벤트) 해제 (피자 최대 레벨 달성)
         {
             menuIcon[11].SetActive(true);
             menuIcon[12].SetActive(false);
@@ -116,12 +116,12 @@ public class LockManager : MonoBehaviour
             menuIcon[14].SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 6) //오프라인 보상 해제
+        if (playerDataBase.LockTutorial >= 6) //오프라인 보상 해제 (도넛 최대 레벨 달성)
         {
             menuIcon[15].SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 7) //챌린지, 섬 이동 해제
+        if (playerDataBase.LockTutorial >= 7) //챌린지, 섬 이동 해제 (감자 튀김 최대 레벨 달성)
         {
             menuIcon[16].SetActive(false);
             menuIcon[17].SetActive(false);

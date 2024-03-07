@@ -576,6 +576,11 @@ public class RankingManager : MonoBehaviour
 
         int index = 1;
 
+        for (int i = 0; i < rankingRewardCheck.Length; i++)
+        {
+            rankingRewardCheck[i].SetActive(false);
+        }
+
         foreach (PlayerLeaderboardEntry player in curBoard)
         {
             if (player.PlayFabId.Equals(GameStateManager.instance.PlayfabId))

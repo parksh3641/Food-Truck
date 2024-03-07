@@ -109,6 +109,16 @@ public class SkillManager : MonoBehaviour
         topMenuImgArray[number].sprite = topMenuSpriteArray[1];
         skillArray[number].gameObject.SetActive(true);
 
+        if(number == 2)
+        {
+            if(playerDataBase.LockTutorial < 7)
+            {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                NotionManager.instance.UseNotion(NotionType.UnLockedNotion4);
+                return;
+            }
+        }
+
         for (int i = 0; i < skillContents.Length; i++)
         {
             if (skillContents[i].gameObject.activeInHierarchy)

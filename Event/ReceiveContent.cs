@@ -138,6 +138,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.RankPoint:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
                 break;
             case RewardType.RepairTicket:
                 mainBackground.sprite = rankBackgroundArray[2];
@@ -220,6 +221,11 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.ChallengePoint:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
+                break;
+            case RewardType.Icon_Attendance:
+                mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
         }
     }

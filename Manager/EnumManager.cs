@@ -371,7 +371,8 @@ public enum RewardType
     SliverBox,
     GoldBox,
     EventTicket,
-    ChallengePoint
+    ChallengePoint,
+    Icon_Attendance
 }
 
 public enum QuestType
@@ -585,6 +586,28 @@ public enum IconType
     Icon_52,
     Icon_53,
     Icon_54,
+    Icon_55,
+    Icon_56,
+    Icon_57,
+    Icon_58,
+    Icon_59,
+    Icon_60,
+    Icon_61,
+    Icon_62,
+    Icon_63,
+    Icon_64,
+    Icon_65,
+    Icon_66,
+    Icon_67,
+    Icon_68,
+    Icon_69,
+    Icon_70,
+    Icon_71,
+    Icon_72,
+    Icon_73,
+    Icon_74,
+    Icon_75,
+    Icon_76,
 }
 
 public enum GifticonType

@@ -1398,7 +1398,10 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            guideMissionManager.Initialize();
+            if (guideMissionManager.guideMissonView.gameObject.activeInHierarchy)
+            {
+                guideMissionManager.Initialize();
+            }
 
             speicalShopView.SetActive(false);
         }
@@ -1414,7 +1417,10 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            guideMissionManager.Initialize();
+            if(guideMissionManager.guideMissonView.gameObject.activeInHierarchy)
+            {
+                guideMissionManager.Initialize();
+            }
 
             speicalShopView.SetActive(false);
         }

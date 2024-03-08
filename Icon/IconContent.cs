@@ -207,9 +207,6 @@ public class IconContent : MonoBehaviour
                 case IconType.Icon_46:
                     NotionManager.instance.UseNotion(NotionType.Icon_Locked12);
                     break;
-                case IconType.Icon_47:
-                    NotionManager.instance.UseNotion(NotionType.Icon_Locked8);
-                    break;
                 case IconType.Icon_48:
                     NotionManager.instance.UseNotion(NotionType.Icon_Locked13);
                     break;

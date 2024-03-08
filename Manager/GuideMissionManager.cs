@@ -41,8 +41,6 @@ public class GuideMissionManager : MonoBehaviour
 
     public void Initialize()
     {
-        if (!guideMissonView.activeInHierarchy) return;
-
         if (playerDataBase.GuideIndex > 21) return;
 
         guideMissonView.SetActive(true);

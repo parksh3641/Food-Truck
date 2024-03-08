@@ -83,6 +83,13 @@ public class GameManager : MonoBehaviour
     private bool buff4 = false;
 
     [Space]
+    [Title("Portion_Ad")]
+    public GameObject portionAdView;
+    public ReceiveContent portionReceiveContent;
+
+    private int portionAd = 0;
+
+    [Space]
     [Title("Christmas")]
     public GameObject christmasSnow;
 
@@ -161,6 +168,7 @@ public class GameManager : MonoBehaviour
 
     public Text portionText1, portionText2, portionText3, portionText4, portionText5, portionText6;
     public Image portionFillamount1, portionFillamount2, portionFillamount3, portionFillamount4, portionFillamount5, portionFillamount6;
+    public GameObject portionAd1, portionAd2, portionAd3, portionAd4, portionAd5, portionAd6;
     private bool portion1, portion2, portion3, portion4, portion5, portion6;
 
     public LocalizationContent titleText;
@@ -225,6 +233,9 @@ public class GameManager : MonoBehaviour
     private int portion5Value = 10;
     private int portion6Value = 0;
 
+    float currentTime1, currentTime2, currentTime3, currentTime4, currentTime5, currentTime6;
+    float fillAmount1, fillAmount2, fillAmount3, fillAmount4, fillAmount5, fillAmount6;
+
     private int level = 0;
     private int nextLevel = 0;
     private int maxLevel = 0;
@@ -266,7 +277,7 @@ public class GameManager : MonoBehaviour
     [Space]
     [Title("Bankruptcy")]
     public GameObject bankruptcyView;
-    public Text bankruptcyText;
+    public ReceiveContent bankReceiveContent;
 
     [Space]
     [Title("Login")]
@@ -367,6 +378,7 @@ public class GameManager : MonoBehaviour
         appReview.SetActive(false);
         checkInternet.SetActive(false);
         rankingNoticeView.SetActive(false);
+        portionAdView.SetActive(false);
 
         loginButtonArray[0].SetActive(false);
         loginButtonArray[1].SetActive(false);
@@ -2372,11 +2384,27 @@ public class GameManager : MonoBehaviour
             priceText.plusText += "\n" + MoneyUnitString.ToCurrencyString(sellPrice);
         }
 
-        defDestroyText.localizationName = "DefDestroyPercent";
-        defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
+        if(defDestroy > 0)
+        {
+            defDestroyText.localizationName = "DefDestroyPercent";
+            defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
+        }
+        else
+        {
+            defDestroyText.localizationName = " ";
+            defDestroyText.plusText = "";
+        }
 
-        successX2Text.localizationName = "SuccessX2Percent";
-        successX2Text.plusText = " : " + successX2.ToString("N1") + "%";
+        if(successX2 > 0)
+        {
+            successX2Text.localizationName = "SuccessX2Percent";
+            successX2Text.plusText = " : " + successX2.ToString("N1") + "%";
+        }
+        else
+        {
+            successX2Text.localizationName = " ";
+            successX2Text.plusText = "";
+        }
 
         sellPriceTipText.localizationName = "SellPriceX2Up";
         sellPriceTipText.plusText += "\n" + sellPriceTip.ToString("N1") + "%";
@@ -2405,7 +2433,10 @@ public class GameManager : MonoBehaviour
         highLevelText.ReLoad();
         //sellPriceTipText.ReLoad();
 
-        guideMissionManager.Initialize();
+        if (guideMissionManager.guideMissonView.gameObject.activeInHierarchy)
+        {
+            guideMissionManager.Initialize();
+        }
     }
 
     void CheckFoodState()
@@ -4996,8 +5027,16 @@ public class GameManager : MonoBehaviour
             defTicketObj.SetActive(false);
         }
 
-        defDestroyText.localizationName = "DefDestroyPercent";
-        defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
+        if (defDestroy > 0)
+        {
+            defDestroyText.localizationName = "DefDestroyPercent";
+            defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
+        }
+        else
+        {
+            defDestroyText.localizationName = " ";
+            defDestroyText.plusText = "";
+        }
         defDestroyText.ReLoad();
     }
 
@@ -5056,46 +5095,56 @@ public class GameManager : MonoBehaviour
         {
             if (playerDataBase.Portion1 == 0)
             {
-                portionText1.text = "-";
+                portionAd1.SetActive(true);
+                portionText1.text = "";
             }
             else
             {
+                portionAd1.SetActive(false);
                 portionText1.text = playerDataBase.Portion1.ToString();
             }
 
             if (playerDataBase.Portion2 == 0)
             {
-                portionText2.text = "-";
+                portionAd2.SetActive(true);
+                portionText2.text = "";
             }
             else
             {
+                portionAd2.SetActive(false);
                 portionText2.text = playerDataBase.Portion2.ToString();
             }
 
             if (playerDataBase.Portion3 == 0)
             {
-                portionText3.text = "-";
+                portionAd3.SetActive(true);
+                portionText3.text = "";
             }
             else
             {
+                portionAd3.SetActive(false);
                 portionText3.text = playerDataBase.Portion3.ToString();
             }
 
             if (playerDataBase.Portion4 == 0)
             {
-                portionText4.text = "-";
+                portionAd4.SetActive(true);
+                portionText4.text = "";
             }
             else
             {
+                portionAd4.SetActive(false);
                 portionText4.text = playerDataBase.Portion4.ToString();
             }
 
             if (playerDataBase.Portion5 == 0)
             {
-                portionText5.text = "-";
+                portionAd5.SetActive(true);
+                portionText5.text = "";
             }
             else
             {
+                portionAd5.SetActive(false);
                 portionText5.text = playerDataBase.Portion5.ToString();
             }
 
@@ -5105,10 +5154,14 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                portionAd6.SetActive(false);
                 portionText6.text = playerDataBase.Portion6.ToString();
             }
 
-            guideMissionManager.Initialize();
+            if (guideMissionManager.guideMissonView.gameObject.activeInHierarchy)
+            {
+                guideMissionManager.Initialize();
+            }
         }
     }
 
@@ -5141,12 +5194,14 @@ public class GameManager : MonoBehaviour
                         StartCoroutine(PortionCoroution1());
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
-                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion1);
+                        NotionManager.instance.UseNotion2(NotionType.UsePortionNotion1);
 
                         FirebaseAnalytics.LogEvent("UsePortion1");
                     }
                     else
                     {
+                        OpenPortionAdView(0);
+
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
@@ -5175,12 +5230,14 @@ public class GameManager : MonoBehaviour
                         StartCoroutine(PortionCoroution2());
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
-                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion2);
+                        NotionManager.instance.UseNotion2(NotionType.UsePortionNotion2);
 
                         FirebaseAnalytics.LogEvent("UsePortion2");
                     }
                     else
                     {
+                        OpenPortionAdView(1);
+
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
@@ -5209,12 +5266,14 @@ public class GameManager : MonoBehaviour
                         StartCoroutine(PortionCoroution3());
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
-                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion3);
+                        NotionManager.instance.UseNotion2(NotionType.UsePortionNotion3);
 
                         FirebaseAnalytics.LogEvent("UsePortion3");
                     }
                     else
                     {
+                        OpenPortionAdView(2);
+
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
@@ -5239,12 +5298,14 @@ public class GameManager : MonoBehaviour
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("UseSauce4", playerDataBase.UseSauce4);
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
-                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion4);
+                        NotionManager.instance.UseNotion2(NotionType.UsePortionNotion4);
 
                         FirebaseAnalytics.LogEvent("UsePortion4");
                     }
                     else
                     {
+                        OpenPortionAdView(3);
+
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
@@ -5273,12 +5334,14 @@ public class GameManager : MonoBehaviour
                         StartCoroutine(PortionCoroution5());
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
-                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion5);
+                        NotionManager.instance.UseNotion2(NotionType.UsePortionNotion5);
 
                         FirebaseAnalytics.LogEvent("UsePortion5");
                     }
                     else
                     {
+                        OpenPortionAdView(4);
+
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
@@ -5309,12 +5372,14 @@ public class GameManager : MonoBehaviour
                         StartCoroutine(PortionCoroution6());
 
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
-                        NotionManager.instance.UseNotion(NotionType.UsePortionNotion6);
+                        NotionManager.instance.UseNotion2(NotionType.UsePortionNotion6);
 
                         FirebaseAnalytics.LogEvent("UsePortion6");
                     }
                     else
                     {
+                        OpenPortionAdView(5);
+
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
                     }
@@ -5327,17 +5392,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PortionCoroution1()
     {
-        float currentTime = 0f;
+        currentTime1 = 0f;
 
-        while (currentTime < portion1Time)
+        while (currentTime1 < portion1Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion1Time);
+            fillAmount1 = Mathf.Lerp(1.0f, 0, currentTime1 / portion1Time);
+            fillAmount1 = Mathf.Clamp01(fillAmount1);
 
-            fillAmount = Mathf.Clamp01(fillAmount);
+            portionFillamount1.fillAmount = fillAmount1;
 
-            portionFillamount1.fillAmount = fillAmount;
-
-            currentTime += Time.deltaTime;
+            currentTime1 += Time.deltaTime;
 
             yield return null;
         }
@@ -5351,17 +5415,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PortionCoroution2()
     {
-        float currentTime = 0f;
+        currentTime2 = 0f;
 
-        while (currentTime < portion2Time)
+        while (currentTime2 < portion2Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion2Time);
+            fillAmount2 = Mathf.Lerp(1.0f, 0, currentTime2 / portion2Time);
+            fillAmount2 = Mathf.Clamp01(fillAmount2);
 
-            fillAmount = Mathf.Clamp01(fillAmount);
+            portionFillamount2.fillAmount = fillAmount2;
 
-            portionFillamount2.fillAmount = fillAmount;
-
-            currentTime += Time.deltaTime;
+            currentTime2 += Time.deltaTime;
 
             yield return null;
         }
@@ -5375,17 +5438,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PortionCoroution3()
     {
-        float currentTime = 0f;
+        currentTime3 = 0f;
 
-        while (currentTime < portion3Time)
+        while (currentTime3 < portion3Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion3Time);
+            fillAmount3 = Mathf.Lerp(1.0f, 0, currentTime3 / portion3Time);
+            fillAmount3 = Mathf.Clamp01(fillAmount3);
 
-            fillAmount = Mathf.Clamp01(fillAmount);
+            portionFillamount3.fillAmount = fillAmount3;
 
-            portionFillamount3.fillAmount = fillAmount;
-
-            currentTime += Time.deltaTime;
+            currentTime3 += Time.deltaTime;
 
             yield return null;
         }
@@ -5399,17 +5461,17 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PortionCoroution5()
     {
-        float currentTime = 0f;
+        currentTime5 = 0f;
 
-        while (currentTime < portion5Time)
+        while (currentTime5 < portion5Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion5Time);
+            fillAmount5 = Mathf.Lerp(1.0f, 0, currentTime5 / portion5Time);
 
-            fillAmount = Mathf.Clamp01(fillAmount);
+            fillAmount5 = Mathf.Clamp01(fillAmount5);
 
-            portionFillamount5.fillAmount = fillAmount;
+            portionFillamount5.fillAmount = fillAmount5;
 
-            currentTime += Time.deltaTime;
+            currentTime5 += Time.deltaTime;
 
             yield return null;
         }
@@ -5423,17 +5485,16 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PortionCoroution6()
     {
-        float currentTime = 0f;
+        currentTime6 = 0f;
 
-        while (currentTime < portion6Time)
+        while (currentTime6 < portion6Time)
         {
-            float fillAmount = Mathf.Lerp(1.0f, 0, currentTime / portion6Time);
+            fillAmount6 = Mathf.Lerp(1.0f, 0, currentTime6 / portion6Time);
+            fillAmount6 = Mathf.Clamp01(fillAmount6);
 
-            fillAmount = Mathf.Clamp01(fillAmount);
+            portionFillamount6.fillAmount = fillAmount6;
 
-            portionFillamount6.fillAmount = fillAmount;
-
-            currentTime += Time.deltaTime;
+            currentTime6 += Time.deltaTime;
 
             yield return null;
         }
@@ -5464,8 +5525,16 @@ public class GameManager : MonoBehaviour
 
                 defDestroy += buff2Value;
 
-                defDestroyText.localizationName = "DefDestroyPercent";
-                defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
+                if (defDestroy > 0)
+                {
+                    defDestroyText.localizationName = "DefDestroyPercent";
+                    defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
+                }
+                else
+                {
+                    defDestroyText.localizationName = " ";
+                    defDestroyText.plusText = "";
+                }
                 defDestroyText.ReLoad();
                 break;
             case 2:
@@ -5488,7 +5557,10 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        guideMissionManager.Initialize();
+        if (guideMissionManager.guideMissonView.gameObject.activeInHierarchy)
+        {
+            guideMissionManager.Initialize();
+        }
     }
 
     public void OffBuff(int number)
@@ -5506,8 +5578,16 @@ public class GameManager : MonoBehaviour
 
                 defDestroy -= buff2Value;
 
-                defDestroyText.localizationName = "DefDestroyPercent";
-                defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
+                if (defDestroy > 0)
+                {
+                    defDestroyText.localizationName = "DefDestroyPercent";
+                    defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
+                }
+                else
+                {
+                    defDestroyText.localizationName = " ";
+                    defDestroyText.plusText = "";
+                }
                 defDestroyText.ReLoad();
                 break;
             case 2:
@@ -5525,6 +5605,88 @@ public class GameManager : MonoBehaviour
                 buffAutoUpgrade = false;
                 break;
         }
+    }
+
+    public void OpenPortionAdView(int number)
+    {
+        if(!portionAdView.activeInHierarchy)
+        {
+            portionAdView.SetActive(true);
+
+            portionAd = number;
+
+            switch (number)
+            {
+                case 0:
+                    portionReceiveContent.Initialize(RewardType.Portion1, 5);
+                    break;
+                case 1:
+                    portionReceiveContent.Initialize(RewardType.Portion2, 5);
+                    break;
+                case 2:
+                    portionReceiveContent.Initialize(RewardType.Portion3, 5);
+                    break;
+                case 3:
+                    portionReceiveContent.Initialize(RewardType.Portion4, 5);
+                    break;
+                case 4:
+                    portionReceiveContent.Initialize(RewardType.Portion5, 3);
+                    break;
+            }
+        }
+        else
+        {
+            portionAdView.SetActive(false);
+        }
+    }
+
+
+    public void WatchAd()
+    {
+        switch(portionAd)
+        {
+            case 0:
+                GoogleAdsManager.instance.admobReward_Portion.ShowAd(13);
+                break;
+            case 1:
+                GoogleAdsManager.instance.admobReward_Portion.ShowAd(14);
+                break;
+            case 2:
+                GoogleAdsManager.instance.admobReward_Portion.ShowAd(15);
+                break;
+            case 3:
+                GoogleAdsManager.instance.admobReward_Portion.ShowAd(16);
+                break;
+            case 4:
+                GoogleAdsManager.instance.admobReward_Portion.ShowAd(17);
+                break;
+        }
+    }
+
+    public void SuccessWatchAd(int number)
+    {
+        portionAdView.SetActive(false);
+
+        switch(number)
+        {
+            case 0:
+                PortionManager.instance.GetPortion(0, 5);
+                break;
+            case 1:
+                PortionManager.instance.GetPortion(1, 5);
+                break;
+            case 2:
+                PortionManager.instance.GetPortion(2, 5);
+                break;
+            case 3:
+                PortionManager.instance.GetPortion(3, 5);
+                break;
+            case 4:
+                PortionManager.instance.GetPortion(4, 3);
+                break;
+        }
+
+        CheckPortion();
     }
 
     public void Reincarnation()
@@ -5785,11 +5947,11 @@ public class GameManager : MonoBehaviour
 
             if(GameStateManager.instance.Bankruptcy < 1)
             {
-                bankruptcyText.text = MoneyUnitString.ToCurrencyString(100000);
+                bankReceiveContent.Initialize(RewardType.Gold, 100000);
             }
             else
             {
-                bankruptcyText.text = MoneyUnitString.ToCurrencyString(30000);
+                bankReceiveContent.Initialize(RewardType.Gold, 30000);
             }
         }
     }

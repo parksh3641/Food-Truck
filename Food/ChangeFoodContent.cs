@@ -370,7 +370,7 @@ public class ChangeFoodContent : MonoBehaviour
             level = max - 1;
         }
 
-        levelText.text = "( " + (level + 1).ToString() + " / " + max.ToString() + " )";
+        levelText.text = "Lv. ( " + (level + 1).ToString() + " / " + max.ToString() + " )";
     }
 
     public void Locked()

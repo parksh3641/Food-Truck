@@ -447,6 +447,68 @@ public class IconManager : MonoBehaviour
         {
             GetIcon(number);
         }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number)) //61
+        {
+            GetIcon(number);
+        }
+
+        Debug.Log(number);
     }
 
     void GetIcon(int number)

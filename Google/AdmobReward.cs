@@ -131,6 +131,21 @@ public class AdmobReward : MonoBehaviour
                 case 12:
                     dungeonManager.SuccessWatchAd(3);
                     break;
+                case 13:
+                    GameManager.instance.SuccessWatchAd(0);
+                    break;
+                case 14:
+                    GameManager.instance.SuccessWatchAd(1);
+                    break;
+                case 15:
+                    GameManager.instance.SuccessWatchAd(2);
+                    break;
+                case 16:
+                    GameManager.instance.SuccessWatchAd(3);
+                    break;
+                case 17:
+                    GameManager.instance.SuccessWatchAd(4);
+                    break;
             }
         }
         else
@@ -184,6 +199,21 @@ public class AdmobReward : MonoBehaviour
                             break;
                         case 12:
                             dungeonManager.SuccessWatchAd(3);
+                            break;
+                        case 13:
+                            GameManager.instance.SuccessWatchAd(0);
+                            break;
+                        case 14:
+                            GameManager.instance.SuccessWatchAd(1);
+                            break;
+                        case 15:
+                            GameManager.instance.SuccessWatchAd(2);
+                            break;
+                        case 16:
+                            GameManager.instance.SuccessWatchAd(3);
+                            break;
+                        case 17:
+                            GameManager.instance.SuccessWatchAd(4);
                             break;
                     }
 

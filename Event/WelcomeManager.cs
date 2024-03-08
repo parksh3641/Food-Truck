@@ -109,6 +109,12 @@ public class WelcomeManager : MonoBehaviour
             attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, (100 * (i + 1)));
             attendanceContentArray[i].receiveContent[1].Initialize(RewardType.RepairTicket, 3);
             attendanceContentArray[i].receiveContent[2].Initialize(RewardType.EventTicket, 10);
+
+            if(i == 6)
+            {
+                attendanceContentArray[i].receiveContent[3].gameObject.SetActive(true);
+                attendanceContentArray[i].receiveContent[3].Initialize(RewardType.Icon_Attendance, 1);
+            }
         }
     }
 
@@ -124,6 +130,15 @@ public class WelcomeManager : MonoBehaviour
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (100 * (index + 1)));
         PortionManager.instance.GetRepairTickets(3);
         PortionManager.instance.GetEventTicket(10);
+
+        if (index == 6)
+        {
+            if (!playerDataBase.CheckIcon(IconType.Icon_54))
+            {
+                playerDataBase.SetIcon(IconType.Icon_54, 1);
+                PlayfabManager.instance.GrantItemsToUser((IconType.Icon_54).ToString(), "Icon");
+            }
+        }
 
         playerDataBase.EventTicketCount += 10;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);

@@ -163,11 +163,11 @@ public class OfflineManager : MonoBehaviour
             if (timeSpan.TotalMinutes >= 10)
             {
                 OnSetAlarm();
+
+                OpenCastleView();
+
+                first = true;
             }
-
-            OpenCastleView();
-
-            first = true;
         }
     }
 

@@ -21,6 +21,7 @@ public class ReincarnationManager : MonoBehaviour
     public ButtonScaleAnimation buttonScaleAnim;
 
 
+    private float oldPoint = 0;
     private float point = 0;
     private float plus = 0;
     private int number = 0;
@@ -110,6 +111,8 @@ public class ReincarnationManager : MonoBehaviour
         //    passiveText.text = "";
         //}
 
+        oldPoint = point;
+
         point = point + (point * (0.005f * playerDataBase.Skill11));
         point = point + (point * (0.01f * playerDataBase.Treasure10));
 
@@ -121,8 +124,8 @@ public class ReincarnationManager : MonoBehaviour
 
         if (point > 0 && plus > 0)
         {
-            passiveText.text = MoneyUnitString.ToCurrencyString((int)point).ToString();
-            passiveText.text += " (+" + plus.ToString() + "%) = " + MoneyUnitString.ToCurrencyString((int)point * 2).ToString();
+            passiveText.text = MoneyUnitString.ToCurrencyString((int)oldPoint).ToString();
+            passiveText.text += "  (+" + plus.ToString() + "%) = " + MoneyUnitString.ToCurrencyString((int)point).ToString();
         }
         else
         {

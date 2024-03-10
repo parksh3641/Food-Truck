@@ -229,7 +229,7 @@ public class GameManager : MonoBehaviour
     private int portion1Value = 40;
     private int portion2Value = 20;
     private int portion3Value = 3;
-    private int portion4Value = 40;
+    private int portion4Value = 50;
     private int portion5Value = 10;
     private int portion6Value = 0;
 
@@ -542,15 +542,6 @@ public class GameManager : MonoBehaviour
 
     public void SuccessLogin()
     {
-        if (Application.systemLanguage == SystemLanguage.Korean)
-        {
-            PlayfabManager.instance.SetProfileLanguage("ko");
-        }
-        else
-        {
-            PlayfabManager.instance.SetProfileLanguage("en");
-        }
-
         if (!GameStateManager.instance.Gender && playerDataBase.Gender == 0)
         {
             genderView.SetActive(true);
@@ -688,14 +679,6 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.GetTitleInternalData("Coupon", CheckCoupon);
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Version", int.Parse(Application.version.Replace(".", "")));
-
-#if UNITY_ANDROID
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 0);
-#elif UNITY_IOS
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 1);
-#else
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 2);
-#endif
     }
 
     public void CheckPurchase()
@@ -1239,6 +1222,25 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FirstDelay()
     {
+#if UNITY_ANDROID
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 0);
+#elif UNITY_IOS
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 1);
+#else
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 2);
+#endif
+
+        yield return firstSeconds;
+
+        if (Application.systemLanguage == SystemLanguage.Korean)
+        {
+            PlayfabManager.instance.SetProfileLanguage("ko");
+        }
+        else
+        {
+            PlayfabManager.instance.SetProfileLanguage("en");
+        }
+
         yield return firstSeconds;
 
         PortionManager.instance.GetAllPortion(3);
@@ -2085,6 +2087,8 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.FoodType = type;
 
+        FirebaseAnalytics.LogEvent("ChangeFood_" + type);
+
         OFFSpeicalFood();
 
         if (type == FoodType.Food4)
@@ -2109,6 +2113,8 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.CandyType = type;
 
+        FirebaseAnalytics.LogEvent("ChangeFood_" + type);
+
         OFFSpeicalFood();
 
         upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
@@ -2122,6 +2128,8 @@ public class GameManager : MonoBehaviour
     {
         GameStateManager.instance.JapaneseFoodType = type;
 
+        FirebaseAnalytics.LogEvent("ChangeFood_" + type);
+
         OFFSpeicalFood();
 
         upgradeJapaneseFood = upgradeDataBase.GetUpgradeJapaneseFood(GameStateManager.instance.JapaneseFoodType);
@@ -2134,6 +2142,8 @@ public class GameManager : MonoBehaviour
     public void ChangeDessert(DessertType type)
     {
         GameStateManager.instance.DessertType = type;
+
+        FirebaseAnalytics.LogEvent("ChangeFood_" + type);
 
         OFFSpeicalFood();
 
@@ -3887,7 +3897,7 @@ public class GameManager : MonoBehaviour
                 bombPartice[(int)GameStateManager.instance.IslandType].Play();
             }
 
-            if(maxLevel >= 30 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade)
+            if(maxLevel >= 30 && level >= recoverLevel && !GameStateManager.instance.AutoUpgrade && GameStateManager.instance.Recover)
             {
                 switch (GameStateManager.instance.IslandType)
                 {
@@ -3907,12 +3917,11 @@ public class GameManager : MonoBehaviour
             }
 
             DestoryFood();
-
             CheckFoodState();
             UpgradeInitialize();
 
-
             SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
+
             if (!changeFoodManager.changeFoodView.activeInHierarchy)
             {
                 NotionManager.instance.UseNotion(NotionType.FailUpgrade);
@@ -4139,6 +4148,9 @@ public class GameManager : MonoBehaviour
                         GameStateManager.instance.Food8Level = 0;
                         break;
                 }
+
+                FirebaseAnalytics.LogEvent("Destroy_" + GameStateManager.instance.FoodType);
+
                 break;
             case IslandType.Island2:
                 switch (GameStateManager.instance.CandyType)
@@ -4174,6 +4186,8 @@ public class GameManager : MonoBehaviour
                         GameStateManager.instance.Food8Level = 0;
                         break;
                 }
+
+                FirebaseAnalytics.LogEvent("Destroy_" + GameStateManager.instance.CandyType);
                 break;
             case IslandType.Island3:
                 switch (GameStateManager.instance.JapaneseFoodType)
@@ -4203,6 +4217,8 @@ public class GameManager : MonoBehaviour
                         GameStateManager.instance.JapaneseFood8Level = 0;
                         break;
                 }
+
+                FirebaseAnalytics.LogEvent("Destroy_" + GameStateManager.instance.JapaneseFoodType);
                 break;
             case IslandType.Island4:
                 switch (GameStateManager.instance.DessertType)
@@ -4238,6 +4254,8 @@ public class GameManager : MonoBehaviour
                         GameStateManager.instance.Dessert10Level = 0;
                         break;
                 }
+
+                FirebaseAnalytics.LogEvent("Destroy_" + GameStateManager.instance.DessertType);
                 break;
         }
     }
@@ -4414,6 +4432,8 @@ public class GameManager : MonoBehaviour
 
                             changeFoodAlarmObj.SetActive(true);
                             moveArrow3.SetActive(true);
+
+                            shopManager.OpenLimitPackage();
                         }
 
                         lockManager.UnLocked(3);
@@ -4495,8 +4515,7 @@ public class GameManager : MonoBehaviour
                         break;
                 }
 
-                //Debug.Log(GameStateManager.instance.FoodType + " : Max Level!");
-
+                FirebaseAnalytics.LogEvent("MaxLevel_" + GameStateManager.instance.FoodType);
                 break;
             case IslandType.Island2:
                 switch (GameStateManager.instance.CandyType)
@@ -4623,7 +4642,7 @@ public class GameManager : MonoBehaviour
                         break;
                 }
 
-                Debug.Log(GameStateManager.instance.CandyType + " : Max Level!");
+                FirebaseAnalytics.LogEvent("MaxLevel_" + GameStateManager.instance.CandyType);
 
                 break;
             case IslandType.Island3:
@@ -4723,7 +4742,7 @@ public class GameManager : MonoBehaviour
                         break;
                 }
 
-                Debug.Log(GameStateManager.instance.JapaneseFoodType + " : Max Level!");
+                FirebaseAnalytics.LogEvent("MaxLevel_" + GameStateManager.instance.JapaneseFoodType);
 
                 break;
             case IslandType.Island4:
@@ -4848,7 +4867,7 @@ public class GameManager : MonoBehaviour
                         break;
                 }
 
-                Debug.Log(GameStateManager.instance.DessertType + " : Max Level!");
+                FirebaseAnalytics.LogEvent("MaxLevel_" + GameStateManager.instance.DessertType);
 
                 break;
         }
@@ -5929,30 +5948,20 @@ public class GameManager : MonoBehaviour
 
     void CheckBankruptcy()
     {
-        if(GameStateManager.instance.Food1Level <= 1 && GameStateManager.instance.Food2Level <= 1 && GameStateManager.instance.Food3Level <= 1
-            && GameStateManager.instance.Food4Level <= 1 && GameStateManager.instance.Food5Level <= 1 && GameStateManager.instance.Food6Level <= 1
-            && GameStateManager.instance.Food7Level <= 1 && GameStateManager.instance.Candy1Level <= 1 && GameStateManager.instance.Candy2Level <= 1
-            && GameStateManager.instance.Candy3Level <= 1 && GameStateManager.instance.Candy4Level <= 1 && GameStateManager.instance.Candy5Level <= 1
-            && GameStateManager.instance.Candy6Level <= 1 && GameStateManager.instance.Candy7Level <= 1 && GameStateManager.instance.Candy8Level <= 1
-            && GameStateManager.instance.Candy9Level <= 1 && GameStateManager.instance.JapaneseFood1Level <= 1 && GameStateManager.instance.JapaneseFood2Level <= 1
-            && GameStateManager.instance.JapaneseFood3Level <= 1 && GameStateManager.instance.JapaneseFood4Level <= 1
-            && GameStateManager.instance.JapaneseFood5Level <= 1 && GameStateManager.instance.JapaneseFood6Level <= 1
-            && GameStateManager.instance.JapaneseFood7Level <= 1 && GameStateManager.instance.Dessert1Level <= 1 && GameStateManager.instance.Dessert2Level <= 1
-            && GameStateManager.instance.Dessert3Level <= 1 && GameStateManager.instance.Dessert4Level <= 1 && GameStateManager.instance.Dessert5Level <= 1
-            && GameStateManager.instance.Dessert6Level <= 1 && GameStateManager.instance.Dessert7Level <= 1 && GameStateManager.instance.Dessert8Level <= 1
-            && GameStateManager.instance.Dessert9Level <= 1
-            && playerDataBase.Coin < 10000)
+        if(playerDataBase.Coin < 5000)
         {
             bankruptcyView.SetActive(true);
 
             if(GameStateManager.instance.Bankruptcy < 1)
             {
-                bankReceiveContent.Initialize(RewardType.Gold, 100000);
+                bankReceiveContent.Initialize(RewardType.Gold, 300000);
             }
             else
             {
-                bankReceiveContent.Initialize(RewardType.Gold, 30000);
+                bankReceiveContent.Initialize(RewardType.Gold, 100000);
             }
+
+            FirebaseAnalytics.LogEvent("Bankruptcy");
         }
     }
 
@@ -5962,11 +5971,11 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.Bankruptcy < 1)
         {
-            PlayfabManager.instance.UpdateAddGold(100000);
+            PlayfabManager.instance.UpdateAddGold(300000);
         }
         else
         {
-            PlayfabManager.instance.UpdateAddGold(30000);
+            PlayfabManager.instance.UpdateAddGold(100000);
         }
 
         SoundManager.instance.PlaySFX(GameSfxType.GetMoney);

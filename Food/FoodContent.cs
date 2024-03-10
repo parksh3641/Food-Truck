@@ -11,7 +11,7 @@ public class FoodContent : MonoBehaviour
     private float posY = 0;
     private float posZ = 0;
 
-    private float sizeUp = 1.5f;
+    private float sizeUp = 2f;
 
     public bool speicalFood = false;
 

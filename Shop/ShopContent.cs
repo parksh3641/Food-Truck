@@ -128,7 +128,7 @@ public class ShopContent : MonoBehaviour
                 {
                     rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
                 }
-                effect.SetActive(true);
+                //effect.SetActive(true);
                 break;
             case ItemType.AdReward_Gold:
                 rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(500000) + "</size>";
@@ -187,7 +187,7 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
-                effect.SetActive(true);
+                //effect.SetActive(true);
                 break;
             case ItemType.RemoveAds:
                 lockedObj.SetActive(false);
@@ -256,7 +256,7 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
-                effect.SetActive(true);
+                //effect.SetActive(true);
                 break;
             case ItemType.GoldX2:
                 lockedObj.SetActive(false);
@@ -427,6 +427,8 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = "HoldPiece";
                 infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece + "/5";
                 infoText.ReLoad();
+
+                effect.SetActive(true);
                 break;
             case ItemType.DefDestroyTicketPiece:
                 lockedObj.SetActive(false);
@@ -438,7 +440,6 @@ public class ShopContent : MonoBehaviour
                 infoText.localizationName = "Hold";
                 infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece;
                 infoText.ReLoad();
-
                 break;
             case ItemType.BuffTicketSet1:
                 lockedObj.SetActive(false);

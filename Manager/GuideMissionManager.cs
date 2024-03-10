@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class GuideMissionManager : MonoBehaviour
     public GameObject defTickets;
 
     public GameObject clearObj;
+    public GameObject checkMark;
 
     public LocalizationContent titleText;
     public Text rewardText;
@@ -35,6 +37,7 @@ public class GuideMissionManager : MonoBehaviour
 
         guideMissonView.SetActive(false);
         clearObj.SetActive(false);
+        checkMark.SetActive(false);
 
         rewardText.text = reward.ToString();
     }
@@ -171,6 +174,7 @@ public class GuideMissionManager : MonoBehaviour
     public void CheckMission()
     {
         clearObj.SetActive(false);
+        checkMark.SetActive(false);
         clear = false;
 
         if (now >= need)
@@ -183,6 +187,7 @@ public class GuideMissionManager : MonoBehaviour
     {
         titleText.GetText().color = Color.yellow;
         clearObj.SetActive(true);
+        checkMark.SetActive(true);
         clear = true;
     }
 
@@ -199,6 +204,8 @@ public class GuideMissionManager : MonoBehaviour
 
             SoundManager.instance.PlaySFX(GameSfxType.Success);
             NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+            FirebaseAnalytics.LogEvent("GuideMission_Clear");
 
             Initialize();
         }

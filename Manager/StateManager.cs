@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
     public static StateManager instance;
 
     public FadeInOut fadeInOut;
+    public Text loginText;
 
     public ShopManager shopManager;
     public GameManager gameManager;
@@ -28,6 +30,8 @@ public class StateManager : MonoBehaviour
     public AdvancementManager advancementManager;
     public IconManager iconManager;
 
+    WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+
     private void Awake()
     {
         instance = this;
@@ -39,6 +43,8 @@ public class StateManager : MonoBehaviour
         {
             fadeInOut.canvasGroup.gameObject.SetActive(true);
             fadeInOut.canvasGroup.alpha = 1;
+
+            StartCoroutine(LoginCoroution());
         }
         else
         {
@@ -50,12 +56,38 @@ public class StateManager : MonoBehaviour
             {
                 fadeInOut.canvasGroup.gameObject.SetActive(true);
                 fadeInOut.canvasGroup.alpha = 1;
+
+                StartCoroutine(LoginCoroution());
             }
         }
     }
 
+    IEnumerator LoginCoroution()
+    {
+        loginText.text = LocalizationManager.instance.GetString("Login...");
+
+        yield return waitForSeconds;
+
+        loginText.text = LocalizationManager.instance.GetString("Login...") + ".";
+
+        yield return waitForSeconds;
+
+        loginText.text = LocalizationManager.instance.GetString("Login...") + "..";
+
+        yield return waitForSeconds;
+
+        loginText.text = LocalizationManager.instance.GetString("Login...") + "...";
+
+        yield return waitForSeconds;
+
+        StartCoroutine(LoginCoroution());
+    }
+
     public void Initialize()
     {
+        StopAllCoroutines();
+        loginText.text = "";
+
         fadeInOut.FadeIn();
         ResetManager.instance.Initialize();
         newsManager.Initialize();

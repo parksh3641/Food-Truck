@@ -617,3 +617,8 @@ public enum GifticonType
     Gifticon_3,
     Gifticon_4,
 }
+
+public enum BookType
+{
+
+}

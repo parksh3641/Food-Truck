@@ -15,9 +15,9 @@ public class IconManager : MonoBehaviour
 {
     IconType iconType = IconType.Icon_1;
 
-    public GameObject alarm;
-
     public GameObject iconView;
+
+    public GameObject alarm;
 
     public Text titleText;
 

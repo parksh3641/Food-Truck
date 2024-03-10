@@ -37,6 +37,7 @@ public class GameStateManager : MonoBehaviour
         public bool vibration = true;
         public bool effect = true;
         public bool backgroundEffect = true;
+        public bool recover = true;
 
         public bool appReview = false;
         public bool rankingNotice = false;
@@ -441,6 +442,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.backgroundEffect = value;
+            SaveFile();
+        }
+    }
+
+    public bool Recover
+    {
+        get
+        {
+            return gameSettings.recover;
+        }
+        set
+        {
+            gameSettings.recover = value;
             SaveFile();
         }
     }

@@ -9,6 +9,8 @@ public class WarningManager : MonoBehaviour
     public GameObject bugReportWarning;
     public GameObject updateWarning;
     public GameObject accountStopWarning;
+    public Text accountStopNickname;
+
     public GameObject friendsWarning;
     public GameObject reviewWarning;
 
@@ -112,6 +114,8 @@ public class WarningManager : MonoBehaviour
         if (!accountStopWarning.activeInHierarchy)
         {
             accountStopWarning.SetActive(true);
+
+            accountStopNickname.text = LocalizationManager.instance.GetString("NickName") + " : " + GameStateManager.instance.NickName;
 
 #if !UNITY_EDITOR
             playerDataBase.UpgradeCount = 0;

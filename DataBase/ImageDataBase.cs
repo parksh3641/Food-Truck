@@ -31,6 +31,8 @@ public class ImageDataBase : ScriptableObject
 
     public Sprite[] gifticonArray;
 
+    public Sprite[] bookArray;
+
     public Sprite[] GetFoodChangeArray()
     {
         return foodChangeArray;
@@ -99,5 +101,10 @@ public class ImageDataBase : ScriptableObject
     public Sprite GetGifticonArray(GifticonType type)
     {
         return gifticonArray[(int)type];
+    }
+
+    public Sprite GetBookType(BookType type)
+    {
+        return bookArray[(int)type];
     }
 }

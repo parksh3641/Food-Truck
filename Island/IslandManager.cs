@@ -115,6 +115,8 @@ public class IslandManager : MonoBehaviour
     {
         if (GameStateManager.instance.IslandType == type) return;
 
+        FirebaseAnalytics.LogEvent("ChangeIsland_" + type.ToString());
+
         changeIslandView.SetActive(false);
 
         gameManager.ChangeIsland(type);

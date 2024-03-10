@@ -38,6 +38,11 @@ public class OptionManager : MonoBehaviour
     public Image backgroundEffectButtonImg;
     public LocalizationContent backgroundEffectText;
 
+    [Space]
+    [Title("Recover")]
+    public Image recoverButtonImg;
+    public LocalizationContent recoverText;
+
     public GameObject googleLink;
     public GameObject appleLink;
 
@@ -65,6 +70,7 @@ public class OptionManager : MonoBehaviour
             OnVibration();
             OnEffect();
             OnBackgroundEffect();
+            OnRecover();
 
             googleLink.SetActive(false);
             appleLink.SetActive(false);
@@ -183,6 +189,20 @@ public class OptionManager : MonoBehaviour
         OnBackgroundEffect();
     }
 
+    public void RecoverOnOff()
+    {
+        if (GameStateManager.instance.Recover)
+        {
+            GameStateManager.instance.Recover = false;
+        }
+        else
+        {
+            GameStateManager.instance.Recover = true;
+        }
+
+        OnRecover();
+    }
+
     public void OnBGM()
     {
         if (GameStateManager.instance.Music)
@@ -282,6 +302,24 @@ public class OptionManager : MonoBehaviour
             backgroundEffectButtonImg.sprite = buttonImgArray[1];
 
             GameManager.instance.BackgroundEffect(false);
+        }
+    }
+
+    public void OnRecover()
+    {
+        if (GameStateManager.instance.Recover)
+        {
+            recoverText.localizationName = "ON";
+            recoverText.ReLoad();
+
+            recoverButtonImg.sprite = buttonImgArray[0];
+        }
+        else
+        {
+            recoverText.localizationName = "OFF";
+            recoverText.ReLoad();
+
+            recoverButtonImg.sprite = buttonImgArray[1];
         }
     }
 

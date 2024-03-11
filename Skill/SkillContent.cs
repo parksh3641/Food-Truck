@@ -774,7 +774,7 @@ public class SkillContent : MonoBehaviour
                 break;
         }
 
-        FirebaseAnalytics.LogEvent(skillType.ToString());
+        FirebaseAnalytics.LogEvent("LevelUp_" + skillType.ToString());
 
         SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
         NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);

@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
 
             infoText.ReLoad();
 
-            FirebaseAnalytics.LogEvent("OpenProfile");
+            FirebaseAnalytics.LogEvent("Open_Profile");
         }
         else
         {
@@ -100,7 +100,7 @@ public class LevelManager : MonoBehaviour
 
             GameManager.instance.CheckPercent();
 
-            FirebaseAnalytics.LogEvent("LevelUp");
+            FirebaseAnalytics.LogEvent("LevelUp_Profile");
 
             Debug.LogError("·¹º§ ¾÷");
         }

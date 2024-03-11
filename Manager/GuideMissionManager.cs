@@ -205,7 +205,7 @@ public class GuideMissionManager : MonoBehaviour
             SoundManager.instance.PlaySFX(GameSfxType.Success);
             NotionManager.instance.UseNotion(NotionType.SuccessReward);
 
-            FirebaseAnalytics.LogEvent("GuideMission_Clear");
+            FirebaseAnalytics.LogEvent("Clear_GuideMission");
 
             Initialize();
         }

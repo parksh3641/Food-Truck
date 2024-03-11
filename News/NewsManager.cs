@@ -104,7 +104,7 @@ public class NewsManager : MonoBehaviour
 
                 alarm.SetActive(false);
 
-                FirebaseAnalytics.LogEvent("OpenNotice");
+                FirebaseAnalytics.LogEvent("Open_Notice");
                 break;
             case 1:
                 patchNoteView.SetActive(true);
@@ -114,7 +114,7 @@ public class NewsManager : MonoBehaviour
                 isDelay = true;
                 PlayfabManager.instance.ReadTitleNews(ReadTitleNews);
 
-                FirebaseAnalytics.LogEvent("OpenPatchNote");
+                FirebaseAnalytics.LogEvent("Open_PatchNote");
                 break;
         }
     }
@@ -181,7 +181,7 @@ public class NewsManager : MonoBehaviour
     {
         Application.OpenURL("https://discord.gg/yEV33a8ajy");
 
-        FirebaseAnalytics.LogEvent("OpenDiscord");
+        FirebaseAnalytics.LogEvent("Open_Discord");
     }
 
     public void HideCheck()

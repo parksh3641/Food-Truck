@@ -38,7 +38,7 @@ public class NoticeManager : MonoBehaviour
 
             alarm.SetActive(false);
 
-            FirebaseAnalytics.LogEvent("OpenNotice");
+            FirebaseAnalytics.LogEvent("Open_Notice");
         }
         else
         {

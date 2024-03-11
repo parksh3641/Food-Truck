@@ -56,7 +56,7 @@ public class PlayTimeManager : MonoBehaviour
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("OpenPlayTime");
+            FirebaseAnalytics.LogEvent("Open_Event_PlayTime");
         }
         else
         {
@@ -134,13 +134,13 @@ public class PlayTimeManager : MonoBehaviour
 
         CheckPlayTime();
 
-        FirebaseAnalytics.LogEvent("PlayTimeClear");
+        FirebaseAnalytics.LogEvent("Clear_Event_PlayTime" + index);
 
         if (playerDataBase.PlayTimeCount > 5)
         {
             OffAlarm();
 
-            FirebaseAnalytics.LogEvent("PlayTimeAllClear");
+            FirebaseAnalytics.LogEvent("AllClear_Event_PlayTime");
         }
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);

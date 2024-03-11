@@ -14,6 +14,10 @@ public class AdvancementManager : MonoBehaviour
     public Text nowAdvencementText; //Áö±Ý ÄªÈ£
     public Text nextAdvencementText; //´ÙÀ½ ÄªÈ£
 
+    public Image nowClassImg;
+    public Image nextClassImg;
+    public Image mainScreenImg;
+
     public Text needText;
     public Text needText2;
     public Text needText3;
@@ -48,11 +52,15 @@ public class AdvancementManager : MonoBehaviour
     private bool isActive = false;
     private bool isDelay = false;
 
+    Sprite sp;
+
     PlayerDataBase playerDataBase;
+    ImageDataBase imageDataBase;
 
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
+        if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
 
         lockedObj.SetActive(false);
     }
@@ -61,8 +69,10 @@ public class AdvancementManager : MonoBehaviour
     {
         chefType = ChefType.Cook1_1 + playerDataBase.Advancement;
 
+        mainScreenImg.sprite = GetAdvencementImg(chefType);
+
         mainScreenText.localizationName = chefType.ToString().Substring(0, 5);
-        mainScreenText.plusText = " " + chefType.ToString().Substring(6, 1);
+        mainScreenText.plusText = "  <color=#FFFF00>" + chefType.ToString().Substring(6, 1) + "</color>";
         mainScreenText.ReLoad();
     }
 
@@ -71,25 +81,28 @@ public class AdvancementManager : MonoBehaviour
         chefType = ChefType.Cook1_1 + playerDataBase.Advancement;
         nextChefType = ChefType.Cook1_1 + playerDataBase.Advancement + 1;
 
-        if(chefType.ToString().Length == 7)
+        nowClassImg.sprite = GetAdvencementImg(chefType);
+        nextClassImg.sprite = GetAdvencementImg(nextChefType);
+
+        if (chefType.ToString().Length == 7)
         {
-            nowAdvencementText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 5)) + " <color=#FFC800>" +
+            nowAdvencementText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 5)) + "  <color=#FFFF00>" +
     chefType.ToString().Substring(6, 1) + "</color>";
         }
         else
         {
-            nowAdvencementText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 6)) + " <color=#FFC800>" +
+            nowAdvencementText.text = LocalizationManager.instance.GetString(chefType.ToString().Substring(0, 6)) + "  <color=#FFFF00>" +
     chefType.ToString().Substring(7, 1) + "</color>";
         }
 
         if(nextChefType.ToString().Length == 7)
         {
-            nextAdvencementText.text = LocalizationManager.instance.GetString(nextChefType.ToString().Substring(0, 5)) + " <color=#FFC800>" +
+            nextAdvencementText.text = LocalizationManager.instance.GetString(nextChefType.ToString().Substring(0, 5)) + "  <color=#FFFF00>" +
     nextChefType.ToString().Substring(6, 1) + "</color>";
         }
         else
         {
-            nextAdvencementText.text = LocalizationManager.instance.GetString(nextChefType.ToString().Substring(0, 6)) + " <color=#FFC800>" +
+            nextAdvencementText.text = LocalizationManager.instance.GetString(nextChefType.ToString().Substring(0, 6)) + "  <color=#FFFF00>" +
     nextChefType.ToString().Substring(7, 1) + "</color>";
         }
 
@@ -187,7 +200,7 @@ public class AdvancementManager : MonoBehaviour
 
         GameManager.instance.CheckPercent();
 
-        FirebaseAnalytics.LogEvent("AdvencementLevelUp");
+        FirebaseAnalytics.LogEvent("LevelUp_Advencement");
     }
 
     void Delay()
@@ -195,4 +208,192 @@ public class AdvancementManager : MonoBehaviour
         isDelay = false;
     }
 
+    public Sprite GetAdvencementImg(ChefType chefType)
+    {
+        switch (chefType)
+        {
+            case ChefType.Cook1_1:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook1_2:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook1_3:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook1_4:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook2_1:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook2_2:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook2_3:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook2_4:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook3_1:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook3_2:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook3_3:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook3_4:
+                sp = imageDataBase.GetAdvancementArray(0);
+                break;
+            case ChefType.Cook4_1:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook4_2:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook4_3:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook4_4:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook5_1:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook5_2:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook5_3:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook5_4:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook6_1:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook6_2:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook6_3:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook6_4:
+                sp = imageDataBase.GetAdvancementArray(1);
+                break;
+            case ChefType.Cook7_1:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook7_2:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook7_3:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook7_4:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook8_1:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook8_2:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook8_3:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook8_4:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook9_1:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook9_2:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook9_3:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook9_4:
+                sp = imageDataBase.GetAdvancementArray(2);
+                break;
+            case ChefType.Cook10_1:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook10_2:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook10_3:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook10_4:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook11_1:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook11_2:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook11_3:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook11_4:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook12_1:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook12_2:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook12_3:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook12_4:
+                sp = imageDataBase.GetAdvancementArray(3);
+                break;
+            case ChefType.Cook13_1:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook13_2:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook13_3:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook13_4:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook14_1:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook14_2:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook14_3:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook14_4:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook15_1:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook15_2:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook15_3:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook15_4:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+        }
+
+        return sp;
+    }
 }

@@ -486,6 +486,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        GameStateManager.instance.Pause = false;
+        GameStateManager.instance.DestroyCount = 0;
+
+        if(GameStateManager.instance.Region.Length == 0)
+        {
+            if (Application.systemLanguage == SystemLanguage.Korean)
+            {
+                GameStateManager.instance.Region = "ko";
+            }
+            else
+            {
+                GameStateManager.instance.Region = "en";
+            }
+        }
+
         if (GameStateManager.instance.AutoLogin)
         {
             if (!NetworkConnect.instance.CheckConnectInternet())
@@ -1235,10 +1250,14 @@ public class GameManager : MonoBehaviour
         if (Application.systemLanguage == SystemLanguage.Korean)
         {
             PlayfabManager.instance.SetProfileLanguage("ko");
+
+            GameStateManager.instance.Region = "ko";
         }
         else
         {
             PlayfabManager.instance.SetProfileLanguage("en");
+
+            GameStateManager.instance.Region = "en";
         }
 
         yield return firstSeconds;
@@ -1738,7 +1757,6 @@ public class GameManager : MonoBehaviour
             {
                 buffAutoUpgrade = true;
                 StartCoroutine(BuffAutoUpgradeCoroution());
-
             }
         }
 
@@ -2001,6 +2019,8 @@ public class GameManager : MonoBehaviour
         {
             homeButton.SetActive(false);
             moveArrow1.SetActive(true);
+
+            FirebaseAnalytics.LogEvent("New_" + DateTime.Now.ToString("yyyyMMdd"));
 
             playerDataBase.FirstReward = 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
@@ -3457,10 +3477,24 @@ public class GameManager : MonoBehaviour
         switch(number)
         {
             case 0:
-                FirebaseAnalytics.LogEvent("Upgrade_Screen");
+                if(playerDataBase.AttendanceCount == 1)
+                {
+                    FirebaseAnalytics.LogEvent(GameStateManager.instance.NickName + " : Upgrade_Screen");
+                }
+                else
+                {
+                    FirebaseAnalytics.LogEvent("Upgrade_Screen");
+                }
                 break;
             case 1:
-                FirebaseAnalytics.LogEvent("Upgrade_Button");
+                if (playerDataBase.AttendanceCount == 1)
+                {
+                    FirebaseAnalytics.LogEvent(GameStateManager.instance.NickName + " : Upgrade_Button");
+                }
+                else
+                {
+                    FirebaseAnalytics.LogEvent("Upgrade_Button");
+                }
                 break;
         }    
 
@@ -3492,6 +3526,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     level += 1;
+
                     if (!changeFoodManager.changeFoodView.activeInHierarchy)
                     {
                         NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
@@ -3501,6 +3536,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 level += 1;
+
                 if (!changeFoodManager.changeFoodView.activeInHierarchy)
                 {
                     NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
@@ -3513,169 +3549,13 @@ public class GameManager : MonoBehaviour
             if (!isExp)
             {
                 playerDataBase.Exp += 20 + expUp;
+                levelManager.Initialize();
             }
-
-            switch (GameStateManager.instance.IslandType)
-            {
-                case IslandType.Island1:
-                    switch (GameStateManager.instance.FoodType)
-                    {
-                        case FoodType.Food1:
-                            GameStateManager.instance.Food1Level = level;
-                            break;
-                        case FoodType.Food2:
-                            GameStateManager.instance.Food2Level = level;
-                            break;
-                        case FoodType.Food3:
-                            GameStateManager.instance.Food3Level = level;
-                            break;
-                        case FoodType.Food4:
-                            GameStateManager.instance.Food4Level = level;
-                            break;
-                        case FoodType.Food5:
-                            GameStateManager.instance.Food5Level = level;
-                            break;
-                        case FoodType.Food6:
-                            GameStateManager.instance.Food6Level = level;
-                            break;
-                        case FoodType.Food7:
-                            GameStateManager.instance.Food7Level = level;
-                            break;
-                        case FoodType.Ribs:
-                            GameStateManager.instance.Food8Level = level;
-                            break;
-                    }
-                    break;
-                case IslandType.Island2:
-                    switch (GameStateManager.instance.CandyType)
-                    {
-                        case CandyType.Candy1:
-                            GameStateManager.instance.Candy1Level = level;
-                            break;
-                        case CandyType.Candy2:
-                            GameStateManager.instance.Candy2Level = level;
-                            break;
-                        case CandyType.Candy3:
-                            GameStateManager.instance.Candy3Level = level;
-                            break;
-                        case CandyType.Candy4:
-                            GameStateManager.instance.Candy4Level = level;
-                            break;
-                        case CandyType.Candy5:
-                            GameStateManager.instance.Candy5Level = level;
-                            break;
-                        case CandyType.Candy6:
-                            GameStateManager.instance.Candy6Level = level;
-                            break;
-                        case CandyType.Candy7:
-                            GameStateManager.instance.Candy7Level = level;
-                            break;
-                        case CandyType.Candy8:
-                            GameStateManager.instance.Candy8Level = level;
-                            break;
-                        case CandyType.Candy9:
-                            GameStateManager.instance.Candy9Level = level;
-                            break;
-                        case CandyType.Chocolate:
-                            GameStateManager.instance.Candy10Level = level;
-                            break;
-                    }
-                    break;
-                case IslandType.Island3:
-                    switch (GameStateManager.instance.JapaneseFoodType)
-                    {
-                        case JapaneseFoodType.JapaneseFood1:
-                            GameStateManager.instance.JapaneseFood1Level = level;
-                            break;
-                        case JapaneseFoodType.JapaneseFood2:
-                            GameStateManager.instance.JapaneseFood2Level = level;
-                            break;
-                        case JapaneseFoodType.JapaneseFood3:
-                            GameStateManager.instance.JapaneseFood3Level = level;
-                            break;
-                        case JapaneseFoodType.JapaneseFood4:
-                            GameStateManager.instance.JapaneseFood4Level = level;
-                            break;
-                        case JapaneseFoodType.JapaneseFood5:
-                            GameStateManager.instance.JapaneseFood5Level = level;
-                            break;
-                        case JapaneseFoodType.JapaneseFood6:
-                            GameStateManager.instance.JapaneseFood6Level = level;
-                            break;
-                        case JapaneseFoodType.JapaneseFood7:
-                            GameStateManager.instance.JapaneseFood7Level = level;
-                            break;
-                        case JapaneseFoodType.Ramen:
-                            GameStateManager.instance.JapaneseFood8Level = level;
-                            break;
-                    }
-                    break;
-                case IslandType.Island4:
-                    switch (GameStateManager.instance.DessertType)
-                    {
-                        case DessertType.Dessert1:
-                            GameStateManager.instance.Dessert1Level = level;
-                            break;
-                        case DessertType.Dessert2:
-                            GameStateManager.instance.Dessert2Level = level;
-                            break;
-                        case DessertType.Dessert3:
-                            GameStateManager.instance.Dessert3Level = level;
-                            break;
-                        case DessertType.Dessert4:
-                            GameStateManager.instance.Dessert4Level = level;
-                            break;
-                        case DessertType.Dessert5:
-                            GameStateManager.instance.Dessert5Level = level;
-                            break;
-                        case DessertType.Dessert6:
-                            GameStateManager.instance.Dessert6Level = level;
-                            break;
-                        case DessertType.Dessert7:
-                            GameStateManager.instance.Dessert7Level = level;
-                            break;
-                        case DessertType.Dessert8:
-                            GameStateManager.instance.Dessert8Level = level;
-                            break;
-                        case DessertType.Dessert9:
-                            GameStateManager.instance.Dessert9Level = level;
-                            break;
-                        case DessertType.FruitSkewers:
-                            GameStateManager.instance.Dessert10Level = level;
-                            break;
-                    }
-                    break;
-            }
-
-            levelManager.Initialize();
-
-            CheckFoodLevelUp();
-            UpgradeInitialize();
 
             if (level + 1 >= maxLevel)
             {
-                MaxLevelUpgradeSuccess();
-
-                SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
-                if (!changeFoodManager.changeFoodView.activeInHierarchy)
-                {
-                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
-                }
-
-                if (GameStateManager.instance.Effect)
-                {
-                    level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
-                    level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
-                    level1UpParticle[(int)GameStateManager.instance.IslandType].Play();
-
-                    level5UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
-                    level5UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
-                    level5UpParticle[(int)GameStateManager.instance.IslandType].Play();
-
-                    levelMaxParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
-                    levelMaxParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
-                    levelMaxParticle[(int)GameStateManager.instance.IslandType].Play();
-                }
+                level -= 1;
+                StartCoroutine(MaxLevelUpgradeSuccessCoroution());
             }
             else
             {
@@ -3708,6 +3588,10 @@ public class GameManager : MonoBehaviour
 
                     SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
                 }
+
+                SaveFoodLevel(level);
+                CheckFoodLevelUp();
+                UpgradeInitialize();
             }
         }
         else
@@ -3920,6 +3804,18 @@ public class GameManager : MonoBehaviour
             CheckFoodState();
             UpgradeInitialize();
 
+            if(!GameStateManager.instance.FirstFail)
+            {
+                tutorialManager.Next2();
+            }
+
+            GameStateManager.instance.DestroyCount += 1;
+
+            if(GameStateManager.instance.DestroyCount >= 10)
+            {
+                tutorialManager.Next3();
+            }
+
             SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
 
             if (!changeFoodManager.changeFoodView.activeInHierarchy)
@@ -3940,6 +3836,190 @@ public class GameManager : MonoBehaviour
 
         isUpgradeDelay = true;
         Invoke("WaitUpgradeDelay", delay);
+    }
+
+    IEnumerator MaxLevelUpgradeSuccessCoroution()
+    {
+        inGameUI.SetActive(false);
+
+        level += 1;
+        SaveFoodLevel(level);
+
+        cameraController.GoToC();
+
+        yield return buffUpgradeSecond;
+
+        CheckFoodLevelUp();
+        UpgradeInitialize();
+
+        MaxLevelUpgradeSuccess();
+
+        SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
+
+        if (!changeFoodManager.changeFoodView.activeInHierarchy)
+        {
+            NotionManager.instance.UseNotion2(NotionType.MaxLevel);
+        }
+
+        if (GameStateManager.instance.Effect)
+        {
+            level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+            level1UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+            level1UpParticle[(int)GameStateManager.instance.IslandType].Play();
+
+            level5UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+            level5UpParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+            level5UpParticle[(int)GameStateManager.instance.IslandType].Play();
+
+            levelMaxParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
+            levelMaxParticle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(true);
+            levelMaxParticle[(int)GameStateManager.instance.IslandType].Play();
+        }
+
+        yield return buffUpgradeSecond;
+
+        cameraController.GoToB();
+
+        yield return buffUpgradeSecond;
+
+        inGameUI.SetActive(true);
+
+        CheckAuto();
+    }
+
+    void SaveFoodLevel(int level)
+    {
+        switch (GameStateManager.instance.IslandType)
+        {
+            case IslandType.Island1:
+                switch (GameStateManager.instance.FoodType)
+                {
+                    case FoodType.Food1:
+                        GameStateManager.instance.Food1Level = level;
+                        break;
+                    case FoodType.Food2:
+                        GameStateManager.instance.Food2Level = level;
+                        break;
+                    case FoodType.Food3:
+                        GameStateManager.instance.Food3Level = level;
+                        break;
+                    case FoodType.Food4:
+                        GameStateManager.instance.Food4Level = level;
+                        break;
+                    case FoodType.Food5:
+                        GameStateManager.instance.Food5Level = level;
+                        break;
+                    case FoodType.Food6:
+                        GameStateManager.instance.Food6Level = level;
+                        break;
+                    case FoodType.Food7:
+                        GameStateManager.instance.Food7Level = level;
+                        break;
+                    case FoodType.Ribs:
+                        GameStateManager.instance.Food8Level = level;
+                        break;
+                }
+                break;
+            case IslandType.Island2:
+                switch (GameStateManager.instance.CandyType)
+                {
+                    case CandyType.Candy1:
+                        GameStateManager.instance.Candy1Level = level;
+                        break;
+                    case CandyType.Candy2:
+                        GameStateManager.instance.Candy2Level = level;
+                        break;
+                    case CandyType.Candy3:
+                        GameStateManager.instance.Candy3Level = level;
+                        break;
+                    case CandyType.Candy4:
+                        GameStateManager.instance.Candy4Level = level;
+                        break;
+                    case CandyType.Candy5:
+                        GameStateManager.instance.Candy5Level = level;
+                        break;
+                    case CandyType.Candy6:
+                        GameStateManager.instance.Candy6Level = level;
+                        break;
+                    case CandyType.Candy7:
+                        GameStateManager.instance.Candy7Level = level;
+                        break;
+                    case CandyType.Candy8:
+                        GameStateManager.instance.Candy8Level = level;
+                        break;
+                    case CandyType.Candy9:
+                        GameStateManager.instance.Candy9Level = level;
+                        break;
+                    case CandyType.Chocolate:
+                        GameStateManager.instance.Candy10Level = level;
+                        break;
+                }
+                break;
+            case IslandType.Island3:
+                switch (GameStateManager.instance.JapaneseFoodType)
+                {
+                    case JapaneseFoodType.JapaneseFood1:
+                        GameStateManager.instance.JapaneseFood1Level = level;
+                        break;
+                    case JapaneseFoodType.JapaneseFood2:
+                        GameStateManager.instance.JapaneseFood2Level = level;
+                        break;
+                    case JapaneseFoodType.JapaneseFood3:
+                        GameStateManager.instance.JapaneseFood3Level = level;
+                        break;
+                    case JapaneseFoodType.JapaneseFood4:
+                        GameStateManager.instance.JapaneseFood4Level = level;
+                        break;
+                    case JapaneseFoodType.JapaneseFood5:
+                        GameStateManager.instance.JapaneseFood5Level = level;
+                        break;
+                    case JapaneseFoodType.JapaneseFood6:
+                        GameStateManager.instance.JapaneseFood6Level = level;
+                        break;
+                    case JapaneseFoodType.JapaneseFood7:
+                        GameStateManager.instance.JapaneseFood7Level = level;
+                        break;
+                    case JapaneseFoodType.Ramen:
+                        GameStateManager.instance.JapaneseFood8Level = level;
+                        break;
+                }
+                break;
+            case IslandType.Island4:
+                switch (GameStateManager.instance.DessertType)
+                {
+                    case DessertType.Dessert1:
+                        GameStateManager.instance.Dessert1Level = level;
+                        break;
+                    case DessertType.Dessert2:
+                        GameStateManager.instance.Dessert2Level = level;
+                        break;
+                    case DessertType.Dessert3:
+                        GameStateManager.instance.Dessert3Level = level;
+                        break;
+                    case DessertType.Dessert4:
+                        GameStateManager.instance.Dessert4Level = level;
+                        break;
+                    case DessertType.Dessert5:
+                        GameStateManager.instance.Dessert5Level = level;
+                        break;
+                    case DessertType.Dessert6:
+                        GameStateManager.instance.Dessert6Level = level;
+                        break;
+                    case DessertType.Dessert7:
+                        GameStateManager.instance.Dessert7Level = level;
+                        break;
+                    case DessertType.Dessert8:
+                        GameStateManager.instance.Dessert8Level = level;
+                        break;
+                    case DessertType.Dessert9:
+                        GameStateManager.instance.Dessert9Level = level;
+                        break;
+                    case DessertType.FruitSkewers:
+                        GameStateManager.instance.Dessert10Level = level;
+                        break;
+                }
+                break;
+        }
     }
 
     public void RecoverFood(FoodType type)
@@ -4371,8 +4451,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void MaxLevelUpgradeSuccess() //????
+    void MaxLevelUpgradeSuccess()
     {
+        GameStateManager.instance.DestroyCount = 0;
+
+        if (!GameStateManager.instance.FirstSuccess)
+        {
+            tutorialManager.Next1();
+        }
+
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
@@ -4387,17 +4474,13 @@ public class GameManager : MonoBehaviour
                             playerDataBase.NextFoodNumber = 1;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
+                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food2);
                             changeFoodAlarmObj.SetActive(true);
 
                             if(playerDataBase.InGameTutorial == 1)
                             {
                                 moveArrow3.SetActive(true);
                             }
-
-                            //if (playerDataBase.HamburgerMaxValue == 1)
-                            //{
-                            //    tutorialManager.Next1();
-                            //}
                         }
 
                         lockManager.UnLocked(1);
@@ -4412,6 +4495,7 @@ public class GameManager : MonoBehaviour
                             playerDataBase.NextFoodNumber = 2;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
+                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food3);
                             changeFoodAlarmObj.SetActive(true);
                             moveArrow3.SetActive(true);
 
@@ -4430,6 +4514,7 @@ public class GameManager : MonoBehaviour
                             playerDataBase.NextFoodNumber = 3;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
+                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food4);
                             changeFoodAlarmObj.SetActive(true);
                             moveArrow3.SetActive(true);
 
@@ -4448,6 +4533,7 @@ public class GameManager : MonoBehaviour
                             playerDataBase.NextFoodNumber = 4;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
+                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food5);
                             changeFoodAlarmObj.SetActive(true);
                             moveArrow3.SetActive(true);
 
@@ -4469,6 +4555,7 @@ public class GameManager : MonoBehaviour
                             playerDataBase.NextFoodNumber = 5;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
+                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food6);
                             changeFoodAlarmObj.SetActive(true);
                             moveArrow3.SetActive(true);
                         }
@@ -4485,6 +4572,7 @@ public class GameManager : MonoBehaviour
                             playerDataBase.NextFoodNumber = 6;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
 
+                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food7);
                             changeFoodAlarmObj.SetActive(true);
                             moveArrow3.SetActive(true);
                         }
@@ -4500,11 +4588,6 @@ public class GameManager : MonoBehaviour
                         {
                             playerDataBase.IslandNumber = 1;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
-
-                            //if (playerDataBase.Candy1MaxValue == 0)
-                            //{
-                            //    tutorialManager.Next3();
-                            //}
                         }
 
                         lockManager.UnLocked(7);
@@ -4872,7 +4955,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        FirebaseAnalytics.LogEvent("MaxLevel");
+        //FirebaseAnalytics.LogEvent("MaxLevel");
 
         //questManager.CheckGoal();
         changeFoodManager.CheckProficiency();
@@ -4937,7 +5020,7 @@ public class GameManager : MonoBehaviour
 
         if(speicalFood)
         {
-            Debug.LogError("Sell Rare Food");
+            Debug.LogError("Sell_RareFood");
 
             PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 10 + (level / 5)));
         }
@@ -4980,6 +5063,8 @@ public class GameManager : MonoBehaviour
 
                 Debug.LogError("Rare Food is Open !");
 
+                FirebaseAnalytics.LogEvent("Open_RareFood");
+
                 SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
 
                 if (!changeFoodManager.changeFoodView.activeInHierarchy)
@@ -5002,13 +5087,13 @@ public class GameManager : MonoBehaviour
         myMoneyPlusText.color = Color.green;
         myMoneyPlusText.text = "+" + MoneyUnitString.ToCurrencyString(sellPrice);
 
+        FirebaseAnalytics.LogEvent("SellFood : Lv." + level);
+
         DestoryFood();
         CheckFoodState();
         UpgradeInitialize();
 
         SoundManager.instance.PlaySFX(GameSfxType.Sell);
-
-        FirebaseAnalytics.LogEvent("SellFood");
 
         isUpgradeDelay = true;
         Invoke("WaitSellDelay", delay);
@@ -5790,7 +5875,7 @@ public class GameManager : MonoBehaviour
         Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
 #endif
 
-        FirebaseAnalytics.LogEvent("OpenUpdate");
+        FirebaseAnalytics.LogEvent("Open_Update");
     }
 
     public void OpenURL()
@@ -5803,7 +5888,7 @@ public class GameManager : MonoBehaviour
 
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
 
-        FirebaseAnalytics.LogEvent("OpenAppReview");
+        FirebaseAnalytics.LogEvent("Open_AppReview");
 
         CloseAppReview();
     }
@@ -5816,7 +5901,7 @@ public class GameManager : MonoBehaviour
         Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
 #endif
 
-        FirebaseAnalytics.LogEvent("OpenAppReviewEvent");
+        FirebaseAnalytics.LogEvent("Open_Event_AppReview");
     }
 
     public void FeedBack()
@@ -5830,21 +5915,21 @@ public class GameManager : MonoBehaviour
             Application.OpenURL("https://forms.gle/dvMRSQkPJpmm9iJM9");
         }
 
-        FirebaseAnalytics.LogEvent("FeedBack");
+        FirebaseAnalytics.LogEvent("Open_FeedBack");
     }
 
     public void OpenPrivacypolicyURL()
     {
         Application.OpenURL("https://sites.google.com/view/whilili-privacypolicy");
 
-        FirebaseAnalytics.LogEvent("Privacypolicy");
+        FirebaseAnalytics.LogEvent("Open_Privacypolicy");
     }
 
     public void OpenTermsURL()
     {
         Application.OpenURL("https://sites.google.com/view/whilili-terms");
 
-        FirebaseAnalytics.LogEvent("Terms");
+        FirebaseAnalytics.LogEvent("Open_Terms");
     }
 
     public void Agree()
@@ -5961,7 +6046,7 @@ public class GameManager : MonoBehaviour
                 bankReceiveContent.Initialize(RewardType.Gold, 100000);
             }
 
-            FirebaseAnalytics.LogEvent("Bankruptcy");
+            FirebaseAnalytics.LogEvent("Open_Bankruptcy");
         }
     }
 
@@ -5977,6 +6062,8 @@ public class GameManager : MonoBehaviour
         {
             PlayfabManager.instance.UpdateAddGold(100000);
         }
+
+        FirebaseAnalytics.LogEvent("Clear_Bankruptcy : " + GameStateManager.instance.Bankruptcy);
 
         SoundManager.instance.PlaySFX(GameSfxType.GetMoney);
 

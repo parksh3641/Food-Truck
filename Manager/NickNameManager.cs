@@ -84,7 +84,7 @@ public class NickNameManager : MonoBehaviour
 
             coinPriceText.text = MoneyUnitString.ToCurrencyString(price);
 
-            FirebaseAnalytics.LogEvent("OpenNickName");
+            FirebaseAnalytics.LogEvent("Open_NickName");
         }
         else
         {
@@ -179,6 +179,8 @@ public class NickNameManager : MonoBehaviour
 
         playerDataBase.ChangeNicknameCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("ChangeNicknameCount", playerDataBase.ChangeNicknameCount);
+
+        FirebaseAnalytics.LogEvent("Clear_Nickname");
     }
 
     public void Failure()

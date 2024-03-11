@@ -41,7 +41,7 @@ public class CouponManager : MonoBehaviour
 
             inputFieldText.text = "";
 
-            FirebaseAnalytics.LogEvent("OpenCoupon");
+            FirebaseAnalytics.LogEvent("Open_Coupon");
         }
         else
         {
@@ -100,7 +100,7 @@ public class CouponManager : MonoBehaviour
                     receiveContents[0].Initialize(RewardType.Gold, 1000000);
                     receiveContents[1].Initialize(RewardType.Crystal, 300);
 
-                    FirebaseAnalytics.LogEvent("Coupon_Open");
+                    FirebaseAnalytics.LogEvent("Clear_WelcomeCoupon");
 
                     SoundManager.instance.PlaySFX(GameSfxType.Success);
                     NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -489,7 +489,13 @@ public class CouponManager : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.CouponNotion2);
                 }
                 break;
+            case "20231119":
+                playerDataBase.TestAccount = 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("TestAccount", playerDataBase.TestAccount);
 
+                SoundManager.instance.PlaySFX(GameSfxType.Success);
+                NotionManager.instance.UseNotion(NotionType.SuccessReward);
+                break;
             default:
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.CouponNotion3);
@@ -516,7 +522,7 @@ public class CouponManager : MonoBehaviour
         receiveContents[3].Initialize(RewardType.Portion3, 5);
         receiveContents[4].Initialize(RewardType.Portion4, 5);
 
-        FirebaseAnalytics.LogEvent("Coupon_Reward");
+        FirebaseAnalytics.LogEvent("Clear_Coupon");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -537,7 +543,7 @@ public class CouponManager : MonoBehaviour
         receiveContents[1].Initialize(RewardType.Crystal, 300);
         receiveContents[2].Initialize(RewardType.DefDestroyTicket, 5);
 
-        FirebaseAnalytics.LogEvent("Coupon_Speical");
+        FirebaseAnalytics.LogEvent("Clear_Coupon_Speical");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

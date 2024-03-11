@@ -95,7 +95,7 @@ public class TreasureManager : MonoBehaviour
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("OpenTreasure");
+            FirebaseAnalytics.LogEvent("Open_Treasure");
         }
         else
         {
@@ -109,7 +109,7 @@ public class TreasureManager : MonoBehaviour
         {
             treasureInfoView.SetActive(true);
 
-            FirebaseAnalytics.LogEvent("OpenTreasureInfo");
+            FirebaseAnalytics.LogEvent("Open_TreasureInfo");
         }
         else
         {
@@ -174,7 +174,7 @@ public class TreasureManager : MonoBehaviour
 
         OpenTreasure(1);
 
-        FirebaseAnalytics.LogEvent("OpenTreasure1");
+        FirebaseAnalytics.LogEvent("Open_Treasure1");
     }
 
     public void OpenTreasure2()
@@ -202,7 +202,7 @@ public class TreasureManager : MonoBehaviour
 
         OpenTreasure(11);
 
-        FirebaseAnalytics.LogEvent("OpenTreasure11");
+        FirebaseAnalytics.LogEvent("Open_Treasure11");
     }
 
     public void OpenTreasure2_OneMore()
@@ -230,7 +230,7 @@ public class TreasureManager : MonoBehaviour
 
         OpenTreasure(11);
 
-        FirebaseAnalytics.LogEvent("OpenTreasure11");
+        FirebaseAnalytics.LogEvent("Open_Treasure11");
     }
 
     public void OpenTreasure(int number)

@@ -105,4 +105,9 @@ public class GifticonManager : MonoBehaviour
         //    gifticonInfoView.SetActive(false);
         //}
     }
+
+    public void OpenEventTicketInfo()
+    {
+        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.EventTicket, 3);
+    }
 }

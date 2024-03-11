@@ -372,7 +372,7 @@ public class ShopManager : MonoBehaviour
 
             rankPointText.text = playerDataBase.RankPoint.ToString();
 
-            FirebaseAnalytics.LogEvent("OpenShop");
+            FirebaseAnalytics.LogEvent("Open_Shop");
         }
         else
         {
@@ -400,6 +400,8 @@ public class ShopManager : MonoBehaviour
         switch (number)
         {
             case 0:
+                FirebaseAnalytics.LogEvent("Open_Shop_Daily");
+
                 shopContents[0].Initialize(ItemType.DailyReward, BuyType.Free, this);
                 shopContents[1].Initialize(ItemType.AdReward_Gold, BuyType.Ad, this);
                 //shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Crystal, this);
@@ -496,6 +498,8 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 1:
+                FirebaseAnalytics.LogEvent("Open_Shop_Package");
+
                 packageThanks.SetActive(false);
 
                 packageAlarm[0].SetActive(false);
@@ -558,6 +562,8 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 2:
+                FirebaseAnalytics.LogEvent("Open_Shop_Item");
+
                 packageAlarm[3].SetActive(false);
 
                 shopContents[8].Initialize(ItemType.PortionSet1, BuyType.Crystal, this);
@@ -574,6 +580,8 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 3:
+                FirebaseAnalytics.LogEvent("Open_Shop_Crystal");
+
                 packageAlarm[1].SetActive(false);
 
                 shopContents[13].Initialize(ItemType.CrystalShop1, BuyType.Rm, this);
@@ -591,6 +599,8 @@ public class ShopManager : MonoBehaviour
                 shopContents[5].gameObject.SetActive(false);
                 break;
             case 4:
+                FirebaseAnalytics.LogEvent("Open_Shop_Ranking");
+
                 packageAlarm[2].SetActive(false);
 
                 shopContents[19].Initialize(ItemType.Portion1, BuyType.RankPoint, this);
@@ -1162,6 +1172,8 @@ public class ShopManager : MonoBehaviour
         GameManager.instance.CheckPortion();
         GameManager.instance.CheckDefTicket();
 
+        FirebaseAnalytics.LogEvent("Buy_Item : " + item.ToString());
+
         isDelay = true;
         Invoke("Delay", 0.2f);
     }
@@ -1352,7 +1364,7 @@ public class ShopManager : MonoBehaviour
                         shopAnimalArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
 
-                    FirebaseAnalytics.LogEvent("OpenPet");
+                    FirebaseAnalytics.LogEvent("Open_Pet");
                     break;
                 case 1:
                     for (int i = 0; i < shopTruckArray.Length; i++)
@@ -1360,7 +1372,7 @@ public class ShopManager : MonoBehaviour
                         shopTruckArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
 
-                    FirebaseAnalytics.LogEvent("OpenFoodTruck");
+                    FirebaseAnalytics.LogEvent("Open_FoodTruck");
                     break;
                 case 2:
                     for (int i = 0; i < shopCharacterArray.Length; i++)
@@ -1368,7 +1380,7 @@ public class ShopManager : MonoBehaviour
                         shopCharacterArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
 
-                    FirebaseAnalytics.LogEvent("OpenCharacter");
+                    FirebaseAnalytics.LogEvent("Open_Character");
                     break;
                 case 3:
                     for (int i = 0; i < shopButterflyArray.Length; i++)
@@ -1376,7 +1388,7 @@ public class ShopManager : MonoBehaviour
                         shopButterflyArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
 
-                    FirebaseAnalytics.LogEvent("OpenButterfly");
+                    FirebaseAnalytics.LogEvent("Open_Butterfly");
                     break;
                 case 4:
                     for (int i = 0; i < shopTotemsArray.Length; i++)
@@ -1384,7 +1396,7 @@ public class ShopManager : MonoBehaviour
                         shopTotemsArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
 
-                    FirebaseAnalytics.LogEvent("OpenTotems");
+                    FirebaseAnalytics.LogEvent("Open_Totems");
                     break;
                 case 5:
                     for (int i = 0; i < shopFlowerArray.Length; i++)
@@ -1392,7 +1404,7 @@ public class ShopManager : MonoBehaviour
                         shopFlowerArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
 
-                    FirebaseAnalytics.LogEvent("OpenFlower");
+                    FirebaseAnalytics.LogEvent("Open_Flower");
                     break;
             }
         }
@@ -3377,7 +3389,7 @@ public class ShopManager : MonoBehaviour
 
                 PlayfabManager.instance.GrantItemToUser("Animal", itemList);
 
-                FirebaseAnalytics.LogEvent("BuyAnimal");
+                FirebaseAnalytics.LogEvent("Buy_Animal : " + animalInfo.animalType.ToString());
 
                 switch (animalInfo.animalType)
                 {
@@ -3445,7 +3457,7 @@ public class ShopManager : MonoBehaviour
 
                 PlayfabManager.instance.GrantItemToUser("Truck", itemList);
 
-                FirebaseAnalytics.LogEvent("BuyTruck");
+                FirebaseAnalytics.LogEvent("Buy_Truck : " + truckInfo.truckType.ToString());
 
                 switch (truckInfo.truckType)
                 {
@@ -3519,7 +3531,7 @@ public class ShopManager : MonoBehaviour
 
                 PlayfabManager.instance.GrantItemToUser("Character", itemList);
 
-                FirebaseAnalytics.LogEvent("BuyCharacter");
+                FirebaseAnalytics.LogEvent("Buy_Character : " + characterInfo.characterType.ToString());
 
                 switch (characterInfo.characterType)
                 {
@@ -3623,7 +3635,7 @@ public class ShopManager : MonoBehaviour
 
                 PlayfabManager.instance.GrantItemToUser("Butterfly", itemList);
 
-                FirebaseAnalytics.LogEvent("BuyButterfly");
+                FirebaseAnalytics.LogEvent("Buy_Butterfly : " + butterflyInfo.butterflyType.ToString());
 
                 switch (butterflyInfo.butterflyType)
                 {
@@ -3751,7 +3763,7 @@ public class ShopManager : MonoBehaviour
 
                 PlayfabManager.instance.GrantItemToUser("Totems", itemList);
 
-                FirebaseAnalytics.LogEvent("BuyTotems");
+                FirebaseAnalytics.LogEvent("Buy_Totems : " + totemsInfo.totemsType.ToString());
 
                 switch (totemsInfo.totemsType)
                 {
@@ -3944,36 +3956,48 @@ public class ShopManager : MonoBehaviour
 
                 playerDataBase.BuyCrystal += 600;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
+
+                FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack1");
                 break;
             case 9:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3600);
 
                 playerDataBase.BuyCrystal += 3600;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
+
+                FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack2");
                 break;
             case 10:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 8400);
 
                 playerDataBase.BuyCrystal += 8400;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
+
+                FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack3");
                 break;
             case 11:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 19200);
 
                 playerDataBase.BuyCrystal += 19200;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
+
+                FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack4");
                 break;
             case 12:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 59400);
 
                 playerDataBase.BuyCrystal += 59400;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
+
+                FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack5");
                 break;
             case 13:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 120000);
 
                 playerDataBase.BuyCrystal += 120000;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
+
+                FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack6");
                 break;
             case 14:
                 PortionManager.instance.GetBuffTickets(10);
@@ -4173,11 +4197,13 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
-        if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
-             && playerDataBase.Package5 && playerDataBase.Package6)
-        {
-            packageThanks.SetActive(true);
-        }
+        FirebaseAnalytics.LogEvent("Buy_Package : " + type.ToString());
+
+        //if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
+        //     && playerDataBase.Package5 && playerDataBase.Package6)
+        //{
+        //    packageThanks.SetActive(true);
+        //}
     }
 
     void ContentDelay()

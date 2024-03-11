@@ -21,6 +21,7 @@ public class GameStateManager : MonoBehaviour
         [Title("Login")]
         public string playfabId = "";
         public string customId = "";
+        public string region = "";
 
         public bool autoLogin = false;
         public LoginType loginType = LoginType.None;
@@ -64,6 +65,12 @@ public class GameStateManager : MonoBehaviour
         public DessertType dessertType = DessertType.Dessert1;
 
         public int level = 0;
+
+        [Space]
+        [Title("Tip")]
+        public bool firstSuccess;
+        public bool firstFail;
+        public int destroyCount = 0;
 
         [Space]
         [Title("Level")]
@@ -170,6 +177,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.customId = value;
+            SaveFile();
+        }
+    }
+
+    public string Region
+    {
+        get
+        {
+            return gameSettings.region;
+        }
+        set
+        {
+            gameSettings.region = value;
             SaveFile();
         }
     }
@@ -572,6 +592,45 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.level = value;
+            SaveFile();
+        }
+    }
+
+    public bool FirstSuccess
+    {
+        get
+        {
+            return gameSettings.firstSuccess;
+        }
+        set
+        {
+            gameSettings.firstSuccess = value;
+            SaveFile();
+        }
+    }
+
+    public bool FirstFail
+    {
+        get
+        {
+            return gameSettings.firstFail;
+        }
+        set
+        {
+            gameSettings.firstFail = value;
+            SaveFile();
+        }
+    }
+
+    public int DestroyCount
+    {
+        get
+        {
+            return gameSettings.destroyCount;
+        }
+        set
+        {
+            gameSettings.destroyCount = value;
             SaveFile();
         }
     }

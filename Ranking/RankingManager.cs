@@ -97,7 +97,7 @@ public class RankingManager : MonoBehaviour
                 ChangeTopToggle(0);
             }
 
-            FirebaseAnalytics.LogEvent("OpenRanking");
+            FirebaseAnalytics.LogEvent("Open_Ranking");
         }
         else
         {
@@ -201,7 +201,7 @@ public class RankingManager : MonoBehaviour
                 isDelay = false;
             }
 
-            FirebaseAnalytics.LogEvent("OpenRankingReward");
+            FirebaseAnalytics.LogEvent("Open_RankingReward");
         }
         else
         {
@@ -243,7 +243,7 @@ public class RankingManager : MonoBehaviour
 
                 infoText.localizationName = "Ranking1_Info";
 
-                FirebaseAnalytics.LogEvent("OpenRanking1");
+                FirebaseAnalytics.LogEvent("Open_Ranking1");
                 break;
             case 1:
                 if(SeasonManager.instance.CheckSeason_Ranking() == 0)
@@ -263,21 +263,21 @@ public class RankingManager : MonoBehaviour
 
                 infoText.localizationName = "Ranking2_Info";
 
-                FirebaseAnalytics.LogEvent("OpenRanking2");
+                FirebaseAnalytics.LogEvent("Open_Ranking2");
                 break;
             case 2:
                 ChangeRankingView(RankingType.GourmetLevel.ToString());
 
                 infoText.localizationName = "Ranking3_Info";
 
-                FirebaseAnalytics.LogEvent("OpenRanking3");
+                FirebaseAnalytics.LogEvent("Open_Ranking3");
                 break;
             case 3:
                 ChangeRankingView(RankingType.Level.ToString());
 
                 infoText.localizationName = "Ranking4_Info";
 
-                FirebaseAnalytics.LogEvent("OpenRanking4");
+                FirebaseAnalytics.LogEvent("Open_Ranking4");
                 break;
         }
 

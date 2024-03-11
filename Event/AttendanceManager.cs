@@ -96,7 +96,7 @@ public class AttendanceManager : MonoBehaviour
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("OpenAttendance");
+            FirebaseAnalytics.LogEvent("Open_Event_Attendance");
         }
         else
         {

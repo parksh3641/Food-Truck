@@ -55,7 +55,7 @@ public class ReincarnationManager : MonoBehaviour
 
             alarm.SetActive(false);
 
-            FirebaseAnalytics.LogEvent("OpenChallenge");
+            FirebaseAnalytics.LogEvent("Open_Challenge");
         }
         else
         {
@@ -162,7 +162,7 @@ public class ReincarnationManager : MonoBehaviour
 
     IEnumerator ReincarnationCoroution()
     {
-        FirebaseAnalytics.LogEvent("ChallengeClear");
+        FirebaseAnalytics.LogEvent("Clear_Challenge");
 
         fadeInOut.FadeOut();
 

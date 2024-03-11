@@ -87,11 +87,6 @@ public class ChangeFoodManager : MonoBehaviour
         alarmObj.SetActive(false);
     }
 
-    private void Start()
-    {
-        GameStateManager.instance.Pause = false;
-    }
-
     public void Initialize()
     {
         for (int i = 0; i < System.Enum.GetValues(typeof(FoodType)).Length; i++)
@@ -228,7 +223,7 @@ public class ChangeFoodManager : MonoBehaviour
 
             //GameStateManager.instance.Pause = true;
 
-            FirebaseAnalytics.LogEvent("OpenChangeFood");
+            FirebaseAnalytics.LogEvent("Open_ChangeFood");
         }
         else
         {
@@ -697,5 +692,11 @@ public class ChangeFoodManager : MonoBehaviour
             autoPresentButton.color = onColor;
             autoPresentText.text = LocalizationManager.instance.GetString("ON");
         }
+    }
+
+
+    public void ChangeFoodMoveArrow(FoodType type)
+    {
+        changeFoodContentList[(int)type].SetMoveArrow();
     }
 }

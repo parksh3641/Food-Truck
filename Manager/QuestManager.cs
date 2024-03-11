@@ -64,7 +64,7 @@ public class QuestManager : MonoBehaviour
 
             Initialize();
 
-            FirebaseAnalytics.LogEvent("OpenQuest");
+            FirebaseAnalytics.LogEvent("Open_Quest");
         }
         else
         {
@@ -297,7 +297,7 @@ public class QuestManager : MonoBehaviour
 
         alarm.SetActive(false);
 
-        FirebaseAnalytics.LogEvent("QuestClear");
+        FirebaseAnalytics.LogEvent("Clear_Quest");
 
         GourmetManager.instance.Initialize();
     }

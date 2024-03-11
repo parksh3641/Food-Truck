@@ -26,6 +26,8 @@ public class ChangeFoodContent : MonoBehaviour
 
     public Image background;
 
+    public GameObject moveArrow;
+
     Color foodColor = new Color(206 / 255f, 141 / 255f, 1);
     Color candyColor = new Color(247 / 255f, 160 / 255f, 0);
     Color jpColor = new Color(94 / 255f, 102 / 255f, 220 / 255f);
@@ -47,6 +49,8 @@ public class ChangeFoodContent : MonoBehaviour
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
         if (proficiencyDataBase == null) proficiencyDataBase = Resources.Load("ProficiencyDataBase") as ProficiencyDataBase;
+
+        moveArrow.SetActive(false);
     }
 
 
@@ -358,7 +362,10 @@ public class ChangeFoodContent : MonoBehaviour
         proficiencyFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
     }
 
-
+    public void SetMoveArrow()
+    {
+        moveArrow.SetActive(true);
+    }
 
 
 
@@ -437,6 +444,8 @@ public class ChangeFoodContent : MonoBehaviour
                     changeFoodManager.ChangeDessert(dessertType);
                 }
                 break;
-        }    
+        }
+
+        moveArrow.SetActive(false);
     }
 }

@@ -69,7 +69,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
                 receiveContents[3].Initialize(RewardType.EventTicket, 10);
-                receiveContents[4].gameObject.SetActive(false);
+
                 break;
             case PackageType.Package2:
                 iapButton.productId = "shop.foodtruck.package2"; //20000
@@ -78,7 +78,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 8500); //14000
                 receiveContents[2].Initialize(RewardType.PortionSet, 40); //3000
                 receiveContents[3].Initialize(RewardType.EventTicket, 50);
-                receiveContents[4].gameObject.SetActive(false);
+
                 break;
             case PackageType.Package3:
                 iapButton.productId = "shop.foodtruck.package3"; //60000
@@ -87,7 +87,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 30000); //50000
                 receiveContents[2].Initialize(RewardType.PortionSet, 100); //10000
                 receiveContents[3].Initialize(RewardType.EventTicket, 100);
-                receiveContents[4].gameObject.SetActive(false);
+
                 break;
             case PackageType.Package4:
                 iapButton.productId = "shop.foodtruck.package4"; //100000
@@ -96,7 +96,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 42000); //70000
                 receiveContents[2].Initialize(RewardType.DefDestroyTicket, 200); //20000
                 receiveContents[3].Initialize(RewardType.EventTicket, 200);
-                receiveContents[4].gameObject.SetActive(false);
+
                 break;
             case PackageType.Package5: //한정 패키지
                 iapButton.productId = "shop.foodtruck.package5";
@@ -105,7 +105,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 1200);
                 receiveContents[2].Initialize(RewardType.PortionSet, 20);
                 receiveContents[3].Initialize(RewardType.EventTicket, 10);
-                receiveContents[4].gameObject.SetActive(false);
+
 
                 BuyLimitDate();
                 break;
@@ -116,7 +116,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.GoldX2, -1);
                 receiveContents[2].Initialize(RewardType.AutoUpgrade, -1);
                 receiveContents[3].Initialize(RewardType.EventTicket, 200);
-                receiveContents[4].gameObject.SetActive(false);
+
                 break;
             case PackageType.Package7: //서포트 패키지
                 iapButton.productId = "shop.foodtruck.package7";
@@ -125,7 +125,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
                 receiveContents[3].Initialize(RewardType.EventTicket, 10);
-                receiveContents[4].gameObject.SetActive(false);
+
                 break;
         }
 
@@ -178,23 +178,23 @@ public class PackageContent : MonoBehaviour
 
             if (timeSpan.Days > 0)
             {
-                timerText.text = localization_Time + "\n" + timeSpan.Days.ToString("D2") + localization_Days + " " + timeSpan.Hours.ToString("D2") + localization_Hours;
+                timerText.text = localization_Time + "  " + timeSpan.Days.ToString("D2") + ":" + timeSpan.Hours.ToString("D2") + ":" + timeSpan.Days.ToString("D2");
             }
             else
             {
                 if (timeSpan.Hours > 0)
                 {
-                    timerText.text = localization_Time + "\n" + timeSpan.Hours.ToString("D2") + localization_Hours + " " + timeSpan.Minutes.ToString("D2") + localization_Minutes;
+                    timerText.text = localization_Time + "  " + timeSpan.Hours.ToString("D2") + ":" + timeSpan.Minutes.ToString("D2") + ":" + timeSpan.Seconds.ToString("D2");
                 }
                 else
                 {
                     if (timeSpan.Minutes == 0)
                     {
-                        timerText.text = localization_Time + "\n" + timeSpan.Seconds.ToString("D2") + localization_Seconds;
+                        timerText.text = localization_Time + "  " + timeSpan.Seconds.ToString("D2");
                     }
                     else
                     {
-                        timerText.text = localization_Time + "\n" + timeSpan.Minutes.ToString("D2") + localization_Minutes + " " + timeSpan.Seconds.ToString("D2") + localization_Seconds;
+                        timerText.text = localization_Time + "  " + timeSpan.Minutes.ToString("D2") + ":" + timeSpan.Seconds.ToString("D2");
                     }
                 }
             }

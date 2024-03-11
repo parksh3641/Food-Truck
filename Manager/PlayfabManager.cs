@@ -23,6 +23,7 @@ using AppleAuth.Extensions;
 using EntityKey = PlayFab.ProfilesModels.EntityKey;
 using System.Text;
 using UnityEngine.SceneManagement;
+using Firebase.Analytics;
 
 public class PlayfabManager : MonoBehaviour
 {
@@ -2861,6 +2862,8 @@ public class PlayfabManager : MonoBehaviour
         UpdatePlayerStatisticsInsert("RemoveAds", 1);
 
         GameManager.instance.CheckPurchase();
+
+        FirebaseAnalytics.LogEvent("Buy_Purchase : RemoveAds");
     }
 
     public void PurchaseGoldX2()
@@ -2877,6 +2880,8 @@ public class PlayfabManager : MonoBehaviour
         playerDataBase.GoldX2 = true;
 
         GameManager.instance.CheckPurchase();
+
+        FirebaseAnalytics.LogEvent("Buy_Purchase : GoldX2");
     }
 
     public void PurchaseSuperOffline()
@@ -2896,6 +2901,8 @@ public class PlayfabManager : MonoBehaviour
         playerDataBase.SuperOffline = true;
 
         GameManager.instance.CheckPurchase();
+
+        FirebaseAnalytics.LogEvent("Buy_Purchase : SuperOffline");
     }
 
     public void PurchaseAutoUpgrade()
@@ -2915,6 +2922,8 @@ public class PlayfabManager : MonoBehaviour
         playerDataBase.AutoUpgrade = true;
 
         GameManager.instance.CheckPurchase();
+
+        FirebaseAnalytics.LogEvent("Buy_Purchase : AutoUpgrade");
     }
 
     public void PurchaseAutoPresent()
@@ -2933,6 +2942,8 @@ public class PlayfabManager : MonoBehaviour
         playerDataBase.AutoPresent = true;
 
         GameManager.instance.CheckPurchase();
+
+        FirebaseAnalytics.LogEvent("Buy_Purchase : AutoPresent");
     }
 
     public void RestorePurchases()

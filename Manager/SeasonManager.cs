@@ -355,7 +355,7 @@ public class SeasonManager : MonoBehaviour
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
 
-        FirebaseAnalytics.LogEvent("SeasonRewardClear");
+        FirebaseAnalytics.LogEvent("Clear_SeasonReward");
     }
 
     public void SetRankingReward(GetLeaderboardResult result)

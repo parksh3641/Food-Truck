@@ -60,6 +60,8 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialView.SetActive(true);
 
+        GameStateManager.instance.FirstSuccess = true;
+
         talkIndex = 6;
         Initialize(talkIndex);
     }
@@ -69,6 +71,8 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialView.SetActive(true);
 
+        GameStateManager.instance.FirstFail = true;
+
         talkIndex = 8;
         Initialize(talkIndex);
     }
@@ -77,6 +81,8 @@ public class TutorialManager : MonoBehaviour
     public void Next3()
     {
         tutorialView.SetActive(true);
+
+        GameStateManager.instance.DestroyCount = 0;
 
         talkIndex = 10;
         Initialize(talkIndex);

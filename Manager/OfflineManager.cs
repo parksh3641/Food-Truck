@@ -105,7 +105,7 @@ public class OfflineManager : MonoBehaviour
 
             CheckCastle();
 
-            FirebaseAnalytics.LogEvent("OpenOffline");
+            FirebaseAnalytics.LogEvent("Open_Offline");
         }
         else
         {
@@ -279,6 +279,8 @@ public class OfflineManager : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.MaxLevel);
         }
 
+        FirebaseAnalytics.LogEvent("LevelUp_Castle");
+
         isDelay = true;
         Invoke("Delay", 0.4f);
     }
@@ -349,6 +351,8 @@ public class OfflineManager : MonoBehaviour
                 first = false;
                 OpenCastleView();
             }
+
+            FirebaseAnalytics.LogEvent("Clear_Offline");
         }
     }
 
@@ -457,6 +461,8 @@ public class OfflineManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
+
+        FirebaseAnalytics.LogEvent("Clear_Offline_Ad");
     }
 
     public void OnSetAlarm()

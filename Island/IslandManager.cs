@@ -70,7 +70,7 @@ public class IslandManager : MonoBehaviour
 
             Initialize();
 
-            FirebaseAnalytics.LogEvent("OpenIsland");
+            FirebaseAnalytics.LogEvent("Open_Island");
         }
         else
         {
@@ -115,7 +115,7 @@ public class IslandManager : MonoBehaviour
     {
         if (GameStateManager.instance.IslandType == type) return;
 
-        FirebaseAnalytics.LogEvent("ChangeIsland_" + type.ToString());
+        FirebaseAnalytics.LogEvent("Change_Island_" + type.ToString());
 
         changeIslandView.SetActive(false);
 

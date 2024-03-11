@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
     [Header("Point")]
     public Transform aPoint;
     public Transform bPoint;
+    public Transform cPoint;
 
     public float smoothTime = 0.3f;
 
@@ -23,6 +24,7 @@ public class CameraController : MonoBehaviour
     private bool shake = false;
     private bool isA = false;
     private bool isB = false;
+    private bool isC = false;
 
     public GameManager gameManager;
 
@@ -33,6 +35,7 @@ public class CameraController : MonoBehaviour
 
         isA = false;
         isB = false;
+        isC = false;
     }
 
     private void Update()
@@ -44,7 +47,7 @@ public class CameraController : MonoBehaviour
                 Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, aPoint.position, ref velocity, smoothTime);
                 Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, aPoint.rotation, smoothTime * 0.5f);
 
-                if (Vector3.Distance(aPoint.position, Camera.main.transform.position) < 0.02f)
+                if (Vector3.Distance(aPoint.position, Camera.main.transform.position) < 0.03f)
                 {
                     Camera.main.transform.position = aPoint.position;
                     Camera.main.transform.rotation = aPoint.rotation; 
@@ -60,7 +63,7 @@ public class CameraController : MonoBehaviour
                 Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, bPoint.position, ref velocity, smoothTime);
                 Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, bPoint.rotation, smoothTime * 0.5f);
 
-                if (Vector3.Distance(bPoint.position, Camera.main.transform.position) < 0.02f)
+                if (Vector3.Distance(bPoint.position, Camera.main.transform.position) < 0.03f)
                 {
                     Camera.main.transform.position = bPoint.position;
                     Camera.main.transform.rotation = bPoint.rotation;
@@ -68,6 +71,20 @@ public class CameraController : MonoBehaviour
                     isB = false;
 
                     gameManager.isDelay_Camera = true;
+                }
+            }
+
+            if (isC)
+            {
+                Camera.main.transform.position = Vector3.SmoothDamp(Camera.main.transform.position, cPoint.position, ref velocity, smoothTime);
+                Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, cPoint.rotation, smoothTime * 0.5f);
+
+                if (Vector3.Distance(cPoint.position, Camera.main.transform.position) < 0.03f)
+                {
+                    Camera.main.transform.position = cPoint.position;
+                    Camera.main.transform.rotation = cPoint.rotation;
+
+                    isC = false;
                 }
             }
         }
@@ -104,6 +121,17 @@ public class CameraController : MonoBehaviour
         SoundManager.instance.PlaySFX(GameSfxType.Screen_In);
 
         Debug.Log("Go To B Point");
+    }
+
+    public void GoToC()
+    {
+        if (isC) return;
+
+        isC = true;
+
+        SoundManager.instance.PlaySFX(GameSfxType.Screen_In);
+
+        Debug.Log("Go To C Point");
     }
 
     IEnumerator ShakeCoroution()

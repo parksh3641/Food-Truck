@@ -72,7 +72,7 @@ public class BookManager : MonoBehaviour
 
             Initialize();
 
-            FirebaseAnalytics.LogEvent("OpenBook");
+            FirebaseAnalytics.LogEvent("Open_Book");
         }
         else
         {

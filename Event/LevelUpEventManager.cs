@@ -56,7 +56,7 @@ public class LevelUpEventManager : MonoBehaviour
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("OpenLevelUpEvent");
+            FirebaseAnalytics.LogEvent("Open_Event_LevelUp");
         }
         else
         {
@@ -101,7 +101,7 @@ public class LevelUpEventManager : MonoBehaviour
 
         OffAlarm();
 
-        FirebaseAnalytics.LogEvent("LevelUpEventClear");
+        FirebaseAnalytics.LogEvent("Clear_Event_LevelUp");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

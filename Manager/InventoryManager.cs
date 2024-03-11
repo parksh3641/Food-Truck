@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
 
             Initialize();
 
-            FirebaseAnalytics.LogEvent("OpenInventory");
+            FirebaseAnalytics.LogEvent("Open_Inventory");
         }
         else
         {

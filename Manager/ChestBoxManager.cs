@@ -75,7 +75,7 @@ public class ChestBoxManager : MonoBehaviour
         count = 0;
         StartCoroutine(TimerCoroution());
 
-        FirebaseAnalytics.LogEvent("OpenChestBox");
+        FirebaseAnalytics.LogEvent("Open_ChestBox");
     }
 
     public void CheckAuto()
@@ -279,7 +279,7 @@ public class ChestBoxManager : MonoBehaviour
 
         Success();
 
-        FirebaseAnalytics.LogEvent("OpenChestBox_Free");
+        FirebaseAnalytics.LogEvent("Open_ChestBox_Free");
     }
 
     public void GetAdsReward()
@@ -291,7 +291,7 @@ public class ChestBoxManager : MonoBehaviour
     {
         GameStateManager.instance.ChestBoxCount += 1;
 
-        FirebaseAnalytics.LogEvent("OpenChestBox_Ad");
+        FirebaseAnalytics.LogEvent("Open_ChestBox_Ad");
 
         switch (epicRewardType)
         {

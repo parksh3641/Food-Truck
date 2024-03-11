@@ -71,7 +71,7 @@ public class SkillManager : MonoBehaviour
 
             Initialize();
 
-            FirebaseAnalytics.LogEvent("OpenReceipe");
+            FirebaseAnalytics.LogEvent("Open_Receipe");
         }
         else
         {
@@ -125,6 +125,19 @@ public class SkillManager : MonoBehaviour
             {
                 skillContents[i].Initialize(this);
             }
+        }
+
+        switch(number)
+        {
+            case 0:
+                FirebaseAnalytics.LogEvent("Open_Receipe_Normal");
+                break;
+            case 1:
+                FirebaseAnalytics.LogEvent("Open_Receipe_Speical");
+                break;
+            case 2:
+                FirebaseAnalytics.LogEvent("Open_Receipe_Challenge");
+                break;
         }
 
         Initialize();

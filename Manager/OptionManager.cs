@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -102,6 +103,8 @@ public class OptionManager : MonoBehaviour
             }
 
             checkMarkArray[(int)GameStateManager.instance.Language - 1].SetActive(true);
+
+            FirebaseAnalytics.LogEvent("Open_Language");
         }
         else
         {

@@ -389,7 +389,7 @@ public class DungeonManager : MonoBehaviour
                 break;
         }
 
-        FirebaseAnalytics.LogEvent(dungeonType.ToString());
+        FirebaseAnalytics.LogEvent("Count_Dungeon : " + dungeonType.ToString());
 
         StartCoroutine(EnterDungeonCoroution());
     }
@@ -409,6 +409,8 @@ public class DungeonManager : MonoBehaviour
         GameManager.instance.GameStart_Dungeon();
         Initialize();
         CheckPercent();
+
+        NotionManager.instance.UseNotion2(NotionType.StartDungeon);
     }
 
     public void CheckPercent()
@@ -541,14 +543,14 @@ public class DungeonManager : MonoBehaviour
                 health -= 2;
 
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
-                NotionManager.instance.UseNotion(NotionType.SuccessAttackX2);
+                NotionManager.instance.UseNotion2(NotionType.SuccessAttackX2);
             }
             else
             {
                 health -= 1;
 
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
-                NotionManager.instance.UseNotion(NotionType.SuccessAttack);
+                NotionManager.instance.UseNotion2(NotionType.SuccessAttack);
             }
 
             Damage();
@@ -556,7 +558,7 @@ public class DungeonManager : MonoBehaviour
         else
         {
             SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
-            NotionManager.instance.UseNotion(NotionType.FailAttack);
+            NotionManager.instance.UseNotion2(NotionType.FailAttack);
         }
     }
 
@@ -589,7 +591,7 @@ public class DungeonManager : MonoBehaviour
     {
         clear = true;
 
-        FirebaseAnalytics.LogEvent(dungeonType.ToString() + "_Clear");
+        FirebaseAnalytics.LogEvent("Clear_Dungeon : " + dungeonType.ToString());
 
         bossFoodContents[(int)dungeonType].gameObject.SetActive(false);
 

@@ -79,7 +79,7 @@ public class EventManager : MonoBehaviour
 
             PlayfabManager.instance.GetTitleInternalData("Gifticon", CheckGifticon);
 
-            FirebaseAnalytics.LogEvent("OpenEvent");
+            FirebaseAnalytics.LogEvent("Open_Event");
         }
         else
         {
@@ -101,7 +101,7 @@ public class EventManager : MonoBehaviour
 
         targetDate = DateTime.ParseExact(date, "yyyyMMdd", null);
 
-        if (currentDate > targetDate || GameStateManager.instance.Language != LanguageType.Korean)
+        if (currentDate > targetDate || GameStateManager.instance.Region != "ko")
         {
             gifticonEvent.SetActive(false);
         }

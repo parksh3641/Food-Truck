@@ -56,7 +56,7 @@ public class RecoverManager : MonoBehaviour
 
             countText.text = playerDataBase.RecoverTicket.ToString();
 
-            FirebaseAnalytics.LogEvent("OpenRecover");
+            FirebaseAnalytics.LogEvent("Open_Recover");
         }
         else
         {
@@ -124,7 +124,7 @@ public class RecoverManager : MonoBehaviour
                 break;
         }
 
-        FirebaseAnalytics.LogEvent("Recover_Success");
+        FirebaseAnalytics.LogEvent("Clear_Recover");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.RecoverNotion);

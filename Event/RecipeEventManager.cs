@@ -56,7 +56,7 @@ public class RecipeEventManager : MonoBehaviour
 
             CheckInitialize();
 
-            FirebaseAnalytics.LogEvent("OpenRecipeEvent");
+            FirebaseAnalytics.LogEvent("Open_Event_Recipe");
         }
         else
         {
@@ -101,7 +101,7 @@ public class RecipeEventManager : MonoBehaviour
 
         OffAlarm();
 
-        FirebaseAnalytics.LogEvent("RecipeEventClear");
+        FirebaseAnalytics.LogEvent("Clear_Event_Recipe");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

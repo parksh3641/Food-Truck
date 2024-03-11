@@ -81,7 +81,7 @@ public class IconManager : MonoBehaviour
 
             CheckMyIcon();
 
-            FirebaseAnalytics.LogEvent("OpenIcon");
+            FirebaseAnalytics.LogEvent("Open_Icon");
         }
         else
         {
@@ -562,7 +562,7 @@ public class IconManager : MonoBehaviour
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Icon", (int)iconType);
 
-        FirebaseAnalytics.LogEvent("ChangeIcon");
+        FirebaseAnalytics.LogEvent("Change_Icon");
 
         NotionManager.instance.UseNotion(NotionType.SaveNotion);
         SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);

@@ -77,7 +77,11 @@ public class EventManager : MonoBehaviour
                 gifticonEventLocked.SetActive(false);
             }
 
+#if UNITY_EDITOR || UNITY_EDITOR_OSX
+            CheckGifticon(true);
+#else
             PlayfabManager.instance.GetTitleInternalData("Gifticon", CheckGifticon);
+#endif
 
             FirebaseAnalytics.LogEvent("Open_Event");
         }

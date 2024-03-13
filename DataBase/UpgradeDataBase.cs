@@ -235,54 +235,7 @@ public class UpgradeDataBase : ScriptableObject
 
                 break;
             case GameType.Rank:
-                //if (level >= 99)
-                //{
-                //    price = level * level * (value * 11);
-                //}
-                //else if (level >= 89)
-                //{
-                //    price = level * level * (value * 10);
-                //}
-                //else if (level >= 79)
-                //{
-                //    price = level * level * (value * 9);
-                //}
-                //else if (level >= 69)
-                //{
-                //    price = level * level * (value * 8);
-                //}
-                //else if (level >= 59)
-                //{
-                //    price = level * level * (value * 7);
-                //}
-                //else if (level >= 49)
-                //{
-                //    price = level * level * (value * 6);
-                //}
-                //else if (level >= 39)
-                //{
-                //    price = level * level * (value * 5);
-                //}
-                //else if (level >= 29)
-                //{
-                //    price = level * level * (value * 4);
-                //}
-                //else if (level >= 19)
-                //{
-                //    price = level * level * (value * 3);
-                //}
-                //else if (level >= 9)
-                //{
-                //    price = level * level * (value * 2);
-                //}
-                //else
-                //{
-                //    price = level * level * (value * 1);
-                //}
-
-                //price *= 0.1f;
-
-                price = 0;
+                price = level * level * 100;
 
                 break;
         }

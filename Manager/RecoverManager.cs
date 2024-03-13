@@ -212,12 +212,17 @@ public class RecoverManager : MonoBehaviour
                 break;
         }
 
-        need = 2;
+        need = 4;
         need += ((maxLevel - 30) / 5);
 
         afterLevelText.text = "Lv. " + ((int)(maxLevel * 0.5f)).ToString();
         needText.text = need.ToString();
 
-        crystalText.text = (need * 10).ToString();
+        crystalText.text = (need * 5).ToString();
+    }
+
+    public void OpenRepairTicketInfo()
+    {
+        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.RepairTicket, 2);
     }
 }

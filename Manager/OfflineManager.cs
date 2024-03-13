@@ -36,8 +36,11 @@ public class OfflineManager : MonoBehaviour
     private int addExp = 0;
     private int addCrystal = 0;
 
+    private int priceCrystal = 0;
+
     private int saveCoin = 0;
     private int saveExp = 0;
+    private int saveCrystal = 0;
 
     private bool isDelay = false;
     private bool first = false;
@@ -180,25 +183,28 @@ public class OfflineManager : MonoBehaviour
 
         castleLevelText.text = LocalizationManager.instance.GetString("CastleLevel") + " : " + playerDataBase.CastleLevel + " / " + playerDataBase.Level;
 
-        addCrystal = (playerDataBase.CastleLevel + 1) * 5;
+        priceCrystal = (playerDataBase.CastleLevel + 1) * 5;
         addCoin = 200000 + playerDataBase.CastleLevel * 5000;
         addExp = 2000 + playerDataBase.CastleLevel * 100;
+        addCrystal = 2;
 
         addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.003f));
         addExp += (int)(addExp * (playerDataBase.Treasure5 * 0.003f));
+        addCrystal += (int)(addCrystal * (playerDataBase.Treasure5 * 0.003f));
 
-        if(playerDataBase.SuperOffline)
+        if (playerDataBase.SuperOffline)
         {
             addCoin += (int)(addCoin * 0.1f);
             addExp += (int)(addExp * 0.1f);
+            addCrystal += (int)(addCrystal * 0.1f);
         }
 
-        if(addCrystal >= 30)
+        if(priceCrystal >= 30)
         {
-            addCrystal = 30;
+            priceCrystal = 30;
         }
 
-        levelUpCostText.text = addCrystal.ToString();
+        levelUpCostText.text = priceCrystal.ToString();
         coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "\n/" + localization_Hours + "  (+5000)";
         expText.text = MoneyUnitString.ToCurrencyString(addExp) + "\n/" + localization_Hours + "  (+50)";
 
@@ -206,7 +212,8 @@ public class OfflineManager : MonoBehaviour
         adExpText.text = MoneyUnitString.ToCurrencyString(addExp * 12);
 
         receiveContents[0].Initialize(RewardType.Gold, saveCoin);
-        receiveContents[1].Initialize(RewardType.Exp, saveExp);
+        receiveContents[1].Initialize(RewardType.Crystal, saveCrystal);
+        receiveContents[2].Initialize(RewardType.Exp, saveExp);
 
         if (DateTime.Compare(DateTime.Now, serverTime) == 1)
         {
@@ -231,11 +238,13 @@ public class OfflineManager : MonoBehaviour
     {
         saveCoin = (int)Mathf.Round((addCoin / (60 * (1.0f))) * (float)minute);
         saveExp = (int)Mathf.Round((addExp / (60 * (1.0f))) * (float)minute);
+        saveCrystal = (int)Mathf.Round((addCrystal / (60 * (1.0f))) * (float)minute);
 
         if (receiveContents[0].gameObject.activeInHierarchy)
         {
             receiveContents[0].Initialize(RewardType.Gold, saveCoin);
-            receiveContents[1].Initialize(RewardType.Exp, saveExp);
+            receiveContents[1].Initialize(RewardType.Crystal, saveCrystal);
+            receiveContents[2].Initialize(RewardType.Exp, saveExp);
         }
     }
 
@@ -253,9 +262,9 @@ public class OfflineManager : MonoBehaviour
 
         if (playerDataBase.CastleLevel < playerDataBase.Level)
         {
-            if (playerDataBase.Crystal >= addCrystal)
+            if (playerDataBase.Crystal >= priceCrystal)
             {
-                PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, addCrystal);
+                PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, priceCrystal);
 
                 playerDataBase.CastleLevel += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleLevel", playerDataBase.CastleLevel);
@@ -332,8 +341,9 @@ public class OfflineManager : MonoBehaviour
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleDate", int.Parse("1" + playerDataBase.CastleDate));
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("CastleServerDate", int.Parse("1" + playerDataBase.CastleServerDate));
 
-            PortionManager.instance.GetExp(saveExp);
             PlayfabManager.instance.UpdateAddGold(saveCoin);
+            PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal,saveCrystal);
+            PortionManager.instance.GetExp(saveExp);
 
             playerDataBase.OfflineCount += 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("OfflineCount", playerDataBase.OfflineCount);

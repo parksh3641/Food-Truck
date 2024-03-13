@@ -10,13 +10,14 @@ public class SoundManager : MonoBehaviour
     public AudioSource musicAudio2;
 
     public AudioClip musicFever;
-    public AudioClip boss;
+    public AudioClip musicBoss;
 
     public AudioClip[] musicArray;
 
     public AudioSource[] sfxAudio;
 
     private bool fever = false;
+    private bool boss = false;
 
     private void Awake()
     {
@@ -110,13 +111,17 @@ public class SoundManager : MonoBehaviour
     {
         if (!GameStateManager.instance.Music) return;
 
+        boss = true;
+
         musicAudio.Stop();
-        musicAudio.clip = boss;
+        musicAudio.clip = musicBoss;
         musicAudio.Play();
     }
 
     public void StopBoss()
     {
+        boss = false;
+
         ResetBGM();
     }
 

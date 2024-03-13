@@ -88,6 +88,9 @@ public enum GameSfxType
     ChestBox,
     QuestReward,
     Shield,
+    RareFoodOpen,
+    CleanKitchenStart,
+    CleanKitchenEnd
 }
 
 public enum CharacterType

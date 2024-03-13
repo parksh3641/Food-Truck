@@ -351,8 +351,6 @@ public class DungeonManager : MonoBehaviour
 
         Debug.LogError(dungeonType + " Ω√¿€");
 
-        SoundManager.instance.PlayBoss();
-
         switch (dungeonType)
         {
             case DungeonType.Dungeon1:
@@ -401,6 +399,8 @@ public class DungeonManager : MonoBehaviour
 
         yield return waitForSeconds;
 
+        SoundManager.instance.PlayBoss();
+
         dungeonLevelView.SetActive(false);
 
         OpenDungeonView();
@@ -411,6 +411,7 @@ public class DungeonManager : MonoBehaviour
         CheckPercent();
 
         NotionManager.instance.UseNotion2(NotionType.StartDungeon);
+        SoundManager.instance.PlaySFX(GameSfxType.CleanKitchenStart);
     }
 
     public void CheckPercent()
@@ -602,11 +603,11 @@ public class DungeonManager : MonoBehaviour
             successParticle.Play();
         }
 
-        SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
+        SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
 
         yield return waitForSeconds;
 
-        SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
+        SoundManager.instance.PlaySFX(GameSfxType.CleanKitchenEnd);
         NotionManager.instance.UseNotion2(NotionType.SuccessSleepFood);
 
         yield return waitForSeconds;

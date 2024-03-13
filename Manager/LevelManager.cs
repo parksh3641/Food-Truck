@@ -1,4 +1,5 @@
 using Firebase.Analytics;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,12 +20,18 @@ public class LevelManager : MonoBehaviour
     public LocalizationContent infoText;
     public Text accessDateText;
 
+    public GameObject levelUpAnim;
+    public CanvasGroup canvasGroup;
+
     private int nowLevel = 0;
     private int level = 0;
     private int nowExp = 0;
     private int nextExp = 0;
 
     private int maxExp = 0;
+
+    public float duration = 2;
+    private float currentTime;
 
     public AdvancementManager advancementManager;
 
@@ -48,6 +55,7 @@ public class LevelManager : MonoBehaviour
         alarm.SetActive(true);
 
         levelView.SetActive(false);
+        levelUpAnim.SetActive(false);
     }
 
 
@@ -95,10 +103,12 @@ public class LevelManager : MonoBehaviour
 
         if(nowLevel != 0 && level > nowLevel)
         {
+            GameManager.instance.CheckPercent();
+
+            StartCoroutine(FadeInOut());
+
             SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
             NotionManager.instance.UseNotion3(NotionType.Levelup);
-
-            GameManager.instance.CheckPercent();
 
             FirebaseAnalytics.LogEvent("LevelUp_Profile");
 
@@ -142,5 +152,45 @@ public class LevelManager : MonoBehaviour
         accessDateText.text = LocalizationManager.instance.GetString("AccessDate") + " : " + playerDataBase.AccessDate;
 
         GourmetManager.instance.Initialize();
+    }
+
+    [Button]
+
+    void LevelIUpAnimation()
+    {
+        StartCoroutine(FadeInOut());
+
+        SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
+        NotionManager.instance.UseNotion3(NotionType.Levelup);
+    }
+
+    IEnumerator FadeInOut()
+    {
+        levelUpAnim.SetActive(true);
+        canvasGroup.alpha = 0;
+
+        currentTime = 0f;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, currentTime / duration);
+            canvasGroup.alpha = alpha;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f); // Wait for 1 second
+
+        currentTime = 0f; // Reset time for the next loop
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, currentTime / duration);
+            canvasGroup.alpha = alpha;
+            yield return null;
+        }
+
+        levelUpAnim.SetActive(false);
     }
 }

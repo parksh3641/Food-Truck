@@ -29,6 +29,7 @@ public class AdvancementManager : MonoBehaviour
 
     public Image[] needImg;
 
+    public GameObject titleLockedObj;
     public GameObject lockedObj;
 
     public Image advenceLevelUpButton;
@@ -38,7 +39,7 @@ public class AdvancementManager : MonoBehaviour
     private int nowNeed3 = 0;
 
     private int need1 = 5;
-    private int need2 = 50000;
+    private int need2 = 25000;
     private int need3 = 3;
 
     private float nowValue1 = 0;
@@ -62,7 +63,8 @@ public class AdvancementManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
         if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
 
-        lockedObj.SetActive(false);
+        titleLockedObj.SetActive(true);
+        lockedObj.SetActive(true);
     }
 
     public void Initialize()
@@ -142,17 +144,27 @@ public class AdvancementManager : MonoBehaviour
             needImg[2].color = Color.green;
         }
 
-        if(playerDataBase.Level >= nowNeed1 && playerDataBase.GourmetLevel >= nowNeed2 && playerDataBase.Proficiency >= nowNeed3)
+        if(playerDataBase.LockTutorial >= 7)
         {
-            lockedObj.SetActive(false);
+            titleLockedObj.SetActive(false);
 
-            isActive = true;
+            if (playerDataBase.Level >= nowNeed1 && playerDataBase.GourmetLevel >= nowNeed2 && playerDataBase.Proficiency >= nowNeed3)
+            {
+                lockedObj.SetActive(false);
+
+                isActive = true;
+            }
+            else
+            {
+                lockedObj.SetActive(true);
+
+                isActive = false;
+            }
         }
         else
         {
+            titleLockedObj.SetActive(true);
             lockedObj.SetActive(true);
-
-            isActive = false;
         }
 
         nowValue1 = playerDataBase.Advancement * value1;

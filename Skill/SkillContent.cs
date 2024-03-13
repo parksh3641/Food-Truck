@@ -54,9 +54,9 @@ public class SkillContent : MonoBehaviour
 
     private float skill15Value = 0.5f;
     private float skill16Value = 0.3f;
-    private float skill17Value = 0.05f;
-    private float skill18Value = 0.2f;
-    private float skill19Value = 0.02f;
+    private float skill17Value = 0.1f;
+    private float skill18Value = 0.4f;
+    private float skill19Value = 0.05f;
 
     private int priceGold = 500000;
 
@@ -102,6 +102,8 @@ public class SkillContent : MonoBehaviour
         icon.sprite = skillArray[(int)skillType];
 
         titleText.text = LocalizationManager.instance.GetString(skillType.ToString());
+
+        buttonTicket.SetActive(true);
 
         switch (skillType)
         {
@@ -224,7 +226,7 @@ public class SkillContent : MonoBehaviour
 
                 if (playerDataBase.Skill9 < maxLevelCrystal - 1)
                 {
-                    nextValueText.text = (skill9Value * (playerDataBase.Skill9 + 1)).ToString("N1") + "%";
+                    nextValueText.text = (skill9Value * (playerDataBase.Skill9 + 1)).ToString("N2") + "%";
                 }
                 else
                 {
@@ -303,6 +305,7 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill15:
+                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill15;
                 nowValue = skill15Value * playerDataBase.Skill15;
 
@@ -317,6 +320,7 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill16:
+                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill16;
                 nowValue = skill16Value * playerDataBase.Skill16;
 
@@ -331,12 +335,13 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill17:
+                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill17;
                 nowValue = skill17Value * playerDataBase.Skill17;
 
                 if (playerDataBase.Skill17 < maxLevelChallenge - 1)
                 {
-                    nextValueText.text = (skill17Value * (playerDataBase.Skill17 + 1)).ToString("N2") + "%";
+                    nextValueText.text = (skill17Value * (playerDataBase.Skill17 + 1)).ToString("N1") + "%";
                 }
                 else
                 {
@@ -345,6 +350,7 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill18:
+                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill18;
                 nowValue = skill18Value * playerDataBase.Skill18;
 
@@ -359,6 +365,7 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill19:
+                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill19;
                 nowValue = skill19Value * playerDataBase.Skill19;
 
@@ -428,7 +435,7 @@ public class SkillContent : MonoBehaviour
                 break;
         }
 
-        if (skillType == SkillType.Skill17 || skillType == SkillType.Skill19)
+        if (skillType == SkillType.Skill9 || skillType == SkillType.Skill19)
         {
             nowValueText.text = nowValue.ToString("N2") + "%";
         }
@@ -436,8 +443,6 @@ public class SkillContent : MonoBehaviour
         {
             nowValueText.text = nowValue.ToString("N1") + "%";
         }
-
-        buttonTicket.SetActive(true);
 
         if (level > 99)
         {

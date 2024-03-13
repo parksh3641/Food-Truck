@@ -32,7 +32,7 @@ public class MoneyAnimation : MonoBehaviour
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 40; i++)
         {
             MoneyContent monster = Instantiate(moneyPrefab);
             monster.transform.SetParent(moneyTransform);
@@ -61,9 +61,28 @@ public class MoneyAnimation : MonoBehaviour
     {
         number = target;
 
-        if(number >= 15)
+        if(number >= 10000000)
+        {
+            number = 40;
+        }
+        else if (number >= 5000000)
+        {
+            number = 30;
+        }
+        else if (number >= 1000000)
+        {
+            number = 20;
+        }
+        else if(number >= 100000)
         {
             number = 15;
+        }
+        else
+        {
+            if(number >= 10)
+            {
+                number = 10;
+            }
         }
 
         StopAllCoroutines();

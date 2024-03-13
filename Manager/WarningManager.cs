@@ -49,7 +49,7 @@ public class WarningManager : MonoBehaviour
             OpenBugReportWarning();
         }
 
-        if(playerDataBase.EventNumber == 3 || playerDataBase.BuyCrystal >= 9999999) //계정 정지
+        if(playerDataBase.EventNumber == 3) //계정 정지
         {
             OpenAccountStopWarning();
         }

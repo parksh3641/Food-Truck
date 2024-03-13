@@ -131,28 +131,28 @@ public class ShopContent : MonoBehaviour
                 //effect.SetActive(true);
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(500000) + "</size>";
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
 
                 if(playerDataBase.Candy1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
-                }
-
-                if(playerDataBase.JapaneseFood1MaxValue > 0)
                 {
                     rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(3000000) + "</size>";
                 }
 
-                if(playerDataBase.Dessert1MaxValue > 0)
+                if(playerDataBase.JapaneseFood1MaxValue > 0)
                 {
                     rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
+                }
+
+                if(playerDataBase.Dessert1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
                 }
                 effect.SetActive(true);
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(500);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(300);
 
                 titleText.plusText = " x1";
 
@@ -435,7 +435,7 @@ public class ShopContent : MonoBehaviour
 
                 titleText.plusText = " x1";
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(200);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(60);
 
                 infoText.localizationName = "Hold";
                 infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece;
@@ -586,7 +586,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicket:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(500);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(1000);
 
                 titleText.plusText = " x1";
 
@@ -597,7 +597,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.SkillTicket:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(300);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(500);
 
                 titleText.plusText = " x1";
 

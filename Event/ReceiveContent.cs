@@ -12,6 +12,8 @@ public class ReceiveContent : MonoBehaviour
     public Text countText;
     public GameObject effect;
 
+    public bool isEffect = false;
+
     ImageDataBase imageDataBase;
 
     Sprite[] rewardArray;
@@ -24,6 +26,8 @@ public class ReceiveContent : MonoBehaviour
         rewardArray = imageDataBase.GetRewardArray();
 
         rankBackgroundArray = imageDataBase.GetRankBackgroundArray();
+
+        effect.SetActive(false);
     }
 
     public void Initialize(RewardType type, int count)
@@ -41,7 +45,10 @@ public class ReceiveContent : MonoBehaviour
 
         mainBackground.sprite = rankBackgroundArray[0];
 
-        effect.SetActive(false);
+        if(!isEffect)
+        {
+            effect.SetActive(false);
+        }
 
         switch (type)
         {
@@ -77,12 +84,15 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Treasure1:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
                 break;
             case RewardType.Treasure2:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
                 break;
             case RewardType.Treasure3:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
                 break;
             case RewardType.Treasure4:
                 mainBackground.sprite = rankBackgroundArray[0];
@@ -98,6 +108,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Treasure7:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
                 break;
             case RewardType.Treasure8:
                 mainBackground.sprite = rankBackgroundArray[1];

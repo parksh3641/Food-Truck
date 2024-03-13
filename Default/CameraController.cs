@@ -22,9 +22,9 @@ public class CameraController : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
     private bool shake = false;
-    private bool isA = false;
-    private bool isB = false;
-    private bool isC = false;
+    public bool isA = false;
+    public bool isB = false;
+    public bool isC = false;
 
     public GameManager gameManager;
 
@@ -50,11 +50,15 @@ public class CameraController : MonoBehaviour
                 if (Vector3.Distance(aPoint.position, Camera.main.transform.position) < 0.03f)
                 {
                     Camera.main.transform.position = aPoint.position;
-                    Camera.main.transform.rotation = aPoint.rotation; 
+                    Camera.main.transform.rotation = aPoint.rotation;
 
                     isA = false;
+                    isB = false;
+                    isC = false;
 
                     gameManager.isDelay_Camera = true;
+
+                    Debug.Log("Go To A Point End");
                 }
             }
 
@@ -68,9 +72,13 @@ public class CameraController : MonoBehaviour
                     Camera.main.transform.position = bPoint.position;
                     Camera.main.transform.rotation = bPoint.rotation;
 
+                    isA = false;
                     isB = false;
+                    isC = false;
 
                     gameManager.isDelay_Camera = true;
+
+                    Debug.Log("Go To B Point End");
                 }
             }
 
@@ -84,7 +92,11 @@ public class CameraController : MonoBehaviour
                     Camera.main.transform.position = cPoint.position;
                     Camera.main.transform.rotation = cPoint.rotation;
 
+                    isA = false;
+                    isB = false;
                     isC = false;
+
+                    Debug.Log("Go To C Point End");
                 }
             }
         }

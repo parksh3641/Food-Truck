@@ -178,13 +178,13 @@ public class RankingManager : MonoBehaviour
             receiveContents[11].Initialize(RewardType.Icon_Ranking4, 1);
 
             receiveContents[12].Initialize(RewardType.Crystal, 2000);
-            receiveContents[13].Initialize(RewardType.RankPoint, 1000);
+            receiveContents[13].Initialize(RewardType.RankPoint, 1500);
 
             receiveContents[14].Initialize(RewardType.Crystal, 1000);
-            receiveContents[15].Initialize(RewardType.RankPoint, 500);
+            receiveContents[15].Initialize(RewardType.RankPoint, 1000);
 
             receiveContents[16].Initialize(RewardType.Crystal, 300);
-            receiveContents[17].Initialize(RewardType.RankPoint, 100);
+            receiveContents[17].Initialize(RewardType.RankPoint, 500);
 
             isDelay = true;
 

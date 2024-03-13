@@ -413,7 +413,6 @@ public class ShopManager : MonoBehaviour
                 shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
                 shopContents[25].Initialize(ItemType.DefDestroyTicketPiece, BuyType.Free, this);
                 shopContents[32].Initialize(ItemType.SuperOffline, BuyType.Rm, this);
-                shopContents[33].Initialize(ItemType.AdReward_Crystal, BuyType.Ad, this);
                 shopContents[34].Initialize(ItemType.AutoUpgrade, BuyType.Rm, this);
                 shopContents[35].Initialize(ItemType.AutoPresent, BuyType.Rm, this);
 
@@ -442,15 +441,6 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     shopContents[25].SetLocked(true);
-                }
-
-                if (playerDataBase.DailyReward_Crystal == 0)
-                {
-                    shopContents[33].SetLocked(false);
-                }
-                else
-                {
-                    shopContents[33].SetLocked(true);
                 }
 
                 if (playerDataBase.DailyAdsReward == 0)
@@ -584,12 +574,23 @@ public class ShopManager : MonoBehaviour
 
                 packageAlarm[1].SetActive(false);
 
+                shopContents[33].Initialize(ItemType.AdReward_Crystal, BuyType.Ad, this);
+
                 shopContents[13].Initialize(ItemType.CrystalShop1, BuyType.Rm, this);
                 shopContents[14].Initialize(ItemType.CrystalShop2, BuyType.Rm, this);
                 shopContents[15].Initialize(ItemType.CrystalShop3, BuyType.Rm, this);
                 shopContents[16].Initialize(ItemType.CrystalShop4, BuyType.Rm, this);
                 shopContents[17].Initialize(ItemType.CrystalShop5, BuyType.Rm, this);
                 shopContents[18].Initialize(ItemType.CrystalShop6, BuyType.Rm, this);
+
+                if (playerDataBase.DailyReward_Crystal == 0)
+                {
+                    shopContents[33].SetLocked(false);
+                }
+                else
+                {
+                    shopContents[33].SetLocked(true);
+                }
 
                 shopContents[3].Initialize(ItemType.GoldShop1, BuyType.Crystal, this);
                 shopContents[4].Initialize(ItemType.GoldShop2, BuyType.Crystal, this);
@@ -609,7 +610,6 @@ public class ShopManager : MonoBehaviour
                 shopContents[22].Initialize(ItemType.Portion4, BuyType.RankPoint, this);
                 shopContents[23].Initialize(ItemType.Portion5, BuyType.RankPoint, this);
                 shopContents[36].Initialize(ItemType.BuffTicket, BuyType.RankPoint, this);
-                shopContents[36].gameObject.SetActive(false);
                 shopContents[37].Initialize(ItemType.SkillTicket, BuyType.RankPoint, this);
                 shopContents[38].Initialize(ItemType.RepairTicket, BuyType.RankPoint, this);
                 shopContents[39].Initialize(ItemType.RepairTicket10, BuyType.RankPoint, this);
@@ -670,9 +670,9 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case ItemType.DefDestroyTicket:
-                if (playerDataBase.RankPoint >= 500)
+                if (playerDataBase.RankPoint >= 300)
                 {
-                    playerDataBase.RankPoint -= 500;
+                    playerDataBase.RankPoint -= 300;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -1072,9 +1072,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.BuffTicket:
-                if (playerDataBase.RankPoint >= 500)
+                if (playerDataBase.RankPoint >= 1000)
                 {
-                    playerDataBase.RankPoint -= 500;
+                    playerDataBase.RankPoint -= 1000;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -1093,9 +1093,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.SkillTicket:
-                if (playerDataBase.RankPoint >= 300)
+                if (playerDataBase.RankPoint >= 500)
                 {
-                    playerDataBase.RankPoint -= 300;
+                    playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = playerDataBase.RankPoint.ToString();
@@ -1267,23 +1267,23 @@ public class ShopManager : MonoBehaviour
 
         if (playerDataBase.Dessert1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(5000000);
+            PlayfabManager.instance.UpdateAddGold(10000000);
             return;
         }
 
         if (playerDataBase.JapaneseFood1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(3000000);
+            PlayfabManager.instance.UpdateAddGold(5000000);
             return;
         }
 
         if (playerDataBase.Candy1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(1000000);
+            PlayfabManager.instance.UpdateAddGold(3000000);
             return;
         }
 
-        PlayfabManager.instance.UpdateAddGold(500000);
+        PlayfabManager.instance.UpdateAddGold(1000000);
     }
 
     public void SuccessWatchAd_Portion()

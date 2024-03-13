@@ -47,9 +47,6 @@ public class OptionManager : MonoBehaviour
     public GameObject googleLink;
     public GameObject appleLink;
 
-    
-    [Space]
-    public SoundManager soundManager;
 
     private void Awake()
     {
@@ -215,7 +212,7 @@ public class OptionManager : MonoBehaviour
 
             musicButtonImg.sprite = buttonImgArray[0];
 
-            soundManager.PlayBGM();
+            SoundManager.instance.PlayBGM();
         }
         else
         {
@@ -224,7 +221,7 @@ public class OptionManager : MonoBehaviour
 
             musicButtonImg.sprite = buttonImgArray[1];
 
-            soundManager.StopBGM();
+            SoundManager.instance.StopBGM();
         }
     }
 

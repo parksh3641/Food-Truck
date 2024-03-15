@@ -212,8 +212,8 @@ public class OfflineManager : MonoBehaviour
         adExpText.text = MoneyUnitString.ToCurrencyString(addExp * 12);
 
         receiveContents[0].Initialize(RewardType.Gold, saveCoin);
-        receiveContents[1].Initialize(RewardType.Crystal, saveCrystal);
-        receiveContents[2].Initialize(RewardType.Exp, saveExp);
+        receiveContents[1].Initialize(RewardType.Exp, saveExp);
+        receiveContents[2].Initialize(RewardType.Crystal, saveCrystal);
 
         if (DateTime.Compare(DateTime.Now, serverTime) == 1)
         {
@@ -243,8 +243,8 @@ public class OfflineManager : MonoBehaviour
         if (receiveContents[0].gameObject.activeInHierarchy)
         {
             receiveContents[0].Initialize(RewardType.Gold, saveCoin);
-            receiveContents[1].Initialize(RewardType.Crystal, saveCrystal);
-            receiveContents[2].Initialize(RewardType.Exp, saveExp);
+            receiveContents[1].Initialize(RewardType.Exp, saveExp);
+            receiveContents[2].Initialize(RewardType.Crystal, saveCrystal);
         }
     }
 

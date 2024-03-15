@@ -34,7 +34,7 @@ public class IconManager : MonoBehaviour
     public GameObject saveLockObject;
 
     private int number = 0;
-    private int maxProficiency = 9;
+    private int maxProficiency = 7;
     private float reward = 0.5f;
 
 
@@ -167,7 +167,7 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.HotdogTruck) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.SnackLabMaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
@@ -389,13 +389,7 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
-
-        number++;
-        if (playerDataBase.GetPetNumber() > 6 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.GetAnimalNumber() > 6 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
@@ -419,31 +413,45 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.UseSauce1 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.UseSauce2 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UseSauce1 > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.UseSauce3 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UseSauce2 > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.UseSauce4 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UseSauce3 > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.UseSauce5 > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UseSauce4 > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.UseSauce5 > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+
+        int sauce = playerDataBase.UseSauce1 + playerDataBase.UseSauce2 + playerDataBase.UseSauce3 + playerDataBase.UseSauce4 + playerDataBase.UseSauce5;
+        number++;
+        if (sauce > 999 ||playerDataBase.CheckIcon(IconType.Icon_1 + number)) //아무 소스 1000번
         {
             GetIcon(number);
         }
@@ -455,7 +463,19 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.UpgradeCount > 999 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.UpgradeCount > 9999 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (GameStateManager.instance.Bankruptcy > 0 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
@@ -467,48 +487,84 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.RecipeEventCount > 999 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.OfflineCount > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.AccessDate > 6 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.AccessDate > 29 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number)) //버그 발견 이벤트 참여
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.CheckIcon(IconType.Icon_1 + number)) //리뷰 작성 이벤트 참여
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number)) //61
+        if (playerDataBase.DefDestroyCount > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //파괴 방어 500회
         {
             GetIcon(number);
         }
 
-        Debug.Log(number);
+        number++;
+        if (playerDataBase.YummyTimeCount > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.RecoverCount > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //복구 100회
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Dungeon1Count > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Dungeon2Count > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Dungeon3Count > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Dungeon4Count > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        Debug.Log((number + 1));
     }
 
     void GetIcon(int number)

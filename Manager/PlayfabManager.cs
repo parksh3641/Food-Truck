@@ -1460,6 +1460,12 @@ public class PlayfabManager : MonoBehaviour
                        case "OfflineCount":
                            playerDataBase.OfflineCount = statistics.Value;
                            break;
+                       case "DefDestroyCount":
+                           playerDataBase.DefDestroyCount = statistics.Value;
+                           break;
+                       case "RecoverCount":
+                           playerDataBase.RecoverCount = statistics.Value;
+                           break;
                        case "AccessDate":
                            playerDataBase.AccessDate = statistics.Value;
                            break;

@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
 
     private int maxExp = 0;
 
-    public float duration = 2;
+    private float duration = 0.7f;
     private float currentTime;
 
     public AdvancementManager advancementManager;

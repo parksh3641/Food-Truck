@@ -124,6 +124,9 @@ public class RecoverManager : MonoBehaviour
                 break;
         }
 
+        playerDataBase.RecoverCount += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RecoverCount", playerDataBase.RecoverCount);
+
         FirebaseAnalytics.LogEvent("Clear_Recover");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);

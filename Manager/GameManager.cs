@@ -1,4 +1,8 @@
 using Firebase.Analytics;
+#if UNITY_ANDROID
+using Google.Play.AppUpdate;
+using Google.Play.Common;
+#endif
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -73,6 +77,15 @@ public class GameManager : MonoBehaviour
     public Text buff2Text;
     public Text buff3Text;
 
+    public Image[] buffImage;
+    public ButtonScaleAnimation[] buffScaleAnim;
+
+    Color buffGrayColor = new Color(200 / 255f, 200 / 255f, 200 / 255f);
+    Color buff1Color = new Color(255 / 255f, 211 / 255f, 6 / 255f);
+    Color buff2Color = new Color(28 / 255f, 197 / 255f, 250 / 255f);
+    Color buff3Color = new Color(255 / 255f, 50 / 255f, 255 / 255f);
+    Color buff4Color = new Color(0 / 255f, 230 / 255f, 0 / 255f);
+
     private int buff1Value = 50;
     private int buff2Value = 15;
     private int buff3Value = 10;
@@ -83,7 +96,7 @@ public class GameManager : MonoBehaviour
     private bool buff4 = false;
 
     [Space]
-    [Title("Portion_Ad")]
+    [Title("Sauce_Ad")]
     public GameObject portionAdView;
     public ReceiveContent portionReceiveContent;
 
@@ -194,7 +207,7 @@ public class GameManager : MonoBehaviour
     public Text feverText;
 
     private float feverCount = 0;
-    private float feverMaxCount = 400;
+    private float feverMaxCount = 300;
     private float feverTime = 0;
     private float feverPlus = 3;
 
@@ -233,8 +246,9 @@ public class GameManager : MonoBehaviour
     private int portion5Value = 10;
     private int portion6Value = 0;
 
-    float currentTime1, currentTime2, currentTime3, currentTime4, currentTime5, currentTime6;
-    float fillAmount1, fillAmount2, fillAmount3, fillAmount4, fillAmount5, fillAmount6;
+    float currentTime, currentTime1, currentTime2, currentTime3, currentTime4, currentTime5, currentTime6;
+    float fillAmount, fillAmount1, fillAmount2, fillAmount3, fillAmount4, fillAmount5, fillAmount6;
+    public ButtonScaleAnimation[] portionScaleAnim;
 
     private int level = 0;
     private int nextLevel = 0;
@@ -349,6 +363,7 @@ public class GameManager : MonoBehaviour
     DateTime decemberStart;
     DateTime decemberEnd;
 
+
     private void Awake()
     {
         instance = this;
@@ -439,6 +454,11 @@ public class GameManager : MonoBehaviour
         portionFillamount5.fillAmount = 0;
         portionFillamount6.fillAmount = 0;
 
+        for(int i = 0; i < buffImage.Length; i ++)
+        {
+            buffImage[i].color = buffGrayColor;
+        }
+
         defTicketObj.SetActive(false);
         bankruptcyView.SetActive(false);
         privacypolicyView.SetActive(false);
@@ -524,7 +544,7 @@ public class GameManager : MonoBehaviour
 
 #if !UNITY_EDITOR
             GameStateManager.instance.Developer = false;
-            GameStateManager.instance.Recorder = false;
+            GameStateManager.instance.YoutubeVideo = false;
 #endif
 
         if (!GameStateManager.instance.Privacypolicy)
@@ -1422,7 +1442,6 @@ public class GameManager : MonoBehaviour
                     }
                     break;
             }
-
             FirebaseAnalytics.LogEvent("NormalMode");
         }
         else
@@ -1501,8 +1520,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            buff4Obj.SetActive(false);
-            OffBuff(3);
+            if(buff4Obj.gameObject.activeInHierarchy)
+            {
+                OffBuff(3);
+                buff4Obj.SetActive(false);
+            }
         }
 
         if(!playerDataBase.AutoPresent)
@@ -1656,7 +1678,7 @@ public class GameManager : MonoBehaviour
         successX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         successX2 += playerDataBase.Treasure3 * 0.2f;
 
-        sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
+        sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetFoodTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 0.4f;
         sellPricePlus += playerDataBase.Skill18 * 0.4f;
         sellPricePlus += playerDataBase.Proficiency * 1;
@@ -1696,7 +1718,7 @@ public class GameManager : MonoBehaviour
         feverTime += (30 * (0.003f * playerDataBase.Skill1));
         feverTime += (30 * (0.004f * playerDataBase.Treasure9));
 
-        feverMaxCount = 400 - (300 * (0.003f * playerDataBase.Skill2));
+        feverMaxCount = 300 - (300 * (0.003f * playerDataBase.Skill2));
         feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
         portion1Time = 30 + (30 * (0.003f * playerDataBase.Skill4)) + (30 * (0.006f * playerDataBase.Treasure6));
@@ -1750,6 +1772,12 @@ public class GameManager : MonoBehaviour
             successX2 += buff3Value;
         }
 
+        if(GameStateManager.instance.YoutubeVideo)
+        {
+            defDestroy = 0;
+            successX2 = 0;
+        }
+
         UpgradeInitialize();
     }
 
@@ -1797,11 +1825,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if(!GameStateManager.instance.Pause)
-            {
-                upgradeButtonAnim.AutoClick();
-                UpgradeButton(2);
-            }
+            upgradeButtonAnim.AutoClick();
+            UpgradeButton(2);
         }
 
         yield return autoUpgradeSecond;
@@ -1828,11 +1853,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (!GameStateManager.instance.Pause)
-            {
-                upgradeButtonAnim.AutoClick();
-                UpgradeButton(2);
-            }
+            upgradeButtonAnim.AutoClick();
+            UpgradeButton(2);
         }
 
         yield return buffUpgradeSecond;
@@ -3539,20 +3561,20 @@ public class GameManager : MonoBehaviour
                 {
                     level += 1;
 
-                    if (!changeFoodManager.changeFoodView.activeInHierarchy)
-                    {
-                        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
-                    }
+                    //if (!changeFoodManager.changeFoodView.activeInHierarchy && !GameStateManager.instance.YoutubeVideo)
+                    //{
+                    //    NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+                    //}
                 }
             }
             else
             {
                 level += 1;
 
-                if (!changeFoodManager.changeFoodView.activeInHierarchy)
-                {
-                    NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
-                }
+                //if (!changeFoodManager.changeFoodView.activeInHierarchy && !GameStateManager.instance.YoutubeVideo)
+                //{
+                //    NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+                //}
             }
 
             GameStateManager.instance.UpgradeCount += 1;
@@ -3617,7 +3639,7 @@ public class GameManager : MonoBehaviour
             {
                 UseDefTicket();
 
-                NotionManager.instance.UseNotion(NotionType.DefDestroyNotion);
+                NotionManager.instance.UseNotion4(NotionType.DefDestroyNotion);
                 return;
             }
             else
@@ -3774,8 +3796,13 @@ public class GameManager : MonoBehaviour
                         CheckFoodState();
                         UpgradeInitialize();
 
+                        playerDataBase.DefDestroyCount += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyCount", playerDataBase.DefDestroyCount);
+
                         SoundManager.instance.PlaySFX(GameSfxType.Shield);
                         NotionManager.instance.UseNotion4(NotionType.DefDestroyNotion);
+
+                        FirebaseAnalytics.LogEvent("Defense_Destroy");
 
                         return;
                     }
@@ -3822,18 +3849,17 @@ public class GameManager : MonoBehaviour
             }
 
             GameStateManager.instance.DestroyCount += 1;
-
             if(GameStateManager.instance.DestroyCount >= 10)
             {
                 tutorialManager.Next3();
             }
 
-            SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
-
-            if (!changeFoodManager.changeFoodView.activeInHierarchy)
+            if (!changeFoodManager.changeFoodView.activeInHierarchy && !GameStateManager.instance.YoutubeVideo)
             {
                 NotionManager.instance.UseNotion(NotionType.FailUpgrade);
             }
+
+            SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
         }
 
         if (feverFillamount.gameObject.activeInHierarchy)
@@ -3870,7 +3896,7 @@ public class GameManager : MonoBehaviour
 
         if (!changeFoodManager.changeFoodView.activeInHierarchy)
         {
-            NotionManager.instance.UseNotion(NotionType.MaxLevel);
+            NotionManager.instance.UseNotion2(NotionType.MaxLevel);
         }
 
         if (GameStateManager.instance.Effect)
@@ -4406,17 +4432,17 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.FeverCount = 0;
 
         GameStateManager.instance.YummyTimeCount += 1;
-
         playerDataBase.YummyTimeCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("YummyTimeCount", playerDataBase.YummyTimeCount);
 
-        float currentTime = 0f;
-        float fillAmount = 0;
+        currentTime = 0f;
+        fillAmount = 0;
+
+        portionScaleAnim[3].StopAnim();
 
         while (currentTime < feverTime)
         {
             fillAmount = Mathf.Lerp(1.0f, 0, currentTime / feverTime);
-
             fillAmount = Mathf.Clamp01(fillAmount);
 
             feverFillamount.fillAmount = fillAmount;
@@ -4425,6 +4451,8 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
+
+        portionScaleAnim[3].PlayAnim();
 
         yummyTimeParticle.gameObject.SetActive(false);
         yummyTime2Particle[(int)GameStateManager.instance.IslandType].gameObject.SetActive(false);
@@ -5122,6 +5150,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckDefTicket()
     {
+        if (GameStateManager.instance.YoutubeVideo) return;
+
         if(level >= 1 && level + 1 < maxLevel && playerDataBase.LockTutorial > 1)
         {
             defTicketObj.SetActive(true);
@@ -5324,7 +5354,7 @@ public class GameManager : MonoBehaviour
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion2(NotionType.UsePortionNotion1);
 
-                        FirebaseAnalytics.LogEvent("UsePortion1");
+                        FirebaseAnalytics.LogEvent("UseSauce1");
                     }
                     else
                     {
@@ -5360,7 +5390,7 @@ public class GameManager : MonoBehaviour
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion2(NotionType.UsePortionNotion2);
 
-                        FirebaseAnalytics.LogEvent("UsePortion2");
+                        FirebaseAnalytics.LogEvent("UseSauce2");
                     }
                     else
                     {
@@ -5396,7 +5426,7 @@ public class GameManager : MonoBehaviour
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion2(NotionType.UsePortionNotion3);
 
-                        FirebaseAnalytics.LogEvent("UsePortion3");
+                        FirebaseAnalytics.LogEvent("UseSauce3");
                     }
                     else
                     {
@@ -5428,7 +5458,7 @@ public class GameManager : MonoBehaviour
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion2(NotionType.UsePortionNotion4);
 
-                        FirebaseAnalytics.LogEvent("UsePortion4");
+                        FirebaseAnalytics.LogEvent("UseSauce4");
                     }
                     else
                     {
@@ -5464,7 +5494,7 @@ public class GameManager : MonoBehaviour
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion2(NotionType.UsePortionNotion5);
 
-                        FirebaseAnalytics.LogEvent("UsePortion5");
+                        FirebaseAnalytics.LogEvent("UseSauce5");
                     }
                     else
                     {
@@ -5482,12 +5512,12 @@ public class GameManager : MonoBehaviour
                     {
                         portion6 = true;
 
-                        needPlus += 30;
-                        sellPricePlus += 10;
-                        successPlus += 1;
-                        feverCount = feverMaxCount;
+                        needPlus += portion1Value;
+                        sellPricePlus += portion2Value;
+                        successPlus += portion3Value;
+                        feverCount += (feverMaxCount * ((portion4Value * 0.01f) + portion4Plus));
+                        defDestroy += portion5Value;
                         CheckFever();
-                        defDestroy += 10;
 
                         UpgradeInitialize();
 
@@ -5502,7 +5532,7 @@ public class GameManager : MonoBehaviour
                         SoundManager.instance.PlaySFX(GameSfxType.UseSources);
                         NotionManager.instance.UseNotion2(NotionType.UsePortionNotion6);
 
-                        FirebaseAnalytics.LogEvent("UsePortion6");
+                        FirebaseAnalytics.LogEvent("UseSauce6");
                     }
                     else
                     {
@@ -5522,6 +5552,8 @@ public class GameManager : MonoBehaviour
     {
         currentTime1 = 0f;
 
+        portionScaleAnim[0].StopAnim();
+
         while (currentTime1 < portion1Time)
         {
             fillAmount1 = Mathf.Lerp(1.0f, 0, currentTime1 / portion1Time);
@@ -5534,6 +5566,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        portionScaleAnim[0].PlayAnim();
+
         portion1 = false;
         portionFillamount1.fillAmount = 0;
 
@@ -5544,6 +5578,8 @@ public class GameManager : MonoBehaviour
     IEnumerator PortionCoroution2()
     {
         currentTime2 = 0f;
+
+        portionScaleAnim[1].StopAnim();
 
         while (currentTime2 < portion2Time)
         {
@@ -5557,6 +5593,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        portionScaleAnim[1].PlayAnim();
+
         portion2 = false;
         portionFillamount2.fillAmount = 0;
 
@@ -5567,6 +5605,8 @@ public class GameManager : MonoBehaviour
     IEnumerator PortionCoroution3()
     {
         currentTime3 = 0f;
+
+        portionScaleAnim[2].StopAnim();
 
         while (currentTime3 < portion3Time)
         {
@@ -5580,6 +5620,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        portionScaleAnim[2].PlayAnim();
+
         portion3 = false;
         portionFillamount3.fillAmount = 0;
 
@@ -5590,6 +5632,8 @@ public class GameManager : MonoBehaviour
     IEnumerator PortionCoroution5()
     {
         currentTime5 = 0f;
+
+        portionScaleAnim[4].StopAnim();
 
         while (currentTime5 < portion5Time)
         {
@@ -5604,6 +5648,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        portionScaleAnim[4].PlayAnim();
+
         portion5 = false;
         portionFillamount5.fillAmount = 0;
 
@@ -5614,6 +5660,8 @@ public class GameManager : MonoBehaviour
     IEnumerator PortionCoroution6()
     {
         currentTime6 = 0f;
+
+        portionScaleAnim[5].StopAnim();
 
         while (currentTime6 < portion6Time)
         {
@@ -5626,6 +5674,8 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
+
+        portionScaleAnim[5].PlayAnim();
 
         portion6 = false;
         portionFillamount6.fillAmount = 0;
@@ -5640,15 +5690,21 @@ public class GameManager : MonoBehaviour
 
     public void OnBuff(int number)
     {
-        switch(number)
+        buffScaleAnim[number].StopAnim();
+
+        switch (number)
         {
             case 0:
+                buffImage[0].color = buff1Color;
+
                 buff1 = true;
 
                 sellPricePlus += buff1Value;
                 UpgradeInitialize();
                 break;
             case 1:
+                buffImage[1].color = buff2Color;
+
                 buff2 = true;
 
                 defDestroy += buff2Value;
@@ -5666,6 +5722,8 @@ public class GameManager : MonoBehaviour
                 defDestroyText.ReLoad();
                 break;
             case 2:
+                buffImage[2].color = buff3Color;
+
                 buff3 = true;
 
                 successX2 += buff3Value;
@@ -5675,6 +5733,8 @@ public class GameManager : MonoBehaviour
                 successX2Text.ReLoad();
                 break;
             case 3:
+                buffImage[3].color = buff4Color;
+
                 buff4 = true;
 
                 if (!buffAutoUpgrade)
@@ -5693,6 +5753,10 @@ public class GameManager : MonoBehaviour
 
     public void OffBuff(int number)
     {
+        buffScaleAnim[number].PlayAnim();
+
+        buffImage[number].color = buffGrayColor;
+
         switch (number)
         {
             case 0:
@@ -5893,14 +5957,71 @@ public class GameManager : MonoBehaviour
 
     public void OpenUpdate()
     {
-#if UNITY_ANDROID || UNITY_EDITOR
-        Application.OpenURL("https://play.google.com/store/apps/details?id=com.whilili.foodtruck");
+#if UNITY_ANDROID
+        StartCoroutine(CheckForUpdate());
 #elif UNITY_IOS
         Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
 #endif
 
         FirebaseAnalytics.LogEvent("Open_Update");
     }
+
+#if UNITY_ANDROID
+    IEnumerator CheckForUpdate()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        AppUpdateManager appUpdateManager = new AppUpdateManager();
+
+        PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> appUpdateInfoOperation = appUpdateManager.GetAppUpdateInfo();
+
+        yield return appUpdateInfoOperation;
+
+        if (appUpdateInfoOperation.IsSuccessful)
+        {
+            var appUpdateInfoResult = appUpdateInfoOperation.GetResult();
+
+            if(appUpdateInfoResult.UpdateAvailability == UpdateAvailability.UpdateAvailable)
+            {
+                var appUpdateOptions = AppUpdateOptions.ImmediateAppUpdateOptions();
+                var startUpdateRequest = appUpdateManager.StartUpdate(appUpdateInfoResult,appUpdateOptions);
+                
+                while(!startUpdateRequest.IsDone)
+                {
+                    if(startUpdateRequest.Status == AppUpdateStatus.Downloading)
+                    {
+                        Debug.Log("업데이트 다운로드 진행중");
+
+                    }
+                    else if(startUpdateRequest.Status == AppUpdateStatus.Downloaded)
+                    {
+                        Debug.Log("다운로드가 완료");
+                    }
+
+                    yield return null;
+                }
+
+                var result = appUpdateManager.CompleteUpdate();
+
+                while(!result.IsDone)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+
+                yield return (int)startUpdateRequest.Status;
+            }
+            else if(appUpdateInfoResult.UpdateAvailability == UpdateAvailability.UpdateNotAvailable)
+            {
+                Debug.Log("업데이트가 없습니다");
+            }
+        }
+        else
+        {
+            Debug.Log("업데이트 에러");
+            Application.OpenURL("https://play.google.com/store/apps/details?id=com.whilili.foodtruck");
+        }
+    }
+#endif
 
     public void OpenURL()
     {
@@ -6299,7 +6420,7 @@ public class GameManager : MonoBehaviour
 
     public void GetExp()
     {
-        playerDataBase.Exp += 100000;
+        playerDataBase.Exp += 1000000;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
 

@@ -52,7 +52,7 @@ public class GameStateManager : MonoBehaviour
 
         [Space]
         public bool developer = false;
-        public bool recorder = false;
+        public bool youtubeVideo = false;
 
 
         [Space]
@@ -531,15 +531,15 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public bool Recorder
+    public bool YoutubeVideo
     {
         get
         {
-            return gameSettings.recorder;
+            return gameSettings.youtubeVideo;
         }
         set
         {
-            gameSettings.recorder = value;
+            gameSettings.youtubeVideo = value;
             SaveFile();
         }
     }

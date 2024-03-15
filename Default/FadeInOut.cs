@@ -13,6 +13,8 @@ public class FadeInOut : MonoBehaviour
     void Awake()
     {
         instance = this;
+
+        DOTween.Init();
     }
 
     [Button]

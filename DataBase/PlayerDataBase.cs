@@ -190,6 +190,10 @@ public class PlayerDataBase : ScriptableObject
     private int dungeon4Count = 0;
     [SerializeField]
     private int offlineCount = 0;
+    [SerializeField]
+    private int defDestroyCount = 0;
+    [SerializeField]
+    private int recoverCount = 0;
 
     [Space]
     [Title("Quest")]
@@ -1104,6 +1108,18 @@ public class PlayerDataBase : ScriptableObject
     {
         get { return offlineCount; }
         set { offlineCount = value; }
+    }
+
+    public int DefDestroyCount
+    {
+        get { return defDestroyCount; }
+        set { defDestroyCount = value; }
+    }
+
+    public int RecoverCount
+    {
+        get { return recoverCount; }
+        set { recoverCount = value; }
     }
 
     public int LockTutorial
@@ -5185,6 +5201,8 @@ public class PlayerDataBase : ScriptableObject
         dungeon3Count = 0;
         dungeon4Count = 0;
         offlineCount = 0;
+        defDestroyCount = 0;
+        recoverCount = 0;
 
         guideIndex = 0;
 
@@ -5384,7 +5402,7 @@ public class PlayerDataBase : ScriptableObject
         return count;
     }
 
-    public int GetPetNumber()
+    public int GetAnimalNumber()
     {
         int count = 0;
 
@@ -5792,7 +5810,7 @@ public class PlayerDataBase : ScriptableObject
         return count;
     }
 
-    public int GetTruckHighNumber()
+    public int GetFoodTruckHighNumber()
     {
         int count = 0;
 
@@ -6185,6 +6203,11 @@ public class PlayerDataBase : ScriptableObject
         }
 
         return count;
+    }
+
+    public int GetFlowerHighNumber()
+    {
+        return 0;
     }
 
     public int GetRecipeUpgradeCount()

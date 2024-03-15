@@ -606,11 +606,11 @@ public enum IconType
     Icon_69,
     Icon_70,
     Icon_71,
-    Icon_72,
-    Icon_73,
-    Icon_74,
-    Icon_75,
-    Icon_76,
+    //Icon_72,
+    //Icon_73,
+    //Icon_74,
+    //Icon_75,
+    //Icon_76,
 }
 
 public enum GifticonType

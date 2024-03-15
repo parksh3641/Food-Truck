@@ -127,6 +127,14 @@ public class LockManager : MonoBehaviour
             menuIcon[17].SetActive(false);
             menuIcon[18].SetActive(true);
         }
+
+        if (GameStateManager.instance.YoutubeVideo)
+        {
+            menuIcon[0].SetActive(false);
+            menuIcon[10].SetActive(false);
+            menuIcon[11].SetActive(false);
+            menuIcon[18].SetActive(false);
+        }
     }
 
     public void UnLocked(int number)

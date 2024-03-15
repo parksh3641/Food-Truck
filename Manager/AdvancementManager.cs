@@ -34,6 +34,9 @@ public class AdvancementManager : MonoBehaviour
 
     public Image advenceLevelUpButton;
 
+    public GameObject levelUpAnim;
+    public CanvasGroup canvasGroup;
+
     private int nowNeed1 = 0;
     private int nowNeed2 = 0;
     private int nowNeed3 = 0;
@@ -53,6 +56,9 @@ public class AdvancementManager : MonoBehaviour
     private bool isActive = false;
     private bool isDelay = false;
 
+    private float duration = 0.7f;
+    private float currentTime;
+
     Sprite sp;
 
     PlayerDataBase playerDataBase;
@@ -65,6 +71,8 @@ public class AdvancementManager : MonoBehaviour
 
         titleLockedObj.SetActive(true);
         lockedObj.SetActive(true);
+
+        levelUpAnim.SetActive(false);
     }
 
     public void Initialize()
@@ -200,11 +208,13 @@ public class AdvancementManager : MonoBehaviour
             return;
         }
 
+        StartCoroutine(FadeInOut());
+
         playerDataBase.Advancement += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Advancement", playerDataBase.Advancement);
 
         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
-        NotionManager.instance.UseNotion(NotionType.SuccessPromotion);
+        NotionManager.instance.UseNotion2(NotionType.SuccessPromotion);
 
         OpenView();
 
@@ -407,5 +417,35 @@ public class AdvancementManager : MonoBehaviour
         }
 
         return sp;
+    }
+
+    IEnumerator FadeInOut()
+    {
+        levelUpAnim.SetActive(true);
+        canvasGroup.alpha = 0;
+
+        currentTime = 0f;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, currentTime / duration);
+            canvasGroup.alpha = alpha;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f); // Wait for 1 second
+
+        currentTime = 0f; // Reset time for the next loop
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, currentTime / duration);
+            canvasGroup.alpha = alpha;
+            yield return null;
+        }
+
+        levelUpAnim.SetActive(false);
     }
 }

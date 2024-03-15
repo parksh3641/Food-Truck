@@ -103,7 +103,7 @@ public class ChestBoxManager : MonoBehaviour
         }
         else
         {
-            if(ingameUI.activeInHierarchy && !GameStateManager.instance.Pause)
+            if(ingameUI.activeInHierarchy  && !GameStateManager.instance.YoutubeVideo)
             {
                 count += 1;
             }

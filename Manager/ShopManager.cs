@@ -259,13 +259,35 @@ public class ShopManager : MonoBehaviour
 
     public void Initialize()
     {
-        if (GameStateManager.instance.Recorder)
+        if (GameStateManager.instance.YoutubeVideo)
         {
-            mainCharacterArray[Random.Range(0, Enum.GetValues(typeof(CharacterType)).Length - 1)].SetActive(true);
-            mainTruckArray[Random.Range(0, Enum.GetValues(typeof(TruckType)).Length - 1)].SetActive(true);
-            mainAnimalArray[Random.Range(0, Enum.GetValues(typeof(AnimalType)).Length - 1)].SetActive(true);
-            mainButterflyArray[Random.Range(0, Enum.GetValues(typeof(ButterflyType)).Length - 1)].SetActive(true);
-            mainTotemsArray[Random.Range(0, Enum.GetValues(typeof(TotemsType)).Length - 1)].SetActive(true);
+            int number = Random.Range(0, Enum.GetValues(typeof(CharacterType)).Length - 1);
+            int number2 = Random.Range(0, Enum.GetValues(typeof(TruckType)).Length - 1);
+            int number3 = Random.Range(0, Enum.GetValues(typeof(AnimalType)).Length - 1);
+            int number4 = Random.Range(0, Enum.GetValues(typeof(ButterflyType)).Length - 1);
+            int number5 = Random.Range(0, Enum.GetValues(typeof(TotemsType)).Length - 1);
+
+            GameStateManager.instance.CharacterType = CharacterType.Character1 + number;
+            GameStateManager.instance.TruckType = TruckType.Bread + number2;
+            GameStateManager.instance.AnimalType = AnimalType.Colobus + number3;
+            GameStateManager.instance.ButterflyType = ButterflyType.Butterfly1 + number4;
+            GameStateManager.instance.TotemsType = TotemsType.Totems1 + number5;
+
+            mainCharacterArray[number].SetActive(true);
+            mainTruckArray[number2].SetActive(true);
+            mainAnimalArray[number3].SetActive(true);
+            mainButterflyArray[number4].SetActive(true);
+            mainTotemsArray[number5].SetActive(true);
+
+            GameStateManager.instance.IslandType = IslandType.Island1 + Random.Range(1, 4);
+            GameStateManager.instance.FoodType = FoodType.Food1 + Random.Range(0, 7);
+            GameStateManager.instance.CandyType = CandyType.Candy1 + Random.Range(0, 9);
+            GameStateManager.instance.JapaneseFoodType = JapaneseFoodType.JapaneseFood1 + Random.Range(0, 7);
+            GameStateManager.instance.DessertType = DessertType.Dessert1 + Random.Range(0, 9);
+
+            GameStateManager.instance.FeverCount = 280;
+
+            Debug.LogError("유튜브 업로드 세팅");
         }
         else
         {
@@ -1619,7 +1641,8 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + characterInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeCharacter";
-        titleText.plusText = "\n<size=10>( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )</size>";
+        titleText.plusText = "\n<size=10>( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " ) "
+            + ((((playerDataBase.GetCharacterNumber() + 1) * 1.0f) / (shopCharacterArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
         titleText.ReLoad();
 
         infoText.localizationName = "Character" + (characterIndex + 1) + "_Info";
@@ -1930,7 +1953,8 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + truckInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeTruck";
-        titleText.plusText = "\n<size=10>( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )</size>";
+        titleText.plusText = "\n<size=10>( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " ) "
+            + ((((playerDataBase.GetFoodTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
         titleText.ReLoad();
 
         infoText.localizationName = (TruckType.Bread + truckIndex) + "TruckInfo";
@@ -2167,7 +2191,8 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " +" + animalInfo.effectNumber.ToString();
 
         titleText.localizationName = "ChangeAnimal";
-        titleText.plusText = "\n<size=10>( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )</size>";
+        titleText.plusText = "\n<size=10>( " + (animalIndex + 1) + " / " + shopAnimalArray.Length +" ) "
+            + ((((playerDataBase.GetAnimalNumber() + 1) * 1.0f) / (shopAnimalArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
         titleText.ReLoad();
 
         infoText.localizationName = (AnimalType.Colobus + animalIndex) + "Info";
@@ -2366,7 +2391,8 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + butterflyInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeButterfly";
-        titleText.plusText = "\n<size=10>( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )</size>";
+        titleText.plusText = "\n<size=10>( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " ) "
+            + ((((playerDataBase.GetButterflyNumber() + 1) * 1.0f) / (shopButterflyArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
         titleText.ReLoad();
 
         infoText.localizationName = " ";
@@ -2778,7 +2804,8 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + totemsInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeTotems";
-        titleText.plusText = "\n<size=10>( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )</size>";
+        titleText.plusText = "\n<size=10>( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " ) "
+            + ((((playerDataBase.GetTotemsNumber() + 1) * 1.0f) / (shopTotemsArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
         titleText.ReLoad();
 
         infoText.localizationName = " ";
@@ -3418,6 +3445,10 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
+                titleText.plusText = "\n<size=10>( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " ) "
+    + ((((playerDataBase.GetAnimalNumber() + 1) * 1.0f) / (shopAnimalArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
+                titleText.ReLoad();
+
                 break;
             case 1:
                 switch(number)
@@ -3491,6 +3522,10 @@ public class ShopManager : MonoBehaviour
                         playerDataBase.SushiTruck = 1;
                         break;
                 }
+
+                titleText.plusText = "\n<size=10>( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " ) "
++ ((((playerDataBase.GetFoodTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
+                titleText.ReLoad();
 
                 break;
             case 2:
@@ -3595,6 +3630,10 @@ public class ShopManager : MonoBehaviour
                         playerDataBase.Character20 = 1;
                         break;
                 }
+
+                titleText.plusText = "\n<size=10>( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " ) "
++ ((((playerDataBase.GetCharacterNumber() + 1) * 1.0f) / (shopCharacterArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
+                titleText.ReLoad();
 
                 break;
             case 3:
@@ -3724,6 +3763,10 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
+                titleText.plusText = "\n<size=10>( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " ) "
++ ((((playerDataBase.GetButterflyNumber() + 1) * 1.0f) / (shopButterflyArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
+                titleText.ReLoad();
+
                 break;
             case 4:
                 switch (number)
@@ -3804,6 +3847,10 @@ public class ShopManager : MonoBehaviour
                         playerDataBase.Totems12 = 1;
                         break;
                 }
+
+                titleText.plusText = "\n<size=10>( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " ) "
++ ((((playerDataBase.GetTotemsNumber() + 1) * 1.0f) / (shopTotemsArray.Length * 1.0f)) * 100f).ToString("N2") + "%</size>";
+                titleText.ReLoad();
                 break;
             case 5:
 

@@ -56,11 +56,11 @@ public class GuideMissionManager : MonoBehaviour
         switch(playerDataBase.GuideIndex)
         {
             case 0:
-                now = playerDataBase.HamburgerMaxValue;
+                now = playerDataBase.Food1MaxValue;
                 need = 1;
                 break;
             case 1:
-                now = playerDataBase.SandwichMaxValue;
+                now = playerDataBase.Food2MaxValue;
                 need = 1;
                 break;
             case 2:
@@ -82,7 +82,7 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 5:
-                now = playerDataBase.SnackLabMaxValue;
+                now = playerDataBase.Food3MaxValue;
                 need = 1;
                 break;
             case 6:
@@ -104,7 +104,7 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 9:
-                now = playerDataBase.DrinkMaxValue;
+                now = playerDataBase.Food4MaxValue;
                 need = 1;
                 break;
             case 10:
@@ -116,7 +116,7 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 12:
-                now = playerDataBase.PizzaMaxValue;
+                now = playerDataBase.Food5MaxValue;
                 need = 1;
                 break;
             case 13:
@@ -132,7 +132,7 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 16:
-                now = playerDataBase.DonutMaxValue;
+                now = playerDataBase.Food6MaxValue;
                 need = 1;
                 break;
             case 17:
@@ -146,7 +146,7 @@ public class GuideMissionManager : MonoBehaviour
                 need = 3000000;
                 break;
             case 18:
-                now = playerDataBase.GeckoAnimal;
+                now = playerDataBase.Animal2;
                 need = 1;
                 break;
             case 19:
@@ -154,7 +154,7 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 20:
-                now = playerDataBase.FriesMaxValue;
+                now = playerDataBase.Food7MaxValue;
                 need = 1;
                 break;
             case 21:

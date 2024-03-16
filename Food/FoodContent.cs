@@ -87,6 +87,11 @@ public class FoodContent : MonoBehaviour
         }
     }
 
+    public void RankInitialize(int number)
+    {
+        transform.localScale = new Vector3(posX += ((size * number) * 0.1f), posY += ((size * number) * 0.1f), posZ += ((size * number) * 0.1f));
+    }
+
 
     public void LevelUp()
     {
@@ -98,6 +103,11 @@ public class FoodContent : MonoBehaviour
         {
             transform.localScale = new Vector3(posX += size, posY += size, posZ += size);
         }
+    }
+
+    public void RankLevelUp()
+    {
+        transform.localScale = new Vector3(posX += (size * 0.1f), posY += (size * 0.1f), posZ += (size * 0.1f));
     }
 
     public void LevelReset()

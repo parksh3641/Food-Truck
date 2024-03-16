@@ -962,82 +962,82 @@ public class PlayfabManager : MonoBehaviour
 
                     if (list.ItemId.Equals("Chips"))
                     {
-                        playerDataBase.ChipsTruck = 1;
+                        playerDataBase.Truck2 = 1;
                     }
 
                     if (list.ItemId.Equals("Donut"))
                     {
-                        playerDataBase.DonutTruck = 1;
+                        playerDataBase.Truck3 = 1;
                     }
 
                     if (list.ItemId.Equals("Hamburger"))
                     {
-                        playerDataBase.HamburgerTruck = 1;
+                        playerDataBase.Truck4 = 1;
                     }
 
                     if (list.ItemId.Equals("Hotdog"))
                     {
-                        playerDataBase.HotdogTruck = 1;
+                        playerDataBase.Truck5 = 1;
                     }
 
                     if (list.ItemId.Equals("Icecream"))
                     {
-                        playerDataBase.IcecreamTruck = 1;
+                        playerDataBase.Truck6 = 1;
                     }
 
                     if (list.ItemId.Equals("Lemonade"))
                     {
-                        playerDataBase.LemonadeTruck = 1;
+                        playerDataBase.Truck7 = 1;
                     }
 
                     if (list.ItemId.Equals("Noodles"))
                     {
-                        playerDataBase.NoodlesTruck = 1;
+                        playerDataBase.Truck8 = 1;
                     }
 
                     if (list.ItemId.Equals("Pizza"))
                     {
-                        playerDataBase.PizzaTruck = 1;
+                        playerDataBase.Truck9 = 1;
                     }
 
                     if (list.ItemId.Equals("Sushi"))
                     {
-                        playerDataBase.SushiTruck = 1;
+                        playerDataBase.Truck10 = 1;
                     }
 
                     if (list.ItemId.Equals("Gecko"))
                     {
-                        playerDataBase.GeckoAnimal = 1;
+                        playerDataBase.Animal2 = 1;
                     }
 
                     if (list.ItemId.Equals("Herring"))
                     {
-                        playerDataBase.HerringAnimal = 1;
+                        playerDataBase.Animal3 = 1;
                     }
 
                     if (list.ItemId.Equals("Muskrat"))
                     {
-                        playerDataBase.MuskratAnimal = 1;
+                        playerDataBase.Animal4 = 1;
                     }
 
                     if (list.ItemId.Equals("Pudu"))
                     {
-                        playerDataBase.PuduAnimal = 1;
+                        playerDataBase.Animal5 = 1;
                     }
 
                     if (list.ItemId.Equals("Sparrow"))
                     {
-                        playerDataBase.SparrowAnimal = 1;
+                        playerDataBase.Animal6 = 1;
                     }
 
                     if (list.ItemId.Equals("Squid"))
                     {
-                        playerDataBase.SquidAnimal = 1;
+                        playerDataBase.Animal7 = 1;
                     }
 
                     if (list.ItemId.Equals("Taipan"))
                     {
-                        playerDataBase.TaipanAnimal = 1;
+                        playerDataBase.Animal8 = 1;
                     }
 
                     if (list.ItemId.Equals("Butterfly1"))
@@ -1724,6 +1724,12 @@ public class PlayfabManager : MonoBehaviour
                        case "Treasure12":
                            playerDataBase.Treasure12 = statistics.Value;
                            break;
+                       case "Treasure13":
+                           playerDataBase.Treasure13 = statistics.Value;
+                           break;
+                       case "Treasure14":
+                           playerDataBase.Treasure14 = statistics.Value;
+                           break;
                        case "Treasure1Count":
                            playerDataBase.Treasure1Count = statistics.Value;
                            break;
@@ -1760,6 +1766,12 @@ public class PlayfabManager : MonoBehaviour
                        case "Treasure12Count":
                            playerDataBase.Treasure12Count = statistics.Value;
                            break;
+                       case "Treasure13Count":
+                           playerDataBase.Treasure13Count = statistics.Value;
+                           break;
+                       case "Treasure14Count":
+                           playerDataBase.Treasure14Count = statistics.Value;
+                           break;
                        case "NextFoodNumber":
                            playerDataBase.NextFoodNumber = statistics.Value;
                            break;
@@ -1773,25 +1785,25 @@ public class PlayfabManager : MonoBehaviour
                            playerDataBase.NextFoodNumber4 = statistics.Value;
                            break;
                        case "HamburgerMaxValue":
-                           playerDataBase.HamburgerMaxValue = statistics.Value;
+                           playerDataBase.Food1MaxValue = statistics.Value;
                            break;
                        case "SandwichMaxValue":
-                           playerDataBase.SandwichMaxValue = statistics.Value;
+                           playerDataBase.Food2MaxValue = statistics.Value;
                            break;
                        case "SnackLabMaxValue":
-                           playerDataBase.SnackLabMaxValue = statistics.Value;
+                           playerDataBase.Food3MaxValue = statistics.Value;
                            break;
                        case "DrinkMaxValue":
-                           playerDataBase.DrinkMaxValue = statistics.Value;
+                           playerDataBase.Food4MaxValue = statistics.Value;
                            break;
                        case "PizzaMaxValue":
-                           playerDataBase.PizzaMaxValue = statistics.Value;
+                           playerDataBase.Food5MaxValue = statistics.Value;
                            break;
                        case "DonutMaxValue":
-                           playerDataBase.DonutMaxValue = statistics.Value;
+                           playerDataBase.Food6MaxValue = statistics.Value;
                            break;
                        case "FriesMaxValue":
-                           playerDataBase.FriesMaxValue = statistics.Value;
+                           playerDataBase.Food7MaxValue = statistics.Value;
                            break;
                        case "Candy1MaxValue":
                            playerDataBase.Candy1MaxValue = statistics.Value;
@@ -2166,6 +2178,243 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Island4Count":
                            playerDataBase.Island4Count = statistics.Value;
+                           break;
+                       case "Character1Level":
+                           playerDataBase.Character1Level = statistics.Value;
+                           break;
+                       case "Character2Level":
+                           playerDataBase.Character2Level = statistics.Value;
+                           break;
+                       case "Character3Level":
+                           playerDataBase.Character3Level = statistics.Value;
+                           break;
+                       case "Character4Level":
+                           playerDataBase.Character4Level = statistics.Value;
+                           break;
+                       case "Character5Level":
+                           playerDataBase.Character5Level = statistics.Value;
+                           break;
+                       case "Character6Level":
+                           playerDataBase.Character6Level = statistics.Value;
+                           break;
+                       case "Character7Level":
+                           playerDataBase.Character7Level = statistics.Value;
+                           break;
+                       case "Character8Level":
+                           playerDataBase.Character8Level = statistics.Value;
+                           break;
+                       case "Character9Level":
+                           playerDataBase.Character9Level = statistics.Value;
+                           break;
+                       case "Character10Level":
+                           playerDataBase.Character10Level = statistics.Value;
+                           break;
+                       case "Character11Level":
+                           playerDataBase.Character11Level = statistics.Value;
+                           break;
+                       case "Character12Level":
+                           playerDataBase.Character12Level = statistics.Value;
+                           break;
+                       case "Character13Level":
+                           playerDataBase.Character13Level = statistics.Value;
+                           break;
+                       case "Character14Level":
+                           playerDataBase.Character14Level = statistics.Value;
+                           break;
+                       case "Character15Level":
+                           playerDataBase.Character15Level = statistics.Value;
+                           break;
+                       case "Character16Level":
+                           playerDataBase.Character16Level = statistics.Value;
+                           break;
+                       case "Character17Level":
+                           playerDataBase.Character17Level = statistics.Value;
+                           break;
+                       case "Character18Level":
+                           playerDataBase.Character18Level = statistics.Value;
+                           break;
+                       case "Character19Level":
+                           playerDataBase.Character19Level = statistics.Value;
+                           break;
+                       case "Character20Level":
+                           playerDataBase.Character20Level = statistics.Value;
+                           break;
+                       case "Character21Level":
+                           playerDataBase.Character21Level = statistics.Value;
+                           break;
+                       case "Truck1Level":
+                           playerDataBase.Truck1Level = statistics.Value;
+                           break;
+                       case "Truck2Level":
+                           playerDataBase.Truck2Level = statistics.Value;
+                           break;
+                       case "Truck3Level":
+                           playerDataBase.Truck3Level = statistics.Value;
+                           break;
+                       case "Truck4Level":
+                           playerDataBase.Truck4Level = statistics.Value;
+                           break;
+                       case "Truck5Level":
+                           playerDataBase.Truck5Level = statistics.Value;
+                           break;
+                       case "Truck6Level":
+                           playerDataBase.Truck6Level = statistics.Value;
+                           break;
+                       case "Truck7Level":
+                           playerDataBase.Truck7Level = statistics.Value;
+                           break;
+                       case "Truck8Level":
+                           playerDataBase.Truck8Level = statistics.Value;
+                           break;
+                       case "Truck9Level":
+                           playerDataBase.Truck9Level = statistics.Value;
+                           break;
+                       case "Truck10Level":
+                           playerDataBase.Truck10Level = statistics.Value;
+                           break;
+                       case "Animal1Level":
+                           playerDataBase.Animal1Level = statistics.Value;
+                           break;
+                       case "Animal2Level":
+                           playerDataBase.Animal2Level = statistics.Value;
+                           break;
+                       case "Animal3Level":
+                           playerDataBase.Animal3Level = statistics.Value;
+                           break;
+                       case "Animal4Level":
+                           playerDataBase.Animal4Level = statistics.Value;
+                           break;
+                       case "Animal5Level":
+                           playerDataBase.Animal5Level = statistics.Value;
+                           break;
+                       case "Animal6Level":
+                           playerDataBase.Animal6Level = statistics.Value;
+                           break;
+                       case "Animal7Level":
+                           playerDataBase.Animal7Level = statistics.Value;
+                           break;
+                       case "Animal8Level":
+                           playerDataBase.Animal8Level = statistics.Value;
+                           break;
+                       case "Butterfly1Level":
+                           playerDataBase.Butterfly1Level = statistics.Value;
+                           break;
+                       case "Butterfly2Level":
+                           playerDataBase.Butterfly2Level = statistics.Value;
+                           break;
+                       case "Butterfly3Level":
+                           playerDataBase.Butterfly3Level = statistics.Value;
+                           break;
+                       case "Butterfly4Level":
+                           playerDataBase.Butterfly4Level = statistics.Value;
+                           break;
+                       case "Butterfly5Level":
+                           playerDataBase.Butterfly5Level = statistics.Value;
+                           break;
+                       case "Butterfly6Level":
+                           playerDataBase.Butterfly6Level = statistics.Value;
+                           break;
+                       case "Butterfly7Level":
+                           playerDataBase.Butterfly7Level = statistics.Value;
+                           break;
+                       case "Butterfly8Level":
+                           playerDataBase.Butterfly8Level = statistics.Value;
+                           break;
+                       case "Butterfly9Level":
+                           playerDataBase.Butterfly9Level = statistics.Value;
+                           break;
+                       case "Butterfly10Level":
+                           playerDataBase.Butterfly10Level = statistics.Value;
+                           break;
+                       case "Butterfly11Level":
+                           playerDataBase.Butterfly11Level = statistics.Value;
+                           break;
+                       case "Butterfly12Level":
+                           playerDataBase.Butterfly12Level = statistics.Value;
+                           break;
+                       case "Butterfly13Level":
+                           playerDataBase.Butterfly13Level = statistics.Value;
+                           break;
+                       case "Butterfly14Level":
+                           playerDataBase.Butterfly14Level = statistics.Value;
+                           break;
+                       case "Butterfly15Level":
+                           playerDataBase.Butterfly15Level = statistics.Value;
+                           break;
+                       case "Butterfly16Level":
+                           playerDataBase.Butterfly16Level = statistics.Value;
+                           break;
+                       case "Butterfly17Level":
+                           playerDataBase.Butterfly17Level = statistics.Value;
+                           break;
+                       case "Butterfly18Level":
+                           playerDataBase.Butterfly18Level = statistics.Value;
+                           break;
+                       case "Butterfly19Level":
+                           playerDataBase.Butterfly19Level = statistics.Value;
+                           break;
+                       case "Butterfly20Level":
+                           playerDataBase.Butterfly20Level = statistics.Value;
+                           break;
+                       case "Butterfly21Level":
+                           playerDataBase.Butterfly21Level = statistics.Value;
+                           break;
+                       case "Butterfly22Level":
+                           playerDataBase.Butterfly22Level = statistics.Value;
+                           break;
+                       case "Butterfly23Level":
+                           playerDataBase.Butterfly23Level = statistics.Value;
+                           break;
+                       case "Butterfly24Level":
+                           playerDataBase.Butterfly24Level = statistics.Value;
+                           break;
+                       case "Butterfly25Level":
+                           playerDataBase.Butterfly25Level = statistics.Value;
+                           break;
+                       case "Butterfly26Level":
+                           playerDataBase.Butterfly26Level = statistics.Value;
+                           break;
+                       case "Butterfly27Level":
+                           playerDataBase.Butterfly27Level = statistics.Value;
+                           break;
+                       case "Butterfly28Level":
+                           playerDataBase.Butterfly28Level = statistics.Value;
+                           break;
+                       case "Totems1Level":
+                           playerDataBase.Totems1Level = statistics.Value;
+                           break;
+                       case "Totems2Level":
+                           playerDataBase.Totems2Level = statistics.Value;
+                           break;
+                       case "Totems3Level":
+                           playerDataBase.Totems3Level = statistics.Value;
+                           break;
+                       case "Totems4Level":
+                           playerDataBase.Totems4Level = statistics.Value;
+                           break;
+                       case "Totems5Level":
+                           playerDataBase.Totems5Level = statistics.Value;
+                           break;
+                       case "Totems6Level":
+                           playerDataBase.Totems6Level = statistics.Value;
+                           break;
+                       case "Totems7Level":
+                           playerDataBase.Totems7Level = statistics.Value;
+                           break;
+                       case "Totems8Level":
+                           playerDataBase.Totems8Level = statistics.Value;
+                           break;
+                       case "Totems9Level":
+                           playerDataBase.Totems9Level = statistics.Value;
+                           break;
+                       case "Totems10Level":
+                           playerDataBase.Totems10Level = statistics.Value;
+                           break;
+                       case "Totems11Level":
+                           playerDataBase.Totems11Level = statistics.Value;
+                           break;
+                       case "Totems12Level":
+                           playerDataBase.Totems12Level = statistics.Value;
                            break;
                    }
                }

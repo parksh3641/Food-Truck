@@ -108,7 +108,7 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(FadeInOut());
 
             SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-            NotionManager.instance.UseNotion3(NotionType.Levelup);
+            NotionManager.instance.UseNotion2(NotionType.Levelup);
 
             FirebaseAnalytics.LogEvent("LevelUp_Profile");
 

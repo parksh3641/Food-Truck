@@ -84,15 +84,12 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Treasure1:
                 mainBackground.sprite = rankBackgroundArray[2];
-                effect.SetActive(true);
                 break;
             case RewardType.Treasure2:
                 mainBackground.sprite = rankBackgroundArray[2];
-                effect.SetActive(true);
                 break;
             case RewardType.Treasure3:
                 mainBackground.sprite = rankBackgroundArray[2];
-                effect.SetActive(true);
                 break;
             case RewardType.Treasure4:
                 mainBackground.sprite = rankBackgroundArray[0];
@@ -108,7 +105,6 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Treasure7:
                 mainBackground.sprite = rankBackgroundArray[2];
-                effect.SetActive(true);
                 break;
             case RewardType.Treasure8:
                 mainBackground.sprite = rankBackgroundArray[1];
@@ -194,7 +190,7 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[3];
                 break;
             case RewardType.AbilityPoint:
-                mainBackground.sprite = rankBackgroundArray[1];
+                mainBackground.sprite = rankBackgroundArray[2];
                 break;
             case RewardType.DungeonKey1:
                 break;
@@ -235,6 +231,14 @@ public class ReceiveContent : MonoBehaviour
                 effect.SetActive(true);
                 break;
             case RewardType.Icon_Attendance:
+                mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
+                break;
+            case RewardType.Treasure13:
+                mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
+                break;
+            case RewardType.Treasure14:
                 mainBackground.sprite = rankBackgroundArray[3];
                 effect.SetActive(true);
                 break;

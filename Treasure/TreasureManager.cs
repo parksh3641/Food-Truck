@@ -9,6 +9,8 @@ public class TreasureManager : MonoBehaviour
     public GameObject treasureView;
     public GameObject treasureInfoView;
 
+    public LocalizationContent[] treasureInfoText;
+
     public GameObject mainAlarm;
     public GameObject alarm;
     public GameObject ingameAlarm;
@@ -16,7 +18,6 @@ public class TreasureManager : MonoBehaviour
     public RectTransform treasureRectTransform;
 
     public Text treasureText;
-
     public Text treasure1Text;
     public Text treasure2Text;
 
@@ -31,12 +32,21 @@ public class TreasureManager : MonoBehaviour
 
     public ReceiveContent[] receiveContents;
 
+    private Queue indexQueue = new Queue();
+    private int[] indexArray = new int[11];
+
     private int index = 0;
     private int price = 30;
     private bool oneMore = false;
 
+    private float legendaryPercent = 2.0f;
+    private float epicPercent = 4.0f;
+    private float rarePercent = 4.0f;
+    private float normalPercent = 4.0f;
+
     WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
-    WaitForSeconds waitForSeconds2 = new WaitForSeconds(0.5f);
+    WaitForSeconds waitForSeconds2 = new WaitForSeconds(2.1f);
+    WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.4f);
 
     PlayerDataBase playerDataBase;
 
@@ -109,6 +119,23 @@ public class TreasureManager : MonoBehaviour
         {
             treasureInfoView.SetActive(true);
 
+            treasureInfoText[0].localizationName = "LegendaryPercent";
+            treasureInfoText[0].plusText = " - " + ((legendaryPercent / System.Enum.GetValues(typeof(TreasureType)).Length) * 100).ToString("N2") + "%";
+
+            treasureInfoText[1].localizationName = "EpicPercent";
+            treasureInfoText[1].plusText = " - " + ((epicPercent / System.Enum.GetValues(typeof(TreasureType)).Length) * 100).ToString("N2") + "%";
+
+            treasureInfoText[2].localizationName = "RarePercent";
+            treasureInfoText[2].plusText = " - " + ((rarePercent / System.Enum.GetValues(typeof(TreasureType)).Length) * 100).ToString("N2") + "%";
+
+            treasureInfoText[3].localizationName = "NormalPercent";
+            treasureInfoText[3].plusText = " - " + ((normalPercent / System.Enum.GetValues(typeof(TreasureType)).Length) * 100).ToString("N2") + "%";
+
+            treasureInfoText[0].ReLoad();
+            treasureInfoText[1].ReLoad();
+            treasureInfoText[2].ReLoad();
+            treasureInfoText[3].ReLoad();
+
             FirebaseAnalytics.LogEvent("Open_TreasureInfo");
         }
         else
@@ -158,6 +185,8 @@ public class TreasureManager : MonoBehaviour
             return;
         }
 
+        if (indexQueue.Count > 0) return;
+
         if (playerDataBase.Crystal < price)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -186,6 +215,8 @@ public class TreasureManager : MonoBehaviour
             return;
         }
 
+        if (indexQueue.Count > 0) return;
+
         if (playerDataBase.Crystal < price * 10)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
@@ -213,6 +244,8 @@ public class TreasureManager : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
             return;
         }
+
+        if (indexQueue.Count > 0) return;
 
         if (playerDataBase.Crystal < price * 9)
         {
@@ -253,19 +286,25 @@ public class TreasureManager : MonoBehaviour
             receiveContents[i].gameObject.SetActive(false);
         }
 
-        yield return waitForSeconds2;
-
         for (int i = 0; i < count; i++)
         {
             index = Random.Range(0, System.Enum.GetValues(typeof(TreasureType)).Length);
 
-            SoundManager.instance.PlaySFX(GameSfxType.Click);
+            indexArray[i] = index;
+            indexQueue.Enqueue(index);
+        }
 
-            GetTreasure(index);
+        StartCoroutine(SaveCoroution());
+
+        yield return waitForSeconds2;
+
+        for (int i = 0; i < count; i++)
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Click);
 
             receiveContents[i].gameObject.SetActive(true);
 
-            switch (index)
+            switch (indexArray[i])
             {
                 case 0:
                     receiveContents[i].Initialize(RewardType.Treasure1, -1);
@@ -303,6 +342,12 @@ public class TreasureManager : MonoBehaviour
                 case 11:
                     receiveContents[i].Initialize(RewardType.Treasure12, -1);
                     break;
+                case 12:
+                    receiveContents[i].Initialize(RewardType.Treasure13, -1);
+                    break;
+                case 13:
+                    receiveContents[i].Initialize(RewardType.Treasure14, -1);
+                    break;
             }
 
             yield return waitForSeconds;
@@ -319,6 +364,16 @@ public class TreasureManager : MonoBehaviour
 
         treasureButton.SetActive(true);
         treasureOneMoreButton.SetActive(oneMore);
+    }
+
+    IEnumerator SaveCoroution()
+    {
+        while(indexQueue.Count > 0)
+        {
+            GetTreasure((int)indexQueue.Dequeue());
+
+            yield return waitForSeconds3;
+        }
     }
 
     void GetTreasure(int number)
@@ -372,6 +427,14 @@ public class TreasureManager : MonoBehaviour
             case 11:
                 playerDataBase.Treasure12Count += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure12Count", playerDataBase.Treasure12Count);
+                break;
+            case 12:
+                playerDataBase.Treasure13Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure13Count", playerDataBase.Treasure13Count);
+                break;
+            case 13:
+                playerDataBase.Treasure14Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure14Count", playerDataBase.Treasure14Count);
                 break;
         }
     }

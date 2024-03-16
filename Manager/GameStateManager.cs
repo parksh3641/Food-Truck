@@ -134,8 +134,8 @@ public class GameStateManager : MonoBehaviour
 
         [Space]
         [Title("Equip")]
-        public AnimalType animalType = AnimalType.Colobus;
-        public TruckType truckType = TruckType.Bread;
+        public AnimalType animalType = AnimalType.Animal1;
+        public TruckType truckType = TruckType.Truck1;
         public CharacterType characterType = CharacterType.Character1;
         public ButterflyType butterflyType = ButterflyType.Butterfly1;
         public TotemsType totemsType = TotemsType.Totems1;

@@ -63,7 +63,7 @@ public class LocalNotificationManager : MonoBehaviour
         content = LocalizationManager.instance.GetString("YummyRushNoti");
 
 #if UNITY_ANDROID
-        NotificationManager.SendWithAppIcon(time4, title, content, Color.gray, NotificationIcon.Bell);
+        NotificationManager.SendWithAppIcon(time1, title, content, Color.gray, NotificationIcon.Bell);
 
         Debug.Log("Set Android Notification");
 #elif UNITY_IOS
@@ -74,7 +74,7 @@ public class LocalNotificationManager : MonoBehaviour
             noti.alertBody = content;
             noti.soundName = LocalNotification.defaultSoundName;
             noti.applicationIconBadgeNumber = 1;
-            noti.fireDate = notify2;
+            noti.fireDate = notify1;
             NotificationServices.ScheduleLocalNotification(noti);
         }
 

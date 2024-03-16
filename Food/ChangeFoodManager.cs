@@ -290,8 +290,8 @@ public class ChangeFoodManager : MonoBehaviour
     {
         exp = 0;
 
-        exp = playerDataBase.HamburgerMaxValue + playerDataBase.SandwichMaxValue + playerDataBase.SnackLabMaxValue + playerDataBase.DrinkMaxValue
-            + playerDataBase.PizzaMaxValue + playerDataBase.DonutMaxValue + playerDataBase.FriesMaxValue + playerDataBase.Candy1MaxValue
+        exp = playerDataBase.Food1MaxValue + playerDataBase.Food2MaxValue + playerDataBase.Food3MaxValue + playerDataBase.Food4MaxValue
+            + playerDataBase.Food5MaxValue + playerDataBase.Food6MaxValue + playerDataBase.Food7MaxValue + playerDataBase.Candy1MaxValue
             + playerDataBase.Candy2MaxValue + playerDataBase.Candy3MaxValue + playerDataBase.Candy4MaxValue + playerDataBase.Candy5MaxValue
             + playerDataBase.Candy6MaxValue + playerDataBase.Candy7MaxValue + playerDataBase.Candy8MaxValue + playerDataBase.Candy9MaxValue
             + playerDataBase.JapaneseFood1MaxValue + playerDataBase.JapaneseFood2MaxValue + playerDataBase.JapaneseFood3MaxValue

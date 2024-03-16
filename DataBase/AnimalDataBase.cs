@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class AnimalInfo
 {
-    public AnimalType animalType = AnimalType.Colobus;
+    public AnimalType animalType = AnimalType.Animal1;
     public int price = 0;
     public int crystal = 0;
 
@@ -20,6 +20,10 @@ public class AnimalInfo
 public class AnimalDataBase : ScriptableObject
 {
     public List<AnimalInfo> animalInfoList = new List<AnimalInfo>();
+
+    [Space]
+    public PassiveEffect retentionEffect = PassiveEffect.None;
+    public List<int> openRetentionPrice = new List<int>();
 
     public AnimalInfo GetAnimalInfo(AnimalType type)
     {
@@ -45,5 +49,10 @@ public class AnimalDataBase : ScriptableObject
         }
 
         return animalInfoList[number].effectNumber;
+    }
+
+    public int GetRetentionPrice(int number)
+    {
+        return openRetentionPrice[number];
     }
 }

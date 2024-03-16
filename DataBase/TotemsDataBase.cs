@@ -19,6 +19,10 @@ public class TotemsDataBase : ScriptableObject
 {
     public List<TotemsInfo> totemsInfoList = new List<TotemsInfo>();
 
+    [Space]
+    public PassiveEffect retentionEffect = PassiveEffect.None;
+    public List<int> openRetentionPrice = new List<int>();
+
     public TotemsInfo GetTotemsInfo(TotemsType type)
     {
         TotemsInfo totems = new TotemsInfo();
@@ -43,5 +47,10 @@ public class TotemsDataBase : ScriptableObject
         }
 
         return totemsInfoList[number].effectNumber;
+    }
+
+    public int GetRetentionPrice(int number)
+    {
+        return openRetentionPrice[number];
     }
 }

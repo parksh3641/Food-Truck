@@ -161,31 +161,31 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.SandwichMaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.Food2MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.SnackLabMaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.Food3MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.DrinkMaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.Food4MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.PizzaMaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.Food5MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.DonutMaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.Food6MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
@@ -457,7 +457,7 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.WelcomeCount >= 7 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }

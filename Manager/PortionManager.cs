@@ -119,9 +119,10 @@ public class PortionManager : MonoBehaviour
     {
         playerDataBase.Exp += number;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Exp", playerDataBase.Exp);
-        levelManager.Initialize();
 
         expAnimation.PlusMoney(number);
+
+        levelManager.Initialize();
     }
 
     [Button]

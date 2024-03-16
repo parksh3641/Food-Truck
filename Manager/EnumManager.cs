@@ -120,28 +120,28 @@ public enum CharacterType
 
 public enum TruckType
 {
-    Bread,
-    Chips,
-    Donut,
-    Hamburger,
-    Hotdog,
-    Icecream,
-    Lemonade,
-    Noodles,
-    Pizza,
-    Sushi
+    Truck1,
+    Truck2,
+    Truck3,
+    Truck4,
+    Truck5,
+    Truck6,
+    Truck7,
+    Truck8,
+    Truck9,
+    Truck10
 }
 
 public enum AnimalType
 {
-    Colobus,
-    Gecko,
-    Herring,
-    Muskrat,
-    Pudu,
-    Sparrow,
-    Squid,
-    Taipan
+    Animal1,
+    Animal2,
+    Animal3,
+    Animal4,
+    Animal5,
+    Animal6,
+    Animal7,
+    Animal8
 }
 
 public enum ButterflyType
@@ -317,7 +317,6 @@ public enum PassiveEffect
     SellPricePercentUp,
     ExpUp,
     SuccessX2PercentUp,
-    UpgradeSpeedUp, //≤… (πÃ¡§)
 }
 
 public enum RewardType
@@ -375,7 +374,9 @@ public enum RewardType
     GoldBox,
     EventTicket,
     ChallengePoint,
-    Icon_Attendance
+    Icon_Attendance,
+    Treasure13,
+    Treasure14,
 }
 
 public enum QuestType
@@ -432,6 +433,8 @@ public enum TreasureType
     Treasure10,
     Treasure11,
     Treasure12,
+    Treasure13,
+    Treasure14,
 }
 
 public enum TotemsType

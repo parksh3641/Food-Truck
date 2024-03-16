@@ -435,13 +435,15 @@ public class DungeonManager : MonoBehaviour
 
         attackSpeed += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
         attackSpeed += playerDataBase.Skill9 * 0.05f;
-        attackSpeed += playerDataBase.Skill15 * 0.5f;
+        attackSpeed += playerDataBase.Skill15 * 0.4f;
+        attackSpeed += playerDataBase.Treasure13 * 0.6f;
         attackSpeed += playerDataBase.Treasure2 * 0.1f;
         attackSpeed += playerDataBase.Advancement * 0.05f;
 
         attackX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         attackX2 += playerDataBase.Treasure3 * 0.2f;
-        attackX2 += playerDataBase.Skill16 * 0.3f;
+        attackX2 += playerDataBase.Treasure14 * 0.4f;
+        attackX2 += playerDataBase.Skill16 * 0.2f;
 
         attackText.localizationName = "AttackPercent";
         attackText.plusText = " : " + success.ToString("N1") + "%";
@@ -551,7 +553,7 @@ public class DungeonManager : MonoBehaviour
                 health -= 1;
 
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
-                NotionManager.instance.UseNotion2(NotionType.SuccessAttack);
+                //NotionManager.instance.UseNotion2(NotionType.SuccessAttack);
             }
 
             Damage();

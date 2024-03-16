@@ -49,11 +49,14 @@ public class TreasureContent : MonoBehaviour
     private float treasure10Value = 1f;
     private float treasure11Value = 1f;
     private float treasure12Value = 0.3f;
+    private float treasure13Value = 0.6f;
+    private float treasure14Value = 0.3f;
 
     Sprite[] treasureArray;
 
     Color rareColor = new Color(61 / 255f, 208 / 255f, 1);
     Color epicColor = new Color(1, 124 / 255f, 1);
+    Color legendaryColor = new Color(1, 1, 0);
 
     TreasureManager treasureManager;
 
@@ -78,8 +81,6 @@ public class TreasureContent : MonoBehaviour
 
         treasureType = type;
         treasureManager = manager;
-
-        percent = 100 - (((level + 1) / 10) * 10);
 
         icon.sprite = treasureArray[(int)type];
 
@@ -120,7 +121,7 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = epicColor;
 
-                if(level > 99)
+                if (level > 99)
                 {
                     upgradeButton.SetActive(false);
                 }
@@ -448,6 +449,71 @@ public class TreasureContent : MonoBehaviour
                 }
 
                 break;
+            case TreasureType.Treasure13:
+                count = playerDataBase.Treasure13Count;
+                level = playerDataBase.Treasure13;
+                nowValue = treasure13Value * playerDataBase.Treasure13;
+                need = (playerDataBase.Treasure13 / 10) + 1;
+
+                if (playerDataBase.Treasure13 < maxLevel - 1)
+                {
+                    nextValue = treasure13Value * (playerDataBase.Treasure13 + 1);
+
+                    if (count >= need)
+                    {
+                        check = 1;
+                    }
+                }
+                else
+                {
+                    nextValue = treasure13Value * (playerDataBase.Treasure13);
+
+                    check = 2;
+                }
+
+                background.effectColor = legendaryColor;
+
+                if (level > 99)
+                {
+                    upgradeButton.SetActive(false);
+                }
+                break;
+            case TreasureType.Treasure14:
+                count = playerDataBase.Treasure14Count;
+                level = playerDataBase.Treasure14;
+                nowValue = treasure14Value * playerDataBase.Treasure14;
+                need = (playerDataBase.Treasure14 / 10) + 1;
+
+                if (playerDataBase.Treasure14 < maxLevel - 1)
+                {
+                    nextValue = treasure14Value * (playerDataBase.Treasure14 + 1);
+
+                    if (count >= need)
+                    {
+                        check = 1;
+                    }
+                }
+                else
+                {
+                    nextValue = treasure14Value * (playerDataBase.Treasure14);
+
+                    check = 2;
+                }
+
+                background.effectColor = legendaryColor;
+
+                if (level > 99)
+                {
+                    upgradeButton.SetActive(false);
+                }
+                break;
+        }
+
+        percent = 100 - ((level / 10) * 10);
+
+        if(percent < 10)
+        {
+            percent = 10;
         }
 
         levelText.text = "Lv. " + level + " / " + maxLevel;
@@ -502,7 +568,7 @@ public class TreasureContent : MonoBehaviour
                 return;
         }
 
-        if (percent >= Random.Range(0, 100))
+        if (percent >= Random.Range(0, 100f))
         {
             success = true;
 
@@ -644,6 +710,26 @@ public class TreasureContent : MonoBehaviour
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure12", playerDataBase.Treasure12);
                 }
                 break;
+            case TreasureType.Treasure13:
+                playerDataBase.Treasure13Count -= need;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure13Count", playerDataBase.Treasure13Count);
+
+                if (success)
+                {
+                    playerDataBase.Treasure13 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure13", playerDataBase.Treasure13);
+                }
+                break;
+            case TreasureType.Treasure14:
+                playerDataBase.Treasure14Count -= need;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure14Count", playerDataBase.Treasure14Count);
+
+                if (success)
+                {
+                    playerDataBase.Treasure14 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure14", playerDataBase.Treasure14);
+                }
+                break;
         }
 
         Initialize(treasureType, treasureManager);
@@ -651,7 +737,7 @@ public class TreasureContent : MonoBehaviour
         GourmetManager.instance.Initialize();
 
         isDelay = true;
-        Invoke("Delay", 0.3f);
+        Invoke("Delay", 0.4f);
     }
 
     void Delay()

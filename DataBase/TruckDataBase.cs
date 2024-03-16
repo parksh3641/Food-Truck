@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class TruckInfo
 {
-    public TruckType truckType = TruckType.Bread;
+    public TruckType truckType = TruckType.Truck1;
     public int price = 0;
     public int crystal = 0;
 
@@ -21,6 +21,10 @@ public class TruckInfo
 public class TruckDataBase : ScriptableObject
 {
     public List<TruckInfo> truckInfoList = new List<TruckInfo>();
+
+    [Space]
+    public PassiveEffect retentionEffect = PassiveEffect.None;
+    public List<int> openRetentionPrice = new List<int>();
 
     public TruckInfo GetTruckInfo(TruckType type)
     {
@@ -46,5 +50,10 @@ public class TruckDataBase : ScriptableObject
         }
 
         return truckInfoList[number].effectNumber;
+    }
+
+    public int GetRetentionPrice(int number)
+    {
+        return openRetentionPrice[number];
     }
 }

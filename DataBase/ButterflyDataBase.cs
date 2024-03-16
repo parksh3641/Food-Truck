@@ -21,6 +21,10 @@ public class ButterflyDataBase : ScriptableObject
 {
     public List<ButterflyInfo> butterflyInfoList = new List<ButterflyInfo>();
 
+    [Space]
+    public PassiveEffect retentionEffect = PassiveEffect.None;
+    public List<int> openRetentionPrice = new List<int>();
+
     public ButterflyInfo GetButterflyInfo(ButterflyType type)
     {
         ButterflyInfo butterfly = new ButterflyInfo();
@@ -45,5 +49,10 @@ public class ButterflyDataBase : ScriptableObject
         }
 
         return butterflyInfoList[number].effectNumber;
+    }
+
+    public int GetRetentionPrice(int number)
+    {
+        return openRetentionPrice[number];
     }
 }

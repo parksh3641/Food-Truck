@@ -88,25 +88,25 @@ public class ChangeFoodContent : MonoBehaviour
         switch (foodType)
         {
             case FoodType.Food1:
-                exp = playerDataBase.HamburgerMaxValue;
+                exp = playerDataBase.Food1MaxValue;
                 break;
             case FoodType.Food2:
-                exp = playerDataBase.SandwichMaxValue;
+                exp = playerDataBase.Food2MaxValue;
                 break;
             case FoodType.Food3:
-                exp = playerDataBase.SnackLabMaxValue;
+                exp = playerDataBase.Food3MaxValue;
                 break;
             case FoodType.Food4:
-                exp = playerDataBase.DrinkMaxValue;
+                exp = playerDataBase.Food4MaxValue;
                 break;
             case FoodType.Food5:
-                exp = playerDataBase.PizzaMaxValue;
+                exp = playerDataBase.Food5MaxValue;
                 break;
             case FoodType.Food6:
-                exp = playerDataBase.DonutMaxValue;
+                exp = playerDataBase.Food6MaxValue;
                 break;
             case FoodType.Food7:
-                exp = playerDataBase.FriesMaxValue;
+                exp = playerDataBase.Food7MaxValue;
                 break;
             case FoodType.Ribs:
                 exp = 0;

@@ -30,6 +30,9 @@ public class LevelManager : MonoBehaviour
 
     private int maxExp = 0;
 
+    private int expUp = 0;
+    private float expUpPlus = 0;
+
     private float duration = 0.7f;
     private float currentTime;
 
@@ -128,8 +131,14 @@ public class LevelManager : MonoBehaviour
         titleText.text = "Lv." + level.ToString();
         levelText.text = level.ToString();
 
-        titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "  <color=#FFFF00>(+" +
-            (20 + (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber())) +")</color>";
+        expUp = 0;
+        expUpPlus = 0;
+
+        expUp = 20 + (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
+        expUpPlus += playerDataBase.GetAnimalLevel() * animalDataBase.retentionValue;
+        expUp = (int)(expUp + (expUp * (expUpPlus / 100)));
+
+        titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "  <color=#FFFF00>(+" + expUp +")</color>";
 
         nowExp = levelDataBase.GetNowExp(playerDataBase.Exp);
         nextExp = levelDataBase.GetNextExp(level);

@@ -81,7 +81,6 @@ public class GameStateManager : MonoBehaviour
         public int food5Level = 0;
         public int food6Level = 0;
         public int food7Level = 0;
-        public int food8Level = 0;
 
         [Space]
         public int candy1Level = 0;
@@ -93,7 +92,6 @@ public class GameStateManager : MonoBehaviour
         public int candy7Level = 0;
         public int candy8Level = 0;
         public int candy9Level = 0;
-        public int candy10Level = 0;
 
         [Space]
         public int japaneseFood1Level = 0;
@@ -103,7 +101,6 @@ public class GameStateManager : MonoBehaviour
         public int japaneseFood5Level = 0;
         public int japaneseFood6Level = 0;
         public int japaneseFood7Level = 0;
-        public int japaneseFood8Level = 0;
 
         [Space]
         public int dessert1Level = 0;
@@ -115,6 +112,12 @@ public class GameStateManager : MonoBehaviour
         public int dessert7Level = 0;
         public int dessert8Level = 0;
         public int dessert9Level = 0;
+
+        [Space]
+        [Title("Rank")]
+        public int food8Level = 0;
+        public int candy10Level = 0;
+        public int japaneseFood8Level = 0;
         public int dessert10Level = 0;
 
         [Space]

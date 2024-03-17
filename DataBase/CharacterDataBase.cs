@@ -21,7 +21,8 @@ public class CharacterDataBase : ScriptableObject
 
     [Space]
     public PassiveEffect retentionEffect = PassiveEffect.None;
-    public List<int> openRetentionPrice = new List<int>();
+    public float retentionValue = 0f;
+    public int retentionPrice = 0;
 
     public CharacterInfo GetCharacterInfo(CharacterType type)
     {
@@ -51,6 +52,6 @@ public class CharacterDataBase : ScriptableObject
 
     public int GetRetentionPrice(int number)
     {
-        return openRetentionPrice[number];
+        return retentionPrice * (number + 1);
     }
 }

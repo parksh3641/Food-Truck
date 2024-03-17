@@ -23,7 +23,8 @@ public class AnimalDataBase : ScriptableObject
 
     [Space]
     public PassiveEffect retentionEffect = PassiveEffect.None;
-    public List<int> openRetentionPrice = new List<int>();
+    public float retentionValue = 0f;
+    public int retentionPrice = 0;
 
     public AnimalInfo GetAnimalInfo(AnimalType type)
     {
@@ -53,6 +54,6 @@ public class AnimalDataBase : ScriptableObject
 
     public int GetRetentionPrice(int number)
     {
-        return openRetentionPrice[number];
+        return retentionPrice * (number + 1);
     }
 }

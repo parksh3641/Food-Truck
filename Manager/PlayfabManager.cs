@@ -1805,6 +1805,27 @@ public class PlayfabManager : MonoBehaviour
                        case "FriesMaxValue":
                            playerDataBase.Food7MaxValue = statistics.Value;
                            break;
+                       case "Food1Rare":
+                           playerDataBase.Food1Rare = statistics.Value;
+                           break;
+                       case "Food2Rare":
+                           playerDataBase.Food2Rare = statistics.Value;
+                           break;
+                       case "Food3Rare":
+                           playerDataBase.Food3Rare = statistics.Value;
+                           break;
+                       case "Food4Rare":
+                           playerDataBase.Food4Rare = statistics.Value;
+                           break;
+                       case "Food5Rare":
+                           playerDataBase.Food5Rare = statistics.Value;
+                           break;
+                       case "Food6Rare":
+                           playerDataBase.Food6Rare = statistics.Value;
+                           break;
+                       case "Food7Rare":
+                           playerDataBase.Food7Rare = statistics.Value;
+                           break;
                        case "Candy1MaxValue":
                            playerDataBase.Candy1MaxValue = statistics.Value;
                            break;
@@ -1832,6 +1853,33 @@ public class PlayfabManager : MonoBehaviour
                        case "Candy9MaxValue":
                            playerDataBase.Candy9MaxValue = statistics.Value;
                            break;
+                       case "Candy1Rare":
+                           playerDataBase.Candy1Rare = statistics.Value;
+                           break;
+                       case "Candy2Rare":
+                           playerDataBase.Candy2Rare = statistics.Value;
+                           break;
+                       case "Candy3Rare":
+                           playerDataBase.Candy3Rare = statistics.Value;
+                           break;
+                       case "Candy4Rare":
+                           playerDataBase.Candy4Rare = statistics.Value;
+                           break;
+                       case "Candy5Rare":
+                           playerDataBase.Candy5Rare = statistics.Value;
+                           break;
+                       case "Candy6Rare":
+                           playerDataBase.Candy6Rare = statistics.Value;
+                           break;
+                       case "Candy7Rare":
+                           playerDataBase.Candy7Rare = statistics.Value;
+                           break;
+                       case "Candy8Rare":
+                           playerDataBase.Candy8Rare = statistics.Value;
+                           break;
+                       case "Candy9Rare":
+                           playerDataBase.Candy9Rare = statistics.Value;
+                           break;
                        case "JapaneseFood1MaxValue":
                            playerDataBase.JapaneseFood1MaxValue = statistics.Value;
                            break;
@@ -1852,6 +1900,27 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "JapaneseFood7MaxValue":
                            playerDataBase.JapaneseFood7MaxValue = statistics.Value;
+                           break;
+                       case "JapaneseFood1Rare":
+                           playerDataBase.JapaneseFood1Rare = statistics.Value;
+                           break;
+                       case "JapaneseFood2Rare":
+                           playerDataBase.JapaneseFood2Rare = statistics.Value;
+                           break;
+                       case "JapaneseFood3Rare":
+                           playerDataBase.JapaneseFood3Rare = statistics.Value;
+                           break;
+                       case "JapaneseFood4Rare":
+                           playerDataBase.JapaneseFood4Rare = statistics.Value;
+                           break;
+                       case "JapaneseFood5Rare":
+                           playerDataBase.JapaneseFood5Rare = statistics.Value;
+                           break;
+                       case "JapaneseFood6Rare":
+                           playerDataBase.JapaneseFood6Rare = statistics.Value;
+                           break;
+                       case "JapaneseFood7Rare":
+                           playerDataBase.JapaneseFood7Rare = statistics.Value;
                            break;
                        case "Dessert1MaxValue":
                            playerDataBase.Dessert1MaxValue = statistics.Value;
@@ -1879,6 +1948,33 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Dessert9MaxValue":
                            playerDataBase.Dessert9MaxValue = statistics.Value;
+                           break;
+                       case "Dessert1Rare":
+                           playerDataBase.Dessert1Rare = statistics.Value;
+                           break;
+                       case "Dessert2Rare":
+                           playerDataBase.Dessert2Rare = statistics.Value;
+                           break;
+                       case "Dessert3Rare":
+                           playerDataBase.Dessert3Rare = statistics.Value;
+                           break;
+                       case "Dessert4Rare":
+                           playerDataBase.Dessert4Rare = statistics.Value;
+                           break;
+                       case "Dessert5Rare":
+                           playerDataBase.Dessert5Rare = statistics.Value;
+                           break;
+                       case "Dessert6Rare":
+                           playerDataBase.Dessert6Rare = statistics.Value;
+                           break;
+                       case "Dessert7Rare":
+                           playerDataBase.Dessert7Rare = statistics.Value;
+                           break;
+                       case "Dessert8Rare":
+                           playerDataBase.Dessert8Rare = statistics.Value;
+                           break;
+                       case "Dessert9Rare":
+                           playerDataBase.Dessert9Rare = statistics.Value;
                            break;
                        case "SellCount":
                            playerDataBase.SellCount = statistics.Value;

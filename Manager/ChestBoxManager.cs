@@ -258,22 +258,19 @@ public class ChestBoxManager : MonoBehaviour
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
                     PlayfabManager.instance.UpdateAddGold(1000000);
-                    return;
                 }
-
-                if (playerDataBase.JapaneseFood1MaxValue > 0)
+                else if (playerDataBase.JapaneseFood1MaxValue > 0)
                 {
                     PlayfabManager.instance.UpdateAddGold(500000);
-                    return;
                 }
-
-                if (playerDataBase.Candy1MaxValue > 0)
+                else if (playerDataBase.Candy1MaxValue > 0)
                 {
                     PlayfabManager.instance.UpdateAddGold(300000);
-                    return;
                 }
-
-                PlayfabManager.instance.UpdateAddGold(50000);
+                else
+                {
+                    PlayfabManager.instance.UpdateAddGold(50000);
+                }
                 break;
             case RewardType.Portion1:
                 PortionManager.instance.GetPortion(0, 1);
@@ -320,22 +317,19 @@ public class ChestBoxManager : MonoBehaviour
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
                     PlayfabManager.instance.UpdateAddGold(10000000);
-                    return;
                 }
-
-                if (playerDataBase.JapaneseFood1MaxValue > 0)
+                else if (playerDataBase.JapaneseFood1MaxValue > 0)
                 {
                     PlayfabManager.instance.UpdateAddGold(5000000);
-                    return;
                 }
-
-                if (playerDataBase.Candy1MaxValue > 0)
+                else if (playerDataBase.Candy1MaxValue > 0)
                 {
                     PlayfabManager.instance.UpdateAddGold(3000000);
-                    return;
                 }
-
-                PlayfabManager.instance.UpdateAddGold(1000000);
+                else
+                {
+                    PlayfabManager.instance.UpdateAddGold(1000000);
+                }
                 break;
             case RewardType.Portion1:
                 PortionManager.instance.GetPortion(0, Random.Range(5, 11));
@@ -374,6 +368,8 @@ public class ChestBoxManager : MonoBehaviour
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+        FirebaseAnalytics.LogEvent("Open_ChestBox");
 
         Initialize();
     }

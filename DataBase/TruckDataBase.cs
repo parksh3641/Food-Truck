@@ -24,7 +24,8 @@ public class TruckDataBase : ScriptableObject
 
     [Space]
     public PassiveEffect retentionEffect = PassiveEffect.None;
-    public List<int> openRetentionPrice = new List<int>();
+    public float retentionValue = 0f;
+    public int retentionPrice = 0;
 
     public TruckInfo GetTruckInfo(TruckType type)
     {
@@ -54,6 +55,6 @@ public class TruckDataBase : ScriptableObject
 
     public int GetRetentionPrice(int number)
     {
-        return openRetentionPrice[number];
+        return retentionPrice * (number + 1);
     }
 }

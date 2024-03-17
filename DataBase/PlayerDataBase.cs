@@ -328,6 +328,22 @@ public class PlayerDataBase : ScriptableObject
     private int food7MaxValue = 0;
 
     [Space]
+    [SerializeField]
+    private int food1Rare = 0;
+    [SerializeField]
+    private int food2Rare = 0;
+    [SerializeField]
+    private int food3Rare = 0;
+    [SerializeField]
+    private int food4Rare = 0;
+    [SerializeField]
+    private int food5Rare = 0;
+    [SerializeField]
+    private int food6Rare = 0;
+    [SerializeField]
+    private int food7Rare = 0;
+
+    [Space]
     [Title("Candy")]
     [SerializeField]
     private int candy1MaxValue = 0;
@@ -349,6 +365,26 @@ public class PlayerDataBase : ScriptableObject
     private int candy9MaxValue = 0;
 
     [Space]
+    [SerializeField]
+    private int candy1Rare = 0;
+    [SerializeField]
+    private int candy2Rare = 0;
+    [SerializeField]
+    private int candy3Rare = 0;
+    [SerializeField]
+    private int candy4Rare = 0;
+    [SerializeField]
+    private int candy5Rare = 0;
+    [SerializeField]
+    private int candy6Rare = 0;
+    [SerializeField]
+    private int candy7Rare = 0;
+    [SerializeField]
+    private int candy8Rare = 0;
+    [SerializeField]
+    private int candy9Rare = 0;
+
+    [Space]
     [Title("Japanese Food")]
     [SerializeField]
     private int japaneseFood1MaxValue = 0;
@@ -364,6 +400,22 @@ public class PlayerDataBase : ScriptableObject
     private int japaneseFood6MaxValue = 0;
     [SerializeField]
     private int japaneseFood7MaxValue = 0;
+
+    [Space]
+    [SerializeField]
+    private int japaneseFood1Rare = 0;
+    [SerializeField]
+    private int japaneseFood2Rare = 0;
+    [SerializeField]
+    private int japaneseFood3Rare = 0;
+    [SerializeField]
+    private int japaneseFood4Rare = 0;
+    [SerializeField]
+    private int japaneseFood5Rare = 0;
+    [SerializeField]
+    private int japaneseFood6Rare = 0;
+    [SerializeField]
+    private int japaneseFood7Rare = 0;
 
     [Space]
     [Title("Dessert")]
@@ -385,6 +437,26 @@ public class PlayerDataBase : ScriptableObject
     private int dessert8MaxValue = 0;
     [SerializeField]
     private int dessert9MaxValue = 0;
+
+    [Space]
+    [SerializeField]
+    private int dessert1Rare = 0;
+    [SerializeField]
+    private int dessert2Rare = 0;
+    [SerializeField]
+    private int dessert3Rare = 0;
+    [SerializeField]
+    private int dessert4Rare = 0;
+    [SerializeField]
+    private int dessert5Rare = 0;
+    [SerializeField]
+    private int dessert6Rare = 0;
+    [SerializeField]
+    private int dessert7Rare = 0;
+    [SerializeField]
+    private int dessert8Rare = 0;
+    [SerializeField]
+    private int dessert9Rare = 0;
 
     [Space]
     [Title("Character")]
@@ -2614,6 +2686,49 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Food1Rare
+    {
+        get { return food1Rare; }
+        set { food1Rare = value; }
+    }
+
+    public int Food2Rare
+    {
+        get { return food2Rare; }
+        set { food2Rare = value; }
+    }
+
+    public int Food3Rare
+    {
+        get { return food3Rare; }
+        set { food3Rare = value; }
+    }
+
+    public int Food4Rare
+    {
+        get { return food4Rare; }
+        set { food4Rare = value; }
+    }
+
+    public int Food5Rare
+    {
+        get { return food5Rare; }
+        set { food5Rare = value; }
+    }
+
+    public int Food6Rare
+    {
+        get { return food6Rare; }
+        set { food6Rare = value; }
+    }
+
+    public int Food7Rare
+    {
+        get { return food7Rare; }
+        set { food7Rare = value; }
+    }
+
+
     public int Candy1MaxValue
     {
         get
@@ -2722,6 +2837,60 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Candy1Rare
+    {
+        get { return candy1Rare; }
+        set { candy1Rare = value; }
+    }
+
+    public int Candy2Rare
+    {
+        get { return candy2Rare; }
+        set { candy2Rare = value; }
+    }
+
+    public int Candy3Rare
+    {
+        get { return candy3Rare; }
+        set { candy3Rare = value; }
+    }
+
+    public int Candy4Rare
+    {
+        get { return candy4Rare; }
+        set { candy4Rare = value; }
+    }
+
+    public int Candy5Rare
+    {
+        get { return candy5Rare; }
+        set { candy5Rare = value; }
+    }
+
+    public int Candy6Rare
+    {
+        get { return candy6Rare; }
+        set { candy6Rare = value; }
+    }
+
+    public int Candy7Rare
+    {
+        get { return candy7Rare; }
+        set { candy7Rare = value; }
+    }
+
+    public int Candy8Rare
+    {
+        get { return candy8Rare; }
+        set { candy8Rare = value; }
+    }
+
+    public int Candy9Rare
+    {
+        get { return candy9Rare; }
+        set { candy9Rare = value; }
+    }
+
     public int JapaneseFood1MaxValue
     {
         get
@@ -2804,6 +2973,48 @@ public class PlayerDataBase : ScriptableObject
         {
             japaneseFood7MaxValue = value;
         }
+    }
+
+    public int JapaneseFood1Rare
+    {
+        get { return japaneseFood1Rare; }
+        set { japaneseFood1Rare = value; }
+    }
+
+    public int JapaneseFood2Rare
+    {
+        get { return japaneseFood2Rare; }
+        set { japaneseFood2Rare = value; }
+    }
+
+    public int JapaneseFood3Rare
+    {
+        get { return japaneseFood3Rare; }
+        set { japaneseFood3Rare = value; }
+    }
+
+    public int JapaneseFood4Rare
+    {
+        get { return japaneseFood4Rare; }
+        set { japaneseFood4Rare = value; }
+    }
+
+    public int JapaneseFood5Rare
+    {
+        get { return japaneseFood5Rare; }
+        set { japaneseFood5Rare = value; }
+    }
+
+    public int JapaneseFood6Rare
+    {
+        get { return japaneseFood6Rare; }
+        set { japaneseFood6Rare = value; }
+    }
+
+    public int JapaneseFood7Rare
+    {
+        get { return japaneseFood7Rare; }
+        set { japaneseFood7Rare = value; }
     }
 
     public int Dessert1MaxValue
@@ -2912,6 +3123,60 @@ public class PlayerDataBase : ScriptableObject
         {
             dessert9MaxValue = value;
         }
+    }
+
+    public int Dessert1Rare
+    {
+        get { return dessert1Rare; }
+        set { dessert1Rare = value; }
+    }
+
+    public int Dessert2Rare
+    {
+        get { return dessert2Rare; }
+        set { dessert2Rare = value; }
+    }
+
+    public int Dessert3Rare
+    {
+        get { return dessert3Rare; }
+        set { dessert3Rare = value; }
+    }
+
+    public int Dessert4Rare
+    {
+        get { return dessert4Rare; }
+        set { dessert4Rare = value; }
+    }
+
+    public int Dessert5Rare
+    {
+        get { return dessert5Rare; }
+        set { dessert5Rare = value; }
+    }
+
+    public int Dessert6Rare
+    {
+        get { return dessert6Rare; }
+        set { dessert6Rare = value; }
+    }
+
+    public int Dessert7Rare
+    {
+        get { return dessert7Rare; }
+        set { dessert7Rare = value; }
+    }
+
+    public int Dessert8Rare
+    {
+        get { return dessert8Rare; }
+        set { dessert8Rare = value; }
+    }
+
+    public int Dessert9Rare
+    {
+        get { return dessert9Rare; }
+        set { dessert9Rare = value; }
     }
 
     public int UpgradeCount
@@ -5689,6 +5954,14 @@ public class PlayerDataBase : ScriptableObject
         food6MaxValue = 0;
         food7MaxValue = 0;
 
+        food1Rare = 0;
+        food2Rare = 0;
+        food3Rare = 0;
+        food4Rare = 0;
+        food5Rare = 0;
+        food6Rare = 0;
+        food7Rare = 0;
+
         candy1MaxValue = 0;
         candy2MaxValue = 0;
         candy3MaxValue = 0;
@@ -5699,6 +5972,16 @@ public class PlayerDataBase : ScriptableObject
         candy8MaxValue = 0;
         candy9MaxValue = 0;
 
+        candy1Rare = 0;
+        candy2Rare = 0;
+        candy3Rare = 0;
+        candy4Rare = 0;
+        candy5Rare = 0;
+        candy6Rare = 0;
+        candy7Rare = 0;
+        candy8Rare = 0;
+        candy9Rare = 0;
+
         japaneseFood1MaxValue = 0;
         japaneseFood2MaxValue = 0;
         japaneseFood3MaxValue = 0;
@@ -5706,6 +5989,14 @@ public class PlayerDataBase : ScriptableObject
         japaneseFood5MaxValue = 0;
         japaneseFood6MaxValue = 0;
         japaneseFood7MaxValue = 0;
+
+        japaneseFood1Rare = 0;
+        japaneseFood2Rare = 0;
+        japaneseFood3Rare = 0;
+        japaneseFood4Rare = 0;
+        japaneseFood5Rare = 0;
+        japaneseFood6Rare = 0;
+        japaneseFood7Rare = 0;
 
         dessert1MaxValue = 0;
         dessert2MaxValue = 0;
@@ -5716,6 +6007,16 @@ public class PlayerDataBase : ScriptableObject
         dessert7MaxValue = 0;
         dessert8MaxValue = 0;
         dessert9MaxValue = 0;
+
+        dessert1Rare = 0;
+        dessert2Rare = 0;
+        dessert3Rare = 0;
+        dessert4Rare = 0;
+        dessert5Rare = 0;
+        dessert6Rare = 0;
+        dessert7Rare = 0;
+        dessert8Rare = 0;
+        dessert9Rare = 0;
 
         treasure1 = 0;
         treasure2 = 0;
@@ -6585,6 +6886,36 @@ public class PlayerDataBase : ScriptableObject
         }
 
         return count;
+    }
+
+    public int GetFoodTruckLevel()
+    {
+        return Truck1Level + Truck2Level + Truck3Level + Truck4Level + Truck5Level + Truck6Level + Truck7Level + Truck8Level + Truck9Level + Truck10Level;
+    }
+
+    public int GetAnimalLevel()
+    {
+        return Animal1Level + Animal2Level + Animal3Level + Animal4Level + Animal5Level + Animal6Level + Animal7Level + Animal8Level;
+    }
+
+    public int GetCharacterLevel()
+    {
+        return Character1Level + Character2Level + Character3Level + Character4Level + Character5Level + Character6Level + Character7Level + Character8Level
+            + Character9Level + Character10Level + Character11Level + Character12Level + Character13Level + Character14Level + Character15Level + Character16Level
+            + Character17Level + Character18Level + Character19Level + Character20Level + Character21Level;
+    }
+    public int GetButterflyLevel()
+    {
+        return Butterfly1Level + Butterfly2Level + Butterfly3Level + Butterfly4Level + Butterfly5Level + Butterfly6Level + Butterfly7Level + Butterfly8Level
+            + Butterfly9Level + Butterfly10Level + Butterfly11Level + Butterfly12Level + Butterfly13Level + Butterfly14Level + Butterfly15Level + Butterfly16Level
+            + Butterfly17Level + Butterfly18Level + Butterfly19Level + Butterfly20Level + Butterfly21Level + Butterfly22Level + Butterfly23Level + Butterfly24Level
+            + Butterfly25Level + Butterfly26Level + Butterfly27Level + Butterfly28Level;
+    }
+
+    public int GetTotemsLevel()
+    {
+        return Totems1Level + Totems2Level + Totems3Level + Totems4Level + Totems5Level + Totems6Level + Totems7Level + Totems8Level
+            + Totems9Level + Totems10Level + Totems11Level + Totems12Level;
     }
 
     public int GetFoodTruckHighNumber()

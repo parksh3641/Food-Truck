@@ -221,7 +221,9 @@ public class GameManager : MonoBehaviour
     private float sellPricePlus = 0;
 
     private float sellPriceTip = 0;
+
     private int expUp = 0;
+    private float expUpPlus = 0;
 
     private float success = 0;
     private float successPlus = 0;
@@ -274,8 +276,8 @@ public class GameManager : MonoBehaviour
     private int defaultSellPrice = 2000;
     private int season = 0;
     private int gender = 0;
-    protected float repairTicket = 10.0f;
-    protected float eventTicket = 3.0f;
+    protected float repairTicketPercent = 10.0f;
+    protected float eventTicketPercent = 3.0f;
 
     private bool clickDelay = false;
     private bool isReady = false;
@@ -1406,9 +1408,6 @@ public class GameManager : MonoBehaviour
         if (!isReady) return;
         if (!isDelay_Camera) return;
 
-        mainUI.SetActive(false);
-        inGameUI.SetActive(true);
-
         GameStateManager.instance.GameType = GameType.Story + number;
 
         rankingNoticeButton.SetActive(false);
@@ -1450,11 +1449,10 @@ public class GameManager : MonoBehaviour
             {
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.SeasonWaitNotion);
-
                 return;
             }
 
-            SoundManager.instance.PlayBoss();
+            //SoundManager.instance.PlayBoss();
 
             rankingNoticeButton.SetActive(true);
 
@@ -1477,7 +1475,6 @@ public class GameManager : MonoBehaviour
             if (!GameStateManager.instance.RankingNotice)
             {
                 OpenRankingNoticeView();
-
                 GameStateManager.instance.RankingNotice = true;
             }
 
@@ -1491,6 +1488,9 @@ public class GameManager : MonoBehaviour
 
         isDelay_Camera = false;
         cameraController.GoToB();
+
+        mainUI.SetActive(false);
+        inGameUI.SetActive(true);
 
         season = SeasonManager.instance.CheckSeason();
 
@@ -1665,6 +1665,7 @@ public class GameManager : MonoBehaviour
         sellPriceTip = 0;
         defDestroy = 0;
         expUp = 0;
+        expUpPlus = 0;
 
         changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
@@ -1674,9 +1675,11 @@ public class GameManager : MonoBehaviour
         successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.05f;
         successPlus += playerDataBase.Treasure1 * 0.2f;
         successPlus += playerDataBase.Advancement * 0.1f;
+        successPlus += playerDataBase.GetCharacterLevel() * characterDataBase.retentionValue;
 
         successX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         successX2 += playerDataBase.Treasure3 * 0.2f;
+        successX2 += playerDataBase.GetTotemsLevel() * totemsDataBase.retentionValue;
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetFoodTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 0.4f;
@@ -1685,6 +1688,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.Treasure7 * 0.8f;
         sellPricePlus += playerDataBase.Advancement * 0.4f;
         sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.5f;
+        sellPricePlus += playerDataBase.GetFoodTruckLevel() * truckDataBase.retentionValue;
 
         if (IsWeekend())
         {
@@ -1694,16 +1698,19 @@ public class GameManager : MonoBehaviour
         }
 
         sellPriceTip += 0;
-        sellPriceTip += playerDataBase.Skill14 * 0.3f; //?? ????
+        sellPriceTip += playerDataBase.Skill14 * 0.3f;
         sellPriceTip += playerDataBase.Treasure8 * 0.6f;
 
         expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
+        expUpPlus += playerDataBase.GetAnimalLevel() * animalDataBase.retentionValue;
+        expUp = (int)(expUp + (expUp * (expUpPlus / 100)));
 
         defDestroy += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
         defDestroy += playerDataBase.Skill9 * 0.05f;
         defDestroy += playerDataBase.Skill19 * 0.05f;
         defDestroy += playerDataBase.Treasure2 * 0.1f;
         defDestroy += playerDataBase.Advancement * 0.05f;
+        defDestroy += playerDataBase.GetButterflyLevel() * butterflyDataBase.retentionValue;
 
         needPlus += playerDataBase.Skill10 * 0.5f;
 
@@ -2221,7 +2228,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (playerDataBase.Island1Level * 0.01f));
+                sellPrice += (int)(sellPrice * (playerDataBase.Island1Level * 0.02f));
                 break;
             case IslandType.Island2:
                 maxLevel = upgradeCandy.maxLevel;
@@ -2232,7 +2239,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (0.2f + (playerDataBase.Island2Level * 0.01f)));
+                sellPrice += (int)(sellPrice * (0.1f + (playerDataBase.Island2Level * 0.02f)));
                 break;
             case IslandType.Island3:
                 maxLevel = upgradeJapaneseFood.maxLevel;
@@ -2243,7 +2250,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (0.4f + (playerDataBase.Island3Level * 0.01f)));
+                sellPrice += (int)(sellPrice * (0.2f + (playerDataBase.Island3Level * 0.02f)));
                 break;
             case IslandType.Island4:
                 maxLevel = upgradeDessert.maxLevel;
@@ -2254,11 +2261,9 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (0.6f + (playerDataBase.Island4Level * 0.01f)));
+                sellPrice += (int)(sellPrice * (0.3f + (playerDataBase.Island4Level * 0.02f)));
                 break;
         }
-
-        //sellPrice = sellPrice + (int)(sellPrice * 0.3f); //?????? 30% ????
 
         if(speicalFood)
         {
@@ -3582,7 +3587,7 @@ public class GameManager : MonoBehaviour
             {
                 if (maxLevel >= 20)
                 {
-                    if (Random.Range(0, 100f) < repairTicket)
+                    if (Random.Range(0, 100f) < repairTicketPercent)
                     {
                         PortionManager.instance.GetRepairTickets(1);
 
@@ -5011,7 +5016,7 @@ public class GameManager : MonoBehaviour
             playerDataBase.SellCount += 1;
             GameStateManager.instance.SellCount += 1;
 
-            if (Random.Range(0, 100f) < eventTicket)
+            if (Random.Range(0, 100f) < eventTicketPercent)
             {
                 PortionManager.instance.GetEventTicket(1);
 
@@ -5051,8 +5056,7 @@ public class GameManager : MonoBehaviour
                         rareFood.SetActive(true);
                     }
 
-                    Debug.LogError("Rare Food is Open !");
-                    FirebaseAnalytics.LogEvent("Open_RareFood");
+                    CheckRareFood();
                 }
             }
         }
@@ -5082,6 +5086,171 @@ public class GameManager : MonoBehaviour
 
         isUpgradeDelay = true;
         Invoke("WaitSellDelay", delay);
+    }
+
+    void CheckRareFood()
+    {
+        switch (GameStateManager.instance.IslandType)
+        {
+            case IslandType.Island1:
+                switch (GameStateManager.instance.FoodType)
+                {
+                    case FoodType.Food1:
+                        playerDataBase.Food1Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Food1Rare", playerDataBase.Food1Rare);
+                        break;
+                    case FoodType.Food2:
+                        playerDataBase.Food2Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Food2Rare", playerDataBase.Food2Rare);
+                        break;
+                    case FoodType.Food3:
+                        playerDataBase.Food3Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Food3Rare", playerDataBase.Food3Rare);
+                        break;
+                    case FoodType.Food4:
+                        playerDataBase.Food4Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Food4Rare", playerDataBase.Food4Rare);
+                        break;
+                    case FoodType.Food5:
+                        playerDataBase.Food5Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Food5Rare", playerDataBase.Food5Rare);
+                        break;
+                    case FoodType.Food6:
+                        playerDataBase.Food6Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Food6Rare", playerDataBase.Food6Rare);
+                        break;
+                    case FoodType.Food7:
+                        playerDataBase.Food7Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Food7Rare", playerDataBase.Food7Rare);
+                        break;
+                }
+
+                FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.FoodType);
+                break;
+            case IslandType.Island2:
+                switch (GameStateManager.instance.CandyType)
+                {
+                    case CandyType.Candy1:
+                        playerDataBase.Candy1Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy1Rare", playerDataBase.Candy1Rare);
+                        break;
+                    case CandyType.Candy2:
+                        playerDataBase.Candy2Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy2Rare", playerDataBase.Candy2Rare);
+                        break;
+                    case CandyType.Candy3:
+                        playerDataBase.Candy3Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy3Rare", playerDataBase.Candy3Rare);
+                        break;
+                    case CandyType.Candy4:
+                        playerDataBase.Candy4Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy4Rare", playerDataBase.Candy4Rare);
+                        break;
+                    case CandyType.Candy5:
+                        playerDataBase.Candy5Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy5Rare", playerDataBase.Candy5Rare);
+                        break;
+                    case CandyType.Candy6:
+                        playerDataBase.Candy6Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy6Rare", playerDataBase.Candy6Rare);
+                        break;
+                    case CandyType.Candy7:
+                        playerDataBase.Candy7Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy7Rare", playerDataBase.Candy7Rare);
+                        break;
+                    case CandyType.Candy8:
+                        playerDataBase.Candy8Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy8Rare", playerDataBase.Candy8Rare);
+                        break;
+                    case CandyType.Candy9:
+                        playerDataBase.Candy9Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy9Rare", playerDataBase.Candy9Rare);
+                        break;
+                }
+
+                FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.CandyType);
+                break;
+            case IslandType.Island3:
+                switch (GameStateManager.instance.JapaneseFoodType)
+                {
+                    case JapaneseFoodType.JapaneseFood1:
+                        playerDataBase.JapaneseFood1Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood1Rare", playerDataBase.JapaneseFood1Rare);
+                        break;
+                    case JapaneseFoodType.JapaneseFood2:
+                        playerDataBase.JapaneseFood2Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood2Rare", playerDataBase.JapaneseFood2Rare);
+                        break;
+                    case JapaneseFoodType.JapaneseFood3:
+                        playerDataBase.JapaneseFood3Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood3Rare", playerDataBase.JapaneseFood3Rare);
+                        break;
+                    case JapaneseFoodType.JapaneseFood4:
+                        playerDataBase.JapaneseFood4Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood4Rare", playerDataBase.JapaneseFood4Rare);
+                        break;
+                    case JapaneseFoodType.JapaneseFood5:
+                        playerDataBase.JapaneseFood5Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood5Rare", playerDataBase.JapaneseFood5Rare);
+                        break;
+                    case JapaneseFoodType.JapaneseFood6:
+                        playerDataBase.JapaneseFood6Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood6Rare", playerDataBase.JapaneseFood6Rare);
+                        break;
+                    case JapaneseFoodType.JapaneseFood7:
+                        playerDataBase.JapaneseFood7Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood7Rare", playerDataBase.JapaneseFood7Rare);
+                        break;
+                }
+
+                FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.JapaneseFoodType);
+                break;
+            case IslandType.Island4:
+                switch (GameStateManager.instance.DessertType)
+                {
+                    case DessertType.Dessert1:
+                        playerDataBase.Dessert1Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert1Rare", playerDataBase.Dessert1Rare);
+                        break;
+                    case DessertType.Dessert2:
+                        playerDataBase.Dessert2Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert2Rare", playerDataBase.Dessert2Rare);
+                        break;
+                    case DessertType.Dessert3:
+                        playerDataBase.Dessert3Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert3Rare", playerDataBase.Dessert3Rare);
+                        break;
+                    case DessertType.Dessert4:
+                        playerDataBase.Dessert4Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert4Rare", playerDataBase.Dessert4Rare);
+                        break;
+                    case DessertType.Dessert5:
+                        playerDataBase.Dessert5Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert5Rare", playerDataBase.Dessert5Rare);
+                        break;
+                    case DessertType.Dessert6:
+                        playerDataBase.Dessert6Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert6Rare", playerDataBase.Dessert6Rare);
+                        break;
+                    case DessertType.Dessert7:
+                        playerDataBase.Dessert7Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert7Rare", playerDataBase.Dessert7Rare);
+                        break;
+                    case DessertType.Dessert8:
+                        playerDataBase.Dessert8Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert8Rare", playerDataBase.Dessert8Rare);
+                        break;
+                    case DessertType.Dessert9:
+                        playerDataBase.Dessert9Rare += 1;
+                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert9Rare", playerDataBase.Dessert9Rare);
+                        break;
+                }
+
+                FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.DessertType);
+                break;
+        }
+
+        Debug.LogError("Rare Food is Open !");
     }
 
     public void CheckDefTicket()

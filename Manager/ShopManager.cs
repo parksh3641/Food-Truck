@@ -100,6 +100,7 @@ public class ShopManager : MonoBehaviour
 
     public GameObject crystalButton;
 
+    public Text levelText;
     public LocalizationContent titleText;
     public LocalizationContent nameText;
     public LocalizationContent effectText;
@@ -144,6 +145,8 @@ public class ShopManager : MonoBehaviour
     private int price_Crystal = 0;
     private int price_LevelUp = 0;
     private int exchagne = 100000;
+
+    private int level = 0;
 
     public GuideMissionManager guideMissionManager;
 
@@ -1672,12 +1675,14 @@ public class ShopManager : MonoBehaviour
         hold = false;
         buy = false;
 
+        passiveText.text = "";
+
         switch (characterInfo.characterType)
         {
             case CharacterType.Character1:
                 hold = true;
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character1Level);
+                level = playerDataBase.Character1Level;
                 break;
             case CharacterType.Character2:
                 if (playerDataBase.Character2 >= 1)
@@ -1687,7 +1692,7 @@ public class ShopManager : MonoBehaviour
 
                 buy = true;
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character2Level);
+                level = playerDataBase.Character2Level;
                 break;
             case CharacterType.Character3:
                 if (playerDataBase.Character3 >= 1)
@@ -1700,7 +1705,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character3Level);
+                level = playerDataBase.Character3Level;
                 break;
             case CharacterType.Character4:
                 if (playerDataBase.Character4 >= 1)
@@ -1713,7 +1718,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character4Level);
+                level = playerDataBase.Character4Level;
                 break;
             case CharacterType.Character5:
                 if (playerDataBase.Character5 >= 1)
@@ -1726,7 +1731,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character5Level);
+                level = playerDataBase.Character5Level;
                 break;
             case CharacterType.Character6:
                 if (playerDataBase.Character6 >= 1)
@@ -1739,7 +1744,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character6Level);
+                level = playerDataBase.Character6Level;
                 break;
             case CharacterType.Character7:
                 if (playerDataBase.Character7 >= 1)
@@ -1752,7 +1757,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character7Level);
+                level = playerDataBase.Character7Level;
                 break;
             case CharacterType.Character8:
                 if (playerDataBase.Character8 >= 1)
@@ -1765,7 +1770,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character8Level);
+                level = playerDataBase.Character8Level;
                 break;
             case CharacterType.Character9:
                 if (playerDataBase.Character9 >= 1)
@@ -1778,7 +1783,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character9Level);
+                level = playerDataBase.Character9Level;
                 break;
             case CharacterType.Character10:
                 if (playerDataBase.Character10 >= 1)
@@ -1791,7 +1796,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character10Level);
+                level = playerDataBase.Character10Level;
                 break;
             case CharacterType.Character11:
                 if (playerDataBase.Character11 >= 1)
@@ -1804,7 +1809,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character11Level);
+                level = playerDataBase.Character11Level;
                 break;
             case CharacterType.Character12:
                 if (playerDataBase.Character12 >= 1)
@@ -1817,7 +1822,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character12Level);
+                level = playerDataBase.Character12Level;
                 break;
             case CharacterType.Character13:
                 if (playerDataBase.Character13 >= 1)
@@ -1830,7 +1835,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character13Level);
+                level = playerDataBase.Character13Level;
                 break;
             case CharacterType.Character14:
                 if (playerDataBase.Character14 >= 1)
@@ -1843,7 +1848,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character14Level);
+                level = playerDataBase.Character14Level;
                 break;
             case CharacterType.Character15:
                 if (playerDataBase.Character15 >= 1)
@@ -1856,7 +1861,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character15Level);
+                level = playerDataBase.Character15Level;
                 break;
             case CharacterType.Character16:
                 if (playerDataBase.Character16 >= 1)
@@ -1869,7 +1874,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character16Level);
+                level = playerDataBase.Character16Level;
                 break;
             case CharacterType.Character17:
                 if (playerDataBase.Character17 >= 1)
@@ -1882,7 +1887,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character17Level);
+                level = playerDataBase.Character17Level;
                 break;
             case CharacterType.Character18:
                 if (playerDataBase.Character18 >= 1)
@@ -1895,7 +1900,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character18Level);
+                level = playerDataBase.Character18Level;
                 break;
             case CharacterType.Character19:
                 if (playerDataBase.Character19 >= 1)
@@ -1908,7 +1913,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character19Level);
+                level = playerDataBase.Character19Level;
                 break;
             case CharacterType.Character20:
                 if (playerDataBase.Character20 >= 1)
@@ -1921,7 +1926,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character20Level);
+                level = playerDataBase.Character20Level;
                 break;
             case CharacterType.Character21:
                 if (playerDataBase.Character21 >= 1)
@@ -1929,14 +1934,14 @@ public class ShopManager : MonoBehaviour
                     hold = true;
                 }
 
-                price_LevelUp = characterDataBase.GetRetentionPrice(playerDataBase.Character21Level);
+                level = playerDataBase.Character21Level;
                 break;
         }
 
 #if UNITY_EDITOR
         buy = true;
 #endif
-
+        passiveText.text = "";
         if (hold)
         {
             selectObj.SetActive(true);
@@ -1945,7 +1950,45 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            levelUpText.text = price_LevelUp.ToString();
+            if (level > 4)
+            {
+                levelText.text = "�ڡڡڡڡ�";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "�١١١١�";
+                        break;
+                    case 1:
+                        levelText.text = "�ڡ١١١�";
+                        break;
+                    case 2:
+                        levelText.text = "�ڡڡ١١�";
+                        break;
+                    case 3:
+                        levelText.text = "�ڡڡڡ١�";
+                        break;
+                    case 4:
+                        levelText.text = "�ڡڡڡڡ�";
+                        break;
+                }
+
+
+                price_LevelUp = characterDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(characterDataBase.retentionEffect.ToString()) + " +"
++ (level * characterDataBase.retentionValue).ToString("N1") + "%";
+            }
 
             if (GameStateManager.instance.CharacterType.Equals(characterInfo.characterType))
             {
@@ -2032,7 +2075,7 @@ public class ShopManager : MonoBehaviour
             case TruckType.Truck1:
                 hold = true;
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck1Level);
+                level = playerDataBase.Truck1Level;
                 break;
             case TruckType.Truck2:
                 if (playerDataBase.Truck2 >= 1)
@@ -2042,7 +2085,7 @@ public class ShopManager : MonoBehaviour
 
                 buy = true;
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck2Level);
+                level = playerDataBase.Truck2Level;
                 break;
             case TruckType.Truck3:
                 if (playerDataBase.Truck3 >= 1)
@@ -2055,7 +2098,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck3Level);
+                level = playerDataBase.Truck3Level;
                 break;
             case TruckType.Truck4:
                 if (playerDataBase.Truck4 >= 1)
@@ -2068,7 +2111,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck4Level);
+                level = playerDataBase.Truck4Level;
                 break;
             case TruckType.Truck5:
                 if (playerDataBase.Truck5 >= 1)
@@ -2081,7 +2124,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck5Level);
+                level = playerDataBase.Truck5Level;
                 break;
             case TruckType.Truck6:
                 if (playerDataBase.Truck6 >= 1)
@@ -2094,7 +2137,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck6Level);
+                level = playerDataBase.Truck6Level;
                 break;
             case TruckType.Truck7:
                 if (playerDataBase.Truck7 >= 1)
@@ -2107,7 +2150,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck7Level);
+                level = playerDataBase.Truck7Level;
                 break;
             case TruckType.Truck8:
                 if (playerDataBase.Truck8 >= 1)
@@ -2120,7 +2163,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck8Level);
+                level = playerDataBase.Truck8Level;
                 break;
             case TruckType.Truck9:
                 if (playerDataBase.Truck9 >= 1)
@@ -2133,7 +2176,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck9Level);
+                level = playerDataBase.Truck9Level;
                 break;
             case TruckType.Truck10:
                 if (playerDataBase.Truck10 >= 1)
@@ -2146,7 +2189,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = truckDataBase.GetRetentionPrice(playerDataBase.Truck10Level);
+                level = playerDataBase.Truck10Level;
                 break;
         }
 
@@ -2154,6 +2197,7 @@ public class ShopManager : MonoBehaviour
         buy = true;
 #endif
 
+        passiveText.text = "";
         if (hold)
         {
             selectObj.SetActive(true);
@@ -2162,7 +2206,45 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            levelUpText.text = price_LevelUp.ToString();
+            if (level > 4)
+            {
+                levelText.text = "�ڡڡڡڡ�";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "�١١١١�";
+                        break;
+                    case 1:
+                        levelText.text = "�ڡ١١١�";
+                        break;
+                    case 2:
+                        levelText.text = "�ڡڡ١١�";
+                        break;
+                    case 3:
+                        levelText.text = "�ڡڡڡ١�";
+                        break;
+                    case 4:
+                        levelText.text = "�ڡڡڡڡ�";
+                        break;
+                }
+
+
+                price_LevelUp = truckDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(truckDataBase.retentionEffect.ToString()) + " +"
++ (level * truckDataBase.retentionValue).ToString("N1") + "%";
+            }
 
             if (GameStateManager.instance.TruckType.Equals(truckInfo.truckType))
             {
@@ -2285,7 +2367,7 @@ public class ShopManager : MonoBehaviour
             case AnimalType.Animal1:
                 hold = true;
 
-                price_LevelUp = animalDataBase.GetRetentionPrice(playerDataBase.Animal1Level);
+                level = playerDataBase.Animal1Level;
                 break;
             case AnimalType.Animal2:
                 if (playerDataBase.Animal2 >= 1)
@@ -2295,7 +2377,7 @@ public class ShopManager : MonoBehaviour
 
                 buy = true;
 
-                price_LevelUp = animalDataBase.GetRetentionPrice(playerDataBase.Animal2Level);
+                level = playerDataBase.Animal2Level;
                 break;
             case AnimalType.Animal3:
                 if (playerDataBase.Animal3 >= 1)
@@ -2308,7 +2390,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = animalDataBase.GetRetentionPrice(playerDataBase.Animal3Level);
+                level = playerDataBase.Animal3Level;
                 break;
             case AnimalType.Animal4:
                 if (playerDataBase.Animal4 >= 1)
@@ -2321,7 +2403,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = animalDataBase.GetRetentionPrice(playerDataBase.Animal4Level);
+                level = playerDataBase.Animal4Level;
                 break;
             case AnimalType.Animal5:
                 if (playerDataBase.Animal5 >= 1)
@@ -2334,7 +2416,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = animalDataBase.GetRetentionPrice(playerDataBase.Animal5Level);
+                level = playerDataBase.Animal5Level;
                 break;
             case AnimalType.Animal6:
                 if (playerDataBase.Animal6 >= 1)
@@ -2347,7 +2429,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = animalDataBase.GetRetentionPrice(playerDataBase.Animal6Level);
+                level = playerDataBase.Animal6Level;
                 break;
             case AnimalType.Animal7:
                 if (playerDataBase.Animal7 >= 1)
@@ -2360,7 +2442,7 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = animalDataBase.GetRetentionPrice(playerDataBase.Animal7Level);
+                level = playerDataBase.Animal7Level;
                 break;
             case AnimalType.Animal8:
                 if (playerDataBase.Animal8 >= 1)
@@ -2373,13 +2455,15 @@ public class ShopManager : MonoBehaviour
                     buy = true;
                 }
 
-                price_LevelUp = animalDataBase.GetRetentionPrice(playerDataBase.Animal8Level);
+                level = playerDataBase.Animal8Level;
                 break;
         }
 
 #if UNITY_EDITOR
         buy = true;
 #endif
+
+        passiveText.text = "";
 
         if (hold)
         {
@@ -2389,7 +2473,45 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            levelUpText.text = price_LevelUp.ToString();
+            if (level > 4)
+            {
+                levelText.text = "�ڡڡڡڡ�";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "�١١١١�";
+                        break;
+                    case 1:
+                        levelText.text = "�ڡ١١١�";
+                        break;
+                    case 2:
+                        levelText.text = "�ڡڡ١١�";
+                        break;
+                    case 3:
+                        levelText.text = "�ڡڡڡ١�";
+                        break;
+                    case 4:
+                        levelText.text = "�ڡڡڡڡ�";
+                        break;
+                }
+
+
+                price_LevelUp = animalDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(animalDataBase.retentionEffect.ToString()) + " +"
++ (level * animalDataBase.retentionValue).ToString("N1") + "%";
+            }
 
             if (GameStateManager.instance.AnimalType.Equals(animalInfo.animalType))
             {
@@ -2497,7 +2619,7 @@ public class ShopManager : MonoBehaviour
             case ButterflyType.Butterfly1:
                 hold = true;
 
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly1Level);
+                level = playerDataBase.Butterfly1Level;
                 break;
             case ButterflyType.Butterfly2:
                 if (playerDataBase.Butterfly2 >= 1)
@@ -2506,7 +2628,7 @@ public class ShopManager : MonoBehaviour
                 }
 
                 buy = true;
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly2Level);
+                level = playerDataBase.Butterfly2Level;
                 break;
             case ButterflyType.Butterfly3:
                 if (playerDataBase.Butterfly3 >= 1)
@@ -2518,7 +2640,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly3Level);
+                level = playerDataBase.Butterfly3Level;
                 break;
             case ButterflyType.Butterfly4:
                 if (playerDataBase.Butterfly4 >= 1)
@@ -2530,7 +2652,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly4Level);
+                level = playerDataBase.Butterfly4Level;
                 break;
             case ButterflyType.Butterfly5:
                 if (playerDataBase.Butterfly5 >= 1)
@@ -2542,7 +2664,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly5Level);
+                level = playerDataBase.Butterfly5Level;
                 break;
             case ButterflyType.Butterfly6:
                 if (playerDataBase.Butterfly6 >= 1)
@@ -2554,7 +2676,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly6Level);
+                level = playerDataBase.Butterfly6Level;
                 break;
             case ButterflyType.Butterfly7:
                 if (playerDataBase.Butterfly7 >= 1)
@@ -2566,7 +2688,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly7Level);
+                level = playerDataBase.Butterfly7Level;
                 break;
             case ButterflyType.Butterfly8:
                 if (playerDataBase.Butterfly8 >= 1)
@@ -2578,7 +2700,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly8Level);
+                level = playerDataBase.Butterfly8Level;
                 break;
             case ButterflyType.Butterfly9:
                 if (playerDataBase.Butterfly9 >= 1)
@@ -2590,7 +2712,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly9Level);
+                level = playerDataBase.Butterfly9Level;
                 break;
             case ButterflyType.Butterfly10:
                 if (playerDataBase.Butterfly10 >= 1)
@@ -2602,7 +2724,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly10Level);
+                level = playerDataBase.Butterfly10Level;
                 break;
             case ButterflyType.Butterfly11:
                 if (playerDataBase.Butterfly11 >= 1)
@@ -2614,7 +2736,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly11Level);
+                level = playerDataBase.Butterfly11Level;
                 break;
             case ButterflyType.Butterfly12:
                 if (playerDataBase.Butterfly12 >= 1)
@@ -2626,7 +2748,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly12Level);
+                level = playerDataBase.Butterfly12Level;
                 break;
             case ButterflyType.Butterfly13:
                 if (playerDataBase.Butterfly13 >= 1)
@@ -2638,7 +2760,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly13Level);
+                level = playerDataBase.Butterfly13Level;
                 break;
             case ButterflyType.Butterfly14:
                 if (playerDataBase.Butterfly14 >= 1)
@@ -2650,7 +2772,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly14Level);
+                level = playerDataBase.Butterfly14Level;
                 break;
             case ButterflyType.Butterfly15:
                 if (playerDataBase.Butterfly15 >= 1)
@@ -2662,7 +2784,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly15Level);
+                level = playerDataBase.Butterfly15Level;
                 break;
             case ButterflyType.Butterfly16:
                 if (playerDataBase.Butterfly16 >= 1)
@@ -2674,7 +2796,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly16Level);
+                level = playerDataBase.Butterfly16Level;
                 break;
             case ButterflyType.Butterfly17:
                 if (playerDataBase.Butterfly17 >= 1)
@@ -2686,7 +2808,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly17Level);
+                level = playerDataBase.Butterfly17Level;
                 break;
             case ButterflyType.Butterfly18:
                 if (playerDataBase.Butterfly18 >= 1)
@@ -2698,7 +2820,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly18Level);
+                level = playerDataBase.Butterfly18Level;
                 break;
             case ButterflyType.Butterfly19:
                 if (playerDataBase.Butterfly19 >= 1)
@@ -2710,7 +2832,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly19Level);
+                level = playerDataBase.Butterfly19Level;
                 break;
             case ButterflyType.Butterfly20:
                 if (playerDataBase.Butterfly20 >= 1)
@@ -2722,7 +2844,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly20Level);
+                level = playerDataBase.Butterfly20Level;
                 break;
             case ButterflyType.Butterfly21:
                 if (playerDataBase.Butterfly21 >= 1)
@@ -2734,7 +2856,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly21Level);
+                level = playerDataBase.Butterfly21Level;
                 break;
             case ButterflyType.Butterfly22:
                 if (playerDataBase.Butterfly22 >= 1)
@@ -2746,7 +2868,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly22Level);
+                level = playerDataBase.Butterfly22Level;
                 break;
             case ButterflyType.Butterfly23:
                 if (playerDataBase.Butterfly23 >= 1)
@@ -2758,7 +2880,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly23Level);
+                level = playerDataBase.Butterfly23Level;
                 break;
             case ButterflyType.Butterfly24:
                 if (playerDataBase.Butterfly24 >= 1)
@@ -2770,7 +2892,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly24Level);
+                level = playerDataBase.Butterfly24Level;
                 break;
             case ButterflyType.Butterfly25:
                 if (playerDataBase.Butterfly25 >= 1)
@@ -2782,7 +2904,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly25Level);
+                level = playerDataBase.Butterfly25Level;
                 break;
             case ButterflyType.Butterfly26:
                 if (playerDataBase.Butterfly26 >= 1)
@@ -2794,7 +2916,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly26Level);
+                level = playerDataBase.Butterfly26Level;
                 break;
             case ButterflyType.Butterfly27:
                 if (playerDataBase.Butterfly27 >= 1)
@@ -2806,7 +2928,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly27Level);
+                level = playerDataBase.Butterfly27Level;
                 break;
             case ButterflyType.Butterfly28:
                 if (playerDataBase.Butterfly28 >= 1)
@@ -2818,7 +2940,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = butterflyDataBase.GetRetentionPrice(playerDataBase.Butterfly28Level);
+                level = playerDataBase.Butterfly28Level;
                 break;
         }
 
@@ -2826,6 +2948,7 @@ public class ShopManager : MonoBehaviour
         buy = true;
 #endif
 
+        passiveText.text = "";
         if (hold)
         {
             selectObj.SetActive(true);
@@ -2834,7 +2957,45 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            levelUpText.text = price_LevelUp.ToString();
+            if (level > 4)
+            {
+                levelText.text = "�ڡڡڡڡ�";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "�١١١١�";
+                        break;
+                    case 1:
+                        levelText.text = "�ڡ١١١�";
+                        break;
+                    case 2:
+                        levelText.text = "�ڡڡ١١�";
+                        break;
+                    case 3:
+                        levelText.text = "�ڡڡڡ١�";
+                        break;
+                    case 4:
+                        levelText.text = "�ڡڡڡڡ�";
+                        break;
+                }
+
+
+                price_LevelUp = butterflyDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(butterflyDataBase.retentionEffect.ToString()) + " +"
++ (level * butterflyDataBase.retentionValue).ToString("N1") + "%";
+            }
 
             if (GameStateManager.instance.ButterflyType.Equals(butterflyInfo.butterflyType))
             {
@@ -2943,7 +3104,7 @@ public class ShopManager : MonoBehaviour
             case TotemsType.Totems1:
                 hold = true;
 
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems1Level);
+                level = playerDataBase.Totems1Level;
                 break;
             case TotemsType.Totems2:
                 if (playerDataBase.Totems2 >= 1)
@@ -2952,7 +3113,7 @@ public class ShopManager : MonoBehaviour
                 }
 
                 buy = true;
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems2Level);
+                level = playerDataBase.Totems2Level;
                 break;
             case TotemsType.Totems3:
                 if (playerDataBase.Totems3 >= 1)
@@ -2964,7 +3125,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems3Level);
+                level = playerDataBase.Totems3Level;
                 break;
             case TotemsType.Totems4:
                 if (playerDataBase.Totems4 >= 1)
@@ -2976,7 +3137,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems4Level);
+                level = playerDataBase.Totems4Level;
                 break;
             case TotemsType.Totems5:
                 if (playerDataBase.Totems5 >= 1)
@@ -2988,7 +3149,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems5Level);
+                level = playerDataBase.Totems5Level;
                 break;
             case TotemsType.Totems6:
                 if (playerDataBase.Totems6 >= 1)
@@ -3000,7 +3161,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems6Level);
+                level = playerDataBase.Totems6Level;
                 break;
             case TotemsType.Totems7:
                 if (playerDataBase.Totems7 >= 1)
@@ -3012,7 +3173,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems7Level);
+                level = playerDataBase.Totems7Level;
                 break;
             case TotemsType.Totems8:
                 if (playerDataBase.Totems8 >= 1)
@@ -3024,7 +3185,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems8Level);
+                level = playerDataBase.Totems8Level;
                 break;
             case TotemsType.Totems9:
                 if (playerDataBase.Totems9 >= 1)
@@ -3036,7 +3197,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems9Level);
+                level = playerDataBase.Totems9Level;
                 break;
             case TotemsType.Totems10:
                 if (playerDataBase.Totems10 >= 1)
@@ -3048,7 +3209,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems10Level);
+                level = playerDataBase.Totems10Level;
                 break;
             case TotemsType.Totems11:
                 if (playerDataBase.Totems11 >= 1)
@@ -3060,7 +3221,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems11Level);
+                level = playerDataBase.Totems11Level;
                 break;
             case TotemsType.Totems12:
                 if (playerDataBase.Totems12 >= 1)
@@ -3072,7 +3233,7 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                price_LevelUp = totemsDataBase.GetRetentionPrice(playerDataBase.Totems12Level);
+                level = playerDataBase.Totems12Level;
                 break;
         }
 
@@ -3080,6 +3241,7 @@ public class ShopManager : MonoBehaviour
         buy = true;
 #endif
 
+        passiveText.text = "";
         if (hold)
         {
             selectObj.SetActive(true);
@@ -3088,7 +3250,45 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            levelUpText.text = price_LevelUp.ToString();
+            if (level > 4)
+            {
+                levelText.text = "�ڡڡڡڡ�";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "�١١١١�";
+                        break;
+                    case 1:
+                        levelText.text = "�ڡ١١١�";
+                        break;
+                    case 2:
+                        levelText.text = "�ڡڡ١١�";
+                        break;
+                    case 3:
+                        levelText.text = "�ڡڡڡ١�";
+                        break;
+                    case 4:
+                        levelText.text = "�ڡڡڡڡ�";
+                        break;
+                }
+
+
+                price_LevelUp = totemsDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(totemsDataBase.retentionEffect.ToString()) + " +"
++ (level * totemsDataBase.retentionValue).ToString("N1") + "%";
+            }
 
             if (GameStateManager.instance.TotemsType.Equals(totemsInfo.totemsType))
             {
@@ -4544,8 +4744,10 @@ public class ShopManager : MonoBehaviour
         playerDataBase.AbilityPoint -= price_LevelUp;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("AbilityPoint", playerDataBase.AbilityPoint);
 
-        SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
-        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
+        abilityPointText.text = playerDataBase.AbilityPoint.ToString();
+
+        SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
+        NotionManager.instance.UseNotion4(NotionType.SuccessUpgrade);
 
         switch (speicalIndex)
         {

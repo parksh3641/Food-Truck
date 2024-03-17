@@ -236,6 +236,8 @@ public class IslandManager : MonoBehaviour
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
 
+        FirebaseAnalytics.LogEvent("LevelUp_" + type.ToString());
+
         GourmetManager.instance.Initialize();
     }
 }

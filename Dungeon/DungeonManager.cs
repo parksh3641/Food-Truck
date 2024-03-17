@@ -553,7 +553,7 @@ public class DungeonManager : MonoBehaviour
                 health -= 1;
 
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
-                //NotionManager.instance.UseNotion2(NotionType.SuccessAttack);
+                NotionManager.instance.UseNotion2(NotionType.SuccessAttack);
             }
 
             Damage();

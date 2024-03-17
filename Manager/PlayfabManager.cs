@@ -396,7 +396,6 @@ public class PlayfabManager : MonoBehaviour
 
                     LinkGoogleAccountRequest request = new LinkGoogleAccountRequest()
                     {
-                        ForceLink = true,
                         ServerAuthCode = serverAuthCode
                     };
 
@@ -413,12 +412,20 @@ public class PlayfabManager : MonoBehaviour
                         NotionManager.instance.UseNotion(NotionType.SuccessLink);
                     }, error =>
                     {
-                        Debug.Log(error.GenerateErrorReport());
+                        if(error.Error == PlayFabErrorCode.AccountAlreadyLinked)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.AlreadyLink);
+                        }
+                        else
+                        {
+                            Debug.Log(error.GenerateErrorReport());
 
-                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                        NotionManager.instance.UseNotion(NotionType.FailLink);
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.FailLink);
 
-                        Debug.Log("Link Google Account Fail");
+                            Debug.Log("Link Google Account Fail");
+                        }
                     });
                 }
                 else
@@ -1657,6 +1664,12 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "LockTutorial":
                            playerDataBase.LockTutorial = statistics.Value;
+                           break;
+                       case "AbilityPoint":
+                           playerDataBase.AbilityPoint = statistics.Value;
+                           break;
+                       case "AbilityLevel":
+                           playerDataBase.AbilityLevel = statistics.Value;
                            break;
                        case "DungeonKey1":
                            playerDataBase.DungeonKey1 = statistics.Value;

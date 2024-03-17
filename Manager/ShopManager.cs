@@ -1,4 +1,4 @@
-using Firebase.Analytics;
+﻿using Firebase.Analytics;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -294,7 +294,7 @@ public class ShopManager : MonoBehaviour
 
             GameStateManager.instance.FeverCount = 280;
 
-            Debug.LogError("��Ʃ�� ���ε� ����");
+            Debug.LogError("유튜브 업로드 세팅");
         }
         else
         {
@@ -316,7 +316,7 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstDate", int.Parse(playerDataBase.FirstDate));
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstServerDate", int.Parse(playerDataBase.FirstServerDate));
 
-                Debug.Log("���� ��Ű�� ���� ��¥ ����");
+                Debug.Log("한정 패키지 구매 날짜 설정");
             }
 
             if (playerDataBase.InGameTutorial == 1)
@@ -1650,7 +1650,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + characterInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeCharacter";
-        titleText.plusText = "  <size=10>( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )\n"
+        titleText.plusText = "  ( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )\n<size=11>"
             + LocalizationManager.instance.GetString("Collect") + " : " +  ((((playerDataBase.GetCharacterNumber() + 1) * 1.0f) / (shopCharacterArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -1952,7 +1952,7 @@ public class ShopManager : MonoBehaviour
 
             if (level > 4)
             {
-                levelText.text = "�ڡڡڡڡ�";
+                levelText.text = "★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -1961,19 +1961,19 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "�١١١١�";
+                        levelText.text = "☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "�ڡ١١١�";
+                        levelText.text = "★☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "�ڡڡ١١�";
+                        levelText.text = "★★☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "�ڡڡڡ١�";
+                        levelText.text = "★★★☆☆";
                         break;
                     case 4:
-                        levelText.text = "�ڡڡڡڡ�";
+                        levelText.text = "★★★★☆";
                         break;
                 }
 
@@ -2045,7 +2045,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + truckInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeTruck";
-        titleText.plusText = "  <size=10>( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n"
+        titleText.plusText = "  ( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n<size=11>"
             + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetFoodTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -2208,7 +2208,7 @@ public class ShopManager : MonoBehaviour
 
             if (level > 4)
             {
-                levelText.text = "�ڡڡڡڡ�";
+                levelText.text = "★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -2217,19 +2217,19 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "�١١١١�";
+                        levelText.text = "☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "�ڡ١١١�";
+                        levelText.text = "★☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "�ڡڡ١١�";
+                        levelText.text = "★★☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "�ڡڡڡ١�";
+                        levelText.text = "★★★☆☆";
                         break;
                     case 4:
-                        levelText.text = "�ڡڡڡڡ�";
+                        levelText.text = "★★★★☆";
                         break;
                 }
 
@@ -2287,7 +2287,7 @@ public class ShopManager : MonoBehaviour
         shopAnimalArray[animalIndex].transform.position = normalPos;
         shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
-        if(animalIndex == 2) //û�� Ű ����
+        if(animalIndex == 2) //청어 키 높이
         {
             shopAnimalArray[animalIndex].transform.position += new Vector3(0, 0.9f, 0);
         }
@@ -2316,12 +2316,12 @@ public class ShopManager : MonoBehaviour
                 shopAnimalArray[animalIndex + 1].transform.position = afterPos;
                 shopAnimalArray[animalIndex + 1].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
-                if (animalIndex - 1 == 2) //û�� Ű ����
+                if (animalIndex - 1 == 2) //청어 키 높이
                 {
                     shopAnimalArray[animalIndex - 1].transform.position += new Vector3(0, 0.9f, 0);
                 }
 
-                if (animalIndex + 1 == 2) //û�� Ű ����
+                if (animalIndex + 1 == 2) //청어 키 높이
                 {
                     shopAnimalArray[animalIndex + 1].transform.position += new Vector3(0, 0.9f, 0);
                 }
@@ -2337,7 +2337,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " +" + animalInfo.effectNumber.ToString();
 
         titleText.localizationName = "ChangeAnimal";
-        titleText.plusText = "  <size=10>( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )\n"
+        titleText.plusText = "  ( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )\n<size=11>"
             + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetAnimalNumber() + 1) * 1.0f) / (shopAnimalArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -2475,7 +2475,7 @@ public class ShopManager : MonoBehaviour
 
             if (level > 4)
             {
-                levelText.text = "�ڡڡڡڡ�";
+                levelText.text = "★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -2484,19 +2484,19 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "�١١١١�";
+                        levelText.text = "☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "�ڡ١١١�";
+                        levelText.text = "★☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "�ڡڡ١١�";
+                        levelText.text = "★★☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "�ڡڡڡ١�";
+                        levelText.text = "★★★☆☆";
                         break;
                     case 4:
-                        levelText.text = "�ڡڡڡڡ�";
+                        levelText.text = "★★★★☆";
                         break;
                 }
 
@@ -2589,7 +2589,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + butterflyInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeButterfly";
-        titleText.plusText = "  <size=10>( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )\n"
+        titleText.plusText = "  ( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )\n<size=11>"
             + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetButterflyNumber() + 1) * 1.0f) / (shopButterflyArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -2959,7 +2959,7 @@ public class ShopManager : MonoBehaviour
 
             if (level > 4)
             {
-                levelText.text = "�ڡڡڡڡ�";
+                levelText.text = "★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -2968,19 +2968,19 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "�١١١١�";
+                        levelText.text = "☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "�ڡ١١١�";
+                        levelText.text = "★☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "�ڡڡ١١�";
+                        levelText.text = "★★☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "�ڡڡڡ١�";
+                        levelText.text = "★★★☆☆";
                         break;
                     case 4:
-                        levelText.text = "�ڡڡڡڡ�";
+                        levelText.text = "★★★★☆";
                         break;
                 }
 
@@ -3074,7 +3074,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + totemsInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeTotems";
-        titleText.plusText = "  <size=10>( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n"
+        titleText.plusText = "  ( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n<size=11>"
             + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetTotemsNumber() + 1) * 1.0f) / (shopTotemsArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -3252,7 +3252,7 @@ public class ShopManager : MonoBehaviour
 
             if (level > 4)
             {
-                levelText.text = "�ڡڡڡڡ�";
+                levelText.text = "★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -3261,19 +3261,19 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "�١١١١�";
+                        levelText.text = "☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "�ڡ١١١�";
+                        levelText.text = "★☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "�ڡڡ١١�";
+                        levelText.text = "★★☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "�ڡڡڡ١�";
+                        levelText.text = "★★★☆☆";
                         break;
                     case 4:
-                        levelText.text = "�ڡڡڡڡ�";
+                        levelText.text = "★★★★☆";
                         break;
                 }
 
@@ -3771,7 +3771,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  <size=10>( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )\n"
+                titleText.plusText = "  ( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )\n<size=11>"
     + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetAnimalNumber() + 1) * 1.0f) / (shopAnimalArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
 
@@ -3849,7 +3849,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  <size=10>( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n"
+                titleText.plusText = "  ( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n<size=11>"
 + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetFoodTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
 
@@ -3957,7 +3957,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  <size=10>( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )\n"
+                titleText.plusText = "  ( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )\n<size=11>"
 + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetCharacterNumber() + 1) * 1.0f) / (shopCharacterArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
 
@@ -4089,7 +4089,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  <size=10>( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )\n"
+                titleText.plusText = "  ( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )\n<size=11>"
 + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetButterflyNumber() + 1) * 1.0f) / (shopButterflyArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
 
@@ -4174,7 +4174,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  <size=10>( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n"
+                titleText.plusText = "  ( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n<size=11>"
 + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetTotemsNumber() + 1) * 1.0f) / (shopTotemsArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
                 break;
@@ -4512,7 +4512,7 @@ public class ShopManager : MonoBehaviour
 
                 PortionManager.instance.GetEventTicket(200);
                 break;
-            case PackageType.Package5: //���� ��Ű��
+            case PackageType.Package5: //한정 패키지
                 playerDataBase.Package5 = true;
                 Invoke("PackageDelay5", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package5", 1);
@@ -4531,7 +4531,7 @@ public class ShopManager : MonoBehaviour
 
                 PortionManager.instance.GetEventTicket(10);
                 break;
-            case PackageType.Package6: //��Ʈ�� ��Ű��
+            case PackageType.Package6: //울트라 패키지
                 playerDataBase.Package6 = true;
                 Invoke("PackageDelay6", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package6", 1);
@@ -4550,7 +4550,7 @@ public class ShopManager : MonoBehaviour
 
                 PortionManager.instance.GetEventTicket(200);
                 break;
-            case PackageType.Package7: //����Ʈ ��Ű��
+            case PackageType.Package7: //서포트 패키지
                 playerDataBase.Package7 += 1;
                 Invoke("PackageDelay7", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package7", playerDataBase.Package7);
@@ -4746,8 +4746,16 @@ public class ShopManager : MonoBehaviour
 
         abilityPointText.text = playerDataBase.AbilityPoint.ToString();
 
-        SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-        NotionManager.instance.UseNotion4(NotionType.SuccessUpgrade);
+        if(level + 1 < 5)
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+            NotionManager.instance.UseNotion4(NotionType.SuccessUpgrade);
+        }
+        else
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
+            NotionManager.instance.UseNotion4(NotionType.MaxLevel);
+        }
 
         switch (speicalIndex)
         {

@@ -46,7 +46,11 @@ public class GuideMissionManager : MonoBehaviour
     {
         if (GameStateManager.instance.YoutubeVideo) return;
 
-        if (playerDataBase.GuideIndex > 21) return;
+        if (playerDataBase.GuideIndex > 21)
+        {
+            guideMissonView.SetActive(false);
+            return;
+        }
 
         guideMissonView.SetActive(true);
 

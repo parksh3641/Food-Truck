@@ -18,6 +18,8 @@ public class BookManager : MonoBehaviour
     public Image[] topMenuImgArray;
     public Sprite[] topMenuSpriteArray;
 
+    public Text titleText;
+
     [Space]
     [Title("ScrollView")]
     public GameObject[] bookArray;
@@ -115,6 +117,9 @@ public class BookManager : MonoBehaviour
                 bookNormalContentList[i].Initialize(BookType.Food1 + i, 0);
             }
 
+            titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetNormalBookNumber() + " / " + System.Enum.GetValues(typeof(BookType)).Length + " )"
+    + "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetNormalBookNumber() * 1.0f) / System.Enum.GetValues(typeof(BookType)).Length) * 100f).ToString("N1") + "%</size>";
+
             CheckNormalInitialize();
         }
         else
@@ -123,6 +128,9 @@ public class BookManager : MonoBehaviour
             {
                 bookEpicContentList[i].Initialize(BookType.Food1 + i, 1);
             }
+
+            titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetEpicBookNumber() + " / " + System.Enum.GetValues(typeof(BookType)).Length + " )"
++ "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetEpicBookNumber() * 1.0f) / System.Enum.GetValues(typeof(BookType)).Length) * 100f).ToString("N1") + "%</size>";
 
             CheckEpicInitialize();
         }

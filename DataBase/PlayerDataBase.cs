@@ -6269,6 +6269,9 @@ public class PlayerDataBase : ScriptableObject
         useSauce4 = 0;
         useSauce5 = 0;
 
+        abilityPoint = 0;
+        abilityLevel = 0;
+
         upgradeCount = 0;
         sellCount = 0;
         useSauceCount = 0;
@@ -7401,6 +7404,340 @@ public class PlayerDataBase : ScriptableObject
                 number++;
             }
         }
+        return number;
+    }
+
+    public int GetNormalBookNumber()
+    {
+        int number = 0;
+
+        if (Food1MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (Food2MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (Food3MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (Food4MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (Food5MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (Food6MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (Food7MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (candy1MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (candy2MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (candy3MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (candy4MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (candy5MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (candy6MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (candy7MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (candy8MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (candy9MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood1MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood2MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood3MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood4MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood5MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood6MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood7MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (dessert1MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (dessert2MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (dessert3MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (dessert4MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (dessert5MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (dessert6MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (dessert7MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (dessert8MaxValue > 0)
+        {
+            number++;
+        }
+
+        if (dessert9MaxValue > 0)
+        {
+            number++;
+        }
+
+        return number;
+    }
+
+    public int GetEpicBookNumber()
+    {
+        int number = 0;
+
+        if (Food1Rare > 0)
+        {
+            number++;
+        }
+
+        if (Food2Rare > 0)
+        {
+            number++;
+        }
+
+        if (Food3Rare > 0)
+        {
+            number++;
+        }
+
+        if (Food4Rare > 0)
+        {
+            number++;
+        }
+
+        if (Food5Rare > 0)
+        {
+            number++;
+        }
+
+        if (Food6Rare > 0)
+        {
+            number++;
+        }
+
+        if (Food7Rare > 0)
+        {
+            number++;
+        }
+
+        if (candy1Rare > 0)
+        {
+            number++;
+        }
+
+        if (candy2Rare > 0)
+        {
+            number++;
+        }
+
+        if (candy3Rare > 0)
+        {
+            number++;
+        }
+
+        if (candy4Rare > 0)
+        {
+            number++;
+        }
+
+        if (candy5Rare > 0)
+        {
+            number++;
+        }
+
+        if (candy6Rare > 0)
+        {
+            number++;
+        }
+
+        if (candy7Rare > 0)
+        {
+            number++;
+        }
+
+        if (candy8Rare > 0)
+        {
+            number++;
+        }
+
+        if (candy9Rare > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood1Rare > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood2Rare > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood3Rare > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood4Rare > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood5Rare > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood6Rare > 0)
+        {
+            number++;
+        }
+
+        if (japaneseFood7Rare > 0)
+        {
+            number++;
+        }
+
+        if (dessert1Rare > 0)
+        {
+            number++;
+        }
+
+        if (dessert2Rare > 0)
+        {
+            number++;
+        }
+
+        if (dessert3Rare > 0)
+        {
+            number++;
+        }
+
+        if (dessert4Rare > 0)
+        {
+            number++;
+        }
+
+        if (dessert5Rare > 0)
+        {
+            number++;
+        }
+
+        if (dessert6Rare > 0)
+        {
+            number++;
+        }
+
+        if (dessert7Rare > 0)
+        {
+            number++;
+        }
+
+        if (dessert8Rare > 0)
+        {
+            number++;
+        }
+
+        if (dessert9Rare > 0)
+        {
+            number++;
+        }
+
         return number;
     }
 }

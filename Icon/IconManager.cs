@@ -98,7 +98,8 @@ public class IconManager : MonoBehaviour
 
     public void CheckMyIcon()
     {
-        titleText.text = LocalizationManager.instance.GetString("ChangeIcon") + " ( " + (playerDataBase.GetIconHoldNumber() + 1) +" / " + System.Enum.GetValues(typeof(IconType)).Length + " )";
+        titleText.text = LocalizationManager.instance.GetString("ChangeIcon") + " ( " + (playerDataBase.GetIconHoldNumber() + 1) +" / " + System.Enum.GetValues(typeof(IconType)).Length + " )"
+            + "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetIconHoldNumber() * 1.0f) / System.Enum.GetValues(typeof(IconType)).Length) * 100f).ToString("N1") + "%</size>";
 
         for (int i = 0; i < iconContentList.Count; i++)
         {

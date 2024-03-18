@@ -581,6 +581,8 @@ public class DungeonManager : MonoBehaviour
 
         bossFoodContents[(int)dungeonType].SetSize(healthPercent);
 
+        FirebaseAnalytics.LogEvent("Attack_Dungeon");
+
         delay = true;
         Invoke("Delay", attackDelay);
     }

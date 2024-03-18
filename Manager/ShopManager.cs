@@ -3588,6 +3588,8 @@ public class ShopManager : MonoBehaviour
 
                 mainAnimalArray[(int)GameStateManager.instance.AnimalType].SetActive(true);
 
+                AnimalInitialize();
+
                 NotionManager.instance.UseNotion(NotionType.ChangeAnimalNotion);
                 break;
             case 1:
@@ -3604,6 +3606,8 @@ public class ShopManager : MonoBehaviour
                 }
 
                 mainTruckArray[(int)GameStateManager.instance.TruckType].SetActive(true);
+
+                TruckInitialize();
 
                 NotionManager.instance.UseNotion(NotionType.ChangeTruckNotion);
                 break;
@@ -3622,6 +3626,8 @@ public class ShopManager : MonoBehaviour
 
                 mainCharacterArray[(int)GameStateManager.instance.CharacterType].SetActive(true);
 
+                CharacterInitialize();
+
                 NotionManager.instance.UseNotion(NotionType.ChangeCharacterNotion);
                 break;
             case 3:
@@ -3639,6 +3645,8 @@ public class ShopManager : MonoBehaviour
 
                 mainButterflyArray[(int)GameStateManager.instance.ButterflyType].SetActive(true);
 
+                ButterflyInitialize();
+
                 NotionManager.instance.UseNotion(NotionType.ChangeButterflyNotion);
                 break;
             case 4:
@@ -3655,6 +3663,8 @@ public class ShopManager : MonoBehaviour
                 }
 
                 mainTotemsArray[(int)GameStateManager.instance.TotemsType].SetActive(true);
+
+                TotemsInitialize();
 
                 NotionManager.instance.UseNotion(NotionType.ChangeTotemsNotion);
                 break;

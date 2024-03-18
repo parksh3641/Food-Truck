@@ -255,16 +255,16 @@ public class UpgradeDataBase : ScriptableObject
                     switch (GameStateManager.instance.IslandType)
                     {
                         case IslandType.Island1:
-                            success = 100 - (level * 1);
+                            success = 100 - (level * 0.5f);
                             break;
                         case IslandType.Island2:
-                            success = 96 - (level * 1);
+                            success = 96 - (level * 0.5f);
                             break;
                         case IslandType.Island3:
-                            success = 91 - (level * 1);
+                            success = 91 - (level * 0.5f);
                             break;
                         case IslandType.Island4:
-                            success = 86 - (level * 1);
+                            success = 86 - (level * 0.5f);
                             break;
                     }
                 }
@@ -276,7 +276,7 @@ public class UpgradeDataBase : ScriptableObject
             case GameType.Rank:
                 if (level > 0)
                 {
-                    success = 100 - (level * 0.5f);
+                    success = 100 - (level * 0.3f);
                 }
                 else
                 {

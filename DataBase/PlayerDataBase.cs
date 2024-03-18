@@ -6529,11 +6529,6 @@ public class PlayerDataBase : ScriptableObject
     {
         int count = 0;
 
-        if (butterfly1 > 0)
-        {
-            count += 1;
-        }
-
         if (butterfly2 > 0)
         {
             count += 1;
@@ -6674,11 +6669,6 @@ public class PlayerDataBase : ScriptableObject
     {
         int count = 0;
 
-        if (character1 > 0)
-        {
-            count += 1;
-        }
-
         if (character2 > 0)
         {
             count += 1;
@@ -6786,11 +6776,6 @@ public class PlayerDataBase : ScriptableObject
     {
         int count = 0;
 
-        if (totems1 > 0)
-        {
-            count += 1;
-        }
-
         if (totems2 > 0)
         {
             count += 1;
@@ -6852,11 +6837,6 @@ public class PlayerDataBase : ScriptableObject
     public int GetFlowerNumber()
     {
         int count = 0;
-
-        if (flower1 > 0)
-        {
-            count += 1;
-        }
 
         if (flower2 > 0)
         {

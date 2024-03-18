@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using Assets.SimpleAndroidNotifications;
+using Unity.Notifications.Android;
 
 #if UNITY_IOS
 using NotificationServices = UnityEngine.iOS.NotificationServices;
@@ -25,7 +26,7 @@ public class LocalNotificationManager : MonoBehaviour
     void DeleteNotification() //알람 초기화
     {
 #if UNITY_ANDROID
-        NotificationManager.CancelAll();
+        AndroidNotificationCenter.CancelAllNotifications();
 #elif UNITY_IOS
         NotificationServices.ClearLocalNotifications();
         NotificationServices.CancelAllLocalNotifications();
@@ -63,7 +64,19 @@ public class LocalNotificationManager : MonoBehaviour
         content = LocalizationManager.instance.GetString("YummyRushNoti");
 
 #if UNITY_ANDROID
-        NotificationManager.SendWithAppIcon(time1, title, content, Color.gray, NotificationIcon.Bell);
+        //NotificationManager.SendWithAppIcon(time1, title, content, Color.gray, NotificationIcon.Bell);
+
+        var notification = new AndroidNotification();
+        notification.Title = title;
+        notification.Text = content;
+        notification.FireTime = notify4;
+
+        notification.SmallIcon = "icon_1";
+        notification.LargeIcon = "icon_0";
+        notification.ShowInForeground = false;
+        string channelId = "my_channel_id";
+
+        AndroidNotificationCenter.SendNotification(notification, channelId);
 
         Debug.Log("Set Android Notification");
 #elif UNITY_IOS

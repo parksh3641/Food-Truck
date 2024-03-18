@@ -27,7 +27,10 @@ public class ReceiveContent : MonoBehaviour
 
         rankBackgroundArray = imageDataBase.GetRankBackgroundArray();
 
-        effect.SetActive(false);
+        if (effect != null)
+        {
+            effect.SetActive(false);
+        }
     }
 
     public void Initialize(RewardType type, int count)

@@ -15,8 +15,8 @@ public class LocalizationManager : MonoBehaviour
 
     //public Sprite[] countryArray;
 
-    public Font koreanFont;
     public Font normalFont;
+    public Font thaiFont;
 
     public OptionManager optionManager;
 
@@ -179,9 +179,9 @@ public class LocalizationManager : MonoBehaviour
     {
         localizationContentList.Add(content);
 
-        if (GameStateManager.instance.Language == LanguageType.Korean)
+        if (GameStateManager.instance.Language == LanguageType.Thai)
         {
-            content.GetComponent<Text>().font = koreanFont;
+            content.GetComponent<Text>().font = thaiFont;
         }
         else
         {
@@ -404,9 +404,9 @@ public class LocalizationManager : MonoBehaviour
         {
             localizationContentList[i].ReLoad();
 
-            if (GameStateManager.instance.Language == LanguageType.Korean)
+            if (GameStateManager.instance.Language == LanguageType.Thai)
             {
-                localizationContentList[i].GetComponent<Text>().font = koreanFont;
+                localizationContentList[i].GetComponent<Text>().font = thaiFont;
             }
             else
             {

@@ -1414,6 +1414,9 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.GameType == GameType.Story)
         {
+            mainUI.SetActive(false);
+            inGameUI.SetActive(true);
+
             switch (GameStateManager.instance.IslandType)
             {
                 case IslandType.Island1:
@@ -1454,6 +1457,9 @@ public class GameManager : MonoBehaviour
 
             //SoundManager.instance.PlayBoss();
 
+            mainUI.SetActive(false);
+            inGameUI.SetActive(true);
+
             rankingNoticeButton.SetActive(true);
 
             switch (GameStateManager.instance.IslandType)
@@ -1488,9 +1494,6 @@ public class GameManager : MonoBehaviour
 
         isDelay_Camera = false;
         cameraController.GoToB();
-
-        mainUI.SetActive(false);
-        inGameUI.SetActive(true);
 
         season = SeasonManager.instance.CheckSeason();
 
@@ -6062,10 +6065,12 @@ public class GameManager : MonoBehaviour
 
     public void OpenUpdate()
     {
-#if UNITY_ANDROID
+#if UNITY_EDITOR
+        checkUpdate.SetActive(false);
+#elif UNITY_ANDROID
         StartCoroutine(CheckForUpdate());
 #elif UNITY_IOS
-        Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
+        Application.OpenURL("https://apps.apple.com/kr/app/food-truck-evolution/id6466390705");
 #endif
 
         FirebaseAnalytics.LogEvent("Open_Update");
@@ -6133,7 +6138,7 @@ public class GameManager : MonoBehaviour
 #if UNITY_ANDROID || UNITY_EDITOR
         Application.OpenURL("https://play.google.com/store/apps/details?id=com.whilili.foodtruck");
 #elif UNITY_IOS
-        Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
+        Application.OpenURL("https://apps.apple.com/kr/app/food-truck-evolution/id6466390705");
 #endif
 
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
@@ -6148,7 +6153,7 @@ public class GameManager : MonoBehaviour
 #if UNITY_ANDROID || UNITY_EDITOR
         Application.OpenURL("https://play.google.com/store/apps/details?id=com.whilili.foodtruck");
 #elif UNITY_IOS
-        Application.OpenURL("https://apps.apple.com/us/app/food-truck-evolution/id6466390705");
+        Application.OpenURL("https://apps.apple.com/kr/app/food-truck-evolution/id6466390705");
 #endif
 
         FirebaseAnalytics.LogEvent("Open_Event_AppReview");
@@ -6483,14 +6488,11 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("Portion5", playerDataBase.Portion5);
     }
 
-    public void GetBuffTicket()
+    public void GetTicket()
     {
         PortionManager.instance.GetBuffTickets(999);
-    }
-
-    public void GetDefTicket()
-    {
         PortionManager.instance.GetDefTickets(999);
+        PortionManager.instance.GetRepairTickets(999);
     }
 
     public void GetDungeonKey()
@@ -6506,18 +6508,24 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey4", playerDataBase.DungeonKey4);
     }
 
-    public void GetAbilityPoint()
+    public void GetPoint()
     {
-        playerDataBase.AbilityPoint += 100000;
+        playerDataBase.RankPoint += 100000;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
+        playerDataBase.AbilityPoint += 100000;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("AbilityPoint", playerDataBase.AbilityPoint);
+
+        playerDataBase.ChallengePoint += 100000;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("ChallengePoint", playerDataBase.ChallengePoint);
     }
 
-    public void GetChallengePoint()
+    public void GetIslandHeart()
     {
-        playerDataBase.ChallengePoint += 100000;
-
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("ChallengePoint", playerDataBase.ChallengePoint);
+        PortionManager.instance.GetIslandCount(0, 1000);
+        PortionManager.instance.GetIslandCount(1, 1000);
+        PortionManager.instance.GetIslandCount(2, 1000);
+        PortionManager.instance.GetIslandCount(3, 1000);
     }
 
     public void GetGourmetLevel()
@@ -6594,9 +6602,9 @@ public class GameManager : MonoBehaviour
 
     public void GetUpgradeCount()
     {
-        playerDataBase.UpgradeCount += Random.Range(5000, 10001);
+        playerDataBase.UpgradeCount += 100000;
 
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
+        //PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
     }
 
     public void CheckLocked()
@@ -6824,7 +6832,14 @@ public class GameManager : MonoBehaviour
         playerDataBase.DungeonKey4 = 0;
 
         playerDataBase.BuffCount = 0;
+        playerDataBase.SkillTicket = 0;
+        playerDataBase.RecoverTicket = 0;
+
         playerDataBase.DefDestroyTicket = 0;
         playerDataBase.DefDestroyTicketPiece = 0;
+
+        playerDataBase.RankPoint = 0;
+        playerDataBase.ChallengePoint = 0;
+        playerDataBase.AbilityPoint = 0;
     }
 }

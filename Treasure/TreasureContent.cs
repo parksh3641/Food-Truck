@@ -209,6 +209,8 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
+                background.effectColor = Color.black;
+
                 if (level > 99)
                 {
                     upgradeButton.SetActive(false);
@@ -236,6 +238,8 @@ public class TreasureContent : MonoBehaviour
 
                     check = 2;
                 }
+
+                background.effectColor = Color.black;
 
                 if (level > 99)
                 {
@@ -415,6 +419,8 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
+                background.effectColor = Color.black;
+
                 if (level > 99)
                 {
                     upgradeButton.SetActive(false);
@@ -442,6 +448,8 @@ public class TreasureContent : MonoBehaviour
 
                     check = 2;
                 }
+
+                background.effectColor = Color.black;
 
                 if (level > 99)
                 {

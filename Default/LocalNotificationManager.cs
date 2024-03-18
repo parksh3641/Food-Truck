@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+#if UNITY_ANDROID
 using Assets.SimpleAndroidNotifications;
 using Unity.Notifications.Android;
+#endif
 
 #if UNITY_IOS
 using NotificationServices = UnityEngine.iOS.NotificationServices;

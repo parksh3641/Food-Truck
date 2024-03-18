@@ -1545,11 +1545,6 @@ public class GameManager : MonoBehaviour
     {
         if (!isDelay_Camera) return;
 
-        if(GameStateManager.instance.GameType == GameType.Rank)
-        {
-            SoundManager.instance.ResetBGM();
-        }
-
         isDelay_Camera = false;
         cameraController.GoToA();
 
@@ -2220,6 +2215,8 @@ public class GameManager : MonoBehaviour
 
     public void UpgradeInitialize()
     {
+        if (!inGameUI.activeInHierarchy) return;
+
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:

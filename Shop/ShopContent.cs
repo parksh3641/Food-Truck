@@ -444,10 +444,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicketSet1:
                 lockedObj.SetActive(false);
 
-                //iapButton.productId = "shop.foodtruck.buff1";
-
-                //priceText.localizationName = itemType + "_Price";
-                //priceText.ReLoad();
+                titleText.plusText = " x5";
 
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(600);
 
@@ -459,10 +456,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicketSet2:
                 lockedObj.SetActive(false);
 
-                //iapButton.productId = "shop.foodtruck.buff2";
-
-                //priceText.localizationName = itemType + "_Price";
-                //priceText.ReLoad();
+                titleText.plusText = " x10";
 
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(1200);
 
@@ -474,10 +468,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicketSet3:
                 lockedObj.SetActive(false);
 
-                //iapButton.productId = "shop.foodtruck.buff3";
-
-                //priceText.localizationName = itemType + "_Price";
-                //priceText.ReLoad();
+                titleText.plusText = " x20";
 
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(1800);
 

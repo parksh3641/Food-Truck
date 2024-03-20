@@ -176,6 +176,7 @@ public class ReceiveInfoManager : MonoBehaviour
             case RewardType.SpeicalCharacter:
                 break;
             case RewardType.AbilityPoint:
+                effect.SetActive(true);
                 break;
             case RewardType.DungeonKey1:
                 break;

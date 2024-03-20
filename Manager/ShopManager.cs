@@ -964,7 +964,7 @@ public class ShopManager : MonoBehaviour
                 {
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 600);
 
-                    PortionManager.instance.GetBuffTickets(10);
+                    PortionManager.instance.GetBuffTickets(5);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -980,7 +980,7 @@ public class ShopManager : MonoBehaviour
                 {
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1200);
 
-                    PortionManager.instance.GetBuffTickets(20);
+                    PortionManager.instance.GetBuffTickets(10);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -996,7 +996,7 @@ public class ShopManager : MonoBehaviour
                 {
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1800);
 
-                    PortionManager.instance.GetBuffTickets(40);
+                    PortionManager.instance.GetBuffTickets(20);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -1650,7 +1650,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + characterInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeCharacter";
-        titleText.plusText = "  ( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )\n<size=11>"
+        titleText.plusText = "  ( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )\n<size=10>"
             + LocalizationManager.instance.GetString("Collect") + " : " +  ((((playerDataBase.GetCharacterNumber() + 1) * 1.0f) / (shopCharacterArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -2045,7 +2045,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + truckInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeTruck";
-        titleText.plusText = "  ( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n<size=11>"
+        titleText.plusText = "  ( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n<size=10>"
             + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetFoodTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -2337,7 +2337,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " +" + animalInfo.effectNumber.ToString();
 
         titleText.localizationName = "ChangeAnimal";
-        titleText.plusText = "  ( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )\n<size=11>"
+        titleText.plusText = "  ( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )\n<size=10>"
             + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetAnimalNumber() + 1) * 1.0f) / (shopAnimalArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -2589,7 +2589,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + butterflyInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeButterfly";
-        titleText.plusText = "  ( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )\n<size=11>"
+        titleText.plusText = "  ( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )\n<size=10>"
             + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetButterflyNumber() + 1) * 1.0f) / (shopButterflyArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -3074,7 +3074,7 @@ public class ShopManager : MonoBehaviour
         effectText.plusText = " : +" + totemsInfo.effectNumber.ToString() + "%";
 
         titleText.localizationName = "ChangeTotems";
-        titleText.plusText = "  ( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n<size=11>"
+        titleText.plusText = "  ( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n<size=10>"
             + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetTotemsNumber() + 1) * 1.0f) / (shopTotemsArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
@@ -3781,7 +3781,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  ( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )\n<size=11>"
+                titleText.plusText = "  ( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )\n<size=10>"
     + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetAnimalNumber() + 1) * 1.0f) / (shopAnimalArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
 
@@ -3859,7 +3859,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  ( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n<size=11>"
+                titleText.plusText = "  ( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n<size=10>"
 + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetFoodTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
 
@@ -3967,7 +3967,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  ( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )\n<size=11>"
+                titleText.plusText = "  ( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )\n<size=10>"
 + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetCharacterNumber() + 1) * 1.0f) / (shopCharacterArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
 
@@ -4099,7 +4099,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  ( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )\n<size=11>"
+                titleText.plusText = "  ( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )\n<size=10>"
 + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetButterflyNumber() + 1) * 1.0f) / (shopButterflyArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
 
@@ -4184,7 +4184,7 @@ public class ShopManager : MonoBehaviour
                         break;
                 }
 
-                titleText.plusText = "  ( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n<size=11>"
+                titleText.plusText = "  ( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n<size=10>"
 + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetTotemsNumber() + 1) * 1.0f) / (shopTotemsArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
                 break;

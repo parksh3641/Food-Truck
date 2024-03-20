@@ -2165,6 +2165,8 @@ public class GameManager : MonoBehaviour
 
         CheckFood();
         CheckFoodState();
+
+        if (!inGameUI.activeInHierarchy) return;
         UpgradeInitialize();
     }
 
@@ -2180,6 +2182,8 @@ public class GameManager : MonoBehaviour
 
         CheckFood();
         CheckFoodState();
+
+        if (!inGameUI.activeInHierarchy) return;
         UpgradeInitialize();
     }
 
@@ -2195,6 +2199,8 @@ public class GameManager : MonoBehaviour
 
         CheckFood();
         CheckFoodState();
+
+        if (!inGameUI.activeInHierarchy) return;
         UpgradeInitialize();
     }
 
@@ -2210,13 +2216,13 @@ public class GameManager : MonoBehaviour
 
         CheckFood();
         CheckFoodState();
+
+        if (!inGameUI.activeInHierarchy) return;
         UpgradeInitialize();
     }
 
     public void UpgradeInitialize()
     {
-        if (!inGameUI.activeInHierarchy) return;
-
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:

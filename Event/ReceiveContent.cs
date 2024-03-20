@@ -194,6 +194,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.AbilityPoint:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
                 break;
             case RewardType.DungeonKey1:
                 break;

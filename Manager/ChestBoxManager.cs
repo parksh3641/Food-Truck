@@ -376,11 +376,11 @@ public class ChestBoxManager : MonoBehaviour
 
     public void ReceiveInfo()
     {
-        ReceiveInfoManager.instance.OpenReceiveInfo(normalRewardType, normalBackground);
+        ReceiveInfoManager.instance.OpenReceiveInfo(normalRewardType);
     }
 
     public void ReceiveInfo2()
     {
-        ReceiveInfoManager.instance.OpenReceiveInfo(epicRewardType, epicBackground);
+        ReceiveInfoManager.instance.OpenReceiveInfo(epicRewardType);
     }
 }

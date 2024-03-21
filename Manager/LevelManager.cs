@@ -108,10 +108,7 @@ public class LevelManager : MonoBehaviour
         {
             GameManager.instance.CheckPercent();
 
-            StartCoroutine(FadeInOut());
-
-            SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-            NotionManager.instance.UseNotion2(NotionType.Levelup);
+            LevelIUpAnimation();
 
             FirebaseAnalytics.LogEvent("LevelUp_Profile");
 
@@ -170,7 +167,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(FadeInOut());
 
         SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-        NotionManager.instance.UseNotion3(NotionType.Levelup);
+        NotionManager.instance.UseNotion2(Color.green, (level - 1) + " ¡æ " + level + "\n" + LocalizationManager.instance.GetString("Levelup"));
     }
 
     IEnumerator FadeInOut()

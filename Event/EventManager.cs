@@ -46,10 +46,10 @@ public class EventManager : MonoBehaviour
                 ResetManager.instance.Initialize();
             }
 
-            welcomeEvent.SetActive(true);
-            if (playerDataBase.WelcomeCount > 6)
+            welcomeEvent.SetActive(false);
+            if (playerDataBase.WelcomeCount < 7)
             {
-                welcomeEvent.SetActive(false);
+                welcomeEvent.SetActive(true);
             }
 
             weekendEvent.SetActive(true);

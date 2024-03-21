@@ -103,8 +103,9 @@ public class GameManager : MonoBehaviour
     private int portionAd = 0;
 
     [Space]
-    [Title("Christmas")]
+    [Title("Background Particle")]
     public GameObject christmasSnow;
+    public GameObject[] island_Particle;
 
     [Space]
     [Title("Truck")]
@@ -472,6 +473,11 @@ public class GameManager : MonoBehaviour
 
         christmasSnow.SetActive(false);
 
+        for(int i = 0; i < island_Particle.Length; i ++)
+        {
+            island_Particle[i].SetActive(false);
+        }
+
         homeButton.SetActive(true);
 
         moveArrow1.SetActive(false);
@@ -554,13 +560,27 @@ public class GameManager : MonoBehaviour
             privacypolicyView.SetActive(true);
         }
 
+        BackgroundEffect();
+    }
+
+    void BackgroundEffect()
+    {
         if (GameStateManager.instance.BackgroundEffect)
         {
             if (currentDate >= decemberStart || currentDate <= decemberEnd)
             {
                 christmasSnow.SetActive(true);
 
-                Debug.LogError("December is Open");
+                Debug.LogError("Snow Particle Play");
+            }
+            else
+            {
+                for (int i = 0; i < island_Particle.Length; i++)
+                {
+                    island_Particle[i].SetActive(false);
+                }
+
+                island_Particle[(int)GameStateManager.instance.IslandType].SetActive(true);
             }
         }
     }
@@ -573,10 +593,24 @@ public class GameManager : MonoBehaviour
             {
                 christmasSnow.SetActive(true);
             }
+            else
+            {
+                for (int i = 0; i < island_Particle.Length; i++)
+                {
+                    island_Particle[i].SetActive(false);
+                }
+
+                island_Particle[(int)GameStateManager.instance.IslandType].SetActive(true);
+            }
         }
         else
         {
             christmasSnow.SetActive(false);
+
+            for (int i = 0; i < island_Particle.Length; i++)
+            {
+                island_Particle[i].SetActive(false);
+            }
         }
     }
 
@@ -2139,7 +2173,11 @@ public class GameManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.ChangeIslandNotion);
 
         CheckFoodState();
-        UpgradeInitialize();
+        if(inGameUI.activeInHierarchy)
+        {
+            UpgradeInitialize();
+        }
+        BackgroundEffect();
     }
 
     public void ChangeFood(FoodType type)

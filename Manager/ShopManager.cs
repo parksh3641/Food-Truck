@@ -436,7 +436,8 @@ public class ShopManager : MonoBehaviour
                 //shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Crystal, this);
                 shopContents[2].gameObject.SetActive(false);
                 shopContents[6].Initialize(ItemType.AdReward_Portion, BuyType.Ad, this);
-                shopContents[7].Initialize(ItemType.RemoveAds, BuyType.Rm, this);
+                //shopContents[7].Initialize(ItemType.RemoveAds, BuyType.Rm, this);
+                shopContents[7].gameObject.SetActive(false);
                 shopContents[11].Initialize(ItemType.DailyReward_Portion, BuyType.Free, this);
                 shopContents[12].Initialize(ItemType.GoldX2, BuyType.Rm, this);
                 shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
@@ -490,10 +491,10 @@ public class ShopManager : MonoBehaviour
                     shopContents[6].SetLocked(true);
                 }
 
-                if (playerDataBase.RemoveAds)
-                {
-                    shopContents[7].gameObject.SetActive(false);
-                }
+                //if (playerDataBase.RemoveAds)
+                //{
+                //    shopContents[7].gameObject.SetActive(false);
+                //}
 
                 if(playerDataBase.GoldX2)
                 {
@@ -571,6 +572,24 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     packageContents[5].Initialize(PackageType.Package6, this);
+                }
+
+                if (playerDataBase.Package8 == 1)
+                {
+                    packageContents[6].gameObject.SetActive(false);
+                }
+                else
+                {
+                    packageContents[6].Initialize(PackageType.Package8, this);
+                }
+
+                if (playerDataBase.Package9 == 1)
+                {
+                    packageContents[7].gameObject.SetActive(false);
+                }
+                else
+                {
+                    packageContents[7].Initialize(PackageType.Package9, this);
                 }
 
                 //if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
@@ -1186,7 +1205,7 @@ public class ShopManager : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.LowPoint);
                 }
                 break;
-            case ItemType.EquipExp:
+            case ItemType.AbilityPoint:
                 break;
             case ItemType.DungeonKey1:
                 break;
@@ -1339,7 +1358,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[33].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 60);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
@@ -4447,9 +4466,11 @@ public class ShopManager : MonoBehaviour
         switch (type)
         {
             case PackageType.Package1:
+                if (playerDataBase.Package1) yield break;
+
                 playerDataBase.Package1 = true;
-                Invoke("PackageDelay1", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package1", 1);
+                Invoke("PackageDelay1", 0.5f);
 
                 PlayfabManager.instance.UpdateAddGold(6000000);
 
@@ -4466,9 +4487,11 @@ public class ShopManager : MonoBehaviour
                 PortionManager.instance.GetEventTicket(10);
                 break;
             case PackageType.Package2:
+                if (playerDataBase.Package2) yield break;
+
                 playerDataBase.Package2 = true;
-                Invoke("PackageDelay2", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package2", 1);
+                Invoke("PackageDelay2", 0.5f);
 
                 PlayfabManager.instance.UpdateAddGold(180000000);
 
@@ -4485,9 +4508,11 @@ public class ShopManager : MonoBehaviour
                 PortionManager.instance.GetEventTicket(50);
                 break;
             case PackageType.Package3:
+                if (playerDataBase.Package3) yield break;
+
                 playerDataBase.Package3 = true;
-                Invoke("PackageDelay3", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package3", 1);
+                Invoke("PackageDelay3", 0.5f);
 
                 PlayfabManager.instance.UpdateAddGold(600000000);
 
@@ -4504,9 +4529,11 @@ public class ShopManager : MonoBehaviour
                 PortionManager.instance.GetEventTicket(100);
                 break;
             case PackageType.Package4:
+                if (playerDataBase.Package4) yield break;
+
                 playerDataBase.Package4 = true;
-                Invoke("PackageDelay4", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package4", 1);
+                Invoke("PackageDelay4", 0.5f);
 
                 PlayfabManager.instance.UpdateAddGold(600000000);
 
@@ -4523,9 +4550,11 @@ public class ShopManager : MonoBehaviour
                 PortionManager.instance.GetEventTicket(200);
                 break;
             case PackageType.Package5: //한정 패키지
+                if (playerDataBase.Package5) yield break;
+
                 playerDataBase.Package5 = true;
-                Invoke("PackageDelay5", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package5", 1);
+                Invoke("PackageDelay5", 0.5f);
 
                 PlayfabManager.instance.UpdateAddGold(12000000);
 
@@ -4542,28 +4571,34 @@ public class ShopManager : MonoBehaviour
                 PortionManager.instance.GetEventTicket(10);
                 break;
             case PackageType.Package6: //울트라 패키지
+                if (playerDataBase.Package6) yield break;
+
                 playerDataBase.Package6 = true;
-                Invoke("PackageDelay6", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package6", 1);
+                Invoke("PackageDelay6", 0.5f);
+
 
                 PlayfabManager.instance.PurchaseRemoveAd();
 
                 yield return waitForSeconds;
 
-                PlayfabManager.instance.PurchaseGoldX2();
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 12000);
 
                 yield return waitForSeconds;
 
-                PlayfabManager.instance.PurchaseAutoUpgrade();
+                PortionManager.instance.GetAllPortion(10);
 
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetEventTicket(200);
                 break;
             case PackageType.Package7: //서포트 패키지
+                if (playerDataBase.Package7 == 1) yield break;
+
                 playerDataBase.Package7 += 1;
-                Invoke("PackageDelay7", 0.5f);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package7", playerDataBase.Package7);
+
+                Invoke("PackageDelay7", 0.5f);
 
                 PlayfabManager.instance.UpdateAddGold(6000000);
 
@@ -4578,6 +4613,26 @@ public class ShopManager : MonoBehaviour
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetEventTicket(10);
+                break;
+            case PackageType.Package8:
+                if (playerDataBase.Package8 == 1) yield break;
+
+                playerDataBase.Package8 += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package8", playerDataBase.Package8);
+                packageContents[6].gameObject.SetActive(false);
+
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+
+                break;
+            case PackageType.Package9:
+                if (playerDataBase.Package9 == 1) yield break;
+
+                playerDataBase.Package9 += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package9", playerDataBase.Package9);
+                packageContents[7].gameObject.SetActive(false);
+
+                TreasureManager.instance.OpenTreasure(11);
+
                 break;
         }
 
@@ -4725,12 +4780,12 @@ public class ShopManager : MonoBehaviour
 
     public void OpenRankPointInfo()
     {
-        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.RankPoint, 2);
+        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.RankPoint);
     }
 
     public void OpenAbilityPointInfo()
     {
-        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.AbilityPoint, 2);
+        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.AbilityPoint);
     }
 
     public void LevelUpButton()

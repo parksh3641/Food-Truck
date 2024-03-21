@@ -218,7 +218,7 @@ public enum ItemType
     SkillTicket,
     RepairTicket,
     RepairTicket10,
-    EquipExp,
+    AbilityPoint,
     DungeonKey1,
     DungeonKey2,
     DungeonKey3,
@@ -233,7 +233,9 @@ public enum PackageType
     Package4,
     Package5,
     Package6,
-    Package7
+    Package7,
+    Package8,
+    Package9
 }
 
 public enum BuyType

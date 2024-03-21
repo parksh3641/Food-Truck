@@ -1030,6 +1030,10 @@ public class PlayerDataBase : ScriptableObject
     private bool package6 = false;
     [SerializeField]
     private int package7 = 0;
+    [SerializeField]
+    private int package8 = 0;
+    [SerializeField]
+    private int package9 = 0;
 
 
     [Space]
@@ -5668,6 +5672,30 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Package8
+    {
+        get
+        {
+            return package8;
+        }
+        set
+        {
+            package8 = value;
+        }
+    }
+
+    public int Package9
+    {
+        get
+        {
+            return package9;
+        }
+        set
+        {
+            package9 = value;
+        }
+    }
+
     public string AttendanceDay
     {
         get
@@ -6373,6 +6401,8 @@ public class PlayerDataBase : ScriptableObject
         package5 = false;
         package6 = false;
         package7 = 0;
+        package8 = 0;
+        package9 = 0;
 
         attendanceDay = "";
         attendanceCount = 0;

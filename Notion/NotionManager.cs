@@ -56,6 +56,16 @@ public class NotionManager : MonoBehaviour
         notion.gameObject.SetActive(true);
     }
 
+    public void UseNotion2(Color color, string txt)
+    {
+        notion2.gameObject.SetActive(false);
+
+        notion2.txt.text = txt;
+        notion2.txt.color = color;
+
+        notion2.gameObject.SetActive(true);
+    }
+
     public void UseNotion3(Color color, string txt)
     {
         notion3.gameObject.SetActive(false);

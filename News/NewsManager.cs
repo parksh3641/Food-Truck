@@ -35,8 +35,12 @@ public class NewsManager : MonoBehaviour
     private int topNumber = -1;
     public bool isDelay = false;
 
+    private bool first = false;
+
     public List<NewsContent> newsContentList = new List<NewsContent>();
     private List<TitleNewsItem> newsInfoList = new List<TitleNewsItem>();
+
+    public WelcomeManager welcomeManager;
 
     PlayerDataBase playerDataBase;
 
@@ -64,12 +68,16 @@ public class NewsManager : MonoBehaviour
 
             newsContentList.Add(monster);
         }
+
+        first = false;
     }
 
     public void Initialize()
     {
         if (playerDataBase.InGameTutorial == 1 && !GameStateManager.instance.HideNotice)
         {
+            first = true;
+
             OpenNews();
         }
     }
@@ -136,6 +144,17 @@ public class NewsManager : MonoBehaviour
         else
         {
             newsView.SetActive(false);
+
+            if (first)
+            {
+                first = false;
+
+                if (!playerDataBase.WelcomeCheck && playerDataBase.WelcomeCount < 7)
+                {
+                    welcomeManager.first = true;
+                    welcomeManager.OpenWelcomeView();
+                }
+            }
         }
     }
 
@@ -182,6 +201,13 @@ public class NewsManager : MonoBehaviour
         Application.OpenURL("https://discord.gg/yEV33a8ajy");
 
         FirebaseAnalytics.LogEvent("Open_Discord");
+    }
+
+    public void OpenKakaoTalk()
+    {
+        Application.OpenURL("https://open.kakao.com/o/gnjyGphg");
+
+        FirebaseAnalytics.LogEvent("Open_KakaoTalk");
     }
 
     public void HideCheck()

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class TreasureManager : MonoBehaviour
 {
+    public static TreasureManager instance;
+
     public GameObject treasureView;
     public GameObject treasureInfoView;
 
@@ -52,6 +54,8 @@ public class TreasureManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         treasureView.SetActive(false);

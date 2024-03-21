@@ -18,8 +18,6 @@ public class PlayTimeManager : MonoBehaviour
 
     public AttendanceContent[] attendanceContentArray;
 
-    public TreasureManager treasureManager;
-
     PlayerDataBase playerDataBase;
 
     private void Awake()
@@ -123,7 +121,7 @@ public class PlayTimeManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
                 break;
             case 5:
-                treasureManager.OpenTreasure(1);
+                TreasureManager.instance.OpenTreasure(1);
                 break;
         }
 
@@ -134,7 +132,7 @@ public class PlayTimeManager : MonoBehaviour
 
         CheckPlayTime();
 
-        FirebaseAnalytics.LogEvent("Clear_Event_PlayTime" + index);
+        FirebaseAnalytics.LogEvent("Clear_Event_PlayTime : " + index);
 
         if (playerDataBase.PlayTimeCount > 5)
         {

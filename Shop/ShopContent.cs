@@ -147,7 +147,6 @@ public class ShopContent : MonoBehaviour
                 {
                     rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
                 }
-                effect.SetActive(true);
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);
@@ -160,6 +159,7 @@ public class ShopContent : MonoBehaviour
                 infoText.plusText = " : " + playerDataBase.DefDestroyTicket;
                 infoText.ReLoad();
 
+                effect.SetActive(true);
                 break;
             case ItemType.GoldShop1:
                 lockedObj.SetActive(false);
@@ -187,7 +187,6 @@ public class ShopContent : MonoBehaviour
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
-                //effect.SetActive(true);
                 break;
             case ItemType.RemoveAds:
                 lockedObj.SetActive(false);
@@ -444,8 +443,6 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicketSet1:
                 lockedObj.SetActive(false);
 
-                titleText.plusText = " x5";
-
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(600);
 
                 infoText.localizationName = itemType + "_Info";
@@ -456,8 +453,6 @@ public class ShopContent : MonoBehaviour
             case ItemType.BuffTicketSet2:
                 lockedObj.SetActive(false);
 
-                titleText.plusText = " x10";
-
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(1200);
 
                 infoText.localizationName = itemType + "_Info";
@@ -467,8 +462,6 @@ public class ShopContent : MonoBehaviour
                 break;
             case ItemType.BuffTicketSet3:
                 lockedObj.SetActive(false);
-
-                titleText.plusText = " x20";
 
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(1800);
 
@@ -483,25 +476,16 @@ public class ShopContent : MonoBehaviour
             case ItemType.DefTicketSet1:
                 lockedObj.SetActive(false);
 
-                //iapButton.productId = "shop.foodtruck.defticket1";
-
-                //priceText.localizationName = itemType + "_Price";
-                //priceText.ReLoad();
-
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(1800);
 
                 infoText.localizationName = itemType + "_Info";
                 infoText.ReLoad();
 
                 index = 17;
+                effect.SetActive(true);
                 break;
             case ItemType.DefTicketSet2:
                 lockedObj.SetActive(false);
-
-                //iapButton.productId = "shop.foodtruck.defticket2";
-
-                //priceText.localizationName = itemType + "_Price";
-                //priceText.ReLoad();
 
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(3600);
 
@@ -509,14 +493,10 @@ public class ShopContent : MonoBehaviour
                 infoText.ReLoad();
 
                 index = 18;
+                effect.SetActive(true);
                 break;
             case ItemType.DefTicketSet3:
                 lockedObj.SetActive(false);
-
-                //iapButton.productId = "shop.foodtruck.defticket3";
-
-                //priceText.localizationName = itemType + "_Price";
-                //priceText.ReLoad();
 
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(6000);
 
@@ -527,6 +507,7 @@ public class ShopContent : MonoBehaviour
                 bestText.text = "BEST";
 
                 index = 19;
+                effect.SetActive(true);
                 break;
             case ItemType.SuperOffline:
                 lockedObj.SetActive(false);
@@ -543,7 +524,7 @@ public class ShopContent : MonoBehaviour
                 effect.SetActive(true);
                 break;
             case ItemType.AdReward_Crystal:
-                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(100) + "</size>";
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(60) + "</size>";
                 effect.SetActive(true);
                 break;
             case ItemType.AutoUpgrade:
@@ -651,5 +632,10 @@ public class ShopContent : MonoBehaviour
     void Delay()
     {
         isDelay = false;
+    }
+
+    public void OpenInfo()
+    {
+        ReceiveInfoManager.instance.OpenReceiveInfo(itemType);
     }
 }

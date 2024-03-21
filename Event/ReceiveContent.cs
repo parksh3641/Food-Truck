@@ -57,7 +57,6 @@ public class ReceiveContent : MonoBehaviour
         {
             case RewardType.Gold:
                 mainBackground.sprite = rankBackgroundArray[0];
-                //effect.SetActive(true);
                 break;
             case RewardType.DefDestroyTicket:
                 mainBackground.sprite = rankBackgroundArray[3];
@@ -251,6 +250,6 @@ public class ReceiveContent : MonoBehaviour
 
     public void OpenInfo()
     {
-        ReceiveInfoManager.instance.OpenReceiveInfo(rewardType, mainBackground.sprite);
+        ReceiveInfoManager.instance.OpenReceiveInfo(rewardType);
     }
 }

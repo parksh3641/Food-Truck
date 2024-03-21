@@ -108,6 +108,6 @@ public class GifticonManager : MonoBehaviour
 
     public void OpenEventTicketInfo()
     {
-        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.EventTicket, 3);
+        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.EventTicket);
     }
 }

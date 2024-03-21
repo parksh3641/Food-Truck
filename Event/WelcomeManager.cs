@@ -18,10 +18,14 @@ public class WelcomeManager : MonoBehaviour
     string localization_Hours = "";
     string localization_Minutes = "";
 
+    public bool first = false;
+
     public GameObject mainAlarm;
     public GameObject alarm;
 
     public AttendanceContent[] attendanceContentArray;
+
+    public AttendanceManager attendanceManager;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
@@ -43,6 +47,8 @@ public class WelcomeManager : MonoBehaviour
 
         mainAlarm.SetActive(false);
         alarm.SetActive(false);
+
+        first = false;
     }
 
     public void Initialize()
@@ -88,6 +94,16 @@ public class WelcomeManager : MonoBehaviour
             StopAllCoroutines();
 
             welcomeView.SetActive(false);
+
+            if(first)
+            {
+                first = false;
+
+                if (!playerDataBase.AttendanceCheck)
+                {
+                    attendanceManager.OpenAttendanceView();
+                }
+            }
         }
     }
 

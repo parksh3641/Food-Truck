@@ -2193,6 +2193,12 @@ public class PlayfabManager : MonoBehaviour
                        case "Package7":
                            playerDataBase.Package7 = statistics.Value;
                            break;
+                       case "Package8":
+                           playerDataBase.Package8 = statistics.Value;
+                           break;
+                       case "Package9":
+                           playerDataBase.Package9 = statistics.Value;
+                           break;
                        case "UpgradeCount":
                            playerDataBase.UpgradeCount = statistics.Value;
                            break;

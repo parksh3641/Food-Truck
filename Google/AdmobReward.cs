@@ -146,6 +146,9 @@ public class AdmobReward : MonoBehaviour
                 case 17:
                     GameManager.instance.SuccessWatchAd(4);
                     break;
+                case 18:
+                    shopManager.BuyPackage(PackageType.Package9);
+                    break;
             }
         }
         else
@@ -214,6 +217,9 @@ public class AdmobReward : MonoBehaviour
                             break;
                         case 17:
                             GameManager.instance.SuccessWatchAd(4);
+                            break;
+                        case 18:
+                            shopManager.BuyPackage(PackageType.Package9);
                             break;
                     }
 

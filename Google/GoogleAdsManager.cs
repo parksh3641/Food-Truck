@@ -9,6 +9,7 @@ public class GoogleAdsManager : MonoBehaviour
 
     //public AdmobBanner admobBanner;
     //public AdmobScreen admobScreen;
+    public AdmobReward admobReward_All;
     public AdmobReward admobReward_Gold;
     public AdmobReward admobReward_Portion;
     public AdmobReward admobReward_ChestBoxGold;

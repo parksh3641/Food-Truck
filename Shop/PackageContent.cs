@@ -11,11 +11,17 @@ public class PackageContent : MonoBehaviour
     public PackageType packageType = PackageType.Package1;
 
     public Text titleText;
+    public Text infoText;
+
+    public GameObject best;
 
     public ReceiveContent[] receiveContents;
 
     public CodelessIAPButton iapButton;
     public LocalizationContent priceText;
+
+    public GameObject freeButton;
+    public GameObject adButton;
 
     public Text bestText;
     public Text timerText;
@@ -48,21 +54,25 @@ public class PackageContent : MonoBehaviour
 
         packageType = type;
 
-        titleText.text = LocalizationManager.instance.GetString(type.ToString());
+        best.SetActive(true);
 
-        if(timerText != null)
+        titleText.text = LocalizationManager.instance.GetString(type.ToString());
+        infoText.text = LocalizationManager.instance.GetString(type.ToString() + "_Info");
+        bestText.text = LocalizationManager.instance.GetString(type + "_Percent");
+
+        if (timerText != null)
         {
             timerText.text = "";
         }
 
-        //for (int i = 0; i < receiveContents.Length; i++)
-        //{
-        //    receiveContents[i].gameObject.SetActive(false);
-        //}
+        iapButton.gameObject.SetActive(false);
+        freeButton.SetActive(false);
+        adButton.SetActive(false);
 
         switch (type)
         {
             case PackageType.Package1:
+                iapButton.gameObject.SetActive(true);
                 iapButton.productId = "shop.foodtruck.package1";
 
                 receiveContents[0].Initialize(RewardType.Gold, 6000000);
@@ -72,6 +82,7 @@ public class PackageContent : MonoBehaviour
 
                 break;
             case PackageType.Package2:
+                iapButton.gameObject.SetActive(true);
                 iapButton.productId = "shop.foodtruck.package2"; //20000
 
                 receiveContents[0].Initialize(RewardType.Gold, 180000000); //3000
@@ -81,6 +92,7 @@ public class PackageContent : MonoBehaviour
 
                 break;
             case PackageType.Package3:
+                iapButton.gameObject.SetActive(true);
                 iapButton.productId = "shop.foodtruck.package3"; //60000
 
                 receiveContents[0].Initialize(RewardType.Gold, 600000000); //10000
@@ -90,6 +102,7 @@ public class PackageContent : MonoBehaviour
 
                 break;
             case PackageType.Package4:
+                iapButton.gameObject.SetActive(true);
                 iapButton.productId = "shop.foodtruck.package4"; //100000
 
                 receiveContents[0].Initialize(RewardType.Gold, 600000000); //10000
@@ -99,6 +112,7 @@ public class PackageContent : MonoBehaviour
 
                 break;
             case PackageType.Package5: //한정 패키지
+                iapButton.gameObject.SetActive(true);
                 iapButton.productId = "shop.foodtruck.package5";
 
                 receiveContents[0].Initialize(RewardType.Gold, 12000000);
@@ -110,15 +124,17 @@ public class PackageContent : MonoBehaviour
                 BuyLimitDate();
                 break;
             case PackageType.Package6:
+                iapButton.gameObject.SetActive(true);
                 iapButton.productId = "shop.foodtruck.package6";
 
                 receiveContents[0].Initialize(RewardType.RemoveAds, -1);
-                receiveContents[1].Initialize(RewardType.GoldX2, -1);
-                receiveContents[2].Initialize(RewardType.AutoUpgrade, -1);
+                receiveContents[1].Initialize(RewardType.Crystal, 12000);
+                receiveContents[2].Initialize(RewardType.PortionSet, 10);
                 receiveContents[3].Initialize(RewardType.EventTicket, 200);
 
                 break;
             case PackageType.Package7: //서포트 패키지
+                iapButton.gameObject.SetActive(true);
                 iapButton.productId = "shop.foodtruck.package7";
 
                 receiveContents[0].Initialize(RewardType.Gold, 6000000);
@@ -127,12 +143,28 @@ public class PackageContent : MonoBehaviour
                 receiveContents[3].Initialize(RewardType.EventTicket, 10);
 
                 break;
+            case PackageType.Package8:
+                freeButton.SetActive(true);
+                best.SetActive(false);
+
+                receiveContents[0].Initialize(RewardType.Crystal, 300);
+                receiveContents[1].gameObject.SetActive(false);
+                receiveContents[2].gameObject.SetActive(false);
+                receiveContents[3].gameObject.SetActive(false);
+                break;
+            case PackageType.Package9:
+                adButton.SetActive(true);
+                best.SetActive(false);
+
+                receiveContents[0].Initialize(RewardType.TreasureBox, 11);
+                receiveContents[1].gameObject.SetActive(false);
+                receiveContents[2].gameObject.SetActive(false);
+                receiveContents[3].gameObject.SetActive(false);
+                break;
         }
 
         priceText.localizationName = type.ToString();
         priceText.ReLoad();
-
-        bestText.text = LocalizationManager.instance.GetString(type + "_Info");
     }
 
     public void BuyLimitDate()
@@ -219,4 +251,13 @@ public class PackageContent : MonoBehaviour
         shopManager.Failed();
     }
 
+    public void FreeButton()
+    {
+        shopManager.BuyPackage(packageType);
+    }
+
+    public void AdButton()
+    {
+        GoogleAdsManager.instance.admobReward_All.ShowAd(18);
+    }
 }

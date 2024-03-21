@@ -25,8 +25,6 @@ public class AttendanceManager : MonoBehaviour
 
     public AttendanceContent[] attendanceContentArray;
 
-    public TreasureManager treasureManager;
-
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
     DateTime f, g;
@@ -53,7 +51,7 @@ public class AttendanceManager : MonoBehaviour
     [Button]
     void OpenTreasureBox()
     {
-        treasureManager.OpenTreasure(1);
+        TreasureManager.instance.OpenTreasure(1);
     }
 
     public void Initialize()
@@ -83,14 +81,15 @@ public class AttendanceManager : MonoBehaviour
         {
             attendanceView.SetActive(true);
 
-            f = DateTime.Now;
-            g = DateTime.Today.AddDays(1);
-            StartCoroutine(TimerCoroution());
-
             localization_Reset = LocalizationManager.instance.GetString("Reset");
             localization_Days = LocalizationManager.instance.GetString("Days");
             localization_Hours = LocalizationManager.instance.GetString("Hours");
             localization_Minutes = LocalizationManager.instance.GetString("Minutes");
+
+            timerText.text = "";
+            f = DateTime.Now;
+            g = DateTime.Today.AddDays(1);
+            StartCoroutine(TimerCoroution());
 
             CheckAttendance();
 

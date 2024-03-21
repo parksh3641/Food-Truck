@@ -226,6 +226,6 @@ public class RecoverManager : MonoBehaviour
 
     public void OpenRepairTicketInfo()
     {
-        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.RepairTicket, 2);
+        ReceiveInfoManager.instance.OpenReceiveInfo(RewardType.RepairTicket);
     }
 }

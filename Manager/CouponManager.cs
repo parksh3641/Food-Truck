@@ -91,14 +91,14 @@ public class CouponManager : MonoBehaviour
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon1", 1);
 
                     PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
 
                     couponRewardView.SetActive(true);
                     receiveContents[0].gameObject.SetActive(true);
                     receiveContents[1].gameObject.SetActive(true);
 
                     receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 300);
+                    receiveContents[1].Initialize(RewardType.Crystal, 500);
 
                     FirebaseAnalytics.LogEvent("Clear_WelcomeCoupon");
 
@@ -505,22 +505,15 @@ public class CouponManager : MonoBehaviour
 
     public void GetReward()
     {
-        PlayfabManager.instance.UpdateAddGold(1000000);
-
-        PortionManager.instance.GetAllPortion(5);
+        PlayfabManager.instance.UpdateAddGold(300000);
+        PortionManager.instance.GetAllPortion(2);
 
         couponRewardView.SetActive(true);
         receiveContents[0].gameObject.SetActive(true);
         receiveContents[1].gameObject.SetActive(true);
-        receiveContents[2].gameObject.SetActive(true);
-        receiveContents[3].gameObject.SetActive(true);
-        receiveContents[4].gameObject.SetActive(true);
 
-        receiveContents[0].Initialize(RewardType.Gold, 1000000);
-        receiveContents[1].Initialize(RewardType.Portion1, 5);
-        receiveContents[2].Initialize(RewardType.Portion2, 5);
-        receiveContents[3].Initialize(RewardType.Portion3, 5);
-        receiveContents[4].Initialize(RewardType.Portion4, 5);
+        receiveContents[0].Initialize(RewardType.Gold, 300000);
+        receiveContents[1].Initialize(RewardType.PortionSet, 2);
 
         FirebaseAnalytics.LogEvent("Clear_Coupon");
 
@@ -530,8 +523,8 @@ public class CouponManager : MonoBehaviour
 
     public void GetSpeicalReward()
     {
-        PlayfabManager.instance.UpdateAddGold(1000000);
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+        PlayfabManager.instance.UpdateAddGold(500000);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
         PortionManager.instance.GetDefTickets(5);
 
         couponRewardView.SetActive(true);
@@ -539,8 +532,8 @@ public class CouponManager : MonoBehaviour
         receiveContents[1].gameObject.SetActive(true);
         receiveContents[2].gameObject.SetActive(true);
 
-        receiveContents[0].Initialize(RewardType.Gold, 1000000);
-        receiveContents[1].Initialize(RewardType.Crystal, 300);
+        receiveContents[0].Initialize(RewardType.Gold, 500000);
+        receiveContents[1].Initialize(RewardType.Crystal, 100);
         receiveContents[2].Initialize(RewardType.DefDestroyTicket, 5);
 
         FirebaseAnalytics.LogEvent("Clear_Coupon_Speical");

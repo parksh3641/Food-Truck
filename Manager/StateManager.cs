@@ -129,8 +129,6 @@ public class StateManager : MonoBehaviour
 
     public void Initialize()
     {
-        ServerStart();
-
         fadeInOut.FadeIn();
         ResetManager.instance.Initialize();
         newsManager.Initialize();
@@ -156,6 +154,7 @@ public class StateManager : MonoBehaviour
         GourmetManager.instance.Initialize();
 
         StopAllCoroutines();
+        loginText.text = "";
 
         Debug.LogError("Load Complete!");
     }

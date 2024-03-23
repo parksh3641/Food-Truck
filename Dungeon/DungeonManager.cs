@@ -607,6 +607,11 @@ public class DungeonManager : MonoBehaviour
             successParticle.Play();
         }
 
+        if (GameStateManager.instance.Vibration)
+        {
+            Handheld.Vibrate();
+        }
+
         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
 
         yield return waitForSeconds;

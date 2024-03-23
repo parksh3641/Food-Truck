@@ -277,7 +277,7 @@ public class GameManager : MonoBehaviour
     private int season = 0;
     private int gender = 0;
 
-    protected float rareFoodPercent = 100.0f;
+    protected float rareFoodPercent = 10.0f;
     protected float repairTicketPercent = 10.0f;
     protected float eventTicketPercent = 3.0f;
 

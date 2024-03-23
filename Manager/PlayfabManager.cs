@@ -743,6 +743,8 @@ public class PlayfabManager : MonoBehaviour
         statisticsData = false;
         inventoryData = false;
 
+        StateManager.instance.ServerStart();
+
         Debug.Log("Load Data...");
 
         GetPlayerNickName();
@@ -2956,7 +2958,7 @@ public class PlayfabManager : MonoBehaviour
                         action?.Invoke(false);
                     }
                 }
-                if (name.Equals("CheckIOSVersion"))
+                else if (name.Equals("CheckIOSVersion"))
                 {
                     if (result.Data[name].Equals("ON"))
                     {

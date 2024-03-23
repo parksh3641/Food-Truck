@@ -4705,7 +4705,7 @@ public class ShopManager : MonoBehaviour
 
         if(level + 1 < 5)
         {
-            SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+            SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
             NotionManager.instance.UseNotion4(NotionType.SuccessUpgrade);
         }
         else

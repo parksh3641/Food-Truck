@@ -120,7 +120,6 @@ public class PackageContent : MonoBehaviour
                 receiveContents[2].Initialize(RewardType.PortionSet, 20);
                 receiveContents[3].Initialize(RewardType.EventTicket, 10);
 
-
                 BuyLimitDate();
                 break;
             case PackageType.Package6:
@@ -210,23 +209,23 @@ public class PackageContent : MonoBehaviour
 
             if (timeSpan.Days > 0)
             {
-                timerText.text = localization_Time + "  " + timeSpan.Days.ToString("D2") + ":" + timeSpan.Hours.ToString("D2") + ":" + timeSpan.Days.ToString("D2");
+                timerText.text = localization_Time + "  " + timeSpan.Days.ToString("D1") + localization_Days + "  " + timeSpan.Hours.ToString("D2") + " : " + timeSpan.Days.ToString("D2") + " : " + timeSpan.Seconds.ToString("D2");
             }
             else
             {
                 if (timeSpan.Hours > 0)
                 {
-                    timerText.text = localization_Time + "  " + timeSpan.Hours.ToString("D2") + ":" + timeSpan.Minutes.ToString("D2") + ":" + timeSpan.Seconds.ToString("D2");
+                    timerText.text = localization_Time + "  " + timeSpan.Hours.ToString("D2") + " : " + timeSpan.Minutes.ToString("D2") + " : " + timeSpan.Seconds.ToString("D2");
                 }
                 else
                 {
-                    if (timeSpan.Minutes == 0)
+                    if (timeSpan.Minutes > 0)
                     {
-                        timerText.text = localization_Time + "  " + timeSpan.Seconds.ToString("D2");
+                        timerText.text = localization_Time + "  " + timeSpan.Minutes.ToString("D2") + " : " + timeSpan.Seconds.ToString("D2");
                     }
                     else
                     {
-                        timerText.text = localization_Time + "  " + timeSpan.Minutes.ToString("D2") + ":" + timeSpan.Seconds.ToString("D2");
+                        timerText.text = localization_Time + "  " + timeSpan.Seconds.ToString("D2");
                     }
                 }
             }
@@ -234,6 +233,8 @@ public class PackageContent : MonoBehaviour
         else
         {
             shopManager.OffLimitPackage();
+
+            yield break;
         }
 
         yield return waitForSeconds;

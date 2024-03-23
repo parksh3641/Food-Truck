@@ -34,7 +34,7 @@ public class IconManager : MonoBehaviour
     public GameObject saveLockObject;
 
     private int number = 0;
-    private int maxProficiency = 7;
+    private int maxProficiency = 9;
     private float reward = 0.5f;
 
 
@@ -396,7 +396,7 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.GetFoodTruckNumber() > 8 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.GetTruckNumber() > 8 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }

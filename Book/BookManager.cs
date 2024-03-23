@@ -339,193 +339,193 @@ public class BookManager : MonoBehaviour
     void CheckEpicInitialize()
     {
         number = 0;
-        if (playerDataBase.Food1Rare > 0)
+        if (playerDataBase.island1RareData.index1 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Food2Rare > 0)
+        if (playerDataBase.island1RareData.index2 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Food3Rare > 0)
+        if (playerDataBase.island1RareData.index3 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Food4Rare > 0)
+        if (playerDataBase.island1RareData.index4 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Food5Rare > 0)
+        if (playerDataBase.island1RareData.index5 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Food6Rare > 0)
+        if (playerDataBase.island1RareData.index6 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Food7Rare > 0)
+        if (playerDataBase.island1RareData.index7 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Candy1Rare > 0)
+        if (playerDataBase.island2RareData.index1 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Candy2Rare > 0)
+        if (playerDataBase.island2RareData.index2 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Candy3Rare > 0)
+        if (playerDataBase.island2RareData.index3 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Candy4Rare > 0)
+        if (playerDataBase.island2RareData.index4 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Candy5Rare > 0)
+        if (playerDataBase.island2RareData.index5 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Candy6Rare > 0)
+        if (playerDataBase.island2RareData.index6 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Candy7Rare > 0)
+        if (playerDataBase.island2RareData.index7 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Candy8Rare > 0)
+        if (playerDataBase.island2RareData.index8 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Candy9Rare > 0)
+        if (playerDataBase.island2RareData.index9 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.JapaneseFood1Rare > 0)
+        if (playerDataBase.island3RareData.index1 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.JapaneseFood2Rare > 0)
+        if (playerDataBase.island3RareData.index2 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.JapaneseFood3Rare > 0)
+        if (playerDataBase.island3RareData.index3 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.JapaneseFood4Rare > 0)
+        if (playerDataBase.island3RareData.index4 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.JapaneseFood5Rare > 0)
+        if (playerDataBase.island3RareData.index5 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.JapaneseFood6Rare > 0)
+        if (playerDataBase.island3RareData.index6 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.JapaneseFood7Rare > 0)
+        if (playerDataBase.island3RareData.index7 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Dessert1Rare > 0)
+        if (playerDataBase.island4RareData.index1 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Dessert2Rare > 0)
+        if (playerDataBase.island4RareData.index2 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Dessert3Rare > 0)
+        if (playerDataBase.island4RareData.index3 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Dessert4Rare > 0)
+        if (playerDataBase.island4RareData.index4 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Dessert5Rare > 0)
+        if (playerDataBase.island4RareData.index5 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Dessert6Rare > 0)
+        if (playerDataBase.island4RareData.index6 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Dessert7Rare > 0)
+        if (playerDataBase.island4RareData.index7 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Dessert8Rare > 0)
+        if (playerDataBase.island4RareData.index8 > 0)
         {
             EpicUnLocked(number);
         }
 
         number++;
-        if (playerDataBase.Dessert9Rare > 0)
+        if (playerDataBase.island4RareData.index9 > 0)
         {
             EpicUnLocked(number);
         }

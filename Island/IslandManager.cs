@@ -3,6 +3,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Island1RareData
+{
+    public int index1 = 0;
+    public int index2 = 0;
+    public int index3 = 0;
+    public int index4 = 0;
+    public int index5 = 0;
+    public int index6 = 0;
+    public int index7 = 0;
+}
+
+[System.Serializable]
+public class Island2RareData
+{
+    public int index1 = 0;
+    public int index2 = 0;
+    public int index3 = 0;
+    public int index4 = 0;
+    public int index5 = 0;
+    public int index6 = 0;
+    public int index7 = 0;
+    public int index8 = 0;
+    public int index9 = 0;
+}
+
+[System.Serializable]
+public class Island3RareData
+{
+    public int index1 = 0;
+    public int index2 = 0;
+    public int index3 = 0;
+    public int index4 = 0;
+    public int index5 = 0;
+    public int index6 = 0;
+    public int index7 = 0;
+}
+
+[System.Serializable]
+public class Island4RareData
+{
+    public int index1 = 0;
+    public int index2 = 0;
+    public int index3 = 0;
+    public int index4 = 0;
+    public int index5 = 0;
+    public int index6 = 0;
+    public int index7 = 0;
+    public int index8 = 0;
+    public int index9 = 0;
+}
+
 public class IslandManager : MonoBehaviour
 {
     public GameObject changeIslandView;

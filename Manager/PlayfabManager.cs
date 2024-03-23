@@ -41,6 +41,7 @@ public class PlayfabManager : MonoBehaviour
     private bool statisticsData = false;
     private bool inventoryData = false;
     private bool grantItemData = false;
+    private bool waitGrantItem = false;
 
     private long coin = 0;
     private long coinA = 0;
@@ -85,6 +86,8 @@ public class PlayfabManager : MonoBehaviour
 
     private List<ItemInstance> inventoryList = new List<ItemInstance>();
 
+    Dictionary<string, string> defaultCustomData = new Dictionary<string, string>() { { "AbilityLevel", "0" }, { "Rare", "0" }, { "Level", "0" } };
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -122,6 +125,8 @@ public class PlayfabManager : MonoBehaviour
     {
         if (GameStateManager.instance.AutoLogin)
         {
+            StateManager.instance.LoginStart();
+
             switch (GameStateManager.instance.Login)
             {
                 case LoginType.None:
@@ -837,6 +842,14 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetIcon(icon, (int)list.RemainingUses);
                     }
 
+                    if (list.ItemId.Contains("Character") || list.ItemId.Contains("Butterfly") || list.ItemId.Contains("Totems") || list.ItemId.Contains("Flower"))
+                    {
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+                    }
+
                     if (list.ItemId.Equals("RemoveAds"))
                     {
                         playerDataBase.RemoveAds = true;
@@ -865,472 +878,744 @@ public class PlayfabManager : MonoBehaviour
                     if (list.ItemId.Equals("Character1"))
                     {
                         playerDataBase.Character1 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 0);
                     }
 
                     if (list.ItemId.Equals("Character2"))
                     {
                         playerDataBase.Character2 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 1);
                     }
 
                     if (list.ItemId.Equals("Character3"))
                     {
                         playerDataBase.Character3 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 2);
                     }
 
                     if (list.ItemId.Equals("Character4"))
                     {
                         playerDataBase.Character4 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 3);
                     }
 
                     if (list.ItemId.Equals("Character5"))
                     {
                         playerDataBase.Character5 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 4);
                     }
 
                     if (list.ItemId.Equals("Character6"))
                     {
                         playerDataBase.Character6 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 5);
                     }
 
                     if (list.ItemId.Equals("Character7"))
                     {
                         playerDataBase.Character7 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 6);
                     }
 
                     if (list.ItemId.Equals("Character8"))
                     {
                         playerDataBase.Character8 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 7);
                     }
 
                     if (list.ItemId.Equals("Character9"))
                     {
                         playerDataBase.Character9 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 8);
                     }
 
                     if (list.ItemId.Equals("Character10"))
                     {
                         playerDataBase.Character10 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 9);
                     }
 
                     if (list.ItemId.Equals("Character11"))
                     {
                         playerDataBase.Character11 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 10);
                     }
 
                     if (list.ItemId.Equals("Character12"))
                     {
                         playerDataBase.Character12 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 11);
                     }
 
                     if (list.ItemId.Equals("Character13"))
                     {
                         playerDataBase.Character13 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 12);
                     }
 
                     if (list.ItemId.Equals("Character14"))
                     {
                         playerDataBase.Character14 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 13);
                     }
 
                     if (list.ItemId.Equals("Character15"))
                     {
                         playerDataBase.Character15 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 14);
                     }
 
                     if (list.ItemId.Equals("Character16"))
                     {
                         playerDataBase.Character16 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 15);
                     }
 
                     if (list.ItemId.Equals("Character17"))
                     {
                         playerDataBase.Character17 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 16);
                     }
 
                     if (list.ItemId.Equals("Character18"))
                     {
                         playerDataBase.Character18 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 17);
                     }
 
                     if (list.ItemId.Equals("Character19"))
                     {
                         playerDataBase.Character19 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 18);
                     }
 
                     if (list.ItemId.Equals("Character20"))
                     {
                         playerDataBase.Character20 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 19);
                     }
 
                     if (list.ItemId.Equals("Character21"))
                     {
                         playerDataBase.Character21 = 1;
+
+                        playerDataBase.SetItemInstance(list, 0, 20);
+                    }
+
+                    if (list.ItemId.Equals("Bread"))
+                    {
+                        playerDataBase.Truck1 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 0);
                     }
 
                     if (list.ItemId.Equals("Chips"))
                     {
                         playerDataBase.Truck2 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 1);
                     }
 
                     if (list.ItemId.Equals("Donut"))
                     {
                         playerDataBase.Truck3 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 2);
                     }
 
                     if (list.ItemId.Equals("Hamburger"))
                     {
                         playerDataBase.Truck4 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 3);
                     }
 
                     if (list.ItemId.Equals("Hotdog"))
                     {
                         playerDataBase.Truck5 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 4);
                     }
 
                     if (list.ItemId.Equals("Icecream"))
                     {
                         playerDataBase.Truck6 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 5);
                     }
 
                     if (list.ItemId.Equals("Lemonade"))
                     {
                         playerDataBase.Truck7 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 6);
                     }
 
                     if (list.ItemId.Equals("Noodles"))
                     {
                         playerDataBase.Truck8 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 7);
                     }
 
                     if (list.ItemId.Equals("Pizza"))
                     {
                         playerDataBase.Truck9 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 8);
                     }
 
                     if (list.ItemId.Equals("Sushi"))
                     {
                         playerDataBase.Truck10 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 1, 9);
+                    }
+
+                    if (list.ItemId.Equals("Colobus"))
+                    {
+                        playerDataBase.Animal1 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 2, 0);
                     }
 
                     if (list.ItemId.Equals("Gecko"))
                     {
                         playerDataBase.Animal2 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 2, 1);
                     }
 
                     if (list.ItemId.Equals("Herring"))
                     {
                         playerDataBase.Animal3 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 2, 2);
                     }
 
                     if (list.ItemId.Equals("Muskrat"))
                     {
                         playerDataBase.Animal4 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 2, 3);
                     }
 
                     if (list.ItemId.Equals("Pudu"))
                     {
                         playerDataBase.Animal5 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 2, 4);
                     }
 
                     if (list.ItemId.Equals("Sparrow"))
                     {
                         playerDataBase.Animal6 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 2, 5);
                     }
 
                     if (list.ItemId.Equals("Squid"))
                     {
                         playerDataBase.Animal7 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 2, 6);
                     }
 
                     if (list.ItemId.Equals("Taipan"))
                     {
                         playerDataBase.Animal8 = 1;
+
+                        if (list.CustomData == null)
+                        {
+                            SetInventoryCustomData(list.ItemInstanceId, defaultCustomData);
+                        }
+
+                        playerDataBase.SetItemInstance(list, 2, 7);
                     }
 
                     if (list.ItemId.Equals("Butterfly1"))
                     {
                         playerDataBase.Butterfly1 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 0);
                     }
 
                     if (list.ItemId.Equals("Butterfly2"))
                     {
                         playerDataBase.Butterfly2 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 1);
                     }
 
                     if (list.ItemId.Equals("Butterfly3"))
                     {
                         playerDataBase.Butterfly3 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 2);
                     }
 
                     if (list.ItemId.Equals("Butterfly4"))
                     {
                         playerDataBase.Butterfly4 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 3);
                     }
 
                     if (list.ItemId.Equals("Butterfly5"))
                     {
                         playerDataBase.Butterfly5 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 4);
                     }
 
                     if (list.ItemId.Equals("Butterfly6"))
                     {
                         playerDataBase.Butterfly6 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 5);
                     }
 
                     if (list.ItemId.Equals("Butterfly7"))
                     {
                         playerDataBase.Butterfly7 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 6);
                     }
 
                     if (list.ItemId.Equals("Butterfly8"))
                     {
                         playerDataBase.Butterfly8 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 7);
                     }
 
                     if (list.ItemId.Equals("Butterfly9"))
                     {
                         playerDataBase.Butterfly9 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 8);
                     }
 
                     if (list.ItemId.Equals("Butterfly10"))
                     {
                         playerDataBase.Butterfly10 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 9);
                     }
 
                     if (list.ItemId.Equals("Butterfly11"))
                     {
                         playerDataBase.Butterfly11 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 10);
                     }
 
                     if (list.ItemId.Equals("Butterfly12"))
                     {
                         playerDataBase.Butterfly12 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 11);
                     }
 
                     if (list.ItemId.Equals("Butterfly13"))
                     {
                         playerDataBase.Butterfly13 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 12);
                     }
 
                     if (list.ItemId.Equals("Butterfly14"))
                     {
                         playerDataBase.Butterfly14 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 13);
                     }
 
                     if (list.ItemId.Equals("Butterfly15"))
                     {
                         playerDataBase.Butterfly15 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 14);
                     }
 
                     if (list.ItemId.Equals("Butterfly16"))
                     {
                         playerDataBase.Butterfly16 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 15);
                     }
 
                     if (list.ItemId.Equals("Butterfly17"))
                     {
                         playerDataBase.Butterfly17 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 16);
                     }
 
                     if (list.ItemId.Equals("Butterfly18"))
                     {
                         playerDataBase.Butterfly18 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 17);
                     }
 
                     if (list.ItemId.Equals("Butterfly19"))
                     {
                         playerDataBase.Butterfly19 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 18);
                     }
 
                     if (list.ItemId.Equals("Butterfly20"))
                     {
                         playerDataBase.Butterfly20 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 19);
                     }
 
                     if (list.ItemId.Equals("Butterfly21"))
                     {
                         playerDataBase.Butterfly21 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 20);
                     }
 
                     if (list.ItemId.Equals("Butterfly22"))
                     {
                         playerDataBase.Butterfly22 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 21);
                     }
 
                     if (list.ItemId.Equals("Butterfly23"))
                     {
                         playerDataBase.Butterfly23 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 22);
                     }
 
                     if (list.ItemId.Equals("Butterfly24"))
                     {
                         playerDataBase.Butterfly24 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 23);
                     }
 
                     if (list.ItemId.Equals("Butterfly25"))
                     {
                         playerDataBase.Butterfly25 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 24);
                     }
 
                     if (list.ItemId.Equals("Butterfly26"))
                     {
                         playerDataBase.Butterfly26 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 25);
                     }
 
                     if (list.ItemId.Equals("Butterfly27"))
                     {
                         playerDataBase.Butterfly27 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 26);
                     }
 
                     if (list.ItemId.Equals("Butterfly28"))
                     {
                         playerDataBase.Butterfly28 = 1;
+
+                        playerDataBase.SetItemInstance(list, 3, 27);
                     }
 
                     if (list.ItemId.Equals("Totems1"))
                     {
                         playerDataBase.Totems1 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 0);
                     }
 
                     if (list.ItemId.Equals("Totems2"))
                     {
                         playerDataBase.Totems2 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 1);
                     }
 
                     if (list.ItemId.Equals("Totems3"))
                     {
                         playerDataBase.Totems3 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 2);
                     }
 
                     if (list.ItemId.Equals("Totems4"))
                     {
                         playerDataBase.Totems4 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 3);
                     }
 
                     if (list.ItemId.Equals("Totems5"))
                     {
                         playerDataBase.Totems5 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 4);
                     }
 
                     if (list.ItemId.Equals("Totems6"))
                     {
                         playerDataBase.Totems6 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 5);
                     }
 
                     if (list.ItemId.Equals("Totems7"))
                     {
                         playerDataBase.Totems7 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 6);
                     }
 
                     if (list.ItemId.Equals("Totems8"))
                     {
                         playerDataBase.Totems8 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 7);
                     }
 
                     if (list.ItemId.Equals("Totems9"))
                     {
                         playerDataBase.Totems9 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 8);
                     }
 
                     if (list.ItemId.Equals("Totems10"))
                     {
                         playerDataBase.Totems10 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 9);
                     }
 
                     if (list.ItemId.Equals("Totems11"))
                     {
                         playerDataBase.Totems11 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 10);
                     }
 
                     if (list.ItemId.Equals("Totems12"))
                     {
                         playerDataBase.Totems12 = 1;
+
+                        playerDataBase.SetItemInstance(list, 4, 11);
                     }
 
                     if (list.ItemId.Equals("Flower1"))
                     {
                         playerDataBase.Flower1 = 1;
+
+                        playerDataBase.SetItemInstance(list, 5, 0);
                     }
 
                     if (list.ItemId.Equals("Flower2"))
                     {
                         playerDataBase.Flower2 = 1;
+
+                        playerDataBase.SetItemInstance(list, 5, 1);
                     }
 
                     if (list.ItemId.Equals("Flower3"))
                     {
                         playerDataBase.Flower3 = 1;
+
+                        playerDataBase.SetItemInstance(list, 5, 2);
                     }
 
                     if (list.ItemId.Equals("Flower4"))
                     {
                         playerDataBase.Flower4 = 1;
+
+                        playerDataBase.SetItemInstance(list, 5, 3);
                     }
 
                     if (list.ItemId.Equals("Flower5"))
                     {
                         playerDataBase.Flower5 = 1;
+
+                        playerDataBase.SetItemInstance(list, 5, 4);
                     }
 
                     if (list.ItemId.Equals("Flower6"))
                     {
                         playerDataBase.Flower6 = 1;
+
+                        playerDataBase.SetItemInstance(list, 5, 5);
                     }
 
                     if (list.ItemId.Equals("Flower7"))
                     {
                         playerDataBase.Flower7 = 1;
+
+                        playerDataBase.SetItemInstance(list, 5, 6);
                     }
 
-                    if (list.ItemId.Equals("Island1"))
-                    {
-                        playerDataBase.Island1 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island1"))
+                    //{
+                    //    playerDataBase.Island1 = 1;
+                    //}
 
-                    if (list.ItemId.Equals("Island2"))
-                    {
-                        playerDataBase.Island2 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island2"))
+                    //{
+                    //    playerDataBase.Island2 = 1;
+                    //}
 
-                    if (list.ItemId.Equals("Island3"))
-                    {
-                        playerDataBase.Island3 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island3"))
+                    //{
+                    //    playerDataBase.Island3 = 1;
+                    //}
 
-                    if (list.ItemId.Equals("Island4"))
-                    {
-                        playerDataBase.Island4 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island4"))
+                    //{
+                    //    playerDataBase.Island4 = 1;
+                    //}
 
-                    if (list.ItemId.Equals("Island5"))
-                    {
-                        playerDataBase.Island5 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island5"))
+                    //{
+                    //    playerDataBase.Island5 = 1;
+                    //}
 
-                    if (list.ItemId.Equals("Island6"))
-                    {
-                        playerDataBase.Island6 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island6"))
+                    //{
+                    //    playerDataBase.Island6 = 1;
+                    //}
 
-                    if (list.ItemId.Equals("Island7"))
-                    {
-                        playerDataBase.Island7 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island7"))
+                    //{
+                    //    playerDataBase.Island7 = 1;
+                    //}
 
-                    if (list.ItemId.Equals("Island8"))
-                    {
-                        playerDataBase.Island8 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island8"))
+                    //{
+                    //    playerDataBase.Island8 = 1;
+                    //}
 
-                    if (list.ItemId.Equals("Island9"))
-                    {
-                        playerDataBase.Island9 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island9"))
+                    //{
+                    //    playerDataBase.Island9 = 1;
+                    //}
 
-                    if (list.ItemId.Equals("Island10"))
-                    {
-                        playerDataBase.Island10 = 1;
-                    }
+                    //if (list.ItemId.Equals("Island10"))
+                    //{
+                    //    playerDataBase.Island10 = 1;
+                    //}
                 }
             }
 
@@ -1818,27 +2103,6 @@ public class PlayfabManager : MonoBehaviour
                        case "FriesMaxValue":
                            playerDataBase.Food7MaxValue = statistics.Value;
                            break;
-                       case "Food1Rare":
-                           playerDataBase.Food1Rare = statistics.Value;
-                           break;
-                       case "Food2Rare":
-                           playerDataBase.Food2Rare = statistics.Value;
-                           break;
-                       case "Food3Rare":
-                           playerDataBase.Food3Rare = statistics.Value;
-                           break;
-                       case "Food4Rare":
-                           playerDataBase.Food4Rare = statistics.Value;
-                           break;
-                       case "Food5Rare":
-                           playerDataBase.Food5Rare = statistics.Value;
-                           break;
-                       case "Food6Rare":
-                           playerDataBase.Food6Rare = statistics.Value;
-                           break;
-                       case "Food7Rare":
-                           playerDataBase.Food7Rare = statistics.Value;
-                           break;
                        case "Candy1MaxValue":
                            playerDataBase.Candy1MaxValue = statistics.Value;
                            break;
@@ -1866,33 +2130,6 @@ public class PlayfabManager : MonoBehaviour
                        case "Candy9MaxValue":
                            playerDataBase.Candy9MaxValue = statistics.Value;
                            break;
-                       case "Candy1Rare":
-                           playerDataBase.Candy1Rare = statistics.Value;
-                           break;
-                       case "Candy2Rare":
-                           playerDataBase.Candy2Rare = statistics.Value;
-                           break;
-                       case "Candy3Rare":
-                           playerDataBase.Candy3Rare = statistics.Value;
-                           break;
-                       case "Candy4Rare":
-                           playerDataBase.Candy4Rare = statistics.Value;
-                           break;
-                       case "Candy5Rare":
-                           playerDataBase.Candy5Rare = statistics.Value;
-                           break;
-                       case "Candy6Rare":
-                           playerDataBase.Candy6Rare = statistics.Value;
-                           break;
-                       case "Candy7Rare":
-                           playerDataBase.Candy7Rare = statistics.Value;
-                           break;
-                       case "Candy8Rare":
-                           playerDataBase.Candy8Rare = statistics.Value;
-                           break;
-                       case "Candy9Rare":
-                           playerDataBase.Candy9Rare = statistics.Value;
-                           break;
                        case "JapaneseFood1MaxValue":
                            playerDataBase.JapaneseFood1MaxValue = statistics.Value;
                            break;
@@ -1913,27 +2150,6 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "JapaneseFood7MaxValue":
                            playerDataBase.JapaneseFood7MaxValue = statistics.Value;
-                           break;
-                       case "JapaneseFood1Rare":
-                           playerDataBase.JapaneseFood1Rare = statistics.Value;
-                           break;
-                       case "JapaneseFood2Rare":
-                           playerDataBase.JapaneseFood2Rare = statistics.Value;
-                           break;
-                       case "JapaneseFood3Rare":
-                           playerDataBase.JapaneseFood3Rare = statistics.Value;
-                           break;
-                       case "JapaneseFood4Rare":
-                           playerDataBase.JapaneseFood4Rare = statistics.Value;
-                           break;
-                       case "JapaneseFood5Rare":
-                           playerDataBase.JapaneseFood5Rare = statistics.Value;
-                           break;
-                       case "JapaneseFood6Rare":
-                           playerDataBase.JapaneseFood6Rare = statistics.Value;
-                           break;
-                       case "JapaneseFood7Rare":
-                           playerDataBase.JapaneseFood7Rare = statistics.Value;
                            break;
                        case "Dessert1MaxValue":
                            playerDataBase.Dessert1MaxValue = statistics.Value;
@@ -1961,33 +2177,6 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Dessert9MaxValue":
                            playerDataBase.Dessert9MaxValue = statistics.Value;
-                           break;
-                       case "Dessert1Rare":
-                           playerDataBase.Dessert1Rare = statistics.Value;
-                           break;
-                       case "Dessert2Rare":
-                           playerDataBase.Dessert2Rare = statistics.Value;
-                           break;
-                       case "Dessert3Rare":
-                           playerDataBase.Dessert3Rare = statistics.Value;
-                           break;
-                       case "Dessert4Rare":
-                           playerDataBase.Dessert4Rare = statistics.Value;
-                           break;
-                       case "Dessert5Rare":
-                           playerDataBase.Dessert5Rare = statistics.Value;
-                           break;
-                       case "Dessert6Rare":
-                           playerDataBase.Dessert6Rare = statistics.Value;
-                           break;
-                       case "Dessert7Rare":
-                           playerDataBase.Dessert7Rare = statistics.Value;
-                           break;
-                       case "Dessert8Rare":
-                           playerDataBase.Dessert8Rare = statistics.Value;
-                           break;
-                       case "Dessert9Rare":
-                           playerDataBase.Dessert9Rare = statistics.Value;
                            break;
                        case "SellCount":
                            playerDataBase.SellCount = statistics.Value;
@@ -2294,243 +2483,6 @@ public class PlayfabManager : MonoBehaviour
                        case "Island4Count":
                            playerDataBase.Island4Count = statistics.Value;
                            break;
-                       case "Character1Level":
-                           playerDataBase.Character1Level = statistics.Value;
-                           break;
-                       case "Character2Level":
-                           playerDataBase.Character2Level = statistics.Value;
-                           break;
-                       case "Character3Level":
-                           playerDataBase.Character3Level = statistics.Value;
-                           break;
-                       case "Character4Level":
-                           playerDataBase.Character4Level = statistics.Value;
-                           break;
-                       case "Character5Level":
-                           playerDataBase.Character5Level = statistics.Value;
-                           break;
-                       case "Character6Level":
-                           playerDataBase.Character6Level = statistics.Value;
-                           break;
-                       case "Character7Level":
-                           playerDataBase.Character7Level = statistics.Value;
-                           break;
-                       case "Character8Level":
-                           playerDataBase.Character8Level = statistics.Value;
-                           break;
-                       case "Character9Level":
-                           playerDataBase.Character9Level = statistics.Value;
-                           break;
-                       case "Character10Level":
-                           playerDataBase.Character10Level = statistics.Value;
-                           break;
-                       case "Character11Level":
-                           playerDataBase.Character11Level = statistics.Value;
-                           break;
-                       case "Character12Level":
-                           playerDataBase.Character12Level = statistics.Value;
-                           break;
-                       case "Character13Level":
-                           playerDataBase.Character13Level = statistics.Value;
-                           break;
-                       case "Character14Level":
-                           playerDataBase.Character14Level = statistics.Value;
-                           break;
-                       case "Character15Level":
-                           playerDataBase.Character15Level = statistics.Value;
-                           break;
-                       case "Character16Level":
-                           playerDataBase.Character16Level = statistics.Value;
-                           break;
-                       case "Character17Level":
-                           playerDataBase.Character17Level = statistics.Value;
-                           break;
-                       case "Character18Level":
-                           playerDataBase.Character18Level = statistics.Value;
-                           break;
-                       case "Character19Level":
-                           playerDataBase.Character19Level = statistics.Value;
-                           break;
-                       case "Character20Level":
-                           playerDataBase.Character20Level = statistics.Value;
-                           break;
-                       case "Character21Level":
-                           playerDataBase.Character21Level = statistics.Value;
-                           break;
-                       case "Truck1Level":
-                           playerDataBase.Truck1Level = statistics.Value;
-                           break;
-                       case "Truck2Level":
-                           playerDataBase.Truck2Level = statistics.Value;
-                           break;
-                       case "Truck3Level":
-                           playerDataBase.Truck3Level = statistics.Value;
-                           break;
-                       case "Truck4Level":
-                           playerDataBase.Truck4Level = statistics.Value;
-                           break;
-                       case "Truck5Level":
-                           playerDataBase.Truck5Level = statistics.Value;
-                           break;
-                       case "Truck6Level":
-                           playerDataBase.Truck6Level = statistics.Value;
-                           break;
-                       case "Truck7Level":
-                           playerDataBase.Truck7Level = statistics.Value;
-                           break;
-                       case "Truck8Level":
-                           playerDataBase.Truck8Level = statistics.Value;
-                           break;
-                       case "Truck9Level":
-                           playerDataBase.Truck9Level = statistics.Value;
-                           break;
-                       case "Truck10Level":
-                           playerDataBase.Truck10Level = statistics.Value;
-                           break;
-                       case "Animal1Level":
-                           playerDataBase.Animal1Level = statistics.Value;
-                           break;
-                       case "Animal2Level":
-                           playerDataBase.Animal2Level = statistics.Value;
-                           break;
-                       case "Animal3Level":
-                           playerDataBase.Animal3Level = statistics.Value;
-                           break;
-                       case "Animal4Level":
-                           playerDataBase.Animal4Level = statistics.Value;
-                           break;
-                       case "Animal5Level":
-                           playerDataBase.Animal5Level = statistics.Value;
-                           break;
-                       case "Animal6Level":
-                           playerDataBase.Animal6Level = statistics.Value;
-                           break;
-                       case "Animal7Level":
-                           playerDataBase.Animal7Level = statistics.Value;
-                           break;
-                       case "Animal8Level":
-                           playerDataBase.Animal8Level = statistics.Value;
-                           break;
-                       case "Butterfly1Level":
-                           playerDataBase.Butterfly1Level = statistics.Value;
-                           break;
-                       case "Butterfly2Level":
-                           playerDataBase.Butterfly2Level = statistics.Value;
-                           break;
-                       case "Butterfly3Level":
-                           playerDataBase.Butterfly3Level = statistics.Value;
-                           break;
-                       case "Butterfly4Level":
-                           playerDataBase.Butterfly4Level = statistics.Value;
-                           break;
-                       case "Butterfly5Level":
-                           playerDataBase.Butterfly5Level = statistics.Value;
-                           break;
-                       case "Butterfly6Level":
-                           playerDataBase.Butterfly6Level = statistics.Value;
-                           break;
-                       case "Butterfly7Level":
-                           playerDataBase.Butterfly7Level = statistics.Value;
-                           break;
-                       case "Butterfly8Level":
-                           playerDataBase.Butterfly8Level = statistics.Value;
-                           break;
-                       case "Butterfly9Level":
-                           playerDataBase.Butterfly9Level = statistics.Value;
-                           break;
-                       case "Butterfly10Level":
-                           playerDataBase.Butterfly10Level = statistics.Value;
-                           break;
-                       case "Butterfly11Level":
-                           playerDataBase.Butterfly11Level = statistics.Value;
-                           break;
-                       case "Butterfly12Level":
-                           playerDataBase.Butterfly12Level = statistics.Value;
-                           break;
-                       case "Butterfly13Level":
-                           playerDataBase.Butterfly13Level = statistics.Value;
-                           break;
-                       case "Butterfly14Level":
-                           playerDataBase.Butterfly14Level = statistics.Value;
-                           break;
-                       case "Butterfly15Level":
-                           playerDataBase.Butterfly15Level = statistics.Value;
-                           break;
-                       case "Butterfly16Level":
-                           playerDataBase.Butterfly16Level = statistics.Value;
-                           break;
-                       case "Butterfly17Level":
-                           playerDataBase.Butterfly17Level = statistics.Value;
-                           break;
-                       case "Butterfly18Level":
-                           playerDataBase.Butterfly18Level = statistics.Value;
-                           break;
-                       case "Butterfly19Level":
-                           playerDataBase.Butterfly19Level = statistics.Value;
-                           break;
-                       case "Butterfly20Level":
-                           playerDataBase.Butterfly20Level = statistics.Value;
-                           break;
-                       case "Butterfly21Level":
-                           playerDataBase.Butterfly21Level = statistics.Value;
-                           break;
-                       case "Butterfly22Level":
-                           playerDataBase.Butterfly22Level = statistics.Value;
-                           break;
-                       case "Butterfly23Level":
-                           playerDataBase.Butterfly23Level = statistics.Value;
-                           break;
-                       case "Butterfly24Level":
-                           playerDataBase.Butterfly24Level = statistics.Value;
-                           break;
-                       case "Butterfly25Level":
-                           playerDataBase.Butterfly25Level = statistics.Value;
-                           break;
-                       case "Butterfly26Level":
-                           playerDataBase.Butterfly26Level = statistics.Value;
-                           break;
-                       case "Butterfly27Level":
-                           playerDataBase.Butterfly27Level = statistics.Value;
-                           break;
-                       case "Butterfly28Level":
-                           playerDataBase.Butterfly28Level = statistics.Value;
-                           break;
-                       case "Totems1Level":
-                           playerDataBase.Totems1Level = statistics.Value;
-                           break;
-                       case "Totems2Level":
-                           playerDataBase.Totems2Level = statistics.Value;
-                           break;
-                       case "Totems3Level":
-                           playerDataBase.Totems3Level = statistics.Value;
-                           break;
-                       case "Totems4Level":
-                           playerDataBase.Totems4Level = statistics.Value;
-                           break;
-                       case "Totems5Level":
-                           playerDataBase.Totems5Level = statistics.Value;
-                           break;
-                       case "Totems6Level":
-                           playerDataBase.Totems6Level = statistics.Value;
-                           break;
-                       case "Totems7Level":
-                           playerDataBase.Totems7Level = statistics.Value;
-                           break;
-                       case "Totems8Level":
-                           playerDataBase.Totems8Level = statistics.Value;
-                           break;
-                       case "Totems9Level":
-                           playerDataBase.Totems9Level = statistics.Value;
-                           break;
-                       case "Totems10Level":
-                           playerDataBase.Totems10Level = statistics.Value;
-                           break;
-                       case "Totems11Level":
-                           playerDataBase.Totems11Level = statistics.Value;
-                           break;
-                       case "Totems12Level":
-                           playerDataBase.Totems12Level = statistics.Value;
-                           break;
                    }
                }
 
@@ -2564,9 +2516,40 @@ public class PlayfabManager : MonoBehaviour
         var request = new GetUserDataRequest() { PlayFabId = GameStateManager.instance.PlayfabId };
         PlayFabClientAPI.GetUserData(request, (result) =>
         {
-        }, DisplayPlayfabError);
+            Island1RareData island1RareData = new Island1RareData();
+            Island2RareData island2RareData = new Island2RareData();
+            Island3RareData island3RareData = new Island3RareData();
+            Island4RareData island4RareData = new Island4RareData();
 
-        playerData = true;
+            foreach (var eachData in result.Data)
+            {
+                string key = eachData.Key;
+
+                if (key.Contains("Island1RareData"))
+                {
+                    island1RareData = JsonUtility.FromJson<Island1RareData>(eachData.Value.Value);
+                    playerDataBase.SetIsland1RareData(island1RareData);
+                }
+                else if (key.Contains("Island2RareData"))
+                {
+                    island2RareData = JsonUtility.FromJson<Island2RareData>(eachData.Value.Value);
+                    playerDataBase.SetIsland2RareData(island2RareData);
+                }
+                else if (key.Contains("Island3RareData"))
+                {
+                    island3RareData = JsonUtility.FromJson<Island3RareData>(eachData.Value.Value);
+                    playerDataBase.SetIsland3RareData(island3RareData);
+                }
+                else if (key.Contains("Island4RareData"))
+                {
+                    island4RareData = JsonUtility.FromJson<Island4RareData>(eachData.Value.Value);
+                    playerDataBase.SetIsland4RareData(island4RareData);
+                }
+            }
+
+            playerData = true;
+
+        }, DisplayPlayfabError);
     }
 
     public void GetPlayerProfile(string playFabId, Action<string> action)
@@ -3186,6 +3169,14 @@ public class PlayfabManager : MonoBehaviour
 
     public void GrantItemsToUser(string itemIds, string catalogVersion)
     {
+        grantItemData = false;
+
+        if(!waitGrantItem)
+        {
+            waitGrantItem = true;
+            StartCoroutine(WaitGrantItemCoroution());
+        }
+
         try
         {
             PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
@@ -3193,12 +3184,28 @@ public class PlayfabManager : MonoBehaviour
                 FunctionName = "GrantItemsToUser",
                 FunctionParameter = new { ItemIds = itemIds, CatalogVersion = catalogVersion },
                 GeneratePlayStreamEvent = true,
-            }, OnCloudUpdateStats, DisplayPlayfabError);
+            }, result =>
+            {
+                grantItemData = true;
+
+            }, DisplayPlayfabError);
         }
         catch (Exception e)
         {
             Debug.LogError(e.Message);
         }
+    }
+
+    IEnumerator WaitGrantItemCoroution()
+    {
+        while (!grantItemData)
+        {
+            yield return null;
+        }
+
+        GetUserInventory();
+
+        waitGrantItem = false;
     }
 
     public void GrantItemToUser(string catalogversion, List<string> itemIds)
@@ -3345,5 +3352,22 @@ public class PlayfabManager : MonoBehaviour
         GameManager.instance.RenewalVC();
 
         UpdateSubtractGold(50000000);
+    }
+
+    public void SetInventoryCustomData(string itemInstanceID, Dictionary<string, string> datas)
+    {
+        try
+        {
+            PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+            {
+                FunctionName = "UpdateUserInventoryItemCustomData",
+                FunctionParameter = new { Data = datas, ItemInstanceId = itemInstanceID },
+                GeneratePlayStreamEvent = true,
+            }, OnCloudUpdateStats, DisplayPlayfabError);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
     }
 }

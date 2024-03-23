@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -128,6 +129,8 @@ public class GifticonContent : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventEnter4", playerDataBase.EventEnter4);
                 break;
         }
+
+        FirebaseAnalytics.LogEvent(gifticonType.ToString());
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessEnter);

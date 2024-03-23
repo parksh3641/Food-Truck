@@ -188,6 +188,8 @@ public class ShopManager : MonoBehaviour
     TotemsDataBase totemsDataBase;
     FlowerDataBase flowerDataBase;
 
+    Dictionary<string, string> customData = new Dictionary<string, string>();
+
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
@@ -1696,12 +1698,12 @@ public class ShopManager : MonoBehaviour
 
         passiveText.text = "";
 
+        level = playerDataBase.GetCharacter_AbilityLevel((int)characterInfo.characterType);
+
         switch (characterInfo.characterType)
         {
             case CharacterType.Character1:
                 hold = true;
-
-                level = playerDataBase.Character1Level;
                 break;
             case CharacterType.Character2:
                 if (playerDataBase.Character2 >= 1)
@@ -1710,8 +1712,6 @@ public class ShopManager : MonoBehaviour
                 }
 
                 buy = true;
-
-                level = playerDataBase.Character2Level;
                 break;
             case CharacterType.Character3:
                 if (playerDataBase.Character3 >= 1)
@@ -1723,8 +1723,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character3Level;
                 break;
             case CharacterType.Character4:
                 if (playerDataBase.Character4 >= 1)
@@ -1736,8 +1734,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character4Level;
                 break;
             case CharacterType.Character5:
                 if (playerDataBase.Character5 >= 1)
@@ -1749,8 +1745,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character5Level;
                 break;
             case CharacterType.Character6:
                 if (playerDataBase.Character6 >= 1)
@@ -1762,8 +1756,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character6Level;
                 break;
             case CharacterType.Character7:
                 if (playerDataBase.Character7 >= 1)
@@ -1775,8 +1767,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character7Level;
                 break;
             case CharacterType.Character8:
                 if (playerDataBase.Character8 >= 1)
@@ -1788,8 +1778,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character8Level;
                 break;
             case CharacterType.Character9:
                 if (playerDataBase.Character9 >= 1)
@@ -1801,8 +1789,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character9Level;
                 break;
             case CharacterType.Character10:
                 if (playerDataBase.Character10 >= 1)
@@ -1814,8 +1800,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character10Level;
                 break;
             case CharacterType.Character11:
                 if (playerDataBase.Character11 >= 1)
@@ -1827,8 +1811,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character11Level;
                 break;
             case CharacterType.Character12:
                 if (playerDataBase.Character12 >= 1)
@@ -1840,8 +1822,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character12Level;
                 break;
             case CharacterType.Character13:
                 if (playerDataBase.Character13 >= 1)
@@ -1853,8 +1833,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character13Level;
                 break;
             case CharacterType.Character14:
                 if (playerDataBase.Character14 >= 1)
@@ -1866,8 +1844,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character14Level;
                 break;
             case CharacterType.Character15:
                 if (playerDataBase.Character15 >= 1)
@@ -1879,8 +1855,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character15Level;
                 break;
             case CharacterType.Character16:
                 if (playerDataBase.Character16 >= 1)
@@ -1892,8 +1866,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character16Level;
                 break;
             case CharacterType.Character17:
                 if (playerDataBase.Character17 >= 1)
@@ -1905,8 +1877,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character17Level;
                 break;
             case CharacterType.Character18:
                 if (playerDataBase.Character18 >= 1)
@@ -1918,8 +1888,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character18Level;
                 break;
             case CharacterType.Character19:
                 if (playerDataBase.Character19 >= 1)
@@ -1931,8 +1899,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character19Level;
                 break;
             case CharacterType.Character20:
                 if (playerDataBase.Character20 >= 1)
@@ -1944,16 +1910,12 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Character20Level;
                 break;
             case CharacterType.Character21:
                 if (playerDataBase.Character21 >= 1)
                 {
                     hold = true;
                 }
-
-                level = playerDataBase.Character21Level;
                 break;
         }
 
@@ -2065,7 +2027,7 @@ public class ShopManager : MonoBehaviour
 
         titleText.localizationName = "ChangeTruck";
         titleText.plusText = "  ( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n<size=10>"
-            + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetFoodTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+            + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
         titleText.ReLoad();
 
         infoText.localizationName = (TruckType.Truck1 + truckIndex) + "Info";
@@ -2089,12 +2051,12 @@ public class ShopManager : MonoBehaviour
         hold = false;
         buy = false;
 
+        level = playerDataBase.GetTruck_AbilityLevel((int)truckInfo.truckType);
+
         switch (truckInfo.truckType)
         {
             case TruckType.Truck1:
                 hold = true;
-
-                level = playerDataBase.Truck1Level;
                 break;
             case TruckType.Truck2:
                 if (playerDataBase.Truck2 >= 1)
@@ -2103,8 +2065,6 @@ public class ShopManager : MonoBehaviour
                 }
 
                 buy = true;
-
-                level = playerDataBase.Truck2Level;
                 break;
             case TruckType.Truck3:
                 if (playerDataBase.Truck3 >= 1)
@@ -2116,8 +2076,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Truck3Level;
                 break;
             case TruckType.Truck4:
                 if (playerDataBase.Truck4 >= 1)
@@ -2129,8 +2087,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Truck4Level;
                 break;
             case TruckType.Truck5:
                 if (playerDataBase.Truck5 >= 1)
@@ -2142,8 +2098,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Truck5Level;
                 break;
             case TruckType.Truck6:
                 if (playerDataBase.Truck6 >= 1)
@@ -2155,8 +2109,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Truck6Level;
                 break;
             case TruckType.Truck7:
                 if (playerDataBase.Truck7 >= 1)
@@ -2168,8 +2120,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Truck7Level;
                 break;
             case TruckType.Truck8:
                 if (playerDataBase.Truck8 >= 1)
@@ -2181,8 +2131,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Truck8Level;
                 break;
             case TruckType.Truck9:
                 if (playerDataBase.Truck9 >= 1)
@@ -2194,8 +2142,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Truck9Level;
                 break;
             case TruckType.Truck10:
                 if (playerDataBase.Truck10 >= 1)
@@ -2207,8 +2153,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Truck10Level;
                 break;
         }
 
@@ -2381,12 +2325,12 @@ public class ShopManager : MonoBehaviour
         hold = false;
         buy = false;
 
+        level = playerDataBase.GetAnimal_AbilityLevel((int)animalInfo.animalType);
+
         switch (animalInfo.animalType)
         {
             case AnimalType.Animal1:
                 hold = true;
-
-                level = playerDataBase.Animal1Level;
                 break;
             case AnimalType.Animal2:
                 if (playerDataBase.Animal2 >= 1)
@@ -2395,8 +2339,6 @@ public class ShopManager : MonoBehaviour
                 }
 
                 buy = true;
-
-                level = playerDataBase.Animal2Level;
                 break;
             case AnimalType.Animal3:
                 if (playerDataBase.Animal3 >= 1)
@@ -2408,8 +2350,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Animal3Level;
                 break;
             case AnimalType.Animal4:
                 if (playerDataBase.Animal4 >= 1)
@@ -2421,8 +2361,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Animal4Level;
                 break;
             case AnimalType.Animal5:
                 if (playerDataBase.Animal5 >= 1)
@@ -2434,8 +2372,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Animal5Level;
                 break;
             case AnimalType.Animal6:
                 if (playerDataBase.Animal6 >= 1)
@@ -2447,8 +2383,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Animal6Level;
                 break;
             case AnimalType.Animal7:
                 if (playerDataBase.Animal7 >= 1)
@@ -2460,8 +2394,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Animal7Level;
                 break;
             case AnimalType.Animal8:
                 if (playerDataBase.Animal8 >= 1)
@@ -2473,8 +2405,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-
-                level = playerDataBase.Animal8Level;
                 break;
         }
 
@@ -2633,12 +2563,12 @@ public class ShopManager : MonoBehaviour
         hold = false;
         buy = false;
 
+        level = playerDataBase.GetButterfly_AbilityLevel((int)butterflyInfo.butterflyType);
+
         switch (butterflyInfo.butterflyType)
         {
             case ButterflyType.Butterfly1:
                 hold = true;
-
-                level = playerDataBase.Butterfly1Level;
                 break;
             case ButterflyType.Butterfly2:
                 if (playerDataBase.Butterfly2 >= 1)
@@ -2647,7 +2577,6 @@ public class ShopManager : MonoBehaviour
                 }
 
                 buy = true;
-                level = playerDataBase.Butterfly2Level;
                 break;
             case ButterflyType.Butterfly3:
                 if (playerDataBase.Butterfly3 >= 1)
@@ -2659,7 +2588,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly3Level;
                 break;
             case ButterflyType.Butterfly4:
                 if (playerDataBase.Butterfly4 >= 1)
@@ -2671,7 +2599,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly4Level;
                 break;
             case ButterflyType.Butterfly5:
                 if (playerDataBase.Butterfly5 >= 1)
@@ -2683,7 +2610,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly5Level;
                 break;
             case ButterflyType.Butterfly6:
                 if (playerDataBase.Butterfly6 >= 1)
@@ -2695,7 +2621,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly6Level;
                 break;
             case ButterflyType.Butterfly7:
                 if (playerDataBase.Butterfly7 >= 1)
@@ -2707,7 +2632,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly7Level;
                 break;
             case ButterflyType.Butterfly8:
                 if (playerDataBase.Butterfly8 >= 1)
@@ -2719,7 +2643,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly8Level;
                 break;
             case ButterflyType.Butterfly9:
                 if (playerDataBase.Butterfly9 >= 1)
@@ -2731,7 +2654,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly9Level;
                 break;
             case ButterflyType.Butterfly10:
                 if (playerDataBase.Butterfly10 >= 1)
@@ -2743,7 +2665,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly10Level;
                 break;
             case ButterflyType.Butterfly11:
                 if (playerDataBase.Butterfly11 >= 1)
@@ -2755,7 +2676,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly11Level;
                 break;
             case ButterflyType.Butterfly12:
                 if (playerDataBase.Butterfly12 >= 1)
@@ -2767,7 +2687,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly12Level;
                 break;
             case ButterflyType.Butterfly13:
                 if (playerDataBase.Butterfly13 >= 1)
@@ -2779,7 +2698,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly13Level;
                 break;
             case ButterflyType.Butterfly14:
                 if (playerDataBase.Butterfly14 >= 1)
@@ -2791,7 +2709,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly14Level;
                 break;
             case ButterflyType.Butterfly15:
                 if (playerDataBase.Butterfly15 >= 1)
@@ -2803,7 +2720,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly15Level;
                 break;
             case ButterflyType.Butterfly16:
                 if (playerDataBase.Butterfly16 >= 1)
@@ -2815,7 +2731,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly16Level;
                 break;
             case ButterflyType.Butterfly17:
                 if (playerDataBase.Butterfly17 >= 1)
@@ -2827,7 +2742,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly17Level;
                 break;
             case ButterflyType.Butterfly18:
                 if (playerDataBase.Butterfly18 >= 1)
@@ -2839,7 +2753,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly18Level;
                 break;
             case ButterflyType.Butterfly19:
                 if (playerDataBase.Butterfly19 >= 1)
@@ -2851,7 +2764,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly19Level;
                 break;
             case ButterflyType.Butterfly20:
                 if (playerDataBase.Butterfly20 >= 1)
@@ -2863,7 +2775,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly20Level;
                 break;
             case ButterflyType.Butterfly21:
                 if (playerDataBase.Butterfly21 >= 1)
@@ -2875,7 +2786,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly21Level;
                 break;
             case ButterflyType.Butterfly22:
                 if (playerDataBase.Butterfly22 >= 1)
@@ -2887,7 +2797,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly22Level;
                 break;
             case ButterflyType.Butterfly23:
                 if (playerDataBase.Butterfly23 >= 1)
@@ -2899,7 +2808,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly23Level;
                 break;
             case ButterflyType.Butterfly24:
                 if (playerDataBase.Butterfly24 >= 1)
@@ -2911,7 +2819,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly24Level;
                 break;
             case ButterflyType.Butterfly25:
                 if (playerDataBase.Butterfly25 >= 1)
@@ -2923,7 +2830,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly25Level;
                 break;
             case ButterflyType.Butterfly26:
                 if (playerDataBase.Butterfly26 >= 1)
@@ -2935,7 +2841,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly26Level;
                 break;
             case ButterflyType.Butterfly27:
                 if (playerDataBase.Butterfly27 >= 1)
@@ -2947,7 +2852,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly27Level;
                 break;
             case ButterflyType.Butterfly28:
                 if (playerDataBase.Butterfly28 >= 1)
@@ -2959,7 +2863,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Butterfly28Level;
                 break;
         }
 
@@ -3118,12 +3021,12 @@ public class ShopManager : MonoBehaviour
         hold = false;
         buy = false;
 
+        level = playerDataBase.GetTotems_AbilityLevel((int)totemsInfo.totemsType);
+
         switch (totemsInfo.totemsType)
         {
             case TotemsType.Totems1:
                 hold = true;
-
-                level = playerDataBase.Totems1Level;
                 break;
             case TotemsType.Totems2:
                 if (playerDataBase.Totems2 >= 1)
@@ -3132,7 +3035,6 @@ public class ShopManager : MonoBehaviour
                 }
 
                 buy = true;
-                level = playerDataBase.Totems2Level;
                 break;
             case TotemsType.Totems3:
                 if (playerDataBase.Totems3 >= 1)
@@ -3144,7 +3046,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems3Level;
                 break;
             case TotemsType.Totems4:
                 if (playerDataBase.Totems4 >= 1)
@@ -3156,7 +3057,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems4Level;
                 break;
             case TotemsType.Totems5:
                 if (playerDataBase.Totems5 >= 1)
@@ -3168,7 +3068,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems5Level;
                 break;
             case TotemsType.Totems6:
                 if (playerDataBase.Totems6 >= 1)
@@ -3180,7 +3079,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems6Level;
                 break;
             case TotemsType.Totems7:
                 if (playerDataBase.Totems7 >= 1)
@@ -3192,7 +3090,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems7Level;
                 break;
             case TotemsType.Totems8:
                 if (playerDataBase.Totems8 >= 1)
@@ -3204,7 +3101,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems8Level;
                 break;
             case TotemsType.Totems9:
                 if (playerDataBase.Totems9 >= 1)
@@ -3216,7 +3112,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems9Level;
                 break;
             case TotemsType.Totems10:
                 if (playerDataBase.Totems10 >= 1)
@@ -3228,7 +3123,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems10Level;
                 break;
             case TotemsType.Totems11:
                 if (playerDataBase.Totems11 >= 1)
@@ -3240,7 +3134,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems11Level;
                 break;
             case TotemsType.Totems12:
                 if (playerDataBase.Totems12 >= 1)
@@ -3252,7 +3145,6 @@ public class ShopManager : MonoBehaviour
                 {
                     buy = true;
                 }
-                level = playerDataBase.Totems12Level;
                 break;
         }
 
@@ -3879,7 +3771,7 @@ public class ShopManager : MonoBehaviour
                 }
 
                 titleText.plusText = "  ( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n<size=10>"
-+ LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetFoodTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
++ LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetTruckNumber() + 1) * 1.0f) / (shopTruckArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
                 titleText.ReLoad();
 
                 break;
@@ -4822,356 +4714,67 @@ public class ShopManager : MonoBehaviour
             NotionManager.instance.UseNotion4(NotionType.MaxLevel);
         }
 
+        level += 1;
+
         switch (speicalIndex)
         {
             case 0:
-                switch (animalInfo.animalType)
-                {
-                    case AnimalType.Animal1:
-                        playerDataBase.Animal1Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Animal1Level", playerDataBase.Animal1Level);
-                        break;
-                    case AnimalType.Animal2:
-                        playerDataBase.Animal2Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Animal2Level", playerDataBase.Animal2Level);
-                        break;
-                    case AnimalType.Animal3:
-                        playerDataBase.Animal3Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Animal3Level", playerDataBase.Animal3Level);
-                        break;
-                    case AnimalType.Animal4:
-                        playerDataBase.Animal4Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Animal4Level", playerDataBase.Animal4Level);
-                        break;
-                    case AnimalType.Animal5:
-                        playerDataBase.Animal5Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Animal5Level", playerDataBase.Animal5Level);
-                        break;
-                    case AnimalType.Animal6:
-                        playerDataBase.Animal6Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Animal6Level", playerDataBase.Animal6Level);
-                        break;
-                    case AnimalType.Animal7:
-                        playerDataBase.Animal7Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Animal7Level", playerDataBase.Animal7Level);
-                        break;
-                    case AnimalType.Animal8:
-                        playerDataBase.Animal8Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Animal8Level", playerDataBase.Animal8Level);
-                        break;
-                }
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetAnimal_Rare((int)animalInfo.animalType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.animalItemInstance[(int)animalInfo.animalType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.animalItemInstance[(int)animalInfo.animalType].instanceId, customData);
 
                 AnimalInitialize();
                 break;
             case 1:
-                switch (truckInfo.truckType)
-                {
-                    case TruckType.Truck1:
-                        playerDataBase.Truck1Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck1Level", playerDataBase.Truck1Level);
-                        break;
-                    case TruckType.Truck2:
-                        playerDataBase.Truck2Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck2Level", playerDataBase.Truck2Level);
-                        break;
-                    case TruckType.Truck3:
-                        playerDataBase.Truck3Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck3Level", playerDataBase.Truck3Level);
-                        break;
-                    case TruckType.Truck4:
-                        playerDataBase.Truck4Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck4Level", playerDataBase.Truck4Level);
-                        break;
-                    case TruckType.Truck5:
-                        playerDataBase.Truck5Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck5Level", playerDataBase.Truck5Level);
-                        break;
-                    case TruckType.Truck6:
-                        playerDataBase.Truck6Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck6Level", playerDataBase.Truck6Level);
-                        break;
-                    case TruckType.Truck7:
-                        playerDataBase.Truck7Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck7Level", playerDataBase.Truck7Level);
-                        break;
-                    case TruckType.Truck8:
-                        playerDataBase.Truck8Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck8Level", playerDataBase.Truck8Level);
-                        break;
-                    case TruckType.Truck9:
-                        playerDataBase.Truck9Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck9Level", playerDataBase.Truck9Level);
-                        break;
-                    case TruckType.Truck10:
-                        playerDataBase.Truck10Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Truck10Level", playerDataBase.Truck10Level);
-                        break;
-                }
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetTruck_Rare((int)truckInfo.truckType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.truckItemInstance[(int)truckInfo.truckType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.truckItemInstance[(int)truckInfo.truckType].instanceId, customData);
 
                 TruckInitialize();
                 break;
             case 2:
-                switch (characterInfo.characterType)
-                {
-                    case CharacterType.Character1:
-                        playerDataBase.Character1Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character1Level", playerDataBase.Character1Level);
-                        break;
-                    case CharacterType.Character2:
-                        playerDataBase.Character2Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character2Level", playerDataBase.Character2Level);
-                        break;
-                    case CharacterType.Character3:
-                        playerDataBase.Character3Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character3Level", playerDataBase.Character3Level);
-                        break;
-                    case CharacterType.Character4:
-                        playerDataBase.Character4Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character4Level", playerDataBase.Character4Level);
-                        break;
-                    case CharacterType.Character5:
-                        playerDataBase.Character5Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character5Level", playerDataBase.Character5Level);
-                        break;
-                    case CharacterType.Character6:
-                        playerDataBase.Character6Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character6Level", playerDataBase.Character6Level);
-                        break;
-                    case CharacterType.Character7:
-                        playerDataBase.Character7Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character7Level", playerDataBase.Character7Level);
-                        break;
-                    case CharacterType.Character8:
-                        playerDataBase.Character8Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character8Level", playerDataBase.Character8Level);
-                        break;
-                    case CharacterType.Character9:
-                        playerDataBase.Character9Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character9Level", playerDataBase.Character9Level);
-                        break;
-                    case CharacterType.Character10:
-                        playerDataBase.Character10Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character10Level", playerDataBase.Character10Level);
-                        break;
-                    case CharacterType.Character11:
-                        playerDataBase.Character11Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character11Level", playerDataBase.Character11Level);
-                        break;
-                    case CharacterType.Character12:
-                        playerDataBase.Character12Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character12Level", playerDataBase.Character12Level);
-                        break;
-                    case CharacterType.Character13:
-                        playerDataBase.Character13Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character13Level", playerDataBase.Character13Level);
-                        break;
-                    case CharacterType.Character14:
-                        playerDataBase.Character14Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character14Level", playerDataBase.Character14Level);
-                        break;
-                    case CharacterType.Character15:
-                        playerDataBase.Character15Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character15Level", playerDataBase.Character15Level);
-                        break;
-                    case CharacterType.Character16:
-                        playerDataBase.Character16Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character16Level", playerDataBase.Character16Level);
-                        break;
-                    case CharacterType.Character17:
-                        playerDataBase.Character17Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character17Level", playerDataBase.Character17Level);
-                        break;
-                    case CharacterType.Character18:
-                        playerDataBase.Character18Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character18Level", playerDataBase.Character18Level);
-                        break;
-                    case CharacterType.Character19:
-                        playerDataBase.Character19Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character19Level", playerDataBase.Character19Level);
-                        break;
-                    case CharacterType.Character20:
-                        playerDataBase.Character20Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character20Level", playerDataBase.Character20Level);
-                        break;
-                    case CharacterType.Character21:
-                        playerDataBase.Character21Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Character21Level", playerDataBase.Character21Level);
-                        break;
-                }
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetCharacter_Rare((int)characterInfo.characterType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.characterItemInstance[(int)characterInfo.characterType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.characterItemInstance[(int)characterInfo.characterType].instanceId, customData);
 
                 CharacterInitialize();
                 break;
             case 3:
-                switch (butterflyInfo.butterflyType)
-                {
-                    case ButterflyType.Butterfly1:
-                        playerDataBase.Butterfly1Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly1Level", playerDataBase.Butterfly1Level);
-                        break;
-                    case ButterflyType.Butterfly2:
-                        playerDataBase.Butterfly2Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly2Level", playerDataBase.Butterfly2Level);
-                        break;
-                    case ButterflyType.Butterfly3:
-                        playerDataBase.Butterfly3Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly3Level", playerDataBase.Butterfly3Level);
-                        break;
-                    case ButterflyType.Butterfly4:
-                        playerDataBase.Butterfly4Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly4Level", playerDataBase.Butterfly4Level);
-                        break;
-                    case ButterflyType.Butterfly5:
-                        playerDataBase.Butterfly5Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly5Level", playerDataBase.Butterfly5Level);
-                        break;
-                    case ButterflyType.Butterfly6:
-                        playerDataBase.Butterfly6Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly6Level", playerDataBase.Butterfly6Level);
-                        break;
-                    case ButterflyType.Butterfly7:
-                        playerDataBase.Butterfly7Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly7Level", playerDataBase.Butterfly7Level);
-                        break;
-                    case ButterflyType.Butterfly8:
-                        playerDataBase.Butterfly8Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly8Level", playerDataBase.Butterfly8Level);
-                        break;
-                    case ButterflyType.Butterfly9:
-                        playerDataBase.Butterfly9Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly9Level", playerDataBase.Butterfly9Level);
-                        break;
-                    case ButterflyType.Butterfly10:
-                        playerDataBase.Butterfly10Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly10Level", playerDataBase.Butterfly10Level);
-                        break;
-                    case ButterflyType.Butterfly11:
-                        playerDataBase.Butterfly11Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly11Level", playerDataBase.Butterfly11Level);
-                        break;
-                    case ButterflyType.Butterfly12:
-                        playerDataBase.Butterfly12Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly12Level", playerDataBase.Butterfly12Level);
-                        break;
-                    case ButterflyType.Butterfly13:
-                        playerDataBase.Butterfly13Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly13Level", playerDataBase.Butterfly13Level);
-                        break;
-                    case ButterflyType.Butterfly14:
-                        playerDataBase.Butterfly14Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly14Level", playerDataBase.Butterfly14Level);
-                        break;
-                    case ButterflyType.Butterfly15:
-                        playerDataBase.Butterfly15Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly15Level", playerDataBase.Butterfly15Level);
-                        break;
-                    case ButterflyType.Butterfly16:
-                        playerDataBase.Butterfly16Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly16Level", playerDataBase.Butterfly16Level);
-                        break;
-                    case ButterflyType.Butterfly17:
-                        playerDataBase.Butterfly17Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly17Level", playerDataBase.Butterfly17Level);
-                        break;
-                    case ButterflyType.Butterfly18:
-                        playerDataBase.Butterfly18Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly18Level", playerDataBase.Butterfly18Level);
-                        break;
-                    case ButterflyType.Butterfly19:
-                        playerDataBase.Butterfly19Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly19Level", playerDataBase.Butterfly19Level);
-                        break;
-                    case ButterflyType.Butterfly20:
-                        playerDataBase.Butterfly20Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly20Level", playerDataBase.Butterfly20Level);
-                        break;
-                    case ButterflyType.Butterfly21:
-                        playerDataBase.Butterfly21Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly21Level", playerDataBase.Butterfly21Level);
-                        break;
-                    case ButterflyType.Butterfly22:
-                        playerDataBase.Butterfly22Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly22Level", playerDataBase.Butterfly22Level);
-                        break;
-                    case ButterflyType.Butterfly23:
-                        playerDataBase.Butterfly23Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly23Level", playerDataBase.Butterfly23Level);
-                        break;
-                    case ButterflyType.Butterfly24:
-                        playerDataBase.Butterfly24Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly24Level", playerDataBase.Butterfly24Level);
-                        break;
-                    case ButterflyType.Butterfly25:
-                        playerDataBase.Butterfly25Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly25Level", playerDataBase.Butterfly25Level);
-                        break;
-                    case ButterflyType.Butterfly26:
-                        playerDataBase.Butterfly26Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly26Level", playerDataBase.Butterfly26Level);
-                        break;
-                    case ButterflyType.Butterfly27:
-                        playerDataBase.Butterfly27Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly27Level", playerDataBase.Butterfly27Level);
-                        break;
-                    case ButterflyType.Butterfly28:
-                        playerDataBase.Butterfly28Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Butterfly28Level", playerDataBase.Butterfly28Level);
-                        break;
-                }
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetButterfly_Rare((int)butterflyInfo.butterflyType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.butterflyItemInstance[(int)butterflyInfo.butterflyType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.butterflyItemInstance[(int)butterflyInfo.butterflyType].instanceId, customData);
 
                 ButterflyInitialize();
                 break;
             case 4:
-                switch (totemsInfo.totemsType)
-                {
-                    case TotemsType.Totems1:
-                        playerDataBase.Totems1Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems1Level", playerDataBase.Totems1Level);
-                        break;
-                    case TotemsType.Totems2:
-                        playerDataBase.Totems2Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems2Level", playerDataBase.Totems2Level);
-                        break;
-                    case TotemsType.Totems3:
-                        playerDataBase.Totems3Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems3Level", playerDataBase.Totems3Level);
-                        break;
-                    case TotemsType.Totems4:
-                        playerDataBase.Totems4Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems4Level", playerDataBase.Totems4Level);
-                        break;
-                    case TotemsType.Totems5:
-                        playerDataBase.Totems5Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems5Level", playerDataBase.Totems5Level);
-                        break;
-                    case TotemsType.Totems6:
-                        playerDataBase.Totems6Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems6Level", playerDataBase.Totems6Level);
-                        break;
-                    case TotemsType.Totems7:
-                        playerDataBase.Totems7Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems7Level", playerDataBase.Totems7Level);
-                        break;
-                    case TotemsType.Totems8:
-                        playerDataBase.Totems8Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems8Level", playerDataBase.Totems8Level);
-                        break;
-                    case TotemsType.Totems9:
-                        playerDataBase.Totems9Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems9Level", playerDataBase.Totems9Level);
-                        break;
-                    case TotemsType.Totems10:
-                        playerDataBase.Totems10Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems10Level", playerDataBase.Totems10Level);
-                        break;
-                    case TotemsType.Totems11:
-                        playerDataBase.Totems11Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems11Level", playerDataBase.Totems11Level);
-                        break;
-                    case TotemsType.Totems12:
-                        playerDataBase.Totems12Level += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Totems12Level", playerDataBase.Totems12Level);
-                        break;
-                }
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetTotems_Rare((int)totemsInfo.totemsType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.totemsItemInstance[(int)totemsInfo.totemsType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.totemsItemInstance[(int)totemsInfo.totemsType].instanceId, customData);
 
                 TotemsInitialize();
                 break;

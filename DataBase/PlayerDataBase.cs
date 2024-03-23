@@ -1,7 +1,19 @@
+using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[System.Serializable]
+public class ShopClass
+{
+    public string instanceId = "";
+
+    public int abilityLevel = 0;
+    public int rare = 0;
+    public int level = 0;
+}
+
 
 [CreateAssetMenu(fileName = "PlayerDataBase", menuName = "ScriptableObjects/PlayerDataBase")]
 public class PlayerDataBase : ScriptableObject
@@ -328,22 +340,6 @@ public class PlayerDataBase : ScriptableObject
     private int food7MaxValue = 0;
 
     [Space]
-    [SerializeField]
-    private int food1Rare = 0;
-    [SerializeField]
-    private int food2Rare = 0;
-    [SerializeField]
-    private int food3Rare = 0;
-    [SerializeField]
-    private int food4Rare = 0;
-    [SerializeField]
-    private int food5Rare = 0;
-    [SerializeField]
-    private int food6Rare = 0;
-    [SerializeField]
-    private int food7Rare = 0;
-
-    [Space]
     [Title("Candy")]
     [SerializeField]
     private int candy1MaxValue = 0;
@@ -365,26 +361,6 @@ public class PlayerDataBase : ScriptableObject
     private int candy9MaxValue = 0;
 
     [Space]
-    [SerializeField]
-    private int candy1Rare = 0;
-    [SerializeField]
-    private int candy2Rare = 0;
-    [SerializeField]
-    private int candy3Rare = 0;
-    [SerializeField]
-    private int candy4Rare = 0;
-    [SerializeField]
-    private int candy5Rare = 0;
-    [SerializeField]
-    private int candy6Rare = 0;
-    [SerializeField]
-    private int candy7Rare = 0;
-    [SerializeField]
-    private int candy8Rare = 0;
-    [SerializeField]
-    private int candy9Rare = 0;
-
-    [Space]
     [Title("Japanese Food")]
     [SerializeField]
     private int japaneseFood1MaxValue = 0;
@@ -400,22 +376,6 @@ public class PlayerDataBase : ScriptableObject
     private int japaneseFood6MaxValue = 0;
     [SerializeField]
     private int japaneseFood7MaxValue = 0;
-
-    [Space]
-    [SerializeField]
-    private int japaneseFood1Rare = 0;
-    [SerializeField]
-    private int japaneseFood2Rare = 0;
-    [SerializeField]
-    private int japaneseFood3Rare = 0;
-    [SerializeField]
-    private int japaneseFood4Rare = 0;
-    [SerializeField]
-    private int japaneseFood5Rare = 0;
-    [SerializeField]
-    private int japaneseFood6Rare = 0;
-    [SerializeField]
-    private int japaneseFood7Rare = 0;
 
     [Space]
     [Title("Dessert")]
@@ -437,26 +397,6 @@ public class PlayerDataBase : ScriptableObject
     private int dessert8MaxValue = 0;
     [SerializeField]
     private int dessert9MaxValue = 0;
-
-    [Space]
-    [SerializeField]
-    private int dessert1Rare = 0;
-    [SerializeField]
-    private int dessert2Rare = 0;
-    [SerializeField]
-    private int dessert3Rare = 0;
-    [SerializeField]
-    private int dessert4Rare = 0;
-    [SerializeField]
-    private int dessert5Rare = 0;
-    [SerializeField]
-    private int dessert6Rare = 0;
-    [SerializeField]
-    private int dessert7Rare = 0;
-    [SerializeField]
-    private int dessert8Rare = 0;
-    [SerializeField]
-    private int dessert9Rare = 0;
 
     [Space]
     [Title("Character")]
@@ -504,51 +444,6 @@ public class PlayerDataBase : ScriptableObject
     private int character21 = 0;
 
     [Space]
-    [Title("Character Level")]
-    [SerializeField]
-    private int character1Level = 0;
-    [SerializeField]
-    private int character2Level = 0;
-    [SerializeField]
-    private int character3Level = 0;
-    [SerializeField]
-    private int character4Level = 0;
-    [SerializeField]
-    private int character5Level = 0;
-    [SerializeField]
-    private int character6Level = 0;
-    [SerializeField]
-    private int character7Level = 0;
-    [SerializeField]
-    private int character8Level = 0;
-    [SerializeField]
-    private int character9Level = 0;
-    [SerializeField]
-    private int character10Level = 0;
-    [SerializeField]
-    private int character11Level = 0;
-    [SerializeField]
-    private int character12Level = 0;
-    [SerializeField]
-    private int character13Level = 0;
-    [SerializeField]
-    private int character14Level = 0;
-    [SerializeField]
-    private int character15Level = 0;
-    [SerializeField]
-    private int character16Level = 0;
-    [SerializeField]
-    private int character17Level = 0;
-    [SerializeField]
-    private int character18Level = 0;
-    [SerializeField]
-    private int character19Level = 0;
-    [SerializeField]
-    private int character20Level = 0;
-    [SerializeField]
-    private int character21Level = 0;
-
-    [Space]
     [Title("Truck")]
     [SerializeField]
     private int truck1 = 1;
@@ -572,29 +467,6 @@ public class PlayerDataBase : ScriptableObject
     private int truck10 = 0;
 
     [Space]
-    [Title("Truck Level")]
-    [SerializeField]
-    private int truck1Level = 0;
-    [SerializeField]
-    private int truck2Level = 0;
-    [SerializeField]
-    private int truck3Level = 0;
-    [SerializeField]
-    private int truck4Level = 0;
-    [SerializeField]
-    private int truck5Level = 0;
-    [SerializeField]
-    private int truck6Level = 0;
-    [SerializeField]
-    private int truck7Level = 0;
-    [SerializeField]
-    private int truck8Level = 0;
-    [SerializeField]
-    private int truck9Level = 0;
-    [SerializeField]
-    private int truck10Level = 0;
-
-    [Space]
     [Title("Animal")]
     [SerializeField]
     private int animal1 = 1;
@@ -612,25 +484,6 @@ public class PlayerDataBase : ScriptableObject
     private int animal7 = 0;
     [SerializeField]
     private int animal8 = 0;
-
-    [Space]
-    [Title("Animal Level")]
-    [SerializeField]
-    private int animal1Level = 0;
-    [SerializeField]
-    private int animal2Level = 0;
-    [SerializeField]
-    private int animal3Level = 0;
-    [SerializeField]
-    private int animal4Level = 0;
-    [SerializeField]
-    private int animal5Level = 0;
-    [SerializeField]
-    private int animal6Level = 0;
-    [SerializeField]
-    private int animal7Level = 0;
-    [SerializeField]
-    private int animal8Level = 0;
 
     [Space]
     [Title("Butterfly")]
@@ -692,65 +545,6 @@ public class PlayerDataBase : ScriptableObject
     private int butterfly28 = 0;
 
     [Space]
-    [Title("Butterfly Level")]
-    [SerializeField]
-    private int butterfly1Level = 0;
-    [SerializeField]
-    private int butterfly2Level = 0;
-    [SerializeField]
-    private int butterfly3Level = 0;
-    [SerializeField]
-    private int butterfly4Level = 0;
-    [SerializeField]
-    private int butterfly5Level = 0;
-    [SerializeField]
-    private int butterfly6Level = 0;
-    [SerializeField]
-    private int butterfly7Level = 0;
-    [SerializeField]
-    private int butterfly8Level = 0;
-    [SerializeField]
-    private int butterfly9Level = 0;
-    [SerializeField]
-    private int butterfly10Level = 0;
-    [SerializeField]
-    private int butterfly11Level = 0;
-    [SerializeField]
-    private int butterfly12Level = 0;
-    [SerializeField]
-    private int butterfly13Level = 0;
-    [SerializeField]
-    private int butterfly14Level = 0;
-    [SerializeField]
-    private int butterfly15Level = 0;
-    [SerializeField]
-    private int butterfly16Level = 0;
-    [SerializeField]
-    private int butterfly17Level = 0;
-    [SerializeField]
-    private int butterfly18Level = 0;
-    [SerializeField]
-    private int butterfly19Level = 0;
-    [SerializeField]
-    private int butterfly20Level = 0;
-    [SerializeField]
-    private int butterfly21Level = 0;
-    [SerializeField]
-    private int butterfly22Level = 0;
-    [SerializeField]
-    private int butterfly23Level = 0;
-    [SerializeField]
-    private int butterfly24Level = 0;
-    [SerializeField]
-    private int butterfly25Level = 0;
-    [SerializeField]
-    private int butterfly26Level = 0;
-    [SerializeField]
-    private int butterfly27Level = 0;
-    [SerializeField]
-    private int butterfly28Level = 0;
-
-    [Space]
     [Title("Totems")]
     [SerializeField]
     private int totems1 = 1;
@@ -777,33 +571,6 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int totems12 = 0;
 
-    [Space]
-    [Title("Totems Level")]
-    [SerializeField]
-    private int totems1Level = 0;
-    [SerializeField]
-    private int totems2Level = 0;
-    [SerializeField]
-    private int totems3Level = 0;
-    [SerializeField]
-    private int totems4Level = 0;
-    [SerializeField]
-    private int totems5Level = 0;
-    [SerializeField]
-    private int totems6Level = 0;
-    [SerializeField]
-    private int totems7Level = 0;
-    [SerializeField]
-    private int totems8Level = 0;
-    [SerializeField]
-    private int totems9Level = 0;
-    [SerializeField]
-    private int totems10Level = 0;
-    [SerializeField]
-    private int totems11Level = 0;
-    [SerializeField]
-    private int totems12Level = 0;
-
 
     [Space]
     [Title("Flower")]
@@ -821,6 +588,33 @@ public class PlayerDataBase : ScriptableObject
     private int flower6 = 0;
     [SerializeField]
     private int flower7 = 0;
+
+    [Space]
+    [Title("ItemInstance")]
+    [SerializeField]
+    public List<ShopClass> characterItemInstance = new List<ShopClass>();
+    [SerializeField]
+    public List<ShopClass> truckItemInstance = new List<ShopClass>();
+    [SerializeField]
+    public List<ShopClass> animalItemInstance = new List<ShopClass>();
+    [SerializeField]
+    public List<ShopClass> butterflyItemInstance = new List<ShopClass>();
+    [SerializeField]
+    public List<ShopClass> totemsItemInstance = new List<ShopClass>();
+    [SerializeField]
+    public List<ShopClass> flowerItemInstance = new List<ShopClass>();
+
+    [Space]
+    [Title("Rare")]
+    [SerializeField]
+    public Island1RareData island1RareData = new Island1RareData();
+    [SerializeField]
+    public Island2RareData island2RareData = new Island2RareData();
+    [SerializeField]
+    public Island3RareData island3RareData = new Island3RareData();
+    [SerializeField]
+    public Island4RareData island4RareData = new Island4RareData();
+
 
     [Space]
     [Title("Icon")]
@@ -2431,133 +2225,6 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int Character1Level
-    {
-        get { return character1Level; }
-        set { character1Level = value; }
-    }
-
-    public int Character2Level
-    {
-        get { return character2Level; }
-        set { character2Level = value; }
-    }
-
-    public int Character3Level
-    {
-        get { return character3Level; }
-        set { character3Level = value; }
-    }
-
-    public int Character4Level
-    {
-        get { return character4Level; }
-        set { character4Level = value; }
-    }
-
-    public int Character5Level
-    {
-        get { return character5Level; }
-        set { character5Level = value; }
-    }
-
-    public int Character6Level
-    {
-        get { return character6Level; }
-        set { character6Level = value; }
-    }
-
-    public int Character7Level
-    {
-        get { return character7Level; }
-        set { character7Level = value; }
-    }
-
-    public int Character8Level
-    {
-        get { return character8Level; }
-        set { character8Level = value; }
-    }
-
-    public int Character9Level
-    {
-        get { return character9Level; }
-        set { character9Level = value; }
-    }
-
-    public int Character10Level
-    {
-        get { return character10Level; }
-        set { character10Level = value; }
-    }
-
-    public int Character11Level
-    {
-        get { return character11Level; }
-        set { character11Level = value; }
-    }
-
-    public int Character12Level
-    {
-        get { return character12Level; }
-        set { character12Level = value; }
-    }
-
-    public int Character13Level
-    {
-        get { return character13Level; }
-        set { character13Level = value; }
-    }
-
-    public int Character14Level
-    {
-        get { return character14Level; }
-        set { character14Level = value; }
-    }
-
-    public int Character15Level
-    {
-        get { return character15Level; }
-        set { character15Level = value; }
-    }
-
-    public int Character16Level
-    {
-        get { return character16Level; }
-        set { character16Level = value; }
-    }
-
-    public int Character17Level
-    {
-        get { return character17Level; }
-        set { character17Level = value; }
-    }
-
-    public int Character18Level
-    {
-        get { return character18Level; }
-        set { character18Level = value; }
-    }
-
-    public int Character19Level
-    {
-        get { return character19Level; }
-        set { character19Level = value; }
-    }
-
-    public int Character20Level
-    {
-        get { return character20Level; }
-        set { character20Level = value; }
-    }
-
-    public int Character21Level
-    {
-        get { return character21Level; }
-        set { character21Level = value; }
-    }
-
-
     public int NextFoodNumber
     {
         get
@@ -2690,49 +2357,6 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int Food1Rare
-    {
-        get { return food1Rare; }
-        set { food1Rare = value; }
-    }
-
-    public int Food2Rare
-    {
-        get { return food2Rare; }
-        set { food2Rare = value; }
-    }
-
-    public int Food3Rare
-    {
-        get { return food3Rare; }
-        set { food3Rare = value; }
-    }
-
-    public int Food4Rare
-    {
-        get { return food4Rare; }
-        set { food4Rare = value; }
-    }
-
-    public int Food5Rare
-    {
-        get { return food5Rare; }
-        set { food5Rare = value; }
-    }
-
-    public int Food6Rare
-    {
-        get { return food6Rare; }
-        set { food6Rare = value; }
-    }
-
-    public int Food7Rare
-    {
-        get { return food7Rare; }
-        set { food7Rare = value; }
-    }
-
-
     public int Candy1MaxValue
     {
         get
@@ -2840,61 +2464,6 @@ public class PlayerDataBase : ScriptableObject
             candy9MaxValue = value;
         }
     }
-
-    public int Candy1Rare
-    {
-        get { return candy1Rare; }
-        set { candy1Rare = value; }
-    }
-
-    public int Candy2Rare
-    {
-        get { return candy2Rare; }
-        set { candy2Rare = value; }
-    }
-
-    public int Candy3Rare
-    {
-        get { return candy3Rare; }
-        set { candy3Rare = value; }
-    }
-
-    public int Candy4Rare
-    {
-        get { return candy4Rare; }
-        set { candy4Rare = value; }
-    }
-
-    public int Candy5Rare
-    {
-        get { return candy5Rare; }
-        set { candy5Rare = value; }
-    }
-
-    public int Candy6Rare
-    {
-        get { return candy6Rare; }
-        set { candy6Rare = value; }
-    }
-
-    public int Candy7Rare
-    {
-        get { return candy7Rare; }
-        set { candy7Rare = value; }
-    }
-
-    public int Candy8Rare
-    {
-        get { return candy8Rare; }
-        set { candy8Rare = value; }
-    }
-
-    public int Candy9Rare
-    {
-        get { return candy9Rare; }
-        set { candy9Rare = value; }
-    }
-
     public int JapaneseFood1MaxValue
     {
         get
@@ -2977,48 +2546,6 @@ public class PlayerDataBase : ScriptableObject
         {
             japaneseFood7MaxValue = value;
         }
-    }
-
-    public int JapaneseFood1Rare
-    {
-        get { return japaneseFood1Rare; }
-        set { japaneseFood1Rare = value; }
-    }
-
-    public int JapaneseFood2Rare
-    {
-        get { return japaneseFood2Rare; }
-        set { japaneseFood2Rare = value; }
-    }
-
-    public int JapaneseFood3Rare
-    {
-        get { return japaneseFood3Rare; }
-        set { japaneseFood3Rare = value; }
-    }
-
-    public int JapaneseFood4Rare
-    {
-        get { return japaneseFood4Rare; }
-        set { japaneseFood4Rare = value; }
-    }
-
-    public int JapaneseFood5Rare
-    {
-        get { return japaneseFood5Rare; }
-        set { japaneseFood5Rare = value; }
-    }
-
-    public int JapaneseFood6Rare
-    {
-        get { return japaneseFood6Rare; }
-        set { japaneseFood6Rare = value; }
-    }
-
-    public int JapaneseFood7Rare
-    {
-        get { return japaneseFood7Rare; }
-        set { japaneseFood7Rare = value; }
     }
 
     public int Dessert1MaxValue
@@ -3127,60 +2654,6 @@ public class PlayerDataBase : ScriptableObject
         {
             dessert9MaxValue = value;
         }
-    }
-
-    public int Dessert1Rare
-    {
-        get { return dessert1Rare; }
-        set { dessert1Rare = value; }
-    }
-
-    public int Dessert2Rare
-    {
-        get { return dessert2Rare; }
-        set { dessert2Rare = value; }
-    }
-
-    public int Dessert3Rare
-    {
-        get { return dessert3Rare; }
-        set { dessert3Rare = value; }
-    }
-
-    public int Dessert4Rare
-    {
-        get { return dessert4Rare; }
-        set { dessert4Rare = value; }
-    }
-
-    public int Dessert5Rare
-    {
-        get { return dessert5Rare; }
-        set { dessert5Rare = value; }
-    }
-
-    public int Dessert6Rare
-    {
-        get { return dessert6Rare; }
-        set { dessert6Rare = value; }
-    }
-
-    public int Dessert7Rare
-    {
-        get { return dessert7Rare; }
-        set { dessert7Rare = value; }
-    }
-
-    public int Dessert8Rare
-    {
-        get { return dessert8Rare; }
-        set { dessert8Rare = value; }
-    }
-
-    public int Dessert9Rare
-    {
-        get { return dessert9Rare; }
-        set { dessert9Rare = value; }
     }
 
     public int UpgradeCount
@@ -3998,66 +3471,6 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int Truck1Level
-    {
-        get { return truck1Level; }
-        set { truck1Level = value; }
-    }
-
-    public int Truck2Level
-    {
-        get { return truck2Level; }
-        set { truck2Level = value; }
-    }
-
-    public int Truck3Level
-    {
-        get { return truck3Level; }
-        set { truck3Level = value; }
-    }
-
-    public int Truck4Level
-    {
-        get { return truck4Level; }
-        set { truck4Level = value; }
-    }
-
-    public int Truck5Level
-    {
-        get { return truck5Level; }
-        set { truck5Level = value; }
-    }
-
-    public int Truck6Level
-    {
-        get { return truck6Level; }
-        set { truck6Level = value; }
-    }
-
-    public int Truck7Level
-    {
-        get { return truck7Level; }
-        set { truck7Level = value; }
-    }
-
-    public int Truck8Level
-    {
-        get { return truck8Level; }
-        set { truck8Level = value; }
-    }
-
-    public int Truck9Level
-    {
-        get { return truck9Level; }
-        set { truck9Level = value; }
-    }
-
-    public int Truck10Level
-    {
-        get { return truck10Level; }
-        set { truck10Level = value; }
-    }
-
     public int Animal1
     {
         get { return animal1; }
@@ -4148,57 +3561,16 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int Animal1Level
-    {
-        get { return animal1Level; }
-        set { animal1Level = value; }
-    }
-
-    public int Animal2Level
-    {
-        get { return animal2Level; }
-        set { animal2Level = value; }
-    }
-
-    public int Animal3Level
-    {
-        get { return animal3Level; }
-        set { animal3Level = value; }
-    }
-
-    public int Animal4Level
-    {
-        get { return animal4Level; }
-        set { animal4Level = value; }
-    }
-
-    public int Animal5Level
-    {
-        get { return animal5Level; }
-        set { animal5Level = value; }
-    }
-    public int Animal6Level
-    {
-        get { return animal6Level; }
-        set { animal6Level = value; }
-    }
-
-    public int Animal7Level
-    {
-        get { return animal7Level; }
-        set { animal7Level = value; }
-    }
-
-    public int Animal8Level
-    {
-        get { return animal8Level; }
-        set { animal8Level = value; }
-    }
-
     public int Butterfly1
     {
-        get { return butterfly1; }
-        set { butterfly1 = value; }
+        get
+        {
+            return butterfly1;
+        }
+        set
+        {
+            butterfly1 = value;
+        }
     }
 
     public int Butterfly2
@@ -4525,175 +3897,6 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int Butterfly1Level
-    {
-        get { return butterfly1Level; }
-        set { butterfly1Level = value; }
-    }
-
-    public int Butterfly2Level
-    {
-        get { return butterfly2Level; }
-        set { butterfly2Level = value; }
-    }
-
-    public int Butterfly3Level
-    {
-        get { return butterfly3Level; }
-        set { butterfly3Level = value; }
-    }
-
-    public int Butterfly4Level
-    {
-        get { return butterfly4Level; }
-        set { butterfly4Level = value; }
-    }
-
-    public int Butterfly5Level
-    {
-        get { return butterfly5Level; }
-        set { butterfly5Level = value; }
-    }
-
-    public int Butterfly6Level
-    {
-        get { return butterfly6Level; }
-        set { butterfly6Level = value; }
-    }
-
-    public int Butterfly7Level
-    {
-        get { return butterfly7Level; }
-        set { butterfly7Level = value; }
-    }
-
-    public int Butterfly8Level
-    {
-        get { return butterfly8Level; }
-        set { butterfly8Level = value; }
-    }
-
-    public int Butterfly9Level
-    {
-        get { return butterfly9Level; }
-        set { butterfly9Level = value; }
-    }
-
-    public int Butterfly10Level
-    {
-        get { return butterfly10Level; }
-        set { butterfly10Level = value; }
-    }
-
-    public int Butterfly11Level
-    {
-        get { return butterfly11Level; }
-        set { butterfly11Level = value; }
-    }
-
-    public int Butterfly12Level
-    {
-        get { return butterfly12Level; }
-        set { butterfly12Level = value; }
-    }
-
-    public int Butterfly13Level
-    {
-        get { return butterfly13Level; }
-        set { butterfly13Level = value; }
-    }
-
-    public int Butterfly14Level
-    {
-        get { return butterfly14Level; }
-        set { butterfly14Level = value; }
-    }
-
-    public int Butterfly15Level
-    {
-        get { return butterfly15Level; }
-        set { butterfly15Level = value; }
-    }
-
-    public int Butterfly16Level
-    {
-        get { return butterfly16Level; }
-        set { butterfly16Level = value; }
-    }
-
-    public int Butterfly17Level
-    {
-        get { return butterfly17Level; }
-        set { butterfly17Level = value; }
-    }
-
-    public int Butterfly18Level
-    {
-        get { return butterfly18Level; }
-        set { butterfly18Level = value; }
-    }
-
-    public int Butterfly19Level
-    {
-        get { return butterfly19Level; }
-        set { butterfly19Level = value; }
-    }
-
-    public int Butterfly20Level
-    {
-        get { return butterfly20Level; }
-        set { butterfly20Level = value; }
-    }
-
-    public int Butterfly21Level
-    {
-        get { return butterfly21Level; }
-        set { butterfly21Level = value; }
-    }
-
-    public int Butterfly22Level
-    {
-        get { return butterfly22Level; }
-        set { butterfly22Level = value; }
-    }
-
-    public int Butterfly23Level
-    {
-        get { return butterfly23Level; }
-        set { butterfly23Level = value; }
-    }
-
-    public int Butterfly24Level
-    {
-        get { return butterfly24Level; }
-        set { butterfly24Level = value; }
-    }
-
-    public int Butterfly25Level
-    {
-        get { return butterfly25Level; }
-        set { butterfly25Level = value; }
-    }
-
-    public int Butterfly26Level
-    {
-        get { return butterfly26Level; }
-        set { butterfly26Level = value; }
-    }
-
-    public int Butterfly27Level
-    {
-        get { return butterfly27Level; }
-        set { butterfly27Level = value; }
-    }
-
-    public int Butterfly28Level
-    {
-        get { return butterfly28Level; }
-        set { butterfly28Level = value; }
-    }
-
-
     public int Totems1
     {
         get { return totems1; }
@@ -4831,79 +4034,6 @@ public class PlayerDataBase : ScriptableObject
             totems12 = value;
         }
     }
-
-    public int Totems1Level
-    {
-        get { return totems1Level; }
-        set { totems1Level = value; }
-    }
-
-    public int Totems2Level
-    {
-        get { return totems2Level; }
-        set { totems2Level = value; }
-    }
-
-    public int Totems3Level
-    {
-        get { return totems3Level; }
-        set { totems3Level = value; }
-    }
-
-    public int Totems4Level
-    {
-        get { return totems4Level; }
-        set { totems4Level = value; }
-    }
-
-    public int Totems5Level
-    {
-        get { return totems5Level; }
-        set { totems5Level = value; }
-    }
-
-    public int Totems6Level
-    {
-        get { return totems6Level; }
-        set { totems6Level = value; }
-    }
-
-    public int Totems7Level
-    {
-        get { return totems7Level; }
-        set { totems7Level = value; }
-    }
-
-    public int Totems8Level
-    {
-        get { return totems8Level; }
-        set { totems8Level = value; }
-    }
-
-    public int Totems9Level
-    {
-        get { return totems9Level; }
-        set { totems9Level = value; }
-    }
-
-    public int Totems10Level
-    {
-        get { return totems10Level; }
-        set { totems10Level = value; }
-    }
-
-    public int Totems11Level
-    {
-        get { return totems11Level; }
-        set { totems11Level = value; }
-    }
-
-    public int Totems12Level
-    {
-        get { return totems12Level; }
-        set { totems12Level = value; }
-    }
-
     public int Flower1
     {
         get
@@ -5982,14 +5112,6 @@ public class PlayerDataBase : ScriptableObject
         food6MaxValue = 0;
         food7MaxValue = 0;
 
-        food1Rare = 0;
-        food2Rare = 0;
-        food3Rare = 0;
-        food4Rare = 0;
-        food5Rare = 0;
-        food6Rare = 0;
-        food7Rare = 0;
-
         candy1MaxValue = 0;
         candy2MaxValue = 0;
         candy3MaxValue = 0;
@@ -6000,16 +5122,6 @@ public class PlayerDataBase : ScriptableObject
         candy8MaxValue = 0;
         candy9MaxValue = 0;
 
-        candy1Rare = 0;
-        candy2Rare = 0;
-        candy3Rare = 0;
-        candy4Rare = 0;
-        candy5Rare = 0;
-        candy6Rare = 0;
-        candy7Rare = 0;
-        candy8Rare = 0;
-        candy9Rare = 0;
-
         japaneseFood1MaxValue = 0;
         japaneseFood2MaxValue = 0;
         japaneseFood3MaxValue = 0;
@@ -6017,14 +5129,6 @@ public class PlayerDataBase : ScriptableObject
         japaneseFood5MaxValue = 0;
         japaneseFood6MaxValue = 0;
         japaneseFood7MaxValue = 0;
-
-        japaneseFood1Rare = 0;
-        japaneseFood2Rare = 0;
-        japaneseFood3Rare = 0;
-        japaneseFood4Rare = 0;
-        japaneseFood5Rare = 0;
-        japaneseFood6Rare = 0;
-        japaneseFood7Rare = 0;
 
         dessert1MaxValue = 0;
         dessert2MaxValue = 0;
@@ -6035,16 +5139,6 @@ public class PlayerDataBase : ScriptableObject
         dessert7MaxValue = 0;
         dessert8MaxValue = 0;
         dessert9MaxValue = 0;
-
-        dessert1Rare = 0;
-        dessert2Rare = 0;
-        dessert3Rare = 0;
-        dessert4Rare = 0;
-        dessert5Rare = 0;
-        dessert6Rare = 0;
-        dessert7Rare = 0;
-        dessert8Rare = 0;
-        dessert9Rare = 0;
 
         treasure1 = 0;
         treasure2 = 0;
@@ -6098,28 +5192,6 @@ public class PlayerDataBase : ScriptableObject
         character20 = 0;
         character21 = 0;
 
-        character1Level = 0;
-        character2Level = 0;
-        character3Level = 0;
-        character4Level = 0;
-        character5Level = 0;
-        character6Level = 0;
-        character7Level = 0;
-        character8Level = 0;
-        character9Level = 0;
-        character10Level = 0;
-        character11Level = 0;
-        character12Level = 0;
-        character13Level = 0;
-        character14Level = 0;
-        character15Level = 0;
-        character16Level = 0;
-        character17Level = 0;
-        character18Level = 0;
-        character19Level = 0;
-        character20Level = 0;
-        character21Level = 0;
-
         truck1 = 1;
         truck2 = 0;
         truck3 = 0;
@@ -6131,17 +5203,6 @@ public class PlayerDataBase : ScriptableObject
         truck9 = 0;
         truck10 = 0;
 
-        truck1Level = 0;
-        truck2Level = 0;
-        truck3Level = 0;
-        truck4Level = 0;
-        truck5Level = 0;
-        truck6Level = 0;
-        truck7Level = 0;
-        truck8Level = 0;
-        truck9Level = 0;
-        truck10Level = 0;
-
         animal1 = 1;
         animal2 = 0;
         animal3 = 0;
@@ -6150,15 +5211,6 @@ public class PlayerDataBase : ScriptableObject
         animal6 = 0;
         animal7 = 0;
         animal8 = 0;
-
-        animal1Level = 0;
-        animal2Level = 0;
-        animal3Level = 0;
-        animal4Level = 0;
-        animal5Level = 0;
-        animal6Level = 0;
-        animal7Level = 0;
-        animal8Level = 0;
 
         butterfly1 = 1;
         butterfly2 = 0;
@@ -6189,35 +5241,6 @@ public class PlayerDataBase : ScriptableObject
         butterfly27 = 0;
         butterfly28 = 0;
 
-        butterfly1Level = 0;
-        butterfly2Level = 0;
-        butterfly3Level = 0;
-        butterfly4Level = 0;
-        butterfly5Level = 0;
-        butterfly6Level = 0;
-        butterfly7Level = 0;
-        butterfly8Level = 0;
-        butterfly9Level = 0;
-        butterfly10Level = 0;
-        butterfly11Level = 0;
-        butterfly12Level = 0;
-        butterfly13Level = 0;
-        butterfly14Level = 0;
-        butterfly15Level = 0;
-        butterfly16Level = 0;
-        butterfly17Level = 0;
-        butterfly18Level = 0;
-        butterfly19Level = 0;
-        butterfly20Level = 0;
-        butterfly21Level = 0;
-        butterfly22Level = 0;
-        butterfly23Level = 0;
-        butterfly24Level = 0;
-        butterfly25Level = 0;
-        butterfly26Level = 0;
-        butterfly27Level = 0;
-        butterfly28Level = 0;
-
         totems1 = 1;
         totems2 = 0;
         totems3 = 0;
@@ -6231,19 +5254,6 @@ public class PlayerDataBase : ScriptableObject
         totems11 = 0;
         totems12 = 0;
 
-        totems1Level = 0;
-        totems2Level = 0;
-        totems3Level = 0;
-        totems4Level = 0;
-        totems5Level = 0;
-        totems6Level = 0;
-        totems7Level = 0;
-        totems8Level = 0;
-        totems9Level = 0;
-        totems10Level = 0;
-        totems11Level = 0;
-        totems12Level = 0;
-
         flower1 = 1;
         flower2 = 0;
         flower3 = 0;
@@ -6251,6 +5261,54 @@ public class PlayerDataBase : ScriptableObject
         flower5 = 0;
         flower6 = 0;
         flower7 = 0;
+
+        characterItemInstance.Clear();
+        truckItemInstance.Clear();
+        animalItemInstance.Clear();
+        butterflyItemInstance.Clear();
+        totemsItemInstance.Clear();
+        flowerItemInstance.Clear();
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(CharacterType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            characterItemInstance.Add(shopClass);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(TruckType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            truckItemInstance.Add(shopClass);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(AnimalType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            animalItemInstance.Add(shopClass);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(ButterflyType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            butterflyItemInstance.Add(shopClass);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(TotemsType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            totemsItemInstance.Add(shopClass);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(FlowerType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            flowerItemInstance.Add(shopClass);
+        }
+
+        island1RareData = new Island1RareData();
+        island2RareData = new Island2RareData();
+        island3RareData = new Island3RareData();
+        island4RareData = new Island4RareData();
 
         iconList.Clear();
 
@@ -6466,7 +5524,7 @@ public class PlayerDataBase : ScriptableObject
         return check;
     }
 
-    public int GetFoodTruckNumber()
+    public int GetTruckNumber()
     {
         int count = 0;
 
@@ -6901,34 +5959,111 @@ public class PlayerDataBase : ScriptableObject
         return count;
     }
 
-    public int GetFoodTruckLevel()
+    public int GetTruck_Total_AbilityLevel()
     {
-        return Truck1Level + Truck2Level + Truck3Level + Truck4Level + Truck5Level + Truck6Level + Truck7Level + Truck8Level + Truck9Level + Truck10Level;
+        int number = 0;
+
+        for(int i = 0; i < truckItemInstance.Count; i ++)
+        {
+            number += truckItemInstance[i].abilityLevel;
+        }
+
+        return number;
     }
 
-    public int GetAnimalLevel()
+    public int GetAnimal_Total_AbilityLevel()
     {
-        return Animal1Level + Animal2Level + Animal3Level + Animal4Level + Animal5Level + Animal6Level + Animal7Level + Animal8Level;
+        int number = 0;
+
+        for (int i = 0; i < animalItemInstance.Count; i++)
+        {
+            number += animalItemInstance[i].abilityLevel;
+        }
+
+        return number;
     }
 
-    public int GetCharacterLevel()
+    public int GetCharacter_Total_AbilityLevel()
     {
-        return Character1Level + Character2Level + Character3Level + Character4Level + Character5Level + Character6Level + Character7Level + Character8Level
-            + Character9Level + Character10Level + Character11Level + Character12Level + Character13Level + Character14Level + Character15Level + Character16Level
-            + Character17Level + Character18Level + Character19Level + Character20Level + Character21Level;
+        int number = 0;
+
+        for (int i = 0; i < characterItemInstance.Count; i++)
+        {
+            number += characterItemInstance[i].abilityLevel;
+        }
+
+        return number;
     }
-    public int GetButterflyLevel()
+    public int GetButterfly_Total_AbilityLevel()
     {
-        return Butterfly1Level + Butterfly2Level + Butterfly3Level + Butterfly4Level + Butterfly5Level + Butterfly6Level + Butterfly7Level + Butterfly8Level
-            + Butterfly9Level + Butterfly10Level + Butterfly11Level + Butterfly12Level + Butterfly13Level + Butterfly14Level + Butterfly15Level + Butterfly16Level
-            + Butterfly17Level + Butterfly18Level + Butterfly19Level + Butterfly20Level + Butterfly21Level + Butterfly22Level + Butterfly23Level + Butterfly24Level
-            + Butterfly25Level + Butterfly26Level + Butterfly27Level + Butterfly28Level;
+        int number = 0;
+
+        for (int i = 0; i < butterflyItemInstance.Count; i++)
+        {
+            number += butterflyItemInstance[i].abilityLevel;
+        }
+
+        return number;
     }
 
-    public int GetTotemsLevel()
+    public int GetTotems_Total_AbilityLevel()
     {
-        return Totems1Level + Totems2Level + Totems3Level + Totems4Level + Totems5Level + Totems6Level + Totems7Level + Totems8Level
-            + Totems9Level + Totems10Level + Totems11Level + Totems12Level;
+        int number = 0;
+
+        for (int i = 0; i < totemsItemInstance.Count; i++)
+        {
+            number += totemsItemInstance[i].abilityLevel;
+        }
+
+        return number;
+    }
+
+    public int GetTruck_AbilityLevel(int number)
+    {
+        return truckItemInstance[number].abilityLevel;
+    }
+
+    public int GetAnimal_AbilityLevel(int number)
+    {
+        return animalItemInstance[number].abilityLevel;
+    }
+
+    public int GetCharacter_AbilityLevel(int number)
+    {
+        return characterItemInstance[number].abilityLevel;
+    }
+    public int GetButterfly_AbilityLevel(int number)
+    {
+        return butterflyItemInstance[number].abilityLevel;
+    }
+
+    public int GetTotems_AbilityLevel(int number)
+    {
+        return totemsItemInstance[number].abilityLevel;
+    }
+
+    public int GetTruck_Rare(int number)
+    {
+        return truckItemInstance[number].rare;
+    }
+
+    public int GetAnimal_Rare(int number)
+    {
+        return animalItemInstance[number].rare;
+    }
+
+    public int GetCharacter_Rare(int number)
+    {
+        return characterItemInstance[number].rare;
+    }
+    public int GetButterfly_Rare(int number)
+    {
+        return butterflyItemInstance[number].rare;
+    }
+
+    public int GetTotems_Rare(int number)
+    {
+        return totemsItemInstance[number].rare;
     }
 
     public int GetFoodTruckHighNumber()
@@ -7588,166 +6723,236 @@ public class PlayerDataBase : ScriptableObject
     {
         int number = 0;
 
-        if (Food1Rare > 0)
+        if (island1RareData.index1 > 0)
         {
             number++;
         }
 
-        if (Food2Rare > 0)
+        if (island1RareData.index2 > 0)
         {
             number++;
         }
 
-        if (Food3Rare > 0)
+        if (island1RareData.index3 > 0)
         {
             number++;
         }
 
-        if (Food4Rare > 0)
+        if (island1RareData.index4 > 0)
         {
             number++;
         }
 
-        if (Food5Rare > 0)
+        if (island1RareData.index5 > 0)
         {
             number++;
         }
 
-        if (Food6Rare > 0)
+        if (island1RareData.index6 > 0)
         {
             number++;
         }
 
-        if (Food7Rare > 0)
+        if (island1RareData.index7 > 0)
         {
             number++;
         }
 
-        if (candy1Rare > 0)
+        if (island2RareData.index1 > 0)
         {
             number++;
         }
 
-        if (candy2Rare > 0)
+        if (island2RareData.index2 > 0)
         {
             number++;
         }
 
-        if (candy3Rare > 0)
+        if (island2RareData.index3 > 0)
         {
             number++;
         }
 
-        if (candy4Rare > 0)
+        if (island2RareData.index4 > 0)
         {
             number++;
         }
 
-        if (candy5Rare > 0)
+        if (island2RareData.index5 > 0)
         {
             number++;
         }
 
-        if (candy6Rare > 0)
+        if (island2RareData.index6 > 0)
         {
             number++;
         }
 
-        if (candy7Rare > 0)
+        if (island2RareData.index7 > 0)
         {
             number++;
         }
 
-        if (candy8Rare > 0)
+        if (island2RareData.index8 > 0)
         {
             number++;
         }
 
-        if (candy9Rare > 0)
+        if (island2RareData.index9 > 0)
         {
             number++;
         }
 
-        if (japaneseFood1Rare > 0)
+        if (island3RareData.index1 > 0)
         {
             number++;
         }
 
-        if (japaneseFood2Rare > 0)
+        if (island3RareData.index2 > 0)
         {
             number++;
         }
 
-        if (japaneseFood3Rare > 0)
+        if (island3RareData.index3 > 0)
         {
             number++;
         }
 
-        if (japaneseFood4Rare > 0)
+        if (island3RareData.index4 > 0)
         {
             number++;
         }
 
-        if (japaneseFood5Rare > 0)
+        if (island3RareData.index5 > 0)
         {
             number++;
         }
 
-        if (japaneseFood6Rare > 0)
+        if (island3RareData.index6 > 0)
         {
             number++;
         }
 
-        if (japaneseFood7Rare > 0)
+        if (island3RareData.index7 > 0)
         {
             number++;
         }
 
-        if (dessert1Rare > 0)
+        if (island4RareData.index1 > 0)
         {
             number++;
         }
 
-        if (dessert2Rare > 0)
+        if (island4RareData.index2 > 0)
         {
             number++;
         }
 
-        if (dessert3Rare > 0)
+        if (island4RareData.index3 > 0)
         {
             number++;
         }
 
-        if (dessert4Rare > 0)
+        if (island4RareData.index4 > 0)
         {
             number++;
         }
 
-        if (dessert5Rare > 0)
+        if (island4RareData.index5 > 0)
         {
             number++;
         }
 
-        if (dessert6Rare > 0)
+        if (island4RareData.index6 > 0)
         {
             number++;
         }
 
-        if (dessert7Rare > 0)
+        if (island4RareData.index7 > 0)
         {
             number++;
         }
 
-        if (dessert8Rare > 0)
+        if (island4RareData.index8 > 0)
         {
             number++;
         }
 
-        if (dessert9Rare > 0)
+        if (island4RareData.index9 > 0)
         {
             number++;
         }
 
         return number;
+    }
+
+    public void SetItemInstance(ItemInstance item, int index, int number)
+    {
+        ShopClass shopClass = new ShopClass();
+
+        shopClass.instanceId = item.ItemInstanceId;
+        shopClass.abilityLevel = 0;
+        shopClass.rare = 0;
+        shopClass.level = 0;
+
+        if (item.CustomData != null)
+        {
+            if(item.CustomData.ContainsKey("AbilityLevel"))
+            {
+                shopClass.abilityLevel = int.Parse(item.CustomData["AbilityLevel"]);
+            }
+
+            if (item.CustomData.ContainsKey("Rare"))
+            {
+                shopClass.rare = int.Parse(item.CustomData["Rare"]);
+            }
+
+            if (item.CustomData.ContainsKey("Level"))
+            {
+                shopClass.level = int.Parse(item.CustomData["Level"]);
+            }
+        }
+
+        switch(index)
+        {
+            case 0:
+                characterItemInstance[number] = shopClass;
+                break;
+            case 1:
+                truckItemInstance[number] = shopClass;
+                break;
+            case 2:
+                animalItemInstance[number] = shopClass;
+                break;
+            case 3:
+                butterflyItemInstance[number] = shopClass;
+                break;
+            case 4:
+                totemsItemInstance[number] = shopClass;
+                break;
+            case 5:
+                flowerItemInstance[number] = shopClass;
+                break;
+        }
+    }
+
+    public void SetIsland1RareData(Island1RareData data)
+    {
+        island1RareData = data;
+    }
+
+    public void SetIsland2RareData(Island2RareData data)
+    {
+        island2RareData = data;
+    }
+
+    public void SetIsland3RareData(Island3RareData data)
+    {
+        island3RareData = data;
+    }
+
+    public void SetIsland4RareData(Island4RareData data)
+    {
+        island4RareData = data;
     }
 }

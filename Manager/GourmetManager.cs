@@ -33,16 +33,16 @@ public class GourmetManager : MonoBehaviour
     {
         value = 0;
 
-        value += playerDataBase.Level * 200;
-        value += playerDataBase.CastleLevel * 200;
-
-        value += playerDataBase.Island1Level * 500;
-        value += playerDataBase.Island2Level * 500;
-        value += playerDataBase.Island3Level * 500;
-        value += playerDataBase.Island4Level * 500;
-
         if (playerDataBase.TestAccount == 0)
         {
+            value += playerDataBase.Level * 200;
+            value += playerDataBase.CastleLevel * 200;
+
+            value += playerDataBase.Island1Level * 1000;
+            value += playerDataBase.Island2Level * 1000;
+            value += playerDataBase.Island3Level * 1000;
+            value += playerDataBase.Island4Level * 1000;
+
             value += playerDataBase.Skill1 * 100;
             value += playerDataBase.Skill2 * 100;
             value += playerDataBase.Skill3 * 100;
@@ -63,27 +63,34 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.Skill18 * 100;
             value += playerDataBase.Skill19 * 100;
 
-            value += playerDataBase.Treasure1 * 300;
-            value += playerDataBase.Treasure2 * 300;
-            value += playerDataBase.Treasure3 * 300;
-            value += playerDataBase.Treasure4 * 300;
-            value += playerDataBase.Treasure5 * 300;
-            value += playerDataBase.Treasure6 * 300;
-            value += playerDataBase.Treasure7 * 300;
-            value += playerDataBase.Treasure8 * 300;
-            value += playerDataBase.Treasure9 * 300;
-            value += playerDataBase.Treasure10 * 300;
-            value += playerDataBase.Treasure11 * 300;
-            value += playerDataBase.Treasure12 * 300;
-            value += playerDataBase.Treasure13 * 300;
-            value += playerDataBase.Treasure14 * 300;
+            value += playerDataBase.Treasure1 * 500;
+            value += playerDataBase.Treasure2 * 500;
+            value += playerDataBase.Treasure3 * 500;
+            value += playerDataBase.Treasure4 * 500;
+            value += playerDataBase.Treasure5 * 500;
+            value += playerDataBase.Treasure6 * 500;
+            value += playerDataBase.Treasure7 * 500;
+            value += playerDataBase.Treasure8 * 500;
+            value += playerDataBase.Treasure9 * 500;
+            value += playerDataBase.Treasure10 * 500;
+            value += playerDataBase.Treasure11 * 500;
+            value += playerDataBase.Treasure12 * 500;
+            value += playerDataBase.Treasure13 * 500;
+            value += playerDataBase.Treasure14 * 500;
+
+            value += playerDataBase.GetCharacter_Total_AbilityLevel() * 300;
+            value += playerDataBase.GetAnimal_Total_AbilityLevel() * 300;
+            value += playerDataBase.GetTruck_Total_AbilityLevel() * 300;
+            value += playerDataBase.GetButterfly_Total_AbilityLevel() * 300;
+            value += playerDataBase.GetTotems_Total_AbilityLevel() * 300;
+            //value += playerDataBase.GetFlower_Total_AbilityLevel() * 300;
 
             value += playerDataBase.GetCharacterNumber() * 5000;
             value += playerDataBase.GetAnimalNumber() * 5000;
-            value += playerDataBase.GetFoodTruckNumber() * 5000;
+            value += playerDataBase.GetTruckNumber() * 5000;
             value += playerDataBase.GetButterflyNumber() * 5000;
-            value += playerDataBase.GetTotemsNumber() * 10000;
-            value += playerDataBase.GetFlowerNumber() * 10000;
+            value += playerDataBase.GetTotemsNumber() * 5000;
+            value += playerDataBase.GetFlowerNumber() * 5000;
         }
 
         //Debug.LogError(value);

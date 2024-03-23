@@ -117,7 +117,7 @@ public class ChangeIslandContent : MonoBehaviour
                 needPriceText.text = playerDataBase.Island3Count + "/" + ((playerDataBase.Island3Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island3Level + 1);
 
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +10%";
+                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +15%";
                 sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (20 + (playerDataBase.Island3Level * value)) + "%";
 
                 if (playerDataBase.Island3Count >= ((playerDataBase.Island3Level + 1) * 100))
@@ -133,7 +133,7 @@ public class ChangeIslandContent : MonoBehaviour
                 needPriceText.text = playerDataBase.Island4Count + "/" + ((playerDataBase.Island4Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island4Level + 1);
 
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +15%";
+                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +20%";
                 sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (30 + (playerDataBase.Island4Level * value)) + "%";
 
                 if (playerDataBase.Island4Count >= ((playerDataBase.Island4Level + 1) * 100))

@@ -230,8 +230,26 @@ public class UpgradeDataBase : ScriptableObject
         switch (GameStateManager.instance.GameType)
         {
             case GameType.Story:
+                switch (GameStateManager.instance.IslandType)
+                {
+                    case IslandType.Island1:
+                        price = level * (value * priceList[level].value);
+                        break;
+                    case IslandType.Island2:
+                        price = level * (value * priceList[level].value);
+                        price = price + (price * 0.05f);
+                        break;
+                    case IslandType.Island3:
+                        price = level * (value * priceList[level].value);
+                        price = price + (price * 0.15f);
+                        break;
+                    case IslandType.Island4:
+                        price = level * (value * priceList[level].value);
+                        price = price + (price * 0.2f);
+                        break;
+                }
 
-                price = level * (value * priceList[level].value);
+                price *= 0.5f;
 
                 break;
             case GameType.Rank:
@@ -261,10 +279,10 @@ public class UpgradeDataBase : ScriptableObject
                             success = 96 - (level * 0.5f);
                             break;
                         case IslandType.Island3:
-                            success = 91 - (level * 0.5f);
+                            success = 86 - (level * 0.5f);
                             break;
                         case IslandType.Island4:
-                            success = 86 - (level * 0.5f);
+                            success = 81 - (level * 0.5f);
                             break;
                     }
                 }
@@ -276,7 +294,7 @@ public class UpgradeDataBase : ScriptableObject
             case GameType.Rank:
                 if (level > 0)
                 {
-                    success = 100 - (level * 0.3f);
+                    success = 100 - (level * 0.5f);
                 }
                 else
                 {

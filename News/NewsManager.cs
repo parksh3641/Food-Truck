@@ -41,6 +41,7 @@ public class NewsManager : MonoBehaviour
     private List<TitleNewsItem> newsInfoList = new List<TitleNewsItem>();
 
     public WelcomeManager welcomeManager;
+    public AttendanceManager attendanceManager;
 
     PlayerDataBase playerDataBase;
 
@@ -153,6 +154,10 @@ public class NewsManager : MonoBehaviour
                 {
                     welcomeManager.first = true;
                     welcomeManager.OpenWelcomeView();
+                }
+                else if(!playerDataBase.AttendanceCheck)
+                {
+                    attendanceManager.OpenAttendanceView();
                 }
             }
         }

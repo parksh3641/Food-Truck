@@ -9,6 +9,7 @@ public class StateManager : MonoBehaviour
 
     public FadeInOut fadeInOut;
     public Text loginText;
+    public GameObject internet;
 
     public ShopManager shopManager;
     public GameManager gameManager;
@@ -35,6 +36,10 @@ public class StateManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        loginText.text = "";
+
+        internet.SetActive(false);
     }
 
     private void Start()
@@ -43,8 +48,6 @@ public class StateManager : MonoBehaviour
         {
             fadeInOut.canvasGroup.gameObject.SetActive(true);
             fadeInOut.canvasGroup.alpha = 1;
-
-            StartCoroutine(LoginCoroution());
         }
         else
         {
@@ -56,10 +59,15 @@ public class StateManager : MonoBehaviour
             {
                 fadeInOut.canvasGroup.gameObject.SetActive(true);
                 fadeInOut.canvasGroup.alpha = 1;
-
-                StartCoroutine(LoginCoroution());
             }
         }
+    }
+
+    public void LoginStart()
+    {
+        loginText.text = "";
+        internet.SetActive(false);
+        StartCoroutine(LoginCoroution());
     }
 
     IEnumerator LoginCoroution()
@@ -83,10 +91,45 @@ public class StateManager : MonoBehaviour
         StartCoroutine(LoginCoroution());
     }
 
-    public void Initialize()
+    IEnumerator ServerCoroution()
+    {
+        loginText.text = LocalizationManager.instance.GetString("Server...");
+
+        yield return waitForSeconds;
+
+        loginText.text = LocalizationManager.instance.GetString("Server...") + ".";
+
+        yield return waitForSeconds;
+
+        loginText.text = LocalizationManager.instance.GetString("Server...") + "..";
+
+        yield return waitForSeconds;
+
+        loginText.text = LocalizationManager.instance.GetString("Server...") + "...";
+
+        yield return waitForSeconds;
+
+        StartCoroutine(ServerCoroution());
+    }
+
+    public void ServerStart()
     {
         StopAllCoroutines();
         loginText.text = "";
+        StartCoroutine(ServerCoroution());
+        StartCoroutine(CheckInternet());
+    }
+
+    IEnumerator CheckInternet()
+    {
+        yield return new WaitForSeconds(10);
+
+        internet.SetActive(true);
+    }
+
+    public void Initialize()
+    {
+        ServerStart();
 
         fadeInOut.FadeIn();
         ResetManager.instance.Initialize();
@@ -111,6 +154,8 @@ public class StateManager : MonoBehaviour
         advancementManager.Initialize();
         iconManager.Initialize();
         GourmetManager.instance.Initialize();
+
+        StopAllCoroutines();
 
         Debug.LogError("Load Complete!");
     }

@@ -489,13 +489,13 @@ public class CouponManager : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.CouponNotion2);
                 }
                 break;
-            case "20231119":
-                playerDataBase.TestAccount = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("TestAccount", playerDataBase.TestAccount);
+            //case "20231119":
+            //    playerDataBase.TestAccount = 1;
+            //    PlayfabManager.instance.UpdatePlayerStatisticsInsert("TestAccount", playerDataBase.TestAccount);
 
-                SoundManager.instance.PlaySFX(GameSfxType.Success);
-                NotionManager.instance.UseNotion(NotionType.SuccessReward);
-                break;
+            //    SoundManager.instance.PlaySFX(GameSfxType.Success);
+            //    NotionManager.instance.UseNotion(NotionType.SuccessReward);
+            //    break;
             default:
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.CouponNotion3);

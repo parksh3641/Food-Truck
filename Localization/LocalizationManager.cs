@@ -251,7 +251,7 @@ public class LocalizationManager : MonoBehaviour
             }
         }
 
-        if (str.Length == 0)
+        if (str.Length == 0 || str.Equals("#VALUE!"))
         {
             str = name;
         }

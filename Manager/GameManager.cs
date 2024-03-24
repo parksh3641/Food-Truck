@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
     public GameObject moveArrow3;
 
     public GameObject rareFood;
+    public GameObject gifticonEvent;
 
     [Space]
     [Title("Buff")]
@@ -738,6 +739,12 @@ public class GameManager : MonoBehaviour
             OnNeedUpdate();
         }
 
+#if UNITY_EDITOR || UNITY_EDITOR_OSX
+        CheckGifticon(true);
+#else
+        PlayfabManager.instance.GetTitleInternalData("Gifticon", CheckGifticon);
+#endif
+
         supportCount = GameStateManager.instance.SupportCount;
 
         if(GameStateManager.instance.SaveGold > 0)
@@ -751,7 +758,12 @@ public class GameManager : MonoBehaviour
 
         GameStateManager.instance.SaveGold = 0;
 
-        Invoke("ServerDelay", 1.0f);
+        Invoke("ServerDelay", 3.0f);
+    }
+
+    void CheckGifticon(bool check)
+    {
+        gifticonEvent.SetActive(check);
     }
 
     void ServerDelay()
@@ -1655,6 +1667,12 @@ public class GameManager : MonoBehaviour
 
         questManager.CheckingAlarm();
         GourmetManager.instance.Initialize();
+
+#if UNITY_EDITOR || UNITY_EDITOR_OSX
+        CheckGifticon(true);
+#else
+        PlayfabManager.instance.GetTitleInternalData("Gifticon", CheckGifticon);
+#endif
     }
 
     public void GameStart_Dungeon()
@@ -1720,13 +1738,16 @@ public class GameManager : MonoBehaviour
 
         changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
-        successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
-        successPlus += playerDataBase.Skill7 * 0.1f;
-        successPlus += playerDataBase.Skill17 * 0.1f;
-        successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.05f;
-        successPlus += playerDataBase.Treasure1 * 0.2f;
-        successPlus += playerDataBase.Advancement * 0.1f;
-        successPlus += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
+        if (GameStateManager.instance.GameType != GameType.Rank)
+        {
+            successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
+            successPlus += playerDataBase.Skill7 * 0.1f;
+            successPlus += playerDataBase.Skill17 * 0.1f;
+            successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.05f;
+            successPlus += playerDataBase.Treasure1 * 0.2f;
+            successPlus += playerDataBase.Advancement * 0.1f;
+            successPlus += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
+        }
 
         successX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         successX2 += playerDataBase.Treasure3 * 0.2f;
@@ -2014,7 +2035,7 @@ public class GameManager : MonoBehaviour
                     if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
     > playerDataBase.TotalLevel_3)
                     {
-                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                        playerDataBase.TotalLevel_3 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
                             + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
 
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_3", playerDataBase.TotalLevel_3);
@@ -2024,7 +2045,7 @@ public class GameManager : MonoBehaviour
                     if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
     > playerDataBase.TotalLevel_4)
                     {
-                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                        playerDataBase.TotalLevel_4 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
                             + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
 
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_4", playerDataBase.TotalLevel_4);
@@ -2034,7 +2055,7 @@ public class GameManager : MonoBehaviour
                     if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
     > playerDataBase.TotalLevel_5)
                     {
-                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                        playerDataBase.TotalLevel_5 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
                             + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
 
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_5", playerDataBase.TotalLevel_5);
@@ -2044,7 +2065,7 @@ public class GameManager : MonoBehaviour
                     if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
     > playerDataBase.TotalLevel_6)
                     {
-                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                        playerDataBase.TotalLevel_6 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
                             + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
 
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_6", playerDataBase.TotalLevel_6);
@@ -2054,7 +2075,7 @@ public class GameManager : MonoBehaviour
                     if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
     > playerDataBase.TotalLevel_7)
                     {
-                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                        playerDataBase.TotalLevel_7 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
                             + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
 
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_7", playerDataBase.TotalLevel_7);
@@ -2074,7 +2095,7 @@ public class GameManager : MonoBehaviour
                     if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
     > playerDataBase.TotalLevel_9)
                     {
-                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                        playerDataBase.TotalLevel_9 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
                             + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
 
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_9", playerDataBase.TotalLevel_9);
@@ -2084,7 +2105,7 @@ public class GameManager : MonoBehaviour
                     if (playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4
     > playerDataBase.TotalLevel_10)
                     {
-                        playerDataBase.TotalLevel_1 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
+                        playerDataBase.TotalLevel_10 = playerDataBase.RankLevel1 + playerDataBase.RankLevel2
                             + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
 
                         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_10", playerDataBase.TotalLevel_10);
@@ -5069,6 +5090,8 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Sell_RareFood");
 
             PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 10 + (level / 5)));
+
+            FirebaseAnalytics.LogEvent("Sell_RareFood");
         }
 
         PlayfabManager.instance.UpdateSellPriceGold(sellPrice);

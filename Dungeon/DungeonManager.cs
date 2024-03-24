@@ -94,7 +94,7 @@ public class DungeonManager : MonoBehaviour
     string localization_Hours = "";
     string localization_Minutes = "";
 
-    WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+    WaitForSeconds waitForSeconds = new WaitForSeconds(1.5f);
 
     DateTime f, g;
     TimeSpan h;

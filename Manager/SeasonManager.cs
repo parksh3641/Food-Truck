@@ -341,6 +341,7 @@ public class SeasonManager : MonoBehaviour
         playerDataBase.RankLevel2 = 0;
         playerDataBase.RankLevel3 = 0;
         playerDataBase.RankLevel4 = 0;
+        playerDataBase.TotalLevel = 0;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel1", playerDataBase.RankLevel1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel2", playerDataBase.RankLevel2);
@@ -348,6 +349,8 @@ public class SeasonManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel4", playerDataBase.RankLevel4);
 
         yield return waitForSeconds;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
 
         playerDataBase.RankEventCount = 0;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankEventCount", playerDataBase.RankEventCount);
@@ -647,7 +650,7 @@ public class SeasonManager : MonoBehaviour
         seasonText.plusText = (season + 1).ToString();
         seasonText.ReLoad();
 
-        //Debug.Log("ÇöÀç ½ÃÁð : " + season);
+        Debug.Log("ÇöÀç ½ÃÁð : " + season);
 
         return season;
     }

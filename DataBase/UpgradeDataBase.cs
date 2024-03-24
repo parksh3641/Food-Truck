@@ -212,10 +212,27 @@ public class UpgradeDataBase : ScriptableObject
             switch (GameStateManager.instance.GameType)
             {
                 case GameType.Story:
-                    need = level * value * needList[level].value;
+                    switch (GameStateManager.instance.IslandType)
+                    {
+                        case IslandType.Island1:
+                            need = level * (value * needList[level].value);
+                            break;
+                        case IslandType.Island2:
+                            need = level * (value * needList[level].value);
+                            need = need + (need * 0.1f);
+                            break;
+                        case IslandType.Island3:
+                            need = level * (value * needList[level].value);
+                            need = need + (need * 0.3f);
+                            break;
+                        case IslandType.Island4:
+                            need = level * (value * needList[level].value);
+                            need = need + (need * 0.4f);
+                            break;
+                    }
                     break;
                 case GameType.Rank:
-                    need = 500 * level;
+                    need = level * 500;
                     break;
             }
 
@@ -230,27 +247,7 @@ public class UpgradeDataBase : ScriptableObject
         switch (GameStateManager.instance.GameType)
         {
             case GameType.Story:
-                switch (GameStateManager.instance.IslandType)
-                {
-                    case IslandType.Island1:
-                        price = level * (value * priceList[level].value);
-                        break;
-                    case IslandType.Island2:
-                        price = level * (value * priceList[level].value);
-                        price = price + (price * 0.05f);
-                        break;
-                    case IslandType.Island3:
-                        price = level * (value * priceList[level].value);
-                        price = price + (price * 0.15f);
-                        break;
-                    case IslandType.Island4:
-                        price = level * (value * priceList[level].value);
-                        price = price + (price * 0.2f);
-                        break;
-                }
-
-                price *= 0.5f;
-
+                price = level * (value * priceList[level].value);
                 break;
             case GameType.Rank:
                 price = level * level * 50;

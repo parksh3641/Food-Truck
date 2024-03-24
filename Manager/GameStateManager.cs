@@ -17,6 +17,8 @@ public class GameStateManager : MonoBehaviour
     [Serializable]
     public class GameSettings
     {
+        public StoreType storeType = StoreType.None;
+
         [Space]
         [Title("Login")]
         public string playfabId = "";
@@ -158,6 +160,19 @@ public class GameStateManager : MonoBehaviour
     }
 
     #region Data
+    public StoreType StoreType
+    {
+        get
+        {
+            return gameSettings.storeType;
+        }
+        set
+        {
+            gameSettings.storeType = value;
+            SaveFile();
+        }
+    }
+
     public string PlayfabId
     {
         get

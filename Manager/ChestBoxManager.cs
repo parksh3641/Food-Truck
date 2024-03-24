@@ -31,6 +31,11 @@ public class ChestBoxManager : MonoBehaviour
 
     private int portion = 0;
 
+    private int limitTime = 31;
+    private int limit = 0;
+
+    public Text limitText;
+
     public QuestManager questManager;
     public GameManager gameManager;
 
@@ -66,7 +71,7 @@ public class ChestBoxManager : MonoBehaviour
 
         if(playerDataBase.AutoPresent)
         {
-            goalCount = (int)(goalCount - (goalCount * 0.1f));
+            goalCount /= 2;
         }
 
 #if UNITY_EDITOR
@@ -113,6 +118,23 @@ public class ChestBoxManager : MonoBehaviour
         StartCoroutine(TimerCoroution());
     }
 
+    IEnumerator LimitCoroution()
+    {
+        if(limit > 0)
+        {
+            limit -= 1;
+        }
+        else
+        {
+            Initialize();
+            yield break;
+        }
+
+        limitText.text = limit.ToString();
+        yield return waitForSeconds;
+        StartCoroutine(LimitCoroution());
+    }
+
     IEnumerator SetChestBox()
     {
         if(playerDataBase.LockTutorial >= 2)
@@ -121,6 +143,13 @@ public class ChestBoxManager : MonoBehaviour
 
             SoundManager.instance.PlaySFX(GameSfxType.ChestBox);
             NotionManager.instance.UseNotion2(NotionType.OpenChestBoxNotion);
+
+            if(!GameStateManager.instance.AutoPresent)
+            {
+                limit = limitTime;
+                limitText.text = "";
+                StartCoroutine(LimitCoroution());
+            }
 
             yield return waitForSeconds2;
 

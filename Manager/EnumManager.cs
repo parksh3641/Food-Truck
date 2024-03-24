@@ -6,6 +6,16 @@ public class EnumManager : MonoBehaviour
 {
 
 }
+
+public enum StoreType
+{
+    None,
+    Google,
+    Apple,
+    OneStore,
+    Amazon,
+}
+
 public enum GameType
 {
     Story,
@@ -34,7 +44,7 @@ public enum RankingType
     UpgradeCount,
     TotalLevel,
     GourmetLevel,
-    Level
+    DefDestroyCount
 }
 
 public enum LanguageType

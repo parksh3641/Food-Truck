@@ -28,6 +28,8 @@ public class TreasureContent : MonoBehaviour
     private int level = 0;
     private int maxLevel = 100;
 
+    private int needUp = 20;
+
     private int percent = 100;
     private bool success = false;
 
@@ -101,7 +103,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure1Count;
                 level = playerDataBase.Treasure1;
                 nowValue = treasure1Value * playerDataBase.Treasure1;
-                need = (playerDataBase.Treasure1 / 10) + 1;
+                need = (playerDataBase.Treasure1 / needUp) + 1;
 
                 if (playerDataBase.Treasure1 < maxLevel - 1)
                 {
@@ -131,7 +133,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure2Count;
                 level = playerDataBase.Treasure2;
                 nowValue = treasure2Value * playerDataBase.Treasure2;
-                need = (playerDataBase.Treasure2 / 10) + 1;
+                need = (playerDataBase.Treasure2 / needUp) + 1;
 
                 if (playerDataBase.Treasure2 < maxLevel - 1)
                 {
@@ -161,7 +163,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure3Count;
                 level = playerDataBase.Treasure3;
                 nowValue = treasure3Value * playerDataBase.Treasure3;
-                need = (playerDataBase.Treasure3 / 10) + 1;
+                need = (playerDataBase.Treasure3 / needUp) + 1;
 
                 if (playerDataBase.Treasure3 < maxLevel - 1)
                 {
@@ -191,7 +193,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure4Count;
                 level = playerDataBase.Treasure4;
                 nowValue = treasure4Value * playerDataBase.Treasure4;
-                need = (playerDataBase.Treasure4 / 10) + 1;
+                need = (playerDataBase.Treasure4 / needUp) + 1;
 
                 if (playerDataBase.Treasure4 < maxLevel - 1)
                 {
@@ -221,7 +223,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure5Count;
                 level = playerDataBase.Treasure5;
                 nowValue = treasure5Value * playerDataBase.Treasure5;
-                need = (playerDataBase.Treasure5 / 10) + 1;
+                need = (playerDataBase.Treasure5 / needUp) + 1;
 
                 if (playerDataBase.Treasure5 < maxLevel - 1)
                 {
@@ -251,7 +253,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure6Count;
                 level = playerDataBase.Treasure6;
                 nowValue = treasure6Value * playerDataBase.Treasure6;
-                need = (playerDataBase.Treasure6 / 10) + 1;
+                need = (playerDataBase.Treasure6 / needUp) + 1;
 
                 if (playerDataBase.Treasure6 < maxLevel - 1)
                 {
@@ -281,7 +283,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure7Count;
                 level = playerDataBase.Treasure7;
                 nowValue = treasure7Value * playerDataBase.Treasure7;
-                need = (playerDataBase.Treasure7 / 10) + 1;
+                need = (playerDataBase.Treasure7 / needUp) + 1;
 
                 if (playerDataBase.Treasure7 < maxLevel - 1)
                 {
@@ -311,7 +313,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure8Count;
                 level = playerDataBase.Treasure8;
                 nowValue = treasure8Value * playerDataBase.Treasure8;
-                need = (playerDataBase.Treasure8 / 10) + 1;
+                need = (playerDataBase.Treasure8 / needUp) + 1;
 
                 if (playerDataBase.Treasure8 < maxLevel - 1)
                 {
@@ -341,7 +343,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure9Count;
                 level = playerDataBase.Treasure9;
                 nowValue = treasure9Value * playerDataBase.Treasure9;
-                need = (playerDataBase.Treasure9 / 10) + 1;
+                need = (playerDataBase.Treasure9 / needUp) + 1;
 
                 if (playerDataBase.Treasure9 < maxLevel - 1)
                 {
@@ -371,7 +373,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure10Count;
                 level = playerDataBase.Treasure10;
                 nowValue = treasure10Value * playerDataBase.Treasure10;
-                need = (playerDataBase.Treasure10 / 10) + 1;
+                need = (playerDataBase.Treasure10 / needUp) + 1;
 
                 if (playerDataBase.Treasure10 < maxLevel - 1)
                 {
@@ -401,7 +403,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure11Count;
                 level = playerDataBase.Treasure11;
                 nowValue = treasure11Value * playerDataBase.Treasure11;
-                need = (playerDataBase.Treasure11 / 10) + 1;
+                need = (playerDataBase.Treasure11 / needUp) + 1;
 
                 if (playerDataBase.Treasure11 < maxLevel - 1)
                 {
@@ -431,7 +433,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure12Count;
                 level = playerDataBase.Treasure12;
                 nowValue = treasure12Value * playerDataBase.Treasure12;
-                need = (playerDataBase.Treasure12 / 10) + 1;
+                need = (playerDataBase.Treasure12 / needUp) + 1;
 
                 if (playerDataBase.Treasure12 < maxLevel - 1)
                 {
@@ -461,7 +463,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure13Count;
                 level = playerDataBase.Treasure13;
                 nowValue = treasure13Value * playerDataBase.Treasure13;
-                need = (playerDataBase.Treasure13 / 10) + 1;
+                need = (playerDataBase.Treasure13 / needUp) + 1;
 
                 if (playerDataBase.Treasure13 < maxLevel - 1)
                 {
@@ -490,7 +492,7 @@ public class TreasureContent : MonoBehaviour
                 count = playerDataBase.Treasure14Count;
                 level = playerDataBase.Treasure14;
                 nowValue = treasure14Value * playerDataBase.Treasure14;
-                need = (playerDataBase.Treasure14 / 10) + 1;
+                need = (playerDataBase.Treasure14 / needUp) + 1;
 
                 if (playerDataBase.Treasure14 < maxLevel - 1)
                 {
@@ -517,7 +519,7 @@ public class TreasureContent : MonoBehaviour
                 break;
         }
 
-        percent = 100 - ((level / 10) * 10);
+        percent = 100 - ((level / 10) * 5);
 
         if(percent < 10)
         {

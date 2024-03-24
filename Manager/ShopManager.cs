@@ -4376,7 +4376,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(10);
+                PortionManager.instance.GetEventTicket(30);
                 break;
             case PackageType.Package2:
                 if (playerDataBase.Package2) yield break;
@@ -4397,7 +4397,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(50);
+                PortionManager.instance.GetEventTicket(150);
                 break;
             case PackageType.Package3:
                 if (playerDataBase.Package3) yield break;
@@ -4418,7 +4418,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(100);
+                PortionManager.instance.GetEventTicket(300);
                 break;
             case PackageType.Package4:
                 if (playerDataBase.Package4) yield break;
@@ -4439,7 +4439,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(200);
+                PortionManager.instance.GetEventTicket(600);
                 break;
             case PackageType.Package5: //한정 패키지
                 if (playerDataBase.Package5) yield break;
@@ -4460,7 +4460,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(10);
+                PortionManager.instance.GetEventTicket(30);
                 break;
             case PackageType.Package6: //울트라 패키지
                 if (playerDataBase.Package6) yield break;
@@ -4468,7 +4468,6 @@ public class ShopManager : MonoBehaviour
                 playerDataBase.Package6 = true;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package6", 1);
                 Invoke("PackageDelay6", 0.5f);
-
 
                 PlayfabManager.instance.PurchaseRemoveAd();
 
@@ -4482,7 +4481,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(200);
+                PortionManager.instance.GetEventTicket(300);
                 break;
             case PackageType.Package7: //서포트 패키지
                 if (playerDataBase.Package7 == 1) yield break;
@@ -4504,7 +4503,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(10);
+                PortionManager.instance.GetEventTicket(30);
                 break;
             case PackageType.Package8:
                 if (playerDataBase.Package8 == 1) yield break;
@@ -4780,7 +4779,7 @@ public class ShopManager : MonoBehaviour
                 break;
         }
 
-
+        GourmetManager.instance.Initialize();
 
         isDelay = true;
         Invoke("Delay", 0.4f);

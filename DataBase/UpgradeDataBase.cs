@@ -219,15 +219,15 @@ public class UpgradeDataBase : ScriptableObject
                             break;
                         case IslandType.Island2:
                             need = level * (value * needList[level].value);
-                            need = need + (need * 0.1f);
+                            need = need + (need * 1);
                             break;
                         case IslandType.Island3:
                             need = level * (value * needList[level].value);
-                            need = need + (need * 0.3f);
+                            need = need + (need * 2);
                             break;
                         case IslandType.Island4:
                             need = level * (value * needList[level].value);
-                            need = need + (need * 0.4f);
+                            need = need + (need * 3);
                             break;
                     }
                     break;
@@ -273,13 +273,13 @@ public class UpgradeDataBase : ScriptableObject
                             success = 100 - (level * 0.5f);
                             break;
                         case IslandType.Island2:
-                            success = 96 - (level * 0.5f);
+                            success = 91 - (level * 0.5f);
                             break;
                         case IslandType.Island3:
-                            success = 86 - (level * 0.5f);
+                            success = 81 - (level * 0.5f);
                             break;
                         case IslandType.Island4:
-                            success = 81 - (level * 0.5f);
+                            success = 71 - (level * 0.5f);
                             break;
                     }
                 }

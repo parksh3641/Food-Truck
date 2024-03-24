@@ -21,12 +21,17 @@ public class GifticonManager : MonoBehaviour
     string localization_Hours = "";
     string localization_Minutes = "";
 
+    private bool first = false;
+
     public Text ticketText;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
     DateTime f, g;
     TimeSpan h;
+
+    DateTime currentDate = DateTime.Now;
+    public DateTime targetDate;
 
     public EventManager eventManager;
 
@@ -51,15 +56,18 @@ public class GifticonManager : MonoBehaviour
 
             Initialize();
 
-            localization_Reset = LocalizationManager.instance.GetString("Reset");
-            localization_Days = LocalizationManager.instance.GetString("Days");
-            localization_Hours = LocalizationManager.instance.GetString("Hours");
-            localization_Minutes = LocalizationManager.instance.GetString("Minutes");
+            if (!first)
+            {
+                first = true;
 
-            timerText.text = "";
-            f = DateTime.Now;
-            g = eventManager.targetDate;
-            StartCoroutine(TimerCoroution());
+                localization_Reset = LocalizationManager.instance.GetString("Reset");
+                localization_Days = LocalizationManager.instance.GetString("Days");
+                localization_Hours = LocalizationManager.instance.GetString("Hours");
+                localization_Minutes = LocalizationManager.instance.GetString("Minutes");
+
+                timerText.text = "";
+                PlayfabManager.instance.GetTitleInternalData("GifticonDate", CheckGifticonDate);
+            }
         }
         else
         {
@@ -67,6 +75,35 @@ public class GifticonManager : MonoBehaviour
 
             gifticonView.SetActive(false);
         }
+    }
+
+    void CheckGifticonDate(string date)
+    {
+        targetDate = DateTime.ParseExact(date, "yyyyMMdd", null);
+
+        if (currentDate > targetDate)
+        {
+            timerText.text = LocalizationManager.instance.GetString("EndEvent");
+            //이벤트 종료
+        }
+        else
+        {
+            f = DateTime.Now;
+            g = targetDate;
+            StartCoroutine(TimerCoroution());
+        }
+    }
+
+    public bool CheckDate()
+    {
+        bool check = true;
+
+        if (currentDate > targetDate)
+        {
+            check = false;
+        }
+
+        return check;
     }
 
     IEnumerator TimerCoroution()

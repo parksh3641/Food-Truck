@@ -324,5 +324,6 @@ public enum NotionType
     Icon_Locked29,
     OpenFood,
     OpenRareFood,
-    AlreadyLink
+    AlreadyLink,
+    EndEvent
 }

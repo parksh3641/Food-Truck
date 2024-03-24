@@ -98,7 +98,7 @@ public class QuestManager : MonoBehaviour
         }
         else
         {
-            reward += (int)(reward * (0.1f * (playerDataBase.QuestCount / 5)));
+            reward += (int)(reward * (0.5f * (playerDataBase.QuestCount / 5)));
         }
 
         reward = Mathf.RoundToInt((reward + (reward * (0.01f * playerDataBase.Treasure11))));

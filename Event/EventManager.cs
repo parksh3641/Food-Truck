@@ -19,9 +19,6 @@ public class EventManager : MonoBehaviour
 
     public LocalizationContent weekendEventTitle;
 
-    DateTime currentDate = DateTime.Now;
-    public DateTime targetDate;
-
     PlayerDataBase playerDataBase;
 
     private void Awake()
@@ -93,24 +90,11 @@ public class EventManager : MonoBehaviour
 
     void CheckGifticon(bool check)
     {
-        if (check)
+        if (check && GameStateManager.instance.Region == "ko")
         {
-            PlayfabManager.instance.GetTitleInternalData("GifticonDate", CheckGifticonDate);
+            gifticonEvent.SetActive(true);
+            eventTransform.anchoredPosition = new Vector2(0, -499);
         }
-    }
-
-    void CheckGifticonDate(string date)
-    {
-        gifticonEvent.SetActive(true);
-
-        targetDate = DateTime.ParseExact(date, "yyyyMMdd", null);
-
-        if (currentDate > targetDate || GameStateManager.instance.Region != "ko")
-        {
-            gifticonEvent.SetActive(false);
-        }
-
-        eventTransform.anchoredPosition = new Vector2(0, -499);
     }
 
     bool IsWeekend()

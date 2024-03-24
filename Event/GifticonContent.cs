@@ -100,6 +100,13 @@ public class GifticonContent : MonoBehaviour
             return;
         }
 
+        if(!gifticonManager.CheckDate())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.EndEvent);
+            return;
+        }
+
         if(playerDataBase.EventTicket < need)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);

@@ -273,7 +273,7 @@ public class RankingManager : MonoBehaviour
                 FirebaseAnalytics.LogEvent("Open_Ranking3");
                 break;
             case 3:
-                ChangeRankingView(RankingType.Level.ToString());
+                ChangeRankingView(RankingType.DefDestroyCount.ToString());
 
                 infoText.localizationName = "Ranking4_Info";
 

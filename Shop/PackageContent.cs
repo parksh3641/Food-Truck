@@ -78,7 +78,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.Gold, 6000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
-                receiveContents[3].Initialize(RewardType.EventTicket, 10);
+                receiveContents[3].Initialize(RewardType.EventTicket, 30);
 
                 break;
             case PackageType.Package2:
@@ -88,7 +88,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.Gold, 180000000); //3000
                 receiveContents[1].Initialize(RewardType.Crystal, 8500); //14000
                 receiveContents[2].Initialize(RewardType.PortionSet, 40); //3000
-                receiveContents[3].Initialize(RewardType.EventTicket, 50);
+                receiveContents[3].Initialize(RewardType.EventTicket, 150);
 
                 break;
             case PackageType.Package3:
@@ -98,7 +98,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.Gold, 600000000); //10000
                 receiveContents[1].Initialize(RewardType.Crystal, 30000); //50000
                 receiveContents[2].Initialize(RewardType.PortionSet, 100); //10000
-                receiveContents[3].Initialize(RewardType.EventTicket, 100);
+                receiveContents[3].Initialize(RewardType.EventTicket, 300);
 
                 break;
             case PackageType.Package4:
@@ -108,7 +108,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.Gold, 600000000); //10000
                 receiveContents[1].Initialize(RewardType.Crystal, 42000); //70000
                 receiveContents[2].Initialize(RewardType.DefDestroyTicket, 200); //20000
-                receiveContents[3].Initialize(RewardType.EventTicket, 200);
+                receiveContents[3].Initialize(RewardType.EventTicket, 600);
 
                 break;
             case PackageType.Package5: //한정 패키지
@@ -118,7 +118,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.Gold, 12000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 1200);
                 receiveContents[2].Initialize(RewardType.PortionSet, 20);
-                receiveContents[3].Initialize(RewardType.EventTicket, 10);
+                receiveContents[3].Initialize(RewardType.EventTicket, 30);
 
                 BuyLimitDate();
                 break;
@@ -129,7 +129,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.RemoveAds, -1);
                 receiveContents[1].Initialize(RewardType.Crystal, 12000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
-                receiveContents[3].Initialize(RewardType.EventTicket, 200);
+                receiveContents[3].Initialize(RewardType.EventTicket, 300);
 
                 break;
             case PackageType.Package7: //서포트 패키지
@@ -139,7 +139,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.Gold, 6000000);
                 receiveContents[1].Initialize(RewardType.Crystal, 600);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
-                receiveContents[3].Initialize(RewardType.EventTicket, 10);
+                receiveContents[3].Initialize(RewardType.EventTicket, 30);
 
                 break;
             case PackageType.Package8:
@@ -209,19 +209,19 @@ public class PackageContent : MonoBehaviour
 
             if (timeSpan.Days > 0)
             {
-                timerText.text = localization_Time + "  " + timeSpan.Days.ToString("D1") + localization_Days + "  " + timeSpan.Hours.ToString("D2") + " : " + timeSpan.Days.ToString("D2") + " : " + timeSpan.Seconds.ToString("D2");
+                timerText.text = localization_Time + "  " + timeSpan.Days.ToString("D1") + localization_Days + "  " + timeSpan.Hours.ToString("D2") + ":" + timeSpan.Days.ToString("D2") + ":" + timeSpan.Seconds.ToString("D2");
             }
             else
             {
                 if (timeSpan.Hours > 0)
                 {
-                    timerText.text = localization_Time + "  " + timeSpan.Hours.ToString("D2") + " : " + timeSpan.Minutes.ToString("D2") + " : " + timeSpan.Seconds.ToString("D2");
+                    timerText.text = localization_Time + "  " + timeSpan.Hours.ToString("D2") + ":" + timeSpan.Minutes.ToString("D2") + ":" + timeSpan.Seconds.ToString("D2");
                 }
                 else
                 {
                     if (timeSpan.Minutes > 0)
                     {
-                        timerText.text = localization_Time + "  " + timeSpan.Minutes.ToString("D2") + " : " + timeSpan.Seconds.ToString("D2");
+                        timerText.text = localization_Time + "  " + timeSpan.Minutes.ToString("D2") + ":" + timeSpan.Seconds.ToString("D2");
                     }
                     else
                     {

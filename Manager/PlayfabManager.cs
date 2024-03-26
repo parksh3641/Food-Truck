@@ -47,9 +47,9 @@ public class PlayfabManager : MonoBehaviour
     private long coinA = 0;
     private long coinB = 0;
 
-    private int consumeGold = 0;
-    private int consumeGoldA = 0;
-    private int consumeGoldB = 0;
+    private long consumeGold = 0;
+    private long consumeGoldA = 0;
+    private long consumeGoldB = 0;
 
     private int getGoldA = 0;
     private int getGoldB = 0;
@@ -632,6 +632,12 @@ public class PlayfabManager : MonoBehaviour
         entityType = result.EntityToken.Entity.Type;
 
         GameStateManager.instance.PlayfabId = result.PlayFabId;
+
+        if(GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            StartCoroutine(LoadDataCoroutine());
+            return;
+        }
 
 #if UNITY_EDITOR || UNITY_EDITOR_OSX
         StartCoroutine(LoadDataCoroutine());
@@ -2728,7 +2734,7 @@ public class PlayfabManager : MonoBehaviour
         GameManager.instance.RenewalVC();
     }
 
-    public void UpdateSubtractGold(int number)
+    public void UpdateSubtractGold(long number)
     {
         coin = playerDataBase.Coin;
         coinA = playerDataBase.CoinA;
@@ -2771,7 +2777,7 @@ public class PlayfabManager : MonoBehaviour
             playerDataBase.ConsumeGold += consumeGoldB;
 
             GameStateManager.instance.ConsumeGold = consumeGoldA;
-            UpdatePlayerStatisticsInsert("ConsumeGold", playerDataBase.ConsumeGold);
+            //UpdatePlayerStatisticsInsert("ConsumeGold", playerDataBase.ConsumeGold);
         }
 
         GameManager.instance.RenewalVC();
@@ -2844,8 +2850,8 @@ public class PlayfabManager : MonoBehaviour
             case MoneyType.Crystal:
                 currentType = "ST";
 
-                playerDataBase.ConsumeGold += number;
-                UpdatePlayerStatisticsInsert("ConsumeGold", playerDataBase.ConsumeGold);
+                //playerDataBase.ConsumeGold += number;
+                //UpdatePlayerStatisticsInsert("ConsumeGold", playerDataBase.ConsumeGold);
 
                 if(playerDataBase.Crystal - number < 0)
                 {

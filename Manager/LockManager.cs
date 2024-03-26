@@ -135,6 +135,11 @@ public class LockManager : MonoBehaviour
             menuIcon[11].SetActive(false);
             menuIcon[18].SetActive(false);
         }
+
+        if(GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            menuIcon[11].SetActive(false);
+        }
     }
 
     public void UnLocked(int number)

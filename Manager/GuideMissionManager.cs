@@ -29,6 +29,9 @@ public class GuideMissionManager : MonoBehaviour
     public SkillManager skillManager;
     public TreasureManager treasureManager;
 
+    public WelcomeManager welcomeManager;
+    public AttendanceManager attendanceManager;
+
     PlayerDataBase playerDataBase;
 
     private void Awake()
@@ -205,6 +208,19 @@ public class GuideMissionManager : MonoBehaviour
 
             playerDataBase.GuideIndex += 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("GuideIndex", playerDataBase.GuideIndex);
+
+            if(playerDataBase.GuideIndex == 6)
+            {
+                if(!playerDataBase.WelcomeCheck && playerDataBase.WelcomeCount < 7)
+                {
+                    welcomeManager.first = true;
+                    welcomeManager.OpenWelcomeView();
+                }
+                else if (!playerDataBase.AttendanceCheck)
+                {
+                    attendanceManager.OpenAttendanceView();
+                }
+            }
 
             PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward);
 

@@ -300,9 +300,11 @@ public class ReceiveInfoManager : MonoBehaviour
                 break;
             case ItemType.GoldShop2:
                 mainBackground.sprite = rankBackgroundArray[1];
+                effect.SetActive(true);
                 break;
             case ItemType.GoldShop3:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
                 break;
             case ItemType.AdReward_Portion:
                 mainBackground.sprite = rankBackgroundArray[1];

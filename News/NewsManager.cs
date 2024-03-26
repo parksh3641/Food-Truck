@@ -10,6 +10,8 @@ public class NewsManager : MonoBehaviour
 {
     public GameObject newsView;
 
+    public GameObject newsIcon;
+
     public GameObject alarm;
     public GameObject patchAlarm;
 
@@ -81,6 +83,13 @@ public class NewsManager : MonoBehaviour
 
             OpenNews();
         }
+
+        newsIcon.SetActive(true);
+
+        if(GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            newsIcon.SetActive(false);
+        }
     }
 
     public void ChangeTopToggle(int number)
@@ -137,6 +146,7 @@ public class NewsManager : MonoBehaviour
             if(topNumber == -1)
             {
                 isDelay = false;
+
                 ChangeTopToggle(0);
             }
 

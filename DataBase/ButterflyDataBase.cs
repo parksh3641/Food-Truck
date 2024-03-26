@@ -24,7 +24,7 @@ public class ButterflyDataBase : ScriptableObject
     [Space]
     public PassiveEffect retentionEffect = PassiveEffect.None;
     public float retentionValue = 0f;
-    public int retentionPrice = 0;
+    public int[] retentionPrice = new int[5];
 
     public ButterflyInfo GetButterflyInfo(ButterflyType type)
     {
@@ -54,6 +54,6 @@ public class ButterflyDataBase : ScriptableObject
 
     public int GetRetentionPrice(int number)
     {
-        return retentionPrice * (number + 1);
+        return retentionPrice[number];
     }
 }

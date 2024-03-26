@@ -278,9 +278,9 @@ public class GameManager : MonoBehaviour
     private int season = 0;
     private int gender = 0;
 
-    protected float rareFoodPercent = 10.0f;
+    protected float rareFoodPercent = 20.0f;
     protected float repairTicketPercent = 10.0f;
-    protected float eventTicketPercent = 3.0f;
+    protected float eventTicketPercent = 5.0f;
 
     private bool clickDelay = false;
     private bool isReady = false;
@@ -569,39 +569,6 @@ public class GameManager : MonoBehaviour
             privacypolicyView.SetActive(true);
         }
 
-        //AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        //AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject>("currentActivity");
-        //AndroidJavaObject packageManager = currentActivity.Call<AndroidJavaObject>("getPackageManager");
-        //string installerPackageName = packageManager.Call<string>("getInstallerPackageName", Application.identifier);
-
-        //// 패키지명으로부터 설치된 스토어 확인
-
-        //if (installerPackageName.Equals("com.android.vending"))
-        //{
-        //    GameStateManager.instance.StoreType = StoreType.Google;
-
-        //    Debug.Log("앱은 Google Play 스토어에서 설치되었습니다.");
-        //}
-        //else if (installerPackageName.Equals("com.amazon.venezia"))
-        //{
-        //    GameStateManager.instance.StoreType = StoreType.Amazon;
-
-        //    Debug.Log("앱은 Amazon Appstore에서 설치되었습니다.");
-        //}
-        //else if (installerPackageName.Equals("com.skt.skaf.A000Z00040"))
-        //{
-        //    GameStateManager.instance.StoreType = StoreType.OneStore;
-
-        //    Debug.Log("앱은 OneStore에서 설치되었습니다.");
-        //}
-        //else
-        //{
-        //    GameStateManager.instance.StoreType = StoreType.Google;
-
-        //    Debug.Log("앱은 알 수 없는 소스에서 설치되었습니다.");
-        //}
-
-
         BackgroundEffect();
     }
 
@@ -746,11 +713,11 @@ public class GameManager : MonoBehaviour
 
         testModeButton.SetActive(false);
 
-        //if (playerDataBase.TestAccount > 0)
-        //{
-        //    testModeButton.SetActive(true);
-        //    testModeText.text = "Cheat Mode ON";
-        //}
+        if (playerDataBase.TestAccount > 0)
+        {
+            testModeButton.SetActive(true);
+            testModeText.text = "Cheat Mode ON";
+        }
 
 #if UNITY_EDITOR
         testModeButton.SetActive(true);
@@ -1776,7 +1743,14 @@ public class GameManager : MonoBehaviour
             successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
             successPlus += playerDataBase.Skill7 * 0.1f;
             successPlus += playerDataBase.Skill17 * 0.1f;
-            successPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.05f;
+            if (playerDataBase.Level > 199)
+            {
+                successPlus += 10;
+            }
+            else
+            {
+                successPlus += playerDataBase.Level * 0.05f;
+            }
             successPlus += playerDataBase.Treasure1 * 0.2f;
             successPlus += playerDataBase.Advancement * 0.1f;
             successPlus += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
@@ -1787,10 +1761,10 @@ public class GameManager : MonoBehaviour
         successX2 += playerDataBase.GetTotems_Total_AbilityLevel() * totemsDataBase.retentionValue;
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetFoodTruckHighNumber());
-        sellPricePlus += playerDataBase.Skill8 * 0.4f;
-        sellPricePlus += playerDataBase.Skill18 * 0.4f;
+        sellPricePlus += playerDataBase.Skill8 * 0.2f;
+        sellPricePlus += playerDataBase.Skill18 * 0.2f;
         sellPricePlus += playerDataBase.Proficiency * 1;
-        sellPricePlus += playerDataBase.Treasure7 * 0.8f;
+        sellPricePlus += playerDataBase.Treasure7 * 0.4f;
         sellPricePlus += playerDataBase.Advancement * 0.4f;
         sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.5f;
         sellPricePlus += playerDataBase.GetTruck_Total_AbilityLevel() * truckDataBase.retentionValue;
@@ -1817,7 +1791,7 @@ public class GameManager : MonoBehaviour
         defDestroy += playerDataBase.Advancement * 0.05f;
         defDestroy += playerDataBase.GetButterfly_Total_AbilityLevel() * butterflyDataBase.retentionValue;
 
-        needPlus += playerDataBase.Skill10 * 0.5f;
+        needPlus += playerDataBase.Skill10 * 0.3f;
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
         upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
@@ -2171,6 +2145,8 @@ public class GameManager : MonoBehaviour
             playerDataBase.FirstReward = 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
 
+            GameStateManager.instance.FeverCount = 150;
+
             PlayfabManager.instance.UpdateAddGold(100000);
 
             StartCoroutine(FirstDelay());
@@ -2261,7 +2237,7 @@ public class GameManager : MonoBehaviour
 
         OFFSpeicalFood();
 
-        if (type == FoodType.Food4)
+        if (type == FoodType.Food4 && GameStateManager.instance.StoreType != StoreType.OneStore)
         {
             if (!playerDataBase.AppReview)
             {
@@ -6131,6 +6107,11 @@ public class GameManager : MonoBehaviour
 #elif UNITY_IOS
             loginButtonArray[2].SetActive(true);
 #endif
+
+            if(GameStateManager.instance.StoreType == StoreType.OneStore)
+            {
+                loginButtonArray[1].SetActive(false);
+            }
         }
         else
         {
@@ -6729,12 +6710,12 @@ public class GameManager : MonoBehaviour
         treasureLocked.SetActive(true);
         rankLocked.SetActive(true);
 
-        if (playerDataBase.Level > 4)
+        if (playerDataBase.Level > 2)
         {
             treasureLocked.SetActive(false);
         }
 
-        if (playerDataBase.Level > 7)
+        if (playerDataBase.Level > 4)
         {
             rankLocked.SetActive(false);
         }

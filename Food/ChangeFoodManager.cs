@@ -205,7 +205,7 @@ public class ChangeFoodManager : MonoBehaviour
 
             treasureLocked.SetActive(true);
 
-            if (levelDataBase.GetLevel(playerDataBase.Exp) > 1)
+            if (playerDataBase.Level > 2)
             {
                 treasureLocked.SetActive(false);
             }

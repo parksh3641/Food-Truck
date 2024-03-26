@@ -46,9 +46,10 @@ public class TreasureManager : MonoBehaviour
     private float rarePercent = 4.0f;
     private float normalPercent = 4.0f;
 
+    private int number = 0;
+
     WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
-    WaitForSeconds waitForSeconds2 = new WaitForSeconds(2.1f);
-    WaitForSeconds waitForSeconds3 = new WaitForSeconds(0.4f);
+    WaitForSeconds waitForSeconds2 = new WaitForSeconds(0.5f);
 
     PlayerDataBase playerDataBase;
 
@@ -372,11 +373,29 @@ public class TreasureManager : MonoBehaviour
 
     IEnumerator SaveCoroution()
     {
-        while(indexQueue.Count > 0)
-        {
-            GetTreasure((int)indexQueue.Dequeue());
+        number = 0;
 
-            yield return waitForSeconds3;
+        while (true)
+        {
+            if(number < 3)
+            {
+                if(indexQueue.Count > 0)
+                {
+                    GetTreasure((int)indexQueue.Dequeue());
+                    number++;
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else
+            {
+                number = 0;
+                yield return waitForSeconds2;
+                continue;
+            }
         }
     }
 

@@ -17,6 +17,8 @@ public class ShopManager : MonoBehaviour
     public GameObject shopAlarm;
     public GameObject shopIngameAlarm;
 
+    public GameObject[] shopIcon;
+
 
     public GameObject martAlarm;
     public GameObject martIngameAlarm;
@@ -268,6 +270,15 @@ public class ShopManager : MonoBehaviour
 
     public void Initialize()
     {
+        shopIcon[0].SetActive(true);
+        shopIcon[1].SetActive(true);
+
+        if (GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            shopIcon[0].SetActive(false);
+            shopIcon[1].SetActive(false);
+        }
+
         if (GameStateManager.instance.YoutubeVideo)
         {
             int number = Random.Range(0, Enum.GetValues(typeof(CharacterType)).Length - 1);
@@ -336,6 +347,11 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShopCoinView()
     {
+        if(GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            return;
+        }
+
         shopView.SetActive(false);
 
         OpenShopView();
@@ -348,6 +364,11 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShopCrystalView()
     {
+        if (GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            return;
+        }
+
         shopView.SetActive(false);
 
         OpenShopView();
@@ -360,6 +381,11 @@ public class ShopManager : MonoBehaviour
 
     public void OpenPackageView()
     {
+        if (GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            return;
+        }
+
         shopView.SetActive(false);
 
         OpenShopView();
@@ -372,7 +398,12 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShopView()
     {
-        if(!shopView.activeInHierarchy)
+        if (GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            return;
+        }
+
+        if (!shopView.activeInHierarchy)
         {
             shopView.SetActive(true);
 
@@ -645,9 +676,6 @@ public class ShopManager : MonoBehaviour
                 shopContents[3].Initialize(ItemType.GoldShop1, BuyType.Crystal, this);
                 shopContents[4].Initialize(ItemType.GoldShop2, BuyType.Crystal, this);
                 shopContents[5].Initialize(ItemType.GoldShop3, BuyType.Crystal, this);
-                shopContents[3].gameObject.SetActive(false);
-                shopContents[4].gameObject.SetActive(false);
-                shopContents[5].gameObject.SetActive(false);
                 break;
             case 4:
                 FirebaseAnalytics.LogEvent("Open_Shop_Ranking");
@@ -743,22 +771,22 @@ public class ShopManager : MonoBehaviour
             case ItemType.GoldShop1:
                 changeMoneyIndex = 0;
                 OpenChangeMoneyView();
-                changeMoneyReceiveContent.Initialize(RewardType.Gold, 1000000);
-                changeMoneyText.text = MoneyUnitString.ToCurrencyString(120);
+                changeMoneyReceiveContent.Initialize(RewardType.Gold, 500000);
+                changeMoneyText.text = MoneyUnitString.ToCurrencyString(60);
 
                 break;
             case ItemType.GoldShop2:
                 changeMoneyIndex = 1;
                 OpenChangeMoneyView();
-                changeMoneyReceiveContent.Initialize(RewardType.Gold2, 10000000);
-                changeMoneyText.text = MoneyUnitString.ToCurrencyString(1200);
+                changeMoneyReceiveContent.Initialize(RewardType.Gold2, 4500000);
+                changeMoneyText.text = MoneyUnitString.ToCurrencyString(500);
 
                 break;
             case ItemType.GoldShop3:
                 changeMoneyIndex = 2;
                 OpenChangeMoneyView();
-                changeMoneyReceiveContent.Initialize(RewardType.Gold3, 100000000);
-                changeMoneyText.text = MoneyUnitString.ToCurrencyString(12000);
+                changeMoneyReceiveContent.Initialize(RewardType.Gold3, 10000000);
+                changeMoneyText.text = MoneyUnitString.ToCurrencyString(1200);
 
                 break;
             case ItemType.AdReward_Portion:
@@ -1238,10 +1266,10 @@ public class ShopManager : MonoBehaviour
         switch(changeMoneyIndex)
         {
             case 0:
-                if (playerDataBase.Crystal >= 120)
+                if (playerDataBase.Crystal >= 60)
                 {
-                    PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 120);
+                    PlayfabManager.instance.UpdateAddGold(500000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 60);
 
                     OpenChangeMoneyView();
 
@@ -1255,10 +1283,10 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case 1:
-                if (playerDataBase.Crystal >= 1200)
+                if (playerDataBase.Crystal >= 500)
                 {
-                    PlayfabManager.instance.UpdateAddGold(10000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1200);
+                    PlayfabManager.instance.UpdateAddGold(4500000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 500);
 
                     OpenChangeMoneyView();
 
@@ -1274,7 +1302,7 @@ public class ShopManager : MonoBehaviour
             case 2:
                 if (playerDataBase.Crystal >= 12000)
                 {
-                    PlayfabManager.instance.UpdateAddGold(100000000);
+                    PlayfabManager.instance.UpdateAddGold(10000000);
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 12000);
 
                     OpenChangeMoneyView();
@@ -1496,7 +1524,7 @@ public class ShopManager : MonoBehaviour
 
         if (number == 3)
         {
-            if (playerDataBase.Level < 15)
+            if (playerDataBase.Level < 10)
             {
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("BufferflyLocked"));
@@ -1505,7 +1533,7 @@ public class ShopManager : MonoBehaviour
         }
         else if (number == 4)
         {
-            if (playerDataBase.Level < 20)
+            if (playerDataBase.Level < 15)
             {
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("TotemLocked"));
@@ -4376,7 +4404,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(30);
+                PortionManager.instance.GetEventTicket(100);
                 break;
             case PackageType.Package2:
                 if (playerDataBase.Package2) yield break;
@@ -4397,7 +4425,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(150);
+                PortionManager.instance.GetEventTicket(500);
                 break;
             case PackageType.Package3:
                 if (playerDataBase.Package3) yield break;
@@ -4418,7 +4446,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(300);
+                PortionManager.instance.GetEventTicket(1000);
                 break;
             case PackageType.Package4:
                 if (playerDataBase.Package4) yield break;
@@ -4439,7 +4467,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(600);
+                PortionManager.instance.GetEventTicket(2000);
                 break;
             case PackageType.Package5: //한정 패키지
                 if (playerDataBase.Package5) yield break;
@@ -4460,7 +4488,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(30);
+                PortionManager.instance.GetEventTicket(100);
                 break;
             case PackageType.Package6: //울트라 패키지
                 if (playerDataBase.Package6) yield break;
@@ -4481,7 +4509,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(300);
+                PortionManager.instance.GetEventTicket(1000);
                 break;
             case PackageType.Package7: //서포트 패키지
                 if (playerDataBase.Package7 == 1) yield break;
@@ -4503,7 +4531,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(30);
+                PortionManager.instance.GetEventTicket(100);
                 break;
             case PackageType.Package8:
                 if (playerDataBase.Package8 == 1) yield break;

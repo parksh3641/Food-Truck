@@ -11,6 +11,8 @@ public class OptionManager : MonoBehaviour
     public GameObject languageView;
     public Text versionText;
 
+    public GameObject appReviewIcon;
+
     public Sprite[] buttonImgArray;
 
     public GameObject[] checkMarkArray;
@@ -53,7 +55,7 @@ public class OptionManager : MonoBehaviour
         optionView.SetActive(false);
         languageView.SetActive(false);
 
-        versionText.text = "v" + Application.version + "  <size=10>(2024/03/21)</size>";
+        versionText.text = "v" + Application.version + "  <size=10>(2024/03/27)</size>";
     }
 
 
@@ -76,10 +78,19 @@ public class OptionManager : MonoBehaviour
             if(GameStateManager.instance.Login == LoginType.Guest)
             {
 #if UNITY_ANDROID
-                googleLink.SetActive(true);
+                if(GameStateManager.instance.StoreType == StoreType.Google)
+                {
+                    googleLink.SetActive(true);
+                }
 #elif UNITY_IOS
                 appleLink.SetActive(true);
 #endif
+            }
+
+            appReviewIcon.SetActive(true);
+            if (GameStateManager.instance.StoreType == StoreType.OneStore)
+            {
+                appReviewIcon.SetActive(false);
             }
         }
         else

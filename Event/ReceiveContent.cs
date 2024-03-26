@@ -141,9 +141,11 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Gold2:
                 mainBackground.sprite = rankBackgroundArray[2];
+                effect.SetActive(true);
                 break;
             case RewardType.Gold3:
                 mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.RankPoint:
                 mainBackground.sprite = rankBackgroundArray[2];

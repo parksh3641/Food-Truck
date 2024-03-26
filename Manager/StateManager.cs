@@ -30,6 +30,7 @@ public class StateManager : MonoBehaviour
     public WarningManager warningManager;
     public AdvancementManager advancementManager;
     public IconManager iconManager;
+    public PhotonManager photonManager;
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1);
 
@@ -129,14 +130,54 @@ public class StateManager : MonoBehaviour
 
     public void Initialize()
     {
-        fadeInOut.FadeIn();
+#if !UNITY_EDITOR && UNITY_ANDROID
+        AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject packageManager = currentActivity.Call<AndroidJavaObject>("getPackageManager");
+        string installerPackageName = packageManager.Call<string>("getInstallerPackageName", Application.identifier);
+
+        // 패키지명으로부터 설치된 스토어 확인
+
+        if (installerPackageName.Equals("com.android.vending"))
+        {
+            GameStateManager.instance.StoreType = StoreType.Google;
+
+            Debug.Log("앱은 Google Play 스토어에서 설치되었습니다.");
+        }
+        else if (installerPackageName.Equals("com.amazon.venezia"))
+        {
+            GameStateManager.instance.StoreType = StoreType.Amazon;
+
+            Debug.Log("앱은 Amazon Appstore에서 설치되었습니다.");
+        }
+        else if (installerPackageName.Equals("com.skt.skaf.A000Z00040"))
+        {
+            GameStateManager.instance.StoreType = StoreType.OneStore;
+
+            Debug.Log("앱은 OneStore에서 설치되었습니다.");
+        }
+        else
+        {
+            GameStateManager.instance.StoreType = StoreType.None;
+
+            Debug.Log("앱은 알 수 없는 소스에서 설치되었습니다.");
+        }
+#endif
+
         ResetManager.instance.Initialize();
+        StopAllCoroutines();
+        loginText.text = "";
+    }
+
+    public void SuccessReset()
+    {
+        fadeInOut.FadeIn();
+
         newsManager.Initialize();
         shopManager.Initialize();
         gameManager.Initialize();
         lockManager.Initialize();
         chestBoxManager.Initialize();
-        //questManager.Initialize();
         offlineManager.Initialize();
         changeFoodManager.Initialize();
         attendanceManager.Initialize();
@@ -148,13 +189,15 @@ public class StateManager : MonoBehaviour
         treasureManager.Initialize();
         gourmetManager.FirstInitialize();
         warningManager.Initialize();
-        SeasonManager.instance.CheckSeason();
         advancementManager.Initialize();
         iconManager.Initialize();
+        SeasonManager.instance.CheckSeason();
         GourmetManager.instance.Initialize();
 
-        StopAllCoroutines();
-        loginText.text = "";
+        if (GameStateManager.instance.NickName.Length > 0)
+        {
+            photonManager.Initialize();
+        }
 
         Debug.LogError("Load Complete!");
     }

@@ -126,7 +126,7 @@ public class GameStateManager : MonoBehaviour
         [Title("Save")]
         public float feverCount = 0;
         public int getGold = 0;
-        public int consumeGold = 0;
+        public long consumeGold = 0;
         public int upgradeCount = 0;
         public int sellCount = 0;
         public int useSauce = 0;
@@ -1147,7 +1147,7 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public int ConsumeGold
+    public long ConsumeGold
     {
         get
         {

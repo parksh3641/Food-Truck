@@ -36,7 +36,7 @@ public class ResetManager : MonoBehaviour
 
     public void OnCheckAttendanceDay()
     {
-        if (PlayfabManager.instance.isActive) PlayfabManager.instance.GetServerTime(SetModeContent);
+        PlayfabManager.instance.GetServerTime(SetModeContent);
     }
 
     private void SetModeContent(DateTime time)
@@ -105,6 +105,8 @@ public class ResetManager : MonoBehaviour
                 Debug.Log("아직 다음주 월요일이 아닙니다");
             }
         }
+
+        StateManager.instance.SuccessReset();
     }
 
     public bool ComparisonDate(string target, System.DateTime time)

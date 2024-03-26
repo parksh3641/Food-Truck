@@ -153,7 +153,15 @@ public class LevelManager : MonoBehaviour
 
 
         infoText.localizationName = "SuccessPercent";
-        infoText.plusText = " : +" + (level * 0.05f).ToString("N1") + "%";
+
+        if(level > 199)
+        {
+            infoText.plusText = " : +" + (200 * 0.05f).ToString("N1") + "%";
+        }
+        else
+        {
+            infoText.plusText = " : +" + (level * 0.05f).ToString("N1") + "%";
+        }
 
         accessDateText.text = LocalizationManager.instance.GetString("AccessDate") + " : " + playerDataBase.AccessDate;
 

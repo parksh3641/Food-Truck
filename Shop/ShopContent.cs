@@ -164,23 +164,23 @@ public class ShopContent : MonoBehaviour
             case ItemType.GoldShop1:
                 lockedObj.SetActive(false);
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(1000000);
+                rewardText.text = MoneyUnitString.ToCurrencyString(500000);
 
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(120);
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(60);
                 break;
             case ItemType.GoldShop2:
+                lockedObj.SetActive(false);
+
+                rewardText.text = MoneyUnitString.ToCurrencyString(4500000);
+
+                buyCrystalText.text = MoneyUnitString.ToCurrencyString(500);
+                break;
+            case ItemType.GoldShop3:
                 lockedObj.SetActive(false);
 
                 rewardText.text = MoneyUnitString.ToCurrencyString(10000000);
 
                 buyCrystalText.text = MoneyUnitString.ToCurrencyString(1200);
-                break;
-            case ItemType.GoldShop3:
-                lockedObj.SetActive(false);
-
-                rewardText.text = MoneyUnitString.ToCurrencyString(100000000);
-
-                buyCrystalText.text = MoneyUnitString.ToCurrencyString(12000);
                 break;
             case ItemType.AdReward_Portion:
                 rewardText.text = "";

@@ -20,6 +20,8 @@ public class DungeonManager : MonoBehaviour
     public GameObject dungeonClearView;
     public ReceiveContent[] clearReceiveContents;
 
+    public GameObject exterminationButton;
+
     public RectTransform rectTransform;
 
     public GameObject alarm;
@@ -177,7 +179,7 @@ public class DungeonManager : MonoBehaviour
         dungeonContents[0].Initialize(this, DungeonType.Dungeon1, dungeonDataBase.dungeonInfos[0], ItemType.DungeonKey1, 0);
         dungeonContents[1].Initialize(this, DungeonType.Dungeon2, dungeonDataBase.dungeonInfos[1], ItemType.DungeonKey2, 30000);
         dungeonContents[2].Initialize(this, DungeonType.Dungeon3, dungeonDataBase.dungeonInfos[2], ItemType.DungeonKey3, 100000);
-        dungeonContents[3].Initialize(this, DungeonType.Dungeon4, dungeonDataBase.dungeonInfos[3], ItemType.DungeonKey4, 250000);
+        dungeonContents[3].Initialize(this, DungeonType.Dungeon4, dungeonDataBase.dungeonInfos[3], ItemType.DungeonKey4, 300000);
 
         //receiveContents[0].Initialize(RewardType.SliverBox, 0);
         //receiveContents[1].Initialize(RewardType.GoldBox, 0);
@@ -277,6 +279,28 @@ public class DungeonManager : MonoBehaviour
 
             levelReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, dungeonInfo.rewardInfos[i].number +
                 (dungeonInfo.rewardInfos[i].addNumber * nowLevel));
+        }
+
+        exterminationButton.SetActive(false);
+
+        if (nowLevel == highLevel)
+        {
+            exterminationButton.SetActive(false);
+        }
+
+        if (nowLevel == 0)
+        {
+            if (highLevel > 0)
+            {
+                exterminationButton.SetActive(true);
+            }
+        }
+        else
+        {
+            if (highLevel > 0 && nowLevel != highLevel)
+            {
+                exterminationButton.SetActive(true);
+            }
         }
     }
 
@@ -422,7 +446,14 @@ public class DungeonManager : MonoBehaviour
 
         attackPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         attackPlus += playerDataBase.Skill7 * 0.1f;
-        attackPlus += levelDataBase.GetLevel(playerDataBase.Exp) * 0.05f;
+        if (playerDataBase.Level > 199)
+        {
+            attackPlus += 10;
+        }
+        else
+        {
+            attackPlus += playerDataBase.Level * 0.05f;
+        }
         attackPlus += playerDataBase.Treasure1 * 0.2f;
         attackPlus += playerDataBase.Advancement * 0.1f;
 
@@ -607,10 +638,10 @@ public class DungeonManager : MonoBehaviour
             successParticle.Play();
         }
 
-        if (GameStateManager.instance.Vibration)
-        {
-            Handheld.Vibrate();
-        }
+        //if (GameStateManager.instance.Vibration)
+        //{
+        //    Handheld.Vibrate();
+        //}
 
         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
 
@@ -914,5 +945,58 @@ public class DungeonManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
 
         ContentInitialize();
+    }
+
+    public void Extermination()
+    {
+        dungeonLevelView.SetActive(false);
+
+        switch (dungeonType)
+        {
+            case DungeonType.Dungeon1:
+                playerDataBase.DungeonKey1 -= 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey1", playerDataBase.DungeonKey1);
+
+                if (playerDataBase.Dungeon1Level < nowLevel + 1)
+                {
+                    playerDataBase.Dungeon1Level += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon1Level", playerDataBase.Dungeon1Level);
+                }
+                break;
+            case DungeonType.Dungeon2:
+                playerDataBase.DungeonKey2 -= 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey2", playerDataBase.DungeonKey2);
+
+                if (playerDataBase.Dungeon2Level < nowLevel + 1)
+                {
+                    playerDataBase.Dungeon2Level += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon2Level", playerDataBase.Dungeon2Level);
+                }
+                break;
+            case DungeonType.Dungeon3:
+                playerDataBase.DungeonKey3 -= 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey3", playerDataBase.DungeonKey3);
+
+                if (playerDataBase.Dungeon3Level < nowLevel + 1)
+                {
+                    playerDataBase.Dungeon3Level += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon3Level", playerDataBase.Dungeon3Level);
+                }
+                break;
+            case DungeonType.Dungeon4:
+                playerDataBase.DungeonKey4 -= 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey4", playerDataBase.DungeonKey4);
+
+                if (playerDataBase.Dungeon4Level < nowLevel + 1)
+                {
+                    playerDataBase.Dungeon4Level += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon4Level", playerDataBase.Dungeon4Level);
+                }
+                break;
+        }
+
+        ReceiveButton();
+
+        OpenDungeonView();
     }
 }

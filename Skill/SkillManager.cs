@@ -23,10 +23,14 @@ public class SkillManager : MonoBehaviour
     public Image[] topMenuImgArray;
     public Sprite[] topMenuSpriteArray;
 
+    public Image[] topMenuImgArray2;
+    public Sprite[] topMenuSpriteArray2;
+
     public GameObject[] skillArray;
     public RectTransform[] skillGrid;
 
     private int index = -1;
+    private int index2 = -1;
     private int challengePoint = 0;
 
     public SkillContent[] skillContents;
@@ -67,6 +71,11 @@ public class SkillManager : MonoBehaviour
             if(index == -1)
             {
                 ChangeTopToggle(0);
+            }
+
+            if(index2 == -1)
+            {
+                ChangeTopToggle2(2);
             }
 
             Initialize();
@@ -141,6 +150,28 @@ public class SkillManager : MonoBehaviour
         }
 
         Initialize();
+    }
+
+    public void ChangeTopToggle2(int number)
+    {
+        if (index2 == number) return;
+
+        index2 = number;
+
+        for (int i = 0; i < topMenuImgArray2.Length; i++)
+        {
+            topMenuImgArray2[i].sprite = topMenuSpriteArray[0];
+        }
+
+        topMenuImgArray2[number].sprite = topMenuSpriteArray[1];
+
+        for (int i = 0; i < skillContents.Length; i++)
+        {
+            if (skillContents[i].gameObject.activeInHierarchy)
+            {
+                skillContents[i].CheckPrice(number);
+            }
+        }
     }
 
     public void OpenSkillTicketInfo()

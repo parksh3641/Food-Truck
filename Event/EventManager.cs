@@ -62,17 +62,12 @@ public class EventManager : MonoBehaviour
 
 
             reviewEvent.SetActive(true);
-            if (playerDataBase.ReviewNumber == 2)
+            if (playerDataBase.ReviewNumber == 2 || GameStateManager.instance.StoreType == StoreType.OneStore)
             {
                 reviewEvent.SetActive(false);
             }
 
-
-            gifticonEventLocked.SetActive(true);
-            if (playerDataBase.Level > 9)
-            {
-                gifticonEventLocked.SetActive(false);
-            }
+            gifticonEventLocked.SetActive(false);
 
 #if UNITY_EDITOR || UNITY_EDITOR_OSX
             CheckGifticon(true);

@@ -77,7 +77,7 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int getGold = 0;
     [SerializeField]
-    private int consumeGold = 0;
+    private long consumeGold = 0;
     [SerializeField]
     private int buyCrystal = 0;
     [SerializeField]
@@ -2950,7 +2950,7 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int ConsumeGold
+    public long ConsumeGold
     {
         get
         {

@@ -209,7 +209,9 @@ public class GameManager : MonoBehaviour
     public Text feverText;
 
     private float feverCount = 0;
-    private float feverMaxCount = 300;
+    private float feverMaxCount = 30000;
+    private float feverCountPlus = 100;
+
     private float feverTime = 0;
     private float feverPlus = 3;
 
@@ -503,11 +505,7 @@ public class GameManager : MonoBehaviour
     {
         if (pause)
         {
-            if (inGameUI.activeInHierarchy)
-            {
-                GameStateManager.instance.FeverCount = feverCount;
-            }
-
+            GameStateManager.instance.FeverCount = feverCount;
             GameStateManager.instance.SupportCount = supportCount;
         }
         else
@@ -647,6 +645,8 @@ public class GameManager : MonoBehaviour
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
         feverText.text = LocalizationManager.instance.GetString("FeverGauge") + "  0%";
+
+        feverCount = GameStateManager.instance.FeverCount;
 
         isExp = levelManager.CheckMaxLevel();
 
@@ -1318,7 +1318,14 @@ public class GameManager : MonoBehaviour
     {
 #if UNITY_ANDROID
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 0);
-        FirebaseAnalytics.LogEvent("Google");
+        if (GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            FirebaseAnalytics.LogEvent("OneStore");
+        }
+        else
+        {
+            FirebaseAnalytics.LogEvent("Google");
+        }
 #elif UNITY_IOS
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 1);
         FirebaseAnalytics.LogEvent("Apple");
@@ -1326,11 +1333,12 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("OS", 2);
         FirebaseAnalytics.LogEvent("Web");
 #endif
+
         yield return firstSeconds;
 
         PlayfabManager.instance.GrantItemsToUser("Character1", "Character");
-        PlayfabManager.instance.GrantItemsToUser("Bread", "Truck");
-        PlayfabManager.instance.GrantItemsToUser("Colobus", "Animal");
+        PlayfabManager.instance.GrantItemsToUser("Truck1", "Truck");
+        PlayfabManager.instance.GrantItemsToUser("Animal1", "Animal");
 
         yield return firstSeconds;
 
@@ -1759,6 +1767,7 @@ public class GameManager : MonoBehaviour
         successX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
         successX2 += playerDataBase.Treasure3 * 0.2f;
         successX2 += playerDataBase.GetTotems_Total_AbilityLevel() * totemsDataBase.retentionValue;
+        successX2 += playerDataBase.GetEpicBookNumber() * 0.2f;
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetFoodTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 0.2f;
@@ -1768,6 +1777,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.Advancement * 0.4f;
         sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.5f;
         sellPricePlus += playerDataBase.GetTruck_Total_AbilityLevel() * truckDataBase.retentionValue;
+        sellPricePlus += playerDataBase.GetNormalBookNumber() * 0.1f;
 
         if (IsWeekend())
         {
@@ -1798,13 +1808,11 @@ public class GameManager : MonoBehaviour
         upgradeJapaneseFood = upgradeDataBase.GetUpgradeJapaneseFood(GameStateManager.instance.JapaneseFoodType);
         upgradeDessert = upgradeDataBase.GetUpgradeDessert(GameStateManager.instance.DessertType);
 
-        feverCount = GameStateManager.instance.FeverCount;
-
         feverTime = 30;
         feverTime += (30 * (0.003f * playerDataBase.Skill1));
         feverTime += (30 * (0.004f * playerDataBase.Treasure9));
 
-        feverMaxCount = 300 - (300 * (0.003f * playerDataBase.Skill2));
+        feverCountPlus += (feverCountPlus * (0.003f * playerDataBase.Skill2));
         feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
 
         portion1Time = 30 + (30 * (0.003f * playerDataBase.Skill4)) + (30 * (0.006f * playerDataBase.Treasure6));
@@ -2145,7 +2153,7 @@ public class GameManager : MonoBehaviour
             playerDataBase.FirstReward = 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("FirstReward", 1);
 
-            GameStateManager.instance.FeverCount = 150;
+            GameStateManager.instance.FeverCount = feverMaxCount * 0.5f;
 
             PlayfabManager.instance.UpdateAddGold(100000);
 
@@ -3900,7 +3908,7 @@ public class GameManager : MonoBehaviour
         {
             if (!feverMode && level + 1 < maxLevel)
             {
-                feverCount += 1;
+                feverCount += feverCountPlus;
 
                 CheckFever();
             }
@@ -4664,6 +4672,8 @@ public class GameManager : MonoBehaviour
                         {
                             playerDataBase.IslandNumber = 1;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
+
+                            changeFoodManager.islandAlarm.SetActive(true);
                         }
 
                         lockManager.UnLocked(7);
@@ -4793,6 +4803,8 @@ public class GameManager : MonoBehaviour
                         {
                             playerDataBase.IslandNumber = 2;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
+
+                            changeFoodManager.islandAlarm.SetActive(true);
                         }
 
                         break;
@@ -4893,6 +4905,8 @@ public class GameManager : MonoBehaviour
                         {
                             playerDataBase.IslandNumber = 3;
                             PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
+
+                            changeFoodManager.islandAlarm.SetActive(true);
                         }
 
                         break;
@@ -6459,19 +6473,19 @@ public class GameManager : MonoBehaviour
 
     public void GetMaxLevel()
     {
-        playerDataBase.Skill1 = 100;
-        playerDataBase.Skill2 = 100;
-        playerDataBase.Skill3 = 100;
-        playerDataBase.Skill4 = 100;
-        playerDataBase.Skill5 = 100;
-        playerDataBase.Skill6 = 100;
+        playerDataBase.Skill1 = 500;
+        playerDataBase.Skill2 = 500;
+        playerDataBase.Skill3 = 500;
+        playerDataBase.Skill4 = 500;
+        playerDataBase.Skill5 = 500;
+        playerDataBase.Skill6 = 500;
         playerDataBase.Skill7 = 100;
         playerDataBase.Skill8 = 100;
         playerDataBase.Skill9 = 100;
         playerDataBase.Skill10 = 100;
         playerDataBase.Skill11 = 100;
-        playerDataBase.Skill12 = 100;
-        playerDataBase.Skill13 = 100;
+        playerDataBase.Skill12 = 500;
+        playerDataBase.Skill13 = 500;
         playerDataBase.Skill14 = 100;
         playerDataBase.Skill15 = 100;
         playerDataBase.Skill16 = 100;

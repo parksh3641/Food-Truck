@@ -6,6 +6,7 @@ using ExitGames.Client.Photon;
 using UnityEngine.UI;
 using System.IO;
 using System.Text.RegularExpressions;
+using Photon.Pun;
 
 public class PhotonManager : MonoBehaviour, IChatClientListener
 {
@@ -76,6 +77,10 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 		}
 	}
 
+	void Start()
+    {
+		Application.runInBackground = true;
+	}
 
     public void Initialize()
     {
@@ -84,7 +89,7 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 
 		chatClient = new ChatClient(this);
 		chatClient.ChatRegion = "asia";
-		chatClient.Connect("a0e02b55-5336-4fe9-aedc-8f54e4a5184a", Application.version, new AuthenticationValues(userName));
+		chatClient.Connect("a0e02b55-5336-4fe9-aedc-8f54e4a5184a", "1.0", new AuthenticationValues(userName));
 
 		StopAllCoroutines();
 		StartCoroutine(CheckChatCoroution());
@@ -136,11 +141,11 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 	{
 		Debug.Log("서버에 연결되었습니다.");
 
-		Application.runInBackground = true;
-
 		chatClient.Subscribe(new string[] { currentChannelName }, 30);
 
 		chatUI.SetActive(true);
+
+		AddLine("<Color=#FFFF00>" + GameStateManager.instance.NickName.ToString() + "</Color> " + LocalizationManager.instance.GetString("IsOnline"));
 
 		chatUISmallText.Initialize(LocalizationManager.instance.GetString("ChatStart"));
 		Close();
@@ -150,11 +155,9 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 	{
 		chatUI.SetActive(false);
 
-		Application.runInBackground = false;
-
 		Debug.Log("서버에 연결이 끊어졌습니다.");
 
-		Invoke("Initialize", 10f);
+		Invoke("Initialize", 5f);
 	}
 
 	public void OnChatStateChange(ChatState state)

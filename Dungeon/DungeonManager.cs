@@ -475,6 +475,7 @@ public class DungeonManager : MonoBehaviour
         attackX2 += playerDataBase.Treasure3 * 0.2f;
         attackX2 += playerDataBase.Treasure14 * 0.4f;
         attackX2 += playerDataBase.Skill16 * 0.2f;
+        attackX2 += playerDataBase.GetEpicBookNumber() * 0.2f;
 
         attackText.localizationName = "AttackPercent";
         attackText.plusText = " : " + success.ToString("N1") + "%";

@@ -1030,7 +1030,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 0, 20);
                     }
 
-                    if (list.ItemId.Equals("Bread"))
+                    if (list.ItemId.Equals("Truck1"))
                     {
                         playerDataBase.Truck1 = 1;
 
@@ -1042,7 +1042,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 0);
                     }
 
-                    if (list.ItemId.Equals("Chips"))
+                    if (list.ItemId.Equals("Truck2"))
                     {
                         playerDataBase.Truck2 = 1;
 
@@ -1054,7 +1054,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 1);
                     }
 
-                    if (list.ItemId.Equals("Donut"))
+                    if (list.ItemId.Equals("Truck3"))
                     {
                         playerDataBase.Truck3 = 1;
 
@@ -1066,7 +1066,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 2);
                     }
 
-                    if (list.ItemId.Equals("Hamburger"))
+                    if (list.ItemId.Equals("Truck4"))
                     {
                         playerDataBase.Truck4 = 1;
 
@@ -1078,7 +1078,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 3);
                     }
 
-                    if (list.ItemId.Equals("Hotdog"))
+                    if (list.ItemId.Equals("Truck5"))
                     {
                         playerDataBase.Truck5 = 1;
 
@@ -1090,7 +1090,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 4);
                     }
 
-                    if (list.ItemId.Equals("Icecream"))
+                    if (list.ItemId.Equals("Truck6"))
                     {
                         playerDataBase.Truck6 = 1;
 
@@ -1102,7 +1102,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 5);
                     }
 
-                    if (list.ItemId.Equals("Lemonade"))
+                    if (list.ItemId.Equals("Truck7"))
                     {
                         playerDataBase.Truck7 = 1;
 
@@ -1114,7 +1114,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 6);
                     }
 
-                    if (list.ItemId.Equals("Noodles"))
+                    if (list.ItemId.Equals("Truck8"))
                     {
                         playerDataBase.Truck8 = 1;
 
@@ -1126,7 +1126,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 7);
                     }
 
-                    if (list.ItemId.Equals("Pizza"))
+                    if (list.ItemId.Equals("Truck9"))
                     {
                         playerDataBase.Truck9 = 1;
 
@@ -1138,7 +1138,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 8);
                     }
 
-                    if (list.ItemId.Equals("Sushi"))
+                    if (list.ItemId.Equals("Truck10"))
                     {
                         playerDataBase.Truck10 = 1;
 
@@ -1150,7 +1150,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 1, 9);
                     }
 
-                    if (list.ItemId.Equals("Colobus"))
+                    if (list.ItemId.Equals("Animal1"))
                     {
                         playerDataBase.Animal1 = 1;
 
@@ -1162,7 +1162,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 2, 0);
                     }
 
-                    if (list.ItemId.Equals("Gecko"))
+                    if (list.ItemId.Equals("Animal2"))
                     {
                         playerDataBase.Animal2 = 1;
 
@@ -1174,7 +1174,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 2, 1);
                     }
 
-                    if (list.ItemId.Equals("Herring"))
+                    if (list.ItemId.Equals("Animal3"))
                     {
                         playerDataBase.Animal3 = 1;
 
@@ -1186,7 +1186,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 2, 2);
                     }
 
-                    if (list.ItemId.Equals("Muskrat"))
+                    if (list.ItemId.Equals("Animal4"))
                     {
                         playerDataBase.Animal4 = 1;
 
@@ -1198,7 +1198,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 2, 3);
                     }
 
-                    if (list.ItemId.Equals("Pudu"))
+                    if (list.ItemId.Equals("Animal5"))
                     {
                         playerDataBase.Animal5 = 1;
 
@@ -1210,7 +1210,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 2, 4);
                     }
 
-                    if (list.ItemId.Equals("Sparrow"))
+                    if (list.ItemId.Equals("Animal6"))
                     {
                         playerDataBase.Animal6 = 1;
 
@@ -1222,7 +1222,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 2, 5);
                     }
 
-                    if (list.ItemId.Equals("Squid"))
+                    if (list.ItemId.Equals("Animal7"))
                     {
                         playerDataBase.Animal7 = 1;
 
@@ -1234,7 +1234,7 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 2, 6);
                     }
 
-                    if (list.ItemId.Equals("Taipan"))
+                    if (list.ItemId.Equals("Animal8"))
                     {
                         playerDataBase.Animal8 = 1;
 

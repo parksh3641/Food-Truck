@@ -20,6 +20,11 @@ public class BookManager : MonoBehaviour
 
     public Text titleText;
 
+    public Text plusText;
+
+    private float reward = 0.1f; //판매 수익
+    private float reward2 = 0.2f; //2단 강화 확률
+
     [Space]
     [Title("ScrollView")]
     public GameObject[] bookArray;
@@ -120,6 +125,8 @@ public class BookManager : MonoBehaviour
             titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetNormalBookNumber() + " / " + System.Enum.GetValues(typeof(BookType)).Length + " )"
     + "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetNormalBookNumber() * 1.0f) / System.Enum.GetValues(typeof(BookType)).Length) * 100f).ToString("N1") + "%</size>";
 
+            plusText.text = LocalizationManager.instance.GetString("NowPrice") + " +" + (playerDataBase.GetNormalBookNumber() * reward).ToString() + "%  (+" + reward + "%)";
+
             CheckNormalInitialize();
         }
         else
@@ -131,6 +138,8 @@ public class BookManager : MonoBehaviour
 
             titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetEpicBookNumber() + " / " + System.Enum.GetValues(typeof(BookType)).Length + " )"
 + "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetEpicBookNumber() * 1.0f) / System.Enum.GetValues(typeof(BookType)).Length) * 100f).ToString("N1") + "%</size>";
+
+            plusText.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " +" + (playerDataBase.GetEpicBookNumber() * reward2).ToString() + "%  (+" + reward2 + "%)";
 
             CheckEpicInitialize();
         }

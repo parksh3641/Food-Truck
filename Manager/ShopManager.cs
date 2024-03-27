@@ -4730,7 +4730,7 @@ public class ShopManager : MonoBehaviour
 
         abilityPointText.text = playerDataBase.AbilityPoint.ToString();
 
-        if(level + 1 < 5)
+        if(level + 1 < 10)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
             NotionManager.instance.UseNotion4(NotionType.SuccessUpgrade);

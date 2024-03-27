@@ -126,7 +126,11 @@ public class ChestBoxManager : MonoBehaviour
         }
         else
         {
-            Initialize();
+            if (!chestBoxView.activeInHierarchy)
+            {
+                Initialize();
+            }
+
             yield break;
         }
 

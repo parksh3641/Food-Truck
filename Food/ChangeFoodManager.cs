@@ -15,6 +15,7 @@ public class ChangeFoodManager : MonoBehaviour
     public GameObject treasureLocked;
 
     public GameObject alarmObj;
+    public GameObject islandAlarm;
 
     [Title("Proficiency")]
     public Text proficiencyLevelText;
@@ -59,6 +60,7 @@ public class ChangeFoodManager : MonoBehaviour
     private bool init = false;
 
     public LockManager lockManager;
+    public IslandManager islandManager;
 
     PlayerDataBase playerDataBase;
     ImageDataBase imageDataBase;
@@ -85,6 +87,7 @@ public class ChangeFoodManager : MonoBehaviour
         autoUpgradeView.SetActive(false);
 
         alarmObj.SetActive(false);
+        islandAlarm.SetActive(false);
     }
 
     public void Initialize()
@@ -698,5 +701,12 @@ public class ChangeFoodManager : MonoBehaviour
     public void ChangeFoodMoveArrow(FoodType type)
     {
         changeFoodContentList[(int)type].SetMoveArrow();
+    }
+
+    public void OpenMoveIsland()
+    {
+        islandAlarm.SetActive(false);
+
+        islandManager.OpenChangeIslandView();
     }
 }

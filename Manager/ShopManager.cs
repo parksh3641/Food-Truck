@@ -17,8 +17,6 @@ public class ShopManager : MonoBehaviour
     public GameObject shopAlarm;
     public GameObject shopIngameAlarm;
 
-    public GameObject[] shopIcon;
-
 
     public GameObject martAlarm;
     public GameObject martIngameAlarm;
@@ -270,14 +268,6 @@ public class ShopManager : MonoBehaviour
 
     public void Initialize()
     {
-        shopIcon[0].SetActive(true);
-        shopIcon[1].SetActive(true);
-
-        if (GameStateManager.instance.StoreType == StoreType.OneStore)
-        {
-            shopIcon[0].SetActive(false);
-            shopIcon[1].SetActive(false);
-        }
 
         if (GameStateManager.instance.YoutubeVideo)
         {
@@ -332,7 +322,7 @@ public class ShopManager : MonoBehaviour
                 Debug.Log("한정 패키지 구매 날짜 설정");
             }
 
-            if (playerDataBase.InGameTutorial == 1)
+            if (playerDataBase.InGameTutorial == 1 && GameStateManager.instance.StoreType != StoreType.OneStore)
             {
                 OpenLimitPackage();
             }
@@ -347,11 +337,6 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShopCoinView()
     {
-        if(GameStateManager.instance.StoreType == StoreType.OneStore)
-        {
-            return;
-        }
-
         shopView.SetActive(false);
 
         OpenShopView();
@@ -364,11 +349,6 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShopCrystalView()
     {
-        if (GameStateManager.instance.StoreType == StoreType.OneStore)
-        {
-            return;
-        }
-
         shopView.SetActive(false);
 
         OpenShopView();
@@ -381,11 +361,6 @@ public class ShopManager : MonoBehaviour
 
     public void OpenPackageView()
     {
-        if (GameStateManager.instance.StoreType == StoreType.OneStore)
-        {
-            return;
-        }
-
         shopView.SetActive(false);
 
         OpenShopView();
@@ -398,11 +373,6 @@ public class ShopManager : MonoBehaviour
 
     public void OpenShopView()
     {
-        if (GameStateManager.instance.StoreType == StoreType.OneStore)
-        {
-            return;
-        }
-
         if (!shopView.activeInHierarchy)
         {
             shopView.SetActive(true);
@@ -556,6 +526,16 @@ public class ShopManager : MonoBehaviour
                 packageThanks.SetActive(false);
 
                 packageAlarm[0].SetActive(false);
+
+                if (GameStateManager.instance.StoreType == StoreType.OneStore)
+                {
+                    packageContents[0].gameObject.SetActive(false);
+                    packageContents[1].gameObject.SetActive(false);
+                    packageContents[2].gameObject.SetActive(false);
+                    packageContents[3].gameObject.SetActive(false);
+                    packageContents[4].gameObject.SetActive(false);
+                    packageContents[5].gameObject.SetActive(false);
+                }
 
                 if (packageContents[0].gameObject.activeSelf)
                 {
@@ -1345,19 +1325,19 @@ public class ShopManager : MonoBehaviour
 
         if (playerDataBase.Dessert1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(10000000);
+            PlayfabManager.instance.UpdateAddGold(50000000);
             return;
         }
 
         if (playerDataBase.JapaneseFood1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(5000000);
+            PlayfabManager.instance.UpdateAddGold(10000000);
             return;
         }
 
         if (playerDataBase.Candy1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(3000000);
+            PlayfabManager.instance.UpdateAddGold(5000000);
             return;
         }
 
@@ -4413,7 +4393,7 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package2", 1);
                 Invoke("PackageDelay2", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(180000000);
+                PlayfabManager.instance.UpdateAddGold(18000000);
 
                 yield return waitForSeconds;
 
@@ -4434,7 +4414,7 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package3", 1);
                 Invoke("PackageDelay3", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(600000000);
+                PlayfabManager.instance.UpdateAddGold(30000000);
 
                 yield return waitForSeconds;
 
@@ -4455,7 +4435,7 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package4", 1);
                 Invoke("PackageDelay4", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(600000000);
+                PlayfabManager.instance.UpdateAddGold(60000000);
 
                 yield return waitForSeconds;
 

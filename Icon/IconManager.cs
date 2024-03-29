@@ -482,7 +482,7 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.GetEpicBookNumber() == 32 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }

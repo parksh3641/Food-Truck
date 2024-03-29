@@ -280,7 +280,7 @@ public class GameManager : MonoBehaviour
     private int season = 0;
     private int gender = 0;
 
-    protected float rareFoodPercent = 20.0f;
+    protected float rareFoodPercent = 10.0f;
     protected float repairTicketPercent = 10.0f;
     protected float eventTicketPercent = 5.0f;
 
@@ -362,7 +362,9 @@ public class GameManager : MonoBehaviour
     WaitForSeconds firstSeconds = new WaitForSeconds(0.5f);
     WaitForSeconds autoUpgradeSecond = new WaitForSeconds(0.4f);
     WaitForSeconds buffUpgradeSecond = new WaitForSeconds(0.5f);
+    WaitForSeconds buffUpgradeSecond_Fever = new WaitForSeconds(0.25f);
     WaitForSeconds maxLevelSecond = new WaitForSeconds(0.7f);
+    WaitForSeconds maxLevelSecond_Fever = new WaitForSeconds(0.35f);
 
     private float delay = 0.2f;
 
@@ -3493,14 +3495,17 @@ public class GameManager : MonoBehaviour
     {
         if(number < 2)
         {
-            if(GameStateManager.instance.AutoUpgrade && number == 0)
+            if (GameStateManager.instance.GameType == GameType.Story)
             {
-                return;
-            }
+                if (GameStateManager.instance.AutoUpgrade && number == 0)
+                {
+                    return;
+                }
 
-            if(buff4)
-            {
-                return;
+                if (buff4)
+                {
+                    return;
+                }
             }
 
             if (isUpgradeDelay) return;
@@ -3927,7 +3932,14 @@ public class GameManager : MonoBehaviour
 
         cameraController.GoToC();
 
-        yield return maxLevelSecond;
+        if(feverMode)
+        {
+            yield return maxLevelSecond_Fever;
+        }
+        else
+        {
+            yield return maxLevelSecond;
+        }
 
         CheckFoodLevelUp();
         UpgradeInitialize();
@@ -3956,11 +3968,25 @@ public class GameManager : MonoBehaviour
             levelMaxParticle[(int)GameStateManager.instance.IslandType].Play();
         }
 
-        yield return buffUpgradeSecond;
+        if(feverMode)
+        {
+            yield return buffUpgradeSecond_Fever;
+        }
+        else
+        {
+            yield return buffUpgradeSecond;
+        }
 
         cameraController.GoToB();
 
-        yield return buffUpgradeSecond;
+        if (feverMode)
+        {
+            yield return buffUpgradeSecond_Fever;
+        }
+        else
+        {
+            yield return buffUpgradeSecond;
+        }
 
         inGameUI.SetActive(true);
 
@@ -4429,6 +4455,8 @@ public class GameManager : MonoBehaviour
         {
             feverMode = true;
 
+            cameraController.smoothTime = 0.15f;
+
             feverEffect.SetActive(true);
             backButton.SetActive(false);
 
@@ -4498,6 +4526,8 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
+
+        cameraController.smoothTime = 0.3f;
 
         portionScaleAnim[3].PlayAnim();
 
@@ -6092,6 +6122,9 @@ public class GameManager : MonoBehaviour
                 PortionManager.instance.GetPortion(4, 3);
                 break;
         }
+
+        SoundManager.instance.PlaySFX(GameSfxType.Success);
+        NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
 
         CheckPortion();
     }

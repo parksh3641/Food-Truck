@@ -91,6 +91,11 @@ public class ShopContent : MonoBehaviour
                 break;
             case BuyType.Rm:
                 buyRMObj.SetActive(true);
+
+                if(GameStateManager.instance.StoreType == StoreType.OneStore)
+                {
+                    gameObject.SetActive(false);
+                }
                 break;
             case BuyType.Ad:
                 buyAdObj.SetActive(true);
@@ -135,17 +140,17 @@ public class ShopContent : MonoBehaviour
 
                 if(playerDataBase.Candy1MaxValue > 0)
                 {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(3000000) + "</size>";
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
                 }
 
                 if(playerDataBase.JapaneseFood1MaxValue > 0)
                 {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
                 }
 
                 if(playerDataBase.Dessert1MaxValue > 0)
                 {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(50000000) + "</size>";
                 }
                 break;
             case ItemType.DefDestroyTicket:

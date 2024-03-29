@@ -20,6 +20,8 @@ public class DungeonManager : MonoBehaviour
     public GameObject dungeonClearView;
     public ReceiveContent[] clearReceiveContents;
 
+    public GameObject dungeonTutorial;
+
     public GameObject exterminationButton;
 
     public RectTransform rectTransform;
@@ -97,6 +99,7 @@ public class DungeonManager : MonoBehaviour
     string localization_Minutes = "";
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1.5f);
+    WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
 
     DateTime f, g;
     TimeSpan h;
@@ -123,6 +126,8 @@ public class DungeonManager : MonoBehaviour
         dungeonInfo2View.SetActive(false);
         dungeonLevelView.SetActive(false);
         dungeonClearView.SetActive(false);
+
+        dungeonTutorial.SetActive(false);
 
         alarm.SetActive(true);
         ingameAlarm.SetActive(true);
@@ -421,7 +426,7 @@ public class DungeonManager : MonoBehaviour
         fadeInOut.canvasGroup.gameObject.SetActive(true);
         fadeInOut.FadeOut();
 
-        yield return waitForSeconds;
+        yield return waitForSeconds2;
 
         SoundManager.instance.PlayBoss();
 
@@ -434,8 +439,18 @@ public class DungeonManager : MonoBehaviour
         Initialize();
         CheckPercent();
 
+        dungeonTutorial.SetActive(true);
+
+        CancelInvoke("TutorialDelay");
+        Invoke("TutorialDelay", 5f);
+
         NotionManager.instance.UseNotion2(NotionType.StartDungeon);
         SoundManager.instance.PlaySFX(GameSfxType.CleanKitchenStart);
+    }
+
+    void TutorialDelay()
+    {
+        dungeonTutorial.SetActive(false);
     }
 
     public void CheckPercent()
@@ -958,41 +973,41 @@ public class DungeonManager : MonoBehaviour
                 playerDataBase.DungeonKey1 -= 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey1", playerDataBase.DungeonKey1);
 
-                if (playerDataBase.Dungeon1Level < nowLevel + 1)
-                {
-                    playerDataBase.Dungeon1Level += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon1Level", playerDataBase.Dungeon1Level);
-                }
+                playerDataBase.Dungeon1Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon1Count", playerDataBase.Dungeon1Count);
+
+                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * nowLevel;
+                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * nowLevel;
                 break;
             case DungeonType.Dungeon2:
                 playerDataBase.DungeonKey2 -= 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey2", playerDataBase.DungeonKey2);
 
-                if (playerDataBase.Dungeon2Level < nowLevel + 1)
-                {
-                    playerDataBase.Dungeon2Level += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon2Level", playerDataBase.Dungeon2Level);
-                }
+                playerDataBase.Dungeon2Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon2Count", playerDataBase.Dungeon2Count);
+
+                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * nowLevel;
+                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * nowLevel;
                 break;
             case DungeonType.Dungeon3:
                 playerDataBase.DungeonKey3 -= 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey3", playerDataBase.DungeonKey3);
 
-                if (playerDataBase.Dungeon3Level < nowLevel + 1)
-                {
-                    playerDataBase.Dungeon3Level += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon3Level", playerDataBase.Dungeon3Level);
-                }
+                playerDataBase.Dungeon3Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon3Count", playerDataBase.Dungeon3Count);
+
+                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * nowLevel;
+                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * nowLevel;
                 break;
             case DungeonType.Dungeon4:
                 playerDataBase.DungeonKey4 -= 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey4", playerDataBase.DungeonKey4);
 
-                if (playerDataBase.Dungeon4Level < nowLevel + 1)
-                {
-                    playerDataBase.Dungeon4Level += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon4Level", playerDataBase.Dungeon4Level);
-                }
+                playerDataBase.Dungeon4Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dungeon4Count", playerDataBase.Dungeon4Count);
+
+                plusNumber1 = dungeonInfo.rewardInfos[0].addNumber * nowLevel;
+                plusNumber2 = dungeonInfo.rewardInfos[1].addNumber * nowLevel;
                 break;
         }
 

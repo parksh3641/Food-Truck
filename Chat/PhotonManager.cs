@@ -31,6 +31,7 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 	private int index = 0;
 
 	private bool delay = false;
+	private bool first = false;
 
 	public string[] lines;
 	string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
@@ -111,6 +112,8 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 		chatContentList[index].gameObject.transform.SetAsFirstSibling();
 
 		index++;
+
+		first = false;
 	}
 
 	public void OnApplicationQuit()
@@ -145,7 +148,16 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 
 		chatUI.SetActive(true);
 
-		AddLine("<Color=#FFFF00>" + GameStateManager.instance.NickName.ToString() + "</Color> " + LocalizationManager.instance.GetString("IsOnline"));
+		for (int i = 0; i < chatContentList.Count; i++)
+		{
+			chatContentList[i].gameObject.SetActive(false);
+		}
+
+		if(!first)
+        {
+			first = true;
+			AddLine("<Color=#FFFF00>" + GameStateManager.instance.NickName.ToString() + "</Color> " + LocalizationManager.instance.GetString("IsOnline"));
+		}
 
 		chatUISmallText.Initialize(LocalizationManager.instance.GetString("ChatStart"));
 		Close();

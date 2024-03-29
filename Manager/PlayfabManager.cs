@@ -658,6 +658,8 @@ public class PlayfabManager : MonoBehaviour
             GetTitleInternalData("AOSVersion", CheckUpdate);
 #elif UNITY_IOS
             GetTitleInternalData("IOSVersion", CheckUpdate);
+#else
+            StartCoroutine(LoadDataCoroutine());
 #endif
         }
         else

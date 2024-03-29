@@ -192,7 +192,7 @@ public class ChestBoxManager : MonoBehaviour
             epicRewardType = RewardType.Gold2;
 
             normalRewardIcon.sprite = rewardArray[(int)normalRewardType];
-            normalRewardText.text = MoneyUnitString.ToCurrencyString(50000);
+            normalRewardText.text = MoneyUnitString.ToCurrencyString(100000);
 
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
             epicRewardText.text = MoneyUnitString.ToCurrencyString(1000000);
@@ -200,23 +200,23 @@ public class ChestBoxManager : MonoBehaviour
             if (playerDataBase.Candy1MaxValue > 0)
             {
                 normalRewardText.text = MoneyUnitString.ToCurrencyString(300000);
-                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(3000000) + "</size>";
+                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
             }
 
             if (playerDataBase.JapaneseFood1MaxValue > 0)
             {
                 normalRewardText.text = MoneyUnitString.ToCurrencyString(500000);
-                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
+                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
             }
 
             if (playerDataBase.Dessert1MaxValue > 0)
             {
-                normalRewardText.text = MoneyUnitString.ToCurrencyString(1000000);
-                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
+                normalRewardText.text = MoneyUnitString.ToCurrencyString(10000000);
+                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(50000000) + "</size>";
             }
 
         }
-        else if (random > 31)
+        else if (random > 41)
         {
             portion = Random.Range(0, 5);
 
@@ -250,7 +250,7 @@ public class ChestBoxManager : MonoBehaviour
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
             epicRewardText.text = "5 ~ 10";
         }
-        else if (random > 11)
+        else if (random > 21)
         {
             normalRewardType = RewardType.DefDestroyTicketPiece;
             epicRewardType = RewardType.DefDestroyTicket;

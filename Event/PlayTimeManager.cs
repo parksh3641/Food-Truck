@@ -79,13 +79,13 @@ public class PlayTimeManager : MonoBehaviour
         attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Crystal, 10);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Exp, 5000);
+        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Exp, 10000);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[3].receiveContent[0].Initialize(RewardType.Crystal, 20);
 
         attendanceContentArray[4].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[4].receiveContent[0].Initialize(RewardType.EventTicket, 2);
+        attendanceContentArray[4].receiveContent[0].Initialize(RewardType.EventTicket, 3);
 
         attendanceContentArray[5].receiveContent[0].gameObject.SetActive(true);
         attendanceContentArray[5].receiveContent[0].Initialize(RewardType.TreasureBox, 1);
@@ -109,15 +109,15 @@ public class PlayTimeManager : MonoBehaviour
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10);
                 break;
             case 2:
-                PortionManager.instance.GetExp(5000);
+                PortionManager.instance.GetExp(10000);
                 break;
             case 3:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 20);
                 break;
             case 4:
-                PortionManager.instance.GetEventTicket(2);
+                PortionManager.instance.GetEventTicket(3);
 
-                playerDataBase.EventTicketCount += 2;
+                playerDataBase.EventTicketCount += 3;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
                 break;
             case 5:

@@ -60,7 +60,7 @@ public class SkillContent : MonoBehaviour
 
     private int priceGold = 500000;
 
-    private int priceCrystal = 5;
+    private int priceCrystal = 1;
     private int maxCrystal = 20;
 
     private int priceCP = 10;

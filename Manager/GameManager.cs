@@ -280,9 +280,9 @@ public class GameManager : MonoBehaviour
     private int season = 0;
     private int gender = 0;
 
-    protected float rareFoodPercent = 10.0f;
+    protected float rareFoodPercent = 5.0f;
     protected float repairTicketPercent = 10.0f;
-    protected float eventTicketPercent = 5.0f;
+    protected float eventTicketPercent = 3.0f;
 
     private bool clickDelay = false;
     private bool isReady = false;
@@ -5150,7 +5150,7 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdateSellPriceGold(sellPrice);
         PlayfabManager.instance.moneyAnimation.PlusMoney(sellPrice);
 
-        if(playerDataBase.GuideIndex < 22)
+        if(playerDataBase.GuideIndex < 23)
         {
             GameStateManager.instance.GetSellGold += sellPrice;
         }
@@ -5162,6 +5162,8 @@ public class GameManager : MonoBehaviour
 
             if (Random.Range(0, 100f) < eventTicketPercent)
             {
+                if (playerDataBase.EventTicket >= 1000) return;
+
                 PortionManager.instance.GetEventTicket(1);
 
                 playerDataBase.EventTicketCount += 1;

@@ -49,7 +49,7 @@ public class GuideMissionManager : MonoBehaviour
     {
         if (GameStateManager.instance.YoutubeVideo) return;
 
-        if (playerDataBase.GuideIndex > 21)
+        if (playerDataBase.GuideIndex > 23)
         {
             guideMissonView.SetActive(false);
             return;
@@ -172,6 +172,10 @@ public class GuideMissionManager : MonoBehaviour
                 now = playerDataBase.TreasureCount;
                 need = 10;
                 break;
+            case 23:
+                now = 0;
+                need = 1;
+                break;
         }
 
         titleText.plusText = "\n( " + MoneyUnitString.ToCurrencyString(now) + " / " + MoneyUnitString.ToCurrencyString(need) + " )";
@@ -276,6 +280,9 @@ public class GuideMissionManager : MonoBehaviour
                     break;
                 case 22:
                     treasureManager.OpenTreasureView();
+                    break;
+                case 23:
+                    shopManager.OpenSpeicalShop();
                     break;
             }
         }

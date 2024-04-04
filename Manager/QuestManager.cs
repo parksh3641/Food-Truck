@@ -14,8 +14,7 @@ public class QuestManager : MonoBehaviour
     public Text questTitleText;
     public Text questInfoText;
     public LocalizationContent questClearTitleText;
-    public Text questClearValueText;
-    public Text questClearValue2Text;
+    public ReceiveContent[] receiveContents;
 
     public Text questClearCountText;
 
@@ -111,9 +110,10 @@ public class QuestManager : MonoBehaviour
             questClearTitleText.plusText = "  (+" + plus.ToString() + "%)";
         }
 
-        questClearValue2Text.text = reward2.ToString();
+        receiveContents[0].Initialize(RewardType.Gold, reward);
+        receiveContents[1].Initialize(RewardType.Crystal, reward2);
+
         questClearTitleText.ReLoad();
-        questClearValueText.text = MoneyUnitString.ToCurrencyString(reward);
 
         questClearCountText.text = LocalizationManager.instance.GetString("ClearCount") + " : " + playerDataBase.QuestCount;
 

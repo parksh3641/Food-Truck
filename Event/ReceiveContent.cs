@@ -250,6 +250,11 @@ public class ReceiveContent : MonoBehaviour
         }
     }
 
+    public void Limit(int number)
+    {
+        countText.text += "/" + number;
+    }
+
     public void OpenInfo()
     {
         ReceiveInfoManager.instance.OpenReceiveInfo(rewardType);

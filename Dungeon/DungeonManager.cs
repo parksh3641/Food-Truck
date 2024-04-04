@@ -801,6 +801,7 @@ public class DungeonManager : MonoBehaviour
                 case RewardType.Treasure9:
                     break;
                 case RewardType.TreasureBox:
+                    TreasureManager.instance.OpenTreasure(dungeonInfo.rewardInfos[i].number + plusNumber);
                     break;
                 case RewardType.DefDestroyTicketPiece:
                     break;

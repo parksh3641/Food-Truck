@@ -639,12 +639,12 @@ public class PlayfabManager : MonoBehaviour
             return;
         }
 
-#if UNITY_EDITOR || UNITY_EDITOR_OSX
-        StartCoroutine(LoadDataCoroutine());
-#elif UNITY_ANDROID
+#if UNITY_ANDROID
         GetTitleInternalData("CheckAOSVersion", CheckVersion);
 #elif UNITY_IOS
         GetTitleInternalData("CheckIOSVersion", CheckVersion);
+#else
+        StartCoroutine(LoadDataCoroutine());
 #endif
     }
 
@@ -658,8 +658,6 @@ public class PlayfabManager : MonoBehaviour
             GetTitleInternalData("AOSVersion", CheckUpdate);
 #elif UNITY_IOS
             GetTitleInternalData("IOSVersion", CheckUpdate);
-#else
-            StartCoroutine(LoadDataCoroutine());
 #endif
         }
         else

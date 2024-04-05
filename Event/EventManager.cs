@@ -85,7 +85,7 @@ public class EventManager : MonoBehaviour
 
     void CheckGifticon(bool check)
     {
-        if (check && GameStateManager.instance.Region == "ko")
+        if (check && GameStateManager.instance.Region == "ko" && GameStateManager.instance.StoreType != StoreType.OneStore)
         {
             gifticonEvent.SetActive(true);
             eventTransform.anchoredPosition = new Vector2(0, -499);

@@ -18,8 +18,8 @@ public class RecipeEventManager : MonoBehaviour
 
     public AttendanceContent[] attendanceContentArray;
 
-    private int level = 20;
-    private int reward = 2;
+    private int level = 50;
+    private int reward = 3;
 
     PlayerDataBase playerDataBase;
 

@@ -402,7 +402,7 @@ public class ShopManager : MonoBehaviour
                 ChangeTopToggle(0);
             }
 
-            rankPointText.text = playerDataBase.RankPoint.ToString();
+            rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
             FirebaseAnalytics.LogEvent("Open_Shop");
         }
@@ -733,7 +733,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 300;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetDefTickets(1);
 
@@ -855,7 +855,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 100;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetPortion(0, 1);
 
@@ -876,7 +876,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 100;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetPortion(1, 1);
 
@@ -897,7 +897,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 100;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetPortion(2, 1);
 
@@ -918,7 +918,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 100;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetPortion(3, 1);
 
@@ -939,7 +939,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 150;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetPortion(4, 1);
 
@@ -1135,7 +1135,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 1000;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetBuffTickets(1);
 
@@ -1156,7 +1156,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetSkillTickets(1);
 
@@ -1177,7 +1177,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 20;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetRepairTickets(1);
 
@@ -1199,7 +1199,7 @@ public class ShopManager : MonoBehaviour
                     playerDataBase.RankPoint -= 200;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
-                    rankPointText.text = playerDataBase.RankPoint.ToString();
+                    rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
 
                     PortionManager.instance.GetRepairTickets(10);
 
@@ -1409,7 +1409,7 @@ public class ShopManager : MonoBehaviour
             shopAlarm.SetActive(false);
             shopIngameAlarm.SetActive(false);
 
-            abilityPointText.text = playerDataBase.AbilityPoint.ToString();
+            abilityPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.AbilityPoint);
 
             if (speicalIndex == -1)
             {
@@ -4708,9 +4708,9 @@ public class ShopManager : MonoBehaviour
         playerDataBase.AbilityPoint -= price_LevelUp;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("AbilityPoint", playerDataBase.AbilityPoint);
 
-        abilityPointText.text = playerDataBase.AbilityPoint.ToString();
+        abilityPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.AbilityPoint);
 
-        if(level + 1 < 10)
+        if (level + 1 < 10)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
             NotionManager.instance.UseNotion4(NotionType.SuccessUpgrade);

@@ -185,7 +185,7 @@ public class OfflineManager : MonoBehaviour
 
         priceCrystal = (playerDataBase.CastleLevel + 1) * 5;
         addCoin = 1000000 + playerDataBase.CastleLevel * 20000;
-        addExp = 10000 + playerDataBase.CastleLevel * 500;
+        addExp = 5000 + playerDataBase.CastleLevel * 500;
         addCrystal = 1;
 
         addCoin += (int)(addCoin * (playerDataBase.Treasure5 * 0.003f));

@@ -36,14 +36,14 @@ public class SkillContent : MonoBehaviour
 
     public Sprite[] buttonImgArray;
 
-    private float skill1Value = 0.3f;
-    private float skill2Value = 0.3f;
-    private float skill3Value = 1f;
-    private float skill4Value = 0.3f;
-    private float skill5Value = 0.3f;
-    private float skill6Value = 0.3f;
-    private float skill12Value = 0.3f;
-    private float skill13Value = 0.3f;
+    private float skill1Value = 0.2f;
+    private float skill2Value = 0.2f;
+    private float skill3Value = 0.5f;
+    private float skill4Value = 0.2f;
+    private float skill5Value = 0.2f;
+    private float skill6Value = 0.2f;
+    private float skill12Value = 0.2f;
+    private float skill13Value = 0.2f;
 
     private float skill7Value = 0.1f;
     private float skill8Value = 0.2f;
@@ -65,11 +65,11 @@ public class SkillContent : MonoBehaviour
 
     private int priceCP = 10;
     private int addPriceCP = 10;
-    private int maxCP = 200;
+    private int maxCP = 300;
 
     private int maxLevelGold = 500;
     private int maxLevelCrystal = 100;
-    private int maxLevelChallenge = 100;
+    private int maxLevelChallenge = 50;
 
     private int level = 0;
     private int plusLevel = 1;
@@ -870,8 +870,8 @@ public class SkillContent : MonoBehaviour
                 case 0:
                     if (level + 50 > maxLevelGold - 1)
                     {
-                        value = CalculateTotalCost(level, (level + 50) - maxLevelGold);
-                        plusLevel = (level + 50) - maxLevelGold;
+                        plusLevel = maxLevelGold - level;
+                        value = CalculateTotalCost(level, plusLevel);
                     }
                     else
                     {
@@ -880,11 +880,10 @@ public class SkillContent : MonoBehaviour
                     }
                     break;
                 case 1:
-
                     if(level + 10 > maxLevelGold - 1)
                     {
-                        value = CalculateTotalCost(level, (level + 10) - maxLevelGold);
-                        plusLevel = (level + 10) - maxLevelGold;
+                        plusLevel = maxLevelGold - level;
+                        value = CalculateTotalCost(level, plusLevel);
                     }
                     else
                     {
@@ -908,12 +907,12 @@ public class SkillContent : MonoBehaviour
     public long CalculateTotalCost(int currentLevel, int levelsToIncrease)
     {
         long totalCost = 0;
-        int additionalCost = priceGold;
+        double additionalCost = priceGold;
 
         for (int i = 0; i < levelsToIncrease; i++)
         {
-            totalCost += additionalCost;
-            totalCost += additionalCost * ((currentLevel + i) / 10);
+            totalCost += (long)additionalCost;
+            totalCost += (long)(additionalCost * ((currentLevel + i) * 0.1f));
         }
 
         return totalCost;

@@ -666,7 +666,7 @@ public class GameManager : MonoBehaviour
 
         levelManager.Initialize();
 
-        bestRankLevelText.localizationName = "TotalLevel";
+        bestRankLevelText.localizationName = "Best";
         bestRankLevelText.plusText = "";
 
         switch (SeasonManager.instance.CheckSeason_Ranking())
@@ -760,12 +760,17 @@ public class GameManager : MonoBehaviour
 
         GameStateManager.instance.SaveGold = 0;
 
-        Invoke("ServerDelay", 3.0f);
+        Invoke("ServerDelay", 2.0f);
     }
 
     void CheckGifticon(bool check)
     {
         gifticonEvent.SetActive(check);
+
+        if(GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            gifticonEvent.SetActive(false);
+        }
     }
 
     void ServerDelay()
@@ -1811,21 +1816,21 @@ public class GameManager : MonoBehaviour
         upgradeDessert = upgradeDataBase.GetUpgradeDessert(GameStateManager.instance.DessertType);
 
         feverTime = 30;
-        feverTime += (30 * (0.003f * playerDataBase.Skill1));
+        feverTime += (30 * (0.002f * playerDataBase.Skill1));
         feverTime += (30 * (0.004f * playerDataBase.Treasure9));
 
-        feverCountPlus += (feverCountPlus * (0.003f * playerDataBase.Skill2));
-        feverPlus = 3 + (3 * (0.01f * playerDataBase.Skill3));
+        feverCountPlus += (feverCountPlus * (0.002f * playerDataBase.Skill2));
+        feverPlus = 3 + (3 * (0.005f * playerDataBase.Skill3));
 
-        portion1Time = 30 + (30 * (0.003f * playerDataBase.Skill4)) + (30 * (0.006f * playerDataBase.Treasure6));
-        portion2Time = 30 + (30 * (0.003f * playerDataBase.Skill5)) + (30 * (0.006f * playerDataBase.Treasure6));
-        portion3Time = 30 + (30 * (0.003f * playerDataBase.Skill6)) + (30 * (0.006f * playerDataBase.Treasure6));
-        portion4Plus = 0.003f * playerDataBase.Skill12;
-        portion5Time = 30 + (30 * (0.003f * playerDataBase.Skill13)) + (30 * (0.006f * playerDataBase.Treasure6));
+        portion1Time = 30 + (30 * (0.002f * playerDataBase.Skill4)) + (30 * (0.006f * playerDataBase.Treasure6));
+        portion2Time = 30 + (30 * (0.002f * playerDataBase.Skill5)) + (30 * (0.006f * playerDataBase.Treasure6));
+        portion3Time = 30 + (30 * (0.002f * playerDataBase.Skill6)) + (30 * (0.006f * playerDataBase.Treasure6));
+        portion4Plus = 0.002f * playerDataBase.Skill12;
+        portion5Time = 30 + (30 * (0.002f * playerDataBase.Skill13)) + (30 * (0.006f * playerDataBase.Treasure6));
 
         if (playerDataBase.GoldX2)
         {
-            sellPricePlus += 100;
+            sellPricePlus += 200;
         }
 
         if (feverMode)
@@ -2331,7 +2336,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (playerDataBase.Island1Level * 0.02f));
+                sellPrice += (int)(sellPrice * (playerDataBase.Island1Level * 0.05f));
                 break;
             case IslandType.Island2:
                 maxLevel = upgradeCandy.maxLevel;
@@ -2342,7 +2347,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (0.1f + (playerDataBase.Island2Level * 0.02f)));
+                sellPrice += (int)(sellPrice * (0.1f + (playerDataBase.Island2Level * 0.05f)));
                 break;
             case IslandType.Island3:
                 maxLevel = upgradeJapaneseFood.maxLevel;
@@ -2353,7 +2358,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (0.2f + (playerDataBase.Island3Level * 0.02f)));
+                sellPrice += (int)(sellPrice * (0.2f + (playerDataBase.Island3Level * 0.05f)));
                 break;
             case IslandType.Island4:
                 maxLevel = upgradeDessert.maxLevel;
@@ -2364,7 +2369,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * (0.3f + (playerDataBase.Island4Level * 0.02f)));
+                sellPrice += (int)(sellPrice * (0.3f + (playerDataBase.Island4Level * 0.05f)));
                 break;
         }
 
@@ -5140,9 +5145,9 @@ public class GameManager : MonoBehaviour
 
         if(speicalFood)
         {
-            Debug.LogError("Sell_RareFood");
+            PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 5 + (level / 5)));
 
-            PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 10 + (level / 5)));
+            Debug.LogError("Sell_RareFood");
 
             FirebaseAnalytics.LogEvent("Sell_RareFood");
         }
@@ -5403,7 +5408,7 @@ public class GameManager : MonoBehaviour
         {
             defTicketObj.SetActive(true);
 
-            defTicketText.text = playerDataBase.DefDestroyTicket + "/1";
+            defTicketText.text = MoneyUnitString.ToCurrencyString(playerDataBase.DefDestroyTicket) + "/1";
 
             if (playerDataBase.DefDestroyTicket <= 0)
             {
@@ -5506,7 +5511,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 portionAd1.SetActive(false);
-                portionText1.text = playerDataBase.Portion1.ToString();
+                portionText1.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion1);
             }
 
             if (playerDataBase.Portion2 == 0)
@@ -5517,7 +5522,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 portionAd2.SetActive(false);
-                portionText2.text = playerDataBase.Portion2.ToString();
+                portionText2.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion2);
             }
 
             if (playerDataBase.Portion3 == 0)
@@ -5528,7 +5533,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 portionAd3.SetActive(false);
-                portionText3.text = playerDataBase.Portion3.ToString();
+                portionText3.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion3);
             }
 
             if (playerDataBase.Portion4 == 0)
@@ -5539,7 +5544,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 portionAd4.SetActive(false);
-                portionText4.text = playerDataBase.Portion4.ToString();
+                portionText4.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion4);
             }
 
             if (playerDataBase.Portion5 == 0)
@@ -5550,7 +5555,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 portionAd5.SetActive(false);
-                portionText5.text = playerDataBase.Portion5.ToString();
+                portionText5.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion5);
             }
 
             if (playerDataBase.Portion6 == 0)
@@ -5560,7 +5565,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 portionAd6.SetActive(false);
-                portionText6.text = playerDataBase.Portion6.ToString();
+                portionText6.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion6);
             }
 
             if (guideMissionManager.guideMissonView.gameObject.activeInHierarchy)

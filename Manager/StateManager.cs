@@ -150,7 +150,8 @@ public class StateManager : MonoBehaviour
 
             Debug.Log("앱은 Amazon Appstore에서 설치되었습니다.");
         }
-        else if (installerPackageName.Equals("com.skt.skaf.A000Z00040"))
+        else if (installerPackageName.Equals("com.skt.skaf.A000Z00040") || installerPackageName.Equals("com.kt.olleh.storefront")
+            || installerPackageName.Equals("android.lgt.appstore") || installerPackageName.Equals("com.lguplus.appstore"))
         {
             GameStateManager.instance.StoreType = StoreType.OneStore;
 

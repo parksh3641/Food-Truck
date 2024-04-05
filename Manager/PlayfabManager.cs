@@ -191,7 +191,7 @@ public class PlayfabManager : MonoBehaviour
 
     public void LogOut()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_EDITOR_OSX
         PlayFabClientAPI.ForgetAllCredentials();
 #elif UNITY_ANDROID
         ((PlayGamesPlatform)Social.Active).SignOut();
@@ -221,7 +221,7 @@ public class PlayfabManager : MonoBehaviour
 #region Message
     private void SetEditorOnlyMessage(string message, bool error = false)
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_EDITOR_OSX
         if (error) Debug.LogError("<color=red>" + message + "</color>");
         //else Debug.Log(message);
 #endif
@@ -633,18 +633,18 @@ public class PlayfabManager : MonoBehaviour
 
         GameStateManager.instance.PlayfabId = result.PlayFabId;
 
-        if(GameStateManager.instance.StoreType == StoreType.OneStore)
-        {
-            StartCoroutine(LoadDataCoroutine());
-            return;
-        }
+        //if(GameStateManager.instance.StoreType == StoreType.OneStore)
+        //{
+        //    StartCoroutine(LoadDataCoroutine());
+        //    return;
+        //}
 
-#if UNITY_ANDROID
+#if UNITY_EDITOR || UNITY_EDITOR_OSX
+        StartCoroutine(LoadDataCoroutine());
+#elif UNITY_ANDROID
         GetTitleInternalData("CheckAOSVersion", CheckVersion);
 #elif UNITY_IOS
         GetTitleInternalData("CheckIOSVersion", CheckVersion);
-#else
-        StartCoroutine(LoadDataCoroutine());
 #endif
     }
 
@@ -2236,21 +2236,51 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Skill1":
                            playerDataBase.Skill1 = statistics.Value;
+
+                           if(playerDataBase.Skill1 >= 500)
+                           {
+                               playerDataBase.Skill1 = 500;
+                           }
                            break;
                        case "Skill2":
                            playerDataBase.Skill2 = statistics.Value;
+
+                           if (playerDataBase.Skill2 >= 500)
+                           {
+                               playerDataBase.Skill2 = 500;
+                           }
                            break;
                        case "Skill3":
                            playerDataBase.Skill3 = statistics.Value;
+
+                           if (playerDataBase.Skill3 >= 500)
+                           {
+                               playerDataBase.Skill3 = 500;
+                           }
                            break;
                        case "Skill4":
                            playerDataBase.Skill4 = statistics.Value;
+
+                           if (playerDataBase.Skill4 >= 500)
+                           {
+                               playerDataBase.Skill4 = 500;
+                           }
                            break;
                        case "Skill5":
                            playerDataBase.Skill5 = statistics.Value;
+
+                           if (playerDataBase.Skill5 >= 500)
+                           {
+                               playerDataBase.Skill5 = 500;
+                           }
                            break;
                        case "Skill6":
                            playerDataBase.Skill6 = statistics.Value;
+
+                           if (playerDataBase.Skill6 >= 500)
+                           {
+                               playerDataBase.Skill6 = 500;
+                           }
                            break;
                        case "Skill7":
                            playerDataBase.Skill7 = statistics.Value;
@@ -2269,9 +2299,19 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Skill12":
                            playerDataBase.Skill12 = statistics.Value;
+
+                           if (playerDataBase.Skill12 >= 500)
+                           {
+                               playerDataBase.Skill12 = 500;
+                           }
                            break;
                        case "Skill13":
                            playerDataBase.Skill13 = statistics.Value;
+
+                           if (playerDataBase.Skill13 >= 500)
+                           {
+                               playerDataBase.Skill13 = 500;
+                           }
                            break;
                        case "Skill14":
                            playerDataBase.Skill14 = statistics.Value;
@@ -2453,15 +2493,18 @@ public class PlayfabManager : MonoBehaviour
                            playerDataBase.TotalLevel_4 = statistics.Value;
                            break;
                        case "TotalLevel_5":
-                           playerDataBase.TotalLevel_6 = statistics.Value;
+                           playerDataBase.TotalLevel_5 = statistics.Value;
                            break;
                        case "TotalLevel_6":
-                           playerDataBase.TotalLevel_7 = statistics.Value;
+                           playerDataBase.TotalLevel_6 = statistics.Value;
                            break;
                        case "TotalLevel_7":
-                           playerDataBase.TotalLevel_8 = statistics.Value;
+                           playerDataBase.TotalLevel_7 = statistics.Value;
                            break;
                        case "TotalLevel_8":
+                           playerDataBase.TotalLevel_8 = statistics.Value;
+                           break;
+                       case "TotalLevel_9":
                            playerDataBase.TotalLevel_9 = statistics.Value;
                            break;
                        case "TotalLevel_10":

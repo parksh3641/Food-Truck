@@ -19,8 +19,8 @@ public class RankEventManager : MonoBehaviour
     public AttendanceContent[] attendanceContentArray;
 
     private int totalLevel = 0;
-    private int level = 20;
-    private int reward = 3;
+    private int level = 10;
+    private int reward = 2;
 
     PlayerDataBase playerDataBase;
 
@@ -94,7 +94,7 @@ public class RankEventManager : MonoBehaviour
                     break;
             }
 
-            rankEventText.text = LocalizationManager.instance.GetString("Ranking2_Info") + " : " + totalLevel;
+            rankEventText.text = LocalizationManager.instance.GetString("Ranking2") + " : " + totalLevel;
 
             CheckRankEvent();
 

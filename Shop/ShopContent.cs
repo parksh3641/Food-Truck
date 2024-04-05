@@ -270,7 +270,7 @@ public class ShopContent : MonoBehaviour
                 priceText.localizationName = itemType + "_Price";
                 priceText.ReLoad();
 
-                rewardText.text = LocalizationManager.instance.GetString("NowPrice") + " +100%";
+                rewardText.text = LocalizationManager.instance.GetString("NowPrice") + " +200%";
 
                 index = 7;
                 effect.SetActive(true);

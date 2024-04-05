@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
         GameStateManager.instance.Level = level;
 
         titleText.text = "Lv." + level.ToString();
-        levelText.text = level.ToString();
+        levelText.text = level.ToString() + "\n<size=35>/300</size>";
 
         expUp = 0;
         expUpPlus = 0;

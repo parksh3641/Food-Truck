@@ -17,6 +17,7 @@ public class SeasonManager : MonoBehaviour
 
     public ReceiveContent[] receiveContents;
 
+    private int number = 0;
     private int season = 0;
     private int myRank = 0;
     private int reward = 0;
@@ -144,48 +145,48 @@ public class SeasonManager : MonoBehaviour
             case 0:
                 receiveContents[2].gameObject.SetActive(true);
 
-                receiveContents[0].Initialize(RewardType.Crystal, 10000);
-                receiveContents[1].Initialize(RewardType.RankPoint, 5000);
+                receiveContents[0].Initialize(RewardType.Crystal, 5000);
+                receiveContents[1].Initialize(RewardType.RankPoint, 2500);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking1, 1);
 
                 break;
             case 1:
                 receiveContents[2].gameObject.SetActive(true);
 
-                receiveContents[0].Initialize(RewardType.Crystal, 8000);
-                receiveContents[1].Initialize(RewardType.RankPoint, 4000);
+                receiveContents[0].Initialize(RewardType.Crystal, 4000);
+                receiveContents[1].Initialize(RewardType.RankPoint, 2000);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking2, 1);
 
                 break;
             case 2:
                 receiveContents[2].gameObject.SetActive(true);
 
-                receiveContents[0].Initialize(RewardType.Crystal, 6000);
-                receiveContents[1].Initialize(RewardType.RankPoint, 3000);
+                receiveContents[0].Initialize(RewardType.Crystal, 3000);
+                receiveContents[1].Initialize(RewardType.RankPoint, 1500);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking3, 1);
 
                 break;
             case 3:
                 receiveContents[2].gameObject.SetActive(true);
 
-                receiveContents[0].Initialize(RewardType.Crystal, 4000);
-                receiveContents[1].Initialize(RewardType.RankPoint, 2000);
+                receiveContents[0].Initialize(RewardType.Crystal, 2000);
+                receiveContents[1].Initialize(RewardType.RankPoint, 1000);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking4, 1);
 
                 break;
             case 4:
-                receiveContents[0].Initialize(RewardType.Crystal, 2000);
-                receiveContents[1].Initialize(RewardType.RankPoint, 1500);
+                receiveContents[0].Initialize(RewardType.Crystal, 1500);
+                receiveContents[1].Initialize(RewardType.RankPoint, 750);
 
                 break;
             case 5:
                 receiveContents[0].Initialize(RewardType.Crystal, 1000);
-                receiveContents[1].Initialize(RewardType.RankPoint, 1000);
+                receiveContents[1].Initialize(RewardType.RankPoint, 500);
 
                 break;
             case 6:
-                receiveContents[0].Initialize(RewardType.Crystal, 300);
-                receiveContents[1].Initialize(RewardType.RankPoint, 500);
+                receiveContents[0].Initialize(RewardType.Crystal, 500);
+                receiveContents[1].Initialize(RewardType.RankPoint, 250);
 
                 break;
             case 7:
@@ -222,9 +223,9 @@ public class SeasonManager : MonoBehaviour
         switch (reward)
         {
             case 0:
-                PortionManager.instance.GetRankPoint(5000);
+                PortionManager.instance.GetRankPoint(2500);
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 10000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 5000);
 
                 if (!playerDataBase.CheckIcon(IconType.Icon_39))
                 {
@@ -233,9 +234,9 @@ public class SeasonManager : MonoBehaviour
                 }
                 break;
             case 1:
-                PortionManager.instance.GetRankPoint(4000);
+                PortionManager.instance.GetRankPoint(2000);
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 8000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 4000);
 
                 if (!playerDataBase.CheckIcon(IconType.Icon_40))
                 {
@@ -244,9 +245,9 @@ public class SeasonManager : MonoBehaviour
                 }
                 break;
             case 2:
-                PortionManager.instance.GetRankPoint(3000);
+                PortionManager.instance.GetRankPoint(1500);
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 6000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3000);
 
                 if (!playerDataBase.CheckIcon(IconType.Icon_41))
                 {
@@ -255,9 +256,9 @@ public class SeasonManager : MonoBehaviour
                 }
                 break;
             case 3:
-                PortionManager.instance.GetRankPoint(2000);
+                PortionManager.instance.GetRankPoint(1000);
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 4000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 2000);
 
                 if (!playerDataBase.CheckIcon(IconType.Icon_42))
                 {
@@ -266,19 +267,19 @@ public class SeasonManager : MonoBehaviour
                 }
                 break;
             case 4:
-                PortionManager.instance.GetRankPoint(1500);
+                PortionManager.instance.GetRankPoint(750);
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 2000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1500);
                 break;
             case 5:
-                PortionManager.instance.GetRankPoint(1000);
+                PortionManager.instance.GetRankPoint(500);
 
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1000);
                 break;
             case 6:
-                PortionManager.instance.GetRankPoint(500);
+                PortionManager.instance.GetRankPoint(250);
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
                 break;
         }
 
@@ -492,7 +493,7 @@ public class SeasonManager : MonoBehaviour
     {
         currentDate = DateTime.Now;
 
-        int number = 0;
+        number = 0;
 
         if (currentDate < season1Date)
         {

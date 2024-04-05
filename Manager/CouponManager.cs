@@ -91,14 +91,14 @@ public class CouponManager : MonoBehaviour
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon1", 1);
 
                     PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
 
                     couponRewardView.SetActive(true);
                     receiveContents[0].gameObject.SetActive(true);
                     receiveContents[1].gameObject.SetActive(true);
 
                     receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 500);
+                    receiveContents[1].Initialize(RewardType.Crystal, 300);
 
                     FirebaseAnalytics.LogEvent("Clear_WelcomeCoupon");
 

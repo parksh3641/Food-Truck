@@ -75,7 +75,7 @@ public class DungeonManager : MonoBehaviour
     private float attackSpeed = 0;
     private float attackX2 = 0;
 
-    private float attackDelay = 0.4f;
+    private float attackDelay = 0.5f;
 
     private bool delay = false;
     private bool clear = false;
@@ -442,7 +442,7 @@ public class DungeonManager : MonoBehaviour
         dungeonTutorial.SetActive(true);
 
         CancelInvoke("TutorialDelay");
-        Invoke("TutorialDelay", 5f);
+        Invoke("TutorialDelay", 8f);
 
         NotionManager.instance.UseNotion2(NotionType.StartDungeon);
         SoundManager.instance.PlaySFX(GameSfxType.CleanKitchenStart);

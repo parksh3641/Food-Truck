@@ -161,30 +161,30 @@ public class RankingManager : MonoBehaviour
                 rankingRewardCheck[i].SetActive(false);
             }
 
-            receiveContents[0].Initialize(RewardType.Crystal, 10000);
-            receiveContents[1].Initialize(RewardType.RankPoint, 5000);
+            receiveContents[0].Initialize(RewardType.Crystal, 5000);
+            receiveContents[1].Initialize(RewardType.RankPoint, 2500);
             receiveContents[2].Initialize(RewardType.Icon_Ranking1, 1);
 
-            receiveContents[3].Initialize(RewardType.Crystal, 8000);
-            receiveContents[4].Initialize(RewardType.RankPoint, 4000);
+            receiveContents[3].Initialize(RewardType.Crystal, 4000);
+            receiveContents[4].Initialize(RewardType.RankPoint, 2000);
             receiveContents[5].Initialize(RewardType.Icon_Ranking2, 1);
 
-            receiveContents[6].Initialize(RewardType.Crystal, 6000);
-            receiveContents[7].Initialize(RewardType.RankPoint, 3000);
+            receiveContents[6].Initialize(RewardType.Crystal, 3000);
+            receiveContents[7].Initialize(RewardType.RankPoint, 1500);
             receiveContents[8].Initialize(RewardType.Icon_Ranking3, 1);
 
-            receiveContents[9].Initialize(RewardType.Crystal, 4000);
-            receiveContents[10].Initialize(RewardType.RankPoint, 2000);
+            receiveContents[9].Initialize(RewardType.Crystal, 2000);
+            receiveContents[10].Initialize(RewardType.RankPoint, 1000);
             receiveContents[11].Initialize(RewardType.Icon_Ranking4, 1);
 
-            receiveContents[12].Initialize(RewardType.Crystal, 2000);
-            receiveContents[13].Initialize(RewardType.RankPoint, 1500);
+            receiveContents[12].Initialize(RewardType.Crystal, 1500);
+            receiveContents[13].Initialize(RewardType.RankPoint, 750);
 
             receiveContents[14].Initialize(RewardType.Crystal, 1000);
-            receiveContents[15].Initialize(RewardType.RankPoint, 1000);
+            receiveContents[15].Initialize(RewardType.RankPoint, 500);
 
-            receiveContents[16].Initialize(RewardType.Crystal, 300);
-            receiveContents[17].Initialize(RewardType.RankPoint, 500);
+            receiveContents[16].Initialize(RewardType.Crystal, 500);
+            receiveContents[17].Initialize(RewardType.RankPoint, 250);
 
             isDelay = true;
 
@@ -273,7 +273,7 @@ public class RankingManager : MonoBehaviour
                 FirebaseAnalytics.LogEvent("Open_Ranking3");
                 break;
             case 3:
-                ChangeRankingView(RankingType.DefDestroyCount.ToString());
+                ChangeRankingView(RankingType.Level.ToString());
 
                 infoText.localizationName = "Ranking4_Info";
 

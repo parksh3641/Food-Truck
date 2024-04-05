@@ -44,7 +44,7 @@ public enum RankingType
     UpgradeCount,
     TotalLevel,
     GourmetLevel,
-    DefDestroyCount
+    Level
 }
 
 public enum LanguageType

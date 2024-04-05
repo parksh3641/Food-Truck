@@ -252,7 +252,7 @@ public class ReceiveContent : MonoBehaviour
 
     public void Limit(int number)
     {
-        countText.text += "/" + number;
+        countText.text += "/" + MoneyUnitString.ToCurrencyString(number);
     }
 
     public void OpenInfo()

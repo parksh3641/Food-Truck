@@ -144,7 +144,7 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 	{
 		Debug.Log("서버에 연결되었습니다.");
 
-		chatClient.Subscribe(new string[] { currentChannelName }, 30);
+		chatClient.Subscribe(new string[] { currentChannelName }, 100);
 
 		chatUI.SetActive(true);
 
@@ -153,13 +153,8 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 			chatContentList[i].gameObject.SetActive(false);
 		}
 
-		if(!first)
-        {
-			first = true;
-			AddLine("<Color=#FFFF00>" + GameStateManager.instance.NickName.ToString() + "</Color> " + LocalizationManager.instance.GetString("IsOnline"));
-		}
-
 		chatUISmallText.Initialize(LocalizationManager.instance.GetString("ChatStart"));
+
 		Close();
 	}
 
@@ -180,6 +175,18 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 	public void OnSubscribed(string[] channels, bool[] results)
 	{
 		Debug.Log(string.Format("채널 입장 ({0})", string.Join(",", channels)));
+
+		Invoke("FirstDelay", 2.0f);
+	}
+
+	void FirstDelay()
+    {
+		if (!first)
+		{
+			first = true;
+
+			chatClient.PublishMessage(currentChannelName, LocalizationManager.instance.GetString("IsOnline"));
+		}
 	}
 
 	public void OnUnsubscribed(string[] channels)
@@ -192,6 +199,11 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 		for (int i = 0; i < messages.Length; i++)
 		{
 			AddLine(string.Format("<Color=#FFFF00>{0}</Color> : {1}", senders[i], messages[i].ToString()));
+
+			if(chatUISmallScreen.gameObject.activeInHierarchy)
+            {
+				chatUISmallText.Initialize(string.Format("<Color=#FFFF00>{0}</Color> : {1}", senders[i], messages[i].ToString()));
+			}
 		}
 	}
 

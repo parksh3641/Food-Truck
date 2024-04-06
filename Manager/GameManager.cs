@@ -280,9 +280,9 @@ public class GameManager : MonoBehaviour
     private int season = 0;
     private int gender = 0;
 
-    protected float rareFoodPercent = 5.0f;
-    protected float repairTicketPercent = 10.0f;
-    protected float eventTicketPercent = 3.0f;
+    private float rareFoodPercent = 5.0f;
+    private float recoverTicketPercent = 10.0f;
+    private float eventTicketPercent = 3.0f;
 
     private bool clickDelay = false;
     private bool isReady = false;
@@ -1380,6 +1380,10 @@ public class GameManager : MonoBehaviour
 
         yield return firstSeconds;
 
+        PortionManager.instance.GetRepairTickets(10);
+
+        yield return firstSeconds;
+
         PortionManager.instance.GetBuffTickets(2);
 
         yield return firstSeconds;
@@ -1750,6 +1754,12 @@ public class GameManager : MonoBehaviour
         defDestroy = 0;
         expUp = 0;
         expUpPlus = 0;
+
+        recoverTicketPercent = 10.0f;
+        eventTicketPercent = 3.0f;
+
+        recoverTicketPercent += (recoverTicketPercent * (playerDataBase.Treasure15 * 0.003f));
+        eventTicketPercent += (eventTicketPercent * (playerDataBase.Treasure15 * 0.003f));
 
         changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
@@ -3698,7 +3708,7 @@ public class GameManager : MonoBehaviour
             {
                 if (maxLevel >= 20)
                 {
-                    if (Random.Range(0, 100f) < repairTicketPercent)
+                    if (Random.Range(0, 100f) < recoverTicketPercent)
                     {
                         PortionManager.instance.GetRepairTickets(1);
 
@@ -6547,9 +6557,10 @@ public class GameManager : MonoBehaviour
         playerDataBase.Treasure12 = 100;
         playerDataBase.Treasure13 = 100;
         playerDataBase.Treasure14 = 100;
+        playerDataBase.Treasure15 = 100;
 
-
-        playerDataBase.Level = 100;
+        playerDataBase.Level = 300;
+        playerDataBase.CastleLevel = 300;
         playerDataBase.Proficiency = 100;
     }
 
@@ -6589,6 +6600,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.Treasure12 = 0;
         playerDataBase.Treasure13 = 0;
         playerDataBase.Treasure14 = 0;
+        playerDataBase.Treasure15 = 0;
     }
 
     public void GetResetReward()

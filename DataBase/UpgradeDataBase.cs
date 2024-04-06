@@ -250,7 +250,7 @@ public class UpgradeDataBase : ScriptableObject
                 price = level * (value * priceList[level].value);
                 break;
             case GameType.Rank:
-                price = level * level * 50;
+                price = level * level * 100;
 
                 break;
         }

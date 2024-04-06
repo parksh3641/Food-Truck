@@ -605,6 +605,24 @@ public class ShopManager : MonoBehaviour
                     packageContents[7].Initialize(PackageType.Package9, this);
                 }
 
+                if (playerDataBase.Package10)
+                {
+                    packageContents[8].gameObject.SetActive(false);
+                }
+                else
+                {
+                    packageContents[8].Initialize(PackageType.Package10, this);
+                }
+
+                if (playerDataBase.Package11)
+                {
+                    packageContents[9].gameObject.SetActive(false);
+                }
+                else
+                {
+                    packageContents[9].Initialize(PackageType.Package11, this);
+                }
+
                 //if (playerDataBase.Package1 && playerDataBase.Package2 && playerDataBase.Package3 && playerDataBase.Package4
                 //    && playerDataBase.Package5 && playerDataBase.Package6)
                 //{
@@ -4533,6 +4551,57 @@ public class ShopManager : MonoBehaviour
                 TreasureManager.instance.OpenTreasure(11);
 
                 break;
+            case PackageType.Package10:
+                if (playerDataBase.Package10) yield break;
+
+                Invoke("PackageDelay10", 0.5f);
+
+                playerDataBase.Treasure13Count += 100;
+                playerDataBase.Treasure14Count += 100;
+                playerDataBase.Treasure15Count += 100;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure13Count", playerDataBase.Treasure13Count);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure14Count", playerDataBase.Treasure14Count);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure15Count", playerDataBase.Treasure15Count);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetEventTicket(2000);
+
+                yield return waitForSeconds;
+
+                playerDataBase.Package10 = true;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package10", 1);
+
+                break;
+            case PackageType.Package11:
+                if (playerDataBase.Package11) yield break;
+
+                Invoke("PackageDelay11", 0.5f);
+
+                playerDataBase.Treasure1Count += 100;
+                playerDataBase.Treasure2Count += 100;
+                playerDataBase.Treasure3Count += 100;
+
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure1Count", playerDataBase.Treasure1Count);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure2Count", playerDataBase.Treasure2Count);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure3Count", playerDataBase.Treasure3Count);
+
+                yield return waitForSeconds;
+
+                PortionManager.instance.GetEventTicket(1000);
+
+                yield return waitForSeconds;
+
+                playerDataBase.Package11 = true;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package11", 1);
+
+                break;
+            case PackageType.Package12:
+                if (playerDataBase.Package12) yield break;
+
+
+                break;
         }
 
         FirebaseAnalytics.LogEvent("Buy_Package : " + type.ToString());
@@ -4612,6 +4681,16 @@ public class ShopManager : MonoBehaviour
     void PackageDelay7()
     {
         package.SetActive(false);
+    }
+
+    void PackageDelay10()
+    {
+        packageContents[8].gameObject.SetActive(false);
+    }
+
+    void PackageDelay11()
+    {
+        packageContents[9].gameObject.SetActive(false);
     }
 
     public void Failed()

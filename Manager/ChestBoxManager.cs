@@ -66,13 +66,14 @@ public class ChestBoxManager : MonoBehaviour
 
         if (GameStateManager.instance.ChestBoxCount >= 20) return;
 
-        goalCount = 180;
-        goalCount = (int)(goalCount - (goalCount * (0.003f * playerDataBase.Treasure12)));
+        goalCount = 270;
 
-        if(playerDataBase.AutoPresent)
+        if (playerDataBase.AutoPresent)
         {
             goalCount /= 2;
         }
+
+        goalCount = (int)(goalCount - (goalCount * (0.003f * playerDataBase.Treasure12)));
 
 #if UNITY_EDITOR
         goalCount = 2;
@@ -135,7 +136,9 @@ public class ChestBoxManager : MonoBehaviour
         }
 
         limitText.text = limit.ToString();
+
         yield return waitForSeconds;
+
         StartCoroutine(LimitCoroution());
     }
 
@@ -152,6 +155,7 @@ public class ChestBoxManager : MonoBehaviour
             {
                 limit = limitTime;
                 limitText.text = "";
+                StopAllCoroutines();
                 StartCoroutine(LimitCoroution());
             }
 

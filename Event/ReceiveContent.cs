@@ -247,6 +247,10 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[3];
                 effect.SetActive(true);
                 break;
+            case RewardType.Treasure15:
+                mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
+                break;
         }
     }
 

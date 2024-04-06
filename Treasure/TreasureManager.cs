@@ -41,7 +41,7 @@ public class TreasureManager : MonoBehaviour
     private int price = 30;
     private bool oneMore = false;
 
-    private float legendaryPercent = 2.0f;
+    private float legendaryPercent = 3.0f;
     private float epicPercent = 4.0f;
     private float rarePercent = 4.0f;
     private float normalPercent = 4.0f;
@@ -52,6 +52,8 @@ public class TreasureManager : MonoBehaviour
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(0.5f);
 
     PlayerDataBase playerDataBase;
+
+    public GuideMissionManager guideMissionManager;
 
     private void Awake()
     {
@@ -286,6 +288,8 @@ public class TreasureManager : MonoBehaviour
         playerDataBase.TreasureCount += count;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TreasureCount", playerDataBase.TreasureCount);
 
+        guideMissionManager.Initialize();
+
         for (int i = 0; i < receiveContents.Length; i++)
         {
             receiveContents[i].gameObject.SetActive(false);
@@ -352,6 +356,9 @@ public class TreasureManager : MonoBehaviour
                     break;
                 case 13:
                     receiveContents[i].Initialize(RewardType.Treasure14, -1);
+                    break;
+                case 14:
+                    receiveContents[i].Initialize(RewardType.Treasure15, -1);
                     break;
             }
 
@@ -458,6 +465,10 @@ public class TreasureManager : MonoBehaviour
             case 13:
                 playerDataBase.Treasure14Count += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure14Count", playerDataBase.Treasure14Count);
+                break;
+            case 14:
+                playerDataBase.Treasure15Count += 1;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure15Count", playerDataBase.Treasure15Count);
                 break;
         }
     }

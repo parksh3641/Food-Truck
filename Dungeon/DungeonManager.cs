@@ -496,7 +496,7 @@ public class DungeonManager : MonoBehaviour
         attackText.plusText = " : " + success.ToString("N1") + "%";
         attackText.plusText += " (+" + attackPlus.ToString("N1") + "%)";
 
-        attackDelay = 0.4f - (0.4f * (attackSpeed * 0.01f));
+        attackDelay = 0.5f - (0.5f * (attackSpeed * 0.01f));
 
         if(attackDelay < 0.1f)
         {

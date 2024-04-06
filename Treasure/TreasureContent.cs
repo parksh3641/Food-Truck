@@ -53,6 +53,7 @@ public class TreasureContent : MonoBehaviour
     private float treasure12Value = 0.3f;
     private float treasure13Value = 0.6f;
     private float treasure14Value = 0.3f;
+    private float treasure15Value = 0.3f;
 
     Sprite[] treasureArray;
 
@@ -517,6 +518,35 @@ public class TreasureContent : MonoBehaviour
                     upgradeButton.SetActive(false);
                 }
                 break;
+            case TreasureType.Treasure15:
+                count = playerDataBase.Treasure15Count;
+                level = playerDataBase.Treasure15;
+                nowValue = treasure15Value * playerDataBase.Treasure15;
+                need = (playerDataBase.Treasure15 / needUp) + 1;
+
+                if (playerDataBase.Treasure15 < maxLevel - 1)
+                {
+                    nextValue = treasure15Value * (playerDataBase.Treasure15 + 1);
+
+                    if (count >= need)
+                    {
+                        check = 1;
+                    }
+                }
+                else
+                {
+                    nextValue = treasure15Value * (playerDataBase.Treasure15);
+
+                    check = 2;
+                }
+
+                background.effectColor = legendaryColor;
+
+                if (level > 99)
+                {
+                    upgradeButton.SetActive(false);
+                }
+                break;
         }
 
         percent = 100 - ((level / 10) * 5);
@@ -738,6 +768,16 @@ public class TreasureContent : MonoBehaviour
                 {
                     playerDataBase.Treasure14 += 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure14", playerDataBase.Treasure14);
+                }
+                break;
+            case TreasureType.Treasure15:
+                playerDataBase.Treasure15Count -= need;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure15Count", playerDataBase.Treasure15Count);
+
+                if (success)
+                {
+                    playerDataBase.Treasure15 += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure15", playerDataBase.Treasure15);
                 }
                 break;
         }

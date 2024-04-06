@@ -280,6 +280,8 @@ public class PlayerDataBase : ScriptableObject
     private int treasure13 = 0;
     [SerializeField]
     private int treasure14 = 0;
+    [SerializeField]
+    private int treasure15 = 0;
 
     [Space]
     [SerializeField]
@@ -310,6 +312,8 @@ public class PlayerDataBase : ScriptableObject
     private int treasure13Count = 0;
     [SerializeField]
     private int treasure14Count = 0;
+    [SerializeField]
+    private int treasure15Count = 0;
 
     [Space]
     [Title("Food Number")]
@@ -828,6 +832,12 @@ public class PlayerDataBase : ScriptableObject
     private int package8 = 0;
     [SerializeField]
     private int package9 = 0;
+    [SerializeField]
+    private bool package10 = false;
+    [SerializeField]
+    private bool package11 = false;
+    [SerializeField]
+    private bool package12 = false;
 
 
     [Space]
@@ -1811,6 +1821,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int Treasure15
+    {
+        get
+        {
+            return treasure15;
+        }
+        set
+        {
+            treasure15 = value;
+        }
+    }
+
     public int Treasure1Count
     {
         get
@@ -1976,6 +1998,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             treasure14Count = value;
+        }
+    }
+
+    public int Treasure15Count
+    {
+        get
+        {
+            return treasure15Count;
+        }
+        set
+        {
+            treasure15Count = value;
         }
     }
 
@@ -4826,6 +4860,42 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public bool Package10
+    {
+        get
+        {
+            return package10;
+        }
+        set
+        {
+            package10 = value;
+        }
+    }
+
+    public bool Package11
+    {
+        get
+        {
+            return package11;
+        }
+        set
+        {
+            package11 = value;
+        }
+    }
+
+    public bool Package12
+    {
+        get
+        {
+            return package12;
+        }
+        set
+        {
+            package12 = value;
+        }
+    }
+
     public string AttendanceDay
     {
         get
@@ -5154,6 +5224,7 @@ public class PlayerDataBase : ScriptableObject
         treasure12 = 0;
         treasure13 = 0;
         treasure14 = 0;
+        treasure15 = 0;
 
         treasure1Count = 0;
         treasure2Count = 0;
@@ -5169,6 +5240,7 @@ public class PlayerDataBase : ScriptableObject
         treasure12Count = 0;
         treasure13Count = 0;
         treasure14Count = 0;
+        treasure15Count = 0;
 
         character1 = 1;
         character2 = 0;
@@ -5461,6 +5533,9 @@ public class PlayerDataBase : ScriptableObject
         package7 = 0;
         package8 = 0;
         package9 = 0;
+        package10 = false;
+        package11 = false;
+        package12 = false;
 
         attendanceDay = "";
         attendanceCount = 0;

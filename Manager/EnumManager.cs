@@ -245,7 +245,10 @@ public enum PackageType
     Package6,
     Package7,
     Package8,
-    Package9
+    Package9,
+    Package10,
+    Package11,
+    Package12
 }
 
 public enum BuyType
@@ -389,6 +392,7 @@ public enum RewardType
     Icon_Attendance,
     Treasure13,
     Treasure14,
+    Treasure15
 }
 
 public enum QuestType
@@ -447,6 +451,7 @@ public enum TreasureType
     Treasure12,
     Treasure13,
     Treasure14,
+    Treasure15,
 }
 
 public enum TotemsType
@@ -621,11 +626,22 @@ public enum IconType
     Icon_69,
     Icon_70,
     Icon_71,
-    //Icon_72,
-    //Icon_73,
-    //Icon_74,
-    //Icon_75,
-    //Icon_76,
+
+    Icon_72, //º¸¹°
+    Icon_73,
+    Icon_74,
+    Icon_75,
+    Icon_76,
+    Icon_77,
+    Icon_78,
+    Icon_79,
+    Icon_80,
+    Icon_81,
+    Icon_82,
+    Icon_83,
+    Icon_84,
+    Icon_85,
+    Icon_86,
 }
 
 public enum GifticonType

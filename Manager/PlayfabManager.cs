@@ -1883,6 +1883,24 @@ public class PlayfabManager : MonoBehaviour
                                playerDataBase.Package6 = true;
                            }
                            break;
+                       case "Package10":
+                           if (statistics.Value == 1)
+                           {
+                               playerDataBase.Package10 = true;
+                           }
+                           break;
+                       case "Package11":
+                           if (statistics.Value == 1)
+                           {
+                               playerDataBase.Package11 = true;
+                           }
+                           break;
+                       case "Package12":
+                           if (statistics.Value == 1)
+                           {
+                               playerDataBase.Package12 = true;
+                           }
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;
@@ -2036,6 +2054,9 @@ public class PlayfabManager : MonoBehaviour
                        case "Treasure14":
                            playerDataBase.Treasure14 = statistics.Value;
                            break;
+                       case "Treasure15":
+                           playerDataBase.Treasure15 = statistics.Value;
+                           break;
                        case "Treasure1Count":
                            playerDataBase.Treasure1Count = statistics.Value;
                            break;
@@ -2077,6 +2098,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Treasure14Count":
                            playerDataBase.Treasure14Count = statistics.Value;
+                           break;
+                       case "Treasure15Count":
+                           playerDataBase.Treasure15Count = statistics.Value;
                            break;
                        case "NextFoodNumber":
                            playerDataBase.NextFoodNumber = statistics.Value;

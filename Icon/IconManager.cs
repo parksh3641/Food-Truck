@@ -34,7 +34,7 @@ public class IconManager : MonoBehaviour
     public GameObject saveLockObject;
 
     private int number = 0;
-    private int maxProficiency = 9;
+    private int maxProficiency = 6;
     private float reward = 0.5f;
 
 
@@ -561,6 +561,96 @@ public class IconManager : MonoBehaviour
 
         number++;
         if (playerDataBase.Dungeon4Count > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure1 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure2 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure3 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure4 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure5 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure6 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure7 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure8 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure9 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure10 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure11 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure12 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure13 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure14 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.Treasure15 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //보물
         {
             GetIcon(number);
         }

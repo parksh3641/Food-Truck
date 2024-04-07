@@ -6235,7 +6235,7 @@ public class GameManager : MonoBehaviour
         Application.OpenURL("https://apps.apple.com/kr/app/food-truck-evolution/id6466390705");
 #endif
 
-        FirebaseAnalytics.LogEvent("Open_Update");
+        FirebaseAnalytics.LogEvent("Open_Update : " + Application.version);
     }
 
 #if UNITY_ANDROID
@@ -6813,6 +6813,12 @@ public class GameManager : MonoBehaviour
         rareFoodPercent = 10;
     }
 
+    [Button]
+    public void OpenSupportPackage()
+    {
+        shopManager.OpenPackage(PackageType.Package7);
+    }
+
     public void GetEnableAllItem()
     {
         playerDataBase.Truck2 = 1;
@@ -6832,7 +6838,6 @@ public class GameManager : MonoBehaviour
         playerDataBase.Animal7 = 1;
         playerDataBase.Animal8 = 1;
 
-        playerDataBase.Butterfly1 = 1;
         playerDataBase.Butterfly2 = 1;
         playerDataBase.Butterfly3 = 1;
         playerDataBase.Butterfly4 = 1;
@@ -6861,7 +6866,6 @@ public class GameManager : MonoBehaviour
         playerDataBase.Butterfly27 = 1;
         playerDataBase.Butterfly28 = 1;
 
-        playerDataBase.Character1 = 1;
         playerDataBase.Character2 = 1;
         playerDataBase.Character3 = 1;
         playerDataBase.Character4 = 1;
@@ -6883,7 +6887,6 @@ public class GameManager : MonoBehaviour
         playerDataBase.Character20 = 1;
         playerDataBase.Character21 = 1;
 
-        playerDataBase.Totems1 = 1;
         playerDataBase.Totems2 = 1;
         playerDataBase.Totems3 = 1;
         playerDataBase.Totems4 = 1;
@@ -6899,6 +6902,7 @@ public class GameManager : MonoBehaviour
 
     public void GetDisableAllItem()
     {
+        playerDataBase.Truck1 = 1;
         playerDataBase.Truck2 = 0;
         playerDataBase.Truck3 = 0;
         playerDataBase.Truck4 = 0;
@@ -6908,6 +6912,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.Truck9 = 0;
         playerDataBase.Truck10 = 0;
 
+        playerDataBase.Animal1 = 1;
         playerDataBase.Animal2 = 0;
         playerDataBase.Animal3 = 0;
         playerDataBase.Animal4 = 0;
@@ -6916,7 +6921,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.Animal7 = 0;
         playerDataBase.Animal8 = 0;
 
-        playerDataBase.Butterfly1 = 0;
+        playerDataBase.Butterfly1 = 1;
         playerDataBase.Butterfly2 = 0;
         playerDataBase.Butterfly3 = 0;
         playerDataBase.Butterfly4 = 0;
@@ -6945,7 +6950,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.Butterfly27 = 0;
         playerDataBase.Butterfly28 = 0;
 
-        playerDataBase.Character1 = 0;
+        playerDataBase.Character1 = 1;
         playerDataBase.Character2 = 0;
         playerDataBase.Character3 = 0;
         playerDataBase.Character4 = 0;
@@ -6967,7 +6972,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.Character20 = 0;
         playerDataBase.Character21 = 0;
 
-        playerDataBase.Totems1 = 0;
+        playerDataBase.Totems1 = 1;
         playerDataBase.Totems2 = 0;
         playerDataBase.Totems3 = 0;
         playerDataBase.Totems4 = 0;

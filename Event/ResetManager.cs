@@ -1,4 +1,5 @@
-﻿using PlayFab;
+﻿using Firebase.Analytics;
+using PlayFab;
 using PlayFab.ClientModels;
 using Sirenix.OdinInspector;
 using System;
@@ -160,6 +161,8 @@ public class ResetManager : MonoBehaviour
     {
         playerDataBase.AttendanceDay = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
         playerDataBase.AccessDate += 1;
+
+        FirebaseAnalytics.LogEvent("AccessDate : " + playerDataBase.AccessDate);
 
         if (playerDataBase.AttendanceCheck)
         {

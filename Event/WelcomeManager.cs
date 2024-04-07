@@ -165,13 +165,13 @@ public class WelcomeManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("WelcomeCount", playerDataBase.WelcomeCount);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("WelcomeCheck", 1);
 
+        FirebaseAnalytics.LogEvent("Clear_Event_Welcome : " + playerDataBase.WelcomeCount);
+
         action.Invoke();
 
         CheckWelcome();
 
         OffAlarm();
-
-        FirebaseAnalytics.LogEvent("Clear_Event_Welcome");
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

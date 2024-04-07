@@ -288,7 +288,10 @@ public class TreasureManager : MonoBehaviour
         playerDataBase.TreasureCount += count;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("TreasureCount", playerDataBase.TreasureCount);
 
-        guideMissionManager.Initialize();
+        if(GameManager.instance.inGameUI.activeInHierarchy)
+        {
+            guideMissionManager.Initialize();
+        }
 
         for (int i = 0; i < receiveContents.Length; i++)
         {

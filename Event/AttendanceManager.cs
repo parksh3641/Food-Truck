@@ -186,6 +186,8 @@ public class AttendanceManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceCount", playerDataBase.AttendanceCount);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("AttendanceCheck", 1);
 
+        FirebaseAnalytics.LogEvent("Clear_Event_Attendance : " + playerDataBase.AttendanceCount);
+
         action.Invoke();
 
         CheckAttendance();

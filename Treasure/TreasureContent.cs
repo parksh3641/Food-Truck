@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Firebase.Analytics;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -785,6 +786,8 @@ public class TreasureContent : MonoBehaviour
         Initialize(treasureType, treasureManager);
 
         GourmetManager.instance.Initialize();
+
+        FirebaseAnalytics.LogEvent("LevelUp_Treasure : " + treasureType.ToString());
 
         isDelay = true;
         Invoke("Delay", 0.4f);

@@ -116,25 +116,25 @@ public class AttendanceManager : MonoBehaviour
     public void CheckInitialize()
     {
         attendanceContentArray[0].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[0].receiveContent[0].Initialize(RewardType.Crystal, 100);
+        attendanceContentArray[0].receiveContent[0].Initialize(RewardType.Crystal, 50);
 
         attendanceContentArray[1].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Crystal, 200);
+        attendanceContentArray[1].receiveContent[0].Initialize(RewardType.Crystal, 100);
 
         attendanceContentArray[2].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Crystal, 300);
+        attendanceContentArray[2].receiveContent[0].Initialize(RewardType.Crystal, 150);
 
         attendanceContentArray[3].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[3].receiveContent[0].Initialize(RewardType.Crystal, 400);
+        attendanceContentArray[3].receiveContent[0].Initialize(RewardType.Crystal, 200);
 
         attendanceContentArray[4].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[4].receiveContent[0].Initialize(RewardType.Crystal, 500);
+        attendanceContentArray[4].receiveContent[0].Initialize(RewardType.Crystal, 250);
 
         attendanceContentArray[5].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[5].receiveContent[0].Initialize(RewardType.Crystal, 600);
+        attendanceContentArray[5].receiveContent[0].Initialize(RewardType.Crystal, 300);
 
         attendanceContentArray[6].receiveContent[0].gameObject.SetActive(true);
-        attendanceContentArray[6].receiveContent[0].Initialize(RewardType.Crystal, 700);
+        attendanceContentArray[6].receiveContent[0].Initialize(RewardType.Crystal, 350);
     }
 
     public void ReceiveButton(int index, Action action)
@@ -151,31 +151,31 @@ public class AttendanceManager : MonoBehaviour
         switch (index)
         {
             case 0:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
 
                 break;
             case 1:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
 
                 break;
             case 2:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 150);
 
                 break;
             case 3:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 400);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200);
 
                 break;
             case 4:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 250);
 
                 break;
             case 5:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 600);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
 
                 break;
             case 6:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 700);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 350);
 
                 break;
         }

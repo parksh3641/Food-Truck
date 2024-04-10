@@ -80,8 +80,6 @@ public class ChestBoxManager : MonoBehaviour
 #endif
         count = 0;
         StartCoroutine(TimerCoroution());
-
-        FirebaseAnalytics.LogEvent("Open_ChestBox");
     }
 
     public void CheckAuto()
@@ -187,6 +185,8 @@ public class ChestBoxManager : MonoBehaviour
         chestBoxView.SetActive(true);
 
         random = Random.Range(0, 100);
+
+        FirebaseAnalytics.LogEvent("Open_ChestBox");
 
         //Debug.LogError(random);
 

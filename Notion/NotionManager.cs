@@ -53,6 +53,21 @@ public class NotionManager : MonoBehaviour
             }
         }    
 
+        if(type == NotionType.LowCrystal)
+        {
+            ShopManager.instance.OpenShopCoinView();
+        }
+
+        notion.gameObject.SetActive(true);
+    }
+
+    public void UseNotion(Color color, string txt)
+    {
+        notion.gameObject.SetActive(false);
+
+        notion.txt.text = txt;
+        notion.txt.color = color;
+
         notion.gameObject.SetActive(true);
     }
 

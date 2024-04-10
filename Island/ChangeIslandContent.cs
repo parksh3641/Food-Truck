@@ -14,6 +14,7 @@ public class ChangeIslandContent : MonoBehaviour
     public Text titlePlusText;
     public Text upgradeText;
     public Text sellPriceText;
+    public Text destroyText;
 
     public Text needPriceText;
 
@@ -31,7 +32,7 @@ public class ChangeIslandContent : MonoBehaviour
 
     private bool isDelay = false;
 
-    private int value = 5;
+    private float value = 0.5f;
 
     Color foodColor = new Color(206 / 255f, 141 / 255f, 1);
     Color candyColor = new Color(247 / 255f, 160 / 255f, 0);
@@ -85,8 +86,9 @@ public class ChangeIslandContent : MonoBehaviour
                 needPriceText.text = playerDataBase.Island1Count + "/" + ((playerDataBase.Island1Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island1Level + 1);
 
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : 0%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (playerDataBase.Island1Level * value) + "%  (+" + value + "%)";
+                upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : 90%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " +0%";
+                destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + (10 - (playerDataBase.Island1Level * value)) + "%  (-" + value + "%)";
 
                 if (playerDataBase.Island1Count >= ((playerDataBase.Island1Level + 1) * 100))
                 {
@@ -101,8 +103,9 @@ public class ChangeIslandContent : MonoBehaviour
                 needPriceText.text = playerDataBase.Island2Count + "/" + ((playerDataBase.Island2Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island2Level + 1);
 
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +10%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (10 + (playerDataBase.Island2Level * value)) + "%  (+" + value + "%)";
+                upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : 70%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " +20%";
+                destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + (20 - (playerDataBase.Island2Level * value)) + "%  (-" + value + "%)";
 
                 if (playerDataBase.Island2Count >= ((playerDataBase.Island2Level + 1) * 100))
                 {
@@ -117,8 +120,9 @@ public class ChangeIslandContent : MonoBehaviour
                 needPriceText.text = playerDataBase.Island3Count + "/" + ((playerDataBase.Island3Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island3Level + 1);
 
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +20%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (20 + (playerDataBase.Island3Level * value)) + "%  (+" + value + "%)";
+                upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : 50%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " +40%";
+                destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + (30 - (playerDataBase.Island3Level * value)) + "%  (-" + value + "%)";
 
                 if (playerDataBase.Island3Count >= ((playerDataBase.Island3Level + 1) * 100))
                 {
@@ -133,8 +137,9 @@ public class ChangeIslandContent : MonoBehaviour
                 needPriceText.text = playerDataBase.Island4Count + "/" + ((playerDataBase.Island4Level + 1) * 100).ToString();
                 titleText.plusText = "  Lv." + (playerDataBase.Island4Level + 1);
 
-                upgradeText.text = LocalizationManager.instance.GetString("IslandUpgrade") + " : +30%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : +" + (30 + (playerDataBase.Island4Level * value)) + "%  (+" + value + "%)";
+                upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : 30%";
+                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " +60%";
+                destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + (50 - (playerDataBase.Island4Level * value)) + "%  (-" + value + "%)";
 
                 if (playerDataBase.Island4Count >= ((playerDataBase.Island4Level + 1) * 100))
                 {

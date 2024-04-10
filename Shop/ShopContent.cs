@@ -136,7 +136,7 @@ public class ShopContent : MonoBehaviour
                 //effect.SetActive(true);
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(2000000) + "</size>";
 
                 if(playerDataBase.Candy1MaxValue > 0)
                 {
@@ -574,7 +574,7 @@ public class ShopContent : MonoBehaviour
             case ItemType.SkillTicket:
                 lockedObj.SetActive(false);
 
-                buyRankPointText.text = MoneyUnitString.ToCurrencyString(500);
+                buyRankPointText.text = MoneyUnitString.ToCurrencyString(300);
 
                 titleText.plusText = " x1";
 

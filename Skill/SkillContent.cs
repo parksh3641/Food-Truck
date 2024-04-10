@@ -38,37 +38,37 @@ public class SkillContent : MonoBehaviour
 
     private float skill1Value = 0.2f;
     private float skill2Value = 0.2f;
-    private float skill3Value = 0.5f;
+    private float skill3Value = 0.4f;
     private float skill4Value = 0.2f;
     private float skill5Value = 0.2f;
     private float skill6Value = 0.2f;
     private float skill12Value = 0.2f;
     private float skill13Value = 0.2f;
 
-    private float skill7Value = 0.1f;
-    private float skill8Value = 0.2f;
-    private float skill9Value = 0.05f;
+    private float skill7Value = 0.5f;
+    private float skill8Value = 1f;
+    private float skill9Value = 0.25f;
     private float skill10Value = 0.3f;
-    private float skill11Value = 0.5f;
-    private float skill14Value = 0.3f;
+    private float skill11Value = 1f;
+    private float skill14Value = 0.25f;
 
-    private float skill15Value = 0.4f;
-    private float skill16Value = 0.2f;
-    private float skill17Value = 0.1f;
-    private float skill18Value = 0.2f;
-    private float skill19Value = 0.05f;
+    private float skill15Value = 0.5f;
+    private float skill16Value = 0.5f;
+    private float skill17Value = 0.5f;
+    private float skill18Value = 1f;
+    private float skill19Value = 0.25f;
 
     private int priceGold = 500000;
 
-    private int priceCrystal = 1;
+    private int priceCrystal = 5;
     private int maxCrystal = 20;
 
-    private int priceCP = 10;
-    private int addPriceCP = 10;
+    private int priceCP = 50;
+    private int addPriceCP = 50;
     private int maxCP = 300;
 
     private int maxLevelGold = 500;
-    private int maxLevelCrystal = 100;
+    private int maxLevelCrystal = 50;
     private int maxLevelChallenge = 50;
 
     private int level = 0;
@@ -309,7 +309,6 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill15:
-                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill15;
                 nowValue = skill15Value * playerDataBase.Skill15;
 
@@ -324,7 +323,6 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill16:
-                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill16;
                 nowValue = skill16Value * playerDataBase.Skill16;
 
@@ -339,7 +337,6 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill17:
-                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill17;
                 nowValue = skill17Value * playerDataBase.Skill17;
 
@@ -354,7 +351,6 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill18:
-                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill18;
                 nowValue = skill18Value * playerDataBase.Skill18;
 
@@ -369,7 +365,6 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill19:
-                buttonTicket.SetActive(false);
                 level = playerDataBase.Skill19;
                 nowValue = skill19Value * playerDataBase.Skill19;
 
@@ -661,6 +656,8 @@ public class SkillContent : MonoBehaviour
                     {
                         SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                         NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                        ShopManager.instance.LowCoin(value);
                         return;
                     }
                     break;
@@ -897,7 +894,7 @@ public class SkillContent : MonoBehaviour
                     break;
             }
 
-            value = (long)(value * (1.0f - (0.003f * playerDataBase.Treasure4)));
+            value = (long)(value * (1.0f - (0.005f * playerDataBase.Treasure4)));
             goldText.text = MoneyUnitString.ToCurrencyString(value);
 
             Checking();

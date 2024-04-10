@@ -121,7 +121,7 @@ public class GifticonManager : MonoBehaviour
 
     public void Initialize()
     {
-        ticketText.text = MoneyUnitString.ToCurrencyString(playerDataBase.EventTicket) + "/1,000";
+        ticketText.text = MoneyUnitString.ToCurrencyString(playerDataBase.EventTicket);
 
         for (int i = 0; i < gifticonContents.Length; i ++)
         {

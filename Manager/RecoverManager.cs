@@ -87,14 +87,14 @@ public class RecoverManager : MonoBehaviour
         }
         else
         {
-            if (playerDataBase.Crystal < need * 10)
+            if (playerDataBase.Crystal < need * 2)
             {
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.LowItemNotion);
                 return;
             }
 
-            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, need * 10);
+            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, need * 2);
         }
 
         SuccessRecover();
@@ -135,10 +135,9 @@ public class RecoverManager : MonoBehaviour
 
     public void FoodInitialize(FoodType type, int level)
     {
-        need = 2;
-        need += ((maxLevel - 30) / 5);
+        need = (level / 5);
 
-        if (playerDataBase.RecoverTicket >= need)
+        if (playerDataBase.RecoverTicket < need)
         {
             return;
         }
@@ -156,6 +155,13 @@ public class RecoverManager : MonoBehaviour
 
     public void CandyInitialize(CandyType type, int level)
     {
+        need = (level / 5);
+
+        if (playerDataBase.RecoverTicket < need)
+        {
+            return;
+        }
+
         OpenRecoverView();
 
         index = 1;
@@ -169,6 +175,13 @@ public class RecoverManager : MonoBehaviour
 
     public void JapaneseFoodInitialize(JapaneseFoodType type, int level)
     {
+        need = (level / 5);
+
+        if (playerDataBase.RecoverTicket < need)
+        {
+            return;
+        }
+
         OpenRecoverView();
 
         index = 2;
@@ -182,6 +195,13 @@ public class RecoverManager : MonoBehaviour
 
     public void DessertInitialize(DessertType type, int level)
     {
+        need = (level / 5);
+
+        if (playerDataBase.RecoverTicket < need)
+        {
+            return;
+        }
+
         OpenRecoverView();
 
         index = 3;
@@ -216,12 +236,12 @@ public class RecoverManager : MonoBehaviour
         }
 
         need = 5;
-        need += ((maxLevel - 30) / 5);
+        need += ((maxLevel - 50) / 5);
 
-        afterLevelText.text = "Lv. " + ((int)(maxLevel * 0.5f)).ToString();
+        afterLevelText.text = "Lv. " + ((int)(maxLevel * 0.5f) - 1).ToString();
         needText.text = need.ToString();
 
-        crystalText.text = (need * 3).ToString();
+        crystalText.text = (need * 2).ToString();
     }
 
     public void OpenRepairTicketInfo()

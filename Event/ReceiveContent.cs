@@ -33,6 +33,11 @@ public class ReceiveContent : MonoBehaviour
         }
     }
 
+    public void Initialize(long count)
+    {
+        countText.text = MoneyUnitString.ToCurrencyString(count);
+    }
+
     public void Initialize(RewardType type, int count)
     {
         icon.sprite = rewardArray[(int)type];

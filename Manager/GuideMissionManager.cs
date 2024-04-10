@@ -1,4 +1,5 @@
 using Firebase.Analytics;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,10 +25,14 @@ public class GuideMissionManager : MonoBehaviour
 
     private int reward = 10;
 
+    public GameObject buffArrow;
+    public GameObject portionArrow;
+
     public ChangeFoodManager changeFoodManager;
     public ShopManager shopManager;
     public SkillManager skillManager;
     public TreasureManager treasureManager;
+    public QuestManager questManager;
 
     public WelcomeManager welcomeManager;
     public AttendanceManager attendanceManager;
@@ -43,6 +48,23 @@ public class GuideMissionManager : MonoBehaviour
         checkMark.SetActive(false);
 
         rewardText.text = reward.ToString();
+
+        buffArrow.SetActive(false);
+        portionArrow.SetActive(false);
+    }
+
+    [Button]
+    public void GuideReset()
+    {
+        playerDataBase.GuideIndex = 0;
+    }
+
+    [Button]
+    public void NextGuide()
+    {
+        playerDataBase.GuideIndex += 1;
+
+        Initialize();
     }
 
     public void Initialize()
@@ -60,7 +82,10 @@ public class GuideMissionManager : MonoBehaviour
         titleText.GetText().color = Color.white;
         titleText.localizationName = "GuiedMisson_" + (playerDataBase.GuideIndex + 1);
 
-        switch(playerDataBase.GuideIndex)
+        buffArrow.SetActive(false);
+        portionArrow.SetActive(false);
+
+        switch (playerDataBase.GuideIndex)
         {
             case 0:
                 now = playerDataBase.Food1MaxValue;
@@ -72,7 +97,13 @@ public class GuideMissionManager : MonoBehaviour
                 break;
             case 2:
                 now = playerDataBase.UseSauceCount;
-                need = 2;
+                need = 1;
+
+                if(now < need)
+                {
+                    portionArrow.SetActive(true);
+                }
+
                 break;
             case 3:
                 if(!firstReset)
@@ -82,7 +113,7 @@ public class GuideMissionManager : MonoBehaviour
                 }
 
                 now = GameStateManager.instance.GetSellGold;
-                need = 200000;
+                need = 100000;
                 break;
             case 4:
                 now = playerDataBase.Character2;
@@ -104,7 +135,7 @@ public class GuideMissionManager : MonoBehaviour
                 }
 
                 now = GameStateManager.instance.GetSellGold;
-                need = 600000;
+                need = 300000;
                 break;
             case 8:
                 now = playerDataBase.Character3;
@@ -121,6 +152,11 @@ public class GuideMissionManager : MonoBehaviour
             case 11:
                 now = playerDataBase.BuffCount;
                 need = 1;
+
+                if (now < need)
+                {
+                    buffArrow.SetActive(true);
+                }
                 break;
             case 12:
                 now = playerDataBase.Food5MaxValue;
@@ -150,7 +186,7 @@ public class GuideMissionManager : MonoBehaviour
                 }
 
                 now = GameStateManager.instance.GetSellGold;
-                need = 3000000;
+                need = 500000;
                 break;
             case 18:
                 now = playerDataBase.Animal2;
@@ -262,6 +298,9 @@ public class GuideMissionManager : MonoBehaviour
                     break;
                 case 12:
                     changeFoodManager.OpenChangeFoodView();
+                    break;
+                case 13:
+                    questManager.OpenQuestView();
                     break;
                 case 15:
                     shopManager.OpenSpeicalShop_Guide(2);

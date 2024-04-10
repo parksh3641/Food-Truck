@@ -97,7 +97,7 @@ public class QuestManager : MonoBehaviour
         }
         else
         {
-            reward += (int)(reward * (0.5f * (playerDataBase.QuestCount / 5)));
+            reward += (int)(reward * (1f * (playerDataBase.QuestCount / 5)));
         }
 
         reward = Mathf.RoundToInt((reward + (reward * (0.01f * playerDataBase.Treasure11))));
@@ -134,6 +134,11 @@ public class QuestManager : MonoBehaviour
             clearObj.SetActive(true);
             clearAdObj.SetActive(true);
         }
+
+#if UNITY_EDITOR
+        lockedObj.SetActive(false);
+        lockedAdObj.SetActive(false);
+#endif
     }
 
     public void CheckingAlarm()
@@ -220,6 +225,7 @@ public class QuestManager : MonoBehaviour
 
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward2);
         PlayfabManager.instance.UpdateAddGold(reward);
+        NotionManager.instance.UseNotion(Color.yellow, "+" + MoneyUnitString.ToCurrencyString(reward).ToString());
 
         QuestClear();
     }
@@ -282,15 +288,16 @@ public class QuestManager : MonoBehaviour
             number = 10;
         }
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward2);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward2 * number);
         PlayfabManager.instance.UpdateAddGold(reward * number);
+        NotionManager.instance.UseNotion(Color.yellow, "x" + number + "\n+" + MoneyUnitString.ToCurrencyString(reward * number).ToString());
 
         QuestClear();
     }
 
     void QuestClear()
     {
-        NotionManager.instance.UseNotion(NotionType.QuestNotion);
+        //NotionManager.instance.UseNotion(NotionType.QuestNotion);
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
 
         Initialize();

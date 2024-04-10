@@ -88,73 +88,19 @@ public class AdmobReward : MonoBehaviour
 
     public void ShowAd(int number)
     {
+#if UNITY_EDITOR
+        GetReward(number);
+        return;
+#endif
+
         if (playerDataBase.RemoveAds)
         {
-            switch (number)
-            {
-                case 0:
-                    shopManager.SuccessWatchAd();
-                    break;
-                case 1:
-                    shopManager.SuccessWatchAd_Portion();
-                    break;
-                case 2:
-                    chestBoxManager.SuccessWatchAd();
-                    break;
-                case 3:
-                    buffManager.SuccessWatchAd();
-                    break;
-                case 4:
-                    reincarnationManager.SuccessWatchAd();
-                    break;
-                case 5:
-                    offlineManager.SuccessWatchAd();
-                    break;
-                case 6:
-                    questManager.SuccessWatchAd();
-                    break;
-                case 7:
-                    treasureManager.SuccessWatchAd();
-                    break;
-                case 8:
-                    shopManager.SuccessWatchAd_Crystal();
-                    break;
-                case 9:
-                    dungeonManager.SuccessWatchAd(0);
-                    break;
-                case 10:
-                    dungeonManager.SuccessWatchAd(1);
-                    break;
-                case 11:
-                    dungeonManager.SuccessWatchAd(2);
-                    break;
-                case 12:
-                    dungeonManager.SuccessWatchAd(3);
-                    break;
-                case 13:
-                    GameManager.instance.SuccessWatchAd(0);
-                    break;
-                case 14:
-                    GameManager.instance.SuccessWatchAd(1);
-                    break;
-                case 15:
-                    GameManager.instance.SuccessWatchAd(2);
-                    break;
-                case 16:
-                    GameManager.instance.SuccessWatchAd(3);
-                    break;
-                case 17:
-                    GameManager.instance.SuccessWatchAd(4);
-                    break;
-                case 18:
-                    shopManager.BuyPackage(PackageType.Package9);
-                    break;
-            }
+            GetReward(number);
         }
         else
         {
-            const string rewardMsg =
-                "Rewarded ad rewarded the user. Type: {0}, amount: {1}.";
+            //const string rewardMsg =
+            //    "Rewarded ad rewarded the user. Type: {0}, amount: {1}.";
 
             if (rewardedAd != null && rewardedAd.CanShowAd())
             {
@@ -162,66 +108,7 @@ public class AdmobReward : MonoBehaviour
                 {
                     Debug.Log("Ad Watch Success!");
 
-                    switch (number)
-                    {
-                        case 0:
-                            shopManager.SuccessWatchAd();
-                            break;
-                        case 1:
-                            shopManager.SuccessWatchAd_Portion();
-                            break;
-                        case 2:
-                            chestBoxManager.SuccessWatchAd();
-                            break;
-                        case 3:
-                            buffManager.SuccessWatchAd();
-                            break;
-                        case 4:
-                            reincarnationManager.SuccessWatchAd();
-                            break;
-                        case 5:
-                            offlineManager.SuccessWatchAd();
-                            break;
-                        case 6:
-                            questManager.SuccessWatchAd();
-                            break;
-                        case 7:
-                            treasureManager.SuccessWatchAd();
-                            break;
-                        case 8:
-                            shopManager.SuccessWatchAd_Crystal();
-                            break;
-                        case 9:
-                            dungeonManager.SuccessWatchAd(0);
-                            break;
-                        case 10:
-                            dungeonManager.SuccessWatchAd(1);
-                            break;
-                        case 11:
-                            dungeonManager.SuccessWatchAd(2);
-                            break;
-                        case 12:
-                            dungeonManager.SuccessWatchAd(3);
-                            break;
-                        case 13:
-                            GameManager.instance.SuccessWatchAd(0);
-                            break;
-                        case 14:
-                            GameManager.instance.SuccessWatchAd(1);
-                            break;
-                        case 15:
-                            GameManager.instance.SuccessWatchAd(2);
-                            break;
-                        case 16:
-                            GameManager.instance.SuccessWatchAd(3);
-                            break;
-                        case 17:
-                            GameManager.instance.SuccessWatchAd(4);
-                            break;
-                        case 18:
-                            shopManager.BuyPackage(PackageType.Package9);
-                            break;
-                    }
+                    GetReward(number);
 
                     LoadRewardedAd();
 
@@ -240,6 +127,70 @@ public class AdmobReward : MonoBehaviour
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.CancelWatchAd);
             }
+        }
+    }
+
+    void GetReward(int number)
+    {
+        switch (number)
+        {
+            case 0:
+                shopManager.SuccessWatchAd();
+                break;
+            case 1:
+                shopManager.SuccessWatchAd_Portion();
+                break;
+            case 2:
+                chestBoxManager.SuccessWatchAd();
+                break;
+            case 3:
+                buffManager.SuccessWatchAd();
+                break;
+            case 4:
+                reincarnationManager.SuccessWatchAd();
+                break;
+            case 5:
+                offlineManager.SuccessWatchAd();
+                break;
+            case 6:
+                questManager.SuccessWatchAd();
+                break;
+            case 7:
+                treasureManager.SuccessWatchAd();
+                break;
+            case 8:
+                shopManager.SuccessWatchAd_Crystal();
+                break;
+            case 9:
+                dungeonManager.SuccessWatchAd(0);
+                break;
+            case 10:
+                dungeonManager.SuccessWatchAd(1);
+                break;
+            case 11:
+                dungeonManager.SuccessWatchAd(2);
+                break;
+            case 12:
+                dungeonManager.SuccessWatchAd(3);
+                break;
+            case 13:
+                GameManager.instance.SuccessWatchAd(0);
+                break;
+            case 14:
+                GameManager.instance.SuccessWatchAd(1);
+                break;
+            case 15:
+                GameManager.instance.SuccessWatchAd(2);
+                break;
+            case 16:
+                GameManager.instance.SuccessWatchAd(3);
+                break;
+            case 17:
+                GameManager.instance.SuccessWatchAd(4);
+                break;
+            case 18:
+                shopManager.BuyPackage(PackageType.Package9);
+                break;
         }
     }
 

@@ -11,15 +11,14 @@ using Random = UnityEngine.Random;
 
 public class ShopManager : MonoBehaviour
 {
+    public static ShopManager instance;
+
     public GameObject shopView;
     public GameObject speicalShopView;
 
     public GameObject shopAlarm;
-    public GameObject shopIngameAlarm;
-
 
     public GameObject martAlarm;
-    public GameObject martIngameAlarm;
     public GameObject[] packageAlarm;
 
     public GameObject goldx2;
@@ -144,7 +143,9 @@ public class ShopManager : MonoBehaviour
     private int price_Gold = 0;
     private int price_Crystal = 0;
     private int price_LevelUp = 0;
-    private int exchagne = 100000;
+    private int exchange = 10000;
+
+    private long lowCoin, needExchangeCrystal = 0;
 
     private int level = 0;
 
@@ -192,6 +193,8 @@ public class ShopManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         if (characterDataBase == null) characterDataBase = Resources.Load("CharacterDataBase") as CharacterDataBase;
@@ -210,10 +213,8 @@ public class ShopManager : MonoBehaviour
         package.SetActive(false);
 
         shopAlarm.SetActive(true);
-        shopIngameAlarm.SetActive(true);
 
         martAlarm.SetActive(true);
-        martIngameAlarm.SetActive(true);
 
         packageBuyIcon.SetActive(false);
 
@@ -332,7 +333,6 @@ public class ShopManager : MonoBehaviour
     public void SetAlarm()
     {
         martAlarm.SetActive(true);
-        martIngameAlarm.SetActive(true);
     }
 
     public void OpenShopCoinView()
@@ -380,7 +380,6 @@ public class ShopManager : MonoBehaviour
             GameManager.instance.RenewalVC();
 
             martAlarm.SetActive(false);
-            martIngameAlarm.SetActive(false);
 
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
@@ -686,6 +685,7 @@ public class ShopManager : MonoBehaviour
                 shopContents[22].Initialize(ItemType.Portion4, BuyType.RankPoint, this);
                 shopContents[23].Initialize(ItemType.Portion5, BuyType.RankPoint, this);
                 shopContents[36].Initialize(ItemType.BuffTicket, BuyType.RankPoint, this);
+                shopContents[36].gameObject.SetActive(false);
                 shopContents[37].Initialize(ItemType.SkillTicket, BuyType.RankPoint, this);
                 shopContents[38].Initialize(ItemType.RepairTicket, BuyType.RankPoint, this);
                 shopContents[39].Initialize(ItemType.RepairTicket10, BuyType.RankPoint, this);
@@ -1169,9 +1169,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.SkillTicket:
-                if (playerDataBase.RankPoint >= 500)
+                if (playerDataBase.RankPoint >= 300)
                 {
-                    playerDataBase.RankPoint -= 500;
+                    playerDataBase.RankPoint -= 300;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -1314,6 +1314,26 @@ public class ShopManager : MonoBehaviour
                     NotionManager.instance.UseNotion(NotionType.LowCrystal);
                 }
                 break;
+            case 3:
+                if(playerDataBase.Crystal >= needExchangeCrystal)
+                {
+                    PlayfabManager.instance.UpdateAddGold((int)lowCoin);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)needExchangeCrystal);
+
+                    changeMoneyView.SetActive(false);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                }
+                else
+                {
+                    changeMoneyView.SetActive(false);
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                }
+
+                break;
         }
     }
 
@@ -1359,7 +1379,7 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
-        PlayfabManager.instance.UpdateAddGold(1000000);
+        PlayfabManager.instance.UpdateAddGold(2000000);
     }
 
     public void SuccessWatchAd_Portion()
@@ -1425,7 +1445,6 @@ public class ShopManager : MonoBehaviour
             speicalShopView.SetActive(true);
 
             shopAlarm.SetActive(false);
-            shopIngameAlarm.SetActive(false);
 
             abilityPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.AbilityPoint);
 
@@ -1520,24 +1539,24 @@ public class ShopManager : MonoBehaviour
     {
         if (speicalIndex == number) return;
 
-        if (number == 3)
-        {
-            if (playerDataBase.Level < 10)
-            {
-                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("BufferflyLocked"));
-                return;
-            }
-        }
-        else if (number == 4)
-        {
-            if (playerDataBase.Level < 15)
-            {
-                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("TotemLocked"));
-                return;
-            }
-        }
+        //if (number == 3)
+        //{
+        //    if (playerDataBase.Level < 10)
+        //    {
+        //        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+        //        NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("BufferflyLocked"));
+        //        return;
+        //    }
+        //}
+        //else if (number == 4)
+        //{
+        //    if (playerDataBase.Level < 15)
+        //    {
+        //        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+        //        NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("TotemLocked"));
+        //        return;
+        //    }
+        //}
 
         speicalIndex = number;
 
@@ -1694,7 +1713,7 @@ public class ShopManager : MonoBehaviour
         //passiveText.text = "";
 
         effectText.localizationName = characterInfo.passiveEffect.ToString();
-        effectText.plusText = " : +" + characterInfo.effectNumber.ToString() + "%";
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)characterInfo.effectNumber).ToString() + "%";
 
         titleText.localizationName = "ChangeCharacter";
         titleText.plusText = "  ( " + (characterIndex + 1) + " / " + shopCharacterArray.Length + " )\n<size=10>"
@@ -1708,8 +1727,8 @@ public class ShopManager : MonoBehaviour
         infoText.ReLoad();
 
         price_Gold = characterInfo.price;
-        price_Crystal = price_Gold / exchagne;
-        price_Crystal = Mathf.RoundToInt(price_Crystal / 100.0f) * 100;
+        price_Crystal = price_Gold / exchange;
+        //price_Crystal = Mathf.RoundToInt(price_Crystal2 / 100.0f) * 100;
 
         if(price_Crystal < 100)
         {
@@ -2021,7 +2040,7 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(true);
+            crystalButton.SetActive(false);
 
             if (characterInfo.characterType == CharacterType.Character21)
             {
@@ -2049,7 +2068,7 @@ public class ShopManager : MonoBehaviour
         //passiveText.text = "";
 
         effectText.localizationName = truckInfo.passiveEffect.ToString();
-        effectText.plusText = " : +" + truckInfo.effectNumber.ToString() + "%";
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)truckInfo.effectNumber).ToString() + "%";
 
         titleText.localizationName = "ChangeTruck";
         titleText.plusText = "  ( " + (truckIndex + 1) + " / " + shopTruckArray.Length + " )\n<size=10>"
@@ -2063,8 +2082,8 @@ public class ShopManager : MonoBehaviour
         infoText.ReLoad();
 
         price_Gold = truckInfo.price;
-        price_Crystal = price_Gold / exchagne;
-        price_Crystal = Mathf.RoundToInt(price_Crystal / 100.0f) * 100;
+        price_Crystal = price_Gold / exchange;
+        //price_Crystal = Mathf.RoundToInt(price_Crystal / 100.0f) * 100;
 
         if (price_Crystal < 100)
         {
@@ -2259,7 +2278,7 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(true);
+            crystalButton.SetActive(false);
         }
     }
 
@@ -2323,7 +2342,7 @@ public class ShopManager : MonoBehaviour
         //passiveText.text = "";
 
         effectText.localizationName = animalInfo.passiveEffect.ToString();
-        effectText.plusText = " +" + animalInfo.effectNumber.ToString();
+        effectText.plusText = " +" + MoneyUnitString.ToCurrencyString((long)animalInfo.effectNumber).ToString();
 
         titleText.localizationName = "ChangeAnimal";
         titleText.plusText = "  ( " + (animalIndex + 1) + " / " + shopAnimalArray.Length + " )\n<size=10>"
@@ -2337,8 +2356,8 @@ public class ShopManager : MonoBehaviour
         infoText.ReLoad();
 
         price_Gold = animalInfo.price;
-        price_Crystal = price_Gold / exchagne;
-        price_Crystal = Mathf.RoundToInt(price_Crystal / 100.0f) * 100;
+        price_Crystal = price_Gold / exchange;
+        //price_Crystal = Mathf.RoundToInt(price_Crystal / 100.0f) * 100;
 
         if (price_Crystal < 100)
         {
@@ -2512,7 +2531,7 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(true);
+            crystalButton.SetActive(false);
         }
     }
 
@@ -2561,7 +2580,7 @@ public class ShopManager : MonoBehaviour
         //passiveText.text = "";
         
         effectText.localizationName = butterflyInfo.passiveEffect.ToString();
-        effectText.plusText = " : +" + butterflyInfo.effectNumber.ToString() + "%";
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)butterflyInfo.effectNumber).ToString() + "%";
 
         titleText.localizationName = "ChangeButterfly";
         titleText.plusText = "  ( " + (butterflyIndex + 1) + " / " + shopButterflyArray.Length + " )\n<size=10>"
@@ -2575,8 +2594,8 @@ public class ShopManager : MonoBehaviour
         infoText.ReLoad();
 
         price_Gold = butterflyInfo.price;
-        price_Crystal = price_Gold / exchagne;
-        price_Crystal = Mathf.RoundToInt(price_Crystal / 100.0f) * 100;
+        price_Crystal = price_Gold / exchange;
+        //price_Crystal = Mathf.RoundToInt(price_Crystal / 100.0f) * 100;
 
         if (price_Crystal < 100)
         {
@@ -2969,7 +2988,7 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(true);
+            crystalButton.SetActive(false);
         }
     }
 
@@ -3019,7 +3038,7 @@ public class ShopManager : MonoBehaviour
         //passiveText.text = "";
 
         effectText.localizationName = totemsInfo.passiveEffect.ToString();
-        effectText.plusText = " : +" + totemsInfo.effectNumber.ToString() + "%";
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)totemsInfo.effectNumber).ToString();
 
         titleText.localizationName = "ChangeTotems";
         titleText.plusText = "  ( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n<size=10>"
@@ -3033,8 +3052,8 @@ public class ShopManager : MonoBehaviour
         infoText.ReLoad();
 
         price_Gold = totemsInfo.price;
-        price_Crystal = price_Gold / exchagne;
-        price_Crystal = Mathf.RoundToInt(price_Crystal / 100.0f) * 100;
+        price_Crystal = price_Gold / exchange;
+        //price_Crystal = Mathf.RoundToInt(price_Crystal / 100.0f) * 100;
 
         if (price_Crystal < 100)
         {
@@ -3224,7 +3243,7 @@ public class ShopManager : MonoBehaviour
             {
                 passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
 + LocalizationManager.instance.GetString(totemsDataBase.retentionEffect.ToString()) + " +"
-+ (level * totemsDataBase.retentionValue).ToString("N1") + "%";
++ (level * totemsDataBase.retentionValue).ToString("N1");
             }
 
             if (GameStateManager.instance.TotemsType.Equals(totemsInfo.totemsType))
@@ -3251,7 +3270,7 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(true);
+            crystalButton.SetActive(false);
         }
     }
 
@@ -3662,6 +3681,8 @@ public class ShopManager : MonoBehaviour
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCoin);
 
+                            LowCoin(price_Gold);
+
                             return;
                         }
                         else
@@ -3733,6 +3754,8 @@ public class ShopManager : MonoBehaviour
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            LowCoin(price_Gold);
 
                             return;
                         }
@@ -3811,6 +3834,8 @@ public class ShopManager : MonoBehaviour
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            LowCoin(price_Gold);
 
                             return;
                         }
@@ -3919,6 +3944,8 @@ public class ShopManager : MonoBehaviour
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            LowCoin(price_Gold);
 
                             return;
                         }
@@ -4051,6 +4078,8 @@ public class ShopManager : MonoBehaviour
                         {
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            LowCoin(price_Gold);
 
                             return;
                         }
@@ -4611,6 +4640,20 @@ public class ShopManager : MonoBehaviour
         //{
         //    packageThanks.SetActive(true);
         //}
+    }
+
+    public void LowCoin(long number) //얼마만큼 부족한지?
+    {
+        GameManager.instance.RenewalVC();
+
+        lowCoin = number - playerDataBase.Coin;
+        needExchangeCrystal = lowCoin / 10000;
+
+        changeMoneyIndex = 3;
+        OpenChangeMoneyView();
+        changeMoneyReceiveContent.Initialize(RewardType.Gold, 0);
+        changeMoneyReceiveContent.Initialize(lowCoin);
+        changeMoneyText.text = MoneyUnitString.ToCurrencyString(needExchangeCrystal);
     }
 
     void ContentDelay()

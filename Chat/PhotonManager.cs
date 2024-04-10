@@ -16,6 +16,8 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 	public Transform chatUISmallScreen;
 	public ChatContent chatUISmallText;
 
+	public RectTransform chatGrid;
+
 	public GameObject closeButton;
 
     private ChatClient chatClient;
@@ -85,7 +87,10 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 
     public void Initialize()
     {
-        userName = GameStateManager.instance.NickName;
+#if UNITY_EDITOR
+		return;
+#endif
+		userName = GameStateManager.instance.NickName;
         currentChannelName = "Channel 001";
 
 		chatClient = new ChatClient(this);
@@ -152,6 +157,8 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 		{
 			chatContentList[i].gameObject.SetActive(false);
 		}
+
+		chatGrid.anchoredPosition = new Vector2(0, -9999);
 
 		chatUISmallText.Initialize(LocalizationManager.instance.GetString("ChatStart"));
 
@@ -247,12 +254,10 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 		closeButton.SetActive(false);
 	}
 
-	public void Input_OnEndEdit(string text)
+	public void Input_OnEndEdit()
 	{
 		if (chatClient.State == ChatState.ConnectedToFrontEnd)
 		{
-			//chatClient.PublishMessage(currentChannelName, text);
-
 			if(inputField.text.Trim().Length > 0)
             {
 				if (!delay)

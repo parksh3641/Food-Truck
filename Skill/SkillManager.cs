@@ -14,7 +14,6 @@ public class SkillManager : MonoBehaviour
     public GameObject lockedObj;
 
     public GameObject alarm;
-    public GameObject ingameAlarm;
 
     public Text challengePointText;
 
@@ -52,7 +51,6 @@ public class SkillManager : MonoBehaviour
         index = -1;
 
         alarm.SetActive(true);
-        ingameAlarm.SetActive(true);
     }
 
     public void OpenSkillView()
@@ -62,7 +60,6 @@ public class SkillManager : MonoBehaviour
             skillView.SetActive(true);
 
             alarm.SetActive(false);
-            ingameAlarm.SetActive(false);
 
             GameManager.instance.RenewalVC();
 

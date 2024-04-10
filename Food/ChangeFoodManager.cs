@@ -11,8 +11,6 @@ public class ChangeFoodManager : MonoBehaviour
     public GameObject autoUpgradeView;
 
     public GameObject moveIsland;
-    public GameObject skillLocked;
-    public GameObject treasureLocked;
 
     public GameObject alarmObj;
     public GameObject islandAlarm;
@@ -199,20 +197,6 @@ public class ChangeFoodManager : MonoBehaviour
                 autoPresentText.text = LocalizationManager.instance.GetString("OFF");
             }
 
-            skillLocked.SetActive(true);
-
-            if (playerDataBase.LockTutorial >= 4) //레시피 해제
-            {
-                skillLocked.SetActive(false);
-            }
-
-            treasureLocked.SetActive(true);
-
-            if (playerDataBase.Level > 2)
-            {
-                treasureLocked.SetActive(false);
-            }
-
             GameManager.instance.moveArrow3.SetActive(false);
 
             if (playerDataBase.InGameTutorial == 0)
@@ -327,7 +311,7 @@ public class ChangeFoodManager : MonoBehaviour
         proficiencyValueText.text = LocalizationManager.instance.GetString("Total") + " : ( " + nowExp + " / " + nextExp + " )";
         proficiencyFillamount.fillAmount = (nowExp * 1.0f) / (nextExp * 1.0f);
 
-        proficiencyEffectText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : <color=#FFFF00>+" + (level * 1) + "%</color>   (+1%)";
+        proficiencyEffectText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : " + (level * 2) + "%   (+2%)";
 
         for (int i = 0; i < changeFoodContentList.Count; i++)
         {

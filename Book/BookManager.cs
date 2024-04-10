@@ -22,7 +22,7 @@ public class BookManager : MonoBehaviour
 
     public Text plusText;
 
-    private float reward = 0.1f; //판매 수익
+    private float reward = 0.2f; //판매 수익
     private float reward2 = 0.2f; //2단 강화 확률
 
     [Space]

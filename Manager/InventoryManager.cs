@@ -8,7 +8,6 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryView;
 
     public GameObject alarm;
-    public GameObject ingameAlarm;
 
     public ReceiveContent[] receiveContents;
 
@@ -21,7 +20,6 @@ public class InventoryManager : MonoBehaviour
         inventoryView.SetActive(false);
 
         alarm.SetActive(true);
-        ingameAlarm.SetActive(true);
     }
 
     public void OpenInventoryView()
@@ -31,7 +29,6 @@ public class InventoryManager : MonoBehaviour
             inventoryView.SetActive(true);
 
             alarm.SetActive(false);
-            ingameAlarm.SetActive(false);
 
             Initialize();
 

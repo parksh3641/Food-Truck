@@ -15,7 +15,6 @@ public class TreasureManager : MonoBehaviour
 
     public GameObject mainAlarm;
     public GameObject alarm;
-    public GameObject ingameAlarm;
 
     public RectTransform treasureRectTransform;
 
@@ -73,7 +72,6 @@ public class TreasureManager : MonoBehaviour
 
         mainAlarm.SetActive(false);
         alarm.SetActive(false);
-        ingameAlarm.SetActive(false);
 
         treasureRectTransform.anchoredPosition = new Vector2(0, -9999);
     }
@@ -84,7 +82,6 @@ public class TreasureManager : MonoBehaviour
         {
             mainAlarm.SetActive(true);
             alarm.SetActive(true);
-            ingameAlarm.SetActive(true);
         }
     }
 
@@ -173,7 +170,6 @@ public class TreasureManager : MonoBehaviour
 
         mainAlarm.SetActive(false);
         alarm.SetActive(false);
-        ingameAlarm.SetActive(false);
 
         treasureAdLockedObj.SetActive(true);
 

@@ -72,21 +72,21 @@ public class ReincarnationManager : MonoBehaviour
 
         if (playerDataBase.IslandNumber > 0)
         {
-            point += 50;
+            point += 25;
 
             if (playerDataBase.NextFoodNumber2 > 7)
             {
-                point += 100;
+                point += 50;
             }
 
             if (playerDataBase.NextFoodNumber3 > 5)
             {
-                point += 150;
+                point += 100;
             }
 
             if (playerDataBase.NextFoodNumber4 > 7)
             {
-                point += 250;
+                point += 200;
             }
 
             lockedObj.SetActive(false);
@@ -98,7 +98,7 @@ public class ReincarnationManager : MonoBehaviour
         }
 
         plus = 0;
-        plus += playerDataBase.Skill11 * 0.5f;
+        plus += playerDataBase.Skill11 * 1f;
         plus += playerDataBase.Treasure10 * 1;
 
         //if(crystal > 0)
@@ -113,7 +113,7 @@ public class ReincarnationManager : MonoBehaviour
 
         oldPoint = point;
 
-        point = point + (point * (0.005f * playerDataBase.Skill11));
+        point = point + (point * (0.01f * playerDataBase.Skill11));
         point = point + (point * (0.01f * playerDataBase.Treasure10));
 
         receiveContent.Initialize(RewardType.ChallengePoint, (int)point);

@@ -332,6 +332,8 @@ public enum PassiveEffect
     SellPricePercentUp,
     ExpUp,
     SuccessX2PercentUp,
+    ItemDropPercentUp,
+    GoldPerSecondPercentUp
 }
 
 public enum RewardType

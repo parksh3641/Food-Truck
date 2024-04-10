@@ -201,7 +201,7 @@ public class UpgradeDataBase : ScriptableObject
                     need = 100;
                     break;
                 case GameType.Rank:
-                    need = 0;
+                    need = 100;
                     break;
             }
 
@@ -215,24 +215,24 @@ public class UpgradeDataBase : ScriptableObject
                     switch (GameStateManager.instance.IslandType)
                     {
                         case IslandType.Island1:
-                            need = level * (value * needList[level].value);
+                            need = level * value;
                             break;
                         case IslandType.Island2:
-                            need = level * (value * needList[level].value);
-                            need = need + (need * 1);
+                            need = level * value;
+                            need *= 1.1f;
                             break;
                         case IslandType.Island3:
-                            need = level * (value * needList[level].value);
-                            need = need + (need * 2);
+                            need = level * value;
+                            need *= 1.2f;
                             break;
                         case IslandType.Island4:
-                            need = level * (value * needList[level].value);
-                            need = need + (need * 3);
+                            need = level * value;
+                            need *= 1.3f;
                             break;
                     }
                     break;
                 case GameType.Rank:
-                    need = level * 500;
+                    need = level * value;
                     break;
             }
 
@@ -270,16 +270,16 @@ public class UpgradeDataBase : ScriptableObject
                     switch (GameStateManager.instance.IslandType)
                     {
                         case IslandType.Island1:
-                            success = 100 - (level * 0.5f);
+                            success = 91 - (level * 1f);
                             break;
                         case IslandType.Island2:
-                            success = 91 - (level * 0.5f);
+                            success = 71 - (level * 1f);
                             break;
                         case IslandType.Island3:
-                            success = 81 - (level * 0.5f);
+                            success = 51 - (level * 1f);
                             break;
                         case IslandType.Island4:
-                            success = 71 - (level * 0.5f);
+                            success = 31 - (level * 1f);
                             break;
                     }
                 }
@@ -300,9 +300,9 @@ public class UpgradeDataBase : ScriptableObject
                 break;
         }
 
-        if (success < 0.1f)
+        if (success < 1f)
         {
-            success = 0.1f;
+            success = 1f;
         }
 
         return success;

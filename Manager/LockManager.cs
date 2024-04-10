@@ -64,7 +64,10 @@ public class LockManager : MonoBehaviour
     {
         for (int i = 0; i < menuIcon.Length; i++)
         {
-            menuIcon[i].SetActive(false);
+            if (menuIcon[i] != null)
+            {
+                menuIcon[i].SetActive(false);
+            }
         }
 
         tutorial.SetActive(true);
@@ -72,12 +75,11 @@ public class LockManager : MonoBehaviour
         menuIcon[7].SetActive(true);
         menuIcon[8].SetActive(true);
         menuIcon[9].SetActive(true);
+        menuIcon[11].SetActive(true);
         menuIcon[12].SetActive(true);
         menuIcon[13].SetActive(true);
         menuIcon[14].SetActive(true);
         menuIcon[15].SetActive(true);
-        menuIcon[16].SetActive(true);
-        menuIcon[17].SetActive(true);
 
         if (playerDataBase.LockTutorial >= 1) //음식 변경
         {
@@ -108,37 +110,27 @@ public class LockManager : MonoBehaviour
             menuIcon[10].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 5) //퀘스트, 가방, 패키지(이벤트) 해제 (피자 최대 레벨 달성)
+        if (playerDataBase.LockTutorial >= 5) //퀘스트, 가방, 해제 (피자 최대 레벨 달성)
         {
-            menuIcon[11].SetActive(true);
+            menuIcon[11].SetActive(false);
             menuIcon[12].SetActive(false);
-            menuIcon[13].SetActive(false);
-            menuIcon[14].SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 6) //오프라인 보상 해제 (도넛 최대 레벨 달성)
         {
-            menuIcon[15].SetActive(false);
+            menuIcon[13].SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 7) //챌린지, 섬 이동 해제 (감자 튀김 최대 레벨 달성)
         {
-            menuIcon[16].SetActive(false);
-            menuIcon[17].SetActive(false);
-            menuIcon[18].SetActive(true);
+            menuIcon[14].SetActive(false);
+            menuIcon[15].SetActive(false);
         }
 
         if (GameStateManager.instance.YoutubeVideo)
         {
             menuIcon[0].SetActive(false);
             menuIcon[10].SetActive(false);
-            menuIcon[11].SetActive(false);
-            menuIcon[18].SetActive(false);
-        }
-
-        if(GameStateManager.instance.StoreType == StoreType.OneStore)
-        {
-            menuIcon[11].SetActive(false);
         }
     }
 
@@ -153,7 +145,7 @@ public class LockManager : MonoBehaviour
         lockView.SetActive(true);
 
         button.SetActive(false);
-        Invoke("Delay", 2.0f);
+        Invoke("Delay", 3.0f);
 
         infoText.localizationName = "LockTutorial" + number;
         infoText.ReLoad();

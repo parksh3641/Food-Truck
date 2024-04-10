@@ -2726,6 +2726,7 @@ public class PlayfabManager : MonoBehaviour
         yield return waitForSeconds;
 
         playerDataBase.SaveCoin = 0;
+        GameStateManager.instance.SaveGold = 0;
         GameManager.instance.RenewalVC();
 
         if (saveGold > 0)
@@ -2743,8 +2744,6 @@ public class PlayfabManager : MonoBehaviour
 
         saveGold = 0;
         saveDelay = false;
-
-        GameStateManager.instance.SaveGold = 0;
     }
 
 

@@ -49,9 +49,9 @@ public class AdvancementManager : MonoBehaviour
     private float nowValue2 = 0;
     private float nowValue3 = 0;
 
-    private float value1 = 0.4f;
-    private float value2 = 0.1f;
-    private float value3 = 0.05f;
+    private float value1 = 0.5f;
+    private float value2 = 1f;
+    private float value3 = 0.25f;
 
     private bool isActive = false;
     private bool isDelay = false;

@@ -27,7 +27,6 @@ public class DungeonManager : MonoBehaviour
     public RectTransform rectTransform;
 
     public GameObject alarm;
-    public GameObject ingameAlarm;
 
     public DungeonContent[] dungeonContents;
     public ReceiveContent[] receiveContents;
@@ -100,6 +99,7 @@ public class DungeonManager : MonoBehaviour
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(1.5f);
     WaitForSeconds waitForSeconds2 = new WaitForSeconds(1.0f);
+    WaitForSeconds autoAttackSeconds = new WaitForSeconds(1);
 
     DateTime f, g;
     TimeSpan h;
@@ -130,7 +130,6 @@ public class DungeonManager : MonoBehaviour
         dungeonTutorial.SetActive(false);
 
         alarm.SetActive(true);
-        ingameAlarm.SetActive(true);
 
         for (int i = 0; i < bossFoodContents.Length; i++)
         {
@@ -155,7 +154,6 @@ public class DungeonManager : MonoBehaviour
             }
 
             alarm.SetActive(false);
-            ingameAlarm.SetActive(false);
 
             localization_Reset = LocalizationManager.instance.GetString("Reset");
             localization_Days = LocalizationManager.instance.GetString("Days");
@@ -439,10 +437,12 @@ public class DungeonManager : MonoBehaviour
         Initialize();
         CheckPercent();
 
-        dungeonTutorial.SetActive(true);
+        dungeonTutorial.SetActive(false);
 
-        CancelInvoke("TutorialDelay");
-        Invoke("TutorialDelay", 8f);
+        StartCoroutine(AutoAttackCoroution());
+
+        //CancelInvoke("TutorialDelay");
+        //Invoke("TutorialDelay", 8f);
 
         NotionManager.instance.UseNotion2(NotionType.StartDungeon);
         SoundManager.instance.PlaySFX(GameSfxType.CleanKitchenStart);
@@ -460,7 +460,7 @@ public class DungeonManager : MonoBehaviour
         attackX2 = 0;
 
         attackPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
-        attackPlus += playerDataBase.Skill7 * 0.1f;
+        attackPlus += playerDataBase.Skill7 * 0.5f;
         if (playerDataBase.Level > 199)
         {
             attackPlus += 10;
@@ -469,7 +469,7 @@ public class DungeonManager : MonoBehaviour
         {
             attackPlus += playerDataBase.Level * 0.05f;
         }
-        attackPlus += playerDataBase.Treasure1 * 0.2f;
+        attackPlus += playerDataBase.Treasure1 * 1f;
         attackPlus += playerDataBase.Advancement * 0.1f;
 
         success += attackPlus;
@@ -480,28 +480,40 @@ public class DungeonManager : MonoBehaviour
         }
 
         attackSpeed += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
-        attackSpeed += playerDataBase.Skill9 * 0.05f;
-        attackSpeed += playerDataBase.Skill15 * 0.4f;
-        attackSpeed += playerDataBase.Treasure13 * 0.6f;
-        attackSpeed += playerDataBase.Treasure2 * 0.1f;
+        attackSpeed += playerDataBase.Skill9 * 0.25f;
+        attackSpeed += playerDataBase.Skill15 * 0.5f;
+        attackSpeed += playerDataBase.Treasure13 * 1f;
+        attackSpeed += playerDataBase.Treasure2 * 0.5f;
         attackSpeed += playerDataBase.Advancement * 0.05f;
 
-        attackX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
-        attackX2 += playerDataBase.Treasure3 * 0.2f;
-        attackX2 += playerDataBase.Treasure14 * 0.4f;
-        attackX2 += playerDataBase.Skill16 * 0.2f;
+        if(attackSpeed >= 100)
+        {
+            attackSpeed = 100;
+        }
+
+        //attackX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
+        attackX2 += playerDataBase.Treasure3 * 0.5f;
+        attackX2 += playerDataBase.Treasure14 * 1f;
+        attackX2 += playerDataBase.Skill16 * 0.5f;
         attackX2 += playerDataBase.GetEpicBookNumber() * 0.2f;
+
+        if(attackX2 >= 100)
+        {
+            attackX2 = 100;
+        }
 
         attackText.localizationName = "AttackPercent";
         attackText.plusText = " : " + success.ToString("N1") + "%";
         attackText.plusText += " (+" + attackPlus.ToString("N1") + "%)";
 
-        attackDelay = 0.5f - (0.5f * (attackSpeed * 0.01f));
+        attackDelay = 0.4f - (0.2f * (attackSpeed * 0.01f));
 
         if(attackDelay < 0.1f)
         {
             attackDelay = 0.1f;
         }
+
+        autoAttackSeconds = new WaitForSeconds(attackDelay);
 
         attackSpeedText.localizationName = "AttackSpeedPercent";
         attackSpeedText.plusText = " : " + attackDelay.ToString("N2");
@@ -584,7 +596,7 @@ public class DungeonManager : MonoBehaviour
     {
         if (clear) return;
 
-        if (delay) return;
+        //if (delay) return;
 
         if (Random.Range(0, 100f) >= 100 - success)
         {
@@ -630,8 +642,8 @@ public class DungeonManager : MonoBehaviour
 
         FirebaseAnalytics.LogEvent("Attack_Dungeon");
 
-        delay = true;
-        Invoke("Delay", attackDelay);
+        //delay = true;
+        //Invoke("Delay", attackDelay);
     }
 
     void Delay()
@@ -879,6 +891,8 @@ public class DungeonManager : MonoBehaviour
 
     void GameOver()
     {
+        clear = true;
+
         SoundManager.instance.StopBoss();
         GameManager.instance.GameStop_Dungeon();
 
@@ -888,6 +902,8 @@ public class DungeonManager : MonoBehaviour
     public void HomeButton()
     {
         if (clear) return;
+
+        clear = true;
 
         SoundManager.instance.StopBoss();
         GameManager.instance.GameStop_Dungeon();
@@ -1015,5 +1031,19 @@ public class DungeonManager : MonoBehaviour
         ReceiveButton();
 
         OpenDungeonView();
+    }
+
+    IEnumerator AutoAttackCoroution()
+    {
+        if (clear)
+        {
+            yield break;
+        }
+
+        AttackButton();
+
+        yield return autoAttackSeconds;
+
+        StartCoroutine(AutoAttackCoroution());
     }
 }

@@ -33,7 +33,7 @@ public class BuffManager : MonoBehaviour
     private bool buff3;
     private bool buff4;
 
-    private int time = 900;
+    private int time = 600;
 
     private int buff1Time = 0;
     private int buff2Time = 0;
@@ -67,6 +67,8 @@ public class BuffManager : MonoBehaviour
 
     public void OpenBuffView(int number)
     {
+        if (playerDataBase.RemoveAds) return;
+
         if (!buffView.activeInHierarchy)
         {
             buffView.SetActive(true);
@@ -319,5 +321,14 @@ public class BuffManager : MonoBehaviour
         yield return waitForSeconds;
 
         StartCoroutine(Buff4Coroution());
+    }
+
+    public void RemoveAdsBuff()
+    {
+        StopAllCoroutines();
+
+        buff1Anim.StopAnim();
+        buff2Anim.StopAnim();
+        buff3Anim.StopAnim();
     }
 }

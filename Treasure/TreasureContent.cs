@@ -40,21 +40,21 @@ public class TreasureContent : MonoBehaviour
     private int check = 0;
     private bool isDelay = false;
 
-    private float treasure1Value = 0.2f;
-    private float treasure2Value = 0.1f;
-    private float treasure3Value = 0.2f;
-    private float treasure4Value = 0.3f;
-    private float treasure5Value = 0.3f;
-    private float treasure6Value = 0.6f;
-    private float treasure7Value = 0.4f;
-    private float treasure8Value = 0.6f;
-    private float treasure9Value = 0.4f;
+    private float treasure1Value = 1f;
+    private float treasure2Value = 0.5f;
+    private float treasure3Value = 0.5f;
+    private float treasure4Value = 0.5f;
+    private float treasure5Value = 1f;
+    private float treasure6Value = 0.5f;
+    private float treasure7Value = 2f;
+    private float treasure8Value = 0.5f;
+    private float treasure9Value = 0.5f;
     private float treasure10Value = 1f;
     private float treasure11Value = 1f;
     private float treasure12Value = 0.3f;
-    private float treasure13Value = 0.6f;
-    private float treasure14Value = 0.3f;
-    private float treasure15Value = 0.3f;
+    private float treasure13Value = 1;
+    private float treasure14Value = 1;
+    private float treasure15Value = 1;
 
     Sprite[] treasureArray;
 

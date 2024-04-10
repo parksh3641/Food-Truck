@@ -72,6 +72,7 @@ public class GameStateManager : MonoBehaviour
         [Title("Tip")]
         public bool firstSuccess;
         public bool firstFail;
+        public bool firstDestory;
         public int destroyCount = 0;
 
         [Space]
@@ -133,7 +134,7 @@ public class GameStateManager : MonoBehaviour
         public int openChestBox = 0;
         public int yummyTimeCount = 0;
         public int playTime = 0;
-        public long saveGold = 0;
+        public long saveGold = 0; //서버 저장 전에 나가버릴 경우
         public int supportCount = 0;
         public int getSellGold = 0; //판매 후 얻은 골드
 
@@ -636,6 +637,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.firstFail = value;
+            SaveFile();
+        }
+    }
+
+    public bool FirstDestory
+    {
+        get
+        {
+            return gameSettings.firstDestory;
+        }
+        set
+        {
+            gameSettings.firstDestory = value;
             SaveFile();
         }
     }

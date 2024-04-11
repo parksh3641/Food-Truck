@@ -60,16 +60,16 @@ public class SkillContent : MonoBehaviour
 
     private int priceGold = 500000;
 
-    private int priceCrystal = 5;
+    private int priceCrystal = 1;
     private int maxCrystal = 20;
 
-    private int priceCP = 50;
-    private int addPriceCP = 50;
+    private int priceCP = 10;
+    private int addPriceCP = 10;
     private int maxCP = 300;
 
     private int maxLevelGold = 500;
-    private int maxLevelCrystal = 50;
-    private int maxLevelChallenge = 50;
+    private int maxLevelCrystal = 500;
+    private int maxLevelChallenge = 500;
 
     private int level = 0;
     private int plusLevel = 1;

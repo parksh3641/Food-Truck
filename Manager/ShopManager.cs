@@ -3265,7 +3265,7 @@ public class ShopManager : MonoBehaviour
             {
                 passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
 + LocalizationManager.instance.GetString(totemsDataBase.retentionEffect.ToString()) + " +"
-+ (level * totemsDataBase.retentionValue).ToString("N1");
++ (level * totemsDataBase.retentionValue).ToString();
             }
 
             if (GameStateManager.instance.TotemsType.Equals(totemsInfo.totemsType))

@@ -40,6 +40,8 @@ public class IconManager : MonoBehaviour
 
     public List<IconContent> iconContentList = new List<IconContent>();
 
+    public GuideMissionManager guideMissionManager;
+
     PlayerDataBase playerDataBase;
     ImageDataBase imageDataBase;
     ProficiencyDataBase proficiencyDataBase;
@@ -85,6 +87,11 @@ public class IconManager : MonoBehaviour
         }
         else
         {
+            if (guideMissionManager.guideMissonView.gameObject.activeInHierarchy)
+            {
+                guideMissionManager.Initialize();
+            }
+
             iconView.SetActive(false);
         }
     }

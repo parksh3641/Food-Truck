@@ -6953,7 +6953,8 @@ public class GameManager : MonoBehaviour
 
     public void TipInfo()
     {
-        NotionManager.instance.UseNotion2(NotionType.TipInfoNotion);
+        NotionManager.instance.UseNotion2(Color.yellow, LocalizationManager.instance.GetString("SellPriceX2Up") + " : " + sellPriceTip.ToString("N1") +"%"
+            + "\n(" + LocalizationManager.instance.GetString("SellPriceX2Up_Info")+")");
     }
 
     public void LockedInfo(int number)

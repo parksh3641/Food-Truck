@@ -87,14 +87,14 @@ public class RecoverManager : MonoBehaviour
         }
         else
         {
-            if (playerDataBase.Crystal < need * 2)
+            if (playerDataBase.Crystal < need * 5)
             {
                 SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                 NotionManager.instance.UseNotion(NotionType.LowItemNotion);
                 return;
             }
 
-            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, need * 2);
+            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, need * 5);
         }
 
         SuccessRecover();
@@ -210,10 +210,10 @@ public class RecoverManager : MonoBehaviour
         need = 5;
         need += ((maxLevel - 50) / 5);
 
-        afterLevelText.text = "Lv. " + ((int)(maxLevel * 0.5f) - 1).ToString();
+        afterLevelText.text = "Lv. " + ((int)(maxLevel * 0.5f)).ToString();
         needText.text = need.ToString();
 
-        crystalText.text = (need * 2).ToString();
+        crystalText.text = (need * 5).ToString();
     }
 
     public void OpenRepairTicketInfo()

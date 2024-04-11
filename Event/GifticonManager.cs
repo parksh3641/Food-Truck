@@ -10,6 +10,9 @@ public class GifticonManager : MonoBehaviour
 
     public GameObject gifticonInfoView;
 
+    public GameObject mainAlarm;
+    public GameObject alarm;
+
     public RectTransform gifticonGrid;
 
     public GifticonContent[] gifticonContents;
@@ -46,6 +49,9 @@ public class GifticonManager : MonoBehaviour
         gifticonInfoView.SetActive(false);
 
         gifticonGrid.anchoredPosition = new Vector2(0, -9999);
+
+        mainAlarm.SetActive(true);
+        alarm.SetActive(true);
     }
 
     public void OpenGifticonView()
@@ -68,6 +74,9 @@ public class GifticonManager : MonoBehaviour
                 timerText.text = "";
                 PlayfabManager.instance.GetTitleInternalData("GifticonDate", CheckGifticonDate);
             }
+
+            mainAlarm.SetActive(false);
+            alarm.SetActive(false);
         }
         else
         {

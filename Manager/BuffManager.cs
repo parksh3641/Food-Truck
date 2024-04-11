@@ -108,6 +108,10 @@ public class BuffManager : MonoBehaviour
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+
+            buffView.SetActive(false);
+
+            ShopManager.instance.OpenShopItemView();
             return;
         }
 

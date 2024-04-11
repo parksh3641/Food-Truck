@@ -139,6 +139,14 @@ public class GameStateManager : MonoBehaviour
         public int getSellGold = 0; //판매 후 얻은 골드
 
         [Space]
+        [Title("Reset")]
+        public bool portion1Ad = false;
+        public bool portion2Ad = false;
+        public bool portion3Ad = false;
+        public bool portion4Ad = false;
+        public bool portion5Ad = false;
+
+        [Space]
         [Title("Equip")]
         public AnimalType animalType = AnimalType.Animal1;
         public TruckType truckType = TruckType.Truck1;
@@ -1287,6 +1295,71 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.getSellGold = value;
+            SaveFile();
+        }
+    }
+
+    public bool Portion1Ad
+    {
+        get
+        {
+            return gameSettings.portion1Ad;
+        }
+        set
+        {
+            gameSettings.portion1Ad = value;
+            SaveFile();
+        }
+    }
+
+    public bool Portion2Ad
+    {
+        get
+        {
+            return gameSettings.portion2Ad;
+        }
+        set
+        {
+            gameSettings.portion2Ad = value;
+            SaveFile();
+        }
+    }
+
+    public bool Portion3Ad
+    {
+        get
+        {
+            return gameSettings.portion3Ad;
+        }
+        set
+        {
+            gameSettings.portion3Ad = value;
+            SaveFile();
+        }
+    }
+
+    public bool Portion4Ad
+    {
+        get
+        {
+            return gameSettings.portion4Ad;
+        }
+        set
+        {
+            gameSettings.portion4Ad = value;
+            SaveFile();
+        }
+    }
+
+    public bool Portion5Ad
+    {
+        get
+        {
+            return gameSettings.portion5Ad;
+        }
+        set
+        {
+            gameSettings.portion5Ad = value;
             SaveFile();
         }
     }

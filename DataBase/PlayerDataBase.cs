@@ -6141,7 +6141,7 @@ public class PlayerDataBase : ScriptableObject
         return totemsItemInstance[number].rare;
     }
 
-    public int GetFoodTruckHighNumber()
+    public int GetTruckHighNumber()
     {
         int count = 0;
 

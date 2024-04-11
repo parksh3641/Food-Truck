@@ -81,6 +81,8 @@ public class SkillManager : MonoBehaviour
         }
         else
         {
+            GameManager.instance.CheckPercent();
+
             skillView.SetActive(false);
         }
     }

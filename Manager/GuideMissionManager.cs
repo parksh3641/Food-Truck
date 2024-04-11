@@ -33,9 +33,10 @@ public class GuideMissionManager : MonoBehaviour
     public SkillManager skillManager;
     public TreasureManager treasureManager;
     public QuestManager questManager;
-
     public WelcomeManager welcomeManager;
     public AttendanceManager attendanceManager;
+    public DungeonManager dungeonManager;
+    public IconManager iconManager;
 
     PlayerDataBase playerDataBase;
 
@@ -71,7 +72,7 @@ public class GuideMissionManager : MonoBehaviour
     {
         if (GameStateManager.instance.YoutubeVideo) return;
 
-        if (playerDataBase.GuideIndex > 23)
+        if (playerDataBase.GuideIndex > 27)
         {
             guideMissonView.SetActive(false);
             return;
@@ -209,6 +210,23 @@ public class GuideMissionManager : MonoBehaviour
                 need = 10;
                 break;
             case 23:
+                now = playerDataBase.Dungeon1Count + playerDataBase.Dungeon2Count + playerDataBase.Dungeon3Count + playerDataBase.Dungeon4Count;
+                need = 2;
+                break;
+            case 24:
+                now = playerDataBase.GetAnimal_Total_AbilityLevel() + playerDataBase.GetTruck_Total_AbilityLevel() + playerDataBase.GetCharacter_Total_AbilityLevel()
+                    + playerDataBase.GetButterfly_Total_AbilityLevel() + playerDataBase.GetTruck_Total_AbilityLevel();
+                need = 1;
+                break;
+            case 25:
+                now = playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+                need = 20;
+                break;
+            case 26:
+                now = playerDataBase.Icon;
+                need = 1;
+                break;
+            case 27:
                 now = 0;
                 need = 1;
                 break;
@@ -258,6 +276,7 @@ public class GuideMissionManager : MonoBehaviour
                 }
                 else if (!playerDataBase.AttendanceCheck)
                 {
+                    attendanceManager.first = true;
                     attendanceManager.OpenAttendanceView();
                 }
             }
@@ -321,6 +340,18 @@ public class GuideMissionManager : MonoBehaviour
                     treasureManager.OpenTreasureView();
                     break;
                 case 23:
+                    dungeonManager.OpenDungeonView();
+                    break;
+                case 24:
+                    shopManager.OpenSpeicalShop();
+                    break;
+                case 25:
+                    GameManager.instance.GameStart(1);
+                    break;
+                case 26:
+                    iconManager.OpenIcon();
+                    break;
+                case 27:
                     shopManager.OpenSpeicalShop();
                     break;
             }

@@ -38,7 +38,7 @@ public class SkillContent : MonoBehaviour
 
     private float skill1Value = 0.2f;
     private float skill2Value = 0.2f;
-    private float skill3Value = 0.4f;
+    private float skill3Value = 0.5f;
     private float skill4Value = 0.2f;
     private float skill5Value = 0.2f;
     private float skill6Value = 0.2f;

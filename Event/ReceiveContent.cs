@@ -90,13 +90,15 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[1];
                 break;
             case RewardType.Treasure1:
-                mainBackground.sprite = rankBackgroundArray[2];
+                mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.Treasure2:
                 mainBackground.sprite = rankBackgroundArray[2];
                 break;
             case RewardType.Treasure3:
-                mainBackground.sprite = rankBackgroundArray[2];
+                mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.Treasure4:
                 mainBackground.sprite = rankBackgroundArray[0];
@@ -111,7 +113,8 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[2];
                 break;
             case RewardType.Treasure7:
-                mainBackground.sprite = rankBackgroundArray[2];
+                mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.Treasure8:
                 mainBackground.sprite = rankBackgroundArray[1];
@@ -245,16 +248,13 @@ public class ReceiveContent : MonoBehaviour
                 effect.SetActive(true);
                 break;
             case RewardType.Treasure13:
-                mainBackground.sprite = rankBackgroundArray[3];
-                effect.SetActive(true);
+                mainBackground.sprite = rankBackgroundArray[2];
                 break;
             case RewardType.Treasure14:
-                mainBackground.sprite = rankBackgroundArray[3];
-                effect.SetActive(true);
+                mainBackground.sprite = rankBackgroundArray[2];
                 break;
             case RewardType.Treasure15:
-                mainBackground.sprite = rankBackgroundArray[3];
-                effect.SetActive(true);
+                mainBackground.sprite = rankBackgroundArray[2];
                 break;
         }
     }

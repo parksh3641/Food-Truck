@@ -113,6 +113,8 @@ public class TreasureManager : MonoBehaviour
         }
         else
         {
+            GameManager.instance.CheckPercent();
+
             treasureView.SetActive(false);
         }
     }

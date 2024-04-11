@@ -70,6 +70,7 @@ public class RankContent : MonoBehaviour
         countryImg.sprite = Resources.Load<Sprite>("Country/" + country);
         scoreText.text = MoneyUnitString.ToCurrencyString((int.Parse(score)));
 
+        classImg.enabled = false;
 
         if (index == 999)
         {
@@ -83,6 +84,7 @@ public class RankContent : MonoBehaviour
     {
         chefType = ChefType.Cook1_1 + number;
 
+        classImg.enabled = true;
         classImg.sprite = GetAdvencementImg(chefType);
 
         if (chefType.ToString().Length == 7)

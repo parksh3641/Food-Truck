@@ -123,7 +123,7 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
-                background.effectColor = epicColor;
+                background.effectColor = legendaryColor;
 
                 if (level > 99)
                 {
@@ -183,7 +183,7 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
-                background.effectColor = epicColor;
+                background.effectColor = legendaryColor;
 
                 if (level > 99)
                 {
@@ -303,7 +303,7 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
-                background.effectColor = epicColor;
+                background.effectColor = legendaryColor;
 
                 if (level > 99)
                 {
@@ -483,7 +483,7 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
-                background.effectColor = legendaryColor;
+                background.effectColor = epicColor;
 
                 if (level > 99)
                 {
@@ -512,7 +512,7 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
-                background.effectColor = legendaryColor;
+                background.effectColor = epicColor;
 
                 if (level > 99)
                 {
@@ -541,7 +541,7 @@ public class TreasureContent : MonoBehaviour
                     check = 2;
                 }
 
-                background.effectColor = legendaryColor;
+                background.effectColor = epicColor;
 
                 if (level > 99)
                 {

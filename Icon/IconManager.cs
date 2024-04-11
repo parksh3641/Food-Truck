@@ -342,25 +342,25 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel1) > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel1) > 299 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel2) > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel2) > 299 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel3) > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel3) > 299 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel4) > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel4) > 299 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }

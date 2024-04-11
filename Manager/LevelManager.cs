@@ -154,18 +154,20 @@ public class LevelManager : MonoBehaviour
 
         infoText.localizationName = "SuccessPercent";
 
-        if(level > 199)
+        if(level > 99)
         {
-            infoText.plusText = " : +" + (200 * 0.05f).ToString("N1") + "%";
+            infoText.plusText = " : +" + (100 * 0.2f).ToString("N1") + "%";
         }
         else
         {
-            infoText.plusText = " : +" + (level * 0.05f).ToString("N1") + "%";
+            infoText.plusText = " : +" + (level * 0.2f).ToString("N1") + "%";
         }
 
         accessDateText.text = LocalizationManager.instance.GetString("AccessDate") + " : " + playerDataBase.AccessDate;
 
         GourmetManager.instance.Initialize();
+
+        GameManager.instance.CheckLocked();
     }
 
     [Button]

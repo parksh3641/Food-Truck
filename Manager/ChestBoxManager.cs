@@ -196,27 +196,27 @@ public class ChestBoxManager : MonoBehaviour
             epicRewardType = RewardType.Gold2;
 
             normalRewardIcon.sprite = rewardArray[(int)normalRewardType];
-            normalRewardText.text = MoneyUnitString.ToCurrencyString(100000);
+            normalRewardText.text = MoneyUnitString.ToCurrencyString(200000);
 
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
-            epicRewardText.text = MoneyUnitString.ToCurrencyString(1000000);
+            epicRewardText.text = MoneyUnitString.ToCurrencyString(2000000);
 
             if (playerDataBase.Candy1MaxValue > 0)
             {
-                normalRewardText.text = MoneyUnitString.ToCurrencyString(300000);
+                normalRewardText.text = MoneyUnitString.ToCurrencyString(500000);
                 epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
             }
 
             if (playerDataBase.JapaneseFood1MaxValue > 0)
             {
-                normalRewardText.text = MoneyUnitString.ToCurrencyString(500000);
+                normalRewardText.text = MoneyUnitString.ToCurrencyString(1000000);
                 epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
             }
 
             if (playerDataBase.Dessert1MaxValue > 0)
             {
-                normalRewardText.text = MoneyUnitString.ToCurrencyString(10000000);
-                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(50000000) + "</size>";
+                normalRewardText.text = MoneyUnitString.ToCurrencyString(3000000);
+                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(30000000) + "</size>";
             }
 
         }
@@ -294,19 +294,19 @@ public class ChestBoxManager : MonoBehaviour
             case RewardType.Gold:
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    PlayfabManager.instance.UpdateAddGold(3000000);
                 }
                 else if (playerDataBase.JapaneseFood1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(500000);
+                    PlayfabManager.instance.UpdateAddGold(1000000);
                 }
                 else if (playerDataBase.Candy1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(300000);
+                    PlayfabManager.instance.UpdateAddGold(500000);
                 }
                 else
                 {
-                    PlayfabManager.instance.UpdateAddGold(50000);
+                    PlayfabManager.instance.UpdateAddGold(200000);
                 }
                 break;
             case RewardType.Portion1:
@@ -353,19 +353,19 @@ public class ChestBoxManager : MonoBehaviour
             case RewardType.Gold2:
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(10000000);
+                    PlayfabManager.instance.UpdateAddGold(30000000);
                 }
                 else if (playerDataBase.JapaneseFood1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(5000000);
+                    PlayfabManager.instance.UpdateAddGold(10000000);
                 }
                 else if (playerDataBase.Candy1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(3000000);
+                    PlayfabManager.instance.UpdateAddGold(5000000);
                 }
                 else
                 {
-                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    PlayfabManager.instance.UpdateAddGold(2000000);
                 }
                 break;
             case RewardType.Portion1:

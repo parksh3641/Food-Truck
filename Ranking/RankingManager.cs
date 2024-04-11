@@ -261,27 +261,27 @@ public class RankingManager : MonoBehaviour
                     nextSeason.SetActive(true);
                 }
 
-                infoText.localizationName = "Ranking2_Info";
+                //infoText.localizationName = "Ranking2_Info";
 
                 FirebaseAnalytics.LogEvent("Open_Ranking2");
                 break;
             case 2:
                 ChangeRankingView(RankingType.GourmetLevel.ToString());
 
-                infoText.localizationName = "Ranking3_Info";
+                //infoText.localizationName = "Ranking3_Info";
 
                 FirebaseAnalytics.LogEvent("Open_Ranking3");
                 break;
             case 3:
                 ChangeRankingView(RankingType.Level.ToString());
 
-                infoText.localizationName = "Ranking4_Info";
+                //infoText.localizationName = "Ranking4_Info";
 
                 FirebaseAnalytics.LogEvent("Open_Ranking4");
                 break;
         }
 
-        infoText.ReLoad();
+        //infoText.ReLoad();
 
     }
 

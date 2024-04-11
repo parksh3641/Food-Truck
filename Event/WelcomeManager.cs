@@ -11,6 +11,8 @@ public class WelcomeManager : MonoBehaviour
 
     public RectTransform welcomeTransform;
 
+    public GameObject closeButton;
+
     public Text timerText;
 
     string localization_Reset = "";
@@ -68,6 +70,12 @@ public class WelcomeManager : MonoBehaviour
         {
             welcomeView.SetActive(true);
 
+            closeButton.SetActive(true);
+            if (first)
+            {
+                closeButton.SetActive(false);
+            }
+
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
                 ResetManager.instance.Initialize();
@@ -101,6 +109,7 @@ public class WelcomeManager : MonoBehaviour
 
                 if (!playerDataBase.AttendanceCheck)
                 {
+                    attendanceManager.first = true;
                     attendanceManager.OpenAttendanceView();
                 }
             }

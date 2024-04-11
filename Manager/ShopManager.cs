@@ -19,6 +19,7 @@ public class ShopManager : MonoBehaviour
     public GameObject shopAlarm;
 
     public GameObject martAlarm;
+    public GameObject[] speicalAlarm;
     public GameObject[] packageAlarm;
 
     public GameObject goldx2;
@@ -218,6 +219,11 @@ public class ShopManager : MonoBehaviour
 
         packageBuyIcon.SetActive(false);
 
+        for (int i = 0; i < speicalAlarm.Length; i++)
+        {
+            speicalAlarm[i].SetActive(true);
+        }
+
         for (int i = 0; i < packageAlarm.Length; i ++)
         {
             packageAlarm[i].SetActive(true);
@@ -344,6 +350,18 @@ public class ShopManager : MonoBehaviour
         if (shopView.activeInHierarchy)
         {
             ChangeTopToggle(3);
+        }
+    }
+
+    public void OpenShopItemView()
+    {
+        shopView.SetActive(false);
+
+        OpenShopView();
+
+        if (shopView.activeInHierarchy)
+        {
+            ChangeTopToggle(2);
         }
     }
 
@@ -722,23 +740,23 @@ public class ShopManager : MonoBehaviour
 
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    PlayfabManager.instance.UpdateAddGold(3000000);
                     return;
                 }
 
                 if (playerDataBase.JapaneseFood1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(500000);
+                    PlayfabManager.instance.UpdateAddGold(1000000);
                     return;
                 }
 
                 if (playerDataBase.Candy1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(300000);
+                    PlayfabManager.instance.UpdateAddGold(500000);
                     return;
                 }
 
-                PlayfabManager.instance.UpdateAddGold(100000);
+                PlayfabManager.instance.UpdateAddGold(200000);
 
                 break;
             case ItemType.AdReward_Gold:
@@ -889,9 +907,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion2:
-                if (playerDataBase.RankPoint >= 100)
+                if (playerDataBase.RankPoint >= 150)
                 {
-                    playerDataBase.RankPoint -= 100;
+                    playerDataBase.RankPoint -= 150;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -1363,7 +1381,7 @@ public class ShopManager : MonoBehaviour
 
         if (playerDataBase.Dessert1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(50000000);
+            PlayfabManager.instance.UpdateAddGold(30000000);
             return;
         }
 
@@ -1512,6 +1530,8 @@ public class ShopManager : MonoBehaviour
                 guideMissionManager.Initialize();
             }
 
+            GameManager.instance.CheckPercent();
+
             speicalShopView.SetActive(false);
         }
     }
@@ -1578,6 +1598,8 @@ public class ShopManager : MonoBehaviour
 
         leftButton.SetActive(true);
         rightButton.SetActive(true);
+
+        speicalAlarm[number].SetActive(false);
 
         switch (number)
         {
@@ -4585,13 +4607,13 @@ public class ShopManager : MonoBehaviour
 
                 Invoke("PackageDelay10", 0.5f);
 
-                playerDataBase.Treasure13Count += 100;
-                playerDataBase.Treasure14Count += 100;
-                playerDataBase.Treasure15Count += 100;
+                playerDataBase.Treasure1Count += 100;
+                playerDataBase.Treasure7Count += 100;
+                playerDataBase.Treasure3Count += 100;
 
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure13Count", playerDataBase.Treasure13Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure14Count", playerDataBase.Treasure14Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure15Count", playerDataBase.Treasure15Count);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure1Count", playerDataBase.Treasure1Count);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure7Count", playerDataBase.Treasure7Count);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure3Count", playerDataBase.Treasure3Count);
 
                 yield return waitForSeconds;
 
@@ -4608,13 +4630,13 @@ public class ShopManager : MonoBehaviour
 
                 Invoke("PackageDelay11", 0.5f);
 
-                playerDataBase.Treasure1Count += 100;
                 playerDataBase.Treasure2Count += 100;
-                playerDataBase.Treasure3Count += 100;
+                playerDataBase.Treasure13Count += 100;
+                playerDataBase.Treasure14Count += 100;
 
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure1Count", playerDataBase.Treasure1Count);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure2Count", playerDataBase.Treasure2Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure3Count", playerDataBase.Treasure3Count);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure13Count", playerDataBase.Treasure13Count);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure14Count", playerDataBase.Treasure14Count);
 
                 yield return waitForSeconds;
 
@@ -4913,5 +4935,11 @@ public class ShopManager : MonoBehaviour
 
         isDelay = true;
         Invoke("Delay", 0.4f);
+    }
+
+    public void ComingSoon()
+    {
+        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+        NotionManager.instance.UseNotion(NotionType.ComingSoon);
     }
 }

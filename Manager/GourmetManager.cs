@@ -33,6 +33,10 @@ public class GourmetManager : MonoBehaviour
     {
         value = 0;
 
+#if UNITY_EDITOR
+        return;
+#endif
+
         if (playerDataBase.TestAccount == 0)
         {
             value += playerDataBase.Level * 200;
@@ -77,6 +81,7 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.Treasure12 * 500;
             value += playerDataBase.Treasure13 * 500;
             value += playerDataBase.Treasure14 * 500;
+            value += playerDataBase.Treasure15 * 500;
 
             value += playerDataBase.GetCharacter_Total_AbilityLevel() * 300;
             value += playerDataBase.GetAnimal_Total_AbilityLevel() * 300;

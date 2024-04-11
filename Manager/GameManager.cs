@@ -52,7 +52,10 @@ public class GameManager : MonoBehaviour
     public LocalizationContent bestRankLevelText;
 
     public GameObject rankLocked;
+    public GameObject inGameRankLocked;
     public GameObject treasureLocked;
+
+    public LocalizationContent changeModeText;
 
     public ButtonClickAnimation upgradeButtonAnim;
     public ButtonClickAnimation sellButtonAnim;
@@ -88,8 +91,8 @@ public class GameManager : MonoBehaviour
     Color buff4Color = new Color(0 / 255f, 230 / 255f, 0 / 255f);
 
     private int buff1Value = 100;
-    private int buff2Value = 60;
-    private int buff3Value = 25;
+    private int buff2Value = 30;
+    private int buff3Value = 50;
 
     private bool buff1 = false;
     private bool buff2 = false;
@@ -247,11 +250,11 @@ public class GameManager : MonoBehaviour
     private float portion5Time = 0;
     private float portion6Time = 0;
 
-    private int portion1Value = 50;
-    private int portion2Value = 50;
+    private int portion1Value = 40;
+    private int portion2Value = 30;
     private int portion3Value = 10;
     private int portion4Value = 50;
-    private int portion5Value = 20;
+    private int portion5Value = 15;
     private int portion6Value = 0;
 
     float currentTime, currentTime1, currentTime2, currentTime3, currentTime4, currentTime5, currentTime6;
@@ -755,7 +758,7 @@ public class GameManager : MonoBehaviour
 
         supportCount = GameStateManager.instance.SupportCount;
 
-        if(GameStateManager.instance.SaveGold > 0)
+        if(GameStateManager.instance.SaveGold > 100)
         {
             PlayfabManager.instance.UpdateAddGold((int)GameStateManager.instance.SaveGold);
         }
@@ -1507,6 +1510,8 @@ public class GameManager : MonoBehaviour
             mainUI.SetActive(false);
             inGameUI.SetActive(true);
 
+            changeModeText.localizationName = "ChangeRanking";
+
             switch (GameStateManager.instance.IslandType)
             {
                 case IslandType.Island1:
@@ -1550,6 +1555,8 @@ public class GameManager : MonoBehaviour
             mainUI.SetActive(false);
             inGameUI.SetActive(true);
 
+            changeModeText.localizationName = "ChangeNormal";
+
             rankingNoticeButton.SetActive(true);
 
             switch (GameStateManager.instance.IslandType)
@@ -1576,6 +1583,8 @@ public class GameManager : MonoBehaviour
 
             FirebaseAnalytics.LogEvent("RankingMode");
         }
+
+        changeModeText.ReLoad();
 
         if (playerDataBase.LockTutorial == 1)
         {
@@ -1788,28 +1797,25 @@ public class GameManager : MonoBehaviour
 
         changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
-        if (GameStateManager.instance.GameType != GameType.Rank)
+        successPlus += playerDataBase.Skill7 * 0.5f;
+        successPlus += playerDataBase.Skill17 * 0.5f;
+        if (playerDataBase.Level > 99)
         {
-            successPlus += playerDataBase.Skill7 * 0.5f;
-            successPlus += playerDataBase.Skill17 * 0.5f;
-            if (playerDataBase.Level > 199)
-            {
-                successPlus += 10;
-            }
-            else
-            {
-                successPlus += playerDataBase.Level * 0.05f;
-            }
-            successPlus += playerDataBase.Treasure1 * 1f;
-            successPlus += playerDataBase.Advancement * 0.5f;
+            successPlus += 20;
         }
+        else
+        {
+            successPlus += playerDataBase.Level * 0.2f;
+        }
+        successPlus += playerDataBase.Treasure1 * 1f;
+        successPlus += playerDataBase.Advancement * 0.5f;
 
         successX2 += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         successX2 += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
         successX2 += playerDataBase.Treasure3 * 0.5f;
         successX2 += playerDataBase.GetEpicBookNumber() * 0.2f;
 
-        sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetFoodTruckHighNumber());
+        sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 1f;
         sellPricePlus += playerDataBase.Skill18 * 1f;
         sellPricePlus += playerDataBase.Proficiency * 2;
@@ -1879,7 +1885,7 @@ public class GameManager : MonoBehaviour
         feverTime += (20 * (0.005f * playerDataBase.Treasure9));
 
         feverCountPlus += (feverCountPlus * (0.002f * playerDataBase.Skill2));
-        feverPlus = 3 + (3 * (0.004f * playerDataBase.Skill3));
+        feverPlus = 3 + (3 * (0.005f * playerDataBase.Skill3));
 
         portion1Time = 20 + (20 * (0.002f * playerDataBase.Skill4)) + (20 * (0.005f * playerDataBase.Treasure6));
         portion2Time = 20 + (20 * (0.002f * playerDataBase.Skill5)) + (20 * (0.005f * playerDataBase.Treasure6));
@@ -2091,6 +2097,8 @@ public class GameManager : MonoBehaviour
 
         yield return serverSeconds;
 
+#if !UNITY_EDITOR
+
         if (GameStateManager.instance.GameType == GameType.Rank)
         {
             if (GameStateManager.instance.Food8Level + 1 > playerDataBase.RankLevel1)
@@ -2233,6 +2241,8 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
+
+#endif
 
         StartCoroutine(ServerDelayCoroution());
     }
@@ -2656,37 +2666,21 @@ public class GameManager : MonoBehaviour
             priceText.plusText += "\n" + MoneyUnitString.ToCurrencyString(sellPrice);
         }
 
-        if(defDestroy > 0)
+        if (defDestroy >= 100)
         {
-            if(defDestroy >= 100)
-            {
-                defDestroy = 100;
-            }
-
-            defDestroyText.localizationName = "DefDestroyPercent";
-            defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
-        }
-        else
-        {
-            defDestroyText.localizationName = " ";
-            defDestroyText.plusText = "";
+            defDestroy = 100;
         }
 
-        if(successX2 > 0)
-        {
-            if (successX2 >= 100)
-            {
-                successX2 = 100;
-            }
+        defDestroyText.localizationName = "DefDestroyPercent";
+        defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
 
-            successX2Text.localizationName = "SuccessX2Percent";
-            successX2Text.plusText = " : " + successX2.ToString("N1") + "%";
-        }
-        else
+        if (successX2 >= 100)
         {
-            successX2Text.localizationName = " ";
-            successX2Text.plusText = "";
+            successX2 = 100;
         }
+
+        successX2Text.localizationName = "SuccessX2Percent";
+        successX2Text.plusText = " : " + successX2.ToString("N1") + "%";
 
         sellPriceTipText.localizationName = "SellPriceX2Up";
         sellPriceTipText.plusText += "\n" + sellPriceTip.ToString("N1") + "%";
@@ -2969,7 +2963,7 @@ public class GameManager : MonoBehaviour
                         break;
                     case CandyType.Chocolate:
                         candy10Array[0].gameObject.SetActive(true);
-                        candy10Array[0].RankInitialize(GameStateManager.instance.Candy10Level - (5 * nextLevel));
+                        candy10Array[0].RankInitialize(GameStateManager.instance.Candy10Level);
                         candy10Array[0].SpeicalFood(false);
                         break;
                 }
@@ -5314,7 +5308,7 @@ public class GameManager : MonoBehaviour
                 CheckRareFood();
             }
 
-            Debug.LogError("Sell RareFood");
+            Debug.LogError("Sell Rare Food");
 
             FirebaseAnalytics.LogEvent("Sell_RareFood");
         }
@@ -5322,7 +5316,7 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.UpdateSellPriceGold(sellPrice);
         PlayfabManager.instance.moneyAnimation.PlusMoney(sellPrice);
 
-        if(playerDataBase.GuideIndex < 23)
+        if(playerDataBase.GuideIndex < 27)
         {
             GameStateManager.instance.GetSellGold += sellPrice;
         }
@@ -5355,16 +5349,12 @@ public class GameManager : MonoBehaviour
             {
                 speicalFoodCount = 0;
 
-                if (Random.Range(0, 100f) < rareFoodPercent && level >= 9)
+                if (rareFoodPercent >= Random.Range(0, 100f) && level >= 9)
                 {
                     speicalFood = true;
 
                     SoundManager.instance.PlaySFX(GameSfxType.RareFoodOpen);
-
-                    if (!changeFoodManager.changeFoodView.activeInHierarchy)
-                    {
-                        NotionManager.instance.UseNotion2(NotionType.SpeicalFoodNotion);
-                    }
+                    NotionManager.instance.UseNotion2(NotionType.SpeicalFoodNotion);
 
                     if (GameStateManager.instance.Effect)
                     {
@@ -5373,6 +5363,10 @@ public class GameManager : MonoBehaviour
                         speicalFoodParticle.Play();
                         rareFood.SetActive(true);
                     }
+
+                    Debug.Log("Open Rare Food");
+
+                    FirebaseAnalytics.LogEvent("Open_RareFood");
                 }
             }
         }
@@ -5599,21 +5593,13 @@ public class GameManager : MonoBehaviour
 
         if (inGameUI.gameObject.activeInHierarchy)
         {
-            if (defDestroy > 0)
+            if (defDestroy >= 100)
             {
-                if (defDestroy >= 100)
-                {
-                    defDestroy = 100;
-                }
+                defDestroy = 100;
+            }
 
-                defDestroyText.localizationName = "DefDestroyPercent";
-                defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
-            }
-            else
-            {
-                defDestroyText.localizationName = " ";
-                defDestroyText.plusText = "";
-            }
+            defDestroyText.localizationName = "DefDestroyPercent";
+            defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
             defDestroyText.ReLoad();
         }
     }
@@ -5651,6 +5637,8 @@ public class GameManager : MonoBehaviour
             {
                 SoundManager.instance.PlaySFX(GameSfxType.Shield);
                 NotionManager.instance.UseNotion(NotionType.LowItemNotion);
+
+                ShopManager.instance.OpenShopItemView();
                 return;
             }
         }
@@ -5671,70 +5659,81 @@ public class GameManager : MonoBehaviour
     {
         if (inGameUI.activeInHierarchy)
         {
+            portionText1.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion1);
+            portionText2.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion2);
+            portionText3.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion3);
+            portionText4.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion4);
+            portionText5.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion5);
+            portionText6.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion6);
+
             if (playerDataBase.Portion1 == 0)
             {
-                portionAd1.SetActive(true);
-                portionText1.text = "";
+                if(!GameStateManager.instance.Portion1Ad)
+                {
+                    portionAd1.SetActive(true);;
+                }
             }
             else
             {
                 portionAd1.SetActive(false);
-                portionText1.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion1);
             }
 
             if (playerDataBase.Portion2 == 0)
             {
-                portionAd2.SetActive(true);
-                portionText2.text = "";
+                if (!GameStateManager.instance.Portion2Ad)
+                {
+                    portionAd2.SetActive(true); ;
+                }
             }
             else
             {
                 portionAd2.SetActive(false);
-                portionText2.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion2);
             }
 
             if (playerDataBase.Portion3 == 0)
             {
-                portionAd3.SetActive(true);
-                portionText3.text = "";
+                if (!GameStateManager.instance.Portion3Ad)
+                {
+                    portionAd3.SetActive(true); ;
+                }
             }
             else
             {
                 portionAd3.SetActive(false);
-                portionText3.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion3);
             }
 
             if (playerDataBase.Portion4 == 0)
             {
-                portionAd4.SetActive(true);
-                portionText4.text = "";
+                if (!GameStateManager.instance.Portion4Ad)
+                {
+                    portionAd4.SetActive(true); ;
+                }
             }
             else
             {
                 portionAd4.SetActive(false);
-                portionText4.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion4);
             }
 
             if (playerDataBase.Portion5 == 0)
             {
-                portionAd5.SetActive(true);
-                portionText5.text = "";
+                if (!GameStateManager.instance.Portion5Ad)
+                {
+                    portionAd5.SetActive(true); ;
+                }
             }
             else
             {
                 portionAd5.SetActive(false);
-                portionText5.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion5);
             }
 
-            if (playerDataBase.Portion6 == 0)
-            {
-                portionText6.text = "-";
-            }
-            else
-            {
-                portionAd6.SetActive(false);
-                portionText6.text = MoneyUnitString.ToCurrencyString(playerDataBase.Portion6);
-            }
+            //if (playerDataBase.Portion6 == 0)
+            //{
+            //    portionText6.text = "-";
+            //}
+            //else
+            //{
+            //    portionAd6.SetActive(false);
+            //}
 
             if (guideMissionManager.guideMissonView.gameObject.activeInHierarchy)
             {
@@ -5778,7 +5777,10 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        OpenPortionAdView(0);
+                        if(!GameStateManager.instance.Portion1Ad)
+                        {
+                            OpenPortionAdView(0);
+                        }
 
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
@@ -5814,7 +5816,10 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        OpenPortionAdView(1);
+                        if (!GameStateManager.instance.Portion2Ad)
+                        {
+                            OpenPortionAdView(1);
+                        }
 
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
@@ -5850,7 +5855,10 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        OpenPortionAdView(2);
+                        if (!GameStateManager.instance.Portion3Ad)
+                        {
+                            OpenPortionAdView(2);
+                        }
 
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
@@ -5882,7 +5890,10 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        OpenPortionAdView(3);
+                        if (!GameStateManager.instance.Portion4Ad)
+                        {
+                            OpenPortionAdView(3);
+                        }
 
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
@@ -5918,7 +5929,10 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        OpenPortionAdView(4);
+                        if (!GameStateManager.instance.Portion5Ad)
+                        {
+                            OpenPortionAdView(4);
+                        }
 
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
@@ -5956,7 +5970,7 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        OpenPortionAdView(5);
+                        //OpenPortionAdView(5);
 
                         SoundManager.instance.PlaySFX(GameSfxType.NotSources);
                         NotionManager.instance.UseNotion(NotionType.LowPortion);
@@ -6129,23 +6143,15 @@ public class GameManager : MonoBehaviour
 
                 defDestroy += buff2Value;
 
-                if (defDestroy > 0)
+                if (defDestroy >= 100)
                 {
-                    if (defDestroy >= 100)
-                    {
-                        defDestroy = 100;
-                    }
-
-                    defDestroyText.localizationName = "DefDestroyPercent";
-                    defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
-                }
-                else
-                {
-                    defDestroyText.localizationName = " ";
-                    defDestroyText.plusText = "";
+                    defDestroy = 100;
                 }
 
+                defDestroyText.localizationName = "DefDestroyPercent";
+                defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
                 defDestroyText.ReLoad();
+
                 UpgradeInitialize();
                 break;
             case 2:
@@ -6155,21 +6161,15 @@ public class GameManager : MonoBehaviour
 
                 successX2 += buff3Value;
 
-                if (successX2 > 0)
+                if (successX2 >= 100)
                 {
-                    if (successX2 >= 100)
-                    {
-                        successX2 = 100;
-                    }
+                    successX2 = 100;
+                }
 
-                    successX2Text.localizationName = "SuccessX2Percent";
-                    successX2Text.plusText = " : " + successX2.ToString("N1") + "%";
-                }
-                else
-                {
-                    successX2Text.localizationName = " ";
-                    successX2Text.plusText = "";
-                }
+                successX2Text.localizationName = "SuccessX2Percent";
+                successX2Text.plusText = " : " + successX2.ToString("N1") + "%";
+                successX2Text.ReLoad();
+
                 UpgradeInitialize();
                 break;
             case 3:
@@ -6210,38 +6210,32 @@ public class GameManager : MonoBehaviour
 
                 defDestroy -= buff2Value;
 
-                if (defDestroy > 0)
+                if (defDestroy >= 100)
                 {
-                    defDestroyText.localizationName = "DefDestroyPercent";
-                    defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
+                    defDestroy = 100;
                 }
-                else
-                {
-                    defDestroyText.localizationName = " ";
-                    defDestroyText.plusText = "";
-                }
+
+                defDestroyText.localizationName = "DefDestroyPercent";
+                defDestroyText.plusText = " : " + defDestroy.ToString("N2") + "%";
                 defDestroyText.ReLoad();
+
+                UpgradeInitialize();
                 break;
             case 2:
                 buff3 = false;
 
                 successX2 -= buff3Value;
 
-                if (successX2 > 0)
+                if (successX2 >= 100)
                 {
-                    if (successX2 >= 100)
-                    {
-                        successX2 = 100;
-                    }
+                    successX2 = 100;
+                }
 
-                    successX2Text.localizationName = "SuccessX2Percent";
-                    successX2Text.plusText = " : " + successX2.ToString("N1") + "%";
-                }
-                else
-                {
-                    successX2Text.localizationName = " ";
-                    successX2Text.plusText = "";
-                }
+                successX2Text.localizationName = "SuccessX2Percent";
+                successX2Text.plusText = " : " + successX2.ToString("N1") + "%";
+                successX2Text.ReLoad();
+
+                UpgradeInitialize();
                 break;
             case 3:
                 buff4 = false;
@@ -6284,6 +6278,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeMode()
+    {
+        if(GameStateManager.instance.GameType == GameType.Story)
+        {
+            GameStart(1);
+        }
+        else
+        {
+            GameStart(0);
+        }
+    }
+
 
     public void WatchAd()
     {
@@ -6315,18 +6321,28 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 PortionManager.instance.GetPortion(0, 5);
+
+                GameStateManager.instance.Portion1Ad = true;
                 break;
             case 1:
                 PortionManager.instance.GetPortion(1, 5);
+
+                GameStateManager.instance.Portion2Ad = true;
                 break;
             case 2:
                 PortionManager.instance.GetPortion(2, 5);
+
+                GameStateManager.instance.Portion3Ad = true;
                 break;
             case 3:
                 PortionManager.instance.GetPortion(3, 5);
+
+                GameStateManager.instance.Portion4Ad = true;
                 break;
             case 4:
                 PortionManager.instance.GetPortion(4, 3);
+
+                GameStateManager.instance.Portion5Ad = true;
                 break;
         }
 
@@ -6819,11 +6835,16 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.UseSauce = 0;
         GameStateManager.instance.OpenChestBox = 0;
         GameStateManager.instance.YummyTimeCount = 0;
-
         GameStateManager.instance.ChestBoxCount = 0;
 
         playerDataBase.PlayTimeCount = 0;
         playerDataBase.RankEventCount = 0;
+
+        GameStateManager.instance.Portion1Ad = false;
+        GameStateManager.instance.Portion2Ad = false;
+        GameStateManager.instance.Portion3Ad = false;
+        GameStateManager.instance.Portion4Ad = false;
+        GameStateManager.instance.Portion5Ad = false;
     }
 
     public void GetGold()
@@ -6967,6 +6988,7 @@ public class GameManager : MonoBehaviour
     {
         treasureLocked.SetActive(true);
         rankLocked.SetActive(true);
+        inGameRankLocked.SetActive(true);
 
         if (playerDataBase.Level > 2)
         {
@@ -6976,6 +6998,7 @@ public class GameManager : MonoBehaviour
         if (playerDataBase.Level > 4)
         {
             rankLocked.SetActive(false);
+            inGameRankLocked.SetActive(false);
         }
     }
 

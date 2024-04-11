@@ -195,15 +195,7 @@ public class UpgradeDataBase : ScriptableObject
 
         if (level == 0)
         {
-            switch (GameStateManager.instance.GameType)
-            {
-                case GameType.Story:
-                    need = 100;
-                    break;
-                case GameType.Rank:
-                    need = 100;
-                    break;
-            }
+            need = 100;
 
             return (int)need;
         }
@@ -250,7 +242,14 @@ public class UpgradeDataBase : ScriptableObject
                 price = level * (value * priceList[level].value);
                 break;
             case GameType.Rank:
-                price = level * level * 100;
+                if(level > priceList.Count - 1)
+                {
+                    price = level * (value * (10 + (level - (priceList.Count - 1)) / 5));
+                }
+                else
+                {
+                    price = level * (value * priceList[level].value);
+                }
 
                 break;
         }
@@ -291,7 +290,7 @@ public class UpgradeDataBase : ScriptableObject
             case GameType.Rank:
                 if (level > 0)
                 {
-                    success = 100 - (level * 0.5f);
+                    success = 100 - (level * 1f);
                 }
                 else
                 {

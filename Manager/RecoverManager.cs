@@ -135,13 +135,6 @@ public class RecoverManager : MonoBehaviour
 
     public void FoodInitialize(FoodType type, int level)
     {
-        need = (level / 5);
-
-        if (playerDataBase.RecoverTicket < need)
-        {
-            return;
-        }
-
         OpenRecoverView();
 
         index = 0;
@@ -155,13 +148,6 @@ public class RecoverManager : MonoBehaviour
 
     public void CandyInitialize(CandyType type, int level)
     {
-        need = (level / 5);
-
-        if (playerDataBase.RecoverTicket < need)
-        {
-            return;
-        }
-
         OpenRecoverView();
 
         index = 1;
@@ -175,13 +161,6 @@ public class RecoverManager : MonoBehaviour
 
     public void JapaneseFoodInitialize(JapaneseFoodType type, int level)
     {
-        need = (level / 5);
-
-        if (playerDataBase.RecoverTicket < need)
-        {
-            return;
-        }
-
         OpenRecoverView();
 
         index = 2;
@@ -195,13 +174,6 @@ public class RecoverManager : MonoBehaviour
 
     public void DessertInitialize(DessertType type, int level)
     {
-        need = (level / 5);
-
-        if (playerDataBase.RecoverTicket < need)
-        {
-            return;
-        }
-
         OpenRecoverView();
 
         index = 3;

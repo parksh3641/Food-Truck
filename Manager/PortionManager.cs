@@ -24,6 +24,7 @@ public class PortionManager : MonoBehaviour
     private int random = 0;
 
     public LevelManager levelManager;
+    public InventoryManager inventoryManager;
 
     PlayerDataBase playerDataBase;
 
@@ -62,6 +63,8 @@ public class PortionManager : MonoBehaviour
         }
 
         portionAnimation[index].PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -93,6 +96,8 @@ public class PortionManager : MonoBehaviour
         }
 
         portionAnimation[random].PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -112,6 +117,8 @@ public class PortionManager : MonoBehaviour
         portionAnimation[1].PlusMoney(number);
         portionAnimation[2].PlusMoney(number);
         portionAnimation[3].PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -132,6 +139,8 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicketPiece", playerDataBase.DefDestroyTicketPiece);
 
         defTicketPieceAnimation.PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -141,6 +150,8 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicket", playerDataBase.DefDestroyTicket);
 
         defTicketAnimation.PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -150,6 +161,8 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTicket);
 
         buffTicketAnimation.PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -159,6 +172,8 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("SkillTickets", playerDataBase.SkillTicket);
 
         skillTicketAnimation.PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -168,6 +183,8 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RecoverTicket", playerDataBase.RecoverTicket);
 
         repairTicketAnimation.PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -177,6 +194,8 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
         rankPointAnimation.PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -203,6 +222,8 @@ public class PortionManager : MonoBehaviour
         }
 
         islandCountAnimation[index].PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -212,6 +233,8 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicket", playerDataBase.EventTicket);
 
         eventTicketAnimation.PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -221,6 +244,8 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("AbilityPoint", playerDataBase.AbilityPoint);
 
         abilityPointAnimation.PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 
     [Button]
@@ -230,5 +255,7 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("ChallengePoint", playerDataBase.ChallengePoint);
 
         challengePointAnimation.PlusMoney(number);
+
+        inventoryManager.alarm.SetActive(true);
     }
 }

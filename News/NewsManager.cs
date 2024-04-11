@@ -167,6 +167,7 @@ public class NewsManager : MonoBehaviour
                 }
                 else if(!playerDataBase.AttendanceCheck)
                 {
+                    attendanceManager.first = true;
                     attendanceManager.OpenAttendanceView();
                 }
             }

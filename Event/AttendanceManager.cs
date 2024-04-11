@@ -13,6 +13,8 @@ public class AttendanceManager : MonoBehaviour
 
     public RectTransform attendanceRectTransform;
 
+    public GameObject closeButton;
+
     public GameObject mainAlarm;
     public GameObject alarm;
 
@@ -22,6 +24,8 @@ public class AttendanceManager : MonoBehaviour
     string localization_Days = "";
     string localization_Hours = "";
     string localization_Minutes = "";
+
+    public bool first = false;
 
     public AttendanceContent[] attendanceContentArray;
 
@@ -45,6 +49,8 @@ public class AttendanceManager : MonoBehaviour
 
         mainAlarm.SetActive(false);
         alarm.SetActive(false);
+
+        first = false;
     }
 
 
@@ -81,6 +87,12 @@ public class AttendanceManager : MonoBehaviour
         {
             attendanceView.SetActive(true);
 
+            closeButton.SetActive(true);
+            if (first)
+            {
+                closeButton.SetActive(false);
+            }
+
             localization_Reset = LocalizationManager.instance.GetString("Reset");
             localization_Days = LocalizationManager.instance.GetString("Days");
             localization_Hours = LocalizationManager.instance.GetString("Hours");
@@ -100,6 +112,8 @@ public class AttendanceManager : MonoBehaviour
         else
         {
             StopAllCoroutines();
+
+            first = false;
 
             attendanceView.SetActive(false);
         }

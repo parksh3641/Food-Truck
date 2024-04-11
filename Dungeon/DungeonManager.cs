@@ -504,7 +504,7 @@ public class DungeonManager : MonoBehaviour
 
         attackText.localizationName = "AttackPercent";
         attackText.plusText = " : " + success.ToString("N1") + "%";
-        attackText.plusText += " (+" + attackPlus.ToString("N1") + "%)";
+        attackText.plusText += "  (+" + attackPlus.ToString("N1") + "%)";
 
         attackDelay = 0.4f - (0.2f * (attackSpeed * 0.01f));
 
@@ -520,7 +520,7 @@ public class DungeonManager : MonoBehaviour
 
         if (attackSpeed > 0)
         {
-            attackSpeedText.plusText += " (-" + attackSpeed.ToString("N2") + "%)";
+            attackSpeedText.plusText += "  (+" + attackSpeed.ToString("N1") + "%)";
         }
 
         attackX2Text.localizationName = "AttackX2Percent";

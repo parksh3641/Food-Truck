@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
         GameStateManager.instance.Level = level;
 
         titleText.text = "Lv." + level.ToString();
-        levelText.text = level.ToString() + "\n<size=35>/300</size>";
+        levelText.text = level.ToString();
 
         expUp = 0;
         expUpPlus = 0;
@@ -156,11 +156,11 @@ public class LevelManager : MonoBehaviour
 
         if(level > 99)
         {
-            infoText.plusText = " : +" + (100 * 0.2f).ToString("N1") + "%";
+            infoText.plusText = " : +" + (100 * 0.3f).ToString("N1") + "%";
         }
         else
         {
-            infoText.plusText = " : +" + (level * 0.2f).ToString("N1") + "%";
+            infoText.plusText = " : +" + (level * 0.3f).ToString("N1") + "%";
         }
 
         accessDateText.text = LocalizationManager.instance.GetString("AccessDate") + " : " + playerDataBase.AccessDate;

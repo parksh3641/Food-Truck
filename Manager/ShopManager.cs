@@ -141,8 +141,8 @@ public class ShopManager : MonoBehaviour
     bool isTimer = false;
     bool isPackageDelay = false;
 
-    private int price_Gold = 0;
-    private int price_Crystal = 0;
+    private long price_Gold = 0;
+    private long price_Crystal = 0;
     private int price_LevelUp = 0;
     private int exchange = 10000;
 
@@ -3722,7 +3722,7 @@ public class ShopManager : MonoBehaviour
                         }
                         else
                         {
-                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
                         }
                         break;
                 }
@@ -3796,7 +3796,7 @@ public class ShopManager : MonoBehaviour
                         }
                         else
                         {
-                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
                         }
                         break;
                 }
@@ -3876,7 +3876,7 @@ public class ShopManager : MonoBehaviour
                         }
                         else
                         {
-                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
                         }
                         break;
                 }
@@ -3986,7 +3986,7 @@ public class ShopManager : MonoBehaviour
                         }
                         else
                         {
-                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
                         }
                         break;
                 }
@@ -4120,7 +4120,7 @@ public class ShopManager : MonoBehaviour
                         }
                         else
                         {
-                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, price_Crystal);
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
                         }
                         break;
                 }

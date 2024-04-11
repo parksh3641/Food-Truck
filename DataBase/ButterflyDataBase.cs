@@ -8,8 +8,7 @@ using UnityEngine;
 public class ButterflyInfo
 {
     public ButterflyType butterflyType = ButterflyType.Butterfly1;
-    public int price = 0;
-    public int crystal = 0;
+    public long price = 0;
 
     [Space]
     public PassiveEffect passiveEffect = PassiveEffect.DefDestroyPercentUp;

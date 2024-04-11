@@ -184,7 +184,7 @@ public class IslandManager : MonoBehaviour
         switch (type)
         {
             case IslandType.Island1:
-                if(playerDataBase.Island1Level + 1 > 29)
+                if(playerDataBase.Island1Level + 1 > 9)
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.MaxLevel);
@@ -209,7 +209,7 @@ public class IslandManager : MonoBehaviour
                 changeIslandContentList[0].LevelInitialize();
                 break;
             case IslandType.Island2:
-                if (playerDataBase.Island2Level + 1 > 29)
+                if (playerDataBase.Island2Level + 1 > 9)
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.MaxLevel);
@@ -234,7 +234,7 @@ public class IslandManager : MonoBehaviour
                 changeIslandContentList[1].LevelInitialize();
                 break;
             case IslandType.Island3:
-                if (playerDataBase.Island3Level + 1 > 29)
+                if (playerDataBase.Island3Level + 1 > 9)
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.MaxLevel);
@@ -259,7 +259,7 @@ public class IslandManager : MonoBehaviour
                 changeIslandContentList[2].LevelInitialize();
                 break;
             case IslandType.Island4:
-                if (playerDataBase.Island4Level + 1 > 29)
+                if (playerDataBase.Island4Level + 1 > 9)
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.MaxLevel);

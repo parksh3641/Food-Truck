@@ -6,8 +6,7 @@ using UnityEngine;
 public class TotemsInfo
 {
     public TotemsType totemsType = TotemsType.Totems1;
-    public int price = 0;
-    public int crystal = 0;
+    public long price = 0;
 
     [Space]
     public PassiveEffect passiveEffect = PassiveEffect.SuccessX2PercentUp;

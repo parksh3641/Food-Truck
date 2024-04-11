@@ -7,8 +7,7 @@ using UnityEngine;
 public class AnimalInfo
 {
     public AnimalType animalType = AnimalType.Animal1;
-    public int price = 0;
-    public int crystal = 0;
+    public long price = 0;
 
     [Space]
     public PassiveEffect passiveEffect = PassiveEffect.DefDestroyPercentUp;

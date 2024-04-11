@@ -59,11 +59,12 @@ public class InventoryManager : MonoBehaviour
         receiveContents[13].Initialize(RewardType.RankPoint, playerDataBase.RankPoint);
         receiveContents[14].Initialize(RewardType.AbilityPoint, playerDataBase.AbilityPoint);
         receiveContents[15].Initialize(RewardType.ChallengePoint, playerDataBase.ChallengePoint);
+        receiveContents[16].Initialize(RewardType.Portion6, playerDataBase.Portion6);
 
-        receiveContents[16].Initialize(RewardType.EventTicket, playerDataBase.EventTicket);
-        receiveContents[16].Limit(1000);
+        receiveContents[17].Initialize(RewardType.EventTicket, playerDataBase.EventTicket);
+        receiveContents[17].Limit(1000);
 
-        receiveContents[17].Initialize(RewardType.DefDestroyTicket, playerDataBase.DefDestroyTicket);
+        receiveContents[18].Initialize(RewardType.DefDestroyTicket, playerDataBase.DefDestroyTicket);
     }
 
 }

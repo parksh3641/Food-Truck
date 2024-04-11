@@ -286,9 +286,9 @@ public class GameManager : MonoBehaviour
     private int season = 0;
     private int gender = 0;
 
-    private float rareFoodPercent = 5.0f;
+    private float rareFoodPercent = 10.0f;
     private float recoverTicketPercent = 10.0f;
-    private float eventTicketPercent = 3.0f;
+    private float eventTicketPercent = 5.0f;
     private float itemDropPercent = 0f;
 
     private bool clickDelay = false;
@@ -1801,11 +1801,11 @@ public class GameManager : MonoBehaviour
         successPlus += playerDataBase.Skill17 * 0.5f;
         if (playerDataBase.Level > 99)
         {
-            successPlus += 20;
+            successPlus += 30;
         }
         else
         {
-            successPlus += playerDataBase.Level * 0.2f;
+            successPlus += playerDataBase.Level * 0.3f;
         }
         successPlus += playerDataBase.Treasure1 * 1f;
         successPlus += playerDataBase.Advancement * 0.5f;
@@ -5301,7 +5301,7 @@ public class GameManager : MonoBehaviour
 
         if(speicalFood)
         {
-            PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 5 + (level / 5)));
+            PortionManager.instance.GetIslandCount((int)GameStateManager.instance.IslandType, Random.Range(1 + (level / 10), 3 + (level / 5)));
 
             if(level >= maxLevel - 1)
             {
@@ -5555,6 +5555,8 @@ public class GameManager : MonoBehaviour
                 FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.DessertType);
                 break;
         }
+
+        Debug.Log("Success Rare Food Book");
     }
 
     public void CheckDefTicket()
@@ -6737,35 +6739,35 @@ public class GameManager : MonoBehaviour
         playerDataBase.Skill4 = 500;
         playerDataBase.Skill5 = 500;
         playerDataBase.Skill6 = 500;
-        playerDataBase.Skill7 = 100;
-        playerDataBase.Skill8 = 100;
-        playerDataBase.Skill9 = 100;
-        playerDataBase.Skill10 = 100;
-        playerDataBase.Skill11 = 100;
+        playerDataBase.Skill7 = 500;
+        playerDataBase.Skill8 = 500;
+        playerDataBase.Skill9 = 500;
+        playerDataBase.Skill10 = 500;
+        playerDataBase.Skill11 = 500;
         playerDataBase.Skill12 = 500;
         playerDataBase.Skill13 = 500;
-        playerDataBase.Skill14 = 100;
-        playerDataBase.Skill15 = 100;
-        playerDataBase.Skill16 = 100;
-        playerDataBase.Skill17 = 100;
-        playerDataBase.Skill18 = 100;
-        playerDataBase.Skill19 = 100;
+        playerDataBase.Skill14 = 500;
+        playerDataBase.Skill15 = 500;
+        playerDataBase.Skill16 = 500;
+        playerDataBase.Skill17 = 500;
+        playerDataBase.Skill18 = 500;
+        playerDataBase.Skill19 = 500;
 
-        playerDataBase.Treasure1 = 100;
-        playerDataBase.Treasure2 = 100;
-        playerDataBase.Treasure3 = 100;
-        playerDataBase.Treasure4 = 100;
-        playerDataBase.Treasure5 = 100;
-        playerDataBase.Treasure6 = 100;
-        playerDataBase.Treasure7 = 100;
-        playerDataBase.Treasure8 = 100;
-        playerDataBase.Treasure9 = 100;
-        playerDataBase.Treasure10 = 100;
-        playerDataBase.Treasure11 = 100;
-        playerDataBase.Treasure12 = 100;
-        playerDataBase.Treasure13 = 100;
-        playerDataBase.Treasure14 = 100;
-        playerDataBase.Treasure15 = 100;
+        playerDataBase.Treasure1 = 300;
+        playerDataBase.Treasure2 = 300;
+        playerDataBase.Treasure3 = 300;
+        playerDataBase.Treasure4 = 300;
+        playerDataBase.Treasure5 = 300;
+        playerDataBase.Treasure6 = 300;
+        playerDataBase.Treasure7 = 300;
+        playerDataBase.Treasure8 = 300;
+        playerDataBase.Treasure9 = 300;
+        playerDataBase.Treasure10 = 300;
+        playerDataBase.Treasure11 = 300;
+        playerDataBase.Treasure12 = 300;
+        playerDataBase.Treasure13 = 300;
+        playerDataBase.Treasure14 = 300;
+        playerDataBase.Treasure15 = 300;
 
         playerDataBase.Level = 300;
         playerDataBase.CastleLevel = 300;

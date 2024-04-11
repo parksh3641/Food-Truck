@@ -27,7 +27,7 @@ public class TreasureContent : MonoBehaviour
     private int count = 0;
     private int need = 0;
     private int level = 0;
-    private int maxLevel = 100;
+    private int maxLevel = 300;
 
     private int needUp = 20;
 
@@ -550,11 +550,11 @@ public class TreasureContent : MonoBehaviour
                 break;
         }
 
-        percent = 100 - ((level / 10) * 5);
+        percent = 100 - ((level / 20) * 5);
 
-        if(percent < 10)
+        if(percent < 5)
         {
-            percent = 10;
+            percent = 5;
         }
 
         levelText.text = "Lv. " + level + " / " + maxLevel;

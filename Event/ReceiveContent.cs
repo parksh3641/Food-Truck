@@ -134,6 +134,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Portion6:
                 mainBackground.sprite = rankBackgroundArray[3];
+                effect.SetActive(true);
                 break;
             case RewardType.SkillTicket:
                 mainBackground.sprite = rankBackgroundArray[2];
@@ -241,7 +242,6 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.ChallengePoint:
                 mainBackground.sprite = rankBackgroundArray[2];
-                effect.SetActive(true);
                 break;
             case RewardType.Icon_Attendance:
                 mainBackground.sprite = rankBackgroundArray[3];

@@ -117,40 +117,39 @@ public class ShopContent : MonoBehaviour
         switch (itemType)
         {
             case ItemType.DailyReward:
-                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(200000) + "</size>";
-
-                if (playerDataBase.Candy1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(500000) + "</size>";
-                }
-
-                if (playerDataBase.JapaneseFood1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
-                }
-
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
                     rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(3000000) + "</size>";
                 }
-                //effect.SetActive(true);
+                else if (playerDataBase.JapaneseFood1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
+                }
+                else if (playerDataBase.JapaneseFood1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(500000) + "</size>";
+                }
+                else
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(200000) + "</size>";
+                }
                 break;
             case ItemType.AdReward_Gold:
-                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(2000000) + "</size>";
-
-                if(playerDataBase.Candy1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
-                }
-
-                if(playerDataBase.JapaneseFood1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
-                }
-
                 if(playerDataBase.Dessert1MaxValue > 0)
                 {
                     rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(30000000) + "</size>";
+                }
+                else if (playerDataBase.JapaneseFood1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
+                }
+                else if (playerDataBase.Candy1MaxValue > 0)
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
+                }
+                else
+                {
+                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(2000000) + "</size>";
                 }
                 break;
             case ItemType.DefDestroyTicket:
@@ -429,7 +428,7 @@ public class ShopContent : MonoBehaviour
                 titleText.plusText = " x1";
 
                 infoText.localizationName = "HoldPiece";
-                infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece + "/5";
+                infoText.plusText = " : " + playerDataBase.DefDestroyTicketPiece + "/3";
                 infoText.ReLoad();
 
                 effect.SetActive(true);

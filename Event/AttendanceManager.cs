@@ -148,6 +148,7 @@ public class AttendanceManager : MonoBehaviour
         attendanceContentArray[5].receiveContent[0].Initialize(RewardType.Crystal, 600);
 
         attendanceContentArray[6].receiveContent[0].gameObject.SetActive(true);
+        attendanceContentArray[6].receiveContent[1].gameObject.SetActive(true);
         attendanceContentArray[6].receiveContent[0].Initialize(RewardType.Crystal, 700);
         attendanceContentArray[6].receiveContent[1].Initialize(RewardType.DefDestroyTicket, 10);
     }

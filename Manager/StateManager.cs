@@ -130,40 +130,6 @@ public class StateManager : MonoBehaviour
 
     public void Initialize()
     {
-#if !UNITY_EDITOR && UNITY_ANDROID
-        AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject>("currentActivity");
-        AndroidJavaObject packageManager = currentActivity.Call<AndroidJavaObject>("getPackageManager");
-        string installerPackageName = packageManager.Call<string>("getInstallerPackageName", Application.identifier);
-
-        // 패키지명으로부터 설치된 스토어 확인
-
-        if (installerPackageName.Equals("com.android.vending"))
-        {
-            GameStateManager.instance.StoreType = StoreType.Google;
-
-            Debug.Log("앱은 Google Play 스토어에서 설치되었습니다.");
-        }
-        else if (installerPackageName.Equals("com.amazon.venezia"))
-        {
-            GameStateManager.instance.StoreType = StoreType.Amazon;
-
-            Debug.Log("앱은 Amazon Appstore에서 설치되었습니다.");
-        }
-        else if (installerPackageName.Equals("com.skt.skaf.A000Z00040") || installerPackageName.Equals("com.kt.olleh.storefront")
-            || installerPackageName.Equals("android.lgt.appstore") || installerPackageName.Equals("com.lguplus.appstore"))
-        {
-            GameStateManager.instance.StoreType = StoreType.OneStore;
-
-            Debug.Log("앱은 OneStore에서 설치되었습니다.");
-        }
-        else
-        {
-            GameStateManager.instance.StoreType = StoreType.None;
-
-            Debug.Log("앱은 알 수 없는 소스에서 설치되었습니다.");
-        }
-#endif
         ResetManager.instance.Initialize();
         StopAllCoroutines();
         loginText.text = "";

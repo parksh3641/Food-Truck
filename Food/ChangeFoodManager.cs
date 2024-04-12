@@ -149,7 +149,7 @@ public class ChangeFoodManager : MonoBehaviour
 
     public void OpenChangeFoodView()
     {
-        if(!changeFoodView.activeInHierarchy)
+        if (!changeFoodView.activeInHierarchy)
         {
             changeFoodView.SetActive(true);
 

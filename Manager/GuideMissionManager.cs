@@ -81,7 +81,7 @@ public class GuideMissionManager : MonoBehaviour
         guideMissonView.SetActive(true);
 
         titleText.GetText().color = Color.white;
-        titleText.localizationName = "GuiedMisson_" + (playerDataBase.GuideIndex + 1);
+        titleText.localizationName = "GuideMisson_" + (playerDataBase.GuideIndex + 1);
 
         buffArrow.SetActive(false);
         portionArrow.SetActive(false);
@@ -352,7 +352,7 @@ public class GuideMissionManager : MonoBehaviour
                     iconManager.OpenIcon();
                     break;
                 case 27:
-                    shopManager.OpenSpeicalShop();
+
                     break;
             }
         }

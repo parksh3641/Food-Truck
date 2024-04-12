@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
     private float feverCountPlus = 100;
 
     private float feverTime = 0;
-    private float feverPlus = 3;
+    private float feverPlus = 15;
 
     private float destoryPercent = 0; //ÆÄ±«µÉ È®·ü
     private float defDestroy = 0;
@@ -670,6 +670,8 @@ public class GameManager : MonoBehaviour
 
         if (playerDataBase.InGameTutorial == 0)
         {
+            moveArrow1.SetActive(true);
+
             tutorialManager.TutorialStart();
         }
 
@@ -1885,7 +1887,7 @@ public class GameManager : MonoBehaviour
         feverTime += (20 * (0.005f * playerDataBase.Treasure9));
 
         feverCountPlus += (feverCountPlus * (0.002f * playerDataBase.Skill2));
-        feverPlus = 3 + (3 * (0.005f * playerDataBase.Skill3));
+        feverPlus = 15 + (15 * (0.002f * playerDataBase.Skill3));
 
         portion1Time = 20 + (20 * (0.002f * playerDataBase.Skill4)) + (20 * (0.005f * playerDataBase.Treasure6));
         portion2Time = 20 + (20 * (0.002f * playerDataBase.Skill5)) + (20 * (0.005f * playerDataBase.Treasure6));
@@ -2620,7 +2622,7 @@ public class GameManager : MonoBehaviour
 
         notSell.SetActive(false);
 
-        if(level == 0)
+        if (level == 0)
         {
             notSell.SetActive(true);
         }
@@ -5265,9 +5267,12 @@ public class GameManager : MonoBehaviour
 
         moveArrow2.SetActive(false);
 
-        if (playerDataBase.InGameTutorial == 0)
+        if (level >= 9 && playerDataBase.InGameTutorial == 0)
         {
             moveArrow3.SetActive(true);
+
+            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food2);
+            changeFoodAlarmObj.SetActive(true);
 
             lockManager.ChangeFoodTutorial();
         }
@@ -6380,7 +6385,7 @@ public class GameManager : MonoBehaviour
             loginButtonArray[2].SetActive(true);
 #endif
 
-            if(GameStateManager.instance.StoreType == StoreType.OneStore)
+            if (GameStateManager.instance.StoreType == StoreType.OneStore)
             {
                 loginButtonArray[0].SetActive(true);
                 loginButtonArray[1].SetActive(false);

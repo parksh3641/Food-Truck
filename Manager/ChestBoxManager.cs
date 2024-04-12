@@ -294,19 +294,23 @@ public class ChestBoxManager : MonoBehaviour
             case RewardType.Gold:
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(3000000);
+                    PlayfabManager.instance.UpdateSellPriceGold(3000000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(3000000);
                 }
                 else if (playerDataBase.JapaneseFood1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    PlayfabManager.instance.UpdateSellPriceGold(1000000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(1000000);
                 }
                 else if (playerDataBase.Candy1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(500000);
+                    PlayfabManager.instance.UpdateSellPriceGold(500000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(500000);
                 }
                 else
                 {
-                    PlayfabManager.instance.UpdateAddGold(200000);
+                    PlayfabManager.instance.UpdateSellPriceGold(200000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(200000);
                 }
                 break;
             case RewardType.Portion1:
@@ -353,19 +357,23 @@ public class ChestBoxManager : MonoBehaviour
             case RewardType.Gold2:
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(30000000);
+                    PlayfabManager.instance.UpdateSellPriceGold(30000000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(30000000);
                 }
                 else if (playerDataBase.JapaneseFood1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(10000000);
+                    PlayfabManager.instance.UpdateSellPriceGold(10000000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(10000000);
                 }
                 else if (playerDataBase.Candy1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(5000000);
+                    PlayfabManager.instance.UpdateSellPriceGold(5000000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(5000000);
                 }
                 else
                 {
-                    PlayfabManager.instance.UpdateAddGold(2000000);
+                    PlayfabManager.instance.UpdateSellPriceGold(2000000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(2000000);
                 }
                 break;
             case RewardType.Portion1:

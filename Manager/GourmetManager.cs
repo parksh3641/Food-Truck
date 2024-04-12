@@ -83,11 +83,11 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.Treasure14 * 500;
             value += playerDataBase.Treasure15 * 500;
 
-            value += playerDataBase.GetCharacter_Total_AbilityLevel() * 300;
-            value += playerDataBase.GetAnimal_Total_AbilityLevel() * 300;
-            value += playerDataBase.GetTruck_Total_AbilityLevel() * 300;
-            value += playerDataBase.GetButterfly_Total_AbilityLevel() * 300;
-            value += playerDataBase.GetTotems_Total_AbilityLevel() * 300;
+            value += playerDataBase.GetCharacter_Total_AbilityLevel() * 1000;
+            value += playerDataBase.GetAnimal_Total_AbilityLevel() * 1000;
+            value += playerDataBase.GetTruck_Total_AbilityLevel() * 1000;
+            value += playerDataBase.GetButterfly_Total_AbilityLevel() * 1000;
+            value += playerDataBase.GetTotems_Total_AbilityLevel() * 1000;
             //value += playerDataBase.GetFlower_Total_AbilityLevel() * 300;
 
             value += playerDataBase.GetCharacterNumber() * 5000;

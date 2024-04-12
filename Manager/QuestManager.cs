@@ -224,8 +224,8 @@ public class QuestManager : MonoBehaviour
         questClearCountText.text = LocalizationManager.instance.GetString("ClearCount") + " : " + playerDataBase.QuestCount;
 
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward2);
-        PlayfabManager.instance.UpdateAddGold(reward);
-        NotionManager.instance.UseNotion(Color.yellow, "+" + MoneyUnitString.ToCurrencyString(reward).ToString());
+        PlayfabManager.instance.UpdateSellPriceGold(reward);
+        PlayfabManager.instance.moneyAnimation.PlusMoney(reward);
 
         QuestClear();
     }
@@ -289,8 +289,9 @@ public class QuestManager : MonoBehaviour
         }
 
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward2 * number);
-        PlayfabManager.instance.UpdateAddGold(reward * number);
-        NotionManager.instance.UseNotion(Color.yellow, "x" + number + "\n+" + MoneyUnitString.ToCurrencyString(reward * number).ToString());
+
+        PlayfabManager.instance.UpdateSellPriceGold(reward * number);
+        PlayfabManager.instance.moneyAnimation.PlusMoney(reward * number);
 
         QuestClear();
     }

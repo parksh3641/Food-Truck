@@ -552,6 +552,8 @@ public class ShopManager : MonoBehaviour
                     packageContents[3].gameObject.SetActive(false);
                     packageContents[4].gameObject.SetActive(false);
                     packageContents[5].gameObject.SetActive(false);
+                    packageContents[8].gameObject.SetActive(false);
+                    packageContents[9].gameObject.SetActive(false);
                 }
 
                 if (packageContents[0].gameObject.activeSelf)
@@ -740,23 +742,27 @@ public class ShopManager : MonoBehaviour
 
                 if (playerDataBase.Dessert1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(3000000);
+                    PlayfabManager.instance.UpdateSellPriceGold(3000000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(3000000);
                     return;
                 }
 
                 if (playerDataBase.JapaneseFood1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(1000000);
+                    PlayfabManager.instance.UpdateSellPriceGold(1000000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(1000000);
                     return;
                 }
 
                 if (playerDataBase.Candy1MaxValue > 0)
                 {
-                    PlayfabManager.instance.UpdateAddGold(500000);
+                    PlayfabManager.instance.UpdateSellPriceGold(500000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(500000);
                     return;
                 }
 
-                PlayfabManager.instance.UpdateAddGold(200000);
+                PlayfabManager.instance.UpdateSellPriceGold(200000);
+                PlayfabManager.instance.moneyAnimation.PlusMoney(200000);
 
                 break;
             case ItemType.AdReward_Gold:
@@ -991,15 +997,16 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.DefDestroyTicketSlices:
-                if (playerDataBase.DefDestroyTicketPiece >= 5)
+                if (playerDataBase.DefDestroyTicketPiece >= 3)
                 {
-                    playerDataBase.DefDestroyTicketPiece -= 5;
+                    playerDataBase.DefDestroyTicketPiece -= 3;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("DefDestroyTicketPiece", playerDataBase.DefDestroyTicketPiece);
 
                     PortionManager.instance.GetDefTickets(1);
 
                     //shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
                     shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
+                    shopContents[25].Initialize(ItemType.DefDestroyTicketPiece, BuyType.Free, this);
 
                     SoundManager.instance.PlaySFX(GameSfxType.Purchase);
                     NotionManager.instance.UseNotion(NotionType.SuccessBuy);
@@ -1381,23 +1388,27 @@ public class ShopManager : MonoBehaviour
 
         if (playerDataBase.Dessert1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(30000000);
+            PlayfabManager.instance.UpdateSellPriceGold(30000000);
+            PlayfabManager.instance.moneyAnimation.PlusMoney(30000000);
             return;
         }
 
         if (playerDataBase.JapaneseFood1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(10000000);
+            PlayfabManager.instance.UpdateSellPriceGold(10000000);
+            PlayfabManager.instance.moneyAnimation.PlusMoney(10000000);
             return;
         }
 
         if (playerDataBase.Candy1MaxValue > 0)
         {
-            PlayfabManager.instance.UpdateAddGold(5000000);
+            PlayfabManager.instance.UpdateSellPriceGold(5000000);
+            PlayfabManager.instance.moneyAnimation.PlusMoney(5000000);
             return;
         }
 
-        PlayfabManager.instance.UpdateAddGold(2000000);
+        PlayfabManager.instance.UpdateSellPriceGold(2000000);
+        PlayfabManager.instance.moneyAnimation.PlusMoney(2000000);
     }
 
     public void SuccessWatchAd_Portion()
@@ -3265,7 +3276,7 @@ public class ShopManager : MonoBehaviour
             {
                 passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
 + LocalizationManager.instance.GetString(totemsDataBase.retentionEffect.ToString()) + " +"
-+ (level * totemsDataBase.retentionValue).ToString();
++ MoneyUnitString.ToCurrencyString((long)(level * totemsDataBase.retentionValue));
             }
 
             if (GameStateManager.instance.TotemsType.Equals(totemsInfo.totemsType))

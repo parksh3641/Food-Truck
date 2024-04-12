@@ -39,7 +39,6 @@ public class RankingManager : MonoBehaviour
     public bool isDelay = false;
     public bool isDelay2 = false;
 
-    private int record = 0;
     private int topNumber = 0;
 
     private string recordStr = "";

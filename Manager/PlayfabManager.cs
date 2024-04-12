@@ -123,6 +123,8 @@ public class PlayfabManager : MonoBehaviour
 
     private void Start()
     {
+        GameStateManager.instance.StoreType = StoreType.None;
+
 #if !UNITY_EDITOR && UNITY_ANDROID
         AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject>("currentActivity");
@@ -2572,6 +2574,9 @@ public class PlayfabManager : MonoBehaviour
                        case "TotalLevel_10":
                            playerDataBase.TotalLevel_10 = statistics.Value;
                            break;
+                       case "TotalLevel_11":
+                           playerDataBase.TotalLevel_11 = statistics.Value;
+                           break;
                        case "Island1Level":
                            playerDataBase.Island1Level = statistics.Value;
                            break;
@@ -3251,6 +3256,7 @@ public class PlayfabManager : MonoBehaviour
             {
                 item.Add(list);
             }
+
             action.Invoke(item);
 
         }, error =>

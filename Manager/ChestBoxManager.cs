@@ -23,8 +23,6 @@ public class ChestBoxManager : MonoBehaviour
     public Text epicRewardText;
     public Sprite epicBackground;
 
-    private int number = 0;
-
     private int count = 0;
     private int goalCount = 0;
     private int random = 0;

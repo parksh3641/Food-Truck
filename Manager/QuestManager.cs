@@ -27,10 +27,6 @@ public class QuestManager : MonoBehaviour
     private int reward = 0;
     private int reward2 = 0;
 
-    private int crystal = 30;
-
-    private bool isDelay = false;
-
     private int plus = 0;
 
     QuestType questType = QuestType.UpgradeCount;

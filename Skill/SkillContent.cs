@@ -410,7 +410,7 @@ public class SkillContent : MonoBehaviour
             case MoneyType.CoinB:
                 break;
             case MoneyType.CP:
-                value = priceCP * (level + 1);
+                value = priceCP + (addPriceCP * (level + 1));
 
                 if (value >= maxCP)
                 {

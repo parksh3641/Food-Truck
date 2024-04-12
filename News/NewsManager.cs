@@ -73,6 +73,8 @@ public class NewsManager : MonoBehaviour
         }
 
         first = false;
+
+        newsIcon.SetActive(true);
     }
 
     public void Initialize()
@@ -84,9 +86,7 @@ public class NewsManager : MonoBehaviour
             OpenNews();
         }
 
-        newsIcon.SetActive(true);
-
-        if(GameStateManager.instance.StoreType == StoreType.OneStore)
+        if (GameStateManager.instance.StoreType == StoreType.OneStore)
         {
             newsIcon.SetActive(false);
         }

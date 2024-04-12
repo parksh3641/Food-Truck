@@ -3200,6 +3200,18 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int TotalLevel_11
+    {
+        get
+        {
+            return totalLevel_11;
+        }
+        set
+        {
+            totalLevel_11 = value;
+        }
+    }
+
     public int Skill1
     {
         get
@@ -5110,6 +5122,7 @@ public class PlayerDataBase : ScriptableObject
         totalLevel_8 = 0;
         totalLevel_9 = 0;
         totalLevel_10 = 0;
+        totalLevel_11 = 0;
 
         saveCoin = 0;
         coin = 0;

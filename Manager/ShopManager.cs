@@ -133,12 +133,9 @@ public class ShopManager : MonoBehaviour
     private int totemsIndex = 0;
     private int flowerIndex = 0;
 
-    private int needCrystal = 0;
-
     bool hold = false;
     bool buy = false;
     bool isDelay = false;
-    bool isTimer = false;
     bool isPackageDelay = false;
 
     private long price_Gold = 0;

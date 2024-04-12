@@ -3643,15 +3643,18 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if(supportCount >= supportMaxCount)
+        if (GameStateManager.instance.StoreType != StoreType.OneStore)
         {
-            supportCount = 0;
+            if (supportCount >= supportMaxCount)
+            {
+                supportCount = 0;
 
-            OpenSupportPackage();
-        }
-        else
-        {
-            supportCount += 1;
+                OpenSupportPackage();
+            }
+            else
+            {
+                supportCount += 1;
+            }
         }
 
         PlayfabManager.instance.UpdateSellPriceGold(-need);
@@ -4794,7 +4797,10 @@ public class GameManager : MonoBehaviour
                             changeFoodAlarmObj.SetActive(true);
                             moveArrow3.SetActive(true);
 
-                            shopManager.OpenLimitPackage();
+                            if (GameStateManager.instance.StoreType != StoreType.OneStore)
+                            {
+                                shopManager.OpenLimitPackage();
+                            }
                         }
 
                         lockManager.UnLocked(3);
@@ -6377,7 +6383,7 @@ public class GameManager : MonoBehaviour
             loginButtonArray[1].SetActive(false);
             loginButtonArray[2].SetActive(false);
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_EDITOR_OSX
             loginButtonArray[0].SetActive(true);
 #elif UNITY_ANDROID
             loginButtonArray[1].SetActive(true);

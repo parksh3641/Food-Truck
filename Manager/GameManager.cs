@@ -1838,6 +1838,11 @@ public class GameManager : MonoBehaviour
         sellPriceTip += playerDataBase.Skill14 * 0.25f;
         sellPriceTip += playerDataBase.Treasure8 * 0.5f;
 
+        if(sellPriceTip >= 100)
+        {
+            sellPriceTip = 100;
+        }
+
         expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
         expUpPlus += playerDataBase.GetAnimal_Total_AbilityLevel() * animalDataBase.retentionValue;
         expUp = (int)(expUp + (expUp * (expUpPlus / 100)));
@@ -2505,6 +2510,11 @@ public class GameManager : MonoBehaviour
             sellPrice += Mathf.CeilToInt((sellPrice * (0.01f * sellPricePlus)));
         }
 
+        if (sellPrice >= 100000000)
+        {
+            sellPrice = 100000000;
+        }
+
         switch (GameStateManager.instance.IslandType)
         {
             case IslandType.Island1:
@@ -2632,6 +2642,11 @@ public class GameManager : MonoBehaviour
         if (success >= 100)
         {
             success = 100;
+        }
+
+        if (success < 1f)
+        {
+            success = 1f;
         }
 
         if (GameStateManager.instance.Developer) success = 100;

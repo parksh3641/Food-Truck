@@ -15,6 +15,8 @@ public class NewsManager : MonoBehaviour
     public GameObject alarm;
     public GameObject patchAlarm;
 
+    public Text versionText;
+
     public NewsContent newsContent;
     public RectTransform newsContentTransform;
 
@@ -75,6 +77,8 @@ public class NewsManager : MonoBehaviour
         first = false;
 
         newsIcon.SetActive(true);
+
+        versionText.text = "v" + Application.version;
     }
 
     public void Initialize()

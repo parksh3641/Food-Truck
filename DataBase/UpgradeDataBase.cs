@@ -225,6 +225,7 @@ public class UpgradeDataBase : ScriptableObject
                     break;
                 case GameType.Rank:
                     need = level * value;
+                    need *= 1.5f;
                     break;
             }
 
@@ -244,7 +245,7 @@ public class UpgradeDataBase : ScriptableObject
             case GameType.Rank:
                 if(level > priceList.Count - 1)
                 {
-                    price = level * (value * (10 + (level - (priceList.Count - 1)) / 5));
+                    price = level * (value * (10 + (level - (priceList.Count - 1)) / 20));
                 }
                 else
                 {
@@ -297,11 +298,6 @@ public class UpgradeDataBase : ScriptableObject
                     success = 100;
                 }
                 break;
-        }
-
-        if (success < 1f)
-        {
-            success = 1f;
         }
 
         return success;

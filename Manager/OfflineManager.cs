@@ -191,14 +191,14 @@ public class OfflineManager : MonoBehaviour
         addExp = 3000 + playerDataBase.CastleLevel * 300;
         addCrystal = 1;
 
-        addCoin += (int)(addCoin * (plus * 0.01f));
-        addExp += (int)(addExp * (plus * 0.01f));
+        addCoin += Mathf.RoundToInt((int)(addCoin * (plus * 0.01f)));
+        addExp += Mathf.RoundToInt((int)(addExp * (plus * 0.01f)));
         addCrystal += (int)(addCrystal * (plus * 0.01f));
 
         if (playerDataBase.SuperOffline)
         {
-            addCoin += (int)(addCoin * 0.1f);
-            addExp += (int)(addExp * 0.1f);
+            addCoin += Mathf.RoundToInt((int)(addCoin * 0.1f));
+            addExp += Mathf.RoundToInt((int)(addExp * 0.1f));
             addCrystal += (int)(addCrystal * 0.1f);
         }
 

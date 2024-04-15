@@ -36,8 +36,6 @@ public class EventManager : MonoBehaviour
         {
             eventView.SetActive(true);
 
-            gifticonEvent.SetActive(false);
-
             if (playerDataBase.AttendanceDay == DateTime.Today.ToString("yyyyMMdd"))
             {
                 ResetManager.instance.Initialize();

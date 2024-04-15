@@ -93,6 +93,12 @@ public class GifticonManager : MonoBehaviour
         if (currentDate > targetDate)
         {
             timerText.text = LocalizationManager.instance.GetString("EndEvent");
+
+            for(int i = 0; i < gifticonContents.Length; i ++)
+            {
+                gifticonContents[i].CheckingEvent();
+            }
+
             //이벤트 종료
         }
         else

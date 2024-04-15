@@ -50,7 +50,7 @@ public class SkillContent : MonoBehaviour
     private float skill9Value = 0.25f;
     private float skill10Value = 0.3f;
     private float skill11Value = 0.5f;
-    private float skill14Value = 0.25f;
+    private float skill14Value = 0.3f;
 
     private float skill15Value = 0.5f;
     private float skill16Value = 0.5f;
@@ -61,15 +61,15 @@ public class SkillContent : MonoBehaviour
     private int priceGold = 500000;
 
     private int priceCrystal = 1;
-    private int maxCrystal = 20;
+    private int maxCrystal = 30;
 
     private int priceCP = 10;
     private int addPriceCP = 10;
-    private int maxCP = 300;
+    private int maxCP = 500;
 
     private int maxLevelGold = 500;
     private int maxLevelCrystal = 500;
-    private int maxLevelChallenge = 500;
+    private int maxLevelChallenge = 100;
 
     private int level = 0;
     private int plusLevel = 1;
@@ -242,7 +242,7 @@ public class SkillContent : MonoBehaviour
                 level = playerDataBase.Skill10;
                 nowValue = skill10Value * playerDataBase.Skill10;
 
-                if (playerDataBase.Skill10 < maxLevelCrystal)
+                if (playerDataBase.Skill10 < 100)
                 {
                     nextValueText.text = (skill10Value * (playerDataBase.Skill10 + 1)).ToString("N1") + "%";
                 }
@@ -298,7 +298,7 @@ public class SkillContent : MonoBehaviour
                 level = playerDataBase.Skill14;
                 nowValue = skill14Value * playerDataBase.Skill14;
 
-                if (playerDataBase.Skill14 < maxLevelCrystal)
+                if (playerDataBase.Skill14 < 100)
                 {
                     nextValueText.text = (skill14Value * (playerDataBase.Skill14 + 1)).ToString("N1") + "%";
                 }
@@ -399,7 +399,14 @@ public class SkillContent : MonoBehaviour
                     value = maxCrystal;
                 }
 
-                levelText.text = "Lv. " + level + " / " + maxLevelCrystal.ToString();
+                if(skillType == SkillType.Skill10 || skillType == SkillType.Skill14)
+                {
+                    levelText.text = "Lv. " + level + " / 100";
+                }
+                else
+                {
+                    levelText.text = "Lv. " + level + " / " + maxLevelCrystal.ToString();
+                }
 
                 buttonGold.SetActive(false);
                 buttonCrystal.SetActive(true);
@@ -560,7 +567,7 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill10:
-                if (playerDataBase.Skill10 + 1 > maxLevelCrystal)
+                if (playerDataBase.Skill10 + 1 > 100)
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.MaxLevel);
@@ -592,7 +599,7 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case SkillType.Skill14:
-                if (playerDataBase.Skill14 + 1 > maxLevelCrystal)
+                if (playerDataBase.Skill14 + 1 > 100)
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                     NotionManager.instance.UseNotion(NotionType.MaxLevel);

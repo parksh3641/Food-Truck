@@ -342,5 +342,6 @@ public enum NotionType
     AlreadyLink,
     EndEvent,
     Icon_Locked30,
-    ComingSoon
+    ComingSoon,
+    MaxEnterEventTicket
 }

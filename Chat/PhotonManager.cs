@@ -87,9 +87,6 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 
     public void Initialize()
     {
-#if UNITY_EDITOR
-		return;
-#endif
 		userName = GameStateManager.instance.NickName;
         currentChannelName = "Channel 001";
 
@@ -121,13 +118,13 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 		first = false;
 	}
 
-	public void OnApplicationQuit()
-	{
-		if (chatClient != null)
-		{
-			chatClient.Disconnect();
-		}
-	}
+	//public void OnApplicationQuit()
+	//{
+	//	if (chatClient != null)
+	//	{
+	//		chatClient.Disconnect();
+	//	}
+	//}
 
 	public void DebugReturn(ExitGames.Client.Photon.DebugLevel level, string message)
 	{
@@ -149,7 +146,7 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 	{
 		Debug.Log("서버에 연결되었습니다.");
 
-		chatClient.Subscribe(new string[] { currentChannelName }, 100);
+		chatClient.Subscribe(new string[] { currentChannelName }, 50);
 
 		chatUI.SetActive(true);
 
@@ -171,7 +168,7 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 
 		Debug.Log("서버에 연결이 끊어졌습니다.");
 
-		Invoke("Initialize", 5f);
+		Invoke("Initialize", 3f);
 	}
 
 	public void OnChatStateChange(ChatState state)

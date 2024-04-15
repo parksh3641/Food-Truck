@@ -2348,18 +2348,43 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Skill7":
                            playerDataBase.Skill7 = statistics.Value;
+
+                           if (playerDataBase.Skill7 >= 500)
+                           {
+                               playerDataBase.Skill7 = 500;
+                           }
                            break;
                        case "Skill8":
                            playerDataBase.Skill8 = statistics.Value;
+
+                           if (playerDataBase.Skill8 >= 500)
+                           {
+                               playerDataBase.Skill8 = 500;
+                           }
                            break;
                        case "Skill9":
                            playerDataBase.Skill9 = statistics.Value;
+
+                           if (playerDataBase.Skill9 >= 500)
+                           {
+                               playerDataBase.Skill9 = 500;
+                           }
                            break;
                        case "Skill10":
                            playerDataBase.Skill10 = statistics.Value;
+
+                           if (playerDataBase.Skill10 >= 100)
+                           {
+                               playerDataBase.Skill10 = 100;
+                           }
                            break;
                        case "Skill11":
                            playerDataBase.Skill11 = statistics.Value;
+
+                           if (playerDataBase.Skill11 >= 100)
+                           {
+                               playerDataBase.Skill11 = 100;
+                           }
                            break;
                        case "Skill12":
                            playerDataBase.Skill12 = statistics.Value;
@@ -2379,21 +2404,51 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Skill14":
                            playerDataBase.Skill14 = statistics.Value;
+
+                           if (playerDataBase.Skill14 >= 100)
+                           {
+                               playerDataBase.Skill14 = 100;
+                           }
                            break;
                        case "Skill15":
                            playerDataBase.Skill15 = statistics.Value;
+
+                           if (playerDataBase.Skill15 >= 100)
+                           {
+                               playerDataBase.Skill15 = 100;
+                           }
                            break;
                        case "Skill16":
                            playerDataBase.Skill16 = statistics.Value;
+
+                           if (playerDataBase.Skill16 >= 100)
+                           {
+                               playerDataBase.Skill16 = 100;
+                           }
                            break;
                        case "Skill17":
                            playerDataBase.Skill17 = statistics.Value;
+
+                           if (playerDataBase.Skill17 >= 100)
+                           {
+                               playerDataBase.Skill17 = 100;
+                           }
                            break;
                        case "Skill18":
                            playerDataBase.Skill18 = statistics.Value;
+
+                           if (playerDataBase.Skill18 >= 100)
+                           {
+                               playerDataBase.Skill18 = 100;
+                           }
                            break;
                        case "Skill19":
                            playerDataBase.Skill19 = statistics.Value;
+
+                           if (playerDataBase.Skill19 >= 100)
+                           {
+                               playerDataBase.Skill19 = 100;
+                           }
                            break;
                        case "Portion1":
                            playerDataBase.Portion1 = statistics.Value;

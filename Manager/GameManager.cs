@@ -1836,7 +1836,7 @@ public class GameManager : MonoBehaviour
 
         sellPriceTip += 0;
         sellPriceTip += playerDataBase.Skill14 * 0.3f;
-        sellPriceTip += playerDataBase.Treasure8 * 0.5f;
+        sellPriceTip += playerDataBase.Treasure8 * 0.3f;
 
         if(sellPriceTip >= 100)
         {

@@ -42,9 +42,9 @@ public class BossFoodContent : MonoBehaviour
     {
         size = saveSize * number;
 
-        if(size <= saveSize * 0.1f)
+        if(size <= saveSize * 0.15f)
         {
-            size = saveSize * 0.1f;
+            size = saveSize * 0.15f;
         }
 
         if (GameStateManager.instance.Effect)

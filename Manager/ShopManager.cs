@@ -767,9 +767,9 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case ItemType.DefDestroyTicket:
-                if (playerDataBase.RankPoint >= 300)
+                if (playerDataBase.RankPoint >= 200)
                 {
-                    playerDataBase.RankPoint -= 300;
+                    playerDataBase.RankPoint -= 200;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -973,9 +973,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion5:
-                if (playerDataBase.RankPoint >= 150)
+                if (playerDataBase.RankPoint >= 200)
                 {
-                    playerDataBase.RankPoint -= 150;
+                    playerDataBase.RankPoint -= 200;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -1191,9 +1191,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.SkillTicket:
-                if (playerDataBase.RankPoint >= 300)
+                if (playerDataBase.RankPoint >= 500)
                 {
-                    playerDataBase.RankPoint -= 300;
+                    playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -1998,6 +1998,9 @@ public class ShopManager : MonoBehaviour
         buy = true;
 #endif
         passiveText.text = "";
+
+        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
+
         if (hold)
         {
             selectObj.SetActive(true);
@@ -2006,9 +2009,9 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            if (level > 4)
+            if (level > 9)
             {
-                levelText.text = "★★★★★";
+                levelText.text = "★★★★★★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -2017,22 +2020,37 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "☆☆☆☆☆";
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "★☆☆☆☆";
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "★★☆☆☆";
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "★★★☆☆";
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
                         break;
                     case 4:
-                        levelText.text = "★★★★☆";
+                        levelText.text = "★★★★☆☆☆☆☆☆";
                         break;
-                }
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
 
+                }
 
                 price_LevelUp = characterDataBase.GetRetentionPrice(level);
 
@@ -2236,6 +2254,8 @@ public class ShopManager : MonoBehaviour
 #endif
 
         passiveText.text = "";
+
+        levelText.text = "☆☆☆☆☆☆☆☆☆";
         if (hold)
         {
             selectObj.SetActive(true);
@@ -2244,9 +2264,9 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            if (level > 4)
+            if (level > 9)
             {
-                levelText.text = "★★★★★";
+                levelText.text = "★★★★★★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -2255,22 +2275,37 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "☆☆☆☆☆";
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "★☆☆☆☆";
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "★★☆☆☆";
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "★★★☆☆";
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
                         break;
                     case 4:
-                        levelText.text = "★★★★☆";
+                        levelText.text = "★★★★☆☆☆☆☆☆";
                         break;
-                }
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
 
+                }
 
                 price_LevelUp = truckDataBase.GetRetentionPrice(level);
 
@@ -2489,6 +2524,8 @@ public class ShopManager : MonoBehaviour
 
         passiveText.text = "";
 
+        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
+
         if (hold)
         {
             selectObj.SetActive(true);
@@ -2497,9 +2534,9 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            if (level > 4)
+            if (level > 9)
             {
-                levelText.text = "★★★★★";
+                levelText.text = "★★★★★★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -2508,20 +2545,36 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "☆☆☆☆☆";
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "★☆☆☆☆";
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "★★☆☆☆";
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "★★★☆☆";
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
                         break;
                     case 4:
-                        levelText.text = "★★★★☆";
+                        levelText.text = "★★★★☆☆☆☆☆☆";
                         break;
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
+
                 }
 
 
@@ -2946,6 +2999,8 @@ public class ShopManager : MonoBehaviour
 #endif
 
         passiveText.text = "";
+
+        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
         if (hold)
         {
             selectObj.SetActive(true);
@@ -2954,9 +3009,9 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            if (level > 4)
+            if (level > 9)
             {
-                levelText.text = "★★★★★";
+                levelText.text = "★★★★★★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -2965,20 +3020,36 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "☆☆☆☆☆";
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "★☆☆☆☆";
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "★★☆☆☆";
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "★★★☆☆";
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
                         break;
                     case 4:
-                        levelText.text = "★★★★☆";
+                        levelText.text = "★★★★☆☆☆☆☆☆";
                         break;
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
+
                 }
 
 
@@ -3228,6 +3299,8 @@ public class ShopManager : MonoBehaviour
 #endif
 
         passiveText.text = "";
+
+        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
         if (hold)
         {
             selectObj.SetActive(true);
@@ -3236,9 +3309,9 @@ public class ShopManager : MonoBehaviour
             buySpeical.SetActive(false);
             selectCheckMarkObj.SetActive(false);
 
-            if (level > 4)
+            if (level > 9)
             {
-                levelText.text = "★★★★★";
+                levelText.text = "★★★★★★★★★★";
 
                 levelUpObj.SetActive(false);
             }
@@ -3247,20 +3320,36 @@ public class ShopManager : MonoBehaviour
                 switch (level)
                 {
                     case 0:
-                        levelText.text = "☆☆☆☆☆";
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
                         break;
                     case 1:
-                        levelText.text = "★☆☆☆☆";
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
                         break;
                     case 2:
-                        levelText.text = "★★☆☆☆";
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
                         break;
                     case 3:
-                        levelText.text = "★★★☆☆";
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
                         break;
                     case 4:
-                        levelText.text = "★★★★☆";
+                        levelText.text = "★★★★☆☆☆☆☆☆";
                         break;
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
+
                 }
 
 
@@ -4850,7 +4939,11 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
-        if(playerDataBase.AbilityPoint < price_LevelUp)
+#if UNITY_EDITOR
+        price_LevelUp = 0;
+#endif
+
+        if (playerDataBase.AbilityPoint < price_LevelUp)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.LowPoint);

@@ -78,6 +78,7 @@ public class DungeonManager : MonoBehaviour
 
     private bool delay = false;
     private bool clear = false;
+    private bool skip = false;
 
     private int plusNumber = 0;
     private int plusNumber1 = 0;
@@ -486,9 +487,9 @@ public class DungeonManager : MonoBehaviour
         attackSpeed += playerDataBase.Treasure2 * 0.5f;
         attackSpeed += playerDataBase.Advancement * 0.05f;
 
-        if(attackSpeed >= 100)
+        if(attackSpeed >= 150)
         {
-            attackSpeed = 100;
+            attackSpeed = 150;
         }
 
         //attackX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
@@ -771,7 +772,14 @@ public class DungeonManager : MonoBehaviour
             switch (dungeonInfo.rewardInfos[i].rewardType)
             {
                 case RewardType.Gold:
-                    PlayfabManager.instance.UpdateAddGold(dungeonInfo.rewardInfos[i].number + plusNumber);
+                    if(skip)
+                    {
+                        PlayfabManager.instance.UpdateAddGold((dungeonInfo.rewardInfos[i].number + plusNumber) / 2);
+                    }
+                    else
+                    {
+                        PlayfabManager.instance.UpdateAddGold(dungeonInfo.rewardInfos[i].number + plusNumber);
+                    }
                     break;
                 case RewardType.DefDestroyTicket:
                     PortionManager.instance.GetDefTickets(dungeonInfo.rewardInfos[i].number + plusNumber);
@@ -787,10 +795,24 @@ public class DungeonManager : MonoBehaviour
                 case RewardType.PortionSet:
                     break;
                 case RewardType.Crystal:
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal,dungeonInfo.rewardInfos[i].number + plusNumber);
+                    if (skip)
+                    {
+                        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (dungeonInfo.rewardInfos[i].number + plusNumber) / 2);
+                    }
+                    else
+                    {
+                        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, dungeonInfo.rewardInfos[i].number + plusNumber);
+                    }
                     break;
                 case RewardType.Exp:
-                    PortionManager.instance.GetExp(dungeonInfo.rewardInfos[i].number + plusNumber);
+                    if (skip)
+                    {
+                        PortionManager.instance.GetExp((dungeonInfo.rewardInfos[i].number + plusNumber) / 2);
+                    }
+                    else
+                    {
+                        PortionManager.instance.GetExp(dungeonInfo.rewardInfos[i].number + plusNumber);
+                    }
                     break;
                 case RewardType.Treasure1:
                     break;
@@ -856,7 +878,14 @@ public class DungeonManager : MonoBehaviour
                 case RewardType.SpeicalCharacter:
                     break;
                 case RewardType.AbilityPoint:
-                    PortionManager.instance.GetAbilityPoint(dungeonInfo.rewardInfos[i].number + plusNumber);
+                    if (skip)
+                    {
+                        PortionManager.instance.GetAbilityPoint((dungeonInfo.rewardInfos[i].number + plusNumber) / 2);
+                    }
+                    else
+                    {
+                        PortionManager.instance.GetAbilityPoint(dungeonInfo.rewardInfos[i].number + plusNumber);
+                    }
                     break;
                 case RewardType.DungeonKey1:
                     break;
@@ -882,6 +911,8 @@ public class DungeonManager : MonoBehaviour
                     break;
             }
         }
+
+        skip = false;
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
@@ -983,6 +1014,8 @@ public class DungeonManager : MonoBehaviour
     public void Extermination()
     {
         dungeonLevelView.SetActive(false);
+
+        skip = true;
 
         switch (dungeonType)
         {

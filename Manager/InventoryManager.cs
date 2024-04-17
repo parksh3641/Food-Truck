@@ -51,14 +51,15 @@ public class InventoryManager : MonoBehaviour
         receiveContents[6].Initialize(RewardType.Portion2, playerDataBase.Portion2);
         receiveContents[7].Initialize(RewardType.Portion3, playerDataBase.Portion3);
         receiveContents[8].Initialize(RewardType.Portion4, playerDataBase.Portion4);
+
         receiveContents[9].Initialize(RewardType.Portion5, playerDataBase.Portion5);
         receiveContents[10].Initialize(RewardType.BuffTicket, playerDataBase.BuffTicket);
         receiveContents[11].Initialize(RewardType.SkillTicket, playerDataBase.SkillTicket);
         receiveContents[12].Initialize(RewardType.RepairTicket, playerDataBase.RecoverTicket);
+        receiveContents[13].Initialize(RewardType.ChallengePoint, playerDataBase.ChallengePoint);
+        receiveContents[14].Initialize(RewardType.RankPoint, playerDataBase.RankPoint);
+        receiveContents[15].Initialize(RewardType.AbilityPoint, playerDataBase.AbilityPoint);
 
-        receiveContents[13].Initialize(RewardType.RankPoint, playerDataBase.RankPoint);
-        receiveContents[14].Initialize(RewardType.AbilityPoint, playerDataBase.AbilityPoint);
-        receiveContents[15].Initialize(RewardType.ChallengePoint, playerDataBase.ChallengePoint);
         receiveContents[16].Initialize(RewardType.Portion6, playerDataBase.Portion6);
 
         receiveContents[17].Initialize(RewardType.EventTicket, playerDataBase.EventTicket);

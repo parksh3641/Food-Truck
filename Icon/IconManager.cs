@@ -34,7 +34,7 @@ public class IconManager : MonoBehaviour
     public GameObject saveLockObject;
 
     private int number = 0;
-    private int maxProficiency = 6;
+    private int maxProficiency = 4;
     private float reward = 0.5f;
 
 
@@ -349,25 +349,25 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel1) > 299 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel1) > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel2) > 299 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel2) > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel3) > 299 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel3) > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel4) > 299 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel4) > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
@@ -531,43 +531,43 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.DefDestroyCount > 499 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //파괴 방어 500회
+        if (playerDataBase.DefDestroyCount > 299 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //파괴 방어 300회
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.YummyTimeCount > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.YummyTimeCount > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.RecoverCount > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //복구 100회
+        if (playerDataBase.RecoverCount > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //복구 50회
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.Dungeon1Count > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.Dungeon1Count > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.Dungeon2Count > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.Dungeon2Count > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.Dungeon3Count > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.Dungeon3Count > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
 
         number++;
-        if (playerDataBase.Dungeon4Count > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.Dungeon4Count > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }

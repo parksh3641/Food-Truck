@@ -71,7 +71,7 @@ public class ChestBoxManager : MonoBehaviour
             goalCount /= 2;
         }
 
-        goalCount = (int)(goalCount - (goalCount * (0.003f * playerDataBase.Treasure12)));
+        goalCount = (int)(goalCount - (goalCount * (0.002f * playerDataBase.Treasure12)));
 
 #if UNITY_EDITOR
         goalCount = 2;

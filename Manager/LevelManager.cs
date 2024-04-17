@@ -156,11 +156,11 @@ public class LevelManager : MonoBehaviour
 
         if(level > 99)
         {
-            infoText.plusText = " : +" + (100 * 0.3f).ToString("N1") + "%";
+            infoText.plusText = " +" + (100 * 0.3f).ToString("N1") + "%";
         }
         else
         {
-            infoText.plusText = " : +" + (level * 0.3f).ToString("N1") + "%";
+            infoText.plusText = " +" + (level * 0.3f).ToString("N1") + "%";
         }
 
         accessDateText.text = LocalizationManager.instance.GetString("AccessDate") + " : " + playerDataBase.AccessDate;

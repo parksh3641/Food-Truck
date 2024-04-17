@@ -901,7 +901,7 @@ public class SkillContent : MonoBehaviour
                     break;
             }
 
-            value = (long)(value * (1.0f - (0.005f * playerDataBase.Treasure4)));
+            value = (long)(value * (1.0f - (0.003f * playerDataBase.Treasure4)));
             goldText.text = MoneyUnitString.ToCurrencyString(value);
 
             Checking();

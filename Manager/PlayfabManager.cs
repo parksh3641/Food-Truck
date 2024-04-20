@@ -2381,9 +2381,9 @@ public class PlayfabManager : MonoBehaviour
                        case "Skill11":
                            playerDataBase.Skill11 = statistics.Value;
 
-                           if (playerDataBase.Skill11 >= 100)
+                           if (playerDataBase.Skill11 >= 500)
                            {
-                               playerDataBase.Skill11 = 100;
+                               playerDataBase.Skill11 = 500;
                            }
                            break;
                        case "Skill12":

@@ -21,7 +21,7 @@ public class GifticonContent : MonoBehaviour
     public GameObject lockedObj;
 
     private int need = 0;
-    private int max = 100;
+    private int max = 50;
 
     public GameObject checkEvent;
     public Text checkEventText;

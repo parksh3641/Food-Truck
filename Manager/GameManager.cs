@@ -6768,16 +6768,16 @@ public class GameManager : MonoBehaviour
         playerDataBase.Skill7 = 500;
         playerDataBase.Skill8 = 500;
         playerDataBase.Skill9 = 500;
-        playerDataBase.Skill10 = 500;
+        playerDataBase.Skill10 = 100;
         playerDataBase.Skill11 = 500;
         playerDataBase.Skill12 = 500;
         playerDataBase.Skill13 = 500;
-        playerDataBase.Skill14 = 500;
-        playerDataBase.Skill15 = 500;
-        playerDataBase.Skill16 = 500;
-        playerDataBase.Skill17 = 500;
-        playerDataBase.Skill18 = 500;
-        playerDataBase.Skill19 = 500;
+        playerDataBase.Skill14 = 100;
+        playerDataBase.Skill15 = 100;
+        playerDataBase.Skill16 = 100;
+        playerDataBase.Skill17 = 100;
+        playerDataBase.Skill18 = 100;
+        playerDataBase.Skill19 = 100;
 
         playerDataBase.Treasure1 = 300;
         playerDataBase.Treasure2 = 300;

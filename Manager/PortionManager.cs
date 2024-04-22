@@ -24,7 +24,7 @@ public class PortionManager : MonoBehaviour
     private int random = 0;
 
     public LevelManager levelManager;
-    public InventoryManager inventoryManager;
+    public EquipmentManager equipmentManager;
 
     PlayerDataBase playerDataBase;
 
@@ -64,7 +64,7 @@ public class PortionManager : MonoBehaviour
 
         portionAnimation[index].PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -97,7 +97,7 @@ public class PortionManager : MonoBehaviour
 
         portionAnimation[random].PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -118,7 +118,7 @@ public class PortionManager : MonoBehaviour
         portionAnimation[2].PlusMoney(number);
         portionAnimation[3].PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -140,7 +140,7 @@ public class PortionManager : MonoBehaviour
 
         defTicketPieceAnimation.PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -151,7 +151,7 @@ public class PortionManager : MonoBehaviour
 
         defTicketAnimation.PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -162,7 +162,7 @@ public class PortionManager : MonoBehaviour
 
         buffTicketAnimation.PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -173,7 +173,7 @@ public class PortionManager : MonoBehaviour
 
         skillTicketAnimation.PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -184,7 +184,7 @@ public class PortionManager : MonoBehaviour
 
         repairTicketAnimation.PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -195,7 +195,7 @@ public class PortionManager : MonoBehaviour
 
         rankPointAnimation.PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -223,7 +223,7 @@ public class PortionManager : MonoBehaviour
 
         islandCountAnimation[index].PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -234,7 +234,7 @@ public class PortionManager : MonoBehaviour
 
         eventTicketAnimation.PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -245,7 +245,7 @@ public class PortionManager : MonoBehaviour
 
         abilityPointAnimation.PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 
     [Button]
@@ -256,6 +256,6 @@ public class PortionManager : MonoBehaviour
 
         challengePointAnimation.PlusMoney(number);
 
-        inventoryManager.alarm.SetActive(true);
+        equipmentManager.mainAlarm.SetActive(true);
     }
 }

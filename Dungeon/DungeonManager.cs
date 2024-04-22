@@ -912,8 +912,6 @@ public class DungeonManager : MonoBehaviour
             }
         }
 
-        skip = false;
-
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
 
@@ -924,8 +922,14 @@ public class DungeonManager : MonoBehaviour
     {
         clear = true;
 
-        SoundManager.instance.StopBoss();
+        if(!skip)
+        {
+            SoundManager.instance.StopBoss();
+        }
+
         GameManager.instance.GameStop_Dungeon();
+
+        skip = false;
 
         OpenDungeonView();
     }
@@ -976,31 +980,27 @@ public class DungeonManager : MonoBehaviour
         switch(number)
         {
             case 0:
-                playerDataBase.DailyDungeonKey1 += 1;
+                ResetManager.instance.SetResetInfo(ResetType.DailyDungeonKey1);
                 playerDataBase.DungeonKey1 += 1;
 
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey1", playerDataBase.DailyDungeonKey1);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey1", playerDataBase.DungeonKey1);
                 break;
             case 1:
-                playerDataBase.DailyDungeonKey2 += 1;
+                ResetManager.instance.SetResetInfo(ResetType.DailyDungeonKey2);
                 playerDataBase.DungeonKey2 += 1;
 
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey2", playerDataBase.DailyDungeonKey2);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey2", playerDataBase.DungeonKey2);
                 break;
             case 2:
-                playerDataBase.DailyDungeonKey3 += 1;
+                ResetManager.instance.SetResetInfo(ResetType.DailyDungeonKey3);
                 playerDataBase.DungeonKey3 += 1;
 
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey3", playerDataBase.DailyDungeonKey3);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey3", playerDataBase.DungeonKey3);
                 break;
             case 3:
-                playerDataBase.DailyDungeonKey4 += 1;
+                ResetManager.instance.SetResetInfo(ResetType.DailyDungeonKey4);
                 playerDataBase.DungeonKey4 += 1;
 
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyDungeonKey4", playerDataBase.DailyDungeonKey4);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("DungeonKey4", playerDataBase.DungeonKey4);
                 break;
         }
@@ -1011,7 +1011,7 @@ public class DungeonManager : MonoBehaviour
         ContentInitialize();
     }
 
-    public void Extermination()
+    public void Extermination() //´øÀü ½ºÅµ
     {
         dungeonLevelView.SetActive(false);
 

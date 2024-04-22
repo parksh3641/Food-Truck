@@ -269,7 +269,7 @@ public class ShopContent : MonoBehaviour
                 priceText.localizationName = itemType + "_Price";
                 priceText.ReLoad();
 
-                rewardText.text = LocalizationManager.instance.GetString("NowPrice") + " +200%";
+                rewardText.text = LocalizationManager.instance.GetString("NowPrice") + " +300%";
 
                 index = 7;
                 effect.SetActive(true);
@@ -295,10 +295,10 @@ public class ShopContent : MonoBehaviour
                 priceText.localizationName = itemType + "_Price";
                 priceText.ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(3000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(600) + "</size>";
+                rewardText.text = MoneyUnitString.ToCurrencyString(3000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(1500) + "</size>";
 
                 bestObj.SetActive(true);
-                bestText.text = "+20%";
+                bestText.text = "+50%";
 
                 index = 9;
                 effect.SetActive(true);
@@ -311,10 +311,10 @@ public class ShopContent : MonoBehaviour
                 priceText.localizationName = itemType + "_Price";
                 priceText.ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(6000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(2400) + "</size>";
+                rewardText.text = MoneyUnitString.ToCurrencyString(6000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(6000) + "</size>";
 
                 bestObj.SetActive(true);
-                bestText.text = "+40%";
+                bestText.text = "+100%";
 
                 index = 10;
                 effect.SetActive(true);
@@ -327,10 +327,10 @@ public class ShopContent : MonoBehaviour
                 priceText.localizationName = itemType + "_Price";
                 priceText.ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(12000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(7200) + "</size>";
+                rewardText.text = MoneyUnitString.ToCurrencyString(12000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(18000) + "</size>";
 
                 bestObj.SetActive(true);
-                bestText.text = "+60%";
+                bestText.text = "+150%";
 
                 index = 11;
                 effect.SetActive(true);
@@ -343,10 +343,10 @@ public class ShopContent : MonoBehaviour
                 priceText.localizationName = itemType + "_Price";
                 priceText.ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(33000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(26400) + "</size>";
+                rewardText.text = MoneyUnitString.ToCurrencyString(33000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(66000) + "</size>";
 
                 bestObj.SetActive(true);
-                bestText.text = "+80%";
+                bestText.text = "+200%";
 
                 index = 12;
                 effect.SetActive(true);
@@ -359,10 +359,10 @@ public class ShopContent : MonoBehaviour
                 priceText.localizationName = itemType + "_Price";
                 priceText.ReLoad();
 
-                rewardText.text = MoneyUnitString.ToCurrencyString(60000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(60000) + "</size>";
+                rewardText.text = MoneyUnitString.ToCurrencyString(60000) + "\n<size=12>" + LocalizationManager.instance.GetString("Bonus") + " +" + MoneyUnitString.ToCurrencyString(180000) + "</size>";
 
                 bestObj.SetActive(true);
-                bestText.text = "+100%";
+                bestText.text = "+300%";
 
                 index = 13;
                 effect.SetActive(true);

@@ -1,4 +1,5 @@
 using Firebase.Analytics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,6 +54,7 @@ public class AdvancementManager : MonoBehaviour
     private float value2 = 1f;
     private float value3 = 0.25f;
 
+    private bool isMax = false;
     private bool isActive = false;
     private bool isDelay = false;
 
@@ -77,6 +79,11 @@ public class AdvancementManager : MonoBehaviour
 
     public void Initialize()
     {
+        if (playerDataBase.Advancement > Enum.GetValues(typeof(ChefType)).Length - 2)
+        {
+            playerDataBase.Advancement = Enum.GetValues(typeof(ChefType)).Length - 2;
+        }
+
         chefType = ChefType.Cook1_1 + playerDataBase.Advancement;
 
         mainScreenImg.sprite = GetAdvencementImg(chefType);
@@ -88,11 +95,21 @@ public class AdvancementManager : MonoBehaviour
 
     public void OpenView()
     {
-        chefType = ChefType.Cook1_1 + playerDataBase.Advancement;
-        nextChefType = ChefType.Cook1_1 + playerDataBase.Advancement + 1;
+        if (playerDataBase.Advancement > Enum.GetValues(typeof(ChefType)).Length - 2)
+        {
+            playerDataBase.Advancement = Enum.GetValues(typeof(ChefType)).Length - 2;
 
+            isMax = true;
+
+            Debug.Log("요리사 진급 최대치 입니다.");
+        }
+        else
+        {
+            isMax = false;
+        }
+
+        chefType = ChefType.Cook1_1 + playerDataBase.Advancement;
         nowClassImg.sprite = GetAdvencementImg(chefType);
-        nextClassImg.sprite = GetAdvencementImg(nextChefType);
 
         if (chefType.ToString().Length == 7)
         {
@@ -105,7 +122,10 @@ public class AdvancementManager : MonoBehaviour
     chefType.ToString().Substring(7, 1) + "</color>";
         }
 
-        if(nextChefType.ToString().Length == 7)
+        nextChefType = ChefType.Cook1_1 + playerDataBase.Advancement + 1;
+        nextClassImg.sprite = GetAdvencementImg(nextChefType);
+
+        if (nextChefType.ToString().Length == 7)
         {
             nextAdvencementText.text = LocalizationManager.instance.GetString(nextChefType.ToString().Substring(0, 5)) + "  <color=#FFFF00>" +
     nextChefType.ToString().Substring(6, 1) + "</color>";
@@ -175,6 +195,12 @@ public class AdvancementManager : MonoBehaviour
             lockedObj.SetActive(true);
         }
 
+#if UNITY_EDITOR
+        titleLockedObj.SetActive(false);
+        lockedObj.SetActive(false);
+        isActive = true;
+#endif
+
         nowValue1 = playerDataBase.Advancement * value1;
         nowValue2 = playerDataBase.Advancement * value2;
         nowValue3 = playerDataBase.Advancement * value3;
@@ -197,8 +223,12 @@ public class AdvancementManager : MonoBehaviour
     {
         if (isDelay) return;
 
-        isDelay = true;
-        Invoke("Delay", 0.4f);
+        if (isMax)
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.MaxLevel);
+            return;
+        }
 
         if (!isActive)
         {
@@ -223,6 +253,9 @@ public class AdvancementManager : MonoBehaviour
         GameManager.instance.CheckPercent();
 
         FirebaseAnalytics.LogEvent("LevelUp_Advencement");
+
+        isDelay = true;
+        Invoke("Delay", 0.4f);
     }
 
     void Delay()
@@ -412,6 +445,9 @@ public class AdvancementManager : MonoBehaviour
                 sp = imageDataBase.GetAdvancementArray(4);
                 break;
             case ChefType.Cook15_4:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook16_1:
                 sp = imageDataBase.GetAdvancementArray(4);
                 break;
         }

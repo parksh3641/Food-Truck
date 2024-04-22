@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject inventoryView;
-
-    public GameObject alarm;
-
     public ReceiveContent[] receiveContents;
 
     PlayerDataBase playerDataBase;
@@ -16,28 +12,11 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
-
-        inventoryView.SetActive(false);
-
-        alarm.SetActive(true);
     }
 
     public void OpenInventoryView()
     {
-        if (!inventoryView.activeInHierarchy)
-        {
-            inventoryView.SetActive(true);
-
-            alarm.SetActive(false);
-
-            Initialize();
-
-            FirebaseAnalytics.LogEvent("Open_Inventory");
-        }
-        else
-        {
-            inventoryView.SetActive(false);
-        }
+        Initialize();
     }
 
     void Initialize()

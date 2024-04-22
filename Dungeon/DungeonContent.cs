@@ -70,7 +70,7 @@ public class DungeonContent : MonoBehaviour
                 plusNumber1 = info.rewardInfos[0].addNumber * playerDataBase.Dungeon1Level;
                 plusNumber2 = info.rewardInfos[1].addNumber * playerDataBase.Dungeon1Level;
 
-                if(playerDataBase.DungeonKey1 == 0 && playerDataBase.DailyDungeonKey1 == 0)
+                if(playerDataBase.DungeonKey1 == 0 && playerDataBase.resetInfo.dailyDungeonKey1 == 0)
                 {
                     watchAdObj.SetActive(true);
                 }
@@ -85,7 +85,7 @@ public class DungeonContent : MonoBehaviour
                 plusNumber1 = info.rewardInfos[0].addNumber * playerDataBase.Dungeon2Level;
                 plusNumber2 = info.rewardInfos[1].addNumber * playerDataBase.Dungeon2Level;
 
-                if (playerDataBase.DungeonKey2 == 0 && playerDataBase.DailyDungeonKey2 == 0)
+                if (playerDataBase.DungeonKey2 == 0 && playerDataBase.resetInfo.dailyDungeonKey2 == 0)
                 {
                     watchAdObj.SetActive(true);
                 }
@@ -100,7 +100,7 @@ public class DungeonContent : MonoBehaviour
                 plusNumber1 = info.rewardInfos[0].addNumber * playerDataBase.Dungeon3Level;
                 plusNumber2 = info.rewardInfos[1].addNumber * playerDataBase.Dungeon3Level;
 
-                if (playerDataBase.DungeonKey3 == 0 && playerDataBase.DailyDungeonKey3 == 0)
+                if (playerDataBase.DungeonKey3 == 0 && playerDataBase.resetInfo.dailyDungeonKey3 == 0)
                 {
                     watchAdObj.SetActive(true);
                 }
@@ -115,7 +115,7 @@ public class DungeonContent : MonoBehaviour
                 plusNumber1 = info.rewardInfos[0].addNumber * playerDataBase.Dungeon4Level;
                 plusNumber2 = info.rewardInfos[1].addNumber * playerDataBase.Dungeon4Level;
 
-                if (playerDataBase.DungeonKey4 == 0 && playerDataBase.DailyDungeonKey4 == 0)
+                if (playerDataBase.DungeonKey4 == 0 && playerDataBase.resetInfo.dailyDungeonKey4 == 0)
                 {
                     watchAdObj.SetActive(true);
                 }
@@ -199,22 +199,22 @@ public class DungeonContent : MonoBehaviour
         switch (dungeonType)
         {
             case DungeonType.Dungeon1:
-                if (playerDataBase.DailyDungeonKey1 == 1) return;
+                if (playerDataBase.resetInfo.dailyDungeonKey1 == 1) return;
 
                 GoogleAdsManager.instance.admobReward_Dungeon.ShowAd(9);
                 break;
             case DungeonType.Dungeon2:
-                if (playerDataBase.DailyDungeonKey2 == 1) return;
+                if (playerDataBase.resetInfo.dailyDungeonKey2 == 1) return;
 
                 GoogleAdsManager.instance.admobReward_Dungeon.ShowAd(10);
                 break;
             case DungeonType.Dungeon3:
-                if (playerDataBase.DailyDungeonKey3 == 1) return;
+                if (playerDataBase.resetInfo.dailyDungeonKey3 == 1) return;
 
                 GoogleAdsManager.instance.admobReward_Dungeon.ShowAd(11);
                 break;
             case DungeonType.Dungeon4:
-                if (playerDataBase.DailyDungeonKey4 == 1) return;
+                if (playerDataBase.resetInfo.dailyDungeonKey4 == 1) return;
 
                 GoogleAdsManager.instance.admobReward_Dungeon.ShowAd(12);
                 break;

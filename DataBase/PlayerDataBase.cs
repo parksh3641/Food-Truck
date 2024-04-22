@@ -51,6 +51,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int exp = 0;
     [SerializeField]
+    private int advancement = 0;
+    [SerializeField]
     private int playTime = 0;
     [SerializeField]
     private int lockTutorial = 0;
@@ -68,8 +70,6 @@ public class PlayerDataBase : ScriptableObject
     private int testAccount = 0;
     [SerializeField]
     private int update = 0;
-    [SerializeField]
-    private int advancement = 0;
     [SerializeField]
     private int abilityPoint = 0;
     [SerializeField]
@@ -122,7 +122,6 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int eventEnter4 = 0;
 
-
     [Space]
     [Title("Dungeon")]
     [SerializeField]
@@ -147,31 +146,12 @@ public class PlayerDataBase : ScriptableObject
     [Space]
     [Title("Daily")]
     [SerializeField]
-    private int dailyReward = 0;
+    public ResetInfo resetInfo;
+
+    [Space]
+    [Title("Equip")]
     [SerializeField]
-    private int dailyReward_Portion = 0;
-    [SerializeField]
-    private int dailyReward_DefTicket = 0;
-    [SerializeField]
-    private int dailyAdsReward = 0;
-    [SerializeField]
-    private int dailyAdsReward2 = 0;
-    [SerializeField]
-    private int dailyCastleReward = 0;
-    [SerializeField]
-    private int dailyQuestReward = 0;
-    [SerializeField]
-    private int dailyTreasureReward = 0;
-    [SerializeField]
-    private int dailyReward_Crystal = 0;
-    [SerializeField]
-    private int dailyDungeonKey1 = 0;
-    [SerializeField]
-    private int dailyDungeonKey2 = 0;
-    [SerializeField]
-    private int dailyDungeonKey3 = 0;
-    [SerializeField]
-    private int dailyDungeonKey4 = 0;
+    public Equip equip;
 
     [Space]
     [Title("Count")]
@@ -1495,139 +1475,6 @@ public class PlayerDataBase : ScriptableObject
             castleServerDate = value;
         }
     }
-
-    public int DailyReward
-    {
-        get
-        {
-            return dailyReward;
-        }
-        set
-        {
-            dailyReward = value;
-        }
-    }
-
-    public int DailyReward_Portion
-    {
-        get
-        {
-            return dailyReward_Portion;
-        }
-        set
-        {
-            dailyReward_Portion = value;
-        }
-    }
-
-    public int DailyReward_DefTicket
-    {
-        get
-        {
-            return dailyReward_DefTicket;
-        }
-        set
-        {
-            dailyReward_DefTicket = value;
-        }
-    }
-
-    public int DailyReward_Crystal
-    {
-        get
-        {
-            return dailyReward_Crystal;
-        }
-        set
-        {
-            dailyReward_Crystal = value;
-        }
-    }
-
-    public int DailyDungeonKey1
-    {
-        get { return dailyDungeonKey1; }
-        set { dailyDungeonKey1 = value; }
-    }
-
-    public int DailyDungeonKey2
-    {
-        get { return dailyDungeonKey2; }
-        set { dailyDungeonKey2 = value; }
-    }
-
-    public int DailyDungeonKey3
-    {
-        get { return dailyDungeonKey3; }
-        set { dailyDungeonKey3 = value; }
-    }
-
-    public int DailyDungeonKey4
-    {
-        get { return dailyDungeonKey4; }
-        set { dailyDungeonKey4 = value; }
-    }
-
-    public int DailyAdsReward
-    {
-        get
-        {
-            return dailyAdsReward;
-        }
-        set
-        {
-            dailyAdsReward = value;
-        }
-    }
-
-    public int DailyAdsReward2
-    {
-        get
-        {
-            return dailyAdsReward2;
-        }
-        set
-        {
-            dailyAdsReward2 = value;
-        }
-    }
-
-    public int DailyCastleReward
-    {
-        get
-        {
-            return dailyCastleReward;
-        }
-        set
-        {
-            dailyCastleReward = value;
-        }
-    }
-
-    public int DailyQuestReward
-    {
-        get
-        {
-            return dailyQuestReward;
-        }
-        set
-        {
-            dailyQuestReward = value;
-        }
-    }
-
-    public int DailyTreasureReward
-    {
-        get
-        {
-            return dailyTreasureReward;
-        }
-        set
-        {
-            dailyTreasureReward = value;
-        }
-    }
-
 
     public int AdCount
     {
@@ -5168,19 +5015,8 @@ public class PlayerDataBase : ScriptableObject
         castleDate = "";
         castleServerDate = "";
 
-        dailyReward = 0;
-        dailyReward_Portion = 0;
-        dailyReward_DefTicket = 0;
-        dailyReward_Crystal = 0;
-        dailyAdsReward = 0;
-        dailyAdsReward2 = 0;
-        dailyCastleReward = 0;
-        dailyQuestReward = 0;
-        dailyTreasureReward = 0;
-        dailyDungeonKey1 = 0;
-        dailyDungeonKey2 = 0;
-        dailyDungeonKey3 = 0;
-        dailyDungeonKey4 = 0;
+        resetInfo = new ResetInfo();
+        equip = new Equip();
 
         nextFoodNumber = 0;
         nextFoodNumber2 = 0;

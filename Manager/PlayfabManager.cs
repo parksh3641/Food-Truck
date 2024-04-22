@@ -1818,45 +1818,6 @@ public class PlayfabManager : MonoBehaviour
                        case "CastleServerDate":
                            playerDataBase.CastleServerDate = statistics.Value.ToString();
                            break;
-                       case "DailyReward":
-                           playerDataBase.DailyReward = statistics.Value;
-                           break;
-                       case "DailyReward_Portion":
-                           playerDataBase.DailyReward_Portion = statistics.Value;
-                           break;
-                       case "DailyReward_DefTicket":
-                           playerDataBase.DailyReward_DefTicket = statistics.Value;
-                           break;
-                       case "DailyReward_Crystal":
-                           playerDataBase.DailyReward_Crystal = statistics.Value;
-                           break;
-                       case "DailyAdsReward":
-                           playerDataBase.DailyAdsReward = statistics.Value;
-                           break;
-                       case "DailyAdsReward2":
-                           playerDataBase.DailyAdsReward2 = statistics.Value;
-                           break;
-                       case "DailyCastleReward":
-                           playerDataBase.DailyCastleReward = statistics.Value;
-                           break;
-                       case "DailyQuestReward":
-                           playerDataBase.DailyQuestReward = statistics.Value;
-                           break;
-                       case "DailyTreasureReward":
-                           playerDataBase.DailyTreasureReward = statistics.Value;
-                           break;
-                       case "DailyDungeonKey1":
-                           playerDataBase.DailyDungeonKey1 = statistics.Value;
-                           break;
-                       case "DailyDungeonKey2":
-                           playerDataBase.DailyDungeonKey2 = statistics.Value;
-                           break;
-                       case "DailyDungeonKey3":
-                           playerDataBase.DailyDungeonKey3 = statistics.Value;
-                           break;
-                       case "DailyDungeonKey4":
-                           playerDataBase.DailyDungeonKey4 = statistics.Value;
-                           break;
                        case "GetGold":
                            playerDataBase.GetGold = statistics.Value;
                            break;
@@ -2693,12 +2654,23 @@ public class PlayfabManager : MonoBehaviour
             Island2RareData island2RareData = new Island2RareData();
             Island3RareData island3RareData = new Island3RareData();
             Island4RareData island4RareData = new Island4RareData();
+            ResetInfo resetInfo = new ResetInfo();
+            Equip equip = new Equip();
 
             foreach (var eachData in result.Data)
             {
                 string key = eachData.Key;
-
-                if (key.Contains("Island1RareData"))
+                if (key.Contains("ResetInfo"))
+                {
+                    resetInfo = JsonUtility.FromJson<ResetInfo>(eachData.Value.Value);
+                    playerDataBase.resetInfo = resetInfo;
+                }
+                else if (key.Contains("Equip"))
+                {
+                    equip = JsonUtility.FromJson<Equip>(eachData.Value.Value);
+                    playerDataBase.equip = equip;
+                }
+                else if (key.Contains("Island1RareData"))
                 {
                     island1RareData = JsonUtility.FromJson<Island1RareData>(eachData.Value.Value);
                     playerDataBase.SetIsland1RareData(island1RareData);

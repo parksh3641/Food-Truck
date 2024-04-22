@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour
     public GameObject rareFood;
     public GameObject gifticonEvent;
 
+    private bool gifticon = false;
+
     [Space]
     [Title("Buff")]
     public Text buff1Text;
@@ -776,6 +778,8 @@ public class GameManager : MonoBehaviour
 
     void CheckGifticon(bool check)
     {
+        gifticon = check;
+
         gifticonEvent.SetActive(check);
 
         if(GameStateManager.instance.StoreType == StoreType.OneStore)
@@ -1902,7 +1906,7 @@ public class GameManager : MonoBehaviour
 
         if (playerDataBase.GoldX2)
         {
-            sellPricePlus += 200;
+            sellPricePlus += 300;
         }
 
         if (feverMode)
@@ -5352,16 +5356,19 @@ public class GameManager : MonoBehaviour
             playerDataBase.SellCount += 1;
             GameStateManager.instance.SellCount += 1;
 
-            if (Random.Range(0, 100f) < eventTicketPercent)
+            if (gifticon)
             {
-                if (playerDataBase.EventTicket >= 1000) return;
+                if (Random.Range(0, 100f) < eventTicketPercent)
+                {
+                    if (playerDataBase.EventTicket >= 1000) return;
 
-                PortionManager.instance.GetEventTicket(1);
+                    PortionManager.instance.GetEventTicket(1);
 
-                playerDataBase.EventTicketCount += 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
+                    playerDataBase.EventTicketCount += 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
 
-                Debug.LogError("Get Event Ticket");
+                    Debug.LogError("Get Event Ticket");
+                }
             }
         }
 
@@ -6844,19 +6851,7 @@ public class GameManager : MonoBehaviour
         playerDataBase.AttendanceCheck = false;
         playerDataBase.WelcomeCheck = false;
 
-        playerDataBase.DailyReward = 0;
-        playerDataBase.DailyReward_Portion = 0;
-        playerDataBase.DailyReward_DefTicket = 0;
-        playerDataBase.DailyReward_Crystal = 0;
-        playerDataBase.DailyAdsReward = 0;
-        playerDataBase.DailyAdsReward2 = 0;
-        playerDataBase.DailyCastleReward = 0;
-        playerDataBase.DailyQuestReward = 0;
-        playerDataBase.DailyTreasureReward = 0;
-        playerDataBase.DailyDungeonKey1 = 0;
-        playerDataBase.DailyDungeonKey2 = 0;
-        playerDataBase.DailyDungeonKey3 = 0;
-        playerDataBase.DailyDungeonKey4 = 0;
+        playerDataBase.resetInfo = new ResetInfo();
 
         GameStateManager.instance.UpgradeCount = 0;
         GameStateManager.instance.SellCount = 0;

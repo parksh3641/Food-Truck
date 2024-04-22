@@ -252,6 +252,8 @@ public class UpgradeDataBase : ScriptableObject
                     price = level * (value * priceList[level].value);
                 }
 
+                price *= 0.1f;
+
                 break;
         }
 

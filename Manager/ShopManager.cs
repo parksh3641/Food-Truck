@@ -457,13 +457,15 @@ public class ShopManager : MonoBehaviour
                 shopContents[7].gameObject.SetActive(false);
                 shopContents[11].Initialize(ItemType.DailyReward_Portion, BuyType.Free, this);
                 shopContents[12].Initialize(ItemType.GoldX2, BuyType.Rm, this);
+                shopContents[12].gameObject.SetActive(false);
                 shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
                 shopContents[25].Initialize(ItemType.DefDestroyTicketPiece, BuyType.Free, this);
                 shopContents[32].Initialize(ItemType.SuperOffline, BuyType.Rm, this);
                 shopContents[34].Initialize(ItemType.AutoUpgrade, BuyType.Rm, this);
+                shopContents[34].gameObject.SetActive(false);
                 shopContents[35].Initialize(ItemType.AutoPresent, BuyType.Rm, this);
 
-                if (playerDataBase.DailyReward == 0)
+                if (playerDataBase.resetInfo.dailyReward == 0)
                 {
                     shopContents[0].SetLocked(false);
                 }
@@ -472,7 +474,7 @@ public class ShopManager : MonoBehaviour
                     shopContents[0].SetLocked(true);
                 }
 
-                if (playerDataBase.DailyReward_Portion == 0)
+                if (playerDataBase.resetInfo.dailyReward_Portion == 0)
                 {
                     shopContents[11].SetLocked(false);
                 }
@@ -481,7 +483,7 @@ public class ShopManager : MonoBehaviour
                     shopContents[11].SetLocked(true);
                 }
 
-                if (playerDataBase.DailyReward_DefTicket == 0)
+                if (playerDataBase.resetInfo.dailyReward_DefTicket == 0)
                 {
                     shopContents[25].SetLocked(false);
                 }
@@ -490,7 +492,7 @@ public class ShopManager : MonoBehaviour
                     shopContents[25].SetLocked(true);
                 }
 
-                if (playerDataBase.DailyAdsReward == 0)
+                if (playerDataBase.resetInfo.dailyAdsReward == 0)
                 {
                     shopContents[1].SetLocked(false);
                 }
@@ -499,7 +501,7 @@ public class ShopManager : MonoBehaviour
                     shopContents[1].SetLocked(true);
                 }
 
-                if (playerDataBase.DailyAdsReward2 == 0)
+                if (playerDataBase.resetInfo.dailyAdsReward2 == 0)
                 {
                     shopContents[6].SetLocked(false);
                 }
@@ -513,20 +515,20 @@ public class ShopManager : MonoBehaviour
                 //    shopContents[7].gameObject.SetActive(false);
                 //}
 
-                if(playerDataBase.GoldX2)
-                {
-                    shopContents[12].gameObject.SetActive(false);
-                }
+                //if(playerDataBase.GoldX2)
+                //{
+                //    shopContents[12].gameObject.SetActive(false);
+                //}
 
-                if(playerDataBase.SuperOffline)
+                if (playerDataBase.SuperOffline)
                 {
                     shopContents[32].gameObject.SetActive(false);
                 }
 
-                if (playerDataBase.AutoUpgrade)
-                {
-                    shopContents[34].gameObject.SetActive(false);
-                }
+                //if (playerDataBase.AutoUpgrade)
+                //{
+                //    shopContents[34].gameObject.SetActive(false);
+                //}
 
                 if (playerDataBase.AutoPresent)
                 {
@@ -678,7 +680,7 @@ public class ShopManager : MonoBehaviour
                 shopContents[17].Initialize(ItemType.CrystalShop5, BuyType.Rm, this);
                 shopContents[18].Initialize(ItemType.CrystalShop6, BuyType.Rm, this);
 
-                if (playerDataBase.DailyReward_Crystal == 0)
+                if (playerDataBase.resetInfo.dailyReward_Crystal == 0)
                 {
                     shopContents[33].SetLocked(false);
                 }
@@ -727,10 +729,9 @@ public class ShopManager : MonoBehaviour
         switch (item)
         {
             case ItemType.DailyReward:
-                if (playerDataBase.DailyReward == 1) return;
+                if (playerDataBase.resetInfo.dailyReward == 1) return;
 
-                playerDataBase.DailyReward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward", playerDataBase.DailyReward);
+                ResetManager.instance.SetResetInfo(ResetType.DailyReward);
 
                 shopContents[0].SetLocked(true);
 
@@ -862,10 +863,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.DailyReward_Portion:
-                if (playerDataBase.DailyReward_Portion == 1) return;
+                if (playerDataBase.resetInfo.dailyReward_Portion == 1) return;
 
-                playerDataBase.DailyReward_Portion = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_Portion", playerDataBase.DailyReward_Portion);
+                ResetManager.instance.SetResetInfo(ResetType.DailyReward_Portion);
 
                 shopContents[11].SetLocked(true);
 
@@ -1015,10 +1015,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.DefDestroyTicketPiece:
-                if (playerDataBase.DailyReward_DefTicket == 1) return;
+                if (playerDataBase.resetInfo.dailyReward_DefTicket == 1) return;
 
-                playerDataBase.DailyReward_DefTicket = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_DefTicket", playerDataBase.DailyReward_DefTicket);
+                ResetManager.instance.SetResetInfo(ResetType.DailyReward_DefTicket);
 
                 PortionManager.instance.GetDefTicketPiece(1);
 
@@ -1373,10 +1372,9 @@ public class ShopManager : MonoBehaviour
 
     public void SuccessWatchAd()
     {
-        if (playerDataBase.DailyAdsReward == 1) return;
+        if (playerDataBase.resetInfo.dailyAdsReward == 1) return;
 
-        playerDataBase.DailyAdsReward = 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyAdsReward", playerDataBase.DailyAdsReward);
+        ResetManager.instance.SetResetInfo(ResetType.DailyAdsReward);
 
         shopContents[1].SetLocked(true);
 
@@ -1410,10 +1408,9 @@ public class ShopManager : MonoBehaviour
 
     public void SuccessWatchAd_Portion()
     {
-        if (playerDataBase.DailyAdsReward2 == 1) return;
+        if (playerDataBase.resetInfo.dailyAdsReward2 == 1) return;
 
-        playerDataBase.DailyAdsReward2 = 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyAdsReward2", playerDataBase.DailyAdsReward2);
+        ResetManager.instance.SetResetInfo(ResetType.DailyAdsReward2);
 
         shopContents[6].SetLocked(true);
 
@@ -1425,10 +1422,9 @@ public class ShopManager : MonoBehaviour
 
     public void SuccessWatchAd_Crystal()
     {
-        if (playerDataBase.DailyReward_Crystal == 1) return;
+        if (playerDataBase.resetInfo.dailyReward_Crystal == 1) return;
 
-        playerDataBase.DailyReward_Crystal = 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyReward_Crystal", playerDataBase.DailyReward_Crystal);
+        ResetManager.instance.SetResetInfo(ResetType.DailyReward_Crystal);
 
         shopContents[33].SetLocked(true);
 
@@ -4429,41 +4425,41 @@ public class ShopManager : MonoBehaviour
                 FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack1");
                 break;
             case 9:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3600);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 4500);
 
-                playerDataBase.BuyCrystal += 3600;
+                playerDataBase.BuyCrystal += 4500;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
 
                 FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack2");
                 break;
             case 10:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 8400);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 12000);
 
-                playerDataBase.BuyCrystal += 8400;
+                playerDataBase.BuyCrystal += 12000;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
 
                 FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack3");
                 break;
             case 11:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 19200);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 30000);
 
-                playerDataBase.BuyCrystal += 19200;
+                playerDataBase.BuyCrystal += 30000;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
 
                 FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack4");
                 break;
             case 12:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 59400);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 99000);
 
-                playerDataBase.BuyCrystal += 59400;
+                playerDataBase.BuyCrystal += 99000;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
 
                 FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack5");
                 break;
             case 13:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 120000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 240000);
 
-                playerDataBase.BuyCrystal += 120000;
+                playerDataBase.BuyCrystal += 240000;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuyCrystal", playerDataBase.BuyCrystal);
 
                 FirebaseAnalytics.LogEvent("Buy_Purchase : CrystalPack6");
@@ -4550,7 +4546,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(100);
+                PortionManager.instance.GetEventTicket(1000);
                 break;
             case PackageType.Package2:
                 if (playerDataBase.Package2) yield break;
@@ -4559,19 +4555,19 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package2", 1);
                 Invoke("PackageDelay2", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(18000000);
+                PlayfabManager.instance.UpdateAddGold(12000000);
 
                 yield return waitForSeconds;
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 8500);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1200);
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetAllPortion(40);
+                PortionManager.instance.GetAllPortion(20);
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(500);
+                PortionManager.instance.GetEventTicket(2000);
                 break;
             case PackageType.Package3:
                 if (playerDataBase.Package3) yield break;
@@ -4580,19 +4576,19 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package3", 1);
                 Invoke("PackageDelay3", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(30000000);
+                PlayfabManager.instance.PurchaseAutoUpgrade();
 
                 yield return waitForSeconds;
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 30000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 4500);
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetAllPortion(100);
+                PortionManager.instance.GetAllPortion(50);
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(1000);
+                PortionManager.instance.GetEventTicket(5000);
                 break;
             case PackageType.Package4:
                 if (playerDataBase.Package4) yield break;
@@ -4601,19 +4597,19 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package4", 1);
                 Invoke("PackageDelay4", 0.5f);
 
-                PlayfabManager.instance.UpdateAddGold(60000000);
+                PlayfabManager.instance.PurchaseGoldX2();
 
                 yield return waitForSeconds;
 
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 42000);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 18000);
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetDefTickets(200);
+                PortionManager.instance.GetDefTickets(50);
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(2000);
+                PortionManager.instance.GetEventTicket(10000);
                 break;
             case PackageType.Package5: //한정 패키지
                 if (playerDataBase.Package5) yield break;
@@ -4634,7 +4630,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(100);
+                PortionManager.instance.GetEventTicket(1000);
                 break;
             case PackageType.Package6: //울트라 패키지
                 if (playerDataBase.Package6) yield break;
@@ -4655,7 +4651,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(1000);
+                PortionManager.instance.GetEventTicket(10000);
                 break;
             case PackageType.Package7: //서포트 패키지
                 if (playerDataBase.Package7 == 1) yield break;
@@ -4677,7 +4673,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(100);
+                PortionManager.instance.GetEventTicket(1000);
                 break;
             case PackageType.Package8:
                 if (playerDataBase.Package8 == 1) yield break;
@@ -4714,7 +4710,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(2000);
+                PortionManager.instance.GetEventTicket(5000);
 
                 yield return waitForSeconds;
 
@@ -4727,9 +4723,9 @@ public class ShopManager : MonoBehaviour
 
                 Invoke("PackageDelay11", 0.5f);
 
-                playerDataBase.Treasure2Count += 100;
-                playerDataBase.Treasure13Count += 100;
-                playerDataBase.Treasure14Count += 100;
+                playerDataBase.Treasure2Count += 50;
+                playerDataBase.Treasure13Count += 50;
+                playerDataBase.Treasure14Count += 50;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure2Count", playerDataBase.Treasure2Count);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure13Count", playerDataBase.Treasure13Count);
@@ -4737,7 +4733,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetEventTicket(1000);
+                PortionManager.instance.GetEventTicket(2000);
 
                 yield return waitForSeconds;
 

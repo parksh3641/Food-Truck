@@ -35,6 +35,8 @@ public class ImageDataBase : ScriptableObject
 
     public Sprite[] advancementArray;
 
+    public Sprite[] equipArray;
+
     public Sprite GetFoodIconArray(BookType type)
     {
         return foodIconArray[(int)type];
@@ -90,6 +92,11 @@ public class ImageDataBase : ScriptableObject
         return rankBackgroundArray;
     }
 
+    public Sprite GetRankBackgroundArray(int number)
+    {
+        return rankBackgroundArray[number];
+    }
+
     public Sprite[] GetDungeonArray()
     {
         return dungeonArray;
@@ -113,5 +120,10 @@ public class ImageDataBase : ScriptableObject
     public Sprite GetAdvancementArray(int number)
     {
         return advancementArray[number];
+    }
+
+    public Sprite GetEquipArray(int number)
+    {
+        return equipArray[number];
     }
 }

@@ -343,5 +343,7 @@ public enum NotionType
     EndEvent,
     Icon_Locked30,
     ComingSoon,
-    MaxEnterEventTicket
+    MaxEnterEventTicket,
+    ChangeOptionNotion,
+    LevelUpOption
 }

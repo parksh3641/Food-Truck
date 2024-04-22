@@ -135,6 +135,8 @@ public class NickNameManager : MonoBehaviour
                     {
                         if (playerDataBase.Crystal < price)
                         {
+                            OpenNickName();
+
                             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
                             NotionManager.instance.UseNotion(NotionType.LowCrystal);
                             return;

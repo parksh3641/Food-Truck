@@ -97,7 +97,7 @@ public class OfflineManager : MonoBehaviour
             localization_Minutes = LocalizationManager.instance.GetString("Minutes");
             localization_Seconds = LocalizationManager.instance.GetString("Seconds");
 
-            if (playerDataBase.DailyCastleReward == 0)
+            if (playerDataBase.resetInfo.dailyCastleReward == 0)
             {
                 quickLockObj.SetActive(false);
             }
@@ -304,7 +304,7 @@ public class OfflineManager : MonoBehaviour
 
     public void ReceiveAdButton()
     {
-        if (playerDataBase.DailyCastleReward == 1) return;
+        if (playerDataBase.resetInfo.dailyCastleReward == 1) return;
 
         if (!NetworkConnect.instance.CheckConnectInternet())
         {
@@ -453,8 +453,7 @@ public class OfflineManager : MonoBehaviour
     {
         quickLockObj.SetActive(true);
 
-        playerDataBase.DailyCastleReward = 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyCastleReward", playerDataBase.DailyCastleReward);
+        ResetManager.instance.SetResetInfo(ResetType.DailyCastleReward);
 
         button.StopAnim();
 

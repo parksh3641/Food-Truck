@@ -262,14 +262,6 @@ public enum BuyType
     RankPoint
 }
 
-public enum RankType
-{
-    N,
-    R,
-    SR,
-    SSR,
-    UR
-}
 
 public enum FoodType
 {
@@ -545,6 +537,37 @@ public enum ChefType
     Cook15_2,
     Cook15_3,
     Cook15_4,
+    Cook16_1,
+    Cook16_2,
+    Cook16_3,
+    Cook16_4,
+}
+
+public enum ResetType
+{
+    DailyReward,
+    DailyReward_Portion,
+    DailyReward_DefTicket,
+    DailyAdsReward,
+    DailyAdsReward2,
+    DailyCastleReward,
+    DailyQuestReward,
+    DailyTreasureReward,
+    DailyReward_Crystal,
+    DailyDungeonKey1,
+    DailyDungeonKey2,
+    DailyDungeonKey3,
+    DailyDungeonKey4,
+    DailyReset1,
+    DailyReset2,
+    DailyReset3,
+    DailyReset4,
+    DailyReset5,
+    DailyReset6,
+    DailyReset7,
+    DailyReset8,
+    DailyReset9,
+    DailyReset10,
 }
 
 public enum DungeonType
@@ -688,4 +711,28 @@ public enum BookType
     Food30,
     Food31,
     Food32,
+}
+
+public enum EquipType
+{
+    Equip_Index_1,
+    Equip_Index_2,
+    Equip_Index_3,
+    Equip_Index_4,
+    Equip_Index_5,
+    Equip_Index_6,
+    Equip_Index_7,
+    Equip_Index_8,
+    Equip_Index_9,
+    Equip_Index_10,
+    Equip_Index_11,
+    Equip_Index_12,
+}
+
+public enum RankType
+{
+    Normal,
+    Rare,
+    Unique,
+    Legendary
 }

@@ -78,7 +78,7 @@ public class TreasureManager : MonoBehaviour
 
     public void Initialize()
     {
-        if(playerDataBase.DailyTreasureReward == 0)
+        if(playerDataBase.resetInfo.dailyTreasureReward == 0)
         {
             mainAlarm.SetActive(true);
             alarm.SetActive(true);
@@ -98,7 +98,7 @@ public class TreasureManager : MonoBehaviour
 
             GameManager.instance.RenewalVC();
 
-            if (playerDataBase.DailyTreasureReward == 0)
+            if (playerDataBase.resetInfo.dailyTreasureReward == 0)
             {
                 treasureAdLockedObj.SetActive(false);
             }
@@ -160,15 +160,14 @@ public class TreasureManager : MonoBehaviour
 
     public void WatchAd()
     {
-        if (playerDataBase.DailyTreasureReward == 1) return;
+        if (playerDataBase.resetInfo.dailyTreasureReward == 1) return;
 
         GoogleAdsManager.instance.admobReward_Treasure.ShowAd(7);
     }
 
     public void SuccessWatchAd()
     {
-        playerDataBase.DailyTreasureReward = 1;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DailyTreasureReward", playerDataBase.DailyTreasureReward);
+        ResetManager.instance.SetResetInfo(ResetType.DailyTreasureReward);
 
         mainAlarm.SetActive(false);
         alarm.SetActive(false);

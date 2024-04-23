@@ -1287,7 +1287,8 @@ public class ShopManager : MonoBehaviour
             case 0:
                 if (playerDataBase.Crystal >= 60)
                 {
-                    PlayfabManager.instance.UpdateAddGold(500000);
+                    PlayfabManager.instance.UpdateSellPriceGold(500000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(500000);
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 60);
 
                     OpenChangeMoneyView();
@@ -1304,7 +1305,8 @@ public class ShopManager : MonoBehaviour
             case 1:
                 if (playerDataBase.Crystal >= 500)
                 {
-                    PlayfabManager.instance.UpdateAddGold(4500000);
+                    PlayfabManager.instance.UpdateSellPriceGold(4500000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(4500000);
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 500);
 
                     OpenChangeMoneyView();
@@ -1321,7 +1323,8 @@ public class ShopManager : MonoBehaviour
             case 2:
                 if (playerDataBase.Crystal >= 12000)
                 {
-                    PlayfabManager.instance.UpdateAddGold(10000000);
+                    PlayfabManager.instance.UpdateSellPriceGold(10000000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(10000000);
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 12000);
 
                     OpenChangeMoneyView();
@@ -1340,6 +1343,8 @@ public class ShopManager : MonoBehaviour
                 {
                     PlayfabManager.instance.UpdateAddGold((int)lowCoin);
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)needExchangeCrystal);
+
+                    Debug.Log("부족한 골드만큼 구매 완료");
 
                     changeMoneyView.SetActive(false);
 

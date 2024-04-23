@@ -101,8 +101,7 @@ public class ReincarnationManager : MonoBehaviour
 
         oldPoint = point;
 
-        point = point + (point * (0.01f * playerDataBase.Skill11));
-        point = point + (point * (0.01f * playerDataBase.Treasure10));
+        point += point * ((playerDataBase.Skill11 + playerDataBase.Treasure10 + playerDataBase.GetEquipValue(EquipType.Equip_Index_10)) * 0.01f);
 
         receiveContent.Initialize(RewardType.ChallengePoint, (int)point);
 

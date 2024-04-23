@@ -460,18 +460,19 @@ public class DungeonManager : MonoBehaviour
         attackSpeed = 0;
         attackX2 = 0;
 
-        attackPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         attackPlus += playerDataBase.Skill7 * 0.5f;
-        if (playerDataBase.Level > 199)
+        attackPlus += playerDataBase.Skill17 * 0.5f;
+        if (playerDataBase.Level > 99)
         {
-            attackPlus += 10;
+            attackPlus += 30;
         }
         else
         {
-            attackPlus += playerDataBase.Level * 0.05f;
+            attackPlus += playerDataBase.Level * 0.3f;
         }
         attackPlus += playerDataBase.Treasure1 * 1f;
-        attackPlus += playerDataBase.Advancement * 0.1f;
+        attackPlus += playerDataBase.Advancement * 0.5f;
+        attackPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_1);
 
         success += attackPlus;
 
@@ -480,27 +481,33 @@ public class DungeonManager : MonoBehaviour
             success = 100;
         }
 
-        attackSpeed += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
-        attackSpeed += playerDataBase.Skill9 * 0.25f;
-        attackSpeed += playerDataBase.Skill15 * 0.5f;
-        attackSpeed += playerDataBase.Treasure13 * 1f;
-        attackSpeed += playerDataBase.Treasure2 * 0.5f;
-        attackSpeed += playerDataBase.Advancement * 0.05f;
-
-        if(attackSpeed >= 150)
-        {
-            attackSpeed = 150;
-        }
-
-        //attackX2 += totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
+        attackX2 += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
+        attackX2 += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
         attackX2 += playerDataBase.Treasure3 * 0.5f;
+        attackX2 += playerDataBase.GetEpicBookNumber() * 0.2f;
+        attackX2 += playerDataBase.GetEquipValue(EquipType.Equip_Index_3);
+
         attackX2 += playerDataBase.Treasure14 * 1f;
         attackX2 += playerDataBase.Skill16 * 0.5f;
-        attackX2 += playerDataBase.GetEpicBookNumber() * 0.2f;
+        attackSpeed += playerDataBase.GetEquipValue(EquipType.Equip_Index_6);
 
-        if(attackX2 >= 100)
+
+        if (attackX2 >= 100)
         {
             attackX2 = 100;
+        }
+
+        attackSpeed += playerDataBase.Skill9 * 0.25f;
+        attackSpeed += playerDataBase.Skill15 * 0.5f;
+        attackSpeed += playerDataBase.Treasure2 * 0.5f;
+        attackSpeed += playerDataBase.Advancement * 0.25f;
+        attackSpeed += playerDataBase.Treasure13 * 1f;
+        attackSpeed += playerDataBase.GetEquipValue(EquipType.Equip_Index_4);
+        attackSpeed += playerDataBase.GetEquipValue(EquipType.Equip_Index_5);
+
+        if (attackSpeed >= 150)
+        {
+            attackSpeed = 150;
         }
 
         attackText.localizationName = "AttackPercent";

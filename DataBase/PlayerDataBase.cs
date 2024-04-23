@@ -6879,4 +6879,33 @@ public class PlayerDataBase : ScriptableObject
     {
         island4RareData = data;
     }
+
+    public float GetEquipValue(EquipType equipType)
+    {
+        float value = 0;
+
+        for (int i = 0; i < equip.equipInfos.Length; i++)
+        {
+            if (equip.equipInfos[i].option1 == (int)equipType)
+            {
+                value += equip.equipInfos[i].option1_Value;
+            }
+
+            if (equip.equipInfos[i].option2 == (int)equipType)
+            {
+                value += equip.equipInfos[i].option2_Value;
+            }
+
+            if (equip.equipInfos[i].option3 == (int)equipType)
+            {
+                value += equip.equipInfos[i].option3_Value;
+            }
+
+            if (equip.equipInfos[i].option4 == (int)equipType)
+            {
+                value += equip.equipInfos[i].option4_Value;
+            }
+        }
+        return value;
+    }
 }

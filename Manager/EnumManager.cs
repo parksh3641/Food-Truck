@@ -715,18 +715,18 @@ public enum BookType
 
 public enum EquipType
 {
-    Equip_Index_1,
-    Equip_Index_2,
-    Equip_Index_3,
-    Equip_Index_4,
-    Equip_Index_5,
-    Equip_Index_6,
-    Equip_Index_7,
-    Equip_Index_8,
-    Equip_Index_9,
-    Equip_Index_10,
-    Equip_Index_11,
-    Equip_Index_12,
+    Equip_Index_1, //강화 확률
+    Equip_Index_2, //판매 수익
+    Equip_Index_3, //2단 강화 확률
+    Equip_Index_4, //파괴 방어 확률
+    Equip_Index_5, //주방 청소 - 공격 속도
+    Equip_Index_6, //주방 청소 - 공격 X2
+    Equip_Index_7, //아이템 드랍율
+    Equip_Index_8, //소스 지속 시간
+    Equip_Index_9, //야미 타임 지속 시간
+    Equip_Index_10, //챌린지 보상
+    Equip_Index_11, //오프라인 보상
+    Equip_Index_12, //퀘스트 클리어 보상
 }
 
 public enum RankType

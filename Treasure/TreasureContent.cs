@@ -8,6 +8,8 @@ public class TreasureContent : MonoBehaviour
 {
     public TreasureType treasureType = TreasureType.Treasure1;
 
+    public GameObject effect;
+
     public Outline background;
     public Text titleText;
     public Image icon;
@@ -98,6 +100,7 @@ public class TreasureContent : MonoBehaviour
         }
 
         upgradeButton.SetActive(true);
+        effect.SetActive(false);
 
         switch (treasureType)
         {
@@ -125,10 +128,7 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = legendaryColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
+                effect.SetActive(true);
 
                 break;
             case TreasureType.Treasure2:
@@ -155,10 +155,7 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = epicColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
+                effect.SetActive(true);
 
                 break;
             case TreasureType.Treasure3:
@@ -185,10 +182,7 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = legendaryColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
+                effect.SetActive(true);
 
                 break;
             case TreasureType.Treasure4:
@@ -215,11 +209,6 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = Color.black;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
-
                 break;
             case TreasureType.Treasure5:
                 count = playerDataBase.Treasure5Count;
@@ -244,11 +233,6 @@ public class TreasureContent : MonoBehaviour
                 }
 
                 background.effectColor = Color.black;
-
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
 
                 break;
             case TreasureType.Treasure6:
@@ -275,11 +259,6 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = rareColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
-
                 break;
             case TreasureType.Treasure7:
                 count = playerDataBase.Treasure7Count;
@@ -305,10 +284,7 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = legendaryColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
+                effect.SetActive(true);
 
                 break;
             case TreasureType.Treasure8:
@@ -335,11 +311,6 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = rareColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
-
                 break;
             case TreasureType.Treasure9:
                 count = playerDataBase.Treasure9Count;
@@ -365,10 +336,6 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = rareColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
 
                 break;
             case TreasureType.Treasure10:
@@ -395,10 +362,6 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = rareColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
 
                 break;
             case TreasureType.Treasure11:
@@ -425,11 +388,6 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = Color.black;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
-
                 break;
             case TreasureType.Treasure12:
                 count = playerDataBase.Treasure12Count;
@@ -454,11 +412,6 @@ public class TreasureContent : MonoBehaviour
                 }
 
                 background.effectColor = Color.black;
-
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
 
                 break;
             case TreasureType.Treasure13:
@@ -485,10 +438,8 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = epicColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
+                effect.SetActive(true);
+
                 break;
             case TreasureType.Treasure14:
                 count = playerDataBase.Treasure14Count;
@@ -514,10 +465,8 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = epicColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
+                effect.SetActive(true);
+
                 break;
             case TreasureType.Treasure15:
                 count = playerDataBase.Treasure15Count;
@@ -543,11 +492,13 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = epicColor;
 
-                if (level > 99)
-                {
-                    upgradeButton.SetActive(false);
-                }
+                effect.SetActive(true);
                 break;
+        }
+
+        if (level > maxLevel)
+        {
+            upgradeButton.SetActive(false);
         }
 
         percent = 100 - ((level / 20) * 5);

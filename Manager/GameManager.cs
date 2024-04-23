@@ -245,6 +245,12 @@ public class GameManager : MonoBehaviour
     private float speicalFoodCount = 0;
     private float speicalFoodNeedCount = 1;
 
+    private float portion1TimePlus = 0;
+    private float portion2TimePlus = 0;
+    private float portion3TimePlus = 0;
+    private float portion5TimePlus = 0;
+    private float portion6TimePlus = 0;
+
     private float portion1Time = 0;
     private float portion2Time = 0;
     private float portion3Time = 0;
@@ -1797,6 +1803,7 @@ public class GameManager : MonoBehaviour
 
         itemDropPercent = butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber()) + (playerDataBase.Treasure15 * 1f);
         itemDropPercent += playerDataBase.GetButterfly_Total_AbilityLevel() * butterflyDataBase.retentionValue;
+        itemDropPercent += playerDataBase.GetEquipValue(EquipType.Equip_Index_7);
 
         recoverTicketPercent += recoverTicketPercent * (itemDropPercent * 0.01f);
         eventTicketPercent += eventTicketPercent * (itemDropPercent * 0.01f);
@@ -1815,11 +1822,13 @@ public class GameManager : MonoBehaviour
         }
         successPlus += playerDataBase.Treasure1 * 1f;
         successPlus += playerDataBase.Advancement * 0.5f;
+        successPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_1);
 
         successX2 += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         successX2 += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
         successX2 += playerDataBase.Treasure3 * 0.5f;
         successX2 += playerDataBase.GetEpicBookNumber() * 0.2f;
+        successX2 += playerDataBase.GetEquipValue(EquipType.Equip_Index_3);
 
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 1f;
@@ -1830,6 +1839,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.5f;
         sellPricePlus += playerDataBase.GetTruck_Total_AbilityLevel() * truckDataBase.retentionValue;
         sellPricePlus += playerDataBase.GetNormalBookNumber() * 0.2f;
+        sellPricePlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_2);
 
         if (IsWeekend())
         {
@@ -1871,6 +1881,7 @@ public class GameManager : MonoBehaviour
         defDestroy += playerDataBase.Skill19 * 0.25f;
         defDestroy += playerDataBase.Treasure2 * 0.5f;
         defDestroy += playerDataBase.Advancement * 0.25f;
+        defDestroy += playerDataBase.GetEquipValue(EquipType.Equip_Index_4);
 
         needPlus += playerDataBase.Skill10 * 0.3f;
 
@@ -1892,17 +1903,22 @@ public class GameManager : MonoBehaviour
         upgradeDessert = upgradeDataBase.GetUpgradeDessert(GameStateManager.instance.DessertType);
 
         feverTime = 20;
-        feverTime += (20 * (0.002f * playerDataBase.Skill1));
-        feverTime += (20 * (0.005f * playerDataBase.Treasure9));
+        feverTime += 20 * (0.002f * playerDataBase.Skill1);
+        feverTime += 20 * (0.005f * playerDataBase.Treasure9);
 
-        feverCountPlus += (feverCountPlus * (0.002f * playerDataBase.Skill2));
+        feverCountPlus += feverCountPlus * ((playerDataBase.Skill2 + playerDataBase.GetEquipValue(EquipType.Equip_Index_9)) * 0.01f);
         feverPlus = 15 + (15 * (0.002f * playerDataBase.Skill3));
 
-        portion1Time = 20 + (20 * (0.002f * playerDataBase.Skill4)) + (20 * (0.005f * playerDataBase.Treasure6));
-        portion2Time = 20 + (20 * (0.002f * playerDataBase.Skill5)) + (20 * (0.005f * playerDataBase.Treasure6));
-        portion3Time = 20 + (20 * (0.002f * playerDataBase.Skill6)) + (20 * (0.005f * playerDataBase.Treasure6));
+        portion1TimePlus = playerDataBase.Skill4 + playerDataBase.Treasure6 + playerDataBase.GetEquipValue(EquipType.Equip_Index_8);
+        portion2TimePlus = playerDataBase.Skill5 + playerDataBase.Treasure6 + playerDataBase.GetEquipValue(EquipType.Equip_Index_8);
+        portion3TimePlus = playerDataBase.Skill6 + playerDataBase.Treasure6 + playerDataBase.GetEquipValue(EquipType.Equip_Index_8);
+        portion5TimePlus = playerDataBase.Skill13 + playerDataBase.Treasure6 + playerDataBase.GetEquipValue(EquipType.Equip_Index_8);
+
+        portion1Time = 20 + (20 * portion1TimePlus * 0.01f);
+        portion2Time = 20 + (20 * portion2TimePlus * 0.01f);
+        portion3Time = 20 + (20 * portion3TimePlus * 0.01f);
         portion4Plus = 0.002f * playerDataBase.Skill12;
-        portion5Time = 20 + (20 * (0.002f * playerDataBase.Skill13)) + (20 * (0.005f * playerDataBase.Treasure6));
+        portion5Time = 20 + (20 * portion5TimePlus * 0.01f);
 
         if (playerDataBase.GoldX2)
         {
@@ -6715,11 +6731,13 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.Bankruptcy < 1)
         {
-            PlayfabManager.instance.UpdateAddGold(100000);
+            PlayfabManager.instance.UpdateSellPriceGold(100000);
+            PlayfabManager.instance.moneyAnimation.PlusMoney(100000);
         }
         else
         {
-            PlayfabManager.instance.UpdateAddGold(10000);
+            PlayfabManager.instance.UpdateSellPriceGold(10000);
+            PlayfabManager.instance.moneyAnimation.PlusMoney(10000);
         }
 
         FirebaseAnalytics.LogEvent("Clear_Bankruptcy : " + GameStateManager.instance.Bankruptcy);

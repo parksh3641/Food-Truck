@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Equip
 {
-    public EquipInfo[] equipInfos = new EquipInfo[6];
+    public EquipInfo[] equipInfos = new EquipInfo[10];
 }
 
 
@@ -86,6 +86,8 @@ public class EquipmentManager : MonoBehaviour
         }
         else
         {
+            GameManager.instance.CheckPercent();
+
             equipmentView.SetActive(false);
         }
     }

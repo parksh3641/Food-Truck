@@ -293,11 +293,8 @@ public class ShopManager : MonoBehaviour
             mainButterflyArray[number4].SetActive(true);
             mainTotemsArray[number5].SetActive(true);
 
-            GameStateManager.instance.IslandType = IslandType.Island1 + Random.Range(1, 4);
-            GameStateManager.instance.FoodType = FoodType.Food1 + Random.Range(0, 7);
-            GameStateManager.instance.CandyType = CandyType.Candy1 + Random.Range(0, 9);
-            GameStateManager.instance.JapaneseFoodType = JapaneseFoodType.JapaneseFood1 + Random.Range(0, 7);
-            GameStateManager.instance.DessertType = DessertType.Dessert1 + Random.Range(0, 9);
+            GameStateManager.instance.IslandType = IslandType.Island1 + Random.Range(1, System.Enum.GetValues(typeof(IslandType)).Length - 1);
+            GameStateManager.instance.FoodType = FoodType.Food1 + Random.Range(0, System.Enum.GetValues(typeof(FoodType)).Length - 1);
 
             GameStateManager.instance.FeverCount = 280;
 
@@ -738,30 +735,8 @@ public class ShopManager : MonoBehaviour
                 SoundManager.instance.PlaySFX(GameSfxType.Success);
                 NotionManager.instance.UseNotion(NotionType.SuccessReward);
 
-                if (playerDataBase.Dessert1MaxValue > 0)
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(3000000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(3000000);
-                    return;
-                }
-
-                if (playerDataBase.JapaneseFood1MaxValue > 0)
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(1000000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(1000000);
-                    return;
-                }
-
-                if (playerDataBase.Candy1MaxValue > 0)
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(500000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(500000);
-                    return;
-                }
-
-                PlayfabManager.instance.UpdateSellPriceGold(200000);
-                PlayfabManager.instance.moneyAnimation.PlusMoney(200000);
-
+                PlayfabManager.instance.UpdateSellPriceGold(StageManager.GetGold());
+                PlayfabManager.instance.moneyAnimation.PlusMoney(StageManager.GetGold());
                 break;
             case ItemType.AdReward_Gold:
                 GoogleAdsManager.instance.admobReward_Gold.ShowAd(0);
@@ -1386,29 +1361,8 @@ public class ShopManager : MonoBehaviour
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
 
-        if (playerDataBase.Dessert1MaxValue > 0)
-        {
-            PlayfabManager.instance.UpdateSellPriceGold(30000000);
-            PlayfabManager.instance.moneyAnimation.PlusMoney(30000000);
-            return;
-        }
-
-        if (playerDataBase.JapaneseFood1MaxValue > 0)
-        {
-            PlayfabManager.instance.UpdateSellPriceGold(10000000);
-            PlayfabManager.instance.moneyAnimation.PlusMoney(10000000);
-            return;
-        }
-
-        if (playerDataBase.Candy1MaxValue > 0)
-        {
-            PlayfabManager.instance.UpdateSellPriceGold(5000000);
-            PlayfabManager.instance.moneyAnimation.PlusMoney(5000000);
-            return;
-        }
-
-        PlayfabManager.instance.UpdateSellPriceGold(2000000);
-        PlayfabManager.instance.moneyAnimation.PlusMoney(2000000);
+        PlayfabManager.instance.UpdateSellPriceGold(StageManager.GetGold() * 10);
+        PlayfabManager.instance.moneyAnimation.PlusMoney(StageManager.GetGold() * 10);
     }
 
     public void SuccessWatchAd_Portion()

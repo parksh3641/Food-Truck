@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class BookContent : MonoBehaviour
 {
-    public BookType bookType;
+    public FoodType foodType;
 
     private int index = 0;
 
@@ -26,9 +26,9 @@ public class BookContent : MonoBehaviour
         lockedObj.SetActive(true);
     }
 
-    public void Initialize(BookType type, int number)
+    public void Initialize(FoodType type, int number)
     {
-        bookType = type;
+        foodType = type;
 
         index = number;
 

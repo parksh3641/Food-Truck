@@ -17,20 +17,13 @@ public class RecoverManager : MonoBehaviour
     public Text needText;
     public Text crystalText;
 
-    private int index = 0;
     private int need = 0;
 
     private int maxLevel = 0;
 
-    FoodType foodType;
-    CandyType candyType;
-    JapaneseFoodType japaneseFoodType;
-    DessertType dessertType;
+    RankFoodType rankFoodType;
 
-    Sprite[] foodChangeArray;
-    Sprite[] candyArray;
-    Sprite[] japaneseArray;
-    Sprite[] dessertArray;
+    Sprite[] rankFoodIconArray;
 
     PlayerDataBase playerDataBase;
     ImageDataBase imageDataBase;
@@ -42,10 +35,7 @@ public class RecoverManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
         if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
 
-        foodChangeArray = imageDataBase.GetFoodChangeArray();
-        candyArray = imageDataBase.GetCandyArray();
-        japaneseArray = imageDataBase.GetJapaneseFoodArray();
-        dessertArray = imageDataBase.GetDessertArray();
+        rankFoodIconArray = imageDataBase.GetRankFoodIconArray();
     }
 
     public void OpenRecoverView()
@@ -104,25 +94,7 @@ public class RecoverManager : MonoBehaviour
     {
         OpenRecoverView();
 
-        switch (index)
-        {
-            case 0:
-                GameManager.instance.RecoverFood(foodType);
-
-                break;
-            case 1:
-                GameManager.instance.RecoverCandy(candyType);
-
-                break;
-            case 2:
-                GameManager.instance.RecoverJapanese(japaneseFoodType);
-
-                break;
-            case 3:
-                GameManager.instance.RecoverDessert(dessertType);
-
-                break;
-        }
+        GameManager.instance.RecoverFood(rankFoodType);
 
         playerDataBase.RecoverCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RecoverCount", playerDataBase.RecoverCount);
@@ -133,79 +105,20 @@ public class RecoverManager : MonoBehaviour
         NotionManager.instance.UseNotion(NotionType.RecoverNotion);
     }
 
-    public void FoodInitialize(FoodType type, int level)
+    public void FoodInitialize(RankFoodType type, int level)
     {
         OpenRecoverView();
 
-        index = 0;
-
-        foodType = type;
+        rankFoodType = type;
 
         maxLevel = level;
 
         Initialize();
     }
-
-    public void CandyInitialize(CandyType type, int level)
-    {
-        OpenRecoverView();
-
-        index = 1;
-
-        candyType = type;
-
-        maxLevel = level;
-
-        Initialize();
-    }
-
-    public void JapaneseFoodInitialize(JapaneseFoodType type, int level)
-    {
-        OpenRecoverView();
-
-        index = 2;
-
-        japaneseFoodType = type;
-
-        maxLevel = level;
-
-        Initialize();
-    }
-
-    public void DessertInitialize(DessertType type, int level)
-    {
-        OpenRecoverView();
-
-        index = 3;
-
-        dessertType = type;
-
-        maxLevel = level;
-
-        Initialize();
-    }
-
     void Initialize()
     {
-        switch(index)
-        {
-            case 0:
-                beforeIcon.sprite = foodChangeArray[(int)foodType];
-                afterIcon.sprite = foodChangeArray[(int)foodType];
-                break;
-            case 1:
-                beforeIcon.sprite = candyArray[(int)candyType];
-                afterIcon.sprite = candyArray[(int)candyType];
-                break;
-            case 2:
-                beforeIcon.sprite = japaneseArray[(int)japaneseFoodType];
-                afterIcon.sprite = japaneseArray[(int)japaneseFoodType];
-                break;
-            case 3:
-                beforeIcon.sprite = dessertArray[(int)dessertType];
-                afterIcon.sprite = dessertArray[(int)dessertType];
-                break;
-        }
+        beforeIcon.sprite = rankFoodIconArray[(int)rankFoodType];
+        afterIcon.sprite = rankFoodIconArray[(int)rankFoodType];
 
         need = 5;
         need += ((maxLevel - 50) / 5);

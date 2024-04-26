@@ -8,11 +8,9 @@ using UnityEngine;
 public class IslandInfo
 {
     public IslandType islandType = IslandType.Island1;
-    public int price = 0;
-
-    [Space]
-    public PassiveEffect passiveEffect = PassiveEffect.SellPricePercentUp;
-    public float effectNumber = 0;
+    public float success = 100;
+    public float sellPrice = 0;
+    public float destroy = 0;
 }
 
 
@@ -37,7 +35,7 @@ public class IslandDataBase : ScriptableObject
         return island;
     }
 
-    public float GetIslandEffect(ButterflyType type)
+    public float GetSuccess(IslandType type)
     {
         float number = 0;
 
@@ -45,7 +43,39 @@ public class IslandDataBase : ScriptableObject
         {
             if (islandInfoList[i].islandType.Equals(type))
             {
-                number = islandInfoList[i].effectNumber;
+                number = islandInfoList[i].success;
+                break;
+            }
+        }
+
+        return number;
+    }
+
+    public float GetSellPrice(IslandType type)
+    {
+        float number = 0;
+
+        for (int i = 0; i < islandInfoList.Count; i++)
+        {
+            if (islandInfoList[i].islandType.Equals(type))
+            {
+                number = islandInfoList[i].sellPrice;
+                break;
+            }
+        }
+
+        return number;
+    }
+
+    public float GetDestroy(IslandType type)
+    {
+        float number = 0;
+
+        for (int i = 0; i < islandInfoList.Count; i++)
+        {
+            if (islandInfoList[i].islandType.Equals(type))
+            {
+                number = islandInfoList[i].destroy;
                 break;
             }
         }

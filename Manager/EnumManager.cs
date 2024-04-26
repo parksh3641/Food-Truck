@@ -272,47 +272,122 @@ public enum FoodType
     Food5,
     Food6,
     Food7,
-    Ribs
+    Food8,
+    Food9,
+
+    Food10,
+    Food11,
+    Food12,
+    Food13,
+    Food14,
+    Food15,
+    Food16,
+    Food17,
+    Food18,
+
+    Food19,
+    Food20,
+    Food21,
+    Food22,
+    Food23,
+    Food24,
+    Food25,
+    Food26,
+    Food27,
+
+    Food28,
+    Food29,
+    Food30,
+    Food31,
+    Food32,
+    Food33,
+    Food34,
+    Food35,
+    Food36,
+
+    Food37,
+    Food38,
+    Food39,
+    Food40,
+    Food41,
+    Food42,
+    Food43,
+    Food44,
+    Food45,
+
+    Food46,
+    Food47,
+    Food48,
+    Food49,
+    Food50,
+    Food51,
+    Food52,
+    Food53,
+    Food54,
+
+    Food55,
+    Food56,
+    Food57,
+    Food58,
+    Food59,
+    Food60,
+    Food61,
+    Food62,
+    Food63,
+
+    Food64,
+    Food65,
+    Food66,
+    Food67,
+    Food68,
+    Food69,
+    Food70,
+    Food71,
+    Food72,
+
+    Food73,
+    Food74,
+    Food75,
+    Food76,
+    Food77,
+    Food78,
+    Food79,
+    Food80,
+    Food81,
+
+    Food82,
+    Food83,
+    Food84,
+    Food85,
+    Food86,
+    Food87,
+    Food88,
+    Food89,
+    Food90,
+
+    Food91,
+    Food92,
+    Food93,
+    Food94,
+    Food95,
+    Food96,
+    Food97,
+    Food98,
+    Food99,
 }
 
-public enum CandyType
+public enum RankFoodType
 {
-    Candy1,
-    Candy2,
-    Candy3,
-    Candy4,
-    Candy5,
-    Candy6,
-    Candy7,
-    Candy8,
-    Candy9,
-    Chocolate
-}
-
-public enum JapaneseFoodType
-{
-    JapaneseFood1,
-    JapaneseFood2,
-    JapaneseFood3,
-    JapaneseFood4,
-    JapaneseFood5,
-    JapaneseFood6,
-    JapaneseFood7,
-    Ramen
-}
-
-public enum DessertType
-{
-    Dessert1,
-    Dessert2,
-    Dessert3,
-    Dessert4,
-    Dessert5,
-    Dessert6,
-    Dessert7,
-    Dessert8,
-    Dessert9,
-    FruitSkewers
+    RankFood1,
+    RankFood2,
+    RankFood3,
+    RankFood4,
+    RankFood5,
+    RankFood6,
+    RankFood7,
+    RankFood8,
+    RankFood9,
+    RankFood10,
 }
 
 public enum PassiveEffect
@@ -427,6 +502,12 @@ public enum IslandType
     Island2,
     Island3,
     Island4,
+    Island5,
+    Island6,
+    Island7,
+    Island8,
+    Island9,
+    Island10,
 }
 
 public enum TreasureType
@@ -675,42 +756,6 @@ public enum GifticonType
     Gifticon_2,
     Gifticon_3,
     Gifticon_4,
-}
-
-public enum BookType
-{
-    Food1,
-    Food2,
-    Food3,
-    Food4,
-    Food5,
-    Food6,
-    Food7,
-    Food8,
-    Food9,
-    Food10,
-    Food11,
-    Food12,
-    Food13,
-    Food14,
-    Food15,
-    Food16,
-    Food17,
-    Food18,
-    Food19,
-    Food20,
-    Food21,
-    Food22,
-    Food23,
-    Food24,
-    Food25,
-    Food26,
-    Food27,
-    Food28,
-    Food29,
-    Food30,
-    Food31,
-    Food32,
 }
 
 public enum EquipType

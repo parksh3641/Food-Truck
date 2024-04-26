@@ -62,9 +62,9 @@ public class GameStateManager : MonoBehaviour
         public GameType gameType = GameType.Story;
         public IslandType islandType = IslandType.Island1;
         public FoodType foodType = FoodType.Food1;
-        public CandyType candyType = CandyType.Candy1;
-        public JapaneseFoodType japaneseFoodType = JapaneseFoodType.JapaneseFood1;
-        public DessertType dessertType = DessertType.Dessert1;
+        public RankFoodType rankFoodType = RankFoodType.RankFood1;
+        public int[] foodLevel = new int[Enum.GetValues(typeof(FoodType)).Length];
+        public int[] rankFoodLevel = new int[Enum.GetValues(typeof(RankFoodType)).Length];
 
         public int level = 0;
 
@@ -74,54 +74,6 @@ public class GameStateManager : MonoBehaviour
         public bool firstFail;
         public bool firstDestory;
         public int destroyCount = 0;
-
-        [Space]
-        [Title("Level")]
-        public int food1Level = 0;
-        public int food2Level = 0;
-        public int food3Level = 0;
-        public int food4Level = 0;
-        public int food5Level = 0;
-        public int food6Level = 0;
-        public int food7Level = 0;
-
-        [Space]
-        public int candy1Level = 0;
-        public int candy2Level = 0;
-        public int candy3Level = 0;
-        public int candy4Level = 0;
-        public int candy5Level = 0;
-        public int candy6Level = 0;
-        public int candy7Level = 0;
-        public int candy8Level = 0;
-        public int candy9Level = 0;
-
-        [Space]
-        public int japaneseFood1Level = 0;
-        public int japaneseFood2Level = 0;
-        public int japaneseFood3Level = 0;
-        public int japaneseFood4Level = 0;
-        public int japaneseFood5Level = 0;
-        public int japaneseFood6Level = 0;
-        public int japaneseFood7Level = 0;
-
-        [Space]
-        public int dessert1Level = 0;
-        public int dessert2Level = 0;
-        public int dessert3Level = 0;
-        public int dessert4Level = 0;
-        public int dessert5Level = 0;
-        public int dessert6Level = 0;
-        public int dessert7Level = 0;
-        public int dessert8Level = 0;
-        public int dessert9Level = 0;
-
-        [Space]
-        [Title("Rank")]
-        public int food8Level = 0;
-        public int candy10Level = 0;
-        public int japaneseFood8Level = 0;
-        public int dessert10Level = 0;
 
         [Space]
         [Title("Save")]
@@ -311,41 +263,15 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public CandyType CandyType
+    public RankFoodType RankFoodType
     {
         get
         {
-            return gameSettings.candyType;
+            return gameSettings.rankFoodType;
         }
         set
         {
-            gameSettings.candyType = value;
-            SaveFile();
-        }
-    }
-
-    public JapaneseFoodType JapaneseFoodType
-    {
-        get
-        {
-            return gameSettings.japaneseFoodType;
-        }
-        set
-        {
-            gameSettings.japaneseFoodType = value;
-            SaveFile();
-        }
-    }
-
-    public DessertType DessertType
-    {
-        get
-        {
-            return gameSettings.dessertType;
-        }
-        set
-        {
-            gameSettings.dessertType = value;
+            gameSettings.rankFoodType = value;
             SaveFile();
         }
     }
@@ -674,471 +600,28 @@ public class GameStateManager : MonoBehaviour
             SaveFile();
         }
     }
-
-    public int Food1Level
+    public int[] FoodLevel
     {
         get
         {
-            return gameSettings.food1Level;
+            return gameSettings.foodLevel;
         }
         set
         {
-            gameSettings.food1Level = value;
+            gameSettings.foodLevel = value;
             SaveFile();
         }
     }
 
-    public int Food2Level
+    public int[] RankFoodLevel
     {
         get
         {
-            return gameSettings.food2Level;
+            return gameSettings.rankFoodLevel;
         }
         set
         {
-            gameSettings.food2Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Food3Level
-    {
-        get
-        {
-            return gameSettings.food3Level;
-        }
-        set
-        {
-            gameSettings.food3Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Food4Level
-    {
-        get
-        {
-            return gameSettings.food4Level;
-        }
-        set
-        {
-            gameSettings.food4Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Food5Level
-    {
-        get
-        {
-            return gameSettings.food5Level;
-        }
-        set
-        {
-            gameSettings.food5Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Food6Level
-    {
-        get
-        {
-            return gameSettings.food6Level;
-        }
-        set
-        {
-            gameSettings.food6Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Food7Level
-    {
-        get
-        {
-            return gameSettings.food7Level;
-        }
-        set
-        {
-            gameSettings.food7Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Food8Level
-    {
-        get
-        {
-            return gameSettings.food8Level;
-        }
-        set
-        {
-            gameSettings.food8Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy1Level
-    {
-        get
-        {
-            return gameSettings.candy1Level;
-        }
-        set
-        {
-            gameSettings.candy1Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy2Level
-    {
-        get
-        {
-            return gameSettings.candy2Level;
-        }
-        set
-        {
-            gameSettings.candy2Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy3Level
-    {
-        get
-        {
-            return gameSettings.candy3Level;
-        }
-        set
-        {
-            gameSettings.candy3Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy4Level
-    {
-        get
-        {
-            return gameSettings.candy4Level;
-        }
-        set
-        {
-            gameSettings.candy4Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy5Level
-    {
-        get
-        {
-            return gameSettings.candy5Level;
-        }
-        set
-        {
-            gameSettings.candy5Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy6Level
-    {
-        get
-        {
-            return gameSettings.candy6Level;
-        }
-        set
-        {
-            gameSettings.candy6Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy7Level
-    {
-        get
-        {
-            return gameSettings.candy7Level;
-        }
-        set
-        {
-            gameSettings.candy7Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy8Level
-    {
-        get
-        {
-            return gameSettings.candy8Level;
-        }
-        set
-        {
-            gameSettings.candy8Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy9Level
-    {
-        get
-        {
-            return gameSettings.candy9Level;
-        }
-        set
-        {
-            gameSettings.candy9Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Candy10Level
-    {
-        get
-        {
-            return gameSettings.candy10Level;
-        }
-        set
-        {
-            gameSettings.candy10Level = value;
-            SaveFile();
-        }
-    }
-
-    public int JapaneseFood1Level
-    {
-        get
-        {
-            return gameSettings.japaneseFood1Level;
-        }
-        set
-        {
-            gameSettings.japaneseFood1Level = value;
-            SaveFile();
-        }
-    }
-
-    public int JapaneseFood2Level
-    {
-        get
-        {
-            return gameSettings.japaneseFood2Level;
-        }
-        set
-        {
-            gameSettings.japaneseFood2Level = value;
-            SaveFile();
-        }
-    }
-
-    public int JapaneseFood3Level
-    {
-        get
-        {
-            return gameSettings.japaneseFood3Level;
-        }
-        set
-        {
-            gameSettings.japaneseFood3Level = value;
-            SaveFile();
-        }
-    }
-
-    public int JapaneseFood4Level
-    {
-        get
-        {
-            return gameSettings.japaneseFood4Level;
-        }
-        set
-        {
-            gameSettings.japaneseFood4Level = value;
-            SaveFile();
-        }
-    }
-
-    public int JapaneseFood5Level
-    {
-        get
-        {
-            return gameSettings.japaneseFood5Level;
-        }
-        set
-        {
-            gameSettings.japaneseFood5Level = value;
-            SaveFile();
-        }
-    }
-
-    public int JapaneseFood6Level
-    {
-        get
-        {
-            return gameSettings.japaneseFood6Level;
-        }
-        set
-        {
-            gameSettings.japaneseFood6Level = value;
-            SaveFile();
-        }
-    }
-
-    public int JapaneseFood7Level
-    {
-        get
-        {
-            return gameSettings.japaneseFood7Level;
-        }
-        set
-        {
-            gameSettings.japaneseFood7Level = value;
-            SaveFile();
-        }
-    }
-
-    public int JapaneseFood8Level
-    {
-        get
-        {
-            return gameSettings.japaneseFood8Level;
-        }
-        set
-        {
-            gameSettings.japaneseFood8Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert1Level
-    {
-        get
-        {
-            return gameSettings.dessert1Level;
-        }
-        set
-        {
-            gameSettings.dessert1Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert2Level
-    {
-        get
-        {
-            return gameSettings.dessert2Level;
-        }
-        set
-        {
-            gameSettings.dessert2Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert3Level
-    {
-        get
-        {
-            return gameSettings.dessert3Level;
-        }
-        set
-        {
-            gameSettings.dessert3Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert4Level
-    {
-        get
-        {
-            return gameSettings.dessert4Level;
-        }
-        set
-        {
-            gameSettings.dessert4Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert5Level
-    {
-        get
-        {
-            return gameSettings.dessert5Level;
-        }
-        set
-        {
-            gameSettings.dessert5Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert6Level
-    {
-        get
-        {
-            return gameSettings.dessert6Level;
-        }
-        set
-        {
-            gameSettings.dessert6Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert7Level
-    {
-        get
-        {
-            return gameSettings.dessert7Level;
-        }
-        set
-        {
-            gameSettings.dessert7Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert8Level
-    {
-        get
-        {
-            return gameSettings.dessert8Level;
-        }
-        set
-        {
-            gameSettings.dessert8Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert9Level
-    {
-        get
-        {
-            return gameSettings.dessert9Level;
-        }
-        set
-        {
-            gameSettings.dessert9Level = value;
-            SaveFile();
-        }
-    }
-
-    public int Dessert10Level
-    {
-        get
-        {
-            return gameSettings.dessert10Level;
-        }
-        set
-        {
-            gameSettings.dessert10Level = value;
+            gameSettings.rankFoodLevel = value;
             SaveFile();
         }
     }
@@ -1456,6 +939,40 @@ public class GameStateManager : MonoBehaviour
             if (!string.IsNullOrEmpty(stjs))
             {
                 gameSettings = JsonUtility.FromJson<GameSettings>(stjs);
+
+                if(FoodLevel.Length < Enum.GetValues(typeof(FoodType)).Length) //새로운 음식이 추가됬을 경우
+                {
+                    int[] foodArray = new int[Enum.GetValues(typeof(FoodType)).Length];
+
+                    for(int i = 0; i < FoodLevel.Length; i ++)
+                    {
+                        foodArray[i] = FoodLevel[i];
+                    }
+
+                    FoodLevel = new int[Enum.GetValues(typeof(FoodType)).Length];
+
+                    for (int i = 0; i < foodArray.Length; i++)
+                    {
+                        FoodLevel[i] = foodArray[i];
+                    }
+                }
+
+                if (RankFoodLevel.Length < Enum.GetValues(typeof(RankFoodType)).Length) //새로운 음식이 추가됬을 경우
+                {
+                    int[] foodArray = new int[Enum.GetValues(typeof(RankFoodType)).Length];
+
+                    for (int i = 0; i < RankFoodLevel.Length; i++)
+                    {
+                        foodArray[i] = RankFoodLevel[i];
+                    }
+
+                    RankFoodLevel = new int[Enum.GetValues(typeof(RankFoodType)).Length];
+
+                    for (int i = 0; i < foodArray.Length; i++)
+                    {
+                        RankFoodLevel[i] = foodArray[i];
+                    }
+                }
             }
             else
             {

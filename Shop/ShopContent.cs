@@ -117,40 +117,10 @@ public class ShopContent : MonoBehaviour
         switch (itemType)
         {
             case ItemType.DailyReward:
-                if (playerDataBase.Dessert1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(3000000) + "</size>";
-                }
-                else if (playerDataBase.JapaneseFood1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(1000000) + "</size>";
-                }
-                else if (playerDataBase.JapaneseFood1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(500000) + "</size>";
-                }
-                else
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(200000) + "</size>";
-                }
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(StageManager.GetGold()) + "</size>";
                 break;
             case ItemType.AdReward_Gold:
-                if(playerDataBase.Dessert1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(30000000) + "</size>";
-                }
-                else if (playerDataBase.JapaneseFood1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
-                }
-                else if (playerDataBase.Candy1MaxValue > 0)
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
-                }
-                else
-                {
-                    rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(2000000) + "</size>";
-                }
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(StageManager.GetGold() * 10) + "</size>";
                 break;
             case ItemType.DefDestroyTicket:
                 lockedObj.SetActive(false);

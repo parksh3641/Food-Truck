@@ -5,15 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ImageDataBase", menuName = "ScriptableObjects/ImageDataBase")]
 public class ImageDataBase : ScriptableObject
 {
-    public Sprite[] foodChangeArray;
-    public Sprite[] candyArray;
-    public Sprite[] japaneseArray;
-    public Sprite[] dessertArray;
-
-    [Space]
-    [Space]
-
     public Sprite[] foodIconArray;
+
+    public Sprite[] rankFoodIconArray;
 
     public Sprite[] itemArray;
 
@@ -37,29 +31,24 @@ public class ImageDataBase : ScriptableObject
 
     public Sprite[] equipArray;
 
-    public Sprite GetFoodIconArray(BookType type)
+    public Sprite GetFoodIconArray(FoodType type)
     {
         return foodIconArray[(int)type];
     }
 
-    public Sprite[] GetFoodChangeArray()
+    public Sprite[] GetFoodIconArray()
     {
-        return foodChangeArray;
+        return foodIconArray;
     }
 
-    public Sprite[] GetCandyArray()
+    public Sprite GetRankFoodIconArray(RankFoodType type)
     {
-        return candyArray;
+        return rankFoodIconArray[(int)type];
     }
 
-    public Sprite[] GetJapaneseFoodArray()
+    public Sprite[] GetRankFoodIconArray()
     {
-        return japaneseArray;
-    }
-
-    public Sprite[] GetDessertArray()
-    {
-        return dessertArray;
+        return rankFoodIconArray;
     }
 
     public Sprite[] GetItemArray()
@@ -112,7 +101,7 @@ public class ImageDataBase : ScriptableObject
         return gifticonArray[(int)type];
     }
 
-    public Sprite GetFoodIconType(BookType type)
+    public Sprite GetFoodIconType(FoodType type)
     {
         return foodIconArray[(int)type];
     }

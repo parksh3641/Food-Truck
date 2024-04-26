@@ -333,10 +333,10 @@ public class SeasonManager : MonoBehaviour
 
         yield return waitForSeconds;
 
-        GameStateManager.instance.Food8Level = 0;
-        GameStateManager.instance.Candy10Level = 0;
-        GameStateManager.instance.JapaneseFood8Level = 0;
-        GameStateManager.instance.Dessert10Level = 0;
+        for (int i = 0; i < GameStateManager.instance.RankFoodLevel.Length; i++)
+        {
+            GameStateManager.instance.RankFoodLevel[i] = 0;
+        }
 
         playerDataBase.RankLevel1 = 0;
         playerDataBase.RankLevel2 = 0;

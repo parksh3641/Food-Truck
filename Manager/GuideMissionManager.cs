@@ -89,11 +89,11 @@ public class GuideMissionManager : MonoBehaviour
         switch (playerDataBase.GuideIndex)
         {
             case 0:
-                now = playerDataBase.Food1MaxValue;
+                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index1;
                 need = 1;
                 break;
             case 1:
-                now = playerDataBase.Food2MaxValue;
+                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index2;
                 need = 1;
                 break;
             case 2:
@@ -121,7 +121,7 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 5:
-                now = playerDataBase.Food3MaxValue;
+                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index3;
                 need = 1;
                 break;
             case 6:
@@ -143,7 +143,7 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 9:
-                now = playerDataBase.Food4MaxValue;
+                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index4;
                 need = 1;
                 break;
             case 10:
@@ -160,7 +160,7 @@ public class GuideMissionManager : MonoBehaviour
                 }
                 break;
             case 12:
-                now = playerDataBase.Food5MaxValue;
+                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index5;
                 need = 1;
                 break;
             case 13:
@@ -176,7 +176,7 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 16:
-                now = playerDataBase.Food6MaxValue;
+                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index6;
                 need = 1;
                 break;
             case 17:
@@ -198,11 +198,11 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 20:
-                now = playerDataBase.Food7MaxValue;
+                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index7;
                 need = 1;
                 break;
             case 21:
-                now = playerDataBase.Candy1MaxValue;
+                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index8;
                 need = 1;
                 break;
             case 22:

@@ -45,7 +45,7 @@ public class BookManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
         if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
 
-        for (int i = 0; i < System.Enum.GetValues(typeof(BookType)).Length; i++)
+        for (int i = 0; i < System.Enum.GetValues(typeof(FoodType)).Length; i++)
         {
             BookContent monster = Instantiate(bookPrefab);
             monster.transform.SetParent(bookContentTransform[0]);
@@ -58,7 +58,7 @@ public class BookManager : MonoBehaviour
             bookNormalContentList.Add(monster);
         }
 
-        for (int i = 0; i < System.Enum.GetValues(typeof(BookType)).Length; i++)
+        for (int i = 0; i < System.Enum.GetValues(typeof(FoodType)).Length; i++)
         {
             BookContent monster = Instantiate(bookPrefab);
             monster.transform.SetParent(bookContentTransform[1]);
@@ -119,11 +119,11 @@ public class BookManager : MonoBehaviour
         {
             for(int i = 0; i < bookNormalContentList.Count; i ++)
             {
-                bookNormalContentList[i].Initialize(BookType.Food1 + i, 0);
+                bookNormalContentList[i].Initialize(FoodType.Food1 + i, 0);
             }
 
-            titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetNormalBookNumber() + " / " + System.Enum.GetValues(typeof(BookType)).Length + " )"
-    + "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetNormalBookNumber() * 1.0f) / System.Enum.GetValues(typeof(BookType)).Length) * 100f).ToString("N1") + "%</size>";
+            titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetNormalBookNumber() + " / " + System.Enum.GetValues(typeof(FoodType)).Length + " )"
+    + "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetNormalBookNumber() * 1.0f) / System.Enum.GetValues(typeof(FoodType)).Length) * 100f).ToString("N1") + "%</size>";
 
             plusText.text = LocalizationManager.instance.GetString("NowPrice") + " +" + (playerDataBase.GetNormalBookNumber() * reward).ToString() + "%  (+" + reward + "%)";
 
@@ -133,11 +133,11 @@ public class BookManager : MonoBehaviour
         {
             for (int i = 0; i < bookEpicContentList.Count; i++)
             {
-                bookEpicContentList[i].Initialize(BookType.Food1 + i, 1);
+                bookEpicContentList[i].Initialize(FoodType.Food1 + i, 1);
             }
 
-            titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetEpicBookNumber() + " / " + System.Enum.GetValues(typeof(BookType)).Length + " )"
-+ "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetEpicBookNumber() * 1.0f) / System.Enum.GetValues(typeof(BookType)).Length) * 100f).ToString("N1") + "%</size>";
+            titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetEpicBookNumber() + " / " + System.Enum.GetValues(typeof(FoodType)).Length + " )"
++ "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetEpicBookNumber() * 1.0f) / System.Enum.GetValues(typeof(FoodType)).Length) * 100f).ToString("N1") + "%</size>";
 
             plusText.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " +" + (playerDataBase.GetEpicBookNumber() * reward2).ToString() + "%  (+" + reward2 + "%)";
 
@@ -148,195 +148,15 @@ public class BookManager : MonoBehaviour
     void CheckNormalInitialize()
     {
         number = 0;
-        if(playerDataBase.Food1MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
 
-        number++;
-        if (playerDataBase.Food2MaxValue > 0)
+        for (int i = 0; i < System.Enum.GetValues(typeof(IslandType)).Length; i++)
         {
-            NormalUnLocked(number);
-        }
+            if (playerDataBase.island_Total_Data.island_Max_Datas[i].GetValue(FoodType.Food1 + i) > 0)
+            {
+                NormalUnLocked(number);
+            }
 
-        number++;
-        if (playerDataBase.Food3MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Food4MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Food5MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Food6MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Food7MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Candy1MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Candy2MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Candy3MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Candy4MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Candy5MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Candy6MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Candy7MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Candy8MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Candy9MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.JapaneseFood1MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.JapaneseFood2MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.JapaneseFood3MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.JapaneseFood4MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.JapaneseFood5MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.JapaneseFood6MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.JapaneseFood7MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Dessert1MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Dessert2MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Dessert3MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Dessert4MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Dessert5MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Dessert6MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Dessert7MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Dessert8MaxValue > 0)
-        {
-            NormalUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.Dessert9MaxValue > 0)
-        {
-            NormalUnLocked(number);
+            number++;
         }
     }
 
@@ -348,195 +168,15 @@ public class BookManager : MonoBehaviour
     void CheckEpicInitialize()
     {
         number = 0;
-        if (playerDataBase.island1RareData.index1 > 0)
-        {
-            EpicUnLocked(number);
-        }
 
-        number++;
-        if (playerDataBase.island1RareData.index2 > 0)
+        for (int i = 0; i < System.Enum.GetValues(typeof(IslandType)).Length; i ++)
         {
-            EpicUnLocked(number);
-        }
+            if (playerDataBase.island_Total_Data.island_Rare_Datas[i].GetValue(FoodType.Food1 + i) > 0)
+            {
+                EpicUnLocked(number);
+            }
 
-        number++;
-        if (playerDataBase.island1RareData.index3 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island1RareData.index4 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island1RareData.index5 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island1RareData.index6 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island1RareData.index7 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island2RareData.index1 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island2RareData.index2 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island2RareData.index3 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island2RareData.index4 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island2RareData.index5 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island2RareData.index6 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island2RareData.index7 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island2RareData.index8 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island2RareData.index9 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island3RareData.index1 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island3RareData.index2 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island3RareData.index3 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island3RareData.index4 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island3RareData.index5 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island3RareData.index6 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island3RareData.index7 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island4RareData.index1 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island4RareData.index2 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island4RareData.index3 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island4RareData.index4 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island4RareData.index5 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island4RareData.index6 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island4RareData.index7 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island4RareData.index8 > 0)
-        {
-            EpicUnLocked(number);
-        }
-
-        number++;
-        if (playerDataBase.island4RareData.index9 > 0)
-        {
-            EpicUnLocked(number);
+            number++;
         }
     }
 

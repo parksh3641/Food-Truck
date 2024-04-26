@@ -4,19 +4,58 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Island1RareData
+public class Island_Total_Data
 {
-    public int index1 = 0;
-    public int index2 = 0;
-    public int index3 = 0;
-    public int index4 = 0;
-    public int index5 = 0;
-    public int index6 = 0;
-    public int index7 = 0;
+    [Header("¸¸·¾ È½¼ö")]
+    public Island_Max_Data[] island_Max_Datas;
+
+    [Header("·¹¾î È½¼ö")]
+    public Island_Rare_Data[] island_Rare_Datas;
+
+    public void Initialize()
+    {
+        island_Max_Datas = new Island_Max_Data[System.Enum.GetValues(typeof(IslandType)).Length];
+        island_Rare_Datas = new Island_Rare_Data[System.Enum.GetValues(typeof(IslandType)).Length];
+    }
+
+    public int GetMaxValue(IslandType islandType, FoodType foodType)
+    {
+        return island_Max_Datas[(int)islandType].GetValue(foodType);
+    }
+
+    public int GetRareValue(IslandType islandType, FoodType foodType)
+    {
+        return island_Rare_Datas[(int)islandType].GetValue(foodType);
+    }
+
+    public int GetMaxTotalValue()
+    {
+        int number = 0;
+
+        for (int i = 0; i < island_Max_Datas.Length; i++)
+        {
+            number += island_Max_Datas[i].GetMaxValue();
+        }
+
+        return number;
+    }
+
+    public int GetRareTotalValue()
+    {
+        int number = 0;
+
+        for(int i = 0; i < island_Rare_Datas.Length; i ++)
+        {
+            number += island_Rare_Datas[i].GetMaxValue();
+        }
+
+        return number;
+    }
 }
 
+
 [System.Serializable]
-public class Island2RareData
+public class Island_Max_Data
 {
     public int index1 = 0;
     public int index2 = 0;
@@ -27,22 +66,139 @@ public class Island2RareData
     public int index7 = 0;
     public int index8 = 0;
     public int index9 = 0;
+
+    public void SetValue(FoodType type, int number)
+    {
+        switch ((int)type)
+        {
+            case 0:
+                index1 += number;
+                break;
+            case 1:
+                index2 += number;
+                break;
+            case 2:
+                index3 += number;
+                break;
+            case 3:
+                index4 += number;
+                break;
+            case 4:
+                index5 += number;
+                break;
+            case 5:
+                index6 += number;
+                break;
+            case 6:
+                index7 += number;
+                break;
+            case 7:
+                index8 += number;
+                break;
+            case 8:
+                index9 += number;
+                break;
+        }
+    }
+
+    public int GetValue(FoodType type)
+    {
+        int number = 0;
+
+        switch((int)type % 9)
+        {
+            case 0:
+                number = index1;
+                break;
+            case 1:
+                number = index2;
+                break;
+            case 2:
+                number = index3;
+                break;
+            case 3:
+                number = index4;
+                break;
+            case 4:
+                number = index5;
+                break;
+            case 5:
+                number = index6;
+                break;
+            case 6:
+                number = index7;
+                break;
+            case 7:
+                number = index8;
+                break;
+            case 8:
+                number = index9;
+                break;
+        }
+
+        return number;
+    }
+
+    public int GetMaxValue()
+    {
+        return index1 + index2 + index3 + index4 + index5 + index6 + index7 + index8 + index9;
+    }
+
+    public int GetBookValue()
+    {
+        int number = 0;
+
+        if (index1 > 0)
+        {
+            number++;
+        }
+
+        if (index2 > 0)
+        {
+            number++;
+        }
+
+        if (index3 > 0)
+        {
+            number++;
+        }
+
+        if (index4 > 0)
+        {
+            number++;
+        }
+
+        if (index5 > 0)
+        {
+            number++;
+        }
+
+        if (index6 > 0)
+        {
+            number++;
+        }
+
+        if (index7 > 0)
+        {
+            number++;
+        }
+
+        if (index8 > 0)
+        {
+            number++;
+        }
+
+        if (index9 > 0)
+        {
+            number++;
+        }
+
+        return number;
+    }
 }
 
 [System.Serializable]
-public class Island3RareData
-{
-    public int index1 = 0;
-    public int index2 = 0;
-    public int index3 = 0;
-    public int index4 = 0;
-    public int index5 = 0;
-    public int index6 = 0;
-    public int index7 = 0;
-}
-
-[System.Serializable]
-public class Island4RareData
+public class Island_Rare_Data
 {
     public int index1 = 0;
     public int index2 = 0;
@@ -53,6 +209,136 @@ public class Island4RareData
     public int index7 = 0;
     public int index8 = 0;
     public int index9 = 0;
+
+    public void SetValue(FoodType type, int number)
+    {
+        switch ((int)type)
+        {
+            case 0:
+                index1 += number;
+                break;
+            case 1:
+                index2 += number;
+                break;
+            case 2:
+                index3 += number;
+                break;
+            case 3:
+                index4 += number;
+                break;
+            case 4:
+                index5 += number;
+                break;
+            case 5:
+                index6 += number;
+                break;
+            case 6:
+                index7 += number;
+                break;
+            case 7:
+                index8 += number;
+                break;
+            case 8:
+                index9 += number;
+                break;
+        }
+    }
+
+    public int GetValue(FoodType type)
+    {
+        int number = 0;
+
+        switch ((int)type % 9)
+        {
+            case 0:
+                number = index1;
+                break;
+            case 1:
+                number = index2;
+                break;
+            case 2:
+                number = index3;
+                break;
+            case 3:
+                number = index4;
+                break;
+            case 4:
+                number = index5;
+                break;
+            case 5:
+                number = index6;
+                break;
+            case 6:
+                number = index7;
+                break;
+            case 7:
+                number = index8;
+                break;
+            case 8:
+                number = index9;
+                break;
+
+        }
+
+        return number;
+    }
+
+    public int GetMaxValue()
+    {
+        return index1 + index2 + index3 + index4 + index5 + index6 + index7 + index8 + index9;
+    }
+
+    public int GetBookValue()
+    {
+        int number = 0;
+
+        if(index1 > 0)
+        {
+            number++;
+        }
+
+        if (index2 > 0)
+        {
+            number++;
+        }
+
+        if (index3 > 0)
+        {
+            number++;
+        }
+
+        if (index4 > 0)
+        {
+            number++;
+        }
+
+        if (index5 > 0)
+        {
+            number++;
+        }
+
+        if (index6 > 0)
+        {
+            number++;
+        }
+
+        if (index7 > 0)
+        {
+            number++;
+        }
+
+        if (index8 > 0)
+        {
+            number++;
+        }
+
+        if (index9 > 0)
+        {
+            number++;
+        }
+
+        return number;
+    }
 }
 
 public class IslandManager : MonoBehaviour
@@ -142,24 +428,15 @@ public class IslandManager : MonoBehaviour
         changeIslandContentList[(int)GameStateManager.instance.IslandType].Selected();
 
         changeIslandContentList[0].UnLock();
-        changeIslandContentList[0].SetLevel(playerDataBase.NextFoodNumber / 6);
+        changeIslandContentList[0].SetLevel(playerDataBase.NextFoodNumber / 9);
 
-        if (playerDataBase.IslandNumber >= 1)
+        for(int i = 1; i < changeIslandContentList.Count; i ++)
         {
-            changeIslandContentList[1].UnLock();
-            changeIslandContentList[1].SetLevel(playerDataBase.NextFoodNumber2 / 8);
-        }
-
-        if (playerDataBase.IslandNumber >= 2)
-        {
-            changeIslandContentList[2].UnLock();
-            changeIslandContentList[2].SetLevel(playerDataBase.NextFoodNumber3 / 6);
-        }
-
-        if (playerDataBase.IslandNumber >= 3)
-        {
-            changeIslandContentList[3].UnLock();
-            changeIslandContentList[3].SetLevel(playerDataBase.NextFoodNumber4 / 8);
+            if(playerDataBase.IslandNumber >= i)
+            {
+                changeIslandContentList[i].UnLock();
+                changeIslandContentList[i].SetLevel((playerDataBase.NextFoodNumber + 9) / (9 * (i + 1)));
+            }
         }
     }
 

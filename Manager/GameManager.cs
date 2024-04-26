@@ -119,54 +119,11 @@ public class GameManager : MonoBehaviour
 
     [Space]
     [Title("Food")]
-    public FoodContent[] hamburgerArray;
-    public FoodContent[] sandwichArray;
-    public FoodContent[] snackLabArray;
-    public FoodContent[] drinkArray;
-    public FoodContent[] pizzaArray;
-    public FoodContent[] donutArray;
-    public FoodContent[] friesArray;
-    public FoodContent[] ribsArray;
+    public FoodContent[] foodArray;
+    public FoodContent[] rankFoodArray;
 
     [Space]
-    [Title("Candy")]
-    public FoodContent[] candy1Array;
-    public FoodContent[] candy2Array;
-    public FoodContent[] candy3Array;
-    public FoodContent[] candy4Array;
-    public FoodContent[] candy5Array;
-    public FoodContent[] candy6Array;
-    public FoodContent[] candy7Array;
-    public FoodContent[] candy8Array;
-    public FoodContent[] candy9Array;
-    public FoodContent[] candy10Array;
-
-    [Space]
-    [Title("Japanese Food")]
-    public FoodContent[] japaneseFood1Array;
-    public FoodContent[] japaneseFood2Array;
-    public FoodContent[] japaneseFood3Array;
-    public FoodContent[] japaneseFood4Array;
-    public FoodContent[] japaneseFood5Array;
-    public FoodContent[] japaneseFood6Array;
-    public FoodContent[] japaneseFood7Array;
-    public FoodContent[] japaneseFood8Array;
-
-    [Space]
-    [Title("Dessert")]
-    public FoodContent[] dessert1Array;
-    public FoodContent[] dessert2Array;
-    public FoodContent[] dessert3Array;
-    public FoodContent[] dessert4Array;
-    public FoodContent[] dessert5Array;
-    public FoodContent[] dessert6Array;
-    public FoodContent[] dessert7Array;
-    public FoodContent[] dessert8Array;
-    public FoodContent[] dessert9Array;
-    public FoodContent[] dessert10Array;
-
-    [Space]
-    public List<FoodContent> foodArrayList = new List<FoodContent>();
+    private List<FoodContent> foodArrayList = new List<FoodContent>();
 
     [Space]
     [Title("Animal")]
@@ -270,7 +227,6 @@ public class GameManager : MonoBehaviour
     public ButtonScaleAnimation[] portionScaleAnim;
 
     private int level = 0;
-    private int nextLevel = 0;
     private int maxLevel = 0;
     private int recoverLevel = 0;
     private int playTime = 0;
@@ -332,9 +288,6 @@ public class GameManager : MonoBehaviour
     public GameObject checkInternet;
 
     UpgradeFood upgradeFood;
-    UpgradeCandy upgradeCandy;
-    UpgradeJapaneseFood upgradeJapaneseFood;
-    UpgradeDessert upgradeDessert;
 
     Sprite[] islandArray;
 
@@ -362,6 +315,8 @@ public class GameManager : MonoBehaviour
     public BuffManager buffManager;
 
     UpgradeDataBase upgradeDataBase;
+    IslandDataBase islandDataBase;
+
     PlayerDataBase playerDataBase;
     CharacterDataBase characterDataBase;
     TruckDataBase truckDataBase;
@@ -370,7 +325,6 @@ public class GameManager : MonoBehaviour
     TotemsDataBase totemsDataBase;
     FlowerDataBase flowerDataBase;
 
-    IslandDataBase islandDataBase;
     ImageDataBase imageDataBase;
     LevelDataBase levelDataBase;
 
@@ -388,11 +342,6 @@ public class GameManager : MonoBehaviour
     DateTime currentDate = DateTime.Now;
     DateTime decemberStart;
     DateTime decemberEnd;
-
-    Island1RareData island1RareData = new Island1RareData();
-    Island2RareData island2RareData = new Island2RareData();
-    Island3RareData island3RareData = new Island3RareData();
-    Island4RareData island4RareData = new Island4RareData();
 
     private Dictionary<string, string> playerData = new Dictionary<string, string>();
 
@@ -655,7 +604,12 @@ public class GameManager : MonoBehaviour
 
         CheckPurchase();
 
-        SetFoodContent();
+        foodArrayList.Clear();
+
+        for (int i = 0; i < foodArray.Length; i++)
+        {
+            foodArrayList.Add(foodArray[i]);
+        }
 
         buff1Text.text = "+" + buff1Value.ToString() + "%";
         buff2Text.text = "+" + buff2Value.ToString() + "%";
@@ -744,7 +698,7 @@ public class GameManager : MonoBehaviour
         testModeButton.SetActive(true);
 #endif
 
-        changeFoodManager.CheckProficiency();
+        //changeFoodManager.CheckProficiency();
         questManager.CheckingAlarm();
 
         playTime = 0;
@@ -837,509 +791,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SetFoodContent()
-    {
-        for (int i = 0; i < hamburgerArray.Length; i++)
-        {
-            foodArrayList.Add(hamburgerArray[i]);
-        }
-        for (int i = 0; i < sandwichArray.Length; i++)
-        {
-            foodArrayList.Add(sandwichArray[i]);
-        }
-        for (int i = 0; i < snackLabArray.Length; i++)
-        {
-            foodArrayList.Add(snackLabArray[i]);
-        }
-        for (int i = 0; i < drinkArray.Length; i++)
-        {
-            foodArrayList.Add(drinkArray[i]);
-        }
-        for (int i = 0; i < pizzaArray.Length; i++)
-        {
-            foodArrayList.Add(pizzaArray[i]);
-        }
-        for (int i = 0; i < donutArray.Length; i++)
-        {
-            foodArrayList.Add(donutArray[i]);
-        }
-        for (int i = 0; i < friesArray.Length; i++)
-        {
-            foodArrayList.Add(friesArray[i]);
-        }
-        for (int i = 0; i < ribsArray.Length; i++)
-        {
-            foodArrayList.Add(ribsArray[i]);
-        }
-
-        for (int i = 0; i < candy1Array.Length; i++)
-        {
-            foodArrayList.Add(candy1Array[i]);
-        }
-        for (int i = 0; i < candy2Array.Length; i++)
-        {
-            foodArrayList.Add(candy2Array[i]);
-        }
-        for (int i = 0; i < candy3Array.Length; i++)
-        {
-            foodArrayList.Add(candy3Array[i]);
-        }
-        for (int i = 0; i < candy4Array.Length; i++)
-        {
-            foodArrayList.Add(candy4Array[i]);
-        }
-        for (int i = 0; i < candy5Array.Length; i++)
-        {
-            foodArrayList.Add(candy5Array[i]);
-        }
-        for (int i = 0; i < candy6Array.Length; i++)
-        {
-            foodArrayList.Add(candy6Array[i]);
-        }
-        for (int i = 0; i < candy7Array.Length; i++)
-        {
-            foodArrayList.Add(candy7Array[i]);
-        }
-        for (int i = 0; i < candy8Array.Length; i++)
-        {
-            foodArrayList.Add(candy8Array[i]);
-        }
-        for (int i = 0; i < candy9Array.Length; i++)
-        {
-            foodArrayList.Add(candy9Array[i]);
-        }
-        for (int i = 0; i < candy10Array.Length; i++)
-        {
-            foodArrayList.Add(candy10Array[i]);
-        }
-
-        for (int i = 0; i < japaneseFood1Array.Length; i++)
-        {
-            foodArrayList.Add(japaneseFood1Array[i]);
-        }
-        for (int i = 0; i < japaneseFood2Array.Length; i++)
-        {
-            foodArrayList.Add(japaneseFood2Array[i]);
-        }
-        for (int i = 0; i < japaneseFood3Array.Length; i++)
-        {
-            foodArrayList.Add(japaneseFood3Array[i]);
-        }
-        for (int i = 0; i < japaneseFood4Array.Length; i++)
-        {
-            foodArrayList.Add(japaneseFood4Array[i]);
-        }
-        for (int i = 0; i < japaneseFood5Array.Length; i++)
-        {
-            foodArrayList.Add(japaneseFood5Array[i]);
-        }
-        for (int i = 0; i < japaneseFood6Array.Length; i++)
-        {
-            foodArrayList.Add(japaneseFood6Array[i]);
-        }
-        for (int i = 0; i < japaneseFood7Array.Length; i++)
-        {
-            foodArrayList.Add(japaneseFood7Array[i]);
-        }
-        for (int i = 0; i < japaneseFood8Array.Length; i++)
-        {
-            foodArrayList.Add(japaneseFood8Array[i]);
-        }
-
-        for (int i = 0; i < dessert1Array.Length; i++)
-        {
-            foodArrayList.Add(dessert1Array[i]);
-        }
-        for (int i = 0; i < dessert2Array.Length; i++)
-        {
-            foodArrayList.Add(dessert2Array[i]);
-        }
-        for (int i = 0; i < dessert3Array.Length; i++)
-        {
-            foodArrayList.Add(dessert3Array[i]);
-        }
-        for (int i = 0; i < dessert4Array.Length; i++)
-        {
-            foodArrayList.Add(dessert4Array[i]);
-        }
-        for (int i = 0; i < dessert5Array.Length; i++)
-        {
-            foodArrayList.Add(dessert5Array[i]);
-        }
-        for (int i = 0; i < dessert6Array.Length; i++)
-        {
-            foodArrayList.Add(dessert6Array[i]);
-        }
-        for (int i = 0; i < dessert7Array.Length; i++)
-        {
-            foodArrayList.Add(dessert7Array[i]);
-        }
-        for (int i = 0; i < dessert8Array.Length; i++)
-        {
-            foodArrayList.Add(dessert8Array[i]);
-        }
-        for (int i = 0; i < dessert9Array.Length; i++)
-        {
-            foodArrayList.Add(dessert9Array[i]);
-        }
-        for (int i = 0; i < dessert10Array.Length; i++)
-        {
-            foodArrayList.Add(dessert10Array[i]);
-        }
-    }
-
     void CheckFood()
     {
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
-                switch (GameStateManager.instance.FoodType)
-                {
-                    case FoodType.Food1:
-                        level = GameStateManager.instance.Food1Level;
-                        nextLevel = (GameStateManager.instance.Food1Level + 1) / 5;
-
-                        if (hamburgerArray.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case FoodType.Food2:
-                        level = GameStateManager.instance.Food2Level;
-                        nextLevel = (GameStateManager.instance.Food2Level + 1) / 5;
-
-                        if (sandwichArray.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case FoodType.Food3:
-                        level = GameStateManager.instance.Food3Level;
-                        nextLevel = (GameStateManager.instance.Food3Level + 1) / 5;
-
-                        if (snackLabArray.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case FoodType.Food4:
-                        level = GameStateManager.instance.Food4Level;
-                        nextLevel = (GameStateManager.instance.Food4Level + 1) / 5;
-
-                        if (drinkArray.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case FoodType.Food5:
-                        level = GameStateManager.instance.Food5Level;
-                        nextLevel = (GameStateManager.instance.Food5Level + 1) / 5;
-
-                        if (pizzaArray.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case FoodType.Food6:
-                        level = GameStateManager.instance.Food6Level;
-                        nextLevel = (GameStateManager.instance.Food6Level + 1) / 5;
-
-                        if (donutArray.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-
-                        break;
-                    case FoodType.Food7:
-                        level = GameStateManager.instance.Food7Level;
-                        nextLevel = (GameStateManager.instance.Food7Level + 1) / 5;
-
-                        if (friesArray.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-
-                        break;
-                    case FoodType.Ribs:
-                        level = GameStateManager.instance.Food8Level;
-                        nextLevel = (GameStateManager.instance.Food8Level + 1) / 5;
-
-                        if (ribsArray.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-
-                        break;
-                }
-                break;
-            case IslandType.Island2:
-                switch (GameStateManager.instance.CandyType)
-                {
-                    case CandyType.Candy1:
-                        level = GameStateManager.instance.Candy1Level;
-                        nextLevel = (GameStateManager.instance.Candy1Level + 1) / 5;
-
-                        if (candy1Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case CandyType.Candy2:
-                        level = GameStateManager.instance.Candy2Level;
-                        nextLevel = (GameStateManager.instance.Candy2Level + 1) / 5;
-
-                        if (candy2Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case CandyType.Candy3:
-                        level = GameStateManager.instance.Candy3Level;
-                        nextLevel = (GameStateManager.instance.Candy3Level + 1) / 5;
-
-                        if (candy3Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case CandyType.Candy4:
-                        level = GameStateManager.instance.Candy4Level;
-                        nextLevel = (GameStateManager.instance.Candy4Level + 1) / 5;
-
-                        if (candy4Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case CandyType.Candy5:
-                        level = GameStateManager.instance.Candy5Level;
-                        nextLevel = (GameStateManager.instance.Candy5Level + 1) / 5;
-
-                        if (candy5Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case CandyType.Candy6:
-                        level = GameStateManager.instance.Candy6Level;
-                        nextLevel = (GameStateManager.instance.Candy6Level + 1) / 5;
-
-                        if (candy6Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case CandyType.Candy7:
-                        level = GameStateManager.instance.Candy7Level;
-                        nextLevel = (GameStateManager.instance.Candy7Level + 1) / 5;
-
-                        if (candy7Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case CandyType.Candy8:
-                        level = GameStateManager.instance.Candy8Level;
-                        nextLevel = (GameStateManager.instance.Candy8Level + 1) / 5;
-
-                        if (candy8Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case CandyType.Candy9:
-                        level = GameStateManager.instance.Candy9Level;
-                        nextLevel = (GameStateManager.instance.Candy9Level + 1) / 5;
-
-                        if (candy9Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case CandyType.Chocolate:
-                        level = GameStateManager.instance.Candy10Level;
-                        nextLevel = (GameStateManager.instance.Candy10Level + 1) / 5;
-
-                        if (candy10Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                }
-                break;
-            case IslandType.Island3:
-                switch (GameStateManager.instance.JapaneseFoodType)
-                {
-                    case JapaneseFoodType.JapaneseFood1:
-                        level = GameStateManager.instance.JapaneseFood1Level;
-                        nextLevel = (GameStateManager.instance.JapaneseFood1Level + 1) / 5;
-
-                        if (japaneseFood1Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood2:
-                        level = GameStateManager.instance.JapaneseFood2Level;
-                        nextLevel = (GameStateManager.instance.JapaneseFood2Level + 1) / 5;
-
-                        if (japaneseFood2Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood3:
-                        level = GameStateManager.instance.JapaneseFood3Level;
-                        nextLevel = (GameStateManager.instance.JapaneseFood3Level + 1) / 5;
-
-                        if (japaneseFood3Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood4:
-                        level = GameStateManager.instance.JapaneseFood4Level;
-                        nextLevel = (GameStateManager.instance.JapaneseFood4Level + 1) / 5;
-
-                        if (japaneseFood4Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood5:
-                        level = GameStateManager.instance.JapaneseFood5Level;
-                        nextLevel = (GameStateManager.instance.JapaneseFood5Level + 1) / 5;
-
-                        if (japaneseFood5Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood6:
-                        level = GameStateManager.instance.JapaneseFood6Level;
-                        nextLevel = (GameStateManager.instance.JapaneseFood6Level + 1) / 5;
-
-                        if (japaneseFood6Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood7:
-                        level = GameStateManager.instance.JapaneseFood7Level;
-                        nextLevel = (GameStateManager.instance.JapaneseFood7Level + 1) / 5;
-
-                        if (japaneseFood7Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case JapaneseFoodType.Ramen:
-                        level = GameStateManager.instance.JapaneseFood8Level;
-                        nextLevel = (GameStateManager.instance.JapaneseFood8Level + 1) / 5;
-
-                        if (japaneseFood8Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                }
-                break;
-            case IslandType.Island4:
-                switch (GameStateManager.instance.DessertType)
-                {
-                    case DessertType.Dessert1:
-                        level = GameStateManager.instance.Dessert1Level;
-                        nextLevel = (GameStateManager.instance.Dessert1Level + 1) / 5;
-
-                        if (dessert1Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case DessertType.Dessert2:
-                        level = GameStateManager.instance.Dessert2Level;
-                        nextLevel = (GameStateManager.instance.Dessert2Level + 1) / 5;
-
-                        if (dessert2Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case DessertType.Dessert3:
-                        level = GameStateManager.instance.Dessert3Level;
-                        nextLevel = (GameStateManager.instance.Dessert3Level + 1) / 5;
-
-                        if (dessert3Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case DessertType.Dessert4:
-                        level = GameStateManager.instance.Dessert4Level;
-                        nextLevel = (GameStateManager.instance.Dessert4Level + 1) / 5;
-
-                        if (dessert4Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case DessertType.Dessert5:
-                        level = GameStateManager.instance.Dessert5Level;
-                        nextLevel = (GameStateManager.instance.Dessert5Level + 1) / 5;
-
-                        if (dessert5Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case DessertType.Dessert6:
-                        level = GameStateManager.instance.Dessert6Level;
-                        nextLevel = (GameStateManager.instance.Dessert6Level + 1) / 5;
-
-                        if (dessert6Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case DessertType.Dessert7:
-                        level = GameStateManager.instance.Dessert7Level;
-                        nextLevel = (GameStateManager.instance.Dessert7Level + 1) / 5;
-
-                        if (dessert7Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case DessertType.Dessert8:
-                        level = GameStateManager.instance.Dessert8Level;
-                        nextLevel = (GameStateManager.instance.Dessert8Level + 1) / 5;
-
-                        if (dessert8Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case DessertType.Dessert9:
-                        level = GameStateManager.instance.Dessert9Level;
-                        nextLevel = (GameStateManager.instance.Dessert9Level + 1) / 5;
-
-                        if (dessert9Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                    case DessertType.FruitSkewers:
-                        level = GameStateManager.instance.Dessert10Level;
-                        nextLevel = (GameStateManager.instance.Dessert10Level + 1) / 5;
-
-                        if (dessert10Array.Length - 1 < nextLevel)
-                        {
-                            nextLevel -= 1;
-                        }
-                        break;
-                }
-                break;
-        }
+        level = GameStateManager.instance.FoodLevel[(int)GameStateManager.instance.FoodType];
     }
 
     IEnumerator FirstDelay()
@@ -1524,33 +978,8 @@ public class GameManager : MonoBehaviour
 
             changeModeText.localizationName = "ChangeRanking";
 
-            switch (GameStateManager.instance.IslandType)
-            {
-                case IslandType.Island1:
-                    if (GameStateManager.instance.FoodType == FoodType.Ribs)
-                    {
-                        ChangeFood(FoodType.Food1);
-                    }
-                    break;
-                case IslandType.Island2:
-                    if (GameStateManager.instance.CandyType == CandyType.Chocolate)
-                    {
-                        ChangeCandy(CandyType.Candy1);
-                    }
-                    break;
-                case IslandType.Island3:
-                    if (GameStateManager.instance.JapaneseFoodType == JapaneseFoodType.Ramen)
-                    {
-                        ChangeJapaneseFood(JapaneseFoodType.JapaneseFood1);
-                    }
-                    break;
-                case IslandType.Island4:
-                    if (GameStateManager.instance.DessertType == DessertType.FruitSkewers)
-                    {
-                        ChangeDessert(DessertType.Dessert1);
-                    }
-                    break;
-            }
+            ChangeFood(GameStateManager.instance.FoodType);
+
             FirebaseAnalytics.LogEvent("NormalMode");
         }
         else
@@ -1571,21 +1000,7 @@ public class GameManager : MonoBehaviour
 
             rankingNoticeButton.SetActive(true);
 
-            switch (GameStateManager.instance.IslandType)
-            {
-                case IslandType.Island1:
-                    ChangeFood(FoodType.Ribs);
-                    break;
-                case IslandType.Island2:
-                    ChangeCandy(CandyType.Chocolate);
-                    break;
-                case IslandType.Island3:
-                    ChangeJapaneseFood(JapaneseFoodType.Ramen);
-                    break;
-                case IslandType.Island4:
-                    ChangeDessert(DessertType.FruitSkewers);
-                    break;
-            }
+            ChangeRankFood(GameStateManager.instance.RankFoodType);
 
             if (!GameStateManager.instance.RankingNotice)
             {
@@ -1861,21 +1276,7 @@ public class GameManager : MonoBehaviour
         expUpPlus += playerDataBase.GetAnimal_Total_AbilityLevel() * animalDataBase.retentionValue;
         expUp = (int)(expUp + (expUp * (expUpPlus / 100)));
 
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
-                destoryPercent = 10 - (playerDataBase.Island1Level * 0.5f);
-                break;
-            case IslandType.Island2:
-                destoryPercent = 20 - (playerDataBase.Island2Level * 0.5f);
-                break;
-            case IslandType.Island3:
-                destoryPercent = 30 - (playerDataBase.Island3Level * 0.5f);
-                break;
-            case IslandType.Island4:
-                destoryPercent = 50 - (playerDataBase.Island4Level * 0.5f);
-                break;
-        }
+        destoryPercent = islandDataBase.GetDestroy(GameStateManager.instance.IslandType);
 
         defDestroy += playerDataBase.Skill9 * 0.25f;
         defDestroy += playerDataBase.Skill19 * 0.25f;
@@ -1898,9 +1299,6 @@ public class GameManager : MonoBehaviour
         }
 
         upgradeFood = upgradeDataBase.GetUpgradeFood(GameStateManager.instance.FoodType);
-        upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
-        upgradeJapaneseFood = upgradeDataBase.GetUpgradeJapaneseFood(GameStateManager.instance.JapaneseFoodType);
-        upgradeDessert = upgradeDataBase.GetUpgradeDessert(GameStateManager.instance.DessertType);
 
         feverTime = 20;
         feverTime += 20 * (0.002f * playerDataBase.Skill1);
@@ -2319,41 +1717,7 @@ public class GameManager : MonoBehaviour
 
         OFFSpeicalFood();
 
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
-                if (GameStateManager.instance.FoodType == FoodType.Ribs)
-                {
-                    GameStateManager.instance.FoodType = FoodType.Food1;
-                }
-
-                ChangeFood(GameStateManager.instance.FoodType);
-                break;
-            case IslandType.Island2:
-                if (GameStateManager.instance.CandyType == CandyType.Chocolate)
-                {
-                    GameStateManager.instance.CandyType = CandyType.Candy1;
-                }
-
-                ChangeCandy(GameStateManager.instance.CandyType);
-                break;
-            case IslandType.Island3:
-                if (GameStateManager.instance.JapaneseFoodType == JapaneseFoodType.Ramen)
-                {
-                    GameStateManager.instance.JapaneseFoodType = JapaneseFoodType.JapaneseFood1;
-                }
-
-                ChangeJapaneseFood(GameStateManager.instance.JapaneseFoodType);
-                break;
-            case IslandType.Island4:
-                if (GameStateManager.instance.DessertType == DessertType.FruitSkewers)
-                {
-                    GameStateManager.instance.DessertType = DessertType.Dessert1;
-                }
-
-                ChangeDessert(GameStateManager.instance.DessertType);
-                break;
-        }
+        ChangeFood(FoodType.Food1 + ((int)type * 9));
 
         if (GameStateManager.instance.Effect)
         {
@@ -2404,108 +1768,38 @@ public class GameManager : MonoBehaviour
         CheckFoodState();
 
         if (!inGameUI.activeInHierarchy) return;
+
         UpgradeInitialize();
     }
 
-    public void ChangeCandy(CandyType type)
+    public void ChangeRankFood(RankFoodType type)
     {
-        GameStateManager.instance.CandyType = type;
+        GameStateManager.instance.RankFoodType = type;
 
-        FirebaseAnalytics.LogEvent("ChangeFood_" + type);
+        FirebaseAnalytics.LogEvent("ChangeRankFood_" + type);
 
         OFFSpeicalFood();
-
-        upgradeCandy = upgradeDataBase.GetUpgradeCandy(GameStateManager.instance.CandyType);
 
         CheckFood();
         CheckFoodState();
 
         if (!inGameUI.activeInHierarchy) return;
+
         UpgradeInitialize();
     }
 
-    public void ChangeJapaneseFood(JapaneseFoodType type)
-    {
-        GameStateManager.instance.JapaneseFoodType = type;
-
-        FirebaseAnalytics.LogEvent("ChangeFood_" + type);
-
-        OFFSpeicalFood();
-
-        upgradeJapaneseFood = upgradeDataBase.GetUpgradeJapaneseFood(GameStateManager.instance.JapaneseFoodType);
-
-        CheckFood();
-        CheckFoodState();
-
-        if (!inGameUI.activeInHierarchy) return;
-        UpgradeInitialize();
-    }
-
-    public void ChangeDessert(DessertType type)
-    {
-        GameStateManager.instance.DessertType = type;
-
-        FirebaseAnalytics.LogEvent("ChangeFood_" + type);
-
-        OFFSpeicalFood();
-
-        upgradeDessert = upgradeDataBase.GetUpgradeDessert(GameStateManager.instance.DessertType);
-
-        CheckFood();
-        CheckFoodState();
-
-        if (!inGameUI.activeInHierarchy) return;
-        UpgradeInitialize();
-    }
 
     public void UpgradeInitialize()
     {
-        switch (GameStateManager.instance.IslandType)
+        maxLevel = upgradeFood.maxLevel;
+
+        if (level > maxLevel)
         {
-            case IslandType.Island1:
-                maxLevel = upgradeFood.maxLevel;
-
-                if (level + 1 > maxLevel)
-                {
-                    level = maxLevel - 1;
-                }
-
-                sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                break;
-            case IslandType.Island2:
-                maxLevel = upgradeCandy.maxLevel;
-
-                if (level + 1 > maxLevel)
-                {
-                    level = maxLevel - 1;
-                }
-
-                sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * 0.2f);
-                break;
-            case IslandType.Island3:
-                maxLevel = upgradeJapaneseFood.maxLevel;
-
-                if (level + 1 > maxLevel)
-                {
-                    level = maxLevel - 1;
-                }
-
-                sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * 0.4f);
-                break;
-            case IslandType.Island4:
-                maxLevel = upgradeDessert.maxLevel;
-
-                if (level + 1 > maxLevel)
-                {
-                    level = maxLevel - 1;
-                }
-
-                sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-                sellPrice += (int)(sellPrice * 0.6f);
-                break;
+            level = maxLevel;
         }
+
+        sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
+        sellPrice += (int)(sellPrice * islandDataBase.GetSellPrice(GameStateManager.instance.IslandType));
 
         if(speicalFood)
         {
@@ -2513,7 +1807,6 @@ public class GameManager : MonoBehaviour
         }
 
         need = upgradeDataBase.GetNeed(level, defaultNeed);
-        success = upgradeDataBase.GetSuccess(level);
 
         if (needPlus > 0)
         {
@@ -2535,22 +1828,7 @@ public class GameManager : MonoBehaviour
             sellPrice = 100000000;
         }
 
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
-                titleText.localizationName = GameStateManager.instance.FoodType.ToString();
-                break;
-            case IslandType.Island2:
-                titleText.localizationName = GameStateManager.instance.CandyType.ToString();
-                break;
-            case IslandType.Island3:
-                titleText.localizationName = GameStateManager.instance.JapaneseFoodType.ToString();
-                break;
-            case IslandType.Island4:
-                titleText.localizationName = GameStateManager.instance.DessertType.ToString();
-                break;
-        }
-
+        titleText.localizationName = GameStateManager.instance.FoodType.ToString();
         titleText.plusText = " ( " + (level + 1) + " / " + maxLevel + " )";
 
         switch (GameStateManager.instance.GameType)
@@ -2558,56 +1836,71 @@ public class GameManager : MonoBehaviour
             case GameType.Story:
                 highLevelText.localizationName = " ";
                 highLevelText.plusText = "";
+
+                if(level == 0)
+                {
+                    success = 100;
+                }
+                else
+                {
+                    success = 100 - islandDataBase.GetSuccess(GameStateManager.instance.IslandType) - (level * 1);
+                }
+
                 break;
             case GameType.Rank:
+                highLevelText.localizationName = "Best";
+                highLevelText.plusText = "";
+
+                if (level == 0)
+                {
+                    success = 100;
+                }
+                else
+                {
+                    success = 100 - (level * 1);
+                }
+
                 switch (GameStateManager.instance.IslandType)
                 {
                     case IslandType.Island1:
-                        if (GameStateManager.instance.Food8Level > playerDataBase.RankLevel1)
+                        if (GameStateManager.instance.RankFoodLevel[0] > playerDataBase.RankLevel1)
                         {
-                            highLevelText.localizationName = "Best";
-                            highLevelText.plusText = " : " + (GameStateManager.instance.Food8Level + 1);
+                            highLevelText.plusText = " : " + (GameStateManager.instance.RankFoodLevel[0] + 1);
                         }
                         else
                         {
-                            highLevelText.localizationName = "Best";
                             highLevelText.plusText = " : " + playerDataBase.RankLevel1;
                         }
 
                         break;
                     case IslandType.Island2:
-                        if (GameStateManager.instance.Candy10Level > playerDataBase.RankLevel2)
+                        if (GameStateManager.instance.RankFoodLevel[1] > playerDataBase.RankLevel2)
                         {
-                            highLevelText.localizationName = "Best";
-                            highLevelText.plusText = " : " + (GameStateManager.instance.Candy10Level + 1);
+                            highLevelText.plusText = " : " + (GameStateManager.instance.RankFoodLevel[1] + 1);
                         }
                         else
                         {
-                            highLevelText.localizationName = "Best";
+
                             highLevelText.plusText = " : " + playerDataBase.RankLevel2;
                         }
                         break;
                     case IslandType.Island3:
-                        if (GameStateManager.instance.JapaneseFood8Level > playerDataBase.RankLevel3)
+                        if (GameStateManager.instance.RankFoodLevel[2] > playerDataBase.RankLevel3)
                         {
-                            highLevelText.localizationName = "Best";
-                            highLevelText.plusText = " : " + (GameStateManager.instance.JapaneseFood8Level + 1);
+                            highLevelText.plusText = " : " + (GameStateManager.instance.RankFoodLevel[2] + 1);
                         }
                         else
                         {
-                            highLevelText.localizationName = "Best";
                             highLevelText.plusText = " : " + playerDataBase.RankLevel3;
                         }
                         break;
                     case IslandType.Island4:
-                        if (GameStateManager.instance.Dessert10Level > playerDataBase.RankLevel4)
+                        if (GameStateManager.instance.RankFoodLevel[3] > playerDataBase.RankLevel4)
                         {
-                            highLevelText.localizationName = "Best";
-                            highLevelText.plusText = " : " + (GameStateManager.instance.Dessert10Level + 1);
+                            highLevelText.plusText = " : " + (GameStateManager.instance.RankFoodLevel[3] + 1);
                         }
                         else
                         {
-                            highLevelText.localizationName = "Best";
                             highLevelText.plusText = " : " + playerDataBase.RankLevel4;
                         }
                         break;
@@ -2758,497 +2051,16 @@ public class GameManager : MonoBehaviour
         {
             foodArrayList[i].gameObject.SetActive(false);
         }
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
-                switch (GameStateManager.instance.FoodType)
-                {
-                    case FoodType.Food1:
-                        if (hamburgerArray.Length - 1 < nextLevel)
-                        {
-                            hamburgerArray[hamburgerArray.Length - 1].gameObject.SetActive(true);
-                            hamburgerArray[hamburgerArray.Length - 1].Initialize(5);
-                            hamburgerArray[hamburgerArray.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            hamburgerArray[nextLevel].gameObject.SetActive(true);
-                            hamburgerArray[nextLevel].Initialize(GameStateManager.instance.Food1Level - (5 * nextLevel));
-                            hamburgerArray[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case FoodType.Food2:
-                        if (sandwichArray.Length - 1 < nextLevel)
-                        {
-                            sandwichArray[sandwichArray.Length - 1].gameObject.SetActive(true);
-                            sandwichArray[sandwichArray.Length - 1].Initialize(5);
-                            sandwichArray[sandwichArray.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            sandwichArray[nextLevel].gameObject.SetActive(true);
-                            sandwichArray[nextLevel].Initialize(GameStateManager.instance.Food2Level - (5 * nextLevel));
-                            sandwichArray[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case FoodType.Food3:
-                        if (snackLabArray.Length - 1 < nextLevel)
-                        {
-                            snackLabArray[snackLabArray.Length - 1].gameObject.SetActive(true);
-                            snackLabArray[snackLabArray.Length - 1].Initialize(5);
-                            snackLabArray[snackLabArray.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            snackLabArray[nextLevel].gameObject.SetActive(true);
-                            snackLabArray[nextLevel].Initialize(GameStateManager.instance.Food3Level - (5 * nextLevel));
-                            snackLabArray[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case FoodType.Food4:
-                        if (drinkArray.Length - 1 < nextLevel)
-                        {
-                            drinkArray[drinkArray.Length - 1].gameObject.SetActive(true);
-                            drinkArray[drinkArray.Length - 1].Initialize(5);
-                            drinkArray[drinkArray.Length - 1].SpeicalFood(speicalFood);
 
-                        }
-                        else
-                        {
-                            drinkArray[nextLevel].gameObject.SetActive(true);
-                            drinkArray[nextLevel].Initialize(GameStateManager.instance.Food4Level - (5 * nextLevel));
-                            drinkArray[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case FoodType.Food5:
-                        if (pizzaArray.Length - 1 < nextLevel)
-                        {
-                            pizzaArray[pizzaArray.Length - 1].gameObject.SetActive(true);
-                            pizzaArray[pizzaArray.Length - 1].Initialize(5);
-                            pizzaArray[pizzaArray.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            pizzaArray[nextLevel].gameObject.SetActive(true);
-                            pizzaArray[nextLevel].Initialize(GameStateManager.instance.Food5Level - (5 * nextLevel));
-                            pizzaArray[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case FoodType.Food6:
-                        if (donutArray.Length - 1 < nextLevel)
-                        {
-                            donutArray[donutArray.Length - 1].gameObject.SetActive(true);
-                            donutArray[donutArray.Length - 1].Initialize(5);
-                            donutArray[donutArray.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            donutArray[nextLevel].gameObject.SetActive(true);
-                            donutArray[nextLevel].Initialize(GameStateManager.instance.Food6Level - (5 * nextLevel));
-                            donutArray[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case FoodType.Food7:
-                        if (friesArray.Length - 1 < nextLevel)
-                        {
-                            friesArray[friesArray.Length - 1].gameObject.SetActive(true);
-                            friesArray[friesArray.Length - 1].Initialize(5);
-                            friesArray[friesArray.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            friesArray[nextLevel].gameObject.SetActive(true);
-                            friesArray[nextLevel].Initialize(GameStateManager.instance.Food7Level - (5 * nextLevel));
-                            friesArray[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case FoodType.Ribs:
-                        ribsArray[0].gameObject.SetActive(true);
-                        ribsArray[0].RankInitialize(GameStateManager.instance.Food8Level);
-                        ribsArray[0].SpeicalFood(false);
-                        break;
-                }
-                break;
-            case IslandType.Island2:
-                switch (GameStateManager.instance.CandyType)
-                {
-                    case CandyType.Candy1:
-                        if (candy1Array.Length - 1 < nextLevel)
-                        {
-                            candy1Array[candy1Array.Length - 1].gameObject.SetActive(true);
-                            candy1Array[candy1Array.Length - 1].Initialize(5);
-                            candy1Array[candy1Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            candy1Array[nextLevel].gameObject.SetActive(true);
-                            candy1Array[nextLevel].Initialize(GameStateManager.instance.Candy1Level - (5 * nextLevel));
-                            candy1Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case CandyType.Candy2:
-                        if (candy2Array.Length - 1 < nextLevel)
-                        {
-                            candy2Array[candy2Array.Length - 1].gameObject.SetActive(true);
-                            candy2Array[candy2Array.Length - 1].Initialize(5);
-                            candy2Array[candy2Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            candy2Array[nextLevel].gameObject.SetActive(true);
-                            candy2Array[nextLevel].Initialize(GameStateManager.instance.Candy2Level - (5 * nextLevel));
-                            candy2Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case CandyType.Candy3:
-                        if (candy3Array.Length - 1 < nextLevel)
-                        {
-                            candy3Array[candy3Array.Length - 1].gameObject.SetActive(true);
-                            candy3Array[candy3Array.Length - 1].Initialize(5);
-                            candy3Array[candy3Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            candy3Array[nextLevel].gameObject.SetActive(true);
-                            candy3Array[nextLevel].Initialize(GameStateManager.instance.Candy3Level - (5 * nextLevel));
-                            candy3Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case CandyType.Candy4:
-                        if (candy4Array.Length - 1 < nextLevel)
-                        {
-                            candy4Array[candy4Array.Length - 1].gameObject.SetActive(true);
-                            candy4Array[candy4Array.Length - 1].Initialize(5);
-                            candy4Array[candy4Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            candy4Array[nextLevel].gameObject.SetActive(true);
-                            candy4Array[nextLevel].Initialize(GameStateManager.instance.Candy4Level - (5 * nextLevel));
-                            candy4Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case CandyType.Candy5:
-                        if (candy5Array.Length - 1 < nextLevel)
-                        {
-                            candy5Array[candy5Array.Length - 1].gameObject.SetActive(true);
-                            candy5Array[candy5Array.Length - 1].Initialize(5);
-                            candy5Array[candy5Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            candy5Array[nextLevel].gameObject.SetActive(true);
-                            candy5Array[nextLevel].Initialize(GameStateManager.instance.Candy5Level - (5 * nextLevel));
-                            candy5Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case CandyType.Candy6:
-                        if (candy6Array.Length - 1 < nextLevel)
-                        {
-                            candy6Array[candy6Array.Length - 1].gameObject.SetActive(true);
-                            candy6Array[candy6Array.Length - 1].Initialize(5);
-                            candy6Array[candy6Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            candy6Array[nextLevel].gameObject.SetActive(true);
-                            candy6Array[nextLevel].Initialize(GameStateManager.instance.Candy6Level - (5 * nextLevel));
-                            candy6Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case CandyType.Candy7:
-                        if (candy7Array.Length - 1 < nextLevel)
-                        {
-                            candy7Array[candy7Array.Length - 1].gameObject.SetActive(true);
-                            candy7Array[candy7Array.Length - 1].Initialize(5);
-                            candy7Array[candy7Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            candy7Array[nextLevel].gameObject.SetActive(true);
-                            candy7Array[nextLevel].Initialize(GameStateManager.instance.Candy7Level - (5 * nextLevel));
-                            candy7Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case CandyType.Candy8:
-                        if (candy8Array.Length - 1 < nextLevel)
-                        {
-                            candy8Array[candy8Array.Length - 1].gameObject.SetActive(true);
-                            candy8Array[candy8Array.Length - 1].Initialize(5);
-                            candy8Array[candy8Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            candy8Array[nextLevel].gameObject.SetActive(true);
-                            candy8Array[nextLevel].Initialize(GameStateManager.instance.Candy8Level - (5 * nextLevel));
-                            candy8Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case CandyType.Candy9:
-                        if (candy9Array.Length - 1 < nextLevel)
-                        {
-                            candy9Array[candy9Array.Length - 1].gameObject.SetActive(true);
-                            candy9Array[candy9Array.Length - 1].Initialize(5);
-                            candy9Array[candy9Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            candy9Array[nextLevel].gameObject.SetActive(true);
-                            candy9Array[nextLevel].Initialize(GameStateManager.instance.Candy9Level);
-                            candy9Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case CandyType.Chocolate:
-                        candy10Array[0].gameObject.SetActive(true);
-                        candy10Array[0].RankInitialize(GameStateManager.instance.Candy10Level);
-                        candy10Array[0].SpeicalFood(false);
-                        break;
-                }
-                break;
-            case IslandType.Island3:
-                switch (GameStateManager.instance.JapaneseFoodType)
-                {
-                    case JapaneseFoodType.JapaneseFood1:
-                        if (japaneseFood1Array.Length - 1 < nextLevel)
-                        {
-                            japaneseFood1Array[japaneseFood1Array.Length - 1].gameObject.SetActive(true);
-                            japaneseFood1Array[japaneseFood1Array.Length - 1].Initialize(5);
-                            japaneseFood1Array[japaneseFood1Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            japaneseFood1Array[nextLevel].gameObject.SetActive(true);
-                            japaneseFood1Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood1Level - (5 * nextLevel));
-                            japaneseFood1Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood2:
-                        if (japaneseFood2Array.Length - 1 < nextLevel)
-                        {
-                            japaneseFood2Array[japaneseFood2Array.Length - 1].gameObject.SetActive(true);
-                            japaneseFood2Array[japaneseFood2Array.Length - 1].Initialize(5);
-                            japaneseFood2Array[japaneseFood2Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            japaneseFood2Array[nextLevel].gameObject.SetActive(true);
-                            japaneseFood2Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood2Level - (5 * nextLevel));
-                            japaneseFood2Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood3:
-                        if (japaneseFood3Array.Length - 1 < nextLevel)
-                        {
-                            japaneseFood3Array[japaneseFood3Array.Length - 1].gameObject.SetActive(true);
-                            japaneseFood3Array[japaneseFood3Array.Length - 1].Initialize(5);
-                            japaneseFood3Array[japaneseFood3Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            japaneseFood3Array[nextLevel].gameObject.SetActive(true);
-                            japaneseFood3Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood3Level - (5 * nextLevel));
-                            japaneseFood3Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood4:
-                        if (japaneseFood4Array.Length - 1 < nextLevel)
-                        {
-                            japaneseFood4Array[japaneseFood4Array.Length - 1].gameObject.SetActive(true);
-                            japaneseFood4Array[japaneseFood4Array.Length - 1].Initialize(5);
-                            japaneseFood4Array[japaneseFood4Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            japaneseFood4Array[nextLevel].gameObject.SetActive(true);
-                            japaneseFood4Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood4Level - (5 * nextLevel));
-                            japaneseFood4Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood5:
-                        if (japaneseFood5Array.Length - 1 < nextLevel)
-                        {
-                            japaneseFood5Array[japaneseFood5Array.Length - 1].gameObject.SetActive(true);
-                            japaneseFood5Array[japaneseFood5Array.Length - 1].Initialize(5);
-                            japaneseFood5Array[japaneseFood5Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            japaneseFood5Array[nextLevel].gameObject.SetActive(true);
-                            japaneseFood5Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood5Level - (5 * nextLevel));
-                            japaneseFood5Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood6:
-                        if (japaneseFood6Array.Length - 1 < nextLevel)
-                        {
-                            japaneseFood6Array[japaneseFood6Array.Length - 1].gameObject.SetActive(true);
-                            japaneseFood6Array[japaneseFood6Array.Length - 1].Initialize(5);
-                            japaneseFood6Array[japaneseFood6Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            japaneseFood6Array[nextLevel].gameObject.SetActive(true);
-                            japaneseFood6Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood6Level - (5 * nextLevel));
-                            japaneseFood6Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood7:
-                        if (japaneseFood7Array.Length - 1 < nextLevel)
-                        {
-                            japaneseFood7Array[japaneseFood7Array.Length - 1].gameObject.SetActive(true);
-                            japaneseFood7Array[japaneseFood7Array.Length - 1].Initialize(5);
-                            japaneseFood7Array[japaneseFood7Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            japaneseFood7Array[nextLevel].gameObject.SetActive(true);
-                            japaneseFood7Array[nextLevel].Initialize(GameStateManager.instance.JapaneseFood7Level - (5 * nextLevel));
-                            japaneseFood7Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case JapaneseFoodType.Ramen:
-                        japaneseFood8Array[0].gameObject.SetActive(true);
-                        japaneseFood8Array[0].RankInitialize(GameStateManager.instance.JapaneseFood8Level);
-                        japaneseFood8Array[0].SpeicalFood(false);
-                        break;
-                }
-                break;
-            case IslandType.Island4:
-                switch (GameStateManager.instance.DessertType)
-                {
-                    case DessertType.Dessert1:
-                        if (dessert1Array.Length - 1 < nextLevel)
-                        {
-                            dessert1Array[dessert1Array.Length - 1].gameObject.SetActive(true);
-                            dessert1Array[dessert1Array.Length - 1].Initialize(5);
-                            dessert1Array[dessert1Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            dessert1Array[nextLevel].gameObject.SetActive(true);
-                            dessert1Array[nextLevel].Initialize(GameStateManager.instance.Dessert1Level - (5 * nextLevel));
-                            dessert1Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case DessertType.Dessert2:
-                        if (dessert2Array.Length - 1 < nextLevel)
-                        {
-                            dessert2Array[dessert2Array.Length - 1].gameObject.SetActive(true);
-                            dessert2Array[dessert2Array.Length - 1].Initialize(5);
-                            dessert2Array[dessert2Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            dessert2Array[nextLevel].gameObject.SetActive(true);
-                            dessert2Array[nextLevel].Initialize(GameStateManager.instance.Dessert2Level - (5 * nextLevel));
-                            dessert2Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case DessertType.Dessert3:
-                        if (dessert3Array.Length - 1 < nextLevel)
-                        {
-                            dessert3Array[dessert3Array.Length - 1].gameObject.SetActive(true);
-                            dessert3Array[dessert3Array.Length - 1].Initialize(5);
-                            dessert3Array[dessert3Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            dessert3Array[nextLevel].gameObject.SetActive(true);
-                            dessert3Array[nextLevel].Initialize(GameStateManager.instance.Dessert3Level - (5 * nextLevel));
-                            dessert3Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case DessertType.Dessert4:
-                        if (dessert4Array.Length - 1 < nextLevel)
-                        {
-                            dessert4Array[dessert4Array.Length - 1].gameObject.SetActive(true);
-                            dessert4Array[dessert4Array.Length - 1].Initialize(5);
-                            dessert4Array[dessert4Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            dessert4Array[nextLevel].gameObject.SetActive(true);
-                            dessert4Array[nextLevel].Initialize(GameStateManager.instance.Dessert4Level - (5 * nextLevel));
-                            dessert4Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case DessertType.Dessert5:
-                        if (dessert5Array.Length - 1 < nextLevel)
-                        {
-                            dessert5Array[dessert5Array.Length - 1].gameObject.SetActive(true);
-                            dessert5Array[dessert5Array.Length - 1].Initialize(5);
-                            dessert5Array[dessert5Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            dessert5Array[nextLevel].gameObject.SetActive(true);
-                            dessert5Array[nextLevel].Initialize(GameStateManager.instance.Dessert5Level - (5 * nextLevel));
-                            dessert5Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case DessertType.Dessert6:
-                        if (dessert6Array.Length - 1 < nextLevel)
-                        {
-                            dessert6Array[dessert6Array.Length - 1].gameObject.SetActive(true);
-                            dessert6Array[dessert6Array.Length - 1].Initialize(5);
-                            dessert6Array[dessert6Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            dessert6Array[nextLevel].gameObject.SetActive(true);
-                            dessert6Array[nextLevel].Initialize(GameStateManager.instance.Dessert6Level - (5 * nextLevel));
-                            dessert6Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case DessertType.Dessert7:
-                        if (dessert7Array.Length - 1 < nextLevel)
-                        {
-                            dessert7Array[dessert7Array.Length - 1].gameObject.SetActive(true);
-                            dessert7Array[dessert7Array.Length - 1].Initialize(5);
-                            dessert7Array[dessert7Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            dessert7Array[nextLevel].gameObject.SetActive(true);
-                            dessert7Array[nextLevel].Initialize(GameStateManager.instance.Dessert7Level - (5 * nextLevel));
-                            dessert7Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case DessertType.Dessert8:
-                        if (dessert8Array.Length - 1 < nextLevel)
-                        {
-                            dessert8Array[dessert8Array.Length - 1].gameObject.SetActive(true);
-                            dessert8Array[dessert8Array.Length - 1].Initialize(5);
-                            dessert8Array[dessert8Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            dessert8Array[nextLevel].gameObject.SetActive(true);
-                            dessert8Array[nextLevel].Initialize(GameStateManager.instance.Dessert8Level - (5 * nextLevel));
-                            dessert8Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case DessertType.Dessert9:
-                        if (dessert9Array.Length - 1 < nextLevel)
-                        {
-                            dessert9Array[dessert9Array.Length - 1].gameObject.SetActive(true);
-                            dessert9Array[dessert9Array.Length - 1].Initialize(5);
-                            dessert9Array[dessert9Array.Length - 1].SpeicalFood(speicalFood);
-                        }
-                        else
-                        {
-                            dessert9Array[nextLevel].gameObject.SetActive(true);
-                            dessert9Array[nextLevel].Initialize(GameStateManager.instance.Dessert9Level - (5 * nextLevel));
-                            dessert9Array[nextLevel].SpeicalFood(speicalFood);
-                        }
-                        break;
-                    case DessertType.FruitSkewers:
-                        dessert10Array[0].gameObject.SetActive(true);
-                        dessert10Array[0].RankInitialize(GameStateManager.instance.Dessert10Level);
-                        dessert10Array[0].SpeicalFood(false);
-                        break;
-                }
-                break;
+        if(GameStateManager.instance.GameType == GameType.Story)
+        {
+            foodArray[(int)GameStateManager.instance.FoodType].gameObject.SetActive(true);
+            foodArray[(int)GameStateManager.instance.FoodType].Initialize(GameStateManager.instance.FoodLevel[(int)GameStateManager.instance.FoodType]);
+            foodArray[(int)GameStateManager.instance.FoodType].SetSpeicalFood(speicalFood);
+        }
+        else
+        {
+            rankFoodArray[(int)GameStateManager.instance.RankFoodType].Initialize(GameStateManager.instance.RankFoodLevel[(int)GameStateManager.instance.RankFoodType]);
         }
 
         if (feverMode)
@@ -3270,365 +2082,6 @@ public class GameManager : MonoBehaviour
                     foodArrayList[i].FeverOff();
                 }
             }
-        }
-    }
-
-    void CheckFoodLevelUp()
-    {
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
-                switch (GameStateManager.instance.FoodType)
-                {
-                    case FoodType.Food1:
-                        if (hamburgerArray.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            hamburgerArray[nextLevel].LevelUp();
-                        }
-                        break;
-                    case FoodType.Food2:
-                        if (sandwichArray.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            sandwichArray[nextLevel].LevelUp();
-                        }
-                        break;
-                    case FoodType.Food3:
-                        if (snackLabArray.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            snackLabArray[nextLevel].LevelUp();
-                        }
-                        break;
-                    case FoodType.Food4:
-                        if (drinkArray.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            drinkArray[nextLevel].LevelUp();
-                        }
-                        break;
-                    case FoodType.Food5:
-                        if (pizzaArray.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            pizzaArray[nextLevel].LevelUp();
-                        }
-                        break;
-                    case FoodType.Food6:
-                        if (donutArray.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            donutArray[nextLevel].LevelUp();
-                        }
-                        break;
-                    case FoodType.Food7:
-                        if (friesArray.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            friesArray[nextLevel].LevelUp();
-                        }
-                        break;
-                    case FoodType.Ribs:
-                        ribsArray[0].RankLevelUp();
-                        break;
-                }
-                break;
-            case IslandType.Island2:
-                switch (GameStateManager.instance.CandyType)
-                {
-                    case CandyType.Candy1:
-                        if (candy1Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            candy1Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case CandyType.Candy2:
-                        if (candy2Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            candy2Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case CandyType.Candy3:
-                        if (candy3Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            candy3Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case CandyType.Candy4:
-                        if (candy4Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            candy4Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case CandyType.Candy5:
-                        if (candy5Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            candy5Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case CandyType.Candy6:
-                        if (candy6Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            candy6Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case CandyType.Candy7:
-                        if (candy7Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            candy7Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case CandyType.Candy8:
-                        if (candy8Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            candy8Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case CandyType.Candy9:
-                        if (candy9Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            candy9Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case CandyType.Chocolate:
-                        candy10Array[0].RankLevelUp();
-                        break;
-                }
-                break;
-            case IslandType.Island3:
-                switch (GameStateManager.instance.JapaneseFoodType)
-                {
-                    case JapaneseFoodType.JapaneseFood1:
-                        if (japaneseFood1Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            japaneseFood1Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood2:
-                        if (japaneseFood2Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            japaneseFood2Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood3:
-                        if (japaneseFood3Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            japaneseFood3Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood4:
-                        if (japaneseFood4Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            japaneseFood4Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood5:
-                        if (japaneseFood5Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            japaneseFood5Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood6:
-                        if (japaneseFood6Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            japaneseFood6Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood7:
-                        if (japaneseFood7Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            japaneseFood7Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case JapaneseFoodType.Ramen:
-                        japaneseFood8Array[0].RankLevelUp();
-                        break;
-                }
-                break;
-            case IslandType.Island4:
-                switch (GameStateManager.instance.DessertType)
-                {
-                    case DessertType.Dessert1:
-                        if (dessert1Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            dessert1Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case DessertType.Dessert2:
-                        if (dessert2Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            dessert2Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case DessertType.Dessert3:
-                        if (dessert3Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            dessert3Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case DessertType.Dessert4:
-                        if (dessert4Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            dessert4Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case DessertType.Dessert5:
-                        if (dessert5Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            dessert5Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case DessertType.Dessert6:
-                        if (dessert6Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            dessert6Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case DessertType.Dessert7:
-                        if (dessert7Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            dessert7Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case DessertType.Dessert8:
-                        if (dessert8Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            dessert8Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case DessertType.Dessert9:
-                        if (dessert9Array.Length - 1 < nextLevel)
-                        {
-
-                        }
-                        else
-                        {
-                            dessert9Array[nextLevel].LevelUp();
-                        }
-                        break;
-                    case DessertType.FruitSkewers:
-                        dessert10Array[0].RankLevelUp();
-                        break;
-                }
-                break;
         }
     }
 
@@ -3788,7 +2241,6 @@ public class GameManager : MonoBehaviour
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
 
-                    nextLevel++;
                     CheckFoodState();
 
                     if (GameStateManager.instance.Effect)
@@ -3815,7 +2267,6 @@ public class GameManager : MonoBehaviour
                 }
 
                 SaveFoodLevel(level);
-                CheckFoodLevelUp();
                 UpgradeInitialize();
             }
         }
@@ -3930,21 +2381,7 @@ public class GameManager : MonoBehaviour
             {
                 recoverLevel = ((int)(level * 0.5f)) - 1;
 
-                switch (GameStateManager.instance.IslandType)
-                {
-                    case IslandType.Island1:
-                        recoverManager.FoodInitialize(GameStateManager.instance.FoodType, level);
-                        break;
-                    case IslandType.Island2:
-                        recoverManager.CandyInitialize(GameStateManager.instance.CandyType, level);
-                        break;
-                    case IslandType.Island3:
-                        recoverManager.JapaneseFoodInitialize(GameStateManager.instance.JapaneseFoodType, level);
-                        break;
-                    case IslandType.Island4:
-                        recoverManager.DessertInitialize(GameStateManager.instance.DessertType, level);
-                        break;
-                }
+                recoverManager.FoodInitialize(GameStateManager.instance.RankFoodType, level);
             }
 
             DestoryFood();
@@ -3990,137 +2427,7 @@ public class GameManager : MonoBehaviour
 
     void LevelDown()
     {
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
-                switch (GameStateManager.instance.FoodType)
-                {
-                    case FoodType.Food1:
-                        GameStateManager.instance.Food1Level -= 1;
-                        break;
-                    case FoodType.Food2:
-                        GameStateManager.instance.Food2Level -= 1;
-                        break;
-                    case FoodType.Food3:
-                        GameStateManager.instance.Food3Level -= 1;
-                        break;
-                    case FoodType.Food4:
-                        GameStateManager.instance.Food4Level -= 1;
-                        break;
-                    case FoodType.Food5:
-                        GameStateManager.instance.Food5Level -= 1;
-                        break;
-                    case FoodType.Food6:
-                        GameStateManager.instance.Food6Level -= 1;
-                        break;
-                    case FoodType.Food7:
-                        GameStateManager.instance.Food7Level -= 1;
-                        break;
-                    case FoodType.Ribs:
-                        GameStateManager.instance.Food8Level -= 1;
-                        break;
-                }
-                break;
-            case IslandType.Island2:
-                switch (GameStateManager.instance.CandyType)
-                {
-                    case CandyType.Candy1:
-                        GameStateManager.instance.Candy1Level -= 1;
-                        break;
-                    case CandyType.Candy2:
-                        GameStateManager.instance.Candy2Level -= 1;
-                        break;
-                    case CandyType.Candy3:
-                        GameStateManager.instance.Candy3Level -= 1;
-                        break;
-                    case CandyType.Candy4:
-                        GameStateManager.instance.Candy4Level -= 1;
-                        break;
-                    case CandyType.Candy5:
-                        GameStateManager.instance.Candy5Level -= 1;
-                        break;
-                    case CandyType.Candy6:
-                        GameStateManager.instance.Candy6Level -= 1;
-                        break;
-                    case CandyType.Candy7:
-                        GameStateManager.instance.Candy7Level -= 1;
-                        break;
-                    case CandyType.Candy8:
-                        GameStateManager.instance.Candy8Level -= 1;
-                        break;
-                    case CandyType.Candy9:
-                        GameStateManager.instance.Candy9Level -= 1;
-                        break;
-                    case CandyType.Chocolate:
-                        GameStateManager.instance.Candy10Level -= 1;
-                        break;
-                }
-                break;
-            case IslandType.Island3:
-                switch (GameStateManager.instance.JapaneseFoodType)
-                {
-                    case JapaneseFoodType.JapaneseFood1:
-                        GameStateManager.instance.JapaneseFood1Level -= 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood2:
-                        GameStateManager.instance.JapaneseFood2Level -= 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood3:
-                        GameStateManager.instance.JapaneseFood3Level -= 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood4:
-                        GameStateManager.instance.JapaneseFood4Level -= 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood5:
-                        GameStateManager.instance.JapaneseFood5Level -= 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood6:
-                        GameStateManager.instance.JapaneseFood6Level -= 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood7:
-                        GameStateManager.instance.JapaneseFood7Level -= 1;
-                        break;
-                    case JapaneseFoodType.Ramen:
-                        GameStateManager.instance.JapaneseFood8Level -= 1;
-                        break;
-                }
-                break;
-            case IslandType.Island4:
-                switch (GameStateManager.instance.DessertType)
-                {
-                    case DessertType.Dessert1:
-                        GameStateManager.instance.Dessert1Level -= 1;
-                        break;
-                    case DessertType.Dessert2:
-                        GameStateManager.instance.Dessert2Level -= 1;
-                        break;
-                    case DessertType.Dessert3:
-                        GameStateManager.instance.Dessert3Level -= 1;
-                        break;
-                    case DessertType.Dessert4:
-                        GameStateManager.instance.Dessert4Level -= 1;
-                        break;
-                    case DessertType.Dessert5:
-                        GameStateManager.instance.Dessert5Level -= 1;
-                        break;
-                    case DessertType.Dessert6:
-                        GameStateManager.instance.Dessert6Level -= 1;
-                        break;
-                    case DessertType.Dessert7:
-                        GameStateManager.instance.Dessert7Level -= 1;
-                        break;
-                    case DessertType.Dessert8:
-                        GameStateManager.instance.Dessert8Level -= 1;
-                        break;
-                    case DessertType.Dessert9:
-                        GameStateManager.instance.Dessert9Level -= 1;
-                        break;
-                    case DessertType.FruitSkewers:
-                        GameStateManager.instance.Dessert10Level -= 1;
-                        break;
-                }
-                break;
-        }
+        GameStateManager.instance.FoodLevel[(int)GameStateManager.instance.FoodType] -= 1;
     }
 
     IEnumerator MaxLevelUpgradeSuccessCoroution()
@@ -4141,7 +2448,6 @@ public class GameManager : MonoBehaviour
             yield return maxLevelSecond;
         }
 
-        CheckFoodLevelUp();
         UpgradeInitialize();
 
         MaxLevelUpgradeSuccess();
@@ -4195,283 +2501,15 @@ public class GameManager : MonoBehaviour
 
     void SaveFoodLevel(int level)
     {
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
-                switch (GameStateManager.instance.FoodType)
-                {
-                    case FoodType.Food1:
-                        GameStateManager.instance.Food1Level = level;
-                        break;
-                    case FoodType.Food2:
-                        GameStateManager.instance.Food2Level = level;
-                        break;
-                    case FoodType.Food3:
-                        GameStateManager.instance.Food3Level = level;
-                        break;
-                    case FoodType.Food4:
-                        GameStateManager.instance.Food4Level = level;
-                        break;
-                    case FoodType.Food5:
-                        GameStateManager.instance.Food5Level = level;
-                        break;
-                    case FoodType.Food6:
-                        GameStateManager.instance.Food6Level = level;
-                        break;
-                    case FoodType.Food7:
-                        GameStateManager.instance.Food7Level = level;
-                        break;
-                    case FoodType.Ribs:
-                        GameStateManager.instance.Food8Level = level;
-                        break;
-                }
-                break;
-            case IslandType.Island2:
-                switch (GameStateManager.instance.CandyType)
-                {
-                    case CandyType.Candy1:
-                        GameStateManager.instance.Candy1Level = level;
-                        break;
-                    case CandyType.Candy2:
-                        GameStateManager.instance.Candy2Level = level;
-                        break;
-                    case CandyType.Candy3:
-                        GameStateManager.instance.Candy3Level = level;
-                        break;
-                    case CandyType.Candy4:
-                        GameStateManager.instance.Candy4Level = level;
-                        break;
-                    case CandyType.Candy5:
-                        GameStateManager.instance.Candy5Level = level;
-                        break;
-                    case CandyType.Candy6:
-                        GameStateManager.instance.Candy6Level = level;
-                        break;
-                    case CandyType.Candy7:
-                        GameStateManager.instance.Candy7Level = level;
-                        break;
-                    case CandyType.Candy8:
-                        GameStateManager.instance.Candy8Level = level;
-                        break;
-                    case CandyType.Candy9:
-                        GameStateManager.instance.Candy9Level = level;
-                        break;
-                    case CandyType.Chocolate:
-                        GameStateManager.instance.Candy10Level = level;
-                        break;
-                }
-                break;
-            case IslandType.Island3:
-                switch (GameStateManager.instance.JapaneseFoodType)
-                {
-                    case JapaneseFoodType.JapaneseFood1:
-                        GameStateManager.instance.JapaneseFood1Level = level;
-                        break;
-                    case JapaneseFoodType.JapaneseFood2:
-                        GameStateManager.instance.JapaneseFood2Level = level;
-                        break;
-                    case JapaneseFoodType.JapaneseFood3:
-                        GameStateManager.instance.JapaneseFood3Level = level;
-                        break;
-                    case JapaneseFoodType.JapaneseFood4:
-                        GameStateManager.instance.JapaneseFood4Level = level;
-                        break;
-                    case JapaneseFoodType.JapaneseFood5:
-                        GameStateManager.instance.JapaneseFood5Level = level;
-                        break;
-                    case JapaneseFoodType.JapaneseFood6:
-                        GameStateManager.instance.JapaneseFood6Level = level;
-                        break;
-                    case JapaneseFoodType.JapaneseFood7:
-                        GameStateManager.instance.JapaneseFood7Level = level;
-                        break;
-                    case JapaneseFoodType.Ramen:
-                        GameStateManager.instance.JapaneseFood8Level = level;
-                        break;
-                }
-                break;
-            case IslandType.Island4:
-                switch (GameStateManager.instance.DessertType)
-                {
-                    case DessertType.Dessert1:
-                        GameStateManager.instance.Dessert1Level = level;
-                        break;
-                    case DessertType.Dessert2:
-                        GameStateManager.instance.Dessert2Level = level;
-                        break;
-                    case DessertType.Dessert3:
-                        GameStateManager.instance.Dessert3Level = level;
-                        break;
-                    case DessertType.Dessert4:
-                        GameStateManager.instance.Dessert4Level = level;
-                        break;
-                    case DessertType.Dessert5:
-                        GameStateManager.instance.Dessert5Level = level;
-                        break;
-                    case DessertType.Dessert6:
-                        GameStateManager.instance.Dessert6Level = level;
-                        break;
-                    case DessertType.Dessert7:
-                        GameStateManager.instance.Dessert7Level = level;
-                        break;
-                    case DessertType.Dessert8:
-                        GameStateManager.instance.Dessert8Level = level;
-                        break;
-                    case DessertType.Dessert9:
-                        GameStateManager.instance.Dessert9Level = level;
-                        break;
-                    case DessertType.FruitSkewers:
-                        GameStateManager.instance.Dessert10Level = level;
-                        break;
-                }
-                break;
-        }
+        GameStateManager.instance.FoodLevel[(int)GameStateManager.instance.FoodType] = level;
     }
 
-    public void RecoverFood(FoodType type)
+    public void RecoverFood(RankFoodType type)
     {
-        switch (type)
-        {
-            case FoodType.Food1:
-                GameStateManager.instance.Food1Level = recoverLevel;
-                break;
-            case FoodType.Food2:
-                GameStateManager.instance.Food2Level = recoverLevel;
-                break;
-            case FoodType.Food3:
-                GameStateManager.instance.Food3Level = recoverLevel;
-                break;
-            case FoodType.Food4:
-                GameStateManager.instance.Food4Level = recoverLevel;
-                break;
-            case FoodType.Food5:
-                GameStateManager.instance.Food5Level = recoverLevel;
-                break;
-            case FoodType.Food6:
-                GameStateManager.instance.Food6Level = recoverLevel;
-                break;
-            case FoodType.Food7:
-                GameStateManager.instance.Food7Level = recoverLevel;
-                break;
-            case FoodType.Ribs:
-                GameStateManager.instance.Food8Level = recoverLevel;
-                break;
-        }
+        GameStateManager.instance.RankFoodLevel[(int)type] = recoverLevel;
 
-        ChangeFood(type);
+        ChangeRankFood(type);
     }
-
-    public void RecoverCandy(CandyType type)
-    {
-        switch (type)
-        {
-            case CandyType.Candy1:
-                GameStateManager.instance.Candy1Level = recoverLevel;
-                break;
-            case CandyType.Candy2:
-                GameStateManager.instance.Candy2Level = recoverLevel;
-                break;
-            case CandyType.Candy3:
-                GameStateManager.instance.Candy3Level = recoverLevel;
-                break;
-            case CandyType.Candy4:
-                GameStateManager.instance.Candy4Level = recoverLevel;
-                break;
-            case CandyType.Candy5:
-                GameStateManager.instance.Candy5Level = recoverLevel;
-                break;
-            case CandyType.Candy6:
-                GameStateManager.instance.Candy6Level = recoverLevel;
-                break;
-            case CandyType.Candy7:
-                GameStateManager.instance.Candy7Level = recoverLevel;
-                break;
-            case CandyType.Candy8:
-                GameStateManager.instance.Candy8Level = recoverLevel;
-                break;
-            case CandyType.Candy9:
-                GameStateManager.instance.Candy9Level = recoverLevel;
-                break;
-            case CandyType.Chocolate:
-                GameStateManager.instance.Candy10Level = recoverLevel;
-                break;
-        }
-
-        ChangeCandy(type);
-    }
-
-    public void RecoverJapanese(JapaneseFoodType type)
-    {
-        switch (type)
-        {
-            case JapaneseFoodType.JapaneseFood1:
-                GameStateManager.instance.JapaneseFood1Level = recoverLevel;
-                break;
-            case JapaneseFoodType.JapaneseFood2:
-                GameStateManager.instance.JapaneseFood2Level = recoverLevel;
-                break;
-            case JapaneseFoodType.JapaneseFood3:
-                GameStateManager.instance.JapaneseFood3Level = recoverLevel;
-                break;
-            case JapaneseFoodType.JapaneseFood4:
-                GameStateManager.instance.JapaneseFood4Level = recoverLevel;
-                break;
-            case JapaneseFoodType.JapaneseFood5:
-                GameStateManager.instance.JapaneseFood5Level = recoverLevel;
-                break;
-            case JapaneseFoodType.JapaneseFood6:
-                GameStateManager.instance.JapaneseFood6Level = recoverLevel;
-                break;
-            case JapaneseFoodType.JapaneseFood7:
-                GameStateManager.instance.JapaneseFood7Level = recoverLevel;
-                break;
-            case JapaneseFoodType.Ramen:
-                GameStateManager.instance.JapaneseFood8Level = recoverLevel;
-                break;
-        }
-
-        ChangeJapaneseFood(type);
-    }
-
-    public void RecoverDessert(DessertType type)
-    {
-        switch (type)
-        {
-            case DessertType.Dessert1:
-                GameStateManager.instance.Dessert1Level = recoverLevel;
-                break;
-            case DessertType.Dessert2:
-                GameStateManager.instance.Dessert2Level = recoverLevel;
-                break;
-            case DessertType.Dessert3:
-                GameStateManager.instance.Dessert3Level = recoverLevel;
-                break;
-            case DessertType.Dessert4:
-                GameStateManager.instance.Dessert4Level = recoverLevel;
-                break;
-            case DessertType.Dessert5:
-                GameStateManager.instance.Dessert5Level = recoverLevel;
-                break;
-            case DessertType.Dessert6:
-                GameStateManager.instance.Dessert6Level = recoverLevel;
-                break;
-            case DessertType.Dessert7:
-                GameStateManager.instance.Dessert7Level = recoverLevel;
-                break;
-            case DessertType.Dessert8:
-                GameStateManager.instance.Dessert8Level = recoverLevel;
-                break;
-            case DessertType.Dessert9:
-                GameStateManager.instance.Dessert9Level = recoverLevel;
-                break;
-            case DessertType.FruitSkewers:
-                GameStateManager.instance.Dessert10Level = recoverLevel;
-                break;
-        }
-
-        ChangeDessert(type);
-    }
-
     public void SetParticle(bool check)
     {
         if(check)
@@ -4502,148 +2540,8 @@ public class GameManager : MonoBehaviour
     void DestoryFood()
     {
         level = 0;
-        nextLevel = 0;
 
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
-                switch (GameStateManager.instance.FoodType)
-                {
-                    case FoodType.Food1:
-                        GameStateManager.instance.Food1Level = 0;
-                        break;
-                    case FoodType.Food2:
-                        GameStateManager.instance.Food2Level = 0;
-                        break;
-                    case FoodType.Food3:
-                        GameStateManager.instance.Food3Level = 0;
-                        break;
-                    case FoodType.Food4:
-                        GameStateManager.instance.Food4Level = 0;
-                        break;
-                    case FoodType.Food5:
-                        GameStateManager.instance.Food5Level = 0;
-                        break;
-                    case FoodType.Food6:
-                        GameStateManager.instance.Food6Level = 0;
-                        break;
-                    case FoodType.Food7:
-                        GameStateManager.instance.Food7Level = 0;
-                        break;
-                    case FoodType.Ribs:
-                        GameStateManager.instance.Food8Level = 0;
-                        break;
-                }
-
-                FirebaseAnalytics.LogEvent("Destroy_" + GameStateManager.instance.FoodType);
-
-                break;
-            case IslandType.Island2:
-                switch (GameStateManager.instance.CandyType)
-                {
-                    case CandyType.Candy1:
-                        GameStateManager.instance.Candy1Level = 0;
-                        break;
-                    case CandyType.Candy2:
-                        GameStateManager.instance.Candy2Level = 0;
-                        break;
-                    case CandyType.Candy3:
-                        GameStateManager.instance.Candy3Level = 0;
-                        break;
-                    case CandyType.Candy4:
-                        GameStateManager.instance.Candy4Level = 0;
-                        break;
-                    case CandyType.Candy5:
-                        GameStateManager.instance.Candy5Level = 0;
-                        break;
-                    case CandyType.Candy6:
-                        GameStateManager.instance.Candy6Level = 0;
-                        break;
-                    case CandyType.Candy7:
-                        GameStateManager.instance.Candy7Level = 0;
-                        break;
-                    case CandyType.Candy8:
-                        GameStateManager.instance.Candy8Level = 0;
-                        break;
-                    case CandyType.Candy9:
-                        GameStateManager.instance.Candy9Level = 0;
-                        break;
-                    case CandyType.Chocolate:
-                        GameStateManager.instance.Candy10Level = 0;
-                        break;
-                }
-
-                FirebaseAnalytics.LogEvent("Destroy_" + GameStateManager.instance.CandyType);
-                break;
-            case IslandType.Island3:
-                switch (GameStateManager.instance.JapaneseFoodType)
-                {
-                    case JapaneseFoodType.JapaneseFood1:
-                        GameStateManager.instance.JapaneseFood1Level = 0;
-                        break;
-                    case JapaneseFoodType.JapaneseFood2:
-                        GameStateManager.instance.JapaneseFood2Level = 0;
-                        break;
-                    case JapaneseFoodType.JapaneseFood3:
-                        GameStateManager.instance.JapaneseFood3Level = 0;
-                        break;
-                    case JapaneseFoodType.JapaneseFood4:
-                        GameStateManager.instance.JapaneseFood4Level = 0;
-                        break;
-                    case JapaneseFoodType.JapaneseFood5:
-                        GameStateManager.instance.JapaneseFood5Level = 0;
-                        break;
-                    case JapaneseFoodType.JapaneseFood6:
-                        GameStateManager.instance.JapaneseFood6Level = 0;
-                        break;
-                    case JapaneseFoodType.JapaneseFood7:
-                        GameStateManager.instance.JapaneseFood7Level = 0;
-                        break;
-                    case JapaneseFoodType.Ramen:
-                        GameStateManager.instance.JapaneseFood8Level = 0;
-                        break;
-                }
-
-                FirebaseAnalytics.LogEvent("Destroy_" + GameStateManager.instance.JapaneseFoodType);
-                break;
-            case IslandType.Island4:
-                switch (GameStateManager.instance.DessertType)
-                {
-                    case DessertType.Dessert1:
-                        GameStateManager.instance.Dessert1Level = 0;
-                        break;
-                    case DessertType.Dessert2:
-                        GameStateManager.instance.Dessert2Level = 0;
-                        break;
-                    case DessertType.Dessert3:
-                        GameStateManager.instance.Dessert3Level = 0;
-                        break;
-                    case DessertType.Dessert4:
-                        GameStateManager.instance.Dessert4Level = 0;
-                        break;
-                    case DessertType.Dessert5:
-                        GameStateManager.instance.Dessert5Level = 0;
-                        break;
-                    case DessertType.Dessert6:
-                        GameStateManager.instance.Dessert6Level = 0;
-                        break;
-                    case DessertType.Dessert7:
-                        GameStateManager.instance.Dessert7Level = 0;
-                        break;
-                    case DessertType.Dessert8:
-                        GameStateManager.instance.Dessert8Level = 0;
-                        break;
-                    case DessertType.Dessert9:
-                        GameStateManager.instance.Dessert9Level = 0;
-                        break;
-                    case DessertType.FruitSkewers:
-                        GameStateManager.instance.Dessert10Level = 0;
-                        break;
-                }
-
-                FirebaseAnalytics.LogEvent("Destroy_" + GameStateManager.instance.DessertType);
-                break;
-        }
+        GameStateManager.instance.FoodLevel[(int)GameStateManager.instance.FoodType] = 0;
     }
 
     void CheckFever()
@@ -4774,513 +2672,35 @@ public class GameManager : MonoBehaviour
             tutorialManager.Next1();
         }
 
-        switch (GameStateManager.instance.IslandType)
+        changeFoodAlarmObj.SetActive(true);
+        moveArrow3.SetActive(true);
+
+        if (playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].GetValue(GameStateManager.instance.FoodType) == 0)
         {
-            case IslandType.Island1:
-                switch (GameStateManager.instance.FoodType)
-                {
-                    case FoodType.Food1:
-                        playerDataBase.Food1MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("HamburgerMaxValue", playerDataBase.Food1MaxValue);
-
-                        if (playerDataBase.NextFoodNumber == 0)
-                        {
-                            playerDataBase.NextFoodNumber = 1;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food2);
-                            changeFoodAlarmObj.SetActive(true);
-
-                            if(playerDataBase.InGameTutorial == 1)
-                            {
-                                moveArrow3.SetActive(true);
-                            }
-                        }
-
-                        lockManager.UnLocked(1);
-
-                        break;
-                    case FoodType.Food2:
-                        playerDataBase.Food2MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SandwichMaxValue", playerDataBase.Food2MaxValue);
-
-                        if (playerDataBase.NextFoodNumber == 1)
-                        {
-                            playerDataBase.NextFoodNumber = 2;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food3);
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-
-                            homeButton.SetActive(true);
-                        }
-
-                        lockManager.UnLocked(2);
-
-                        break;
-                    case FoodType.Food3:
-                        playerDataBase.Food3MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SnackLabMaxValue", playerDataBase.Food3MaxValue);
-
-                        if (playerDataBase.NextFoodNumber == 2)
-                        {
-                            playerDataBase.NextFoodNumber = 3;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food4);
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-
-                            if (GameStateManager.instance.StoreType != StoreType.OneStore)
-                            {
-                                shopManager.OpenLimitPackage();
-                            }
-                        }
-
-                        lockManager.UnLocked(3);
-
-                        break;
-                    case FoodType.Food4:
-                        playerDataBase.Food4MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DrinkMaxValue", playerDataBase.Food4MaxValue);
-
-                        if (playerDataBase.NextFoodNumber == 3)
-                        {
-                            playerDataBase.NextFoodNumber = 4;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food5);
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-
-                            //if (playerDataBase.DrinkMaxValue == 1)
-                            //{
-                            //    tutorialManager.Next2();
-                            //}
-                        }
-
-                        lockManager.UnLocked(4);
-
-                        break;
-                    case FoodType.Food5:
-                        playerDataBase.Food5MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("PizzaMaxValue", playerDataBase.Food5MaxValue);
-
-                        if (playerDataBase.NextFoodNumber == 4)
-                        {
-                            playerDataBase.NextFoodNumber = 5;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food6);
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-
-                        lockManager.UnLocked(5);
-
-                        break;
-                    case FoodType.Food6:
-                        playerDataBase.Food6MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("DonutMaxValue", playerDataBase.Food6MaxValue);
-
-                        if (playerDataBase.NextFoodNumber == 5)
-                        {
-                            playerDataBase.NextFoodNumber = 6;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-
-                            changeFoodManager.ChangeFoodMoveArrow(FoodType.Food7);
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-
-                        lockManager.UnLocked(6);
-
-                        break;
-                    case FoodType.Food7:
-                        playerDataBase.Food7MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("FriesMaxValue", playerDataBase.Food7MaxValue);
-
-                        if (playerDataBase.IslandNumber <= 0)
-                        {
-                            playerDataBase.IslandNumber = 1;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
-
-                            changeFoodManager.islandAlarm.SetActive(true);
-                        }
-
-                        lockManager.UnLocked(7);
-
-                        break;
-                    case FoodType.Ribs:
-
-                        break;
-                }
-
-                FirebaseAnalytics.LogEvent("MaxLevel_" + GameStateManager.instance.FoodType);
-                break;
-            case IslandType.Island2:
-                switch (GameStateManager.instance.CandyType)
-                {
-                    case CandyType.Candy1:
-                        playerDataBase.Candy1MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy1MaxValue", playerDataBase.Candy1MaxValue);
-
-                        if (playerDataBase.NextFoodNumber2 == 0)
-                        {
-                            playerDataBase.NextFoodNumber2 = 1;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-
-                        break;
-                    case CandyType.Candy2:
-                        playerDataBase.Candy2MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy2MaxValue", playerDataBase.Candy2MaxValue);
-
-                        if (playerDataBase.NextFoodNumber2 == 1)
-                        {
-                            playerDataBase.NextFoodNumber2 = 2;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-
-                        break;
-                    case CandyType.Candy3:
-                        playerDataBase.Candy3MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy3MaxValue", playerDataBase.Candy3MaxValue);
-
-                        if (playerDataBase.NextFoodNumber2 == 2)
-                        {
-                            playerDataBase.NextFoodNumber2 = 3;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case CandyType.Candy4:
-                        playerDataBase.Candy4MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy4MaxValue", playerDataBase.Candy4MaxValue);
-
-                        if (playerDataBase.NextFoodNumber2 == 3)
-                        {
-                            playerDataBase.NextFoodNumber2 = 4;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case CandyType.Candy5:
-                        playerDataBase.Candy5MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy5MaxValue", playerDataBase.Candy5MaxValue);
-
-                        if (playerDataBase.NextFoodNumber2 == 4)
-                        {
-                            playerDataBase.NextFoodNumber2 = 5;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case CandyType.Candy6:
-                        playerDataBase.Candy6MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy6MaxValue", playerDataBase.Candy6MaxValue);
-
-                        if (playerDataBase.NextFoodNumber2 == 5)
-                        {
-                            playerDataBase.NextFoodNumber2 = 6;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case CandyType.Candy7:
-                        playerDataBase.Candy7MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy7MaxValue", playerDataBase.Candy7MaxValue);
-
-                        if (playerDataBase.NextFoodNumber2 == 6)
-                        {
-                            playerDataBase.NextFoodNumber2 = 7;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case CandyType.Candy8:
-                        playerDataBase.Candy8MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy8MaxValue", playerDataBase.Candy8MaxValue);
-
-                        if (playerDataBase.NextFoodNumber2 == 7)
-                        {
-                            playerDataBase.NextFoodNumber2 = 8;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case CandyType.Candy9:
-                        playerDataBase.Candy9MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Candy9MaxValue", playerDataBase.Candy9MaxValue);
-
-                        if (playerDataBase.IslandNumber <= 1)
-                        {
-                            playerDataBase.IslandNumber = 2;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
-
-                            changeFoodManager.islandAlarm.SetActive(true);
-                        }
-
-                        break;
-                    case CandyType.Chocolate:
-
-                        break;
-                }
-
-                FirebaseAnalytics.LogEvent("MaxLevel_" + GameStateManager.instance.CandyType);
-
-                break;
-            case IslandType.Island3:
-                switch (GameStateManager.instance.JapaneseFoodType)
-                {
-                    case JapaneseFoodType.JapaneseFood1:
-                        playerDataBase.JapaneseFood1MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood1MaxValue", playerDataBase.JapaneseFood1MaxValue);
-
-                        if (playerDataBase.NextFoodNumber3 == 0)
-                        {
-                            playerDataBase.NextFoodNumber3 = 1;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood2:
-                        playerDataBase.JapaneseFood2MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood2MaxValue", playerDataBase.JapaneseFood2MaxValue);
-
-                        if (playerDataBase.NextFoodNumber3 == 1)
-                        {
-                            playerDataBase.NextFoodNumber3 = 2;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood3:
-                        playerDataBase.JapaneseFood3MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood3MaxValue", playerDataBase.JapaneseFood3MaxValue);
-
-                        if (playerDataBase.NextFoodNumber3 == 2)
-                        {
-                            playerDataBase.NextFoodNumber3 = 3;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood4:
-                        playerDataBase.JapaneseFood4MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood4MaxValue", playerDataBase.JapaneseFood4MaxValue);
-
-                        if (playerDataBase.NextFoodNumber3 == 3)
-                        {
-                            playerDataBase.NextFoodNumber3 = 4;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood5:
-                        playerDataBase.JapaneseFood5MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood5MaxValue", playerDataBase.JapaneseFood5MaxValue);
-
-                        if (playerDataBase.NextFoodNumber3 == 4)
-                        {
-                            playerDataBase.NextFoodNumber3 = 5;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood6:
-                        playerDataBase.JapaneseFood6MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood6MaxValue", playerDataBase.JapaneseFood6MaxValue);
-
-                        if (playerDataBase.NextFoodNumber3 == 5)
-                        {
-                            playerDataBase.NextFoodNumber3 = 6;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case JapaneseFoodType.JapaneseFood7:
-                        playerDataBase.JapaneseFood7MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("JapaneseFood7MaxValue", playerDataBase.JapaneseFood7MaxValue);
-
-                        if (playerDataBase.IslandNumber <= 2)
-                        {
-                            playerDataBase.IslandNumber = 3;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
-
-                            changeFoodManager.islandAlarm.SetActive(true);
-                        }
-
-                        break;
-                    case JapaneseFoodType.Ramen:
-
-                        break;
-                }
-
-                FirebaseAnalytics.LogEvent("MaxLevel_" + GameStateManager.instance.JapaneseFoodType);
-
-                break;
-            case IslandType.Island4:
-                switch (GameStateManager.instance.DessertType)
-                {
-                    case DessertType.Dessert1:
-                        playerDataBase.Dessert1MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert1MaxValue", playerDataBase.Dessert1MaxValue);
-
-                        if (playerDataBase.NextFoodNumber4 == 0)
-                        {
-                            playerDataBase.NextFoodNumber4 = 1;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case DessertType.Dessert2:
-                        playerDataBase.Dessert2MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert2MaxValue", playerDataBase.Dessert2MaxValue);
-
-                        if (playerDataBase.NextFoodNumber4 == 1)
-                        {
-                            playerDataBase.NextFoodNumber4 = 2;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case DessertType.Dessert3:
-                        playerDataBase.Dessert3MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert3MaxValue", playerDataBase.Dessert3MaxValue);
-
-                        if (playerDataBase.NextFoodNumber4 == 2)
-                        {
-                            playerDataBase.NextFoodNumber4 = 3;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case DessertType.Dessert4:
-                        playerDataBase.Dessert4MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert4MaxValue", playerDataBase.Dessert4MaxValue);
-
-                        if (playerDataBase.NextFoodNumber4 == 3)
-                        {
-                            playerDataBase.NextFoodNumber4 = 4;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case DessertType.Dessert5:
-                        playerDataBase.Dessert5MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert5MaxValue", playerDataBase.Dessert5MaxValue);
-
-                        if (playerDataBase.NextFoodNumber4 == 4)
-                        {
-                            playerDataBase.NextFoodNumber4 = 5;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case DessertType.Dessert6:
-                        playerDataBase.Dessert6MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert6MaxValue", playerDataBase.Dessert6MaxValue);
-
-                        if (playerDataBase.NextFoodNumber4 == 5)
-                        {
-                            playerDataBase.NextFoodNumber4 = 6;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case DessertType.Dessert7:
-                        playerDataBase.Dessert7MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert7MaxValue", playerDataBase.Dessert7MaxValue);
-
-                        if (playerDataBase.NextFoodNumber4 == 6)
-                        {
-                            playerDataBase.NextFoodNumber4 = 7;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case DessertType.Dessert8:
-                        playerDataBase.Dessert8MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert8MaxValue", playerDataBase.Dessert8MaxValue);
-
-                        if (playerDataBase.NextFoodNumber4 == 7)
-                        {
-                            playerDataBase.NextFoodNumber4 = 8;
-                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
-
-                            changeFoodAlarmObj.SetActive(true);
-                            moveArrow3.SetActive(true);
-                        }
-                        break;
-                    case DessertType.Dessert9:
-                        playerDataBase.Dessert9MaxValue += 1;
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("Dessert9MaxValue", playerDataBase.Dessert9MaxValue);
-
-                        //if (playerDataBase.IslandNumber <= 3)
-                        //{
-                        //    playerDataBase.IslandNumber = 4;
-                        //    PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
-                        //}
-
-                        break;
-                    case DessertType.FruitSkewers:
-                        break;
-                }
-
-                FirebaseAnalytics.LogEvent("MaxLevel_" + GameStateManager.instance.DessertType);
-
-                break;
+            changeFoodManager.ChangeFoodMoveArrow(GameStateManager.instance.FoodType + 1);
         }
 
-        //FirebaseAnalytics.LogEvent("MaxLevel");
+        lockManager.UnLocked((int)GameStateManager.instance.FoodType + 1);
 
-        //questManager.CheckGoal();
+        if (playerDataBase.NextFoodNumber == (int)GameStateManager.instance.FoodType)
+        {
+            playerDataBase.NextFoodNumber = (int)GameStateManager.instance.FoodType + 1;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+        }
+        
+        playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].SetValue(GameStateManager.instance.FoodType, 1);
+
+        playerData.Clear();
+        playerData.Add("Island_Total_Data", JsonUtility.ToJson(playerDataBase.island_Total_Data));
+        PlayfabManager.instance.SetPlayerData(playerData);
+
+        if (playerDataBase.IslandNumber == (int)GameStateManager.instance.FoodType / 8) //¼¶ °³¹æ
+        {
+            playerDataBase.IslandNumber = ((int)GameStateManager.instance.FoodType / 8) + 1;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
+        }
+
+
         changeFoodManager.CheckProficiency();
         UpgradeInitialize();
     }
@@ -5449,163 +2869,15 @@ public class GameManager : MonoBehaviour
 
     void CheckRareFood()
     {
-        switch (GameStateManager.instance.IslandType)
-        {
-            case IslandType.Island1:
+        playerDataBase.island_Total_Data.island_Rare_Datas[(int)GameStateManager.instance.IslandType].SetValue(GameStateManager.instance.FoodType, 1);
 
-                island1RareData = playerDataBase.island1RareData;
+        playerData.Clear();
+        playerData.Add("Island_Total_Data", JsonUtility.ToJson(playerDataBase.island_Total_Data));
+        PlayfabManager.instance.SetPlayerData(playerData);
 
-                switch (GameStateManager.instance.FoodType)
-                {
-                    case FoodType.Food1:
-                        island1RareData.index1 += 1;
-                        break;
-                    case FoodType.Food2:
-                        island1RareData.index2 += 1;
-                        break;
-                    case FoodType.Food3:
-                        island1RareData.index3 += 1;
-                        break;
-                    case FoodType.Food4:
-                        island1RareData.index4 += 1;
-                        break;
-                    case FoodType.Food5:
-                        island1RareData.index5 += 1;
-                        break;
-                    case FoodType.Food6:
-                        island1RareData.index6 += 1;
-                        break;
-                    case FoodType.Food7:
-                        island1RareData.index7 += 1;
-                        break;
-                }
+        FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.FoodType);
 
-                playerData.Clear();
-                playerData.Add("Island1RareData", JsonUtility.ToJson(island1RareData));
-                PlayfabManager.instance.SetPlayerData(playerData);
-
-                FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.FoodType);
-                break;
-            case IslandType.Island2:
-
-                island2RareData = playerDataBase.island2RareData;
-
-                switch (GameStateManager.instance.CandyType)
-                {
-                    case CandyType.Candy1:
-                        island2RareData.index1 += 1;
-                        break;
-                    case CandyType.Candy2:
-                        island2RareData.index2 += 1;
-                        break;
-                    case CandyType.Candy3:
-                        island2RareData.index3 += 1;
-                        break;
-                    case CandyType.Candy4:
-                        island2RareData.index4 += 1;
-                        break;
-                    case CandyType.Candy5:
-                        island2RareData.index5 += 1;
-                        break;
-                    case CandyType.Candy6:
-                        island2RareData.index6 += 1;
-                        break;
-                    case CandyType.Candy7:
-                        island2RareData.index7 += 1;
-                        break;
-                    case CandyType.Candy8:
-                        island2RareData.index8 += 1;
-                        break;
-                    case CandyType.Candy9:
-                        island2RareData.index9 += 1;
-                        break;
-                }
-
-                playerData.Clear();
-                playerData.Add("Island2RareData", JsonUtility.ToJson(island2RareData));
-                PlayfabManager.instance.SetPlayerData(playerData);
-
-                FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.CandyType);
-                break;
-            case IslandType.Island3:
-
-                island3RareData = playerDataBase.island3RareData;
-
-                switch (GameStateManager.instance.JapaneseFoodType)
-                {
-                    case JapaneseFoodType.JapaneseFood1:
-                        island3RareData.index1 += 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood2:
-                        island3RareData.index2 += 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood3:
-                        island3RareData.index3 += 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood4:
-                        island3RareData.index4 += 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood5:
-                        island3RareData.index5 += 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood6:
-                        island3RareData.index6 += 1;
-                        break;
-                    case JapaneseFoodType.JapaneseFood7:
-                        island3RareData.index7 += 1;
-                        break;
-                }
-
-                playerData.Clear();
-                playerData.Add("Island3RareData", JsonUtility.ToJson(island3RareData));
-                PlayfabManager.instance.SetPlayerData(playerData);
-
-                FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.JapaneseFoodType);
-                break;
-            case IslandType.Island4:
-
-                island4RareData = playerDataBase.island4RareData;
-
-                switch (GameStateManager.instance.DessertType)
-                {
-                    case DessertType.Dessert1:
-                        island4RareData.index1 += 1;
-                        break;
-                    case DessertType.Dessert2:
-                        island4RareData.index2 += 1;
-                        break;
-                    case DessertType.Dessert3:
-                        island4RareData.index3 += 1;
-                        break;
-                    case DessertType.Dessert4:
-                        island4RareData.index4 += 1;
-                        break;
-                    case DessertType.Dessert5:
-                        island4RareData.index5 += 1;
-                        break;
-                    case DessertType.Dessert6:
-                        island4RareData.index6 += 1;
-                        break;
-                    case DessertType.Dessert7:
-                        island4RareData.index7 += 1;
-                        break;
-                    case DessertType.Dessert8:
-                        island4RareData.index8 += 1;
-                        break;
-                    case DessertType.Dessert9:
-                        island4RareData.index9 += 1;
-                        break;
-                }
-
-                playerData.Clear();
-                playerData.Add("Island4RareData", JsonUtility.ToJson(island4RareData));
-                PlayfabManager.instance.SetPlayerData(playerData);
-
-                FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.DessertType);
-                break;
-        }
-
-        Debug.Log("Success Rare Food Book");
+        Debug.Log("Success Rare Food");
     }
 
     public void CheckDefTicket()
@@ -6765,21 +4037,15 @@ public class GameManager : MonoBehaviour
 
     public void GetIsland()
     {
-        playerDataBase.IslandNumber = 3;
+        playerDataBase.IslandNumber = 10;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
     }
 
     public void GetFood()
     {
-        playerDataBase.NextFoodNumber = 6;
-        playerDataBase.NextFoodNumber2 = 8;
-        playerDataBase.NextFoodNumber3 = 6;
-        playerDataBase.NextFoodNumber4 = 8;
+        playerDataBase.NextFoodNumber = System.Enum.GetValues(typeof(IslandType)).Length - 1;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
     }
 
     public void GetMaxLevel()

@@ -151,202 +151,202 @@ public class IconManager : MonoBehaviour
     public void CheckIconUnLock() //아이콘 언락 체크
     {
         number = 1;
-        if (playerDataBase.Candy9MaxValue > 0 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //if (playerDataBase.Candy9MaxValue > 0 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (playerDataBase.JapaneseFood7MaxValue > 0 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (playerDataBase.JapaneseFood7MaxValue > 0 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (playerDataBase.Dessert9MaxValue > 0 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (playerDataBase.Dessert9MaxValue > 0 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Food2MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Food2MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Food3MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Food3MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Food4MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Food4MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Food5MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Food5MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Food6MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Food6MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Candy1MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Candy1MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Candy2MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Candy2MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Candy3MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Candy3MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Candy4MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Candy4MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Candy5MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Candy5MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Candy6MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Candy6MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Candy7MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Candy7MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Candy8MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Candy8MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Candy9MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Candy9MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood1MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood1MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood2MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood2MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood3MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood3MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood4MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood4MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood5MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood5MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood6MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood6MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood7MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.JapaneseFood7MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Dessert1MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Dessert1MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Dessert2MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Dessert2MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Dessert3MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Dessert3MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Dessert4MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Dessert4MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Dessert5MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Dessert5MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Dessert6MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Dessert6MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Dessert7MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Dessert7MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Dessert8MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Dessert8MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
-        number++;
-        if (proficiencyDataBase.GetLevel(playerDataBase.Dessert9MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
-        {
-            GetIcon(number);
-        }
+        //number++;
+        //if (proficiencyDataBase.GetLevel(playerDataBase.Dessert9MaxValue) > maxProficiency || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        //{
+        //    GetIcon(number);
+        //}
 
         number++;
         if (proficiencyDataBase.GetLevel(playerDataBase.RankLevel1) > 199 || playerDataBase.CheckIcon(IconType.Icon_1 + number))

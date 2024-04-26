@@ -138,6 +138,8 @@ public class LockManager : MonoBehaviour
     {
         if (playerDataBase.LockTutorial >= number) return;
 
+        if (number > 7) return;
+
         playerDataBase.LockTutorial = number;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("LockTutorial", number);
         Initialize();

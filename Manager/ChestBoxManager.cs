@@ -194,29 +194,10 @@ public class ChestBoxManager : MonoBehaviour
             epicRewardType = RewardType.Gold2;
 
             normalRewardIcon.sprite = rewardArray[(int)normalRewardType];
-            normalRewardText.text = MoneyUnitString.ToCurrencyString(200000);
+            normalRewardText.text = MoneyUnitString.ToCurrencyString(StageManager.GetGold());
 
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
-            epicRewardText.text = MoneyUnitString.ToCurrencyString(2000000);
-
-            if (playerDataBase.Candy1MaxValue > 0)
-            {
-                normalRewardText.text = MoneyUnitString.ToCurrencyString(500000);
-                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(5000000) + "</size>";
-            }
-
-            if (playerDataBase.JapaneseFood1MaxValue > 0)
-            {
-                normalRewardText.text = MoneyUnitString.ToCurrencyString(1000000);
-                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(10000000) + "</size>";
-            }
-
-            if (playerDataBase.Dessert1MaxValue > 0)
-            {
-                normalRewardText.text = MoneyUnitString.ToCurrencyString(3000000);
-                epicRewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(30000000) + "</size>";
-            }
-
+            epicRewardText.text = MoneyUnitString.ToCurrencyString(StageManager.GetGold() * 10);
         }
         else if (random > 41)
         {
@@ -290,26 +271,8 @@ public class ChestBoxManager : MonoBehaviour
         switch (normalRewardType)
         {
             case RewardType.Gold:
-                if (playerDataBase.Dessert1MaxValue > 0)
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(3000000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(3000000);
-                }
-                else if (playerDataBase.JapaneseFood1MaxValue > 0)
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(1000000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(1000000);
-                }
-                else if (playerDataBase.Candy1MaxValue > 0)
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(500000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(500000);
-                }
-                else
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(200000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(200000);
-                }
+                PlayfabManager.instance.UpdateSellPriceGold(StageManager.GetGold());
+                PlayfabManager.instance.moneyAnimation.PlusMoney(StageManager.GetGold());
                 break;
             case RewardType.Portion1:
                 PortionManager.instance.GetPortion(0, 1);
@@ -353,26 +316,8 @@ public class ChestBoxManager : MonoBehaviour
         switch (epicRewardType)
         {
             case RewardType.Gold2:
-                if (playerDataBase.Dessert1MaxValue > 0)
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(30000000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(30000000);
-                }
-                else if (playerDataBase.JapaneseFood1MaxValue > 0)
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(10000000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(10000000);
-                }
-                else if (playerDataBase.Candy1MaxValue > 0)
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(5000000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(5000000);
-                }
-                else
-                {
-                    PlayfabManager.instance.UpdateSellPriceGold(2000000);
-                    PlayfabManager.instance.moneyAnimation.PlusMoney(2000000);
-                }
+                PlayfabManager.instance.UpdateSellPriceGold(StageManager.GetGold() * 10);
+                PlayfabManager.instance.moneyAnimation.PlusMoney(StageManager.GetGold() * 10);
                 break;
             case RewardType.Portion1:
                 PortionManager.instance.GetPortion(0, Random.Range(5, 11));

@@ -2106,111 +2106,6 @@ public class PlayfabManager : MonoBehaviour
                        case "NextFoodNumber":
                            playerDataBase.NextFoodNumber = statistics.Value;
                            break;
-                       case "NextFoodNumber2":
-                           playerDataBase.NextFoodNumber2 = statistics.Value;
-                           break;
-                       case "NextFoodNumber3":
-                           playerDataBase.NextFoodNumber3 = statistics.Value;
-                           break;
-                       case "NextFoodNumber4":
-                           playerDataBase.NextFoodNumber4 = statistics.Value;
-                           break;
-                       case "HamburgerMaxValue":
-                           playerDataBase.Food1MaxValue = statistics.Value;
-                           break;
-                       case "SandwichMaxValue":
-                           playerDataBase.Food2MaxValue = statistics.Value;
-                           break;
-                       case "SnackLabMaxValue":
-                           playerDataBase.Food3MaxValue = statistics.Value;
-                           break;
-                       case "DrinkMaxValue":
-                           playerDataBase.Food4MaxValue = statistics.Value;
-                           break;
-                       case "PizzaMaxValue":
-                           playerDataBase.Food5MaxValue = statistics.Value;
-                           break;
-                       case "DonutMaxValue":
-                           playerDataBase.Food6MaxValue = statistics.Value;
-                           break;
-                       case "FriesMaxValue":
-                           playerDataBase.Food7MaxValue = statistics.Value;
-                           break;
-                       case "Candy1MaxValue":
-                           playerDataBase.Candy1MaxValue = statistics.Value;
-                           break;
-                       case "Candy2MaxValue":
-                           playerDataBase.Candy2MaxValue = statistics.Value;
-                           break;
-                       case "Candy3MaxValue":
-                           playerDataBase.Candy3MaxValue = statistics.Value;
-                           break;
-                       case "Candy4MaxValue":
-                           playerDataBase.Candy4MaxValue = statistics.Value;
-                           break;
-                       case "Candy5MaxValue":
-                           playerDataBase.Candy5MaxValue = statistics.Value;
-                           break;
-                       case "Candy6MaxValue":
-                           playerDataBase.Candy6MaxValue = statistics.Value;
-                           break;
-                       case "Candy7MaxValue":
-                           playerDataBase.Candy7MaxValue = statistics.Value;
-                           break;
-                       case "Candy8MaxValue":
-                           playerDataBase.Candy8MaxValue = statistics.Value;
-                           break;
-                       case "Candy9MaxValue":
-                           playerDataBase.Candy9MaxValue = statistics.Value;
-                           break;
-                       case "JapaneseFood1MaxValue":
-                           playerDataBase.JapaneseFood1MaxValue = statistics.Value;
-                           break;
-                       case "JapaneseFood2MaxValue":
-                           playerDataBase.JapaneseFood2MaxValue = statistics.Value;
-                           break;
-                       case "JapaneseFood3MaxValue":
-                           playerDataBase.JapaneseFood3MaxValue = statistics.Value;
-                           break;
-                       case "JapaneseFood4MaxValue":
-                           playerDataBase.JapaneseFood4MaxValue = statistics.Value;
-                           break;
-                       case "JapaneseFood5MaxValue":
-                           playerDataBase.JapaneseFood5MaxValue = statistics.Value;
-                           break;
-                       case "JapaneseFood6MaxValue":
-                           playerDataBase.JapaneseFood6MaxValue = statistics.Value;
-                           break;
-                       case "JapaneseFood7MaxValue":
-                           playerDataBase.JapaneseFood7MaxValue = statistics.Value;
-                           break;
-                       case "Dessert1MaxValue":
-                           playerDataBase.Dessert1MaxValue = statistics.Value;
-                           break;
-                       case "Dessert2MaxValue":
-                           playerDataBase.Dessert2MaxValue = statistics.Value;
-                           break;
-                       case "Dessert3MaxValue":
-                           playerDataBase.Dessert3MaxValue = statistics.Value;
-                           break;
-                       case "Dessert4MaxValue":
-                           playerDataBase.Dessert4MaxValue = statistics.Value;
-                           break;
-                       case "Dessert5MaxValue":
-                           playerDataBase.Dessert5MaxValue = statistics.Value;
-                           break;
-                       case "Dessert6MaxValue":
-                           playerDataBase.Dessert6MaxValue = statistics.Value;
-                           break;
-                       case "Dessert7MaxValue":
-                           playerDataBase.Dessert7MaxValue = statistics.Value;
-                           break;
-                       case "Dessert8MaxValue":
-                           playerDataBase.Dessert8MaxValue = statistics.Value;
-                           break;
-                       case "Dessert9MaxValue":
-                           playerDataBase.Dessert9MaxValue = statistics.Value;
-                           break;
                        case "SellCount":
                            playerDataBase.SellCount = statistics.Value;
                            break;
@@ -2528,33 +2423,33 @@ public class PlayfabManager : MonoBehaviour
                        case "RankLevel1":
                            playerDataBase.RankLevel1 = statistics.Value;
 
-                           if(GameStateManager.instance.Food8Level > playerDataBase.RankLevel1)
+                           if(GameStateManager.instance.RankFoodLevel[0] > playerDataBase.RankLevel1)
                            {
-                               GameStateManager.instance.Food8Level = playerDataBase.RankLevel1;
+                               GameStateManager.instance.RankFoodLevel[0] = playerDataBase.RankLevel1;
                            }
                            break;
                        case "RankLevel2":
                            playerDataBase.RankLevel2 = statistics.Value;
 
-                           if (GameStateManager.instance.Candy10Level > playerDataBase.RankLevel2)
+                           if (GameStateManager.instance.RankFoodLevel[1] > playerDataBase.RankLevel2)
                            {
-                               GameStateManager.instance.Candy10Level = playerDataBase.RankLevel2;
+                               GameStateManager.instance.RankFoodLevel[1] = playerDataBase.RankLevel2;
                            }
                            break;
                        case "RankLevel3":
                            playerDataBase.RankLevel3 = statistics.Value;
 
-                           if (GameStateManager.instance.JapaneseFood8Level > playerDataBase.RankLevel3)
+                           if (GameStateManager.instance.RankFoodLevel[2] > playerDataBase.RankLevel3)
                            {
-                               GameStateManager.instance.JapaneseFood8Level = playerDataBase.RankLevel3;
+                               GameStateManager.instance.RankFoodLevel[2] = playerDataBase.RankLevel3;
                            }
                            break;
                        case "RankLevel4":
                            playerDataBase.RankLevel4 = statistics.Value;
 
-                           if (GameStateManager.instance.Dessert10Level > playerDataBase.RankLevel4)
+                           if (GameStateManager.instance.RankFoodLevel[3] > playerDataBase.RankLevel4)
                            {
-                               GameStateManager.instance.Dessert10Level = playerDataBase.RankLevel4;
+                               GameStateManager.instance.RankFoodLevel[3] = playerDataBase.RankLevel4;
                            }
                            break;
                        case "TotalLevel":
@@ -2650,10 +2545,7 @@ public class PlayfabManager : MonoBehaviour
         var request = new GetUserDataRequest() { PlayFabId = GameStateManager.instance.PlayfabId };
         PlayFabClientAPI.GetUserData(request, (result) =>
         {
-            Island1RareData island1RareData = new Island1RareData();
-            Island2RareData island2RareData = new Island2RareData();
-            Island3RareData island3RareData = new Island3RareData();
-            Island4RareData island4RareData = new Island4RareData();
+            Island_Total_Data island_Total_Data = new Island_Total_Data();
             ResetInfo resetInfo = new ResetInfo();
             Equip equip = new Equip();
 
@@ -2670,25 +2562,10 @@ public class PlayfabManager : MonoBehaviour
                     equip = JsonUtility.FromJson<Equip>(eachData.Value.Value);
                     playerDataBase.equip = equip;
                 }
-                else if (key.Contains("Island1RareData"))
+                else if (key.Contains("Island_Total_Data"))
                 {
-                    island1RareData = JsonUtility.FromJson<Island1RareData>(eachData.Value.Value);
-                    playerDataBase.SetIsland1RareData(island1RareData);
-                }
-                else if (key.Contains("Island2RareData"))
-                {
-                    island2RareData = JsonUtility.FromJson<Island2RareData>(eachData.Value.Value);
-                    playerDataBase.SetIsland2RareData(island2RareData);
-                }
-                else if (key.Contains("Island3RareData"))
-                {
-                    island3RareData = JsonUtility.FromJson<Island3RareData>(eachData.Value.Value);
-                    playerDataBase.SetIsland3RareData(island3RareData);
-                }
-                else if (key.Contains("Island4RareData"))
-                {
-                    island4RareData = JsonUtility.FromJson<Island4RareData>(eachData.Value.Value);
-                    playerDataBase.SetIsland4RareData(island4RareData);
+                    island_Total_Data = JsonUtility.FromJson<Island_Total_Data>(eachData.Value.Value);
+                    playerDataBase.island_Total_Data = island_Total_Data;
                 }
             }
 

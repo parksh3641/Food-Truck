@@ -72,11 +72,6 @@ public class FoodContent : MonoBehaviour
 
     public void Initialize(int number)
     {
-        if (number >= 5)
-        {
-            number = 5;
-        }
-
         if(speicalFood)
         {
             transform.localScale = new Vector3(posX += ((size * number) * sizeUp), posY += ((size * number) * sizeUp), posZ += ((size * number) * sizeUp));
@@ -125,7 +120,7 @@ public class FoodContent : MonoBehaviour
         rotation.rotationSpeed = 30;
     }
 
-    public void SpeicalFood(bool check)
+    public void SetSpeicalFood(bool check)
     {
         if(check)
         {

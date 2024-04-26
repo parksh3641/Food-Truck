@@ -71,9 +71,6 @@ public class ReincarnationManager : MonoBehaviour
         lockedAdObj.SetActive(true);
 
         point += playerDataBase.NextFoodNumber * 5;
-        point += playerDataBase.NextFoodNumber2 * 10;
-        point += playerDataBase.NextFoodNumber3 * 20;
-        point += playerDataBase.NextFoodNumber4 * 30;
 
         if (point > 0)
         {
@@ -161,53 +158,16 @@ public class ReincarnationManager : MonoBehaviour
 
         GameStateManager.instance.IslandType = IslandType.Island1;
         GameStateManager.instance.FoodType = FoodType.Food1;
-        GameStateManager.instance.CandyType = CandyType.Candy1;
-        GameStateManager.instance.JapaneseFoodType = JapaneseFoodType.JapaneseFood1;
-        GameStateManager.instance.DessertType = DessertType.Dessert1;
 
-        GameStateManager.instance.Food1Level = 0;
-        GameStateManager.instance.Food2Level = 0;
-        GameStateManager.instance.Food3Level = 0;
-        GameStateManager.instance.Food4Level = 0;
-        GameStateManager.instance.Food5Level = 0;
-        GameStateManager.instance.Food6Level = 0;
-        GameStateManager.instance.Food7Level = 0;
-
-        GameStateManager.instance.Candy1Level = 0;
-        GameStateManager.instance.Candy2Level = 0;
-        GameStateManager.instance.Candy3Level = 0;
-        GameStateManager.instance.Candy4Level = 0;
-        GameStateManager.instance.Candy5Level = 0;
-        GameStateManager.instance.Candy6Level = 0;
-        GameStateManager.instance.Candy7Level = 0;
-        GameStateManager.instance.Candy8Level = 0;
-        GameStateManager.instance.Candy9Level = 0;
-
-        GameStateManager.instance.JapaneseFood1Level = 0;
-        GameStateManager.instance.JapaneseFood2Level = 0;
-        GameStateManager.instance.JapaneseFood3Level = 0;
-        GameStateManager.instance.JapaneseFood4Level = 0;
-        GameStateManager.instance.JapaneseFood5Level = 0;
-        GameStateManager.instance.JapaneseFood6Level = 0;
-        GameStateManager.instance.JapaneseFood7Level = 0;
-
-        GameStateManager.instance.Dessert1Level = 0;
-        GameStateManager.instance.Dessert2Level = 0;
-        GameStateManager.instance.Dessert3Level = 0;
-        GameStateManager.instance.Dessert4Level = 0;
-        GameStateManager.instance.Dessert5Level = 0;
-        GameStateManager.instance.Dessert6Level = 0;
-        GameStateManager.instance.Dessert7Level = 0;
-        GameStateManager.instance.Dessert8Level = 0;
-        GameStateManager.instance.Dessert9Level = 0;
+        for(int i = 0; i < GameStateManager.instance.FoodLevel.Length; i ++)
+        {
+            GameStateManager.instance.FoodLevel[i] = 0;
+        }
 
         playerDataBase.IslandNumber = 0;
         playerDataBase.ReincarnationCount += 1;
 
         playerDataBase.NextFoodNumber = 0;
-        playerDataBase.NextFoodNumber2 = 0;
-        playerDataBase.NextFoodNumber3 = 0;
-        playerDataBase.NextFoodNumber4 = 0;
 
         playerDataBase.YummyTimeCount = 0;
         GameStateManager.instance.YummyTimeCount = 0;
@@ -234,8 +194,5 @@ public class ReincarnationManager : MonoBehaviour
         yield return waitForSeconds;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber2", playerDataBase.NextFoodNumber2);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber3", playerDataBase.NextFoodNumber3);
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber4", playerDataBase.NextFoodNumber4);
     }
 }

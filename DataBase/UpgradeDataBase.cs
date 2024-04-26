@@ -22,24 +22,9 @@ public class UpgradeFood
     public int maxLevel = 0;
 }
 
-[System.Serializable]
-public class UpgradeCandy
+public class UpgradeRankFood
 {
-    public CandyType candyType = CandyType.Candy1;
-    public int maxLevel = 0;
-}
-
-[System.Serializable]
-public class UpgradeJapaneseFood
-{
-    public JapaneseFoodType japaneseFoodType = JapaneseFoodType.JapaneseFood1;
-    public int maxLevel = 0;
-}
-
-[System.Serializable]
-public class UpgradeDessert
-{
-    public DessertType dessertType = DessertType.Dessert1;
+    public RankFoodType rankFoodType = RankFoodType.RankFood1;
     public int maxLevel = 0;
 }
 
@@ -48,12 +33,7 @@ public class UpgradeDataBase : ScriptableObject
 {
     public List<UpgradeFood> upgradeFoodList = new List<UpgradeFood>();
 
-    public List<UpgradeCandy> upgradeCandyList = new List<UpgradeCandy>();
-
-    public List<UpgradeJapaneseFood> upgradeJapaneseFoodList = new List<UpgradeJapaneseFood>();
-
-    public List<UpgradeDessert> upgradeDessertList = new List<UpgradeDessert>();
-
+    public List<UpgradeRankFood> upgradeRankFoodList = new List<UpgradeRankFood>();
 
     public List<UpgradeFoodMagnification> priceList = new List<UpgradeFoodMagnification>();
 
@@ -61,9 +41,11 @@ public class UpgradeDataBase : ScriptableObject
 
     private float need, price, success = 0;
 
+    UpgradeFood food;
+
     public UpgradeFood GetUpgradeFood(FoodType type)
     {
-        UpgradeFood food = new UpgradeFood();
+        food = new UpgradeFood();
 
         for (int i = 0; i < upgradeFoodList.Count; i ++)
         {
@@ -77,7 +59,7 @@ public class UpgradeDataBase : ScriptableObject
         return food;
     }
 
-    public int GetMaxLevelFastFood(FoodType type)
+    public int GetFoodMaxLevel(FoodType type)
     {
         int number = 0;
         for(int i = 0; i < upgradeFoodList.Count; i ++)
@@ -92,102 +74,20 @@ public class UpgradeDataBase : ScriptableObject
         return number;
     }
 
-    public UpgradeCandy GetUpgradeCandy(CandyType type)
-    {
-        UpgradeCandy candy = new UpgradeCandy();
-
-        for (int i = 0; i < upgradeCandyList.Count; i++)
-        {
-            if (upgradeCandyList[i].candyType.Equals(type))
-            {
-                candy = upgradeCandyList[i];
-                break;
-            }
-        }
-
-        return candy;
-    }
-
-    public UpgradeJapaneseFood GetUpgradeJapaneseFood(JapaneseFoodType type)
-    {
-        UpgradeJapaneseFood japaneseFood = new UpgradeJapaneseFood();
-
-        for (int i = 0; i < upgradeJapaneseFoodList.Count; i++)
-        {
-            if (upgradeJapaneseFoodList[i].japaneseFoodType.Equals(type))
-            {
-                japaneseFood = upgradeJapaneseFoodList[i];
-                break;
-            }
-        }
-
-        return japaneseFood;
-    }
-
-    public UpgradeDessert GetUpgradeDessert(DessertType type)
-    {
-        UpgradeDessert dessert = new UpgradeDessert();
-
-        for (int i = 0; i < upgradeDessertList.Count; i++)
-        {
-            if (upgradeDessertList[i].dessertType.Equals(type))
-            {
-                dessert = upgradeDessertList[i];
-                break;
-            }
-        }
-
-        return dessert;
-    }
-
-
-
-    public int GetMaxLevelCandy(CandyType type)
+    public int GetRankFoodMaxLevel(RankFoodType type)
     {
         int number = 0;
-        for (int i = 0; i < upgradeCandyList.Count; i++)
+        for (int i = 0; i < upgradeRankFoodList.Count; i++)
         {
-            if (upgradeCandyList[i].candyType.Equals(type))
+            if (upgradeRankFoodList[i].rankFoodType.Equals(type))
             {
-                number = upgradeCandyList[i].maxLevel;
+                number = upgradeRankFoodList[i].maxLevel;
                 break;
             }
         }
 
         return number;
     }
-
-    public int GetMaxLevelJapaneseFood(JapaneseFoodType type)
-    {
-        int number = 0;
-        for (int i = 0; i < upgradeJapaneseFoodList.Count; i++)
-        {
-            if (upgradeJapaneseFoodList[i].japaneseFoodType.Equals(type))
-            {
-                number = upgradeJapaneseFoodList[i].maxLevel;
-                break;
-            }
-        }
-
-        return number;
-    }
-
-    public int GetMaxLevelDessert(DessertType type)
-    {
-        int number = 0;
-        for (int i = 0; i < upgradeDessertList.Count; i++)
-        {
-            if (upgradeDessertList[i].dessertType.Equals(type))
-            {
-                number = upgradeDessertList[i].maxLevel;
-                break;
-            }
-        }
-
-        return number;
-    }
-
-
 
     public int GetNeed(int level, int value)
     {
@@ -204,24 +104,7 @@ public class UpgradeDataBase : ScriptableObject
             switch (GameStateManager.instance.GameType)
             {
                 case GameType.Story:
-                    switch (GameStateManager.instance.IslandType)
-                    {
-                        case IslandType.Island1:
-                            need = level * value;
-                            break;
-                        case IslandType.Island2:
-                            need = level * value;
-                            need *= 1.1f;
-                            break;
-                        case IslandType.Island3:
-                            need = level * value;
-                            need *= 1.2f;
-                            break;
-                        case IslandType.Island4:
-                            need = level * value;
-                            need *= 1.3f;
-                            break;
-                    }
+                    need = level * value;
                     break;
                 case GameType.Rank:
                     need = level * value;
@@ -258,51 +141,6 @@ public class UpgradeDataBase : ScriptableObject
         }
 
         return (int)price;
-    }
-
-    public float GetSuccess(int level)
-    {
-        success = 0;
-
-        switch (GameStateManager.instance.GameType)
-        {
-            case GameType.Story:
-                if (level > 0)
-                {
-                    switch (GameStateManager.instance.IslandType)
-                    {
-                        case IslandType.Island1:
-                            success = 91 - (level * 1f);
-                            break;
-                        case IslandType.Island2:
-                            success = 71 - (level * 1f);
-                            break;
-                        case IslandType.Island3:
-                            success = 51 - (level * 1f);
-                            break;
-                        case IslandType.Island4:
-                            success = 31 - (level * 1f);
-                            break;
-                    }
-                }
-                else
-                {
-                    success = 100;
-                }
-                break;
-            case GameType.Rank:
-                if (level > 0)
-                {
-                    success = 100 - (level * 1f);
-                }
-                else
-                {
-                    success = 100;
-                }
-                break;
-        }
-
-        return success;
     }
 
 }

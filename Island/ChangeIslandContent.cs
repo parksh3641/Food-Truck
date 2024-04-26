@@ -42,10 +42,12 @@ public class ChangeIslandContent : MonoBehaviour
     IslandManager islandManager;
 
     PlayerDataBase playerDataBase;
+    IslandDataBase islandDataBase;
 
     private void Awake()
     {
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
+        if (islandDataBase == null) islandDataBase = Resources.Load("IslandDataBase") as IslandDataBase;
     }
 
     public void Initialize(IslandType type, Sprite sp, IslandManager manager)
@@ -79,79 +81,11 @@ public class ChangeIslandContent : MonoBehaviour
     public void LevelInitialize()
     {
         titleText.localizationName = islandType.ToString();
-
-        switch (islandType)
-        {
-            case IslandType.Island1:
-                needPriceText.text = playerDataBase.Island1Count + "/" + ((playerDataBase.Island1Level + 1) * 100).ToString();
-                titleText.plusText = "  Lv." + (playerDataBase.Island1Level + 1);
-
-                upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : 90%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " +0%";
-                destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + (10 - (playerDataBase.Island1Level * value)) + "%  (-" + value + "%)";
-
-                if (playerDataBase.Island1Count >= ((playerDataBase.Island1Level + 1) * 100))
-                {
-                    levelUpLockedObj.SetActive(false);
-                }
-                else
-                {
-                    levelUpLockedObj.SetActive(true);
-                }
-                break;
-            case IslandType.Island2:
-                needPriceText.text = playerDataBase.Island2Count + "/" + ((playerDataBase.Island2Level + 1) * 100).ToString();
-                titleText.plusText = "  Lv." + (playerDataBase.Island2Level + 1);
-
-                upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : 70%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " +20%";
-                destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + (20 - (playerDataBase.Island2Level * value)) + "%  (-" + value + "%)";
-
-                if (playerDataBase.Island2Count >= ((playerDataBase.Island2Level + 1) * 100))
-                {
-                    levelUpLockedObj.SetActive(false);
-                }
-                else
-                {
-                    levelUpLockedObj.SetActive(true);
-                }
-                break;
-            case IslandType.Island3:
-                needPriceText.text = playerDataBase.Island3Count + "/" + ((playerDataBase.Island3Level + 1) * 100).ToString();
-                titleText.plusText = "  Lv." + (playerDataBase.Island3Level + 1);
-
-                upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : 50%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " +40%";
-                destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + (30 - (playerDataBase.Island3Level * value)) + "%  (-" + value + "%)";
-
-                if (playerDataBase.Island3Count >= ((playerDataBase.Island3Level + 1) * 100))
-                {
-                    levelUpLockedObj.SetActive(false);
-                }
-                else
-                {
-                    levelUpLockedObj.SetActive(true);
-                }
-                break;
-            case IslandType.Island4:
-                needPriceText.text = playerDataBase.Island4Count + "/" + ((playerDataBase.Island4Level + 1) * 100).ToString();
-                titleText.plusText = "  Lv." + (playerDataBase.Island4Level + 1);
-
-                upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : 30%";
-                sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " +60%";
-                destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + (50 - (playerDataBase.Island4Level * value)) + "%  (-" + value + "%)";
-
-                if (playerDataBase.Island4Count >= ((playerDataBase.Island4Level + 1) * 100))
-                {
-                    levelUpLockedObj.SetActive(false);
-                }
-                else
-                {
-                    levelUpLockedObj.SetActive(true);
-                }
-                break;
-        }
         titleText.ReLoad();
+
+        upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + islandDataBase.GetSuccess(islandType).ToString() + "%";
+        sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : " + islandDataBase.GetSellPrice(islandType).ToString() + " % ";
+        destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + islandDataBase.GetDestroy(islandType).ToString() + "%";
     }
 
     public void SetLevel(float level)

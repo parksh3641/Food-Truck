@@ -42,11 +42,6 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.Level * 200;
             value += playerDataBase.CastleLevel * 200;
 
-            value += playerDataBase.Island1Level * 1000;
-            value += playerDataBase.Island2Level * 1000;
-            value += playerDataBase.Island3Level * 1000;
-            value += playerDataBase.Island4Level * 1000;
-
             value += playerDataBase.Skill1 * 100;
             value += playerDataBase.Skill2 * 100;
             value += playerDataBase.Skill3 * 100;

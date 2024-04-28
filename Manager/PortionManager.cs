@@ -16,7 +16,6 @@ public class PortionManager : MonoBehaviour
     public MoneyAnimation skillTicketAnimation;
     public MoneyAnimation repairTicketAnimation;
     public MoneyAnimation rankPointAnimation;
-    public MoneyAnimation[] islandCountAnimation;
     public MoneyAnimation eventTicketAnimation;
     public MoneyAnimation abilityPointAnimation;
     public MoneyAnimation challengePointAnimation;
@@ -194,34 +193,6 @@ public class PortionManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
         rankPointAnimation.PlusMoney(number);
-
-        equipmentManager.mainAlarm.SetActive(true);
-    }
-
-    [Button]
-    public void GetIslandCount(int index, int number)
-    {
-        switch (index)
-        {
-            case 0:
-                playerDataBase.Island1Count += number;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island1Count", playerDataBase.Island1Count);
-                break;
-            case 1:
-                playerDataBase.Island2Count += number;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island2Count", playerDataBase.Island2Count);
-                break;
-            case 2:
-                playerDataBase.Island3Count += number;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island3Count", playerDataBase.Island3Count);
-                break;
-            case 3:
-                playerDataBase.Island4Count += number;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island4Count", playerDataBase.Island4Count);
-                break;
-        }
-
-        islandCountAnimation[index].PlusMoney(number);
 
         equipmentManager.mainAlarm.SetActive(true);
     }

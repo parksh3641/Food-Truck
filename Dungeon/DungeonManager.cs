@@ -181,9 +181,9 @@ public class DungeonManager : MonoBehaviour
         gourmetPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.GourmetLevel);
 
         dungeonContents[0].Initialize(this, DungeonType.Dungeon1, dungeonDataBase.dungeonInfos[0], ItemType.DungeonKey1, 0);
-        dungeonContents[1].Initialize(this, DungeonType.Dungeon2, dungeonDataBase.dungeonInfos[1], ItemType.DungeonKey2, 30000);
-        dungeonContents[2].Initialize(this, DungeonType.Dungeon3, dungeonDataBase.dungeonInfos[2], ItemType.DungeonKey3, 100000);
-        dungeonContents[3].Initialize(this, DungeonType.Dungeon4, dungeonDataBase.dungeonInfos[3], ItemType.DungeonKey4, 300000);
+        dungeonContents[1].Initialize(this, DungeonType.Dungeon2, dungeonDataBase.dungeonInfos[1], ItemType.DungeonKey2, 50000);
+        dungeonContents[2].Initialize(this, DungeonType.Dungeon3, dungeonDataBase.dungeonInfos[2], ItemType.DungeonKey3, 250000);
+        dungeonContents[3].Initialize(this, DungeonType.Dungeon4, dungeonDataBase.dungeonInfos[3], ItemType.DungeonKey4, 500000);
 
         //receiveContents[0].Initialize(RewardType.SliverBox, 0);
         //receiveContents[1].Initialize(RewardType.GoldBox, 0);

@@ -292,16 +292,17 @@ public class ChangeFoodManager : MonoBehaviour
                 foodContentList[number + i].CheckFoodProficiency();
                 foodContentList[number + i].Locked();
                 foodContentList[number + i].UnSelected();
+                foodContentList[number + i].SetLevel(GameStateManager.instance.FoodLevel[number + i], upgradeDataBase.GetFoodMaxLevel(FoodType.Food1 + number + i));
+            }
 
+            foodContentList[number].UnLock();
+            foodContentList[(int)GameStateManager.instance.FoodType].Selected();
 
-                foodContentList[number + i].UnLock();
-
-                for (int j = 0; j < playerDataBase.NextFoodNumber + 1; j++)
+            for (int j = 0; j < playerDataBase.NextFoodNumber + 1; j++)
+            {
+                if (foodContentList[j].gameObject.activeInHierarchy)
                 {
-                    if (foodContentList[i] != null)
-                    {
-                        foodContentList[i].UnLock();
-                    }
+                    foodContentList[j].UnLock();
                 }
             }
         }
@@ -318,6 +319,11 @@ public class ChangeFoodManager : MonoBehaviour
                 rankFoodContentList[(int)GameStateManager.instance.RankFoodType].Selected();
 
                 rankFoodContentList[0].UnLock();
+            }
+
+            for(int i = 0; i < playerDataBase.IslandNumber; i ++)
+            {
+                rankFoodContentList[i].UnLock();
             }
         }
     }

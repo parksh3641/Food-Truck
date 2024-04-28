@@ -34,10 +34,30 @@ public class ChangeIslandContent : MonoBehaviour
 
     private float value = 0.5f;
 
-    Color foodColor = new Color(206 / 255f, 141 / 255f, 1);
-    Color candyColor = new Color(247 / 255f, 160 / 255f, 0);
-    Color jpColor = new Color(94 / 255f, 102 / 255f, 220 / 255f);
-    Color dessertColor = new Color(242 / 255f, 138 / 255f, 222 / 255f);
+    Color food1Color = new Color(209 / 255f, 243 / 255f, 224 / 255f);
+    Color food2Color = new Color(254 / 255f, 185 / 255f, 200 / 255f);
+    Color food3Color = new Color(246 / 255f, 167 / 255f, 186 / 255f);
+    Color food4Color = new Color(245 / 255f, 250 / 255f, 241 / 255f);
+
+    Color food5Color = new Color(228 / 255f, 23 / 255f, 73 / 255f);
+    Color food6Color = new Color(245 / 255f, 88 / 255f, 123 / 255f);
+    Color food7Color = new Color(255 / 255f, 138 / 255f, 92 / 255f);
+    Color food8Color = new Color(254 / 255f, 245 / 255f, 145 / 255f);
+
+    Color food9Color = new Color(190 / 255f, 238 / 255f, 246 / 255f);
+    Color food10Color = new Color(111 / 255f, 194 / 255f, 208 / 255f);
+    Color food11Color = new Color(55 / 255f, 58 / 255f, 109 / 255f);
+    Color food12Color = new Color(255 / 255f, 130 / 255f, 70 / 255f);
+
+    Color food13Color = new Color(178 / 255f, 6 / 255f, 176 / 255f);
+    Color food14Color = new Color(228 / 255f, 23 / 255f, 73 / 255f);
+    Color food15Color = new Color(69 / 255f, 146 / 255f, 175 / 255f);
+    Color food16Color = new Color(226 / 255f, 196 / 255f, 168 / 255f);
+
+    Color food17Color = new Color(240 / 255f, 245 / 255f, 159 / 255f);
+    Color food18Color = new Color(176 / 255f, 224 / 255f, 168 / 255f);
+    Color food19Color = new Color(216 / 255f, 239 / 255f, 240 / 255f);
+    Color food20Color = new Color(191 / 255f, 204 / 255f, 126 / 255f);
 
     IslandManager islandManager;
 
@@ -59,16 +79,37 @@ public class ChangeIslandContent : MonoBehaviour
         switch (islandType)
         {
             case IslandType.Island1:
-                background.color = foodColor;
+                background.color = food1Color;
                 break;
             case IslandType.Island2:
-                background.color = candyColor;
+                background.color = food2Color;
                 break;
             case IslandType.Island3:
-                background.color = jpColor;
+                background.color = food3Color;
                 break;
             case IslandType.Island4:
-                background.color = dessertColor;
+                background.color = food4Color;
+                break;
+            case IslandType.Island5:
+                background.color = food5Color;
+                break;
+            case IslandType.Island6:
+                background.color = food6Color;
+                break;
+            case IslandType.Island7:
+                background.color = food7Color;
+                break;
+            case IslandType.Island8:
+                background.color = food8Color;
+                break;
+            case IslandType.Island9:
+                background.color = food9Color;
+                break;
+            case IslandType.Island10:
+                background.color = food10Color;
+                break;
+            default:
+                background.color = food1Color;
                 break;
         }
 
@@ -83,8 +124,8 @@ public class ChangeIslandContent : MonoBehaviour
         titleText.localizationName = islandType.ToString();
         titleText.ReLoad();
 
-        upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + islandDataBase.GetSuccess(islandType).ToString() + "%";
-        sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + " : " + islandDataBase.GetSellPrice(islandType).ToString() + " % ";
+        upgradeText.text = LocalizationManager.instance.GetString("SuccessPercent") + " : " + (100 - islandDataBase.GetSuccess(islandType)).ToString() + "%";
+        sellPriceText.text = LocalizationManager.instance.GetString("IslandSellPrice") + "  +" + islandDataBase.GetSellPrice(islandType).ToString() + "% ";
         destroyText.text = LocalizationManager.instance.GetString("DestroyPercent") + " : " + islandDataBase.GetDestroy(islandType).ToString() + "%";
     }
 
@@ -127,16 +168,6 @@ public class ChangeIslandContent : MonoBehaviour
     public void OnClick()
     {
         islandManager.ChangeIsland(islandType);
-    }
-
-    public void LevelUp()
-    {
-        if (isDelay) return;
-
-        islandManager.LevelUp(islandType);
-
-        isDelay = true;
-        Invoke("Delay", 0.4f);
     }
 
     void Delay()

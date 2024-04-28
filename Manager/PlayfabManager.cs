@@ -885,9 +885,16 @@ public class PlayfabManager : MonoBehaviour
                 {
                     if (list.ItemId.Contains("Icon_"))
                     {
-                        IconType icon = (IconType)Enum.Parse(typeof(IconType), list.ItemId);
+                        try
+                        {
+                            IconType icon = (IconType)Enum.Parse(typeof(IconType), list.ItemId);
 
-                        playerDataBase.SetIcon(icon, (int)list.RemainingUses);
+                            playerDataBase.SetIcon(icon, (int)list.RemainingUses);
+                        }
+                        catch (ArgumentException e)
+                        {
+
+                        }
                     }
 
                     if (list.ItemId.Contains("Character") || list.ItemId.Contains("Butterfly") || list.ItemId.Contains("Totems") || list.ItemId.Contains("Flower"))
@@ -2452,6 +2459,54 @@ public class PlayfabManager : MonoBehaviour
                                GameStateManager.instance.RankFoodLevel[3] = playerDataBase.RankLevel4;
                            }
                            break;
+                       case "RankLevel5":
+                           playerDataBase.RankLevel5 = statistics.Value;
+
+                           if (GameStateManager.instance.RankFoodLevel[4] > playerDataBase.RankLevel5)
+                           {
+                               GameStateManager.instance.RankFoodLevel[4] = playerDataBase.RankLevel5;
+                           }
+                           break;
+                       case "RankLevel6":
+                           playerDataBase.RankLevel6 = statistics.Value;
+
+                           if (GameStateManager.instance.RankFoodLevel[5] > playerDataBase.RankLevel6)
+                           {
+                               GameStateManager.instance.RankFoodLevel[5] = playerDataBase.RankLevel6;
+                           }
+                           break;
+                       case "RankLevel7":
+                           playerDataBase.RankLevel7 = statistics.Value;
+
+                           if (GameStateManager.instance.RankFoodLevel[6] > playerDataBase.RankLevel7)
+                           {
+                               GameStateManager.instance.RankFoodLevel[6] = playerDataBase.RankLevel7;
+                           }
+                           break;
+                       case "RankLevel8":
+                           playerDataBase.RankLevel8 = statistics.Value;
+
+                           if (GameStateManager.instance.RankFoodLevel[7] > playerDataBase.RankLevel8)
+                           {
+                               GameStateManager.instance.RankFoodLevel[7] = playerDataBase.RankLevel8;
+                           }
+                           break;
+                       case "RankLevel9":
+                           playerDataBase.RankLevel9 = statistics.Value;
+
+                           if (GameStateManager.instance.RankFoodLevel[8] > playerDataBase.RankLevel9)
+                           {
+                               GameStateManager.instance.RankFoodLevel[8] = playerDataBase.RankLevel9;
+                           }
+                           break;
+                       case "RankLevel10":
+                           playerDataBase.RankLevel10 = statistics.Value;
+
+                           if (GameStateManager.instance.RankFoodLevel[9] > playerDataBase.RankLevel10)
+                           {
+                               GameStateManager.instance.RankFoodLevel[9] = playerDataBase.RankLevel10;
+                           }
+                           break;
                        case "TotalLevel":
                            playerDataBase.TotalLevel = statistics.Value;
                            break;
@@ -2487,30 +2542,6 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "TotalLevel_11":
                            playerDataBase.TotalLevel_11 = statistics.Value;
-                           break;
-                       case "Island1Level":
-                           playerDataBase.Island1Level = statistics.Value;
-                           break;
-                       case "Island2Level":
-                           playerDataBase.Island2Level = statistics.Value;
-                           break;
-                       case "Island3Level":
-                           playerDataBase.Island3Level = statistics.Value;
-                           break;
-                       case "Island4Level":
-                           playerDataBase.Island4Level = statistics.Value;
-                           break;
-                       case "Island1Count":
-                           playerDataBase.Island1Count = statistics.Value;
-                           break;
-                       case "Island2Count":
-                           playerDataBase.Island2Count = statistics.Value;
-                           break;
-                       case "Island3Count":
-                           playerDataBase.Island3Count = statistics.Value;
-                           break;
-                       case "Island4Count":
-                           playerDataBase.Island4Count = statistics.Value;
                            break;
                    }
                }

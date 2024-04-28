@@ -158,10 +158,10 @@ public class WelcomeManager : MonoBehaviour
 
         if (index == 6)
         {
-            if (!playerDataBase.CheckIcon(IconType.Icon_54))
+            if (!playerDataBase.CheckIcon(IconType.Icon_16))
             {
-                playerDataBase.SetIcon(IconType.Icon_54, 1);
-                PlayfabManager.instance.GrantItemsToUser((IconType.Icon_54).ToString(), "Icon");
+                playerDataBase.SetIcon(IconType.Icon_16, 1);
+                PlayfabManager.instance.GrantItemsToUser((IconType.Icon_16).ToString(), "Icon");
             }
         }
 

@@ -19,6 +19,9 @@ public class IslandDataBase : ScriptableObject
 {
     public List<IslandInfo> islandInfoList = new List<IslandInfo>();
 
+    float number = 0;
+    float success = 0;
+
     public IslandInfo GetIslandInfo(IslandType type)
     {
         IslandInfo island = new IslandInfo();
@@ -37,7 +40,7 @@ public class IslandDataBase : ScriptableObject
 
     public float GetSuccess(IslandType type)
     {
-        float number = 0;
+        number = 0;
 
         for (int i = 0; i < islandInfoList.Count; i++)
         {
@@ -48,7 +51,16 @@ public class IslandDataBase : ScriptableObject
             }
         }
 
-        return number;
+        if(number > 0)
+        {
+            success = 100 - number;
+        }
+        else
+        {
+            success = 100 + Mathf.Abs(number);
+        }
+
+        return success;
     }
 
     public float GetSellPrice(IslandType type)

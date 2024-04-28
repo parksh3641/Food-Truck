@@ -22,6 +22,7 @@ public class UpgradeFood
     public int maxLevel = 0;
 }
 
+[System.Serializable]
 public class UpgradeRankFood
 {
     public RankFoodType rankFoodType = RankFoodType.RankFood1;
@@ -43,6 +44,50 @@ public class UpgradeDataBase : ScriptableObject
 
     UpgradeFood food;
 
+    public void Initialize()
+    {
+        upgradeFoodList.Clear();
+
+        for(int i = 0; i < System.Enum.GetValues(typeof(FoodType)).Length; i ++)
+        {
+            UpgradeFood food = new UpgradeFood();
+            food.foodType = FoodType.Food1 + i;
+
+            switch(i % 9)
+            {
+                case 0:
+                    food.maxLevel = 10;
+                    break;
+                case 1:
+                    food.maxLevel = 15;
+                    break;
+                case 2:
+                    food.maxLevel = 20;
+                    break;
+                case 3:
+                    food.maxLevel = 25;
+                    break;
+                case 4:
+                    food.maxLevel = 30;
+                    break;
+                case 5:
+                    food.maxLevel = 35;
+                    break;
+                case 6:
+                    food.maxLevel = 40;
+                    break;
+                case 7:
+                    food.maxLevel = 45;
+                    break;
+                case 8:
+                    food.maxLevel = 50;
+                    break;
+            }
+
+            upgradeFoodList.Add(food);
+        }
+    }
+
     public UpgradeFood GetUpgradeFood(FoodType type)
     {
         food = new UpgradeFood();
@@ -50,6 +95,22 @@ public class UpgradeDataBase : ScriptableObject
         for (int i = 0; i < upgradeFoodList.Count; i ++)
         {
             if(upgradeFoodList[i].foodType.Equals(type))
+            {
+                food = upgradeFoodList[i];
+                break;
+            }
+        }
+
+        return food;
+    }
+
+    public UpgradeFood GetUpgradeRankFood(RankFoodType type)
+    {
+        food = new UpgradeFood();
+
+        for (int i = 0; i < upgradeFoodList.Count; i++)
+        {
+            if (upgradeFoodList[i].foodType.Equals(type))
             {
                 food = upgradeFoodList[i];
                 break;

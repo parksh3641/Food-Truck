@@ -26,10 +26,30 @@ public class ChangeFoodContent : MonoBehaviour
 
     public GameObject moveArrow;
 
-    Color foodColor = new Color(206 / 255f, 141 / 255f, 1);
-    Color candyColor = new Color(247 / 255f, 160 / 255f, 0);
-    Color jpColor = new Color(94 / 255f, 102 / 255f, 220 / 255f);
-    Color dessertColor = new Color(242 / 255f, 138 / 255f, 222 / 255f);
+    Color food1Color = new Color(209 / 255f, 243 / 255f, 224 / 255f);
+    Color food2Color = new Color(254 / 255f, 185 / 255f, 200 / 255f);
+    Color food3Color = new Color(246 / 255f, 167 / 255f, 186 / 255f);
+    Color food4Color = new Color(245 / 255f, 250 / 255f, 241 / 255f);
+
+    Color food5Color = new Color(228 / 255f, 23 / 255f, 73 / 255f);
+    Color food6Color = new Color(245 / 255f, 88 / 255f, 123 / 255f);
+    Color food7Color = new Color(255 / 255f, 138 / 255f, 92 / 255f);
+    Color food8Color = new Color(254 / 255f, 245 / 255f, 145 / 255f);
+
+    Color food9Color = new Color(190 / 255f, 238 / 255f, 246 / 255f);
+    Color food10Color = new Color(111 / 255f, 194 / 255f, 208 / 255f);
+    Color food11Color = new Color(55 / 255f, 58 / 255f, 109 / 255f);
+    Color food12Color = new Color(255 / 255f, 130 / 255f, 70 / 255f);
+
+    Color food13Color = new Color(178 / 255f, 6 / 255f, 176 / 255f);
+    Color food14Color = new Color(228 / 255f, 23 / 255f, 73 / 255f);
+    Color food15Color = new Color(69 / 255f, 146 / 255f, 175 / 255f);
+    Color food16Color = new Color(226 / 255f, 196 / 255f, 168 / 255f);
+
+    Color food17Color = new Color(240 / 255f, 245 / 255f, 159 / 255f);
+    Color food18Color = new Color(176 / 255f, 224 / 255f, 168 / 255f);
+    Color food19Color = new Color(216 / 255f, 239 / 255f, 240 / 255f);
+    Color food20Color = new Color(191 / 255f, 204 / 255f, 126 / 255f);
 
     private int index = 0;
 
@@ -60,7 +80,75 @@ public class ChangeFoodContent : MonoBehaviour
 
         icon.sprite = sp;
 
-        background.color = foodColor;
+        switch ((int)type / 9)
+        {
+            case 0:
+                background.color = food1Color;
+                break;
+            case 1:
+                background.color = food2Color;
+                break;
+            case 2:
+                background.color = food3Color;
+                break;
+            case 3:
+                background.color = food4Color;
+                break;
+            case 4:
+                background.color = food4Color;
+                break;
+            case 5:
+                background.color = food5Color;
+                break;
+            case 6:
+                background.color = food6Color;
+                break;
+            case 7:
+                background.color = food7Color;
+                break;
+            case 8:
+                background.color = food8Color;
+                break;
+            case 9:
+                background.color = food9Color;
+                break;
+            case 10:
+                background.color = food10Color;
+                break;
+            case 11:
+                background.color = food11Color;
+                break;
+            case 12:
+                background.color = food12Color;
+                break;
+            case 13:
+                background.color = food13Color;
+                break;
+            case 14:
+                background.color = food14Color;
+                break;
+            case 15:
+                background.color = food15Color;
+                break;
+            case 16:
+                background.color = food16Color;
+                break;
+            case 17:
+                background.color = food17Color;
+                break;
+            case 18:
+                background.color = food18Color;
+                break;
+            case 19:
+                background.color = food19Color;
+                break;
+            case 20:
+                background.color = food20Color;
+                break;
+            default:
+                background.color = food1Color;
+                break;
+        }
 
         changeFoodManager = manager;
 
@@ -82,19 +170,71 @@ public class ChangeFoodContent : MonoBehaviour
 
         icon.sprite = sp;
 
-        background.color = foodColor;
+        bestText.text = LocalizationManager.instance.GetString("Best");
+
+        switch (type)
+        {
+            case RankFoodType.RankFood1:
+                background.color = food1Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel1;
+                break;
+            case RankFoodType.RankFood2:
+                background.color = food2Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel2;
+                break;
+            case RankFoodType.RankFood3:
+                background.color = food3Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel3;
+                break;
+            case RankFoodType.RankFood4:
+                background.color = food4Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel4;
+                break;
+            case RankFoodType.RankFood5:
+                background.color = food5Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel5;
+                break;
+            case RankFoodType.RankFood6:
+                background.color = food6Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel6;
+                break;
+            case RankFoodType.RankFood7:
+                background.color = food7Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel7;
+                break;
+            case RankFoodType.RankFood8:
+                background.color = food8Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel8;
+                break;
+            case RankFoodType.RankFood9:
+                background.color = food9Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel9;
+                break;
+            case RankFoodType.RankFood10:
+                background.color = food10Color;
+
+                bestText.text += " : " + playerDataBase.RankLevel10;
+                break;
+        }
 
         changeFoodManager = manager;
 
         titleText.localizationName = type.ToString();
         titleText.ReLoad();
 
-        lockedText.localizationName = "FoodLocked";
+        lockedText.localizationName = "IslandLocked";
         lockedText.ReLoad();
 
         proficiency.SetActive(false);
-
-        bestText.text = LocalizationManager.instance.GetString("Best") + " : " + playerDataBase.RankLevel1;
     }
 
     public void CheckFoodProficiency()

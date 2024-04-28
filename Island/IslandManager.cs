@@ -12,10 +12,14 @@ public class Island_Total_Data
     [Header("·¹¾î È½¼ö")]
     public Island_Rare_Data[] island_Rare_Datas;
 
+    [Header("Âø¿ëµÈ Ä¡Àå")]
+    public Island_Equip_Data[] island_Equip_Datas;
+
     public void Initialize()
     {
         island_Max_Datas = new Island_Max_Data[System.Enum.GetValues(typeof(IslandType)).Length];
         island_Rare_Datas = new Island_Rare_Data[System.Enum.GetValues(typeof(IslandType)).Length];
+        island_Equip_Datas = new Island_Equip_Data[System.Enum.GetValues(typeof(IslandType)).Length];
     }
 
     public int GetMaxValue(IslandType islandType, FoodType foodType)
@@ -105,7 +109,7 @@ public class Island_Max_Data
     {
         int number = 0;
 
-        switch((int)type % 9)
+        switch((int)type)
         {
             case 0:
                 number = index1;
@@ -248,7 +252,7 @@ public class Island_Rare_Data
     {
         int number = 0;
 
-        switch ((int)type % 9)
+        switch ((int)type)
         {
             case 0:
                 number = index1;
@@ -339,6 +343,20 @@ public class Island_Rare_Data
 
         return number;
     }
+}
+
+[System.Serializable]
+public class Island_Equip_Data
+{
+    public int index1 = 0;
+    public int index2 = 0;
+    public int index3 = 0;
+    public int index4 = 0;
+    public int index5 = 0;
+    public int index6 = 0;
+    public int index7 = 0;
+    public int index8 = 0;
+    public int index9 = 0;
 }
 
 public class IslandManager : MonoBehaviour
@@ -454,119 +472,5 @@ public class IslandManager : MonoBehaviour
         {
             changeFoodManager.CheckFood();
         }
-    }
-
-    public void LevelUp(IslandType type)
-    {
-        switch (type)
-        {
-            case IslandType.Island1:
-                if(playerDataBase.Island1Level + 1 > 9)
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
-                    return;
-                }
-                else
-                {
-                    if(playerDataBase.Island1Count < (playerDataBase.Island1Level + 1) * 100)
-                    {
-                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                        NotionManager.instance.UseNotion(NotionType.LimitIslandHeart);
-                        return;
-                    }
-                }
-
-                playerDataBase.Island1Count -= (playerDataBase.Island1Level + 1) * 100;
-                playerDataBase.Island1Level += 1;
-
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island1Count", playerDataBase.Island1Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island1Level", playerDataBase.Island1Level);
-
-                changeIslandContentList[0].LevelInitialize();
-                break;
-            case IslandType.Island2:
-                if (playerDataBase.Island2Level + 1 > 9)
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
-                    return;
-                }
-                else
-                {
-                    if (playerDataBase.Island2Count < (playerDataBase.Island2Level + 1) * 100)
-                    {
-                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                        NotionManager.instance.UseNotion(NotionType.LimitIslandHeart);
-                        return;
-                    }
-                }
-
-                playerDataBase.Island2Count -= (playerDataBase.Island2Level + 1) * 100;
-                playerDataBase.Island2Level += 1;
-
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island2Count", playerDataBase.Island2Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island2Level", playerDataBase.Island2Level);
-
-                changeIslandContentList[1].LevelInitialize();
-                break;
-            case IslandType.Island3:
-                if (playerDataBase.Island3Level + 1 > 9)
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
-                    return;
-                }
-                else
-                {
-                    if (playerDataBase.Island3Count < (playerDataBase.Island3Level + 1) * 100)
-                    {
-                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                        NotionManager.instance.UseNotion(NotionType.LimitIslandHeart);
-                        return;
-                    }
-                }
-
-                playerDataBase.Island3Count -= (playerDataBase.Island3Level + 1) * 100;
-                playerDataBase.Island3Level += 1;
-
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island3Count", playerDataBase.Island3Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island3Level", playerDataBase.Island3Level);
-
-                changeIslandContentList[2].LevelInitialize();
-                break;
-            case IslandType.Island4:
-                if (playerDataBase.Island4Level + 1 > 9)
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.MaxLevel);
-                    return;
-                }
-                else
-                {
-                    if (playerDataBase.Island4Count < (playerDataBase.Island4Level + 1) * 100)
-                    {
-                        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                        NotionManager.instance.UseNotion(NotionType.LimitIslandHeart);
-                        return;
-                    }
-                }
-
-                playerDataBase.Island4Count -= (playerDataBase.Island4Level + 1) * 100;
-                playerDataBase.Island4Level += 1;
-
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island4Count", playerDataBase.Island4Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Island4Level", playerDataBase.Island4Level);
-
-                changeIslandContentList[3].LevelInitialize();
-                break;
-        }
-
-        SoundManager.instance.PlaySFX(GameSfxType.Success);
-        NotionManager.instance.UseNotion(NotionType.SuccessUpgrade);
-
-        FirebaseAnalytics.LogEvent("LevelUp_" + type.ToString());
-
-        GourmetManager.instance.Initialize();
     }
 }

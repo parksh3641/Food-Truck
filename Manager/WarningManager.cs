@@ -103,10 +103,10 @@ public class WarningManager : MonoBehaviour
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);
 
-        if (!playerDataBase.CheckIcon(IconType.Icon_63))
+        if (!playerDataBase.CheckIcon(IconType.Icon_25))
         {
-            playerDataBase.SetIcon(IconType.Icon_63, 1);
-            PlayfabManager.instance.GrantItemsToUser((IconType.Icon_63).ToString(), "Icon");
+            playerDataBase.SetIcon(IconType.Icon_25, 1);
+            PlayfabManager.instance.GrantItemsToUser((IconType.Icon_25).ToString(), "Icon");
         }
 
         playerDataBase.EventNumber = 0;
@@ -219,10 +219,10 @@ public class WarningManager : MonoBehaviour
         playerDataBase.ReviewNumber = 2;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("ReviewNumber", playerDataBase.ReviewNumber);
 
-        if (!playerDataBase.CheckIcon(IconType.Icon_64))
+        if (!playerDataBase.CheckIcon(IconType.Icon_26))
         {
-            playerDataBase.SetIcon(IconType.Icon_64, 1);
-            PlayfabManager.instance.GrantItemsToUser((IconType.Icon_64).ToString(), "Icon");
+            playerDataBase.SetIcon(IconType.Icon_26, 1);
+            PlayfabManager.instance.GrantItemsToUser((IconType.Icon_26).ToString(), "Icon");
         }
 
         OpenReviewWarning();

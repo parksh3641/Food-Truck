@@ -219,7 +219,8 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 25:
-                now = playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4;
+                now = playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4 + playerDataBase.RankLevel5
+                    + playerDataBase.RankLevel6 + playerDataBase.RankLevel7 + playerDataBase.RankLevel8 + playerDataBase.RankLevel9 + playerDataBase.RankLevel10;
                 need = 20;
                 break;
             case 26:

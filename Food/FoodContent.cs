@@ -35,7 +35,7 @@ public class FoodContent : MonoBehaviour
         if(saveSize == 0)
         {
             saveSize = transform.localScale.x;
-            size = saveSize * 0.3f;
+            size = saveSize * 0.1f;
 
             posX = saveSize;
             posY = saveSize;
@@ -54,7 +54,7 @@ public class FoodContent : MonoBehaviour
         if (saveSize == 0)
         {
             saveSize = transform.localScale.x;
-            size = saveSize * 0.3f;
+            size = saveSize * 0.1f;
 
             posX = saveSize;
             posY = saveSize;
@@ -72,38 +72,21 @@ public class FoodContent : MonoBehaviour
 
     public void Initialize(int number)
     {
-        if(speicalFood)
+        if (speicalFood)
         {
-            transform.localScale = new Vector3(posX += ((size * number) * sizeUp), posY += ((size * number) * sizeUp), posZ += ((size * number) * sizeUp));
+            transform.localScale = new Vector3(posX + (size * (number + 1)) * sizeUp, posY + (size * (number + 1)) * sizeUp, posZ + (size * (number + 1)) * sizeUp);
         }
         else
         {
-            transform.localScale = new Vector3(posX += (size * number), posY += (size * number), posZ += (size * number));
+            transform.localScale = new Vector3(posX + (size * (number + 1)), posY + (size * (number + 1)), posZ + (size * (number + 1)));
         }
     }
 
     public void RankInitialize(int number)
     {
-        transform.localScale = new Vector3(posX += ((size * number) * 0.1f), posY += ((size * number) * 0.1f), posZ += ((size * number) * 0.1f));
+        transform.localScale = new Vector3((posX + (size * (number + 1)) * 0.1f), (posY + (size * (number + 1)) * 0.1f), (posZ + (size * (number + 1)) * 0.1f));
     }
 
-
-    public void LevelUp()
-    {
-        if (speicalFood)
-        {
-            transform.localScale = new Vector3(posX += (size * sizeUp), posY += (size * sizeUp), posZ += (size * sizeUp));
-        }
-        else
-        {
-            transform.localScale = new Vector3(posX += size, posY += size, posZ += size);
-        }
-    }
-
-    public void RankLevelUp()
-    {
-        transform.localScale = new Vector3(posX += (size * 0.1f), posY += (size * 0.1f), posZ += (size * 0.1f));
-    }
 
     public void LevelReset()
     {

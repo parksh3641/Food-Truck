@@ -342,7 +342,12 @@ public class SeasonManager : MonoBehaviour
         playerDataBase.RankLevel2 = 0;
         playerDataBase.RankLevel3 = 0;
         playerDataBase.RankLevel4 = 0;
-        playerDataBase.TotalLevel = 0;
+        playerDataBase.RankLevel5 = 0;
+        playerDataBase.RankLevel6 = 0;
+        playerDataBase.RankLevel7 = 0;
+        playerDataBase.RankLevel8 = 0;
+        playerDataBase.RankLevel9 = 0;
+        playerDataBase.RankLevel10 = 0;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel1", playerDataBase.RankLevel1);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel2", playerDataBase.RankLevel2);
@@ -351,7 +356,15 @@ public class SeasonManager : MonoBehaviour
 
         yield return waitForSeconds;
 
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel5", playerDataBase.RankLevel5);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel6", playerDataBase.RankLevel6);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel7", playerDataBase.RankLevel7);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel8", playerDataBase.RankLevel8);
+
+        yield return waitForSeconds;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel9", playerDataBase.RankLevel9);
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel10", playerDataBase.RankLevel10);
 
         playerDataBase.RankEventCount = 0;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankEventCount", playerDataBase.RankEventCount);

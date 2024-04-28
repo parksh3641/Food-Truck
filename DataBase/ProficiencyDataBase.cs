@@ -26,7 +26,7 @@ public class ProficiencyDataBase : ScriptableObject
     {
         proficiencyMotherInfoList.Clear();
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 300; i++)
         {
             ProficiencyMotherInfo levelInfo = new ProficiencyMotherInfo();
             levelInfo.needExp = 5;

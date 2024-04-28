@@ -47,7 +47,11 @@ public class PlayerDataBase : ScriptableObject
 
     [Title("Info")]
     [SerializeField]
-    public Island_Total_Data island_Total_Data = new Island_Total_Data();
+    private int nextFoodNumber = 0;
+    [SerializeField]
+    private int islandNumber = 0;
+    [SerializeField]
+    public Island_Total_Data island_Total_Data;
     [SerializeField]
     private int level = 0;
     [SerializeField]
@@ -84,8 +88,6 @@ public class PlayerDataBase : ScriptableObject
     private int buyCrystal = 0;
     [SerializeField]
     private int gourmetLevel = 0;
-    [SerializeField]
-    private int islandNumber = 0;
     [SerializeField]
     private int buffTicket = 0;
     [SerializeField]
@@ -296,11 +298,6 @@ public class PlayerDataBase : ScriptableObject
     private int treasure14Count = 0;
     [SerializeField]
     private int treasure15Count = 0;
-
-    [Space]
-    [Title("Food Number")]
-    [SerializeField]
-    private int nextFoodNumber = 0;
 
     [Space]
     [Title("Character")]
@@ -535,22 +532,6 @@ public class PlayerDataBase : ScriptableObject
     private int island9 = 0;
     [SerializeField]
     private int island10 = 0;
-    [SerializeField]
-    private int island1Level = 0;
-    [SerializeField]
-    private int island2Level = 0;
-    [SerializeField]
-    private int island3Level = 0;
-    [SerializeField]
-    private int island4Level = 0;
-    [SerializeField]
-    private int island1Count = 0;
-    [SerializeField]
-    private int island2Count = 0;
-    [SerializeField]
-    private int island3Count = 0;
-    [SerializeField]
-    private int island4Count = 0;
 
     [Space]
     [Title("Rank")]
@@ -562,6 +543,18 @@ public class PlayerDataBase : ScriptableObject
     private int rankLevel3 = 0;
     [SerializeField]
     private int rankLevel4 = 0;
+    [SerializeField]
+    private int rankLevel5 = 0;
+    [SerializeField]
+    private int rankLevel6 = 0;
+    [SerializeField]
+    private int rankLevel7 = 0;
+    [SerializeField]
+    private int rankLevel8 = 0;
+    [SerializeField]
+    private int rankLevel9 = 0;
+    [SerializeField]
+    private int rankLevel10 = 0;
     [SerializeField]
     private int totalLevel = 0;
     [SerializeField]
@@ -2405,6 +2398,78 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int RankLevel5
+    {
+        get
+        {
+            return rankLevel5;
+        }
+        set
+        {
+            rankLevel5 = value;
+        }
+    }
+
+    public int RankLevel6
+    {
+        get
+        {
+            return rankLevel6;
+        }
+        set
+        {
+            rankLevel6 = value;
+        }
+    }
+
+    public int RankLevel7
+    {
+        get
+        {
+            return rankLevel7;
+        }
+        set
+        {
+            rankLevel7 = value;
+        }
+    }
+
+    public int RankLevel8
+    {
+        get
+        {
+            return rankLevel8;
+        }
+        set
+        {
+            rankLevel8 = value;
+        }
+    }
+
+    public int RankLevel9
+    {
+        get
+        {
+            return rankLevel9;
+        }
+        set
+        {
+            rankLevel9 = value;
+        }
+    }
+
+    public int RankLevel10
+    {
+        get
+        {
+            return rankLevel10;
+        }
+        set
+        {
+            rankLevel10 = value;
+        }
+    }
+
     public int TotalLevel
     {
         get
@@ -3620,101 +3685,6 @@ public class PlayerDataBase : ScriptableObject
             island10 = value;
         }
     }
-    public int Island1Level
-    {
-        get
-        {
-            return island1Level;
-        }
-        set
-        {
-            island1Level = value;
-        }
-    }
-
-    public int Island2Level
-    {
-        get
-        {
-            return island2Level;
-        }
-        set
-        {
-            island2Level = value;
-        }
-    }
-
-    public int Island3Level
-    {
-        get
-        {
-            return island3Level;
-        }
-        set
-        {
-            island3Level = value;
-        }
-    }
-
-    public int Island4Level
-    {
-        get
-        {
-            return island4Level;
-        }
-        set
-        {
-            island4Level = value;
-        }
-    }
-
-    public int Island1Count
-    {
-        get
-        {
-            return island1Count;
-        }
-        set
-        {
-            island1Count = value;
-        }
-    }
-
-    public int Island2Count
-    {
-        get
-        {
-            return island2Count;
-        }
-        set
-        {
-            island2Count = value;
-        }
-    }
-
-    public int Island3Count
-    {
-        get
-        {
-            return island3Count;
-        }
-        set
-        {
-            island3Count = value;
-        }
-    }
-
-    public int Island4Count
-    {
-        get
-        {
-            return island4Count;
-        }
-        set
-        {
-            island4Count = value;
-        }
-    }
 
     public int Portion1
     {
@@ -4451,6 +4421,13 @@ public class PlayerDataBase : ScriptableObject
         rankLevel2 = 0;
         rankLevel3 = 0;
         rankLevel4 = 0;
+        rankLevel5 = 0;
+        rankLevel6 = 0;
+        rankLevel7 = 0;
+        rankLevel8 = 0;
+        rankLevel9 = 0;
+        rankLevel10 = 0;
+
         totalLevel = 0;
         totalLevel_1 = 0;
         totalLevel_2 = 0;
@@ -4701,14 +4678,6 @@ public class PlayerDataBase : ScriptableObject
         island8 = 0;
         island9 = 0;
         island10 = 0;
-        island1Level = 0;
-        island2Level = 0;
-        island3Level = 0;
-        island4Level = 0;
-        island1Count = 0;
-        island2Count = 0;
-        island3Count = 0;
-        island4Count = 0;
 
         questCount = 0;
         reincarnationCount = 0;

@@ -15,6 +15,26 @@ public class Island_Total_Data
     [Header("착용된 치장")]
     public Island_Equip_Data[] island_Equip_Datas;
 
+    public void SaveServerData(Island_Total_Data total)
+    {
+        for(int i = 0; i < total.island_Max_Datas.Length; i ++)
+        {
+            island_Max_Datas[i] = total.island_Max_Datas[i];
+        }
+
+        for (int i = 0; i < total.island_Rare_Datas.Length; i++)
+        {
+            island_Rare_Datas[i] = total.island_Rare_Datas[i];
+        }
+
+        for (int i = 0; i < total.island_Equip_Datas.Length; i++)
+        {
+            island_Equip_Datas[i] = total.island_Equip_Datas[i];
+        }
+
+        island_Max_Datas[0].index1 = 1;
+    }
+
     public void Initialize()
     {
         island_Max_Datas = new Island_Max_Data[System.Enum.GetValues(typeof(IslandType)).Length];

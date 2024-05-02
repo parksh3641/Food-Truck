@@ -374,6 +374,36 @@ public enum FoodType
     Food97,
     Food98,
     Food99,
+
+    Food100,
+    Food101,
+    Food102,
+    Food103,
+    Food104,
+    Food105,
+    Food106,
+    Food107,
+    Food108,
+
+    Food109,
+    Food110,
+    Food111,
+    Food112,
+    Food113,
+    Food114,
+    Food115,
+    Food116,
+    Food117,
+
+    Food118,
+    Food119,
+    Food120,
+    Food121,
+    Food122,
+    Food123,
+    Food124,
+    Food125,
+    Food126,
 }
 
 public enum RankFoodType
@@ -508,6 +538,18 @@ public enum IslandType
     Island8,
     Island9,
     Island10,
+    Island11,
+    Island12,
+    Island13,
+    Island14,
+    Island15,
+    Island16,
+    Island17,
+    Island18,
+    Island19,
+    Island20,
+    Island21,
+    Island22,
 }
 
 public enum TreasureType

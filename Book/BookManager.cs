@@ -151,9 +151,9 @@ public class BookManager : MonoBehaviour
 
         for (int i = 0; i < System.Enum.GetValues(typeof(IslandType)).Length; i++)
         {
-            for(int j = 0; j < 9; j ++)
+            for(int j = 0; j < GameStateManager.instance.Island; j ++)
             {
-                if (playerDataBase.island_Total_Data.island_Max_Datas[i].GetValue(FoodType.Food1 + (i * 9) + j) > 0)
+                if (playerDataBase.island_Total_Data.island_Max_Datas[i].GetValue(FoodType.Food1 + (i * GameStateManager.instance.Island) + j) > 0)
                 {
                     NormalUnLocked(number);
                 }
@@ -174,9 +174,9 @@ public class BookManager : MonoBehaviour
 
         for (int i = 0; i < System.Enum.GetValues(typeof(IslandType)).Length; i ++)
         {
-            for (int j = 0; j < 9; j++)
+            for (int j = 0; j < GameStateManager.instance.Island; j++)
             {
-                if (playerDataBase.island_Total_Data.island_Rare_Datas[i].GetValue(FoodType.Food1 + (i * 9) + j) > 0)
+                if (playerDataBase.island_Total_Data.island_Rare_Datas[i].GetValue(FoodType.Food1 + (i * GameStateManager.instance.Island) + j) > 0)
                 {
                     EpicUnLocked(number);
                 }

@@ -282,11 +282,11 @@ public class ChangeFoodManager : MonoBehaviour
             rankFoodContentList[i].gameObject.SetActive(false);
         }
 
-        number = ((int)GameStateManager.instance.IslandType * 9);
+        number = ((int)GameStateManager.instance.IslandType * GameStateManager.instance.Island);
 
         if (GameStateManager.instance.GameType == GameType.Story)
         {
-            for(int i = 0; i < 9; i ++)
+            for(int i = 0; i < GameStateManager.instance.Island; i ++)
             {
                 foodContentList[number + i].gameObject.SetActive(true);
                 foodContentList[number + i].CheckFoodProficiency();

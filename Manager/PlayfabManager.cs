@@ -2596,7 +2596,8 @@ public class PlayfabManager : MonoBehaviour
                 else if (key.Contains("Island_Total_Data"))
                 {
                     island_Total_Data = JsonUtility.FromJson<Island_Total_Data>(eachData.Value.Value);
-                    playerDataBase.island_Total_Data = island_Total_Data;
+
+                    playerDataBase.island_Total_Data.SaveServerData(island_Total_Data);
                 }
             }
 

@@ -5898,7 +5898,7 @@ public class PlayerDataBase : ScriptableObject
     {
         int number = 0;
 
-        for (int i = 0; i < island_Total_Data.island_Max_Datas.Length; i++)
+        for (int i = 0; i < island_Total_Data.island_Max_Datas.Length - 1; i++)
         {
             number += island_Total_Data.island_Max_Datas[i].GetBookValue();
         }
@@ -5910,7 +5910,7 @@ public class PlayerDataBase : ScriptableObject
     {
         int number = 0;
 
-        for(int i = 0; i < island_Total_Data.island_Rare_Datas.Length; i ++)
+        for(int i = 0; i < island_Total_Data.island_Rare_Datas.Length - 1; i ++)
         {
             number += island_Total_Data.island_Rare_Datas[i].GetBookValue();
         }
@@ -5973,22 +5973,22 @@ public class PlayerDataBase : ScriptableObject
 
         for (int i = 0; i < equip.equipInfos.Length; i++)
         {
-            if (equip.equipInfos[i].option1 == (int)equipType)
+            if (equip.equipInfos[i].option1 == (int)equipType + 1)
             {
                 value += equip.equipInfos[i].option1_Value;
             }
 
-            if (equip.equipInfos[i].option2 == (int)equipType)
+            if (equip.equipInfos[i].option2 == (int)equipType + 1)
             {
                 value += equip.equipInfos[i].option2_Value;
             }
 
-            if (equip.equipInfos[i].option3 == (int)equipType)
+            if (equip.equipInfos[i].option3 == (int)equipType + 1)
             {
                 value += equip.equipInfos[i].option3_Value;
             }
 
-            if (equip.equipInfos[i].option4 == (int)equipType)
+            if (equip.equipInfos[i].option4 == (int)equipType + 1)
             {
                 value += equip.equipInfos[i].option4_Value;
             }

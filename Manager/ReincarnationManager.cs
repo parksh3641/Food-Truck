@@ -70,7 +70,7 @@ public class ReincarnationManager : MonoBehaviour
         lockedObj.SetActive(true);
         lockedAdObj.SetActive(true);
 
-        point += playerDataBase.NextFoodNumber * 5;
+        point = playerDataBase.NextFoodNumber * 5;
 
         if (point > 0)
         {
@@ -85,6 +85,7 @@ public class ReincarnationManager : MonoBehaviour
         plus = 0;
         plus += playerDataBase.Skill11 * 0.5f;
         plus += playerDataBase.Treasure10 * 1;
+        plus += playerDataBase.GetEquipValue(EquipType.Equip_Index_10);
 
         //if(crystal > 0)
         //{
@@ -98,7 +99,7 @@ public class ReincarnationManager : MonoBehaviour
 
         oldPoint = point;
 
-        point += point * ((playerDataBase.Skill11 + playerDataBase.Treasure10 + playerDataBase.GetEquipValue(EquipType.Equip_Index_10)) * 0.01f);
+        point += point * (plus * 0.01f);
 
         receiveContent.Initialize(RewardType.ChallengePoint, (int)point);
 

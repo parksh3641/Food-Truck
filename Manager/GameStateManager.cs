@@ -55,6 +55,7 @@ public class GameStateManager : MonoBehaviour
         [Space]
         public bool developer = false;
         public bool youtubeVideo = false;
+        public int island = 6;
 
 
         [Space]
@@ -493,6 +494,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.youtubeVideo = value;
+            SaveFile();
+        }
+    }
+
+    public int Island
+    {
+        get
+        {
+            return gameSettings.island;
+        }
+        set
+        {
+            gameSettings.island = value;
             SaveFile();
         }
     }

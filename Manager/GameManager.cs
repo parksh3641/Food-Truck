@@ -1750,7 +1750,7 @@ public class GameManager : MonoBehaviour
 
         OFFSpeicalFood();
 
-        ChangeFood(FoodType.Food1 + ((int)type * 9));
+        ChangeFood(FoodType.Food1 + ((int)type * GameStateManager.instance.Island));
 
         if (GameStateManager.instance.Effect)
         {
@@ -2784,9 +2784,9 @@ public class GameManager : MonoBehaviour
         playerData.Add("Island_Total_Data", JsonUtility.ToJson(playerDataBase.island_Total_Data));
         PlayfabManager.instance.SetPlayerData(playerData);
 
-        if (playerDataBase.IslandNumber <= (int)GameStateManager.instance.FoodType / 8) //级 俺规
+        if (playerDataBase.IslandNumber <= (int)GameStateManager.instance.FoodType / (GameStateManager.instance.Island - 1)) //级 俺规
         {
-            playerDataBase.IslandNumber = ((int)GameStateManager.instance.FoodType / 8) + 1;
+            playerDataBase.IslandNumber = ((int)GameStateManager.instance.FoodType / (GameStateManager.instance.Island - 1)) + 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
         }
 

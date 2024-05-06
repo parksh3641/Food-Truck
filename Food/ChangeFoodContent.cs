@@ -80,7 +80,7 @@ public class ChangeFoodContent : MonoBehaviour
 
         icon.sprite = sp;
 
-        switch ((int)type / 9)
+        switch ((int)type / GameStateManager.instance.Island)
         {
             case 0:
                 background.color = food1Color;
@@ -144,6 +144,33 @@ public class ChangeFoodContent : MonoBehaviour
                 break;
             case 20:
                 background.color = food20Color;
+                break;
+            case 21:
+                background.color = food1Color;
+                break;
+            case 22:
+                background.color = food2Color;
+                break;
+            case 23:
+                background.color = food3Color;
+                break;
+            case 24:
+                background.color = food4Color;
+                break;
+            case 25:
+                background.color = food5Color;
+                break;
+            case 26:
+                background.color = food6Color;
+                break;
+            case 27:
+                background.color = food7Color;
+                break;
+            case 28:
+                background.color = food8Color;
+                break;
+            case 29:
+                background.color = food9Color;
                 break;
             default:
                 background.color = food1Color;
@@ -239,7 +266,12 @@ public class ChangeFoodContent : MonoBehaviour
 
     public void CheckFoodProficiency()
     {
-        exp = playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].GetValue(foodType);
+        exp = 0;
+
+        if (playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType] != null)
+        {
+            exp = playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].GetValue(foodType);
+        }
 
         level = proficiencyDataBase.GetLevel(exp);
 

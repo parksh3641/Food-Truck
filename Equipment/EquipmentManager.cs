@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,43 @@ using UnityEngine.UI;
 public class Equip
 {
     public EquipInfo[] equipInfos = new EquipInfo[10];
+
+    private EquipInfo[] equipInfosArray = new EquipInfo[10];
+
+    public void Initialize()
+    {
+        for(int i = 0; i < equipInfos.Length; i ++)
+        {
+            equipInfos[i].Initialize();
+        }
+    }
+
+    public void SaveServerData(Equip equip)
+    {
+        if(equipInfos.Length >= equip.equipInfos.Length)
+        {
+            for (int i = 0; i < equipInfos.Length; i++)
+            {
+                equipInfos[i] = equip.equipInfos[i];
+            }
+        }
+        else
+        {
+            EquipInfo[] equipInfosArray = new EquipInfo[equip.equipInfos.Length];
+
+            for (int i = 0; i < equipInfos.Length; i++)
+            {
+                equipInfosArray[i] = equipInfos[i];
+            }
+
+            equipInfos = new EquipInfo[equip.equipInfos.Length];
+
+            for (int i = 0; i < equipInfosArray.Length; i++)
+            {
+                equipInfos[i] = equipInfosArray[i];
+            }
+        }
+    }
 }
 
 
@@ -28,6 +66,23 @@ public class EquipInfo
 
     public int option4 = 0;
     public float option4_Value = 0;
+
+    public void Initialize()
+    {
+        rank = 0;
+
+        option1 = 0;
+        option1_Value = 0;
+
+        option2 = 0;
+        option2_Value = 0;
+
+        option3 = 0;
+        option3_Value = 0;
+
+        option4 = 0;
+        option4_Value = 0;
+    }
 }
 
 public class EquipmentManager : MonoBehaviour

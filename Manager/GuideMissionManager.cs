@@ -89,11 +89,17 @@ public class GuideMissionManager : MonoBehaviour
         switch (playerDataBase.GuideIndex)
         {
             case 0:
-                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index1;
+                if(playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
+                {
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index1;
+                }
                 need = 1;
                 break;
             case 1:
-                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index2;
+                if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
+                {
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index2;
+                }
                 need = 1;
                 break;
             case 2:
@@ -121,7 +127,10 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 5:
-                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index3;
+                if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
+                {
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index3;
+                }
                 need = 1;
                 break;
             case 6:
@@ -143,7 +152,10 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 9:
-                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index4;
+                if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
+                {
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index4;
+                }
                 need = 1;
                 break;
             case 10:
@@ -160,7 +172,10 @@ public class GuideMissionManager : MonoBehaviour
                 }
                 break;
             case 12:
-                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index5;
+                if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
+                {
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index5;
+                }
                 need = 1;
                 break;
             case 13:
@@ -176,7 +191,10 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 16:
-                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index6;
+                if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
+                {
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index6;
+                }
                 need = 1;
                 break;
             case 17:
@@ -198,11 +216,17 @@ public class GuideMissionManager : MonoBehaviour
                 need = 1;
                 break;
             case 20:
-                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index7;
+                if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
+                {
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index7;
+                }
                 need = 1;
                 break;
             case 21:
-                now = playerDataBase.island_Total_Data.island_Max_Datas[0].index8;
+                if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
+                {
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index8;
+                }
                 need = 1;
                 break;
             case 22:
@@ -296,27 +320,32 @@ public class GuideMissionManager : MonoBehaviour
             switch(playerDataBase.GuideIndex)
             {
                 case 0:
+                    GameStateManager.instance.IslandType = IslandType.Island1;
                     changeFoodManager.OpenChangeFoodView();
                     break;
                 case 1:
+                    GameStateManager.instance.IslandType = IslandType.Island1;
                     changeFoodManager.OpenChangeFoodView();
                     break;
                 case 4:
                     shopManager.OpenSpeicalShop_Guide(2);
                     break;
                 case 5:
+                    GameStateManager.instance.IslandType = IslandType.Island1;
                     changeFoodManager.OpenChangeFoodView();
                     break;
                 case 8:
                     shopManager.OpenSpeicalShop_Guide(2);
                     break;
                 case 9:
+                    GameStateManager.instance.IslandType = IslandType.Island1;
                     changeFoodManager.OpenChangeFoodView();
                     break;
                 case 10:
                     skillManager.OpenSkillView();
                     break;
                 case 12:
+                    GameStateManager.instance.IslandType = IslandType.Island1;
                     changeFoodManager.OpenChangeFoodView();
                     break;
                 case 13:
@@ -326,15 +355,18 @@ public class GuideMissionManager : MonoBehaviour
                     shopManager.OpenSpeicalShop_Guide(2);
                     break;
                 case 16:
+                    GameStateManager.instance.IslandType = IslandType.Island2;
                     changeFoodManager.OpenChangeFoodView();
                     break;
                 case 18:
                     shopManager.OpenSpeicalShop_Guide(0);
                     break;
                 case 20:
+                    GameStateManager.instance.IslandType = IslandType.Island2;
                     changeFoodManager.OpenChangeFoodView();
                     break;
                 case 21:
+                    GameStateManager.instance.IslandType = IslandType.Island2;
                     changeFoodManager.OpenChangeFoodView();
                     break;
                 case 22:

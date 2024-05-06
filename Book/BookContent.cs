@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class BookContent : MonoBehaviour
 {
-    public FoodType foodType;
+    public FoodType foodType = FoodType.Food1;
 
     private int index = 0;
 
@@ -16,6 +16,10 @@ public class BookContent : MonoBehaviour
     private bool isStart = false;
 
     public GameObject lockedObj;
+
+    Color speicalColor = new Color(1, 50f / 255f, 1);
+
+    BookManager bookManager;
 
     ImageDataBase imageDataBase;
 
@@ -26,11 +30,13 @@ public class BookContent : MonoBehaviour
         lockedObj.SetActive(true);
     }
 
-    public void Initialize(FoodType type, int number)
+    public void Initialize(FoodType type, int number, BookManager manager)
     {
         foodType = type;
 
         index = number;
+
+        bookManager = manager;
 
         icon.sprite = imageDataBase.GetFoodIconType(type);
 
@@ -40,7 +46,7 @@ public class BookContent : MonoBehaviour
 
             if (number == 1)
             {
-                icon.color = new Color(Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f);
+                icon.color = speicalColor;
             }
         }
     }
@@ -62,5 +68,10 @@ public class BookContent : MonoBehaviour
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.OpenRareFood);
         }
+    }
+
+    public void ChangeFood()
+    {
+        bookManager.CheckFood(foodType, index);
     }
 }

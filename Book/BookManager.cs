@@ -9,6 +9,8 @@ public class BookManager : MonoBehaviour
 {
     public GameObject bookView;
 
+    public GameObject bookCamera;
+
     public GameObject alarm;
 
     private int index = -1;
@@ -19,6 +21,7 @@ public class BookManager : MonoBehaviour
     public Sprite[] topMenuSpriteArray;
 
     public Text titleText;
+    public Text infoText;
 
     public Text plusText;
 
@@ -77,6 +80,8 @@ public class BookManager : MonoBehaviour
 
         bookContentTransform[0].anchoredPosition = new Vector2(0, -9999);
         bookContentTransform[1].anchoredPosition = new Vector2(0, -9999);
+
+        bookCamera.SetActive(false);
     }
 
     public void OpenBook()
@@ -87,16 +92,24 @@ public class BookManager : MonoBehaviour
 
             alarm.SetActive(false);
 
-            if(index == -1)
+            bookCamera.SetActive(true);
+
+            if (index == -1)
             {
                 ChangeTopToggle(0);
             }
+
+            CheckFood(FoodType.Food1, 0);
 
             FirebaseAnalytics.LogEvent("Open_Book");
         }
         else
         {
             bookView.SetActive(false);
+
+            bookCamera.SetActive(false);
+
+            GameManager.instance.ChangeFood(GameStateManager.instance.FoodType);
         }
     }
 
@@ -119,7 +132,7 @@ public class BookManager : MonoBehaviour
         {
             for(int i = 0; i < bookNormalContentList.Count; i ++)
             {
-                bookNormalContentList[i].Initialize(FoodType.Food1 + i, 0);
+                bookNormalContentList[i].Initialize(FoodType.Food1 + i, 0, this);
             }
 
             titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetNormalBookNumber() + " / " + System.Enum.GetValues(typeof(FoodType)).Length + " )"
@@ -133,7 +146,7 @@ public class BookManager : MonoBehaviour
         {
             for (int i = 0; i < bookEpicContentList.Count; i++)
             {
-                bookEpicContentList[i].Initialize(FoodType.Food1 + i, 1);
+                bookEpicContentList[i].Initialize(FoodType.Food1 + i, 1, this);
             }
 
             titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetEpicBookNumber() + " / " + System.Enum.GetValues(typeof(FoodType)).Length + " )"
@@ -153,7 +166,8 @@ public class BookManager : MonoBehaviour
         {
             for(int j = 0; j < GameStateManager.instance.Island; j ++)
             {
-                if (playerDataBase.island_Total_Data.island_Max_Datas[i].GetValue(FoodType.Food1 + (i * GameStateManager.instance.Island) + j) > 0)
+                if (playerDataBase.island_Total_Data.island_Max_Datas[i].GetValue(FoodType.Food1 + (i * GameStateManager.instance.Island) + j) > 0 ||
+                    playerDataBase.NextFoodNumber >= i)
                 {
                     NormalUnLocked(number);
                 }
@@ -189,5 +203,26 @@ public class BookManager : MonoBehaviour
     void EpicUnLocked(int number)
     {
         bookEpicContentList[number].UnLock();
+    }
+
+    public void CheckFood(FoodType type, int index)
+    {
+        GameManager.instance.ChangeFood_Book(type, index);
+
+        infoText.text = LocalizationManager.instance.GetString(type.ToString() + "_Info");
+    }
+
+    public void ChangeCamera(int number)
+    {
+        if(number == 0)
+        {
+            bookCamera.transform.position = new Vector3(0, 0.85f, 2.5f);
+            bookCamera.transform.rotation = Quaternion.identity;
+        }
+        else
+        {
+            bookCamera.transform.position = new Vector3(0, 1.45f, 2.5f);
+            bookCamera.transform.rotation = Quaternion.Euler(40, 0, 0);
+        }
     }
 }

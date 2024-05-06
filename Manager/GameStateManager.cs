@@ -55,7 +55,7 @@ public class GameStateManager : MonoBehaviour
         [Space]
         public bool developer = false;
         public bool youtubeVideo = false;
-        public int island = 6;
+        public int island = 5;
 
 
         [Space]

@@ -2591,7 +2591,7 @@ public class PlayfabManager : MonoBehaviour
                 else if (key.Contains("Equip"))
                 {
                     equip = JsonUtility.FromJson<Equip>(eachData.Value.Value);
-                    playerDataBase.equip = equip;
+                    playerDataBase.equip.SaveServerData(equip);
                 }
                 else if (key.Contains("Island_Total_Data"))
                 {

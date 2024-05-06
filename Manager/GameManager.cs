@@ -557,7 +557,7 @@ public class GameManager : MonoBehaviour
                     island_Particle[i].SetActive(false);
                 }
 
-                island_Particle[(int)GameStateManager.instance.IslandType].SetActive(true);
+                //island_Particle[(int)GameStateManager.instance.IslandType].SetActive(true);
             }
         }
     }
@@ -577,7 +577,7 @@ public class GameManager : MonoBehaviour
                     island_Particle[i].SetActive(false);
                 }
 
-                island_Particle[0].SetActive(true);
+                //island_Particle[0].SetActive(true);
             }
         }
         else
@@ -634,7 +634,7 @@ public class GameManager : MonoBehaviour
         nowUpgradeCount = playerDataBase.UpgradeCount;
         nowSellCount = playerDataBase.SellCount;
 
-        CheckFood();
+        CheckFoodLevel();
         CheckFoodState();
 
         if (playerDataBase.InGameTutorial == 0)
@@ -798,7 +798,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void CheckFood()
+    void CheckFoodLevel()
     {
         if(GameStateManager.instance.GameType == GameType.Story)
         {
@@ -1237,7 +1237,7 @@ public class GameManager : MonoBehaviour
         recoverTicketPercent += recoverTicketPercent * (itemDropPercent * 0.01f);
         eventTicketPercent += eventTicketPercent * (itemDropPercent * 0.01f);
 
-        changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
+        //changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
         successPlus += playerDataBase.Skill7 * 0.5f;
         successPlus += playerDataBase.Skill17 * 0.5f;
@@ -1746,7 +1746,7 @@ public class GameManager : MonoBehaviour
         GameStateManager.instance.IslandType = type;
 
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
-        changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
+        //changeFoodImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
         OFFSpeicalFood();
 
@@ -1776,6 +1776,26 @@ public class GameManager : MonoBehaviour
         BackgroundEffect();
     }
 
+    public void ChangeFood_Book(FoodType type, int index)
+    {
+        for (int i = 0; i < foodArrayList.Count; i++)
+        {
+            foodArrayList[i].gameObject.SetActive(false);
+        }
+
+        foodArray[(int)type].gameObject.SetActive(true);
+        foodArray[(int)type].Initialize(0);
+
+        if(index == 0)
+        {
+            foodArray[(int)type].SetSpeicalFood(false);
+        }
+        else
+        {
+            foodArray[(int)type].SetSpeicalFood(true);
+        }
+    }
+
     public void ChangeFood(FoodType type)
     {
         GameStateManager.instance.FoodType = type;
@@ -1795,7 +1815,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        CheckFood();
+        CheckFoodLevel();
         CheckFoodState();
         UpgradeInitialize();
     }
@@ -1808,7 +1828,7 @@ public class GameManager : MonoBehaviour
 
         OFFSpeicalFood();
 
-        CheckFood();
+        CheckFoodLevel();
         CheckFoodState();
         UpgradeInitialize();
     }
@@ -2364,7 +2384,7 @@ public class GameManager : MonoBehaviour
                     level -= 1;
                     LevelDown();
 
-                    CheckFood();
+                    CheckFoodLevel();
                     CheckFoodState();
                     UpgradeInitialize();
 
@@ -2422,7 +2442,7 @@ public class GameManager : MonoBehaviour
                             level -= 1;
                             LevelDown();
 
-                            CheckFood();
+                            CheckFoodLevel();
                             CheckFoodState();
                             UpgradeInitialize();
 
@@ -2764,10 +2784,13 @@ public class GameManager : MonoBehaviour
 
         if (playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].GetValue(GameStateManager.instance.FoodType) == 0)
         {
-            changeFoodManager.ChangeFoodMoveArrow(GameStateManager.instance.FoodType + 1);
+            if(GameStateManager.instance.FoodType != FoodType.Food1)
+            {
+                changeFoodManager.ChangeFoodMoveArrow(GameStateManager.instance.FoodType + 1);
 
-            changeFoodAlarmObj.SetActive(true);
-            moveArrow3.SetActive(true);
+                changeFoodAlarmObj.SetActive(true);
+                moveArrow3.SetActive(true);
+            }
         }
 
         lockManager.UnLocked((int)GameStateManager.instance.FoodType + 1);
@@ -2784,12 +2807,16 @@ public class GameManager : MonoBehaviour
         playerData.Add("Island_Total_Data", JsonUtility.ToJson(playerDataBase.island_Total_Data));
         PlayfabManager.instance.SetPlayerData(playerData);
 
-        if (playerDataBase.IslandNumber <= (int)GameStateManager.instance.FoodType / (GameStateManager.instance.Island - 1)) //级 俺规
+        if((int)GameStateManager.instance.FoodType > 0 && (((int)GameStateManager.instance.FoodType + 1) % GameStateManager.instance.Island) == 0)
         {
-            playerDataBase.IslandNumber = ((int)GameStateManager.instance.FoodType / (GameStateManager.instance.Island - 1)) + 1;
-            PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
-        }
+            if (playerDataBase.IslandNumber <= ((int)GameStateManager.instance.FoodType + 1) / GameStateManager.instance.Island) //级 俺规
+            {
+                playerDataBase.IslandNumber = (((int)GameStateManager.instance.FoodType + 1) / GameStateManager.instance.Island);
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
 
+                Debug.Log("货肺款 级 俺规!");
+            }
+        }
 
         changeFoodManager.CheckProficiency();
         UpgradeInitialize();
@@ -2820,10 +2847,10 @@ public class GameManager : MonoBehaviour
 
         if (level >= 9 && playerDataBase.InGameTutorial == 0)
         {
+            changeFoodAlarmObj.SetActive(true);
             moveArrow3.SetActive(true);
 
             changeFoodManager.ChangeFoodMoveArrow(FoodType.Food2);
-            changeFoodAlarmObj.SetActive(true);
 
             lockManager.ChangeFoodTutorial();
         }
@@ -3767,7 +3794,7 @@ public class GameManager : MonoBehaviour
     {
         islandImg.sprite = islandArray[(int)GameStateManager.instance.IslandType];
 
-        CheckFood();
+        CheckFoodLevel();
         CheckFoodState();
     }
 
@@ -4125,7 +4152,7 @@ public class GameManager : MonoBehaviour
 
     public void GetIsland()
     {
-        playerDataBase.IslandNumber = 10;
+        playerDataBase.IslandNumber = System.Enum.GetValues(typeof(IslandType)).Length - 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
     }
 

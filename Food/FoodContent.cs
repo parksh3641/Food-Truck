@@ -16,6 +16,13 @@ public class FoodContent : MonoBehaviour
     public bool speicalFood = false;
 
     public MeshRenderer meshRenderer;
+
+    Color speicalColor = new Color(1, 50f / 255f, 1);
+
+    public bool isColor = false;
+    public Color color;
+
+
     Rotation rotation;
 
     private void Awake()
@@ -28,6 +35,11 @@ public class FoodContent : MonoBehaviour
         }
 
         speicalFood = false;
+
+        if(isColor)
+        {
+            meshRenderer.material.color = color;
+        }
     }
 
     private void OnEnable()
@@ -47,7 +59,7 @@ public class FoodContent : MonoBehaviour
 
     private void OnDisable()
     {
-        meshRenderer.material.color = new Color(1, 1, 1);
+        meshRenderer.material.color = Color.white;
 
         speicalFood = false;
 
@@ -110,12 +122,12 @@ public class FoodContent : MonoBehaviour
             if(!speicalFood)
             {
                 speicalFood = true;
-                meshRenderer.materials[0].color = new Color(Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f, Random.Range(0, 200f) / 255f);
+                meshRenderer.materials[0].color = speicalColor;
             }
         }
         else
         {
-            meshRenderer.materials[0].color = new Color(1, 1, 1);
+            meshRenderer.materials[0].color = Color.white;
 
             speicalFood = false;
         }

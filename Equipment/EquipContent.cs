@@ -95,6 +95,34 @@ public class EquipContent : MonoBehaviour
                 }
                 lockedText.text = "Lv. 100";
                 break;
+            case 6:
+                if (playerDataBase.Level >= 150)
+                {
+                    lockedObj.SetActive(false);
+                }
+                lockedText.text = "Lv. 150";
+                break;
+            case 7:
+                if (playerDataBase.Level >= 200)
+                {
+                    lockedObj.SetActive(false);
+                }
+                lockedText.text = "Lv. 200";
+                break;
+            case 8:
+                if (playerDataBase.Level >= 250)
+                {
+                    lockedObj.SetActive(false);
+                }
+                lockedText.text = "Lv. 250";
+                break;
+            case 9:
+                if (playerDataBase.Level >= 300)
+                {
+                    lockedObj.SetActive(false);
+                }
+                lockedText.text = "Lv. 300";
+                break;
         }
 
         if(!first)

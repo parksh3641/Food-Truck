@@ -4414,7 +4414,7 @@ public class PlayerDataBase : ScriptableObject
         autoUpgrade = false;
         autoPresent = false;
 
-        island_Total_Data = new Island_Total_Data();
+        //island_Total_Data = new Island_Total_Data();
         island_Total_Data.Initialize();
 
         rankLevel1 = 0;
@@ -4486,7 +4486,7 @@ public class PlayerDataBase : ScriptableObject
         castleServerDate = "";
 
         resetInfo = new ResetInfo();
-        equip = new Equip();
+        equip.Initialize();
 
         nextFoodNumber = 0;
 
@@ -5900,7 +5900,10 @@ public class PlayerDataBase : ScriptableObject
 
         for (int i = 0; i < island_Total_Data.island_Max_Datas.Length - 1; i++)
         {
-            number += island_Total_Data.island_Max_Datas[i].GetBookValue();
+            if (island_Total_Data.island_Max_Datas[i] != null)
+            {
+                number += island_Total_Data.island_Max_Datas[i].GetBookValue();
+            }
         }
 
         return number;
@@ -5912,7 +5915,10 @@ public class PlayerDataBase : ScriptableObject
 
         for(int i = 0; i < island_Total_Data.island_Rare_Datas.Length - 1; i ++)
         {
-            number += island_Total_Data.island_Rare_Datas[i].GetBookValue();
+            if (island_Total_Data.island_Rare_Datas[i] != null)
+            {
+                number += island_Total_Data.island_Rare_Datas[i].GetBookValue();
+            }
         }
 
         return number;
@@ -5967,30 +5973,36 @@ public class PlayerDataBase : ScriptableObject
                 break;
         }
     }
+
+
+
     public float GetEquipValue(EquipType equipType)
     {
         float value = 0;
 
         for (int i = 0; i < equip.equipInfos.Length; i++)
         {
-            if (equip.equipInfos[i].option1 == (int)equipType + 1)
+            if (equip.equipInfos[i] != null)
             {
-                value += equip.equipInfos[i].option1_Value;
-            }
+                if (equip.equipInfos[i].option1 == (int)equipType + 1)
+                {
+                    value += equip.equipInfos[i].option1_Value;
+                }
 
-            if (equip.equipInfos[i].option2 == (int)equipType + 1)
-            {
-                value += equip.equipInfos[i].option2_Value;
-            }
+                if (equip.equipInfos[i].option2 == (int)equipType + 1)
+                {
+                    value += equip.equipInfos[i].option2_Value;
+                }
 
-            if (equip.equipInfos[i].option3 == (int)equipType + 1)
-            {
-                value += equip.equipInfos[i].option3_Value;
-            }
+                if (equip.equipInfos[i].option3 == (int)equipType + 1)
+                {
+                    value += equip.equipInfos[i].option3_Value;
+                }
 
-            if (equip.equipInfos[i].option4 == (int)equipType + 1)
-            {
-                value += equip.equipInfos[i].option4_Value;
+                if (equip.equipInfos[i].option4 == (int)equipType + 1)
+                {
+                    value += equip.equipInfos[i].option4_Value;
+                }
             }
         }
         return value;

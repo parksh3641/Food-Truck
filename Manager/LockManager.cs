@@ -114,6 +114,7 @@ public class LockManager : MonoBehaviour
         {
             menuIcon[11].SetActive(false);
             menuIcon[12].SetActive(false);
+            menuIcon[15].SetActive(false);
         }
 
         if (playerDataBase.LockTutorial >= 6) //오프라인 보상 해제 (도넛 최대 레벨 달성)
@@ -124,7 +125,6 @@ public class LockManager : MonoBehaviour
         if (playerDataBase.LockTutorial >= 7) //챌린지, 섬 이동 해제 (감자 튀김 최대 레벨 달성)
         {
             menuIcon[14].SetActive(false);
-            menuIcon[15].SetActive(false);
         }
 
         if (GameStateManager.instance.YoutubeVideo)
@@ -193,6 +193,7 @@ public class LockManager : MonoBehaviour
             case 5:
                 lockIcon[10].SetActive(true);
                 lockIcon[11].SetActive(true);
+                lockIcon[14].SetActive(true);
 
                 break;
             case 6:
@@ -201,7 +202,6 @@ public class LockManager : MonoBehaviour
                 break;
             case 7:
                 lockIcon[13].SetActive(true);
-                lockIcon[14].SetActive(true);
                 break;
         }
     }

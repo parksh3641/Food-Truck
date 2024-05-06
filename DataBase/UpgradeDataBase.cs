@@ -53,36 +53,7 @@ public class UpgradeDataBase : ScriptableObject
             UpgradeFood food = new UpgradeFood();
             food.foodType = FoodType.Food1 + i;
 
-            switch(i % 9)
-            {
-                case 0:
-                    food.maxLevel = 10;
-                    break;
-                case 1:
-                    food.maxLevel = 15;
-                    break;
-                case 2:
-                    food.maxLevel = 20;
-                    break;
-                case 3:
-                    food.maxLevel = 25;
-                    break;
-                case 4:
-                    food.maxLevel = 30;
-                    break;
-                case 5:
-                    food.maxLevel = 35;
-                    break;
-                case 6:
-                    food.maxLevel = 40;
-                    break;
-                case 7:
-                    food.maxLevel = 45;
-                    break;
-                case 8:
-                    food.maxLevel = 50;
-                    break;
-            }
+            food.maxLevel = 10 + ((i % GameStateManager.instance.Island) * 5) + (i / GameStateManager.instance.Island);
 
             upgradeFoodList.Add(food);
         }

@@ -1,4 +1,5 @@
 using Firebase.Analytics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,19 +18,46 @@ public class Island_Total_Data
 
     public void SaveServerData(Island_Total_Data total)
     {
-        for(int i = 0; i < total.island_Max_Datas.Length; i ++)
+        if(island_Max_Datas.Length >= total.island_Max_Datas.Length)
         {
-            island_Max_Datas[i] = total.island_Max_Datas[i];
-        }
+            for (int i = 0; i < total.island_Max_Datas.Length; i++)
+            {
+                island_Max_Datas[i] = total.island_Max_Datas[i];
+            }
 
-        for (int i = 0; i < total.island_Rare_Datas.Length; i++)
-        {
-            island_Rare_Datas[i] = total.island_Rare_Datas[i];
-        }
+            for (int i = 0; i < total.island_Rare_Datas.Length; i++)
+            {
+                island_Rare_Datas[i] = total.island_Rare_Datas[i];
+            }
 
-        for (int i = 0; i < total.island_Equip_Datas.Length; i++)
+            for (int i = 0; i < total.island_Equip_Datas.Length; i++)
+            {
+                island_Equip_Datas[i] = total.island_Equip_Datas[i];
+            }
+        }
+        else
         {
-            island_Equip_Datas[i] = total.island_Equip_Datas[i];
+            Island_Max_Data[] island_Max_DatasArray = new Island_Max_Data[Enum.GetValues(typeof(FoodType)).Length];
+            Island_Rare_Data[] island_Rare_DatasArray = new Island_Rare_Data[Enum.GetValues(typeof(FoodType)).Length];
+            Island_Equip_Data[] island_Equip_DatasArray = new Island_Equip_Data[Enum.GetValues(typeof(FoodType)).Length];
+
+            for (int i = 0; i < total.island_Max_Datas.Length; i++)
+            {
+                total.island_Max_Datas[i] = island_Max_DatasArray[i];
+                total.island_Rare_Datas[i] = island_Rare_DatasArray[i];
+                total.island_Equip_Datas[i] = island_Equip_DatasArray[i];
+            }
+
+            island_Max_Datas = new Island_Max_Data[Enum.GetValues(typeof(FoodType)).Length];
+            island_Rare_Datas = new Island_Rare_Data[Enum.GetValues(typeof(FoodType)).Length];
+            island_Equip_Datas = new Island_Equip_Data[Enum.GetValues(typeof(FoodType)).Length];
+
+            for (int i = 0; i < island_Max_DatasArray.Length; i++)
+            {
+                island_Max_DatasArray[i] = total.island_Max_Datas[i];
+                island_Rare_DatasArray[i] = total.island_Rare_Datas[i];
+                island_Equip_DatasArray[i] = total.island_Equip_Datas[i];
+            }
         }
 
         island_Max_Datas[0].index1 = 1;
@@ -37,9 +65,12 @@ public class Island_Total_Data
 
     public void Initialize()
     {
-        island_Max_Datas = new Island_Max_Data[System.Enum.GetValues(typeof(IslandType)).Length];
-        island_Rare_Datas = new Island_Rare_Data[System.Enum.GetValues(typeof(IslandType)).Length];
-        island_Equip_Datas = new Island_Equip_Data[System.Enum.GetValues(typeof(IslandType)).Length];
+        for(int i = 0; i < island_Max_Datas.Length; i ++)
+        {
+            island_Max_Datas[i].Initialize();
+            island_Rare_Datas[i].Initialize();
+            island_Equip_Datas[i].Initialize();
+        }
     }
 
     public int GetMaxValue(IslandType islandType, FoodType foodType)
@@ -58,7 +89,10 @@ public class Island_Total_Data
 
         for (int i = 0; i < island_Max_Datas.Length; i++)
         {
-            number += island_Max_Datas[i].GetMaxValue();
+            if (island_Max_Datas[i] != null)
+            {
+                number += island_Max_Datas[i].GetMaxValue();
+            }
         }
 
         return number;
@@ -90,6 +124,19 @@ public class Island_Max_Data
     public int index7 = 0;
     public int index8 = 0;
     public int index9 = 0;
+
+    public void Initialize()
+    {
+        index1 = 0;
+        index2 = 0;
+        index3 = 0;
+        index4 = 0;
+        index5 = 0;
+        index6 = 0;
+        index7 = 0;
+        index8 = 0;
+        index9 = 0;
+    }
 
     public void SetValue(FoodType type, int number)
     {
@@ -234,6 +281,19 @@ public class Island_Rare_Data
     public int index8 = 0;
     public int index9 = 0;
 
+    public void Initialize()
+    {
+        index1 = 0;
+        index2 = 0;
+        index3 = 0;
+        index4 = 0;
+        index5 = 0;
+        index6 = 0;
+        index7 = 0;
+        index8 = 0;
+        index9 = 0;
+    }
+
     public void SetValue(FoodType type, int number)
     {
         switch ((int)type)
@@ -377,6 +437,19 @@ public class Island_Equip_Data
     public int index7 = 0;
     public int index8 = 0;
     public int index9 = 0;
+
+    public void Initialize()
+    {
+        index1 = 0;
+        index2 = 0;
+        index3 = 0;
+        index4 = 0;
+        index5 = 0;
+        index6 = 0;
+        index7 = 0;
+        index8 = 0;
+        index9 = 0;
+    }
 }
 
 public class IslandManager : MonoBehaviour
@@ -466,14 +539,22 @@ public class IslandManager : MonoBehaviour
         changeIslandContentList[(int)GameStateManager.instance.IslandType].Selected();
 
         changeIslandContentList[0].UnLock();
-        changeIslandContentList[0].SetLevel(playerDataBase.NextFoodNumber / 9);
+        changeIslandContentList[0].SetLevel(((playerDataBase.NextFoodNumber + 1) * 1.0f) / (GameStateManager.instance.Island * 1.0f));
 
         for(int i = 1; i < changeIslandContentList.Count; i ++)
         {
             if(playerDataBase.IslandNumber >= i)
             {
                 changeIslandContentList[i].UnLock();
-                changeIslandContentList[i].SetLevel((playerDataBase.NextFoodNumber + 9) / (9 * (i + 1)));
+
+                if (playerDataBase.NextFoodNumber + 1 >= GameStateManager.instance.Island * i)
+                {
+                    changeIslandContentList[i].SetLevel(((((playerDataBase.NextFoodNumber + 1) - GameStateManager.instance.Island * i) * 1.0f) / ((GameStateManager.instance.Island * 1.0f))));
+                }
+                else
+                {
+                    changeIslandContentList[i].SetLevel(0);
+                }
             }
         }
     }

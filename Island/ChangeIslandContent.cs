@@ -108,6 +108,63 @@ public class ChangeIslandContent : MonoBehaviour
             case IslandType.Island10:
                 background.color = food10Color;
                 break;
+            case IslandType.Island11:
+                background.color = food11Color;
+                break;
+            case IslandType.Island12:
+                background.color = food12Color;
+                break;
+            case IslandType.Island13:
+                background.color = food13Color;
+                break;
+            case IslandType.Island14:
+                background.color = food14Color;
+                break;
+            case IslandType.Island15:
+                background.color = food15Color;
+                break;
+            case IslandType.Island16:
+                background.color = food16Color;
+                break;
+            case IslandType.Island17:
+                background.color = food17Color;
+                break;
+            case IslandType.Island18:
+                background.color = food18Color;
+                break;
+            case IslandType.Island19:
+                background.color = food19Color;
+                break;
+            case IslandType.Island20:
+                background.color = food20Color;
+                break;
+            case IslandType.Island21:
+                background.color = food1Color;
+                break;
+            case IslandType.Island22:
+                background.color = food2Color;
+                break;
+            case IslandType.Island23:
+                background.color = food3Color;
+                break;
+            case IslandType.Island24:
+                background.color = food4Color;
+                break;
+            case IslandType.Island25:
+                background.color = food5Color;
+                break;
+            case IslandType.Island26:
+                background.color = food6Color;
+                break;
+            case IslandType.Island27:
+                background.color = food7Color;
+                break;
+            case IslandType.Island28:
+                background.color = food8Color;
+                break;
+            case IslandType.Island29:
+                background.color = food9Color;
+                break;
             default:
                 background.color = food1Color;
                 break;
@@ -131,7 +188,14 @@ public class ChangeIslandContent : MonoBehaviour
 
     public void SetLevel(float level)
     {
-        titlePlusText.text = LocalizationManager.instance.GetString("Progress") + " : " + (level * 100).ToString("N1") +"%";
+        if(level >= 1)
+        {
+            titlePlusText.text = LocalizationManager.instance.GetString("Progress") + " : 100.0%";
+        }
+        else
+        {
+            titlePlusText.text = LocalizationManager.instance.GetString("Progress") + " : " + (level * 100).ToString("N1") + "%";
+        }
     }
 
     public void Locked()

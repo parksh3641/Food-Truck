@@ -11,9 +11,11 @@ public class ChangeFoodManager : MonoBehaviour
     public GameObject autoUpgradeView;
 
     public GameObject moveIsland;
+    public GameObject rankMode;
+
+    public LocalizationContent changeModeText;
 
     public GameObject alarmObj;
-    public GameObject islandAlarm;
 
     [Title("Proficiency")]
     public Text proficiencyLevelText;
@@ -25,6 +27,8 @@ public class ChangeFoodManager : MonoBehaviour
     public GameObject autoUpgradeLocked;
     public Image autoUpgradeButton;
     public Text autoUpgradeText;
+
+    public Text islandTitleText;
 
     public GameObject autoPresentLocked;
     public Image autoPresentButton;
@@ -79,7 +83,6 @@ public class ChangeFoodManager : MonoBehaviour
         autoUpgradeView.SetActive(false);
 
         alarmObj.SetActive(false);
-        islandAlarm.SetActive(false);
     }
 
     public void Initialize()
@@ -265,6 +268,23 @@ public class ChangeFoodManager : MonoBehaviour
             moveIsland.SetActive(true);
         }
 
+        rankMode.SetActive(false);
+        if(playerDataBase.Level > 4)
+        {
+            rankMode.SetActive(true);
+
+            if(GameStateManager.instance.GameType == GameType.Story)
+            {
+                changeModeText.localizationName = "ChangeRanking";
+            }
+            else
+            {
+                changeModeText.localizationName = "ChangeNormal";
+            }
+
+            changeModeText.ReLoad();
+        }
+
         proficiencyLevelText.text = level.ToString();
 
         proficiencyValueText.text = LocalizationManager.instance.GetString("Total") + " : ( " + nowExp + " / " + nextExp + " )";
@@ -286,7 +306,9 @@ public class ChangeFoodManager : MonoBehaviour
 
         if (GameStateManager.instance.GameType == GameType.Story)
         {
-            for(int i = 0; i < GameStateManager.instance.Island; i ++)
+            islandTitleText.text = LocalizationManager.instance.GetString(GameStateManager.instance.IslandType.ToString());
+
+            for (int i = 0; i < GameStateManager.instance.Island; i ++)
             {
                 foodContentList[number + i].gameObject.SetActive(true);
                 foodContentList[number + i].CheckFoodProficiency();
@@ -308,6 +330,8 @@ public class ChangeFoodManager : MonoBehaviour
         }
         else
         {
+            islandTitleText.text = LocalizationManager.instance.GetString("Ranking2");
+
             for (int i = 0; i < rankFoodContentList.Count; i++)
             {
                 rankFoodContentList[i].gameObject.SetActive(true);
@@ -321,7 +345,7 @@ public class ChangeFoodManager : MonoBehaviour
                 rankFoodContentList[0].UnLock();
             }
 
-            for(int i = 0; i < playerDataBase.IslandNumber; i ++)
+            for(int i = 0; i < 10; i ++)
             {
                 rankFoodContentList[i].UnLock();
             }
@@ -405,8 +429,22 @@ public class ChangeFoodManager : MonoBehaviour
 
     public void OpenMoveIsland()
     {
-        islandAlarm.SetActive(false);
-
         islandManager.OpenChangeIslandView();
+    }
+
+    public void ChangeMode()
+    {
+        if(GameStateManager.instance.GameType == GameType.Story)
+        {
+            GameManager.instance.GameStart(1);
+        }
+        else
+        {
+            GameManager.instance.GameStart(0);
+        }
+
+        CheckFood();
+
+        changeFoodContentTransform.anchoredPosition = new Vector2(0, -9999);
     }
 }

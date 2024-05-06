@@ -1662,6 +1662,7 @@ public class ShopManager : MonoBehaviour
         }
 
         shopCharacterArray[characterIndex].gameObject.SetActive(true);
+        shopCharacterArray[characterIndex].GetComponent<Animator>().SetBool("YummyTime", false);
         shopCharacterArray[characterIndex].transform.position = normalPos;
         shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
@@ -2063,6 +2064,7 @@ public class ShopManager : MonoBehaviour
         }
 
         shopTruckArray[truckIndex].gameObject.SetActive(true);
+        shopTruckArray[truckIndex].GetComponent<Animator>().SetBool("YummyTime", false);
         shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
         truckInfo = truckDataBase.GetTruckInfo(TruckType.Truck1 + truckIndex);
@@ -2312,6 +2314,7 @@ public class ShopManager : MonoBehaviour
         }
 
         shopAnimalArray[animalIndex].gameObject.SetActive(true);
+        shopAnimalArray[animalIndex].GetComponent<Animator>().SetBool("YummyTime", false);
         shopAnimalArray[animalIndex].transform.position = normalPos;
         shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
@@ -2583,6 +2586,7 @@ public class ShopManager : MonoBehaviour
         }
 
         shopButterflyArray[butterflyIndex].gameObject.SetActive(true);
+        shopButterflyArray[butterflyIndex].GetComponent<Animator>().SetBool("YummyTime", false);
         shopButterflyArray[butterflyIndex].transform.position = normalPos_Butterfly;
         shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 

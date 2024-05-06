@@ -15,9 +15,9 @@ public class StageManager : MonoBehaviour
 
     public static int GetGold()
     {
-        gold = 300000;
+        gold = 500000;
 
-        gold += playerDataBase.NextFoodNumber * 50000;
+        gold += playerDataBase.NextFoodNumber * 100000;
 
         return gold;
     }

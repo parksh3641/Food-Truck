@@ -1784,7 +1784,7 @@ public class GameManager : MonoBehaviour
         }
 
         foodArray[(int)type].gameObject.SetActive(true);
-        foodArray[(int)type].Initialize(0);
+        foodArray[(int)type].Initialize(-1);
 
         if(index == 0)
         {
@@ -1891,14 +1891,7 @@ public class GameManager : MonoBehaviour
                 highLevelText.localizationName = " ";
                 highLevelText.plusText = "";
 
-                if(level == 0)
-                {
-                    success = 100;
-                }
-                else
-                {
-                    success = 100 - (islandDataBase.GetSuccess(GameStateManager.instance.IslandType)) - (level * 1);
-                }
+                success = 100 - (islandDataBase.GetSuccess(GameStateManager.instance.IslandType)) - (level * 1);
 
                 break;
             case GameType.Rank:

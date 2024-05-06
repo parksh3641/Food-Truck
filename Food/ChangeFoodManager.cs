@@ -345,9 +345,12 @@ public class ChangeFoodManager : MonoBehaviour
                 rankFoodContentList[0].UnLock();
             }
 
-            for(int i = 0; i < 10; i ++)
+            for(int i = 1; i < rankFoodContentList.Count; i ++)
             {
-                rankFoodContentList[i].UnLock();
+                if(playerDataBase.IslandNumber >= i)
+                {
+                    rankFoodContentList[i].UnLock();
+                }
             }
         }
     }

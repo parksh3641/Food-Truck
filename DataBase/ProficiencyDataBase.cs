@@ -29,12 +29,7 @@ public class ProficiencyDataBase : ScriptableObject
         for (int i = 0; i < 300; i++)
         {
             ProficiencyMotherInfo levelInfo = new ProficiencyMotherInfo();
-            levelInfo.needExp = 5;
-
-            if (i > 0)
-            {
-                levelInfo.needExp += 5 * i;
-            }
+            levelInfo.needExp = 5 * (i + 1);
 
             proficiencyMotherInfoList.Add(levelInfo);
         }

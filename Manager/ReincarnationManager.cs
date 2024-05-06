@@ -70,7 +70,7 @@ public class ReincarnationManager : MonoBehaviour
         lockedObj.SetActive(true);
         lockedAdObj.SetActive(true);
 
-        point = playerDataBase.NextFoodNumber * 5;
+        point = playerDataBase.NextFoodNumber * 10;
 
         if (point > 0)
         {

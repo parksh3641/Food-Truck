@@ -27,16 +27,19 @@ public class FoodContent : MonoBehaviour
 
     private void Awake()
     {
+        speicalFood = false;
+
         rotation = GetComponent<Rotation>();
 
         if (meshRenderer == null)
         {
             meshRenderer = GetComponent<MeshRenderer>();
         }
+    }
 
-        speicalFood = false;
-
-        if(isColor)
+    void SetColor()
+    {
+        if (isColor)
         {
             meshRenderer.material.color = color;
         }
@@ -55,6 +58,8 @@ public class FoodContent : MonoBehaviour
 
             transform.localScale = new Vector3(saveSize, saveSize, saveSize);
         }
+
+        Invoke("SetColor", 0.05f);
     }
 
     private void OnDisable()

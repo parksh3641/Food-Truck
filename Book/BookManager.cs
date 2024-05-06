@@ -36,6 +36,9 @@ public class BookManager : MonoBehaviour
 
     private int number = 0;
 
+    private int zoomNumber = 0;
+    private bool zoom = false;
+
     public BookContent bookPrefab;
     public List<BookContent> bookNormalContentList = new List<BookContent>();
     public List<BookContent> bookEpicContentList = new List<BookContent>();
@@ -82,6 +85,8 @@ public class BookManager : MonoBehaviour
         bookContentTransform[1].anchoredPosition = new Vector2(0, -9999);
 
         bookCamera.SetActive(false);
+
+        bookCamera.transform.position = new Vector3(0, 0.85f, 2.5f);
     }
 
     public void OpenBook()
@@ -212,17 +217,85 @@ public class BookManager : MonoBehaviour
         infoText.text = LocalizationManager.instance.GetString(type.ToString() + "_Info");
     }
 
-    public void ChangeCamera(int number)
+    public void Zoom()
     {
-        if(number == 0)
+        if (zoomNumber == 0)
         {
-            bookCamera.transform.position = new Vector3(0, 0.85f, 2.5f);
-            bookCamera.transform.rotation = Quaternion.identity;
+            if(!zoom)
+            {
+                zoom = true;
+
+                bookCamera.transform.position = new Vector3(0, 0.85f, 2.7f);
+                bookCamera.transform.rotation = Quaternion.identity;
+            }
+            else
+            {
+                zoom = false;
+
+                bookCamera.transform.position = new Vector3(0, 0.85f, 2.5f);
+                bookCamera.transform.rotation = Quaternion.identity;
+            }
         }
         else
         {
-            bookCamera.transform.position = new Vector3(0, 1.45f, 2.5f);
-            bookCamera.transform.rotation = Quaternion.Euler(40, 0, 0);
+            if (!zoom)
+            {
+                zoom = true;
+
+                bookCamera.transform.position = new Vector3(0, 1.25f, 2.7f);
+                bookCamera.transform.rotation = Quaternion.Euler(40, 0, 0);
+            }
+            else
+            {
+                zoom = false;
+
+                bookCamera.transform.position = new Vector3(0, 1.45f, 2.5f);
+                bookCamera.transform.rotation = Quaternion.Euler(40, 0, 0);
+            }
+        }
+    }
+
+    public void ChangeCamera(int number)
+    {
+        zoomNumber = number;
+
+        if(zoomNumber == 0)
+        {
+            if(!zoom)
+            {
+                bookCamera.transform.position = new Vector3(0, 0.9f, 2.5f);
+                bookCamera.transform.rotation = Quaternion.identity;
+            }
+            else
+            {
+                bookCamera.transform.position = new Vector3(0, 0.9f, 2.7f);
+                bookCamera.transform.rotation = Quaternion.identity;
+            }
+        }
+        else
+        {
+            if (!zoom)
+            {
+                bookCamera.transform.position = new Vector3(0, 1.45f, 2.5f);
+                bookCamera.transform.rotation = Quaternion.Euler(40, 0, 0);
+            }
+            else
+            {
+                bookCamera.transform.position = new Vector3(0, 1.25f, 2.7f);
+                bookCamera.transform.rotation = Quaternion.Euler(40, 0, 0);
+            }
+        }
+    }
+
+    public void Information()
+    {
+        if (infoText.enabled)
+        {
+            infoText.enabled = false;
+        }
+        else
+        {
+            infoText.enabled = true;
         }
     }
 }

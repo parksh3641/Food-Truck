@@ -89,6 +89,8 @@ public class EquipmentManager : MonoBehaviour
 {
     public GameObject equipmentView;
 
+    public GameObject equipInfoView;
+
     public GameObject mainAlarm;
 
     public GameObject equipAlarm;
@@ -115,6 +117,7 @@ public class EquipmentManager : MonoBehaviour
     private void Awake()
     {
         equipmentView.SetActive(false);
+        equipInfoView.SetActive(false);
 
         mainAlarm.SetActive(true);
 
@@ -144,6 +147,18 @@ public class EquipmentManager : MonoBehaviour
             GameManager.instance.CheckPercent();
 
             equipmentView.SetActive(false);
+        }
+    }
+
+    public void OpenInfoView()
+    {
+        if (!equipInfoView.activeInHierarchy)
+        {
+            equipInfoView.SetActive(true);
+        }
+        else
+        {
+            equipInfoView.SetActive(false);
         }
     }
 

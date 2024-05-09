@@ -103,25 +103,25 @@ public class EquipContent : MonoBehaviour
                 lockedText.text = "Lv. 100";
                 break;
             case 7:
-                if (playerDataBase.Level >= 100)
-                {
-                    lockedObj.SetActive(false);
-                }
-                lockedText.text = "Lv. 100";
-                break;
-            case 8:
                 if (playerDataBase.Level >= 150)
                 {
                     lockedObj.SetActive(false);
                 }
                 lockedText.text = "Lv. 150";
                 break;
-            case 9:
+            case 8:
                 if (playerDataBase.Level >= 200)
                 {
                     lockedObj.SetActive(false);
                 }
                 lockedText.text = "Lv. 200";
+                break;
+            case 9:
+                if (playerDataBase.Level >= 250)
+                {
+                    lockedObj.SetActive(false);
+                }
+                lockedText.text = "Lv. 250";
                 break;
         }
 
@@ -235,7 +235,7 @@ public class EquipContent : MonoBehaviour
         }
 
         rangeNumbers = new List<int>();
-        rangeNumbers = ExtractNumbers(1, 12, equipInfo.rank + 1);
+        rangeNumbers = ExtractNumbers(1, System.Enum.GetValues(typeof(EquipType)).Length, equipInfo.rank + 1);
 
         FirebaseAnalytics.LogEvent("Change_Options : " + equipInfo.rank);
 

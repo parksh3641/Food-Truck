@@ -37,7 +37,7 @@ public class OfflineManager : MonoBehaviour
     private int addExp = 0;
     private int addCrystal = 0;
 
-    private int priceCrystal = 0;
+    private int priceCrystal = 20;
 
     private int saveCoin = 0;
     private int saveExp = 0;
@@ -186,9 +186,9 @@ public class OfflineManager : MonoBehaviour
 
         plus = (playerDataBase.Treasure5 + playerDataBase.GetEquipValue(EquipType.Equip_Index_11)) * 0.01f;
 
-        priceCrystal = (playerDataBase.CastleLevel + 1) * 5;
-        addCoin = 300000 + playerDataBase.CastleLevel * 30000;
-        addExp = 3000 + playerDataBase.CastleLevel * 300;
+        priceCrystal = 20;
+        addCoin = 100000 + playerDataBase.CastleLevel * 10000;
+        addExp = 1000 + playerDataBase.CastleLevel * 100;
         addCrystal = 1;
 
         addCoin += Mathf.RoundToInt((int)(addCoin * plus));
@@ -202,14 +202,9 @@ public class OfflineManager : MonoBehaviour
             addCrystal += (int)(addCrystal * 0.1f);
         }
 
-        if(priceCrystal >= 20)
-        {
-            priceCrystal = 20;
-        }
-
         levelUpCostText.text = priceCrystal.ToString();
-        coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "  (+30,000)\n/" + localization_Hours + "  (+" + plus.ToString("N1") + "%)";
-        expText.text = MoneyUnitString.ToCurrencyString(addExp) + "  (+300)\n/" + localization_Hours + "  (+" + plus.ToString("N1") + "%)";
+        coinText.text = MoneyUnitString.ToCurrencyString(addCoin) + "  (+10,000)\n/" + localization_Hours + "  (+" + plus.ToString("N1") + "%)";
+        expText.text = MoneyUnitString.ToCurrencyString(addExp) + "  (+100)\n/" + localization_Hours + "  (+" + plus.ToString("N1") + "%)";
 
         adCoinText.text = MoneyUnitString.ToCurrencyString(addCoin * 12);
         adExpText.text = MoneyUnitString.ToCurrencyString(addExp * 12);

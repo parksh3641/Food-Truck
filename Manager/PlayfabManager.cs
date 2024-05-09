@@ -930,6 +930,16 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.AutoPresent = true;
                     }
 
+                    if (list.ItemId.Equals("SuperExp"))
+                    {
+                        playerDataBase.SuperExp = true;
+                    }
+
+                    if (list.ItemId.Equals("SuperKitchen"))
+                    {
+                        playerDataBase.SuperKitchen = true;
+                    }
+
                     if (list.ItemId.Equals("Character1"))
                     {
                         playerDataBase.Character1 = 1;
@@ -1713,6 +1723,11 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Icon":
                            playerDataBase.Icon = statistics.Value;
+
+                           if (playerDataBase.Icon > System.Enum.GetValues(typeof(IconType)).Length - 1)
+                           {
+                               playerDataBase.Icon = 0;
+                           }
                            break;
                        case "FirstReward":
                            playerDataBase.FirstReward = statistics.Value;
@@ -2542,6 +2557,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "TotalLevel_11":
                            playerDataBase.TotalLevel_11 = statistics.Value;
+                           break;
+                       case "IslandReward":
+                           playerDataBase.IslandReward = statistics.Value;
                            break;
                    }
                }
@@ -3375,6 +3393,42 @@ public class PlayfabManager : MonoBehaviour
         GameManager.instance.CheckPurchase();
 
         FirebaseAnalytics.LogEvent("Buy_Purchase : AutoPresent");
+    }
+
+    public void PurchaseSuperExp()
+    {
+        if (playerDataBase.SuperExp) return;
+
+        itemList.Clear();
+        itemList.Add("SuperExp");
+
+        GrantItemToUser("Shop", itemList);
+
+        UpdatePlayerStatisticsInsert("SuperExp", 1);
+
+        playerDataBase.SuperExp = true;
+
+        GameManager.instance.CheckPurchase();
+
+        FirebaseAnalytics.LogEvent("Buy_Purchase : SuperExp");
+    }
+
+    public void PurchaseSuperKitchen()
+    {
+        if (playerDataBase.SuperKitchen) return;
+
+        itemList.Clear();
+        itemList.Add("SuperKitchen");
+
+        GrantItemToUser("Shop", itemList);
+
+        UpdatePlayerStatisticsInsert("SuperKitchen", 1);
+
+        playerDataBase.SuperKitchen = true;
+
+        GameManager.instance.CheckPurchase();
+
+        FirebaseAnalytics.LogEvent("Buy_Purchase : SuperKitchen");
     }
 
     public void RestorePurchases()

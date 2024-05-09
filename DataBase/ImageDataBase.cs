@@ -71,6 +71,11 @@ public class ImageDataBase : ScriptableObject
         return islandArray;
     }
 
+    public Sprite GetIslandArray(IslandType type)
+    {
+        return islandArray[(int)type];
+    }
+
     public Sprite[] GetTreasureArray()
     {
         return treasureArray;

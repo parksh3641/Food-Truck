@@ -164,18 +164,18 @@ public class PackageContent : MonoBehaviour
                 iapButton.gameObject.SetActive(true);
                 iapButton.productId = "shop.foodtruck.package10";
 
-                receiveContents[0].Initialize(RewardType.Treasure1, 100);
-                receiveContents[1].Initialize(RewardType.Treasure7, 100);
-                receiveContents[2].Initialize(RewardType.Treasure3, 100);
+                receiveContents[0].Initialize(RewardType.SuperExp, -1);
+                receiveContents[1].Initialize(RewardType.Treasure1, 100);
+                receiveContents[2].Initialize(RewardType.Treasure7, 100);
                 receiveContents[3].Initialize(RewardType.EventTicket, 5000);
                 break;
             case PackageType.Package11:
                 iapButton.gameObject.SetActive(true);
                 iapButton.productId = "shop.foodtruck.package11";
 
-                receiveContents[0].Initialize(RewardType.Treasure13, 50);
-                receiveContents[1].Initialize(RewardType.Treasure14, 50);
-                receiveContents[2].Initialize(RewardType.Treasure2, 50);
+                receiveContents[0].Initialize(RewardType.SuperKitchen, -1);
+                receiveContents[1].Initialize(RewardType.Treasure13, 50);
+                receiveContents[2].Initialize(RewardType.Treasure14, 50);
                 receiveContents[3].Initialize(RewardType.EventTicket, 2000);
                 break;
             case PackageType.Package12:

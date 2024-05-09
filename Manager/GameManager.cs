@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     public GameObject superOffline;
     public GameObject autoUpgrade;
     public GameObject autoPresent;
+    public GameObject superExp;
+    public GameObject superKitchen;
 
     public GameObject privacypolicyView;
     public GameObject genderView;
@@ -200,7 +202,7 @@ public class GameManager : MonoBehaviour
     private int goldPerSecond = 0;
 
     private float speicalFoodCount = 0;
-    private float speicalFoodNeedCount = 1;
+    private float speicalFoodNeedCount = 3;
 
     private float portion1TimePlus = 0;
     private float portion2TimePlus = 0;
@@ -313,6 +315,7 @@ public class GameManager : MonoBehaviour
     public GuideMissionManager guideMissionManager;
     public NoticeManager noticeManager;
     public BuffManager buffManager;
+    public IslandManager islandManager;
 
     UpgradeDataBase upgradeDataBase;
     IslandDataBase islandDataBase;
@@ -557,7 +560,7 @@ public class GameManager : MonoBehaviour
                     island_Particle[i].SetActive(false);
                 }
 
-                //island_Particle[(int)GameStateManager.instance.IslandType].SetActive(true);
+                island_Particle[(int)GameStateManager.instance.IslandType].SetActive(true);
             }
         }
     }
@@ -577,7 +580,7 @@ public class GameManager : MonoBehaviour
                     island_Particle[i].SetActive(false);
                 }
 
-                //island_Particle[0].SetActive(true);
+                island_Particle[0].SetActive(true);
             }
         }
         else
@@ -771,6 +774,8 @@ public class GameManager : MonoBehaviour
         superOffline.SetActive(false);
         autoUpgrade.SetActive(false);
         autoPresent.SetActive(false);
+        superExp.SetActive(false);
+        superKitchen.SetActive(false);
 
         if (playerDataBase.RemoveAds)
         {
@@ -795,6 +800,16 @@ public class GameManager : MonoBehaviour
         if (playerDataBase.AutoPresent)
         {
             autoPresent.SetActive(true);
+        }
+
+        if (playerDataBase.SuperExp)
+        {
+            superExp.SetActive(true);
+        }
+
+        if (playerDataBase.SuperKitchen)
+        {
+            superKitchen.SetActive(true);
         }
     }
 
@@ -1288,7 +1303,14 @@ public class GameManager : MonoBehaviour
 
         expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
         expUpPlus += playerDataBase.GetAnimal_Total_AbilityLevel() * animalDataBase.retentionValue;
-        expUp = (int)(expUp + (expUp * (expUpPlus / 100)));
+        expUpPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_14);
+
+        if (playerDataBase.SuperExp)
+        {
+            expUp += 40;
+        }
+
+        expUp = (int)(expUp + (expUp * (expUpPlus * 0.01f)));
 
         destoryPercent = islandDataBase.GetDestroy(GameStateManager.instance.IslandType);
 
@@ -1854,7 +1876,7 @@ public class GameManager : MonoBehaviour
         }
 
         sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
-        sellPrice += (int)(sellPrice * islandDataBase.GetSellPrice(GameStateManager.instance.IslandType));
+        sellPrice += (int)(sellPrice * (islandDataBase.GetSellPrice(GameStateManager.instance.IslandType) * 0.01f));
 
         if(speicalFood)
         {
@@ -1878,9 +1900,9 @@ public class GameManager : MonoBehaviour
             sellPrice += Mathf.CeilToInt((sellPrice * (0.01f * sellPricePlus)));
         }
 
-        if (sellPrice >= 100000000)
+        if (sellPrice >= 500000000)
         {
-            sellPrice = 100000000;
+            sellPrice = 500000000;
         }
 
         titleText.plusText = " ( " + (level + 1) + " / " + maxLevel + " )";
@@ -2064,10 +2086,10 @@ public class GameManager : MonoBehaviour
             success = 100;
         }
 
-        if (success < 1f)
-        {
-            success = 1f;
-        }
+        //if (success < 1f)
+        //{
+        //    success = 1f;
+        //}
 
         if (GameStateManager.instance.Developer) success = 100;
 
@@ -2807,6 +2829,8 @@ public class GameManager : MonoBehaviour
                 playerDataBase.IslandNumber = (((int)GameStateManager.instance.FoodType + 1) / GameStateManager.instance.Island);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
 
+                islandManager.NewIsland(playerDataBase.IslandNumber);
+
                 Debug.Log("货肺款 级 俺规!");
             }
         }
@@ -2922,12 +2946,12 @@ public class GameManager : MonoBehaviour
         {
             speicalFoodCount += 1;
 
-            if (speicalFoodCount >= speicalFoodNeedCount)
+            if (speicalFoodCount >= speicalFoodNeedCount && level >= 9)
             {
-                speicalFoodCount = 0;
-
-                if (rareFoodPercent >= Random.Range(0, 100f) && level >= 9)
+                if (rareFoodPercent >= Random.Range(0, 100f))
                 {
+                    speicalFoodCount = 0;
+
                     speicalFood = true;
 
                     SoundManager.instance.PlaySFX(GameSfxType.RareFoodOpen);
@@ -4264,12 +4288,12 @@ public class GameManager : MonoBehaviour
 
     public void GetGold()
     {
-        PlayfabManager.instance.UpdateAddGold(100000000);
+        PlayfabManager.instance.UpdateAddGold(1000000000);
     }
 
     public void GetCrystal()
     {
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100000);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1000000);
     }
 
     public void GetPortion()

@@ -356,5 +356,6 @@ public enum NotionType
     ComingSoon,
     MaxEnterEventTicket,
     ChangeOptionNotion,
-    LevelUpOption
+    LevelUpOption,
+    DontTodayAdsReward
 }

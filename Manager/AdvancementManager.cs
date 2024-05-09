@@ -205,17 +205,17 @@ public class AdvancementManager : MonoBehaviour
         nowValue2 = playerDataBase.Advancement * value2;
         nowValue3 = playerDataBase.Advancement * value3;
 
-        nowValueText.text = LocalizationManager.instance.GetString("NowPrice") + "  +<color=#FFFF00>" + nowValue1.ToString("N1") + "%</color>\n"
-            + LocalizationManager.instance.GetString("SuccessPercent") + "  +<color=#FFFF00>" + nowValue2.ToString("N1") + "%</color>\n"
-            + LocalizationManager.instance.GetString("DefDestroyPercent") + "  +<color=#FFFF00>" + nowValue3.ToString("N2") + "%</color>";
+        nowValueText.text = LocalizationManager.instance.GetString("NowPrice") + " <color=#FFFF00>+" + nowValue1.ToString("N1") + "%</color>\n"
+            + LocalizationManager.instance.GetString("SuccessPercent") + " <color=#FFFF00>+" + nowValue2.ToString("N1") + "%</color>\n"
+            + LocalizationManager.instance.GetString("DefDestroyPercent") + " <color=#FFFF00>+" + nowValue3.ToString("N2") + "%</color>";
 
         nowValue1 = (playerDataBase.Advancement + 1) * value1;
         nowValue2 = (playerDataBase.Advancement + 1) * value2;
         nowValue3 = (playerDataBase.Advancement + 1) * value3;
 
-        nextValueText.text = LocalizationManager.instance.GetString("NowPrice") + "  <color=#FFFF00>+" + nowValue1.ToString("N1") + "%</color>\n"
-    + LocalizationManager.instance.GetString("SuccessPercent") + "  +<color=#FFFF00>" + nowValue2.ToString("N1") + "%</color>\n"
-    + LocalizationManager.instance.GetString("DefDestroyPercent") + "  +<color=#FFFF00>" + nowValue3.ToString("N2") + "%</color>";
+        nextValueText.text = LocalizationManager.instance.GetString("NowPrice") + " <color=#FFFF00>+" + nowValue1.ToString("N1") + "%</color>\n"
+    + LocalizationManager.instance.GetString("SuccessPercent") + " <color=#FFFF00>+" + nowValue2.ToString("N1") + "%</color>\n"
+    + LocalizationManager.instance.GetString("DefDestroyPercent") + " <color=#FFFF00>+" + nowValue3.ToString("N2") + "%</color>";
 
     }
 

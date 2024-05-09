@@ -26,6 +26,7 @@ public class DungeonContent : MonoBehaviour
 
     private int plusNumber1 = 0;
     private int plusNumber2 = 0;
+    private int reward = 0;
 
     Sprite[] rewardArray;
     Sprite[] itemArray;
@@ -132,10 +133,24 @@ public class DungeonContent : MonoBehaviour
             switch(i)
             {
                 case 0:
-                    receiveContents[i].Initialize(info.rewardInfos[i].rewardType, info.rewardInfos[i].number + plusNumber1);
+                    reward = info.rewardInfos[i].number + plusNumber1;
+
+                    if(playerDataBase.SuperKitchen)
+                    {
+                        reward = (int)(reward + (reward * 0.5f));
+                    }
+
+                    receiveContents[i].Initialize(info.rewardInfos[i].rewardType, reward);
                     break;
                 case 1:
-                    receiveContents[i].Initialize(info.rewardInfos[i].rewardType, info.rewardInfos[i].number + plusNumber2);
+                    reward = info.rewardInfos[i].number + plusNumber2;
+
+                    if (playerDataBase.SuperKitchen)
+                    {
+                        reward = (int)(reward + (reward * 0.5f));
+                    }
+
+                    receiveContents[i].Initialize(info.rewardInfos[i].rewardType, reward);
                     break;
             }
         }

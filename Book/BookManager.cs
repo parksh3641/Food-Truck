@@ -86,7 +86,7 @@ public class BookManager : MonoBehaviour
 
         bookCamera.SetActive(false);
 
-        bookCamera.transform.position = new Vector3(0, 0.85f, 2.5f);
+        bookCamera.transform.position = new Vector3(0, 0.88f, 2.5f);
     }
 
     public void OpenBook()
@@ -225,14 +225,14 @@ public class BookManager : MonoBehaviour
             {
                 zoom = true;
 
-                bookCamera.transform.position = new Vector3(0, 0.85f, 2.7f);
+                bookCamera.transform.position = new Vector3(0, 0.88f, 2.7f);
                 bookCamera.transform.rotation = Quaternion.identity;
             }
             else
             {
                 zoom = false;
 
-                bookCamera.transform.position = new Vector3(0, 0.85f, 2.5f);
+                bookCamera.transform.position = new Vector3(0, 0.88f, 2.5f);
                 bookCamera.transform.rotation = Quaternion.identity;
             }
         }
@@ -263,12 +263,12 @@ public class BookManager : MonoBehaviour
         {
             if(!zoom)
             {
-                bookCamera.transform.position = new Vector3(0, 0.9f, 2.5f);
+                bookCamera.transform.position = new Vector3(0, 0.88f, 2.5f);
                 bookCamera.transform.rotation = Quaternion.identity;
             }
             else
             {
-                bookCamera.transform.position = new Vector3(0, 0.9f, 2.7f);
+                bookCamera.transform.position = new Vector3(0, 0.88f, 2.7f);
                 bookCamera.transform.rotation = Quaternion.identity;
             }
         }

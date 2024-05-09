@@ -233,6 +233,8 @@ public enum ItemType
     DungeonKey2,
     DungeonKey3,
     DungeonKey4,
+    SuperExp,
+    SuperKitchen
 }
 
 public enum PackageType
@@ -510,7 +512,9 @@ public enum RewardType
     Icon_Attendance,
     Treasure13,
     Treasure14,
-    Treasure15
+    Treasure15,
+    SuperExp,
+    SuperKitchen
 }
 
 public enum QuestType
@@ -795,13 +799,15 @@ public enum EquipType
     Equip_Index_3, //2단 강화 확률
     Equip_Index_4, //파괴 방어 확률
     Equip_Index_5, //주방 청소 - 공격 속도
-    Equip_Index_6, //주방 청소 - 공격 X2
+    Equip_Index_6, //주방 청소 - 크리티컬
     Equip_Index_7, //아이템 드랍율
     Equip_Index_8, //소스 지속 시간
     Equip_Index_9, //야미 타임 지속 시간
     Equip_Index_10, //챌린지 보상
     Equip_Index_11, //오프라인 보상
     Equip_Index_12, //퀘스트 클리어 보상
+    Equip_Index_13, //주방 청소 - 공격력 증가
+    Equip_Index_14, //경험치 증가
 }
 
 public enum RankType

@@ -37,7 +37,7 @@ public class TreasureManager : MonoBehaviour
     private int[] indexArray = new int[11];
 
     private int index = 0;
-    private int price = 30;
+    private int price = 50;
     private bool oneMore = false;
 
     private float legendaryPercent = 3.0f;

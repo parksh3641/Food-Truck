@@ -1,8 +1,10 @@
 using Firebase.Analytics;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Island_Total_Data
@@ -466,6 +468,17 @@ public class IslandManager : MonoBehaviour
 
     Sprite[] islandArray;
 
+    [Title("Reward")]
+    public GameObject clearView;
+
+    public Image clearIcon;
+
+    public Text clearText;
+
+    public ReceiveContent receiveContent;
+
+    private int index = 0;
+
     public GameManager gameManager;
     public ChangeFoodManager changeFoodManager;
 
@@ -484,6 +497,8 @@ public class IslandManager : MonoBehaviour
         changeIslandView.SetActive(false);
 
         alarmObj.SetActive(true);
+
+        clearView.SetActive(false);
     }
 
     private void Start()
@@ -573,5 +588,33 @@ public class IslandManager : MonoBehaviour
         {
             changeFoodManager.CheckFood();
         }
+    }
+
+    public void NewIsland(int number)
+    {
+        if (number > Enum.GetValues(typeof(IslandType)).Length - 1) return;
+
+        if (playerDataBase.IslandReward >= number) return;
+
+        index = number;
+
+        clearView.SetActive(true);
+
+        clearIcon.sprite = imageDataBase.GetIslandArray(IslandType.Island1 + number);
+
+        clearText.text = LocalizationManager.instance.GetString((IslandType.Island1 + number).ToString());
+
+        receiveContent.Initialize(RewardType.Crystal, 300);
+    }
+
+    public void ClearButton()
+    {
+        clearView.SetActive(false);
+
+        playerDataBase.IslandReward = index;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandReward", playerDataBase.IslandReward);
+
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
     }
 }

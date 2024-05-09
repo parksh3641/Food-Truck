@@ -62,8 +62,6 @@ public class ChestBoxManager : MonoBehaviour
         chestBoxIcon.SetActive(false);
         chestBoxView.SetActive(false);
 
-        if (GameStateManager.instance.ChestBoxCount >= 20) return;
-
         goalCount = 270;
 
         if (playerDataBase.AutoPresent)
@@ -231,7 +229,7 @@ public class ChestBoxManager : MonoBehaviour
             normalRewardText.text = MoneyUnitString.ToCurrencyString(1);
 
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
-            epicRewardText.text = "5 ~ 10";
+            epicRewardText.text = "2 ~ 5";
         }
         else if (random > 21)
         {
@@ -304,6 +302,13 @@ public class ChestBoxManager : MonoBehaviour
 
     public void GetAdsReward()
     {
+        if (GameStateManager.instance.ChestBoxCount >= 20)
+        {
+            NotionManager.instance.UseNotion(NotionType.DontTodayAdsReward);
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            return;
+        }
+
         GoogleAdsManager.instance.admobReward_ChestBoxGold.ShowAd(2);
     }
 
@@ -320,19 +325,19 @@ public class ChestBoxManager : MonoBehaviour
                 PlayfabManager.instance.moneyAnimation.PlusMoney(StageManager.GetGold() * 10);
                 break;
             case RewardType.Portion1:
-                PortionManager.instance.GetPortion(0, Random.Range(5, 11));
+                PortionManager.instance.GetPortion(0, Random.Range(2, 6));
                 break;
             case RewardType.Portion2:
-                PortionManager.instance.GetPortion(1, Random.Range(5, 11));
+                PortionManager.instance.GetPortion(1, Random.Range(2, 6));
                 break;
             case RewardType.Portion3:
-                PortionManager.instance.GetPortion(2, Random.Range(5, 11));
+                PortionManager.instance.GetPortion(2, Random.Range(2, 6));
                 break;
             case RewardType.Portion4:
-                PortionManager.instance.GetPortion(3, Random.Range(5, 11));
+                PortionManager.instance.GetPortion(3, Random.Range(2, 6));
                 break;
             case RewardType.Portion5:
-                PortionManager.instance.GetPortion(4, Random.Range(5, 11));
+                PortionManager.instance.GetPortion(4, Random.Range(2, 6));
                 break;
             case RewardType.DefDestroyTicketPiece:
                 PortionManager.instance.GetDefTickets(3);

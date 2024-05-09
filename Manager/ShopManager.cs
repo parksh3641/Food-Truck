@@ -507,6 +507,7 @@ public class ShopManager : MonoBehaviour
                     shopContents[6].SetLocked(true);
                 }
 
+
                 //if (playerDataBase.RemoveAds)
                 //{
                 //    shopContents[7].gameObject.SetActive(false);
@@ -1442,6 +1443,8 @@ public class ShopManager : MonoBehaviour
                         shopAnimalArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
 
+                    shopAnimalArray[animalIndex].GetComponent<Animator>().SetBool("YummyTime", false);
+
                     FirebaseAnalytics.LogEvent("Open_Pet");
                     break;
                 case 1:
@@ -1449,6 +1452,8 @@ public class ShopManager : MonoBehaviour
                     {
                         shopTruckArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
+
+                    shopTruckArray[truckIndex].GetComponent<Animator>().SetBool("YummyTime", false);
 
                     FirebaseAnalytics.LogEvent("Open_FoodTruck");
                     break;
@@ -1458,6 +1463,8 @@ public class ShopManager : MonoBehaviour
                         shopCharacterArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
 
+                    shopCharacterArray[characterIndex].GetComponent<Animator>().SetBool("YummyTime", false);
+
                     FirebaseAnalytics.LogEvent("Open_Character");
                     break;
                 case 3:
@@ -1465,6 +1472,8 @@ public class ShopManager : MonoBehaviour
                     {
                         shopButterflyArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
                     }
+
+                    shopButterflyArray[butterflyIndex].GetComponent<Animator>().SetBool("YummyTime", false);
 
                     FirebaseAnalytics.LogEvent("Open_Butterfly");
                     break;
@@ -1662,7 +1671,6 @@ public class ShopManager : MonoBehaviour
         }
 
         shopCharacterArray[characterIndex].gameObject.SetActive(true);
-        shopCharacterArray[characterIndex].GetComponent<Animator>().SetBool("YummyTime", false);
         shopCharacterArray[characterIndex].transform.position = normalPos;
         shopCharacterArray[characterIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
@@ -2064,7 +2072,6 @@ public class ShopManager : MonoBehaviour
         }
 
         shopTruckArray[truckIndex].gameObject.SetActive(true);
-        shopTruckArray[truckIndex].GetComponent<Animator>().SetBool("YummyTime", false);
         shopTruckArray[truckIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
         truckInfo = truckDataBase.GetTruckInfo(TruckType.Truck1 + truckIndex);
@@ -2314,7 +2321,6 @@ public class ShopManager : MonoBehaviour
         }
 
         shopAnimalArray[animalIndex].gameObject.SetActive(true);
-        shopAnimalArray[animalIndex].GetComponent<Animator>().SetBool("YummyTime", false);
         shopAnimalArray[animalIndex].transform.position = normalPos;
         shopAnimalArray[animalIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
@@ -2586,7 +2592,6 @@ public class ShopManager : MonoBehaviour
         }
 
         shopButterflyArray[butterflyIndex].gameObject.SetActive(true);
-        shopButterflyArray[butterflyIndex].GetComponent<Animator>().SetBool("YummyTime", false);
         shopButterflyArray[butterflyIndex].transform.position = normalPos_Butterfly;
         shopButterflyArray[butterflyIndex].transform.localRotation = Quaternion.Euler(0, 210, 0);
 
@@ -4621,7 +4626,6 @@ public class ShopManager : MonoBehaviour
 
                 playerDataBase.Package7 += 1;
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package7", playerDataBase.Package7);
-
                 Invoke("PackageDelay7", 0.5f);
 
                 PlayfabManager.instance.UpdateAddGold(6000000);
@@ -4661,47 +4665,46 @@ public class ShopManager : MonoBehaviour
             case PackageType.Package10:
                 if (playerDataBase.Package10) yield break;
 
+                playerDataBase.Package10 = true;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package10", 1);
                 Invoke("PackageDelay10", 0.5f);
+
+                PlayfabManager.instance.PurchaseSuperExp();
+
+                yield return waitForSeconds;
 
                 playerDataBase.Treasure1Count += 100;
                 playerDataBase.Treasure7Count += 100;
-                playerDataBase.Treasure3Count += 100;
 
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure1Count", playerDataBase.Treasure1Count);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure7Count", playerDataBase.Treasure7Count);
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure3Count", playerDataBase.Treasure3Count);
 
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetEventTicket(5000);
 
-                yield return waitForSeconds;
-
-                playerDataBase.Package10 = true;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package10", 1);
 
                 break;
             case PackageType.Package11:
                 if (playerDataBase.Package11) yield break;
 
+                playerDataBase.Package11 = true;
+                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package11", 1);
                 Invoke("PackageDelay11", 0.5f);
 
-                playerDataBase.Treasure2Count += 50;
+                PlayfabManager.instance.PurchaseSuperKitchen();
+
+                yield return waitForSeconds;
+
                 playerDataBase.Treasure13Count += 50;
                 playerDataBase.Treasure14Count += 50;
 
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure2Count", playerDataBase.Treasure2Count);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure13Count", playerDataBase.Treasure13Count);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("Treasure14Count", playerDataBase.Treasure14Count);
 
                 yield return waitForSeconds;
 
                 PortionManager.instance.GetEventTicket(2000);
-
-                yield return waitForSeconds;
-
-                playerDataBase.Package11 = true;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Package11", 1);
 
                 break;
             case PackageType.Package12:

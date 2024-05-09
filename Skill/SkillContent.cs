@@ -456,12 +456,25 @@ public class SkillContent : MonoBehaviour
                 }
                 break;
             case MoneyType.Crystal:
-                if (level > maxLevelCrystal - 1)
+                if(skillType == SkillType.Skill10 || skillType == SkillType.Skill14)
                 {
-                    buttonGold.SetActive(false);
-                    buttonTicket.SetActive(false);
-                    buttonCrystal.SetActive(false);
-                    buttonCP.SetActive(false);
+                    if (level > 99)
+                    {
+                        buttonGold.SetActive(false);
+                        buttonTicket.SetActive(false);
+                        buttonCrystal.SetActive(false);
+                        buttonCP.SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (level > maxLevelCrystal - 1)
+                    {
+                        buttonGold.SetActive(false);
+                        buttonTicket.SetActive(false);
+                        buttonCrystal.SetActive(false);
+                        buttonCP.SetActive(false);
+                    }
                 }
                 break;
             case MoneyType.CoinB:

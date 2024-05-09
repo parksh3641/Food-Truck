@@ -109,6 +109,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int defDestroyTicketPiece = 0;
     [SerializeField]
+    private int islandReward = 0;
+    [SerializeField]
     private int gender = 0;
 
     [Space]
@@ -759,6 +761,10 @@ public class PlayerDataBase : ScriptableObject
     private bool autoUpgrade = false;
     [SerializeField]
     private bool autoPresent = false;
+    [SerializeField]
+    private bool superExp = false;
+    [SerializeField]
+    private bool superKitchen = false;
 
 
     public long SaveCoin
@@ -854,6 +860,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             defDestroyTicketPiece = value;
+        }
+    }
+
+    public int IslandReward
+    {
+        get
+        {
+            return islandReward;
+        }
+        set
+        {
+            islandReward = value;
         }
     }
 
@@ -4406,6 +4424,30 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public bool SuperExp
+    {
+        get
+        {
+            return superExp;
+        }
+        set
+        {
+            superExp = value;
+        }
+    }
+
+    public bool SuperKitchen
+    {
+        get
+        {
+            return superKitchen;
+        }
+        set
+        {
+            superKitchen = value;
+        }
+    }
+
     public void Initialize()
     {
         removeAds = false;
@@ -4413,6 +4455,8 @@ public class PlayerDataBase : ScriptableObject
         superOffline = false;
         autoUpgrade = false;
         autoPresent = false;
+        superExp = false;
+        superKitchen = false;
 
         //island_Total_Data = new Island_Total_Data();
         island_Total_Data.Initialize();
@@ -4449,6 +4493,7 @@ public class PlayerDataBase : ScriptableObject
         rankPoint = 0;
         defDestroyTicket = 0;
         defDestroyTicketPiece = 0;
+        islandReward = 0;
 
         eventTicket = 0;
         eventTicketCount = 0;

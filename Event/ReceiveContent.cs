@@ -10,6 +10,7 @@ public class ReceiveContent : MonoBehaviour
     public Image mainBackground;
     public Image icon;
     public Text countText;
+    public GameObject rotateEffect;
     public GameObject effect;
 
     public bool isEffect = false;
@@ -30,6 +31,7 @@ public class ReceiveContent : MonoBehaviour
         if (effect != null)
         {
             effect.SetActive(false);
+            rotateEffect.SetActive(false);
         }
     }
 
@@ -56,6 +58,7 @@ public class ReceiveContent : MonoBehaviour
         if(!isEffect)
         {
             effect.SetActive(false);
+            rotateEffect.SetActive(false);
         }
 
         switch (type)
@@ -65,6 +68,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.DefDestroyTicket:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Portion1:
@@ -80,10 +84,13 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[1];
                 break;
             case RewardType.PortionSet:
-                mainBackground.sprite = rankBackgroundArray[1];
+                mainBackground.sprite = rankBackgroundArray[2];
+                rotateEffect.SetActive(true);
+                effect.SetActive(true);
                 break;
             case RewardType.Crystal:
                 mainBackground.sprite = rankBackgroundArray[1];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Exp:
@@ -91,6 +98,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Treasure1:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Treasure2:
@@ -98,6 +106,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Treasure3:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Treasure4:
@@ -114,6 +123,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Treasure7:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Treasure8:
@@ -124,6 +134,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.TreasureBox:
                 mainBackground.sprite = rankBackgroundArray[2];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.DefDestroyTicketPiece:
@@ -134,6 +145,7 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Portion6:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.SkillTicket:
@@ -149,15 +161,17 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[0];
                 break;
             case RewardType.Gold2:
-                mainBackground.sprite = rankBackgroundArray[2];
+                mainBackground.sprite = rankBackgroundArray[1];
                 effect.SetActive(true);
                 break;
             case RewardType.Gold3:
-                mainBackground.sprite = rankBackgroundArray[3];
+                mainBackground.sprite = rankBackgroundArray[2];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.RankPoint:
-                mainBackground.sprite = rankBackgroundArray[2];
+                mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.RepairTicket:
@@ -167,24 +181,28 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[3];
                 countText.text = LocalizationManager.instance.GetString("RemoveAds");
                 countText.alignment = TextAnchor.MiddleCenter;
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.GoldX2:
                 mainBackground.sprite = rankBackgroundArray[3];
                 countText.text = LocalizationManager.instance.GetString("GoldX2");
                 countText.alignment = TextAnchor.MiddleCenter;
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.AutoUpgrade:
                 mainBackground.sprite = rankBackgroundArray[3];
                 countText.text = LocalizationManager.instance.GetString("AutoUpgrade");
                 countText.alignment = TextAnchor.MiddleCenter;
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.AutoPresent:
                 mainBackground.sprite = rankBackgroundArray[3];
                 countText.text = LocalizationManager.instance.GetString("AutoPresent");
                 countText.alignment = TextAnchor.MiddleCenter;
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Island1_Heart:
@@ -203,7 +221,8 @@ public class ReceiveContent : MonoBehaviour
                 mainBackground.sprite = rankBackgroundArray[3];
                 break;
             case RewardType.AbilityPoint:
-                mainBackground.sprite = rankBackgroundArray[2];
+                mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.DungeonKey1:
@@ -216,18 +235,22 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.Icon_Ranking1:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Icon_Ranking2:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Icon_Ranking3:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Icon_Ranking4:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.SliverBox:
@@ -238,23 +261,45 @@ public class ReceiveContent : MonoBehaviour
                 break;
             case RewardType.EventTicket:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.ChallengePoint:
                 mainBackground.sprite = rankBackgroundArray[2];
+                rotateEffect.SetActive(true);
+                effect.SetActive(true);
                 break;
             case RewardType.Icon_Attendance:
                 mainBackground.sprite = rankBackgroundArray[3];
+                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.Treasure13:
                 mainBackground.sprite = rankBackgroundArray[2];
+                rotateEffect.SetActive(true);
+                effect.SetActive(true);
                 break;
             case RewardType.Treasure14:
                 mainBackground.sprite = rankBackgroundArray[2];
+                rotateEffect.SetActive(true);
+                effect.SetActive(true);
                 break;
             case RewardType.Treasure15:
                 mainBackground.sprite = rankBackgroundArray[2];
+                break;
+            case RewardType.SuperExp:
+                mainBackground.sprite = rankBackgroundArray[3];
+                countText.text = LocalizationManager.instance.GetString("SuperExp");
+                countText.alignment = TextAnchor.MiddleCenter;
+                rotateEffect.SetActive(true);
+                effect.SetActive(true);
+                break;
+            case RewardType.SuperKitchen:
+                mainBackground.sprite = rankBackgroundArray[3];
+                countText.text = LocalizationManager.instance.GetString("SuperKitchen");
+                countText.alignment = TextAnchor.MiddleCenter;
+                rotateEffect.SetActive(true);
+                effect.SetActive(true);
                 break;
         }
     }

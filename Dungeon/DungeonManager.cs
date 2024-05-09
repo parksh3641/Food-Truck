@@ -53,6 +53,7 @@ public class DungeonManager : MonoBehaviour
     [Title("Dungeon UI")]
     public LocalizationContent titleText;
     public LocalizationContent attackText;
+    public LocalizationContent attackPowerText;
     public LocalizationContent attackSpeedText;
     public LocalizationContent attackX2Text;
     public LocalizationContent inGameTimerText;
@@ -60,17 +61,25 @@ public class DungeonManager : MonoBehaviour
     public Image timerFillamount;
     public Image healthFillamount;
 
+    public Notion damageNotion;
+
     public Text healthText;
 
-    private int health = 0;
-    private int saveHealth = 0;
+    private float damage = 0;
+    private float health = 0;
+    private float saveHealth = 0;
     private float healthPercent = 0;
 
     private int timer = 0;
     private int saveTimer = 0;
 
     private float success = 0;
+    private float attackPower_Low = 0;
+    private float attackPower_High = 0;
+
+
     private float attackPlus = 0;
+    private float attackPowerPlus = 0;
     private float attackSpeed = 0;
     private float attackX2 = 0;
 
@@ -80,6 +89,7 @@ public class DungeonManager : MonoBehaviour
     private bool clear = false;
     private bool skip = false;
 
+    private int reward = 0;
     private int plusNumber = 0;
     private int plusNumber1 = 0;
     private int plusNumber2 = 0;
@@ -140,6 +150,8 @@ public class DungeonManager : MonoBehaviour
         successParticle.gameObject.SetActive(false);
 
         rectTransform.anchoredPosition = new Vector2(0, -9999);
+
+        damageNotion.gameObject.SetActive(false);
     }
 
 
@@ -281,8 +293,14 @@ public class DungeonManager : MonoBehaviour
         {
             levelReceiveContents[i].gameObject.SetActive(true);
 
-            levelReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, dungeonInfo.rewardInfos[i].number +
-                (dungeonInfo.rewardInfos[i].addNumber * nowLevel));
+            reward = dungeonInfo.rewardInfos[i].number + (dungeonInfo.rewardInfos[i].addNumber * nowLevel);
+
+            if (playerDataBase.SuperKitchen)
+            {
+                reward = (int)(reward + (reward * 0.5f));
+            }
+
+            levelReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, reward);
         }
 
         exterminationButton.SetActive(false);
@@ -459,6 +477,13 @@ public class DungeonManager : MonoBehaviour
         attackPlus = 0;
         attackSpeed = 0;
         attackX2 = 0;
+        attackPower_Low = 90.0f;
+        attackPower_High = 120.0f;
+
+        attackPowerPlus = playerDataBase.GetEquipValue(EquipType.Equip_Index_13) * 0.01f;
+
+        attackPower_Low += attackPower_Low * attackPowerPlus;
+        attackPower_High += attackPower_High * attackPowerPlus;
 
         attackPlus += playerDataBase.Skill7 * 0.5f;
         attackPlus += playerDataBase.Skill17 * 0.5f;
@@ -523,6 +548,9 @@ public class DungeonManager : MonoBehaviour
 
         autoAttackSeconds = new WaitForSeconds(attackDelay);
 
+        attackPowerText.localizationName = "AttackPower";
+        attackPowerText.plusText = " : " + attackPower_Low.ToString("N1") + " ~ " + attackPower_High.ToString("N1") + "  (+" + (attackPowerPlus * 100).ToString("N1") + "%)";
+
         attackSpeedText.localizationName = "AttackSpeedPercent";
         attackSpeedText.plusText = " : " + attackDelay.ToString("N2");
 
@@ -535,6 +563,7 @@ public class DungeonManager : MonoBehaviour
         attackX2Text.plusText = " : " + attackX2.ToString("N1") + "%";
 
         attackText.ReLoad();
+        attackPowerText.ReLoad();
         attackSpeedText.ReLoad();
         attackX2Text.ReLoad();
     }
@@ -559,8 +588,9 @@ public class DungeonManager : MonoBehaviour
 
         saveHealth = health;
 
-        healthText.text = health + "/" + saveHealth;
-        healthFillamount.fillAmount = health * 1.0f / saveHealth * 1.0f;
+        healthText.text = health.ToString("N1") + " / " + saveHealth.ToString();
+        healthPercent = health * 1.0f / saveHealth * 1.0f;
+        healthFillamount.fillAmount = healthPercent;
 
         timer = dungeonInfo.timer + 1;
         saveTimer = timer;
@@ -610,25 +640,35 @@ public class DungeonManager : MonoBehaviour
         {
             if(Random.Range(0, 100f) < attackX2)
             {
-                health -= 2;
+                damage = Random.Range(attackPower_Low, attackPower_High + 1) * 2;
+
+                damageNotion.txt.color = Color.red;
 
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
-                NotionManager.instance.UseNotion2(NotionType.SuccessAttackX2);
+                NotionManager.instance.UseNotion(NotionType.SuccessAttackX2);
             }
             else
             {
-                health -= 1;
+                damage  = Random.Range(attackPower_Low, attackPower_High + 1);
+
+                damageNotion.txt.color = Color.yellow;
 
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
-                NotionManager.instance.UseNotion2(NotionType.SuccessAttack);
+                NotionManager.instance.UseNotion(NotionType.SuccessAttack);
             }
+
+            health -= damage;
+
+            damageNotion.gameObject.SetActive(false);
+            damageNotion.gameObject.SetActive(true);
+            damageNotion.txt.text = "-" + damage.ToString("N1");
 
             Damage();
         }
         else
         {
             SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
-            NotionManager.instance.UseNotion2(NotionType.FailAttack);
+            NotionManager.instance.UseNotion(NotionType.FailAttack);
         }
     }
 
@@ -637,12 +677,13 @@ public class DungeonManager : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
+            healthFillamount.fillAmount = 0;
 
             Debug.Log("던전 성공!");
             StartCoroutine(SuccessCoroution());
         }
 
-        healthText.text = health + "/" + saveHealth;
+        healthText.text = health.ToString("N1") + " / " + saveHealth.ToString();
         healthPercent = health * 1.0f / saveHealth * 1.0f;
         healthFillamount.fillAmount = healthPercent;
 
@@ -662,6 +703,8 @@ public class DungeonManager : MonoBehaviour
     IEnumerator SuccessCoroution()
     {
         clear = true;
+
+        damageNotion.gameObject.SetActive(false);
 
         FirebaseAnalytics.LogEvent("Clear_Dungeon : " + dungeonType.ToString());
 
@@ -704,8 +747,14 @@ public class DungeonManager : MonoBehaviour
         {
             clearReceiveContents[i].gameObject.SetActive(true);
 
-            clearReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, dungeonInfo.rewardInfos[i].number +
-                (dungeonInfo.rewardInfos[i].addNumber * nowLevel));
+            reward = dungeonInfo.rewardInfos[i].number + (dungeonInfo.rewardInfos[i].addNumber * nowLevel);
+
+            if (playerDataBase.SuperKitchen)
+            {
+                reward = (int)(reward + (reward * 0.5f));
+            }
+
+            clearReceiveContents[i].Initialize(dungeonInfo.rewardInfos[i].rewardType, reward);
         }
 
         switch (dungeonType)
@@ -776,16 +825,23 @@ public class DungeonManager : MonoBehaviour
                     break;
             }
 
+            reward = (dungeonInfo.rewardInfos[i].number + plusNumber);
+
+            if (playerDataBase.SuperKitchen)
+            {
+                reward = (int)(reward + (reward * 0.5f));
+            }
+
             switch (dungeonInfo.rewardInfos[i].rewardType)
             {
                 case RewardType.Gold:
-                    if(skip)
+                    if (skip)
                     {
-                        PlayfabManager.instance.UpdateAddGold((dungeonInfo.rewardInfos[i].number + plusNumber) / 2);
+                        PlayfabManager.instance.UpdateAddGold(reward / 2);
                     }
                     else
                     {
-                        PlayfabManager.instance.UpdateAddGold(dungeonInfo.rewardInfos[i].number + plusNumber);
+                        PlayfabManager.instance.UpdateAddGold(reward);
                     }
                     break;
                 case RewardType.DefDestroyTicket:
@@ -804,21 +860,21 @@ public class DungeonManager : MonoBehaviour
                 case RewardType.Crystal:
                     if (skip)
                     {
-                        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (dungeonInfo.rewardInfos[i].number + plusNumber) / 2);
+                        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward / 2);
                     }
                     else
                     {
-                        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, dungeonInfo.rewardInfos[i].number + plusNumber);
+                        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, reward);
                     }
                     break;
                 case RewardType.Exp:
                     if (skip)
                     {
-                        PortionManager.instance.GetExp((dungeonInfo.rewardInfos[i].number + plusNumber) / 2);
+                        PortionManager.instance.GetExp(reward / 2);
                     }
                     else
                     {
-                        PortionManager.instance.GetExp(dungeonInfo.rewardInfos[i].number + plusNumber);
+                        PortionManager.instance.GetExp(reward);
                     }
                     break;
                 case RewardType.Treasure1:
@@ -842,7 +898,6 @@ public class DungeonManager : MonoBehaviour
                 case RewardType.Treasure9:
                     break;
                 case RewardType.TreasureBox:
-                    TreasureManager.instance.OpenTreasure(dungeonInfo.rewardInfos[i].number + plusNumber);
                     break;
                 case RewardType.DefDestroyTicketPiece:
                     break;
@@ -887,11 +942,11 @@ public class DungeonManager : MonoBehaviour
                 case RewardType.AbilityPoint:
                     if (skip)
                     {
-                        PortionManager.instance.GetAbilityPoint((dungeonInfo.rewardInfos[i].number + plusNumber) / 2);
+                        PortionManager.instance.GetAbilityPoint(reward / 2);
                     }
                     else
                     {
-                        PortionManager.instance.GetAbilityPoint(dungeonInfo.rewardInfos[i].number + plusNumber);
+                        PortionManager.instance.GetAbilityPoint(reward);
                     }
                     break;
                 case RewardType.DungeonKey1:

@@ -506,33 +506,23 @@ public class DungeonManager : MonoBehaviour
             success = 100;
         }
 
-        attackX2 += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
-        attackX2 += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
-        attackX2 += playerDataBase.Treasure3 * 0.5f;
-        attackX2 += playerDataBase.GetEpicBookNumber() * 0.2f;
-        attackX2 += playerDataBase.GetEquipValue(EquipType.Equip_Index_3);
 
         attackX2 += playerDataBase.Treasure14 * 1f;
         attackX2 += playerDataBase.Skill16 * 0.5f;
-        attackSpeed += playerDataBase.GetEquipValue(EquipType.Equip_Index_6);
-
+        attackX2 += playerDataBase.GetEquipValue(EquipType.Equip_Index_6);
 
         if (attackX2 >= 100)
         {
             attackX2 = 100;
         }
 
-        attackSpeed += playerDataBase.Skill9 * 0.25f;
-        attackSpeed += playerDataBase.Skill15 * 0.5f;
-        attackSpeed += playerDataBase.Treasure2 * 0.5f;
-        attackSpeed += playerDataBase.Advancement * 0.25f;
         attackSpeed += playerDataBase.Treasure13 * 1f;
-        attackSpeed += playerDataBase.GetEquipValue(EquipType.Equip_Index_4);
+        attackSpeed += playerDataBase.Skill15 * 0.5f;
         attackSpeed += playerDataBase.GetEquipValue(EquipType.Equip_Index_5);
 
-        if (attackSpeed >= 150)
+        if (attackSpeed >= 100)
         {
-            attackSpeed = 150;
+            attackSpeed = 100;
         }
 
         attackText.localizationName = "AttackPercent";

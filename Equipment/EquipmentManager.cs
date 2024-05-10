@@ -1,3 +1,4 @@
+using Firebase.Analytics;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -107,11 +108,17 @@ public class EquipmentManager : MonoBehaviour
 
     public EquipContent[] equipContents;
 
+    public GameObject levelUpAnim;
+    public CanvasGroup canvasGroup;
+
+    private int index = -1;
+
+    private float duration = 0.7f;
+    private float currentTime;
+
 
     public EffectManager effectManager;
     public InventoryManager inventoryManager;
-
-    private int index = -1;
 
 
     private void Awake()
@@ -122,8 +129,10 @@ public class EquipmentManager : MonoBehaviour
         mainAlarm.SetActive(true);
 
         equipAlarm.SetActive(true);
-        effectAlarm.SetActive(true);
+        effectAlarm.SetActive(false);
         inventoryAlarm.SetActive(true);
+
+        levelUpAnim.SetActive(false);
 
         rectTransform.anchoredPosition = new Vector2(0, -9999);
     }
@@ -141,6 +150,8 @@ public class EquipmentManager : MonoBehaviour
             {
                 ChangeTopToggle(0);
             }
+
+            FirebaseAnalytics.LogEvent("Open_Equipment");
         }
         else
         {
@@ -155,6 +166,8 @@ public class EquipmentManager : MonoBehaviour
         if (!equipInfoView.activeInHierarchy)
         {
             equipInfoView.SetActive(true);
+
+            FirebaseAnalytics.LogEvent("Open_EquipmentInfo");
         }
         else
         {
@@ -164,6 +177,13 @@ public class EquipmentManager : MonoBehaviour
 
     public void ChangeTopToggle(int number)
     {
+        if (number == 1 || number == 2)
+        {
+            NotionManager.instance.UseNotion(NotionType.ComingSoon);
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            return;
+        }
+
         if (index == number) return;
 
         index = number;
@@ -186,12 +206,13 @@ public class EquipmentManager : MonoBehaviour
 
                 break;
             case 1:
-                effectAlarm.SetActive(false);
 
                 break;
             case 2:
-                inventoryAlarm.SetActive(false);
 
+                break;
+            case 3:
+                inventoryAlarm.SetActive(false);
                 inventoryManager.OpenInventoryView();
 
                 break;
@@ -202,7 +223,42 @@ public class EquipmentManager : MonoBehaviour
     {
         for(int i = 0; i < equipContents.Length; i ++)
         {
-            equipContents[i].Initialize(i);
+            equipContents[i].Initialize(i, this);
         }
+    }
+
+    public void LevelIUpAnimation()
+    {
+        StartCoroutine(FadeInOut());
+    }
+
+    IEnumerator FadeInOut()
+    {
+        levelUpAnim.SetActive(true);
+        canvasGroup.alpha = 0;
+
+        currentTime = 0f;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, currentTime / duration);
+            canvasGroup.alpha = alpha;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f); // Wait for 1 second
+
+        currentTime = 0f; // Reset time for the next loop
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, currentTime / duration);
+            canvasGroup.alpha = alpha;
+            yield return null;
+        }
+
+        levelUpAnim.SetActive(false);
     }
 }

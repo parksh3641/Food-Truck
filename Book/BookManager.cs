@@ -9,6 +9,8 @@ public class BookManager : MonoBehaviour
 {
     public GameObject bookView;
 
+    public GameObject bookInfoView;
+
     public GameObject bookCamera;
 
     public GameObject alarm;
@@ -25,8 +27,8 @@ public class BookManager : MonoBehaviour
 
     public Text plusText;
 
-    private float reward = 0.2f; //ÆÇ¸Å ¼öÀÍ
-    private float reward2 = 0.2f; //2´Ü °­È­ È®·ü
+    private float reward = 0.1f; //°­È­ È®·ü
+    private float reward2 = 0.1f; //ÆÄ±« ¹æ¾î È®·ü
 
     [Space]
     [Title("ScrollView")]
@@ -78,6 +80,7 @@ public class BookManager : MonoBehaviour
         }
 
         bookView.SetActive(false);
+        bookInfoView.SetActive(false);
 
         alarm.SetActive(true);
 
@@ -118,6 +121,20 @@ public class BookManager : MonoBehaviour
         }
     }
 
+    public void OpenBookInfo()
+    {
+        if (!bookInfoView.activeSelf)
+        {
+            bookInfoView.SetActive(true);
+
+            FirebaseAnalytics.LogEvent("Open_BookInfo");
+        }
+        else
+        {
+            bookInfoView.SetActive(false);
+        }
+    }
+
     public void ChangeTopToggle(int number)
     {
         if (index == number) return;
@@ -143,7 +160,7 @@ public class BookManager : MonoBehaviour
             titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetNormalBookNumber() + " / " + System.Enum.GetValues(typeof(FoodType)).Length + " )"
     + "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetNormalBookNumber() * 1.0f) / System.Enum.GetValues(typeof(FoodType)).Length) * 100f).ToString("N1") + "%</size>";
 
-            plusText.text = LocalizationManager.instance.GetString("NowPrice") + " +" + (playerDataBase.GetNormalBookNumber() * reward).ToString() + "%  (+" + reward + "%)";
+            plusText.text = LocalizationManager.instance.GetString("SuccessPercent") + " +" + (playerDataBase.GetNormalBookNumber() * reward).ToString() + "%  (+" + reward + "%)";
 
             CheckNormalInitialize();
         }
@@ -157,7 +174,7 @@ public class BookManager : MonoBehaviour
             titleText.text = LocalizationManager.instance.GetString("Book") + " ( " + playerDataBase.GetEpicBookNumber() + " / " + System.Enum.GetValues(typeof(FoodType)).Length + " )"
 + "\n<size=11>" + LocalizationManager.instance.GetString("Collect") + " : " + (((playerDataBase.GetEpicBookNumber() * 1.0f) / System.Enum.GetValues(typeof(FoodType)).Length) * 100f).ToString("N1") + "%</size>";
 
-            plusText.text = LocalizationManager.instance.GetString("SuccessX2Percent") + " +" + (playerDataBase.GetEpicBookNumber() * reward2).ToString() + "%  (+" + reward2 + "%)";
+            plusText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " +" + (playerDataBase.GetEpicBookNumber() * reward2).ToString() + "%  (+" + reward2 + "%)";
 
             CheckEpicInitialize();
         }

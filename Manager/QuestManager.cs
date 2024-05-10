@@ -1,4 +1,5 @@
 using Firebase.Analytics;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,11 +24,19 @@ public class QuestManager : MonoBehaviour
     public GameObject clearObj;
     public GameObject clearAdObj;
 
+    [Space]
+    [Title("TopMenu")]
+    public Image[] topMenuImgArray;
+    public Sprite[] topMenuSpriteArray;
+    public GameObject[] contentArray;
+
     private int value = 0;
     private int reward = 0;
     private int reward2 = 0;
 
     private int plus = 0;
+
+    private int index = -1;
 
     QuestType questType = QuestType.UpgradeCount;
     QuestInfo questInfo = new QuestInfo();
@@ -57,13 +66,52 @@ public class QuestManager : MonoBehaviour
 
             questView.SetActive(true);
 
-            Initialize();
+            if (index == -1)
+            {
+                ChangeTopToggle(0);
+            }
 
             FirebaseAnalytics.LogEvent("Open_Quest");
         }
         else
         {
             questView.SetActive(false);
+        }
+    }
+
+    public void ChangeTopToggle(int number)
+    {
+        if (number == 1 || number == 2)
+        {
+            NotionManager.instance.UseNotion(NotionType.ComingSoon);
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            return;
+        }
+
+        if (index == number) return;
+
+        index = number;
+
+        for (int i = 0; i < topMenuImgArray.Length; i++)
+        {
+            topMenuImgArray[i].sprite = topMenuSpriteArray[0];
+            contentArray[i].gameObject.SetActive(false);
+        }
+
+        topMenuImgArray[number].sprite = topMenuSpriteArray[1];
+        contentArray[number].gameObject.SetActive(true);
+
+        switch (number)
+        {
+            case 0:
+                Initialize();
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
         }
     }
 
@@ -97,6 +145,7 @@ public class QuestManager : MonoBehaviour
         }
 
         reward = Mathf.RoundToInt(reward + (reward * (0.01f * (playerDataBase.Treasure11 + playerDataBase.GetEquipValue(EquipType.Equip_Index_9)))));
+        reward2 = Mathf.RoundToInt(reward2 + (reward2 * (0.01f * (playerDataBase.Treasure11 + playerDataBase.GetEquipValue(EquipType.Equip_Index_9)))));
 
         plus += playerDataBase.Treasure11;
 

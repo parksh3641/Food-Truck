@@ -1297,11 +1297,11 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case 2:
-                if (playerDataBase.Crystal >= 12000)
+                if (playerDataBase.Crystal >= 1200)
                 {
                     PlayfabManager.instance.UpdateSellPriceGold(10000000);
                     PlayfabManager.instance.moneyAnimation.PlusMoney(10000000);
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 12000);
+                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 1200);
 
                     OpenChangeMoneyView();
 
@@ -1317,7 +1317,8 @@ public class ShopManager : MonoBehaviour
             case 3:
                 if(playerDataBase.Crystal >= needExchangeCrystal)
                 {
-                    PlayfabManager.instance.UpdateAddGold((int)lowCoin);
+                    PlayfabManager.instance.UpdateSellPriceGold((int)lowCoin);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney((int)lowCoin);
                     PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)needExchangeCrystal);
 
                     Debug.Log("부족한 골드만큼 구매 완료");
@@ -1388,7 +1389,7 @@ public class ShopManager : MonoBehaviour
 
         shopContents[33].SetLocked(true);
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 60);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 30);
 
         SoundManager.instance.PlaySFX(GameSfxType.Success);
         NotionManager.instance.UseNotion(NotionType.SuccessWatchAd);
@@ -3103,7 +3104,7 @@ public class ShopManager : MonoBehaviour
         //passiveText.text = "";
 
         effectText.localizationName = totemsInfo.passiveEffect.ToString();
-        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)totemsInfo.effectNumber).ToString();
+        effectText.plusText = " : +" + totemsInfo.effectNumber.ToString("N1");
 
         titleText.localizationName = "ChangeTotems";
         titleText.plusText = "  ( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n<size=10>"

@@ -498,7 +498,7 @@ public class ShopContent : MonoBehaviour
                 effect.SetActive(true);
                 break;
             case ItemType.AdReward_Crystal:
-                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(60) + "</size>";
+                rewardText.text = "<size=18>" + MoneyUnitString.ToCurrencyString(30) + "</size>";
                 effect.SetActive(true);
                 break;
             case ItemType.AutoUpgrade:

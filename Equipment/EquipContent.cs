@@ -34,6 +34,8 @@ public class EquipContent : MonoBehaviour
 
     private Dictionary<string, string> playerData = new Dictionary<string, string>();
 
+    EquipmentManager equipmentManager;
+
     PlayerDataBase playerDataBase;
     ImageDataBase imageDataBase;
     EquipDataBase equipDataBase;
@@ -49,9 +51,10 @@ public class EquipContent : MonoBehaviour
     }
 
 
-    public void Initialize(int number)
+    public void Initialize(int number, EquipmentManager manager)
     {
         index = number;
+        equipmentManager = manager;
 
         lockedObj.SetActive(true);
 
@@ -82,46 +85,46 @@ public class EquipContent : MonoBehaviour
                 lockedText.text = "Lv. 30";
                 break;
             case 4:
+                if (playerDataBase.Level >= 40)
+                {
+                    lockedObj.SetActive(false);
+                }
+                lockedText.text = "Lv. 40";
+                break;
+            case 5:
                 if (playerDataBase.Level >= 50)
                 {
                     lockedObj.SetActive(false);
                 }
                 lockedText.text = "Lv. 50";
                 break;
-            case 5:
+            case 6:
                 if (playerDataBase.Level >= 75)
                 {
                     lockedObj.SetActive(false);
                 }
                 lockedText.text = "Lv. 75";
                 break;
-            case 6:
+            case 7:
                 if (playerDataBase.Level >= 100)
                 {
                     lockedObj.SetActive(false);
                 }
                 lockedText.text = "Lv. 100";
                 break;
-            case 7:
+            case 8:
+                if (playerDataBase.Level >= 125)
+                {
+                    lockedObj.SetActive(false);
+                }
+                lockedText.text = "Lv. 125";
+                break;
+            case 9:
                 if (playerDataBase.Level >= 150)
                 {
                     lockedObj.SetActive(false);
                 }
                 lockedText.text = "Lv. 150";
-                break;
-            case 8:
-                if (playerDataBase.Level >= 200)
-                {
-                    lockedObj.SetActive(false);
-                }
-                lockedText.text = "Lv. 200";
-                break;
-            case 9:
-                if (playerDataBase.Level >= 250)
-                {
-                    lockedObj.SetActive(false);
-                }
-                lockedText.text = "Lv. 250";
                 break;
         }
 
@@ -229,6 +232,8 @@ public class EquipContent : MonoBehaviour
             {
                 equipInfo.rank += 1;
 
+                equipmentManager.LevelIUpAnimation();
+
                 SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
                 NotionManager.instance.UseNotion3(NotionType.LevelUpOption);
             }
@@ -265,7 +270,7 @@ public class EquipContent : MonoBehaviour
 
         SaveOption();
 
-        Initialize(index);
+        Initialize(index, equipmentManager);
     }
 
     private List<int> ExtractNumbers(int start, int end, int count)

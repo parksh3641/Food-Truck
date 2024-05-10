@@ -145,15 +145,15 @@ public class SeasonManager : MonoBehaviour
             case 0:
                 receiveContents[2].gameObject.SetActive(true);
 
-                receiveContents[0].Initialize(RewardType.Crystal, 5000);
-                receiveContents[1].Initialize(RewardType.RankPoint, 2500);
+                receiveContents[0].Initialize(RewardType.Crystal, 3000);
+                receiveContents[1].Initialize(RewardType.RankPoint, 3000);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking1, 1);
 
                 break;
             case 1:
                 receiveContents[2].gameObject.SetActive(true);
 
-                receiveContents[0].Initialize(RewardType.Crystal, 4000);
+                receiveContents[0].Initialize(RewardType.Crystal, 2000);
                 receiveContents[1].Initialize(RewardType.RankPoint, 2000);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking2, 1);
 
@@ -161,7 +161,7 @@ public class SeasonManager : MonoBehaviour
             case 2:
                 receiveContents[2].gameObject.SetActive(true);
 
-                receiveContents[0].Initialize(RewardType.Crystal, 3000);
+                receiveContents[0].Initialize(RewardType.Crystal, 1500);
                 receiveContents[1].Initialize(RewardType.RankPoint, 1500);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking3, 1);
 
@@ -169,23 +169,23 @@ public class SeasonManager : MonoBehaviour
             case 3:
                 receiveContents[2].gameObject.SetActive(true);
 
-                receiveContents[0].Initialize(RewardType.Crystal, 2000);
+                receiveContents[0].Initialize(RewardType.Crystal, 1000);
                 receiveContents[1].Initialize(RewardType.RankPoint, 1000);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking4, 1);
 
                 break;
             case 4:
-                receiveContents[0].Initialize(RewardType.Crystal, 1500);
+                receiveContents[0].Initialize(RewardType.Crystal, 750);
                 receiveContents[1].Initialize(RewardType.RankPoint, 750);
 
                 break;
             case 5:
-                receiveContents[0].Initialize(RewardType.Crystal, 1000);
+                receiveContents[0].Initialize(RewardType.Crystal, 500);
                 receiveContents[1].Initialize(RewardType.RankPoint, 500);
 
                 break;
             case 6:
-                receiveContents[0].Initialize(RewardType.Crystal, 500);
+                receiveContents[0].Initialize(RewardType.Crystal, 250);
                 receiveContents[1].Initialize(RewardType.RankPoint, 250);
 
                 break;

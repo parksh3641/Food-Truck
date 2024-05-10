@@ -110,8 +110,6 @@ public class BuffManager : MonoBehaviour
             NotionManager.instance.UseNotion(NotionType.LowItemNotion);
 
             buffView.SetActive(false);
-
-            ShopManager.instance.OpenShopItemView();
             return;
         }
 

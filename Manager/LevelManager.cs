@@ -128,13 +128,6 @@ public class LevelManager : MonoBehaviour
         titleText.text = "Lv." + level.ToString();
         levelText.text = level.ToString();
 
-        expUp = 0;
-        expUpPlus = 0;
-
-        expUp = 20 + (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
-        expUpPlus += playerDataBase.GetAnimal_Total_AbilityLevel() * animalDataBase.retentionValue;
-        expUp = (int)(expUp + (expUp * (expUpPlus / 100)));
-
         titleInfoText.text = LocalizationManager.instance.GetString("LevelInfo") + "  <color=#FFFF00>(+" + expUp +")</color>";
 
         nowExp = levelDataBase.GetNowExp(playerDataBase.Exp);

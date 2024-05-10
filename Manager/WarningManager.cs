@@ -149,7 +149,7 @@ public class WarningManager : MonoBehaviour
         {
             updateWarning.SetActive(true);
 
-            receiveContent2.Initialize(RewardType.Crystal, 200);
+            receiveContent2.Initialize(RewardType.Crystal, 300);
         }
         else
         {
@@ -159,7 +159,7 @@ public class WarningManager : MonoBehaviour
 
     public void ReceiveButton2()
     {
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 200);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
 
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

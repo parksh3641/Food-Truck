@@ -87,9 +87,9 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 
     public void Initialize()
     {
-#if UNITY_EDITOR
-		return;
-#endif
+//#if UNITY_EDITOR
+//		return;
+//#endif
 		userName = GameStateManager.instance.NickName;
         currentChannelName = "Channel 001";
 

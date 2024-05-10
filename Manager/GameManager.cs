@@ -95,8 +95,8 @@ public class GameManager : MonoBehaviour
     Color buff4Color = new Color(0 / 255f, 230 / 255f, 0 / 255f);
 
     private int buff1Value = 100;
-    private int buff2Value = 30;
-    private int buff3Value = 50;
+    private int buff2Value = 20;
+    private int buff3Value = 40;
 
     private bool buff1 = false;
     private bool buff2 = false;
@@ -183,8 +183,8 @@ public class GameManager : MonoBehaviour
     private float defDestroy = 0;
     private float defDestroyPlus = 100;
 
-    private int need = 0;
-    private float needPlus = 0;
+    private int needPrice = 0;
+    private float needPricePlus = 0;
 
     private int sellPrice = 0;
     private float sellPricePlus = 0;
@@ -266,8 +266,6 @@ public class GameManager : MonoBehaviour
     private bool speicalFood = false;
     private bool isWeekend = false;
     private bool isGoldPerSecond = false;
-
-    private bool checkInGame = false;
 
     public GameObject buff4Obj;
 
@@ -1184,18 +1182,6 @@ public class GameManager : MonoBehaviour
     {
         if (!isDelay_Camera) return;
 
-        if(inGameUI.activeSelf)
-        {
-            checkInGame = true;
-        }
-        else
-        {
-            checkInGame = false;
-
-            isDelay_Camera = false;
-            cameraController.GoToB();
-        }
-
         island.SetActive(false);
         dungeon.SetActive(true);
 
@@ -1208,21 +1194,9 @@ public class GameManager : MonoBehaviour
     {
         if (!isDelay_Camera) return;
 
-        if(!checkInGame)
-        {
-            isDelay_Camera = false;
-            cameraController.GoToA();
-
-            mainUI.SetActive(true);
-            inGameUI.SetActive(false);
-            dungeonUI.SetActive(false);
-        }
-        else
-        {
-            mainUI.SetActive(false);
-            inGameUI.SetActive(true);
-            dungeonUI.SetActive(false);
-        }
+        mainUI.SetActive(false);
+        inGameUI.SetActive(true);
+        dungeonUI.SetActive(false);
 
         island.SetActive(true);
         dungeon.SetActive(false);
@@ -1234,19 +1208,31 @@ public class GameManager : MonoBehaviour
 
         successPlus = 0;
         successX2 = 0;
-        needPlus = 0;
+        needPricePlus = 0;
         sellPricePlus = 0;
         sellPriceTip = 0;
         defDestroy = 0;
         expUp = 0;
         expUpPlus = 0;
         destoryPercent = 0;
+        itemDropPercent = 0;
+        expUp = 0;
+        expUpPlus = 0;
 
         recoverTicketPercent = 10.0f;
         eventTicketPercent = 3.0f;
 
-        itemDropPercent = butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber()) + (playerDataBase.Treasure15 * 1f);
-        itemDropPercent += playerDataBase.GetButterfly_Total_AbilityLevel() * butterflyDataBase.retentionValue;
+        expUp = 20;
+        expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
+        expUpPlus += playerDataBase.GetAnimal_Total_AbilityLevel() * animalDataBase.retentionValue;
+        expUp = (int)(expUp + (expUp * (expUpPlus / 100)));
+
+        if (playerDataBase.SuperExp)
+        {
+            expUp *= 2;
+        }
+
+        itemDropPercent += (playerDataBase.Treasure15 * 1f);
         itemDropPercent += playerDataBase.GetEquipValue(EquipType.Equip_Index_7);
 
         recoverTicketPercent += recoverTicketPercent * (itemDropPercent * 0.01f);
@@ -1266,23 +1252,25 @@ public class GameManager : MonoBehaviour
         }
         successPlus += playerDataBase.Treasure1 * 1f;
         successPlus += playerDataBase.Advancement * 0.5f;
+        successPlus += playerDataBase.GetNormalBookNumber() * 0.1f;
         successPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_1);
+        successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
+        successPlus += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
 
-        successX2 += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
-        successX2 += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
         successX2 += playerDataBase.Treasure3 * 0.5f;
-        successX2 += playerDataBase.GetEpicBookNumber() * 0.2f;
         successX2 += playerDataBase.GetEquipValue(EquipType.Equip_Index_3);
+        successX2 += playerDataBase.GetTotems_Total_AbilityLevel() * totemsDataBase.retentionValue;
+        successX2 += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
+        successX2 += playerDataBase.GetButterfly_Total_AbilityLevel() * butterflyDataBase.retentionValue;
 
-        sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.Skill8 * 1f;
         sellPricePlus += playerDataBase.Skill18 * 1f;
         sellPricePlus += playerDataBase.Proficiency * 2;
         sellPricePlus += playerDataBase.Treasure7 * 2f;
         sellPricePlus += playerDataBase.Advancement * 1f;
         sellPricePlus += playerDataBase.GetIconHoldNumber() * 0.5f;
+        sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.GetTruck_Total_AbilityLevel() * truckDataBase.retentionValue;
-        sellPricePlus += playerDataBase.GetNormalBookNumber() * 0.2f;
         sellPricePlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_2);
 
         if (IsWeekend())
@@ -1301,16 +1289,16 @@ public class GameManager : MonoBehaviour
             sellPriceTip = 100;
         }
 
+        expUp = 20;
         expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
         expUpPlus += playerDataBase.GetAnimal_Total_AbilityLevel() * animalDataBase.retentionValue;
         expUpPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_14);
+        expUp = (int)(expUp + (expUp * (expUpPlus * 0.01f)));
 
         if (playerDataBase.SuperExp)
         {
-            expUp += 40;
+            expUp *= 2;
         }
-
-        expUp = (int)(expUp + (expUp * (expUpPlus * 0.01f)));
 
         destoryPercent = islandDataBase.GetDestroy(GameStateManager.instance.IslandType);
 
@@ -1318,12 +1306,12 @@ public class GameManager : MonoBehaviour
         defDestroy += playerDataBase.Skill19 * 0.25f;
         defDestroy += playerDataBase.Treasure2 * 0.5f;
         defDestroy += playerDataBase.Advancement * 0.25f;
+        defDestroy += playerDataBase.GetEpicBookNumber() * 0.1f;
         defDestroy += playerDataBase.GetEquipValue(EquipType.Equip_Index_4);
 
-        needPlus += playerDataBase.Skill10 * 0.3f;
+        needPricePlus += playerDataBase.Skill10 * 0.3f;
 
         goldPerSecond = (int)totemsDataBase.GetTotemsEffect(playerDataBase.GetTotemsHighNumber());
-        goldPerSecond += (int)(playerDataBase.GetTotems_Total_AbilityLevel() * totemsDataBase.retentionValue);
 
         if (goldPerSecond > 0)
         {
@@ -1364,7 +1352,7 @@ public class GameManager : MonoBehaviour
 
         if (portion1)
         {
-            needPlus += portion1Value;
+            needPricePlus += portion1Value;
         }
 
         if (portion2)
@@ -1416,9 +1404,9 @@ public class GameManager : MonoBehaviour
             successX2 = 100;
         }
 
-        if(needPlus >= 100)
+        if(needPricePlus >= 100)
         {
-            needPlus = 100;
+            needPricePlus = 100;
         }
 
         if(GameStateManager.instance.YoutubeVideo)
@@ -1883,17 +1871,26 @@ public class GameManager : MonoBehaviour
             sellPrice += (int)(sellPrice * 1.5f);
         }
 
-        need = upgradeDataBase.GetNeed(level, defaultNeed);
+        needPrice = upgradeDataBase.GetNeed(level, defaultNeed);
+        needPrice += (int)(needPrice * (islandDataBase.GetSellPrice(GameStateManager.instance.IslandType) * 0.01f));
 
-        if (needPlus > 0)
+        switch (GameStateManager.instance.GameType)
         {
-            need -= Mathf.CeilToInt((need * (0.01f * needPlus)));
+            case GameType.Rank:
+                needPrice *= 10;
+                break;
+        }
 
-            if(needPlus >= 100)
+        if (needPricePlus > 0)
+        {
+            needPrice -= Mathf.CeilToInt((needPrice * (0.01f * needPricePlus)));
+
+            if(needPricePlus >= 100)
             {
-                need = 0;
+                needPrice = 0;
             }
         }
+
 
         if (sellPricePlus > 0)
         {
@@ -2104,13 +2101,13 @@ public class GameManager : MonoBehaviour
         needText.localizationName = "NeedPrice";
         needText.plusText = "";
 
-        if (needPlus > 0)
+        if (needPricePlus > 0)
         {
-            needText.plusText += " (-" + (needPlus.ToString("N1")) + "%)\n" + MoneyUnitString.ToCurrencyString(need);
+            needText.plusText += " (-" + (needPricePlus.ToString("N1")) + "%)\n" + MoneyUnitString.ToCurrencyString(needPrice);
         }
         else
         {
-            needText.plusText += "\n" + MoneyUnitString.ToCurrencyString(need);
+            needText.plusText += "\n" + MoneyUnitString.ToCurrencyString(needPrice);
         }
 
         priceText.localizationName = "NowPrice";
@@ -2254,7 +2251,7 @@ public class GameManager : MonoBehaviour
 
         RenewalVC();
 
-        if (playerDataBase.Coin < need)
+        if (playerDataBase.Coin < needPrice)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion(NotionType.LowCoin);
@@ -2275,12 +2272,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        PlayfabManager.instance.UpdateSellPriceGold(-need);
+        PlayfabManager.instance.UpdateSellPriceGold(-needPrice);
 
         myMoneyPlusText.gameObject.SetActive(false);
         myMoneyPlusText.gameObject.SetActive(true);
         myMoneyPlusText.color = Color.red;
-        myMoneyPlusText.text = "-" + MoneyUnitString.ToCurrencyString(need);
+        myMoneyPlusText.text = "-" + MoneyUnitString.ToCurrencyString(needPrice);
 
         switch(number)
         {
@@ -2346,7 +2343,7 @@ public class GameManager : MonoBehaviour
 
             if (!isExp)
             {
-                playerDataBase.Exp += 20 + expUp;
+                playerDataBase.Exp += expUp;
                 levelManager.Initialize();
             }
 
@@ -3092,8 +3089,6 @@ public class GameManager : MonoBehaviour
             {
                 SoundManager.instance.PlaySFX(GameSfxType.Shield);
                 NotionManager.instance.UseNotion(NotionType.LowItemNotion);
-
-                ShopManager.instance.OpenShopItemView();
                 return;
             }
         }
@@ -3210,7 +3205,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion1 = true;
 
-                        needPlus += portion1Value;
+                        needPricePlus += portion1Value;
                         UpgradeInitialize();
 
                         playerDataBase.Portion1 -= 1;
@@ -3401,7 +3396,7 @@ public class GameManager : MonoBehaviour
                     {
                         portion6 = true;
 
-                        needPlus += portion1Value;
+                        needPricePlus += portion1Value;
                         sellPricePlus += portion2Value;
                         successPlus += portion3Value;
                         feverCount += (feverMaxCount * ((portion4Value * 0.01f) + portion4Plus));
@@ -3460,7 +3455,7 @@ public class GameManager : MonoBehaviour
         portion1 = false;
         portionFillamount1.fillAmount = 0;
 
-        needPlus -= portion1Value;
+        needPricePlus -= portion1Value;
         UpgradeInitialize();
     }
 
@@ -3569,7 +3564,7 @@ public class GameManager : MonoBehaviour
         portion6 = false;
         portionFillamount6.fillAmount = 0;
 
-        needPlus -= portion1Value;
+        needPricePlus -= portion1Value;
         sellPricePlus -= portion2Value;
         successPlus -= portion3Value;
         defDestroy -= portion5Value;

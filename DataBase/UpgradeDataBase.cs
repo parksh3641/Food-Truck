@@ -128,24 +128,13 @@ public class UpgradeDataBase : ScriptableObject
         if (level == 0)
         {
             need = 100;
-
-            return (int)need;
         }
         else
         {
-            switch (GameStateManager.instance.GameType)
-            {
-                case GameType.Story:
-                    need = level * value;
-                    break;
-                case GameType.Rank:
-                    need = level * value;
-                    need *= 1.5f;
-                    break;
-            }
-
-            return (int)need;
+            need = level * value;
         }
+
+        return (int)need;
     }
 
     public int GetPrice(int level, int value)

@@ -99,7 +99,7 @@ public class SkillManager : MonoBehaviour
             }
         }
 
-        challengePointText.text = playerDataBase.ChallengePoint.ToString();
+        challengePointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.ChallengePoint);
     }
 
     public void ChangeTopToggle(int number)

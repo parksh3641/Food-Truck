@@ -702,7 +702,6 @@ public class ShopManager : MonoBehaviour
                 shopContents[22].Initialize(ItemType.Portion4, BuyType.RankPoint, this);
                 shopContents[23].Initialize(ItemType.Portion5, BuyType.RankPoint, this);
                 shopContents[36].Initialize(ItemType.BuffTicket, BuyType.RankPoint, this);
-                shopContents[36].gameObject.SetActive(false);
                 shopContents[37].Initialize(ItemType.SkillTicket, BuyType.RankPoint, this);
                 shopContents[38].Initialize(ItemType.RepairTicket, BuyType.RankPoint, this);
                 shopContents[39].Initialize(ItemType.RepairTicket10, BuyType.RankPoint, this);
@@ -744,9 +743,9 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case ItemType.DefDestroyTicket:
-                if (playerDataBase.RankPoint >= 200)
+                if (playerDataBase.RankPoint >= 1000)
                 {
-                    playerDataBase.RankPoint -= 200;
+                    playerDataBase.RankPoint -= 1000;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -865,9 +864,9 @@ public class ShopManager : MonoBehaviour
             case ItemType.CrystalShop6:
                 break;
             case ItemType.Portion1:
-                if (playerDataBase.RankPoint >= 100)
+                if (playerDataBase.RankPoint >= 500)
                 {
-                    playerDataBase.RankPoint -= 100;
+                    playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -886,9 +885,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion2:
-                if (playerDataBase.RankPoint >= 150)
+                if (playerDataBase.RankPoint >= 500)
                 {
-                    playerDataBase.RankPoint -= 150;
+                    playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -907,9 +906,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion3:
-                if (playerDataBase.RankPoint >= 100)
+                if (playerDataBase.RankPoint >= 500)
                 {
-                    playerDataBase.RankPoint -= 100;
+                    playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -928,9 +927,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion4:
-                if (playerDataBase.RankPoint >= 100)
+                if (playerDataBase.RankPoint >= 500)
                 {
-                    playerDataBase.RankPoint -= 100;
+                    playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -949,9 +948,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.Portion5:
-                if (playerDataBase.RankPoint >= 200)
+                if (playerDataBase.RankPoint >= 750)
                 {
-                    playerDataBase.RankPoint -= 200;
+                    playerDataBase.RankPoint -= 750;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -1105,49 +1104,49 @@ public class ShopManager : MonoBehaviour
                 GoogleAdsManager.instance.admobReward_Portion.ShowAd(8);
                 break;
             case ItemType.AutoUpgrade:
-                if (playerDataBase.Crystal >= 6000)
-                {
-                    if (playerDataBase.AutoUpgrade) return;
+                //if (playerDataBase.Crystal >= 6000)
+                //{
+                //    if (playerDataBase.AutoUpgrade) return;
 
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 6000);
+                //    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 6000);
 
-                    PlayfabManager.instance.PurchaseAutoUpgrade();
+                //    PlayfabManager.instance.PurchaseAutoUpgrade();
 
-                    Invoke("ContentDelay4", 0.5f);
+                //    Invoke("ContentDelay4", 0.5f);
 
-                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
-                }
-                else
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
-                }
+                //    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                //    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                //}
+                //else
+                //{
+                //    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                //    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                //}
                 break;
             case ItemType.AutoPresent:
-                if (playerDataBase.Crystal >= 3000)
-                {
-                    if (playerDataBase.AutoPresent) return;
+                //if (playerDataBase.Crystal >= 3000)
+                //{
+                //    if (playerDataBase.AutoPresent) return;
 
-                    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 3000);
+                //    PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, 3000);
 
-                    PlayfabManager.instance.PurchaseAutoPresent();
+                //    PlayfabManager.instance.PurchaseAutoPresent();
 
-                    Invoke("ContentDelay5", 0.5f);
+                //    Invoke("ContentDelay5", 0.5f);
 
-                    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
-                    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
-                }
-                else
-                {
-                    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                    NotionManager.instance.UseNotion(NotionType.LowCrystal);
-                }
+                //    SoundManager.instance.PlaySFX(GameSfxType.Purchase);
+                //    NotionManager.instance.UseNotion(NotionType.SuccessBuy);
+                //}
+                //else
+                //{
+                //    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                //    NotionManager.instance.UseNotion(NotionType.LowCrystal);
+                //}
                 break;
             case ItemType.BuffTicket:
-                if (playerDataBase.RankPoint >= 1000)
+                if (playerDataBase.RankPoint >= 2000)
                 {
-                    playerDataBase.RankPoint -= 1000;
+                    playerDataBase.RankPoint -= 2000;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -1166,9 +1165,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.SkillTicket:
-                if (playerDataBase.RankPoint >= 500)
+                if (playerDataBase.RankPoint >= 1000)
                 {
-                    playerDataBase.RankPoint -= 500;
+                    playerDataBase.RankPoint -= 1000;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -1187,9 +1186,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.RepairTicket:
-                if (playerDataBase.RankPoint >= 20)
+                if (playerDataBase.RankPoint >= 50)
                 {
-                    playerDataBase.RankPoint -= 20;
+                    playerDataBase.RankPoint -= 50;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -1209,9 +1208,9 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case ItemType.RepairTicket10:
-                if (playerDataBase.RankPoint >= 200)
+                if (playerDataBase.RankPoint >= 500)
                 {
-                    playerDataBase.RankPoint -= 200;
+                    playerDataBase.RankPoint -= 500;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
 
                     rankPointText.text = MoneyUnitString.ToCurrencyString(playerDataBase.RankPoint);
@@ -3104,7 +3103,7 @@ public class ShopManager : MonoBehaviour
         //passiveText.text = "";
 
         effectText.localizationName = totemsInfo.passiveEffect.ToString();
-        effectText.plusText = " : +" + totemsInfo.effectNumber.ToString("N1");
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)totemsInfo.effectNumber).ToString();
 
         titleText.localizationName = "ChangeTotems";
         titleText.plusText = "  ( " + (totemsIndex + 1) + " / " + shopTotemsArray.Length + " )\n<size=10>"
@@ -3327,7 +3326,7 @@ public class ShopManager : MonoBehaviour
             {
                 passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
 + LocalizationManager.instance.GetString(totemsDataBase.retentionEffect.ToString()) + " +"
-+ MoneyUnitString.ToCurrencyString((long)(level * totemsDataBase.retentionValue));
++ (level * totemsDataBase.retentionValue).ToString("N1") + "%";
             }
 
             if (GameStateManager.instance.TotemsType.Equals(totemsInfo.totemsType))

@@ -184,7 +184,7 @@ public class OfflineManager : MonoBehaviour
 
         castleLevelText.text = LocalizationManager.instance.GetString("CastleLevel") + " : " + playerDataBase.CastleLevel + " / " + playerDataBase.Level;
 
-        plus = (playerDataBase.Treasure5 + playerDataBase.GetEquipValue(EquipType.Equip_Index_11)) * 0.01f;
+        plus = ((playerDataBase.Treasure5 * 0.5f) + playerDataBase.GetEquipValue(EquipType.Equip_Index_11)) * 0.01f;
 
         priceCrystal = 20;
         addCoin = 100000 + playerDataBase.CastleLevel * 10000;

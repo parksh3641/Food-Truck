@@ -84,7 +84,7 @@ public class ReincarnationManager : MonoBehaviour
 
         plus = 0;
         plus += playerDataBase.Skill11 * 0.5f;
-        plus += playerDataBase.Treasure10 * 1;
+        plus += playerDataBase.Treasure10 * 0.5f;
         plus += playerDataBase.GetEquipValue(EquipType.Equip_Index_10);
 
         //if(crystal > 0)

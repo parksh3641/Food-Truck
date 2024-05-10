@@ -67,9 +67,7 @@ public class BuffManager : MonoBehaviour
 
     public void OpenBuffView(int number)
     {
-        if (playerDataBase.RemoveAds) return;
-
-        if (!buffView.activeInHierarchy)
+        if (!buffView.activeInHierarchy && !playerDataBase.RemoveAds)
         {
             buffView.SetActive(true);
 
@@ -98,6 +96,22 @@ public class BuffManager : MonoBehaviour
         }
         else
         {
+            switch(number)
+            {
+                case 0:
+                    NotionManager.instance.UseNotion(Color.green, LocalizationManager.instance.GetString("AdReward_Buff1_Info"));
+                    break;
+                case 1:
+                    NotionManager.instance.UseNotion(Color.green, LocalizationManager.instance.GetString("AdReward_Buff2_Info"));
+                    break;
+                case 2:
+                    NotionManager.instance.UseNotion(Color.green, LocalizationManager.instance.GetString("AdReward_Buff3_Info"));
+                    break;
+                case 3:
+
+                    break;
+            }
+
             buffView.SetActive(false);
         }
     }
@@ -163,7 +177,7 @@ public class BuffManager : MonoBehaviour
 
                 GameManager.instance.OnBuff(0);
 
-                FirebaseAnalytics.LogEvent("UseBuff1");
+                FirebaseAnalytics.LogEvent("Use_Buff1");
                 break;
             case 1:
                 if (buff2) return;
@@ -178,7 +192,7 @@ public class BuffManager : MonoBehaviour
 
                 GameManager.instance.OnBuff(1);
 
-                FirebaseAnalytics.LogEvent("UseBuff2");
+                FirebaseAnalytics.LogEvent("Use_Buff2");
                 break;
             case 2:
                 if (buff3) return;
@@ -193,7 +207,7 @@ public class BuffManager : MonoBehaviour
 
                 GameManager.instance.OnBuff(2);
 
-                FirebaseAnalytics.LogEvent("UseBuff3");
+                FirebaseAnalytics.LogEvent("Use_Buff3");
                 break;
             case 3:
                 if (buff4) return;
@@ -208,7 +222,7 @@ public class BuffManager : MonoBehaviour
 
                 GameManager.instance.OnBuff(3);
 
-                FirebaseAnalytics.LogEvent("UseBuff4");
+                FirebaseAnalytics.LogEvent("Use_Buff4");
                 break;
         }
     }

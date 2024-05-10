@@ -149,11 +149,11 @@ public class LevelManager : MonoBehaviour
 
         if(level > 99)
         {
-            infoText.plusText = " +" + (100 * 0.3f).ToString("N1") + "%";
+            infoText.plusText = " <color=#FFFF00>+" + (100 * 0.3f).ToString("N1") + "%</color>";
         }
         else
         {
-            infoText.plusText = " +" + (level * 0.3f).ToString("N1") + "%";
+            infoText.plusText = " <color=#FFFF00>+" + (level * 0.3f).ToString("N1") + "%</color>";
         }
 
         accessDateText.text = LocalizationManager.instance.GetString("AccessDate") + " : " + playerDataBase.AccessDate;
@@ -170,7 +170,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(FadeInOut());
 
         SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-        NotionManager.instance.UseNotion2(Color.green, (level - 1) + " ¡æ " + level + "\n" + LocalizationManager.instance.GetString("Levelup"));
+        NotionManager.instance.UseNotion2(Color.blue, (level - 1) + " ¡æ " + level + "\n" + LocalizationManager.instance.GetString("Levelup"));
     }
 
     IEnumerator FadeInOut()

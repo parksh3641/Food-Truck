@@ -2212,6 +2212,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void CheckFoodState_MaxLevel()
+    {
+        for (int i = 0; i < foodArrayList.Count; i++)
+        {
+            foodArrayList[i].gameObject.SetActive(false);
+        }
+
+        if (GameStateManager.instance.GameType == GameType.Story)
+        {
+            foodArray[(int)GameStateManager.instance.FoodType].gameObject.SetActive(true);
+            foodArray[(int)GameStateManager.instance.FoodType].Initialize(level + 10);
+            foodArray[(int)GameStateManager.instance.FoodType].SetSpeicalFood(speicalFood);
+        }
+        else
+        {
+            rankFoodArray[(int)GameStateManager.instance.RankFoodType].gameObject.SetActive(true);
+            rankFoodArray[(int)GameStateManager.instance.RankFoodType].RankInitialize(level + 20);
+        }
+    }
+
     public void UpgradeButton(int number)
     {
         if(number < 2)
@@ -2565,6 +2585,7 @@ public class GameManager : MonoBehaviour
         }
 
         CheckFoodState();
+        CheckFoodState_MaxLevel();
         MaxLevelUpgradeSuccess();
 
         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);

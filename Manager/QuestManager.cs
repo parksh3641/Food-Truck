@@ -144,8 +144,8 @@ public class QuestManager : MonoBehaviour
             reward += (int)(reward * (1f * (playerDataBase.QuestCount / 5)));
         }
 
-        reward = Mathf.RoundToInt(reward + (reward * (0.01f * (playerDataBase.Treasure11 + playerDataBase.GetEquipValue(EquipType.Equip_Index_9)))));
-        reward2 = Mathf.RoundToInt(reward2 + (reward2 * (0.01f * (playerDataBase.Treasure11 + playerDataBase.GetEquipValue(EquipType.Equip_Index_9)))));
+        reward = Mathf.RoundToInt(reward + (reward * (0.01f * ((playerDataBase.Treasure11 * 0.5f) + playerDataBase.GetEquipValue(EquipType.Equip_Index_9)))));
+        reward2 = Mathf.RoundToInt(reward2 + (reward2 * (0.01f * ((playerDataBase.Treasure11 * 0.5f) + playerDataBase.GetEquipValue(EquipType.Equip_Index_9)))));
 
         plus += playerDataBase.Treasure11;
 

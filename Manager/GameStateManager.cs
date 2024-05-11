@@ -80,7 +80,7 @@ public class GameStateManager : MonoBehaviour
         [Title("Save")]
         public float feverCount = 0;
         public int getGold = 0;
-        public long consumeGold = 0;
+        public long consumeGold = 0; //계산 용
         public int upgradeCount = 0;
         public int sellCount = 0;
         public int useSauce = 0;
@@ -89,7 +89,8 @@ public class GameStateManager : MonoBehaviour
         public int playTime = 0;
         public long saveGold = 0; //서버 저장 전에 나가버릴 경우
         public int supportCount = 0;
-        public int getSellGold = 0; //판매 후 얻은 골드
+        public long getSellGold = 0; //판매 후 얻은 골드
+        public long todayGold = 0;
 
         [Space]
         [Title("Reset")]
@@ -783,7 +784,7 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    public int GetSellGold
+    public long GetSellGold
     {
         get
         {
@@ -792,6 +793,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.getSellGold = value;
+            SaveFile();
+        }
+    }
+
+    public long TodayGold
+    {
+        get
+        {
+            return gameSettings.todayGold;
+        }
+        set
+        {
+            gameSettings.todayGold = value;
             SaveFile();
         }
     }

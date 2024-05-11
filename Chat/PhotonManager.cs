@@ -256,6 +256,13 @@ public class PhotonManager : MonoBehaviour, IChatClientListener
 
 	public void Input_OnEndEdit()
 	{
+		if (!NetworkConnect.instance.CheckConnectInternet())
+		{
+			SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+			NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+			return;
+		}
+
 		if (chatClient.State == ChatState.ConnectedToFrontEnd)
 		{
 			if(inputField.text.Trim().Length > 0)

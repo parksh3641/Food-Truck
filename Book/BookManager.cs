@@ -27,8 +27,8 @@ public class BookManager : MonoBehaviour
 
     public Text plusText;
 
-    private float reward = 0.1f; //°­È­ È®·ü
-    private float reward2 = 0.1f; //ÆÄ±« ¹æ¾î È®·ü
+    private float reward = 0.3f; //°­È­ È®·ü
+    private float reward2 = 0.5f; //ÆÄ±« ¹æ¾î È®·ü
 
     [Space]
     [Title("ScrollView")]
@@ -137,6 +137,13 @@ public class BookManager : MonoBehaviour
 
     public void ChangeTopToggle(int number)
     {
+        if(number == 2)
+        {
+            NotionManager.instance.UseNotion(NotionType.ComingSoon);
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            return;
+        }
+
         if (index == number) return;
 
         index = number;

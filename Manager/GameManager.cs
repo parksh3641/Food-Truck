@@ -143,6 +143,8 @@ public class GameManager : MonoBehaviour
     public GameObject inGameUI;
     public GameObject dungeonUI;
 
+    public LocalizationContent todayGoldText;
+
     public Text myMoneyPlusText;
 
     public Text portionText1, portionText2, portionText3, portionText4, portionText5, portionText6;
@@ -263,7 +265,7 @@ public class GameManager : MonoBehaviour
     private bool isReady = false;
     private bool auto = false;
     private bool buffAutoUpgrade = false;
-    private bool speicalFood = false;
+    private bool isRareFood = false;
     private bool isWeekend = false;
     private bool isGoldPerSecond = false;
 
@@ -741,6 +743,10 @@ public class GameManager : MonoBehaviour
 
         GameStateManager.instance.SaveGold = 0;
 
+        todayGoldText.localizationName = "TodayGold";
+        todayGoldText.plusText = " : <color=#FFFF00>" + MoneyUnitString.ToCurrencyString(GameStateManager.instance.TodayGold) + "</color>";
+        todayGoldText.ReLoad();
+
         Invoke("ServerDelay", 2.0f);
     }
 
@@ -1116,6 +1122,10 @@ public class GameManager : MonoBehaviour
         isDelay_Camera = false;
         cameraController.GoToA();
 
+        todayGoldText.localizationName = "TodayGold";
+        todayGoldText.plusText = " : <color=#FFFF00>" + MoneyUnitString.ToCurrencyString(GameStateManager.instance.TodayGold) +"</color>";
+        todayGoldText.ReLoad();
+
         mainUI.SetActive(true);
         inGameUI.SetActive(false);
 
@@ -1219,8 +1229,9 @@ public class GameManager : MonoBehaviour
         expUp = 0;
         expUpPlus = 0;
 
-        recoverTicketPercent = 10.0f;
-        eventTicketPercent = 3.0f;
+        rareFoodPercent = 10.0f;
+        recoverTicketPercent = 5.0f;
+        eventTicketPercent = 2.0f;
 
         expUp = 20;
         expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
@@ -1252,10 +1263,15 @@ public class GameManager : MonoBehaviour
         }
         successPlus += playerDataBase.Treasure1 * 1f;
         successPlus += playerDataBase.Advancement * 0.5f;
-        successPlus += playerDataBase.GetNormalBookNumber() * 0.1f;
+        successPlus += playerDataBase.GetNormalBookNumber() * 0.3f;
         successPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_1);
         successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         successPlus += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
+
+        if (isRareFood)
+        {
+            successPlus -= 10;
+        }
 
         successX2 += playerDataBase.Treasure3 * 0.5f;
         successX2 += playerDataBase.GetEquipValue(EquipType.Equip_Index_3);
@@ -1306,7 +1322,7 @@ public class GameManager : MonoBehaviour
         defDestroy += playerDataBase.Skill19 * 0.25f;
         defDestroy += playerDataBase.Treasure2 * 0.5f;
         defDestroy += playerDataBase.Advancement * 0.25f;
-        defDestroy += playerDataBase.GetEpicBookNumber() * 0.1f;
+        defDestroy += playerDataBase.GetEpicBookNumber() * 0.5f;
         defDestroy += playerDataBase.GetEquipValue(EquipType.Equip_Index_4);
 
         needPricePlus += playerDataBase.Skill10 * 0.3f;
@@ -1746,7 +1762,7 @@ public class GameManager : MonoBehaviour
 
     void OFFSpeicalFood()
     {
-        speicalFood = false;
+        isRareFood = false;
         speicalFoodParticle.gameObject.SetActive(false);
         rareFood.SetActive(false);
     }
@@ -1866,7 +1882,7 @@ public class GameManager : MonoBehaviour
         sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
         sellPrice += (int)(sellPrice * (islandDataBase.GetSellPrice(GameStateManager.instance.IslandType) * 0.01f));
 
-        if(speicalFood)
+        if(isRareFood)
         {
             sellPrice += (int)(sellPrice * 1.5f);
         }
@@ -2182,7 +2198,7 @@ public class GameManager : MonoBehaviour
         {
             foodArray[(int)GameStateManager.instance.FoodType].gameObject.SetActive(true);
             foodArray[(int)GameStateManager.instance.FoodType].Initialize(level);
-            foodArray[(int)GameStateManager.instance.FoodType].SetSpeicalFood(speicalFood);
+            foodArray[(int)GameStateManager.instance.FoodType].SetSpeicalFood(isRareFood);
         }
         else
         {
@@ -2223,7 +2239,7 @@ public class GameManager : MonoBehaviour
         {
             foodArray[(int)GameStateManager.instance.FoodType].gameObject.SetActive(true);
             foodArray[(int)GameStateManager.instance.FoodType].Initialize(level + 10);
-            foodArray[(int)GameStateManager.instance.FoodType].SetSpeicalFood(speicalFood);
+            foodArray[(int)GameStateManager.instance.FoodType].SetSpeicalFood(isRareFood);
         }
         else
         {
@@ -2663,7 +2679,7 @@ public class GameManager : MonoBehaviour
                 yummyTime2Particle[0].gameObject.SetActive(true);
             }
 
-            if (speicalFood)
+            if (isRareFood)
             {
                 speicalFoodParticle.gameObject.SetActive(false);
                 speicalFoodParticle.gameObject.SetActive(true);
@@ -2917,7 +2933,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(speicalFood)
+        if(isRareFood)
         {
             if(level >= maxLevel - 1)
             {
@@ -2931,6 +2947,7 @@ public class GameManager : MonoBehaviour
 
         PlayfabManager.instance.UpdateSellPriceGold(sellPrice);
         PlayfabManager.instance.moneyAnimation.PlusMoney(sellPrice);
+        GameStateManager.instance.TodayGold += sellPrice;
 
         if(playerDataBase.GuideIndex < 27)
         {
@@ -2970,7 +2987,7 @@ public class GameManager : MonoBehaviour
                 {
                     speicalFoodCount = 0;
 
-                    speicalFood = true;
+                    isRareFood = true;
 
                     SoundManager.instance.PlaySFX(GameSfxType.RareFoodOpen);
                     NotionManager.instance.UseNotion2(NotionType.SpeicalFoodNotion);
@@ -3217,7 +3234,14 @@ public class GameManager : MonoBehaviour
     {
         if (!clickDelay) return;
 
-        switch(number)
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
+        switch (number)
         {
             case 0:
                 if(!portion1)

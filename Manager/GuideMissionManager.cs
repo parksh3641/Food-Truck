@@ -17,7 +17,7 @@ public class GuideMissionManager : MonoBehaviour
     public LocalizationContent titleText;
     public Text rewardText;
 
-    private int now = 0;
+    private long now = 0;
     private int need = 0;
 
     private bool clear = false;
@@ -287,6 +287,13 @@ public class GuideMissionManager : MonoBehaviour
     {
         if(clear)
         {
+            if (!NetworkConnect.instance.CheckConnectInternet())
+            {
+                SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+                return;
+            }
+
             firstReset = false;
 
             playerDataBase.GuideIndex += 1;

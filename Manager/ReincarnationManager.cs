@@ -122,6 +122,13 @@ public class ReincarnationManager : MonoBehaviour
     {
         if (point == 0) return;
 
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
         SoundManager.instance.PlaySFX(GameSfxType.Success);
 
         number = 0;
@@ -131,6 +138,13 @@ public class ReincarnationManager : MonoBehaviour
     public void Ad()
     {
         if (point == 0) return;
+
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
 
         GoogleAdsManager.instance.admobReward_ReincarnationX2.ShowAd(4);
     }

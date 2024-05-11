@@ -96,20 +96,23 @@ public class BuffManager : MonoBehaviour
         }
         else
         {
-            switch(number)
+            if(playerDataBase.RemoveAds)
             {
-                case 0:
-                    NotionManager.instance.UseNotion(Color.green, LocalizationManager.instance.GetString("AdReward_Buff1_Info"));
-                    break;
-                case 1:
-                    NotionManager.instance.UseNotion(Color.green, LocalizationManager.instance.GetString("AdReward_Buff2_Info"));
-                    break;
-                case 2:
-                    NotionManager.instance.UseNotion(Color.green, LocalizationManager.instance.GetString("AdReward_Buff3_Info"));
-                    break;
-                case 3:
+                switch (number)
+                {
+                    case 0:
+                        NotionManager.instance.UseNotion(Color.green, LocalizationManager.instance.GetString("AdReward_Buff1_Info"));
+                        break;
+                    case 1:
+                        NotionManager.instance.UseNotion(Color.green, LocalizationManager.instance.GetString("AdReward_Buff2_Info"));
+                        break;
+                    case 2:
+                        NotionManager.instance.UseNotion(Color.green, LocalizationManager.instance.GetString("AdReward_Buff3_Info"));
+                        break;
+                    case 3:
 
-                    break;
+                        break;
+                }
             }
 
             buffView.SetActive(false);
@@ -127,6 +130,13 @@ public class BuffManager : MonoBehaviour
             return;
         }
 
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
         playerDataBase.BuffTicket -= 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("BuffTickets", playerDataBase.BuffTicket);
 
@@ -138,7 +148,14 @@ public class BuffManager : MonoBehaviour
 
     public void WatchAd()
     {
-        switch(index)
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
+        switch (index)
         {
             case 0:
                 GoogleAdsManager.instance.admobReward_Buff1.ShowAd(3);

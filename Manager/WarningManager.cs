@@ -202,7 +202,7 @@ public class WarningManager : MonoBehaviour
         {
             reviewWarning.SetActive(true);
 
-            receiveContent4.Initialize(RewardType.Crystal, 1000);
+            receiveContent4.Initialize(RewardType.Crystal, 3000);
         }
         else
         {
@@ -211,7 +211,7 @@ public class WarningManager : MonoBehaviour
     }
     public void ReceiveButton4()
     {
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1000);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 3000);
 
         SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
         NotionManager.instance.UseNotion(NotionType.SuccessReward);

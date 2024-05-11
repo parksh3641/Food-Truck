@@ -520,9 +520,9 @@ public class DungeonManager : MonoBehaviour
         attackSpeed += playerDataBase.Skill15 * 0.5f;
         attackSpeed += playerDataBase.GetEquipValue(EquipType.Equip_Index_5);
 
-        if (attackSpeed >= 100)
+        if (attackSpeed >= 150)
         {
-            attackSpeed = 100;
+            attackSpeed = 150;
         }
 
         attackText.localizationName = "AttackPercent";
@@ -643,7 +643,7 @@ public class DungeonManager : MonoBehaviour
 
                 damageNotion.txt.color = Color.yellow;
 
-                SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+                SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
                 NotionManager.instance.UseNotion(NotionType.SuccessAttack);
             }
 

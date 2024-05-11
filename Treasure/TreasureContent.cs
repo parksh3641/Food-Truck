@@ -29,7 +29,7 @@ public class TreasureContent : MonoBehaviour
     private int count = 0;
     private int need = 0;
     private int level = 0;
-    private int maxLevel = 300;
+    private int maxLevel = 200;
 
     private int needUp = 20;
 

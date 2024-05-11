@@ -199,7 +199,14 @@ public class EquipContent : MonoBehaviour
     {
         if (isDelay) return;
 
-        if(playerDataBase.Coin < coin)
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
+        if (playerDataBase.Coin < coin)
         {
             SoundManager.instance.PlaySFX(GameSfxType.Wrong);
             NotionManager.instance.UseNotion2(NotionType.LowCoin);

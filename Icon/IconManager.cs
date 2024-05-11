@@ -477,6 +477,13 @@ public class IconManager : MonoBehaviour
 
     public void SaveIcon()
     {
+        if (!NetworkConnect.instance.CheckConnectInternet())
+        {
+            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+            NotionManager.instance.UseNotion(NotionType.NetworkConnectNotion);
+            return;
+        }
+
         playerDataBase.Icon = (int)iconType;
 
         icon.sprite = imageDataBase.GetIconArray(IconType.Icon_1 + playerDataBase.Icon);

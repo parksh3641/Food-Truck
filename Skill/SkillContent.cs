@@ -494,6 +494,205 @@ public class SkillContent : MonoBehaviour
         Checking();
     }
 
+    public void NextValue(int number)
+    {
+        switch (skillType)
+        {
+            case SkillType.Skill1:
+                if (playerDataBase.Skill1 + number < maxLevelGold)
+                {
+                    nextValueText.text = (skill1Value * (playerDataBase.Skill1 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill1Value * (maxLevelGold)).ToString("N1") + "%";
+                }
+
+                break;
+            case SkillType.Skill2:
+                if (playerDataBase.Skill2 + number < maxLevelGold)
+                {
+                    nextValueText.text = (skill2Value * (playerDataBase.Skill2 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill2Value * (maxLevelGold)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill3:
+                if (playerDataBase.Skill3 + number < maxLevelGold)
+                {
+                    nextValueText.text = (skill3Value * (playerDataBase.Skill3 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill3Value * (maxLevelGold)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill4:
+                if (playerDataBase.Skill4 + number < maxLevelGold)
+                {
+                    nextValueText.text = (skill4Value * (playerDataBase.Skill4 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill4Value * (maxLevelGold)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill5:
+                level = playerDataBase.Skill5;
+                if (playerDataBase.Skill5 + number < maxLevelGold)
+                {
+                    nextValueText.text = (skill5Value * (playerDataBase.Skill5 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill5Value * (maxLevelGold)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill6:
+                if (playerDataBase.Skill6 + number < maxLevelGold)
+                {
+                    nextValueText.text = (skill6Value * (playerDataBase.Skill6 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill6Value * (maxLevelGold)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill7:
+                if (playerDataBase.Skill7 + number < maxLevelCrystal)
+                {
+                    nextValueText.text = (skill7Value * (playerDataBase.Skill7 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill7Value * (maxLevelCrystal)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill8:
+                if (playerDataBase.Skill8 + number < maxLevelCrystal)
+                {
+                    nextValueText.text = (skill8Value * (playerDataBase.Skill8 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill8Value * (maxLevelCrystal)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill9:
+                if (playerDataBase.Skill9 + number < maxLevelCrystal)
+                {
+                    nextValueText.text = (skill9Value * (playerDataBase.Skill9 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill9Value * (maxLevelCrystal)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill10:
+                if (playerDataBase.Skill10 + number < 100)
+                {
+                    nextValueText.text = (skill10Value * (playerDataBase.Skill10 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill10Value * 100).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill11:
+                if (playerDataBase.Skill11 + number < maxLevelCrystal)
+                {
+                    nextValueText.text = (skill11Value * (playerDataBase.Skill11 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill11Value * (maxLevelCrystal)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill12:
+                if (playerDataBase.Skill12 + number < maxLevelGold)
+                {
+                    nextValueText.text = (skill12Value * (playerDataBase.Skill12 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill12Value * (maxLevelGold)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill13:
+                if (playerDataBase.Skill13 + number < maxLevelGold)
+                {
+                    nextValueText.text = (skill13Value * (playerDataBase.Skill13 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill13Value * (maxLevelGold)).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill14:
+                if (playerDataBase.Skill14 + number < 100)
+                {
+                    nextValueText.text = (skill14Value * (playerDataBase.Skill14 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill14Value * 100).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill15:
+                if (playerDataBase.Skill15 + number < maxLevelChallenge)
+                {
+                    nextValueText.text = (skill15Value * (playerDataBase.Skill15 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill15Value * maxLevelChallenge).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill16:
+                if (playerDataBase.Skill16 + number < maxLevelChallenge)
+                {
+                    nextValueText.text = (skill16Value * (playerDataBase.Skill16 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill16Value * maxLevelChallenge).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill17:
+                if (playerDataBase.Skill17 + number < maxLevelChallenge)
+                {
+                    nextValueText.text = (skill17Value * (playerDataBase.Skill17 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill17Value * maxLevelChallenge).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill18:
+                if (playerDataBase.Skill18 + number < maxLevelChallenge)
+                {
+                    nextValueText.text = (skill18Value * (playerDataBase.Skill18 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill18Value * maxLevelChallenge).ToString("N1") + "%";
+                }
+                break;
+            case SkillType.Skill19:
+                if (playerDataBase.Skill19 + number < maxLevelChallenge)
+                {
+                    nextValueText.text = (skill19Value * (playerDataBase.Skill19 + number + 1)).ToString("N1") + "%";
+                }
+                else
+                {
+                    nextValueText.text = (skill19Value * maxLevelChallenge).ToString("N1") + "%";
+                }
+                break;
+        }
+    }
+
     public void LevelUpButton(int number)
     {
         if (!NetworkConnect.instance.CheckConnectInternet())
@@ -913,6 +1112,8 @@ public class SkillContent : MonoBehaviour
                     plusLevel = 1;
                     break;
             }
+
+            NextValue(plusLevel);
 
             value = (long)(value * (1.0f - (0.003f * playerDataBase.Treasure4)));
             goldText.text = MoneyUnitString.ToCurrencyString(value);

@@ -172,7 +172,7 @@ public class AdvancementManager : MonoBehaviour
             needImg[2].color = Color.green;
         }
 
-        if(playerDataBase.LockTutorial >= 7)
+        if(playerDataBase.IslandNumber >= 2)
         {
             titleLockedObj.SetActive(false);
 

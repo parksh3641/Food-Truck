@@ -219,6 +219,9 @@ public class EquipContent : MonoBehaviour
 
         RandomOption();
 
+        playerDataBase.EquipCount += 1;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("EquipCount", playerDataBase.EquipCount);
+
         SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
         NotionManager.instance.UseNotion2(NotionType.ChangeOptionNotion);
 

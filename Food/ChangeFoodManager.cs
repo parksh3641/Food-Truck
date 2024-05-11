@@ -320,7 +320,7 @@ public class ChangeFoodManager : MonoBehaviour
             foodContentList[number].UnLock();
             foodContentList[(int)GameStateManager.instance.FoodType].Selected();
 
-            for (int j = 0; j < playerDataBase.NextFoodNumber; j++)
+            for (int j = 0; j < (playerDataBase.NextFoodNumber + 1); j++)
             {
                 if (foodContentList[j].gameObject.activeInHierarchy)
                 {

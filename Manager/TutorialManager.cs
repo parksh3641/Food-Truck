@@ -17,8 +17,9 @@ public class TutorialManager : MonoBehaviour
 
     private bool talkSkip = false;
     private bool isSkip = false;
+    private bool isQuiz = false;
 
-    string str = "";
+    private string str = "";
 
     public NickNameManager nameManager;
 
@@ -32,12 +33,15 @@ public class TutorialManager : MonoBehaviour
         if (playerDataBase == null) playerDataBase = Resources.Load("PlayerDataBase") as PlayerDataBase;
 
         tutorialView.SetActive(false);
+
+        isQuiz = false;
     }
 
     public void TutorialStart()
     {
         Invoke("Wait", 1f);
     }
+
 
     void Wait()
     {
@@ -46,10 +50,13 @@ public class TutorialManager : MonoBehaviour
         talkIndex = 0;
         Initialize(talkIndex);
     }
+
     [Button]
-    public void Next0()
+    public void Next0() //╬х ╬╡юс
     {
         tutorialView.SetActive(true);
+
+        isQuiz = false;
 
         talkIndex = 0;
         Initialize(talkIndex);
@@ -59,6 +66,8 @@ public class TutorialManager : MonoBehaviour
     public void Next1()
     {
         tutorialView.SetActive(true);
+
+        isQuiz = false;
 
         GameStateManager.instance.FirstSuccess = true;
 
@@ -71,6 +80,8 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialView.SetActive(true);
 
+        isQuiz = false;
+
         GameStateManager.instance.FirstFail = true;
 
         talkIndex = 8;
@@ -82,7 +93,9 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialView.SetActive(true);
 
-        GameStateManager.instance.DestroyCount = 0;
+        isQuiz = false;
+
+        GameStateManager.instance.FirstDestory = true;
 
         talkIndex = 10;
         Initialize(talkIndex);
@@ -93,7 +106,20 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialView.SetActive(true);
 
+        isQuiz = false;
+
         talkIndex = 12;
+        Initialize(talkIndex);
+    }
+
+    [Button]
+    public void TodayQuizStart()
+    {
+        tutorialView.SetActive(true);
+
+        isQuiz = true;
+
+        talkIndex = 15;
         Initialize(talkIndex);
     }
 
@@ -104,40 +130,57 @@ public class TutorialManager : MonoBehaviour
 
         talkSkip = false;
 
-        Debug.Log(number);
-
-        switch (number)
+        if (isQuiz)
         {
-            case 3:
-                tutorialView.SetActive(false);
+            switch (number)
+            {
+                case 15:
+                    str = LocalizationManager.instance.GetString("Tutorial_Quiz");
+                    break;
+                case 16:
+                    str = LocalizationManager.instance.GetString("Quiz" + Random.Range(1, 11));
+                    break;
+                case 17:
+                    str = LocalizationManager.instance.GetString("Tutorial_Quiz_End");
+                    break;
+                case 18:
+                    tutorialView.SetActive(false);
+                    break;
+            }
+        }
+        else
+        {
+            switch (number)
+            {
+                case 3:
+                    tutorialView.SetActive(false);
 
-                if (playerDataBase.ChangeNicknameCount == 0)
-                {
-                    nameManager.OpenFreeNickName();
-                    GameManager.instance.FirstReward();
-                }
+                    if (playerDataBase.ChangeNicknameCount == 0)
+                    {
+                        nameManager.OpenFreeNickName();
+                        GameManager.instance.FirstReward();
+                    }
 
-                break;
-            case 7:
-                tutorialView.SetActive(false);
-                break;
-            case 9:
-                tutorialView.SetActive(false);
-                break;
-            case 11:
-                tutorialView.SetActive(false);
-                break;
-            case 13:
-                tutorialView.SetActive(false);
-                break;
+                    break;
+                case 7:
+                    tutorialView.SetActive(false);
+                    break;
+                case 9:
+                    tutorialView.SetActive(false);
+                    break;
+                case 11:
+                    tutorialView.SetActive(false);
+                    break;
+                case 13:
+                    tutorialView.SetActive(false);
+                    break;
+            }
+
+            str = LocalizationManager.instance.GetString("Tutorial_" + (number + 1).ToString()).Replace("%%",
+GameStateManager.instance.NickName);
         }
 
-                str = LocalizationManager.instance.GetString("Tutorial_" + (number + 1).ToString()).Replace("%%",
-    GameStateManager.instance.NickName);
-
         StartCoroutine(Talking(str));
-
-        //SoundManager.instance.PlaySFX(GameSfxType.TalkMy);
     }
 
     public void NextButton()

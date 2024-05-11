@@ -45,6 +45,7 @@ public class GameStateManager : MonoBehaviour
         public bool appReview = false;
         public bool rankingNotice = false;
         public bool hideNotice = false;
+        public bool todayQuiz = false;
 
         [Space]
         [Title("Auto")]
@@ -66,6 +67,7 @@ public class GameStateManager : MonoBehaviour
         public RankFoodType rankFoodType = RankFoodType.RankFood1;
         public int[] foodLevel = new int[Enum.GetValues(typeof(FoodType)).Length];
         public int[] rankFoodLevel = new int[Enum.GetValues(typeof(RankFoodType)).Length];
+        public ParticleType particleType = ParticleType.Effect1;
 
         public int level = 0;
 
@@ -91,6 +93,7 @@ public class GameStateManager : MonoBehaviour
         public int supportCount = 0;
         public long getSellGold = 0; //판매 후 얻은 골드
         public long todayGold = 0;
+        public long yesterdayGold = 0;
 
         [Space]
         [Title("Reset")]
@@ -278,6 +281,19 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public ParticleType ParticleType
+    {
+        get
+        {
+            return gameSettings.particleType;
+        }
+        set
+        {
+            gameSettings.particleType = value;
+            SaveFile();
+        }
+    }
+
     public CharacterType CharacterType
     {
         get
@@ -456,6 +472,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.hideNotice = value;
+            SaveFile();
+        }
+    }
+
+    public bool TodayQuiz
+    {
+        get
+        {
+            return gameSettings.todayQuiz;
+        }
+        set
+        {
+            gameSettings.todayQuiz = value;
             SaveFile();
         }
     }
@@ -806,6 +835,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.todayGold = value;
+            SaveFile();
+        }
+    }
+
+    public long YesterdayGold
+    {
+        get
+        {
+            return gameSettings.yesterdayGold;
+        }
+        set
+        {
+            gameSettings.yesterdayGold = value;
             SaveFile();
         }
     }

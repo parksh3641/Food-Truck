@@ -13,15 +13,14 @@ public class FoodContent : MonoBehaviour
 
     private float sizeUp = 1.5f;
 
-    public bool speicalFood = false;
+    private bool speicalFood = false;
 
     public MeshRenderer meshRenderer;
-
-    Color speicalColor = new Color(1, 50f / 255f, 1);
 
     public bool isColor = false;
     public Color color;
 
+    Color speicalColor = new Color(1, 50f / 255f, 1);
 
     Rotation rotation;
 
@@ -34,14 +33,6 @@ public class FoodContent : MonoBehaviour
         if (meshRenderer == null)
         {
             meshRenderer = GetComponent<MeshRenderer>();
-        }
-    }
-
-    void SetColor()
-    {
-        if (isColor)
-        {
-            meshRenderer.material.color = color;
         }
     }
 
@@ -59,7 +50,15 @@ public class FoodContent : MonoBehaviour
             transform.localScale = new Vector3(saveSize, saveSize, saveSize);
         }
 
-        Invoke("SetColor", 0.05f);
+        Invoke("SetColor", 0.01f);
+    }
+
+    void SetColor()
+    {
+        if (isColor)
+        {
+            meshRenderer.material.color = color;
+        }
     }
 
     private void OnDisable()
@@ -104,22 +103,6 @@ public class FoodContent : MonoBehaviour
         transform.localScale = new Vector3((posX + (size * (number + 1)) * 0.1f), (posY + (size * (number + 1)) * 0.1f), (posZ + (size * (number + 1)) * 0.1f));
     }
 
-
-    public void LevelReset()
-    {
-        transform.localScale = new Vector3(saveSize, saveSize, saveSize);
-    }
-
-    public void FeverOn()
-    {
-        rotation.rotationSpeed = 120;
-    }
-
-    public void FeverOff()
-    {
-        rotation.rotationSpeed = 30;
-    }
-
     public void SetSpeicalFood(bool check)
     {
         if(check)
@@ -136,5 +119,15 @@ public class FoodContent : MonoBehaviour
 
             speicalFood = false;
         }
+    }
+
+    public void FeverOn()
+    {
+        rotation.rotationSpeed = 120;
+    }
+
+    public void FeverOff()
+    {
+        rotation.rotationSpeed = 30;
     }
 }

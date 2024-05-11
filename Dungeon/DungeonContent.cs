@@ -166,6 +166,15 @@ public class DungeonContent : MonoBehaviour
             lockedObj.SetActive(true);
             lockedObjText.text = MoneyUnitString.ToCurrencyString(need);
         }
+
+        if (playerDataBase.TestAccount == 1)
+        {
+            lockedObj.SetActive(false);
+        }
+
+#if UNITY_EDITOR
+        lockedObj.SetActive(false);
+#endif
     }
 
     public void EnterDungeon()

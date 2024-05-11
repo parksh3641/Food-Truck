@@ -44,7 +44,7 @@ public enum RankingType
     UpgradeCount,
     TotalLevel,
     GourmetLevel,
-    Level
+    IslandNumber_Ranking
 }
 
 public enum LanguageType
@@ -816,4 +816,12 @@ public enum RankType
     Rare,
     Unique,
     Legendary
+}
+
+public enum ParticleType
+{
+    Effect1,
+    Effect2,
+    Effect3,
+    Effect4,
 }

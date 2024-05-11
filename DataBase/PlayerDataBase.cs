@@ -51,6 +51,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int islandNumber = 0;
     [SerializeField]
+    private int islandNumber_Ranking = 0;
+    [SerializeField]
     public Island_Total_Data island_Total_Data;
     [SerializeField]
     private int level = 0;
@@ -197,6 +199,8 @@ public class PlayerDataBase : ScriptableObject
     private int defDestroyCount = 0;
     [SerializeField]
     private int recoverCount = 0;
+    [SerializeField]
+    private int equipCount = 0;
 
     [Space]
     [Title("Quest")]
@@ -1085,6 +1089,12 @@ public class PlayerDataBase : ScriptableObject
         set { recoverCount = value; }
     }
 
+    public int EquipCount
+    {
+        get { return equipCount; }
+        set { equipCount = value; }
+    }
+
     public int LockTutorial
     {
         get
@@ -1214,6 +1224,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             islandNumber = value;
+        }
+    }
+
+    public int IslandNumber_Ranking
+    {
+        get
+        {
+            return islandNumber_Ranking;
+        }
+        set
+        {
+            islandNumber_Ranking = value;
         }
     }
 
@@ -4512,6 +4534,7 @@ public class PlayerDataBase : ScriptableObject
         firstDate = "";
         firstServerDate = "";
         islandNumber = 0;
+        islandNumber_Ranking = 0;
         testAccount = 0;
         update = 0;
         buffTicket = 0;
@@ -4754,6 +4777,7 @@ public class PlayerDataBase : ScriptableObject
         offlineCount = 0;
         defDestroyCount = 0;
         recoverCount = 0;
+        equipCount = 0;
 
         guideIndex = 0;
 

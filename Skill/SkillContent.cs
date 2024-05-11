@@ -392,12 +392,7 @@ public class SkillContent : MonoBehaviour
                 buttonCP.SetActive(false);
                 break;
             case MoneyType.Crystal:
-                value = priceCrystal * (level + 1);
-
-                if (value >= maxCrystal)
-                {
-                    value = maxCrystal;
-                }
+                value = priceCrystal + (priceCrystal * (level / 20));
 
                 if(skillType == SkillType.Skill10 || skillType == SkillType.Skill14)
                 {

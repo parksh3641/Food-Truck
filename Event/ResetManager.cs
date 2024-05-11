@@ -241,7 +241,9 @@ public class ResetManager : MonoBehaviour
         GameStateManager.instance.ChestBoxCount = 0;
         GameStateManager.instance.PlayTime = 0;
         GameStateManager.instance.HideNotice = false;
+        GameStateManager.instance.YesterdayGold = GameStateManager.instance.TodayGold;
         GameStateManager.instance.TodayGold = 0;
+        GameStateManager.instance.TodayQuiz = false;
 
         GameStateManager.instance.Portion1Ad = false;
         GameStateManager.instance.Portion2Ad = false;

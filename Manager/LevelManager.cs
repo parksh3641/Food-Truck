@@ -36,6 +36,8 @@ public class LevelManager : MonoBehaviour
     private float duration = 0.7f;
     private float currentTime;
 
+    private Color skyblueColor = new Color(0, 1, 1);
+
     public AdvancementManager advancementManager;
 
     PlayerDataBase playerDataBase;
@@ -170,7 +172,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(FadeInOut());
 
         SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-        NotionManager.instance.UseNotion2(Color.blue, (level - 1) + " ¡æ " + level + "\n" + LocalizationManager.instance.GetString("Levelup"));
+        NotionManager.instance.UseNotion2(skyblueColor, (level - 1) + " ¡æ " + level + "\n" + LocalizationManager.instance.GetString("Levelup"));
     }
 
     IEnumerator FadeInOut()

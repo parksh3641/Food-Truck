@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
     public GameObject dungeonUI;
 
     public LocalizationContent todayGoldText;
+    public LocalizationContent yesterdayGoldText;
 
     public Text myMoneyPlusText;
 
@@ -293,15 +294,19 @@ public class GameManager : MonoBehaviour
 
     Sprite[] islandArray;
 
+    [Space]
+    [Title("Particle")]
     public ParticleSystem[] level1UpParticle;
     public ParticleSystem[] level5UpParticle;
     public ParticleSystem[] levelMaxParticle;
-    public ParticleSystem bombAllPartice;
-    public ParticleSystem[] bombPartice;
+    public ParticleSystem bombAllParticle;
+    public ParticleSystem[] bombParticle;
     public ParticleSystem yummyTimeParticle;
     public ParticleSystem[] yummyTime2Particle;
     public ParticleSystem speicalFoodParticle;
     public ParticleSystem[] sellParticle;
+
+    private List<ParticleContent> particleSystemList = new List<ParticleContent>();
 
     public ShopManager shopManager;
     public TutorialManager tutorialManager;
@@ -411,14 +416,25 @@ public class GameManager : MonoBehaviour
             level1UpParticle[i].gameObject.SetActive(false);
             level5UpParticle[i].gameObject.SetActive(false);
             levelMaxParticle[i].gameObject.SetActive(false);
-            bombAllPartice.gameObject.SetActive(false);
-            bombPartice[i].gameObject.SetActive(false);
+            bombParticle[i].gameObject.SetActive(false);
             yummyTime2Particle[i].gameObject.SetActive(false);
             sellParticle[i].gameObject.SetActive(false);
+
+            particleSystemList.Add(level1UpParticle[i].GetComponent<ParticleContent>());
+            particleSystemList.Add(level5UpParticle[i].GetComponent<ParticleContent>());
+            particleSystemList.Add(levelMaxParticle[i].GetComponent<ParticleContent>());
+            particleSystemList.Add(bombParticle[i].GetComponent<ParticleContent>());
+            particleSystemList.Add(yummyTime2Particle[i].GetComponent<ParticleContent>());
+            particleSystemList.Add(sellParticle[i].GetComponent<ParticleContent>());
         }
 
+        bombAllParticle.gameObject.SetActive(false);
         yummyTimeParticle.gameObject.SetActive(false);
         speicalFoodParticle.gameObject.SetActive(false);
+
+        particleSystemList.Add(bombAllParticle.GetComponent<ParticleContent>());
+        particleSystemList.Add(yummyTimeParticle.GetComponent<ParticleContent>());
+        particleSystemList.Add(speicalFoodParticle.GetComponent<ParticleContent>());
 
         portion1 = false;
         portion2 = false;
@@ -646,6 +662,15 @@ public class GameManager : MonoBehaviour
 
             tutorialManager.TutorialStart();
         }
+        else
+        {
+            if(!GameStateManager.instance.TodayQuiz)
+            {
+                GameStateManager.instance.TodayQuiz = true;
+
+                tutorialManager.TodayQuizStart();
+            }
+        }
 
         levelManager.Initialize();
 
@@ -746,6 +771,10 @@ public class GameManager : MonoBehaviour
         todayGoldText.localizationName = "TodayGold";
         todayGoldText.plusText = " : <color=#FFFF00>" + MoneyUnitString.ToCurrencyString(GameStateManager.instance.TodayGold) + "</color>";
         todayGoldText.ReLoad();
+
+        yesterdayGoldText.localizationName = "YesterdayGold";
+        yesterdayGoldText.plusText = " : <color=#FFFF00>" + MoneyUnitString.ToCurrencyString(GameStateManager.instance.YesterdayGold) + "</color>";
+        yesterdayGoldText.ReLoad();
 
         Invoke("ServerDelay", 2.0f);
     }
@@ -1125,6 +1154,10 @@ public class GameManager : MonoBehaviour
         todayGoldText.localizationName = "TodayGold";
         todayGoldText.plusText = " : <color=#FFFF00>" + MoneyUnitString.ToCurrencyString(GameStateManager.instance.TodayGold) +"</color>";
         todayGoldText.ReLoad();
+
+        yesterdayGoldText.localizationName = "YesterdayGold";
+        yesterdayGoldText.plusText = " : <color=#FFFF00>" + MoneyUnitString.ToCurrencyString(GameStateManager.instance.YesterdayGold) + "</color>";
+        yesterdayGoldText.ReLoad();
 
         mainUI.SetActive(true);
         inGameUI.SetActive(false);
@@ -1787,7 +1820,7 @@ public class GameManager : MonoBehaviour
                     yummyTime2Particle[i].gameObject.SetActive(false);
                 }
 
-                yummyTime2Particle[0].gameObject.SetActive(true);
+                yummyTime2Particle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
             }
         }
 
@@ -1877,6 +1910,11 @@ public class GameManager : MonoBehaviour
         if (level > maxLevel)
         {
             level = maxLevel;
+        }
+
+        for(int i = 0; i < particleSystemList.Count; i ++)
+        {
+            particleSystemList[i].Initialize(level);
         }
 
         sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
@@ -2396,22 +2434,22 @@ public class GameManager : MonoBehaviour
 
                     if (GameStateManager.instance.Effect)
                     {
-                        level1UpParticle[0].gameObject.SetActive(false);
-                        level1UpParticle[0].gameObject.SetActive(true);
-                        level1UpParticle[0].Play();
+                        level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
+                        level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
+                        level1UpParticle[(int)GameStateManager.instance.ParticleType].Play();
 
-                        level5UpParticle[0].gameObject.SetActive(false);
-                        level5UpParticle[0].gameObject.SetActive(true);
-                        level5UpParticle[0].Play();
+                        level5UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
+                        level5UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
+                        level5UpParticle[(int)GameStateManager.instance.ParticleType].Play();
                     }
                 }
                 else
                 {
                     if (GameStateManager.instance.Effect)
                     {
-                        level1UpParticle[0].gameObject.SetActive(false);
-                        level1UpParticle[0].gameObject.SetActive(true);
-                        level1UpParticle[0].Play();
+                        level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
+                        level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
+                        level1UpParticle[(int)GameStateManager.instance.ParticleType].Play();
                     }
 
                     SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
@@ -2520,13 +2558,13 @@ public class GameManager : MonoBehaviour
 
             if (GameStateManager.instance.Effect)
             {
-                bombAllPartice.gameObject.SetActive(false);
-                bombAllPartice.gameObject.SetActive(true);
-                bombAllPartice.Play();
+                bombAllParticle.gameObject.SetActive(false);
+                bombAllParticle.gameObject.SetActive(true);
+                bombAllParticle.Play();
 
-                bombPartice[0].gameObject.SetActive(false);
-                bombPartice[0].gameObject.SetActive(true);
-                bombPartice[0].Play();
+                bombParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
+                bombParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
+                bombParticle[(int)GameStateManager.instance.ParticleType].Play();
             }
 
             if (level >= 50 && GameStateManager.instance.Recover && GameStateManager.instance.GameType == GameType.Rank)
@@ -2550,8 +2588,7 @@ public class GameManager : MonoBehaviour
                 GameStateManager.instance.DestroyCount += 1;
                 if (GameStateManager.instance.DestroyCount >= 10)
                 {
-
-                    GameStateManager.instance.FirstDestory = true;
+                    GameStateManager.instance.DestroyCount = 0;
                     tutorialManager.Next3();
                 }
             }
@@ -2613,17 +2650,17 @@ public class GameManager : MonoBehaviour
 
         if (GameStateManager.instance.Effect)
         {
-            level1UpParticle[0].gameObject.SetActive(false);
-            level1UpParticle[0].gameObject.SetActive(true);
-            level1UpParticle[0].Play();
+            level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
+            level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
+            level1UpParticle[(int)GameStateManager.instance.ParticleType].Play();
 
-            level5UpParticle[0].gameObject.SetActive(false);
-            level5UpParticle[0].gameObject.SetActive(true);
-            level5UpParticle[0].Play();
+            level5UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
+            level5UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
+            level5UpParticle[(int)GameStateManager.instance.ParticleType].Play();
 
-            levelMaxParticle[0].gameObject.SetActive(false);
-            levelMaxParticle[0].gameObject.SetActive(true);
-            levelMaxParticle[0].Play();
+            levelMaxParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
+            levelMaxParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
+            levelMaxParticle[(int)GameStateManager.instance.ParticleType].Play();
         }
 
         if(feverMode)
@@ -2676,7 +2713,7 @@ public class GameManager : MonoBehaviour
             if(feverMode)
             {
                 yummyTimeParticle.gameObject.SetActive(true);
-                yummyTime2Particle[0].gameObject.SetActive(true);
+                yummyTime2Particle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
             }
 
             if (isRareFood)
@@ -2689,7 +2726,7 @@ public class GameManager : MonoBehaviour
         else
         {
             yummyTimeParticle.gameObject.SetActive(false);
-            yummyTime2Particle[0].gameObject.SetActive(false);
+            yummyTime2Particle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
 
             speicalFoodParticle.gameObject.SetActive(false);
             rareFood.SetActive(false);
@@ -2750,7 +2787,7 @@ public class GameManager : MonoBehaviour
         {
             yummyTimeParticle.gameObject.SetActive(false);
             yummyTimeParticle.gameObject.SetActive(true);
-            yummyTime2Particle[0].gameObject.SetActive(true);
+            yummyTime2Particle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
         }
 
         if (GameStateManager.instance.Vibration)
@@ -2789,7 +2826,7 @@ public class GameManager : MonoBehaviour
         portionScaleAnim[3].PlayAnim();
 
         yummyTimeParticle.gameObject.SetActive(false);
-        yummyTime2Particle[0].gameObject.SetActive(false);
+        yummyTime2Particle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
 
         feverMode = false;
         feverFillamount.fillAmount = 0;
@@ -2862,6 +2899,14 @@ public class GameManager : MonoBehaviour
             {
                 playerDataBase.IslandNumber = (((int)GameStateManager.instance.FoodType + 1) / GameStateManager.instance.Island);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
+
+#if !UNITY_EDITOR
+                if (playerDataBase.TestAccount == 0)
+                {
+                    playerDataBase.IslandNumber_Ranking = (((int)GameStateManager.instance.FoodType + 1) / GameStateManager.instance.Island);
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber_Ranking", playerDataBase.IslandNumber_Ranking);
+                }
+#endif
 
                 islandManager.NewIsland(playerDataBase.IslandNumber);
 
@@ -3014,7 +3059,7 @@ public class GameManager : MonoBehaviour
                 sellParticle[i].gameObject.SetActive(false);
             }
 
-            sellParticle[0].gameObject.SetActive(true);
+            sellParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
         }
 
         myMoneyPlusText.gameObject.SetActive(false);

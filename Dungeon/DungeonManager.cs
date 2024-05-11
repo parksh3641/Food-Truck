@@ -542,7 +542,7 @@ public class DungeonManager : MonoBehaviour
         attackPowerText.plusText = " : " + attackPower_Low.ToString("N1") + " ~ " + attackPower_High.ToString("N1") + "  (+" + (attackPowerPlus * 100).ToString("N1") + "%)";
 
         attackSpeedText.localizationName = "AttackSpeedPercent";
-        attackSpeedText.plusText = " : " + attackDelay.ToString("N2");
+        attackSpeedText.plusText = " : " + attackDelay.ToString("N2") + "/s";
 
         if (attackSpeed > 0)
         {
@@ -634,7 +634,7 @@ public class DungeonManager : MonoBehaviour
 
                 damageNotion.txt.color = Color.red;
 
-                SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+                SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
                 NotionManager.instance.UseNotion(NotionType.SuccessAttackX2);
             }
             else
@@ -643,7 +643,7 @@ public class DungeonManager : MonoBehaviour
 
                 damageNotion.txt.color = Color.yellow;
 
-                SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
+                SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
                 NotionManager.instance.UseNotion(NotionType.SuccessAttack);
             }
 

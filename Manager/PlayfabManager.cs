@@ -1747,6 +1747,9 @@ public class PlayfabManager : MonoBehaviour
                            }
 
                            break;
+                       case "IslandNumber_Ranking":
+                           playerDataBase.IslandNumber_Ranking = statistics.Value;
+                           break;
                        case "TestAccount":
                            playerDataBase.TestAccount = statistics.Value;
                            break;
@@ -1827,6 +1830,9 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "RecoverCount":
                            playerDataBase.RecoverCount = statistics.Value;
+                           break;
+                       case "EquipCount":
+                           playerDataBase.EquipCount = statistics.Value;
                            break;
                        case "AccessDate":
                            playerDataBase.AccessDate = statistics.Value;

@@ -186,7 +186,7 @@ public class ChestBoxManager : MonoBehaviour
 
         //Debug.LogError(random);
 
-        if (random >= 71)
+        if (random >= 81)
         {
             normalRewardType = RewardType.Gold;
             epicRewardType = RewardType.Gold2;
@@ -197,7 +197,7 @@ public class ChestBoxManager : MonoBehaviour
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
             epicRewardText.text = MoneyUnitString.ToCurrencyString(StageManager.GetGold() * 10);
         }
-        else if (random > 41)
+        else if (random > 31)
         {
             portion = Random.Range(0, 5);
 
@@ -231,7 +231,7 @@ public class ChestBoxManager : MonoBehaviour
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
             epicRewardText.text = "2 ~ 5";
         }
-        else if (random > 21)
+        else if (random > 11)
         {
             normalRewardType = RewardType.DefDestroyTicketPiece;
             epicRewardType = RewardType.DefDestroyTicket;
@@ -251,7 +251,7 @@ public class ChestBoxManager : MonoBehaviour
             normalRewardText.text = MoneyUnitString.ToCurrencyString(10);
 
             epicRewardIcon.sprite = rewardArray[(int)epicRewardType];
-            epicRewardText.text = MoneyUnitString.ToCurrencyString(100);
+            epicRewardText.text = MoneyUnitString.ToCurrencyString(60);
         }
     }
 
@@ -343,7 +343,7 @@ public class ChestBoxManager : MonoBehaviour
                 PortionManager.instance.GetDefTickets(3);
                 break;
             case RewardType.Crystal:
-                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 100);
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 60);
                 break;
         }
 

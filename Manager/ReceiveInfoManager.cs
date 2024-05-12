@@ -156,7 +156,6 @@ public class ReceiveInfoManager : MonoBehaviour
                 break;
             case RewardType.TreasureBox:
                 mainBackground.sprite = rankBackgroundArray[2];
-                rotateEffect.SetActive(true);
                 effect.SetActive(true);
                 break;
             case RewardType.DefDestroyTicketPiece:

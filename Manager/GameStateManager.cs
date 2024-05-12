@@ -111,6 +111,11 @@ public class GameStateManager : MonoBehaviour
         public ButterflyType butterflyType = ButterflyType.Butterfly1;
         public TotemsType totemsType = TotemsType.Totems1;
         public FlowerType flowerType = FlowerType.Flower1;
+        public BucketType bucketType = BucketType.Bucket1;
+        public ChairType chairType = ChairType.Chair1;
+        public TubeType tubeType = TubeType.Tube1;
+        public SurfboardType surfboardType = SurfboardType.Surfboard1;
+        public UmbrellaType umbrellaType = UmbrellaType.Umbrella1;
 
         [Space]
         [Title("Ads")]
@@ -368,6 +373,71 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.flowerType = value;
+            SaveFile();
+        }
+    }
+
+    public BucketType BucketType
+    {
+        get
+        {
+            return gameSettings.bucketType;
+        }
+        set
+        {
+            gameSettings.bucketType = value;
+            SaveFile();
+        }
+    }
+
+    public ChairType ChairType
+    {
+        get
+        {
+            return gameSettings.chairType;
+        }
+        set
+        {
+            gameSettings.chairType = value;
+            SaveFile();
+        }
+    }
+
+    public TubeType TubeType
+    {
+        get
+        {
+            return gameSettings.tubeType;
+        }
+        set
+        {
+            gameSettings.tubeType = value;
+            SaveFile();
+        }
+    }
+
+    public SurfboardType SurfboardType
+    {
+        get
+        {
+            return gameSettings.surfboardType;
+        }
+        set
+        {
+            gameSettings.surfboardType = value;
+            SaveFile();
+        }
+    }
+
+    public UmbrellaType UmbrellaType
+    {
+        get
+        {
+            return gameSettings.umbrellaType;
+        }
+        set
+        {
+            gameSettings.umbrellaType = value;
             SaveFile();
         }
     }

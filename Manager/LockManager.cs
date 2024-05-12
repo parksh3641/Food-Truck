@@ -80,6 +80,8 @@ public class LockManager : MonoBehaviour
         menuIcon[13].SetActive(true);
         menuIcon[14].SetActive(true);
         menuIcon[15].SetActive(true);
+        menuIcon[16].SetActive(true);
+        menuIcon[17].SetActive(true);
 
         if (playerDataBase.LockTutorial >= 1) //음식 변경
         {
@@ -96,13 +98,13 @@ public class LockManager : MonoBehaviour
             tutorial.SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 3) //피버모드 해제 (핫도그 최대 레벨 달성)
+        if (playerDataBase.LockTutorial >= 3) //피버모드 해제
         {
             menuIcon[4].SetActive(true);
             menuIcon[6].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 4) //레시피, 주방 청소, 버프 해제 (음료수 최대 레벨 달성)
+        if (playerDataBase.LockTutorial >= 4) //레시피, 주방 청소, 버프 해제
         {
             menuIcon[7].SetActive(false);
             menuIcon[8].SetActive(false);
@@ -110,21 +112,27 @@ public class LockManager : MonoBehaviour
             menuIcon[10].SetActive(true);
         }
 
-        if (playerDataBase.LockTutorial >= 5) //퀘스트, 가방, 해제 (피자 최대 레벨 달성)
+        if (playerDataBase.LockTutorial >= 5) //퀘스트, 장비, 퀘스트 해제
         {
             menuIcon[11].SetActive(false);
             menuIcon[12].SetActive(false);
             menuIcon[15].SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 6) //오프라인 보상 해제 (도넛 최대 레벨 달성)
+        if (playerDataBase.LockTutorial >= 6) //오프라인 보상 해제
         {
             menuIcon[13].SetActive(false);
         }
 
-        if (playerDataBase.LockTutorial >= 7) //챌린지, 섬 이동 해제 (감자 튀김 최대 레벨 달성)
+        if (playerDataBase.LockTutorial >= 7) //챌린지 해제
         {
             menuIcon[14].SetActive(false);
+        }
+
+        if (playerDataBase.LockTutorial >= 8) //도감, 이벤트
+        {
+            menuIcon[16].SetActive(false);
+            menuIcon[17].SetActive(false);
         }
 
         if (GameStateManager.instance.YoutubeVideo)
@@ -138,10 +146,11 @@ public class LockManager : MonoBehaviour
     {
         if (playerDataBase.LockTutorial >= number) return;
 
-        if (number > 7) return;
+        if (number > 8) return;
 
         playerDataBase.LockTutorial = number;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("LockTutorial", number);
+
         Initialize();
 
         lockView.SetActive(true);
@@ -202,6 +211,10 @@ public class LockManager : MonoBehaviour
                 break;
             case 7:
                 lockIcon[13].SetActive(true);
+                break;
+            case 8:
+                lockIcon[14].SetActive(true);
+                lockIcon[15].SetActive(true);
                 break;
         }
     }

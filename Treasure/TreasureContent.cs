@@ -55,7 +55,7 @@ public class TreasureContent : MonoBehaviour
     private float treasure11Value = 0.5f;
     private float treasure12Value = 0.2f;
     private float treasure13Value = 1;
-    private float treasure14Value = 1;
+    private float treasure14Value = 0.5f;
     private float treasure15Value = 1;
 
     Sprite[] treasureArray;
@@ -501,7 +501,7 @@ public class TreasureContent : MonoBehaviour
             upgradeButton.SetActive(false);
         }
 
-        percent = 100 - ((level / 20) * 5);
+        percent = 100 - ((level / 10) * 5);
 
         if(percent < 5)
         {

@@ -36,14 +36,16 @@ public class TreasureManager : MonoBehaviour
     private Queue indexQueue = new Queue();
     private int[] indexArray = new int[11];
 
-    private int index = 0;
+    private float random = 0;
+    private int random2 = 0;
+
     private int price = 50;
     private bool oneMore = false;
 
-    private float legendaryPercent = 3.0f;
-    private float epicPercent = 4.0f;
-    private float rarePercent = 4.0f;
-    private float normalPercent = 4.0f;
+    private int[] legendary = new int[3] { 0, 2, 6 };
+    private int[] unique = new int[4] { 1, 12, 13, 14 };
+    private int[] rare = new int[4] { 5, 7, 8, 9 };
+    private int[] normal = new int[4] { 3, 4, 10, 11 };
 
     private int number = 0;
 
@@ -126,16 +128,16 @@ public class TreasureManager : MonoBehaviour
             treasureInfoView.SetActive(true);
 
             treasureInfoText[0].localizationName = "LegendaryPercent";
-            treasureInfoText[0].plusText = " - " + ((legendaryPercent / System.Enum.GetValues(typeof(TreasureType)).Length) * 100).ToString("N2") + "%";
+            treasureInfoText[0].plusText = " : 1%";
 
             treasureInfoText[1].localizationName = "EpicPercent";
-            treasureInfoText[1].plusText = " - " + ((epicPercent / System.Enum.GetValues(typeof(TreasureType)).Length) * 100).ToString("N2") + "%";
+            treasureInfoText[1].plusText = " : 7%";
 
             treasureInfoText[2].localizationName = "RarePercent";
-            treasureInfoText[2].plusText = " - " + ((rarePercent / System.Enum.GetValues(typeof(TreasureType)).Length) * 100).ToString("N2") + "%";
+            treasureInfoText[2].plusText = " : 32%";
 
             treasureInfoText[3].localizationName = "NormalPercent";
-            treasureInfoText[3].plusText = " - " + ((normalPercent / System.Enum.GetValues(typeof(TreasureType)).Length) * 100).ToString("N2") + "%";
+            treasureInfoText[3].plusText = " : 60%";
 
             treasureInfoText[0].ReLoad();
             treasureInfoText[1].ReLoad();
@@ -297,10 +299,36 @@ public class TreasureManager : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            index = Random.Range(0, System.Enum.GetValues(typeof(TreasureType)).Length);
+            random = Random.Range(0f, 100f);
 
-            indexArray[i] = index;
-            indexQueue.Enqueue(index);
+            if(random >= 40)
+            {
+                random2 = Random.Range(0, normal.Length);
+
+                indexArray[i] = normal[random2];
+                indexQueue.Enqueue(random2);
+            }
+            else if(random >= 8)
+            {
+                random2 = Random.Range(0, rare.Length);
+
+                indexArray[i] = rare[random2];
+                indexQueue.Enqueue(random2);
+            }
+            else if(random >= 1)
+            {
+                random2 = Random.Range(0, unique.Length);
+
+                indexArray[i] = unique[random2];
+                indexQueue.Enqueue(random2);
+            }
+            else
+            {
+                random2 = Random.Range(0, legendary.Length);
+
+                indexArray[i] = legendary[random2];
+                indexQueue.Enqueue(random2);
+            }
         }
 
         StartCoroutine(SaveCoroution());

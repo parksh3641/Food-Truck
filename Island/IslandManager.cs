@@ -616,5 +616,8 @@ public class IslandManager : MonoBehaviour
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandReward", playerDataBase.IslandReward);
 
         PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+
+        SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
+        NotionManager.instance.UseNotion(NotionType.SuccessReward);
     }
 }

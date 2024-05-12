@@ -446,12 +446,16 @@ public enum PassiveEffect
     None,
     UpgradePercentUp,
     DefDestroyPercentUp,
-    SellPriceX2Up, //아무도 안씀
+    SellPriceX2Up, //팁 받을 확률
     SellPricePercentUp,
     ExpUp,
     SuccessX2PercentUp,
     ItemDropPercentUp,
-    GoldPerSecondPercentUp
+    GoldPerSecondPercentUp,
+    AttackPowerPercentUp,
+    RankModeSuccessPercentUp,
+    SuccessX3PercentUp,
+    CriticalPowerPercentUp, //크리티컬 데미지
 }
 
 public enum RewardType
@@ -824,4 +828,65 @@ public enum ParticleType
     Effect2,
     Effect3,
     Effect4,
+}
+
+public enum BucketType
+{
+    Bucket1,
+    Bucket2,
+    Bucket3,
+    Bucket4,
+    Bucket5,
+    Bucket6,
+    Bucket7,
+}
+
+public enum ChairType
+{
+    Chair1,
+    Chair2,
+    Chair3,
+    Chair4,
+    Chair5,
+    Chair6,
+    Chair7,
+    Chair8,
+}
+
+public enum TubeType
+{
+    Tube1,
+    Tube2,
+    Tube3,
+    Tube4,
+    Tube5,
+    Tube6,
+    Tube7,
+    Tube8,
+}
+
+public enum SurfboardType
+{
+    Surfboard1,
+    Surfboard2,
+    Surfboard3,
+    Surfboard4,
+    Surfboard5,
+    Surfboard6,
+    Surfboard7,
+    Surfboard8,
+}
+
+public enum UmbrellaType
+{
+    Umbrella1,
+    Umbrella2,
+    Umbrella3,
+    Umbrella4,
+    Umbrella5,
+    Umbrella6,
+    Umbrella7,
+    Umbrella8,
+    Umbrella9,
+    Umbrella10,
 }

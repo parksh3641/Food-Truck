@@ -357,5 +357,8 @@ public enum NotionType
     MaxEnterEventTicket,
     ChangeOptionNotion,
     LevelUpOption,
-    DontTodayAdsReward
+    DontTodayAdsReward,
+    UnLockedNotion5,
+    SuccessUpgradeX3,
+    SuccessUpgradeX4
 }

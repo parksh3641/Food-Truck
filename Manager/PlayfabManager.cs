@@ -897,7 +897,8 @@ public class PlayfabManager : MonoBehaviour
                         }
                     }
 
-                    if (list.ItemId.Contains("Character") || list.ItemId.Contains("Butterfly") || list.ItemId.Contains("Totems") || list.ItemId.Contains("Flower"))
+                    if (list.ItemId.Contains("Character") || list.ItemId.Contains("Butterfly") || list.ItemId.Contains("Totems") || list.ItemId.Contains("Bucket")
+                    || list.ItemId.Contains("Chair") || list.ItemId.Contains("Tube") || list.ItemId.Contains("Surfboard") || list.ItemId.Contains("Umbrella"))
                     {
                         if (list.CustomData == null)
                         {
@@ -1632,55 +1633,215 @@ public class PlayfabManager : MonoBehaviour
                         playerDataBase.SetItemInstance(list, 5, 6);
                     }
 
-                    //if (list.ItemId.Equals("Island1"))
-                    //{
-                    //    playerDataBase.Island1 = 1;
-                    //}
+                    if (list.ItemId.Equals("Bucket1"))
+                    {
+                        playerDataBase.Bucket[0] = 1;
+                    }
 
-                    //if (list.ItemId.Equals("Island2"))
-                    //{
-                    //    playerDataBase.Island2 = 1;
-                    //}
+                    if (list.ItemId.Equals("Bucket2"))
+                    {
+                        playerDataBase.Bucket[1] = 1;
+                    }
 
-                    //if (list.ItemId.Equals("Island3"))
-                    //{
-                    //    playerDataBase.Island3 = 1;
-                    //}
+                    if (list.ItemId.Equals("Bucket3"))
+                    {
+                        playerDataBase.Bucket[2] = 1;
+                    }
 
-                    //if (list.ItemId.Equals("Island4"))
-                    //{
-                    //    playerDataBase.Island4 = 1;
-                    //}
+                    if (list.ItemId.Equals("Bucket4"))
+                    {
+                        playerDataBase.Bucket[3] = 1;
+                    }
 
-                    //if (list.ItemId.Equals("Island5"))
-                    //{
-                    //    playerDataBase.Island5 = 1;
-                    //}
+                    if (list.ItemId.Equals("Bucket5"))
+                    {
+                        playerDataBase.Bucket[4] = 1;
+                    }
 
-                    //if (list.ItemId.Equals("Island6"))
-                    //{
-                    //    playerDataBase.Island6 = 1;
-                    //}
+                    if (list.ItemId.Equals("Bucket6"))
+                    {
+                        playerDataBase.Bucket[5] = 1;
+                    }
 
-                    //if (list.ItemId.Equals("Island7"))
-                    //{
-                    //    playerDataBase.Island7 = 1;
-                    //}
+                    if (list.ItemId.Equals("Bucket7"))
+                    {
+                        playerDataBase.Bucket[6] = 1;
+                    }
 
-                    //if (list.ItemId.Equals("Island8"))
-                    //{
-                    //    playerDataBase.Island8 = 1;
-                    //}
+                    if (list.ItemId.Equals("Bucket8"))
+                    {
+                        playerDataBase.Bucket[7] = 1;
+                    }
 
-                    //if (list.ItemId.Equals("Island9"))
-                    //{
-                    //    playerDataBase.Island9 = 1;
-                    //}
+                    if (list.ItemId.Equals("Chair1"))
+                    {
+                        playerDataBase.Chair[0] = 1;
+                    }
 
-                    //if (list.ItemId.Equals("Island10"))
-                    //{
-                    //    playerDataBase.Island10 = 1;
-                    //}
+                    if (list.ItemId.Equals("Chair2"))
+                    {
+                        playerDataBase.Chair[1] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Chair3"))
+                    {
+                        playerDataBase.Chair[2] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Chair4"))
+                    {
+                        playerDataBase.Chair[3] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Chair5"))
+                    {
+                        playerDataBase.Chair[4] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Chair6"))
+                    {
+                        playerDataBase.Chair[5] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Chair7"))
+                    {
+                        playerDataBase.Chair[6] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Chair8"))
+                    {
+                        playerDataBase.Chair[7] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Tube1"))
+                    {
+                        playerDataBase.Tube[0] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Tube2"))
+                    {
+                        playerDataBase.Tube[1] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Tube3"))
+                    {
+                        playerDataBase.Tube[2] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Tube4"))
+                    {
+                        playerDataBase.Tube[3] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Tube5"))
+                    {
+                        playerDataBase.Tube[4] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Tube6"))
+                    {
+                        playerDataBase.Tube[5] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Tube7"))
+                    {
+                        playerDataBase.Tube[6] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Tube8"))
+                    {
+                        playerDataBase.Tube[7] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Surfboard1"))
+                    {
+                        playerDataBase.Surfboard[0] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Surfboard2"))
+                    {
+                        playerDataBase.Surfboard[1] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Surfboard3"))
+                    {
+                        playerDataBase.Surfboard[2] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Surfboard4"))
+                    {
+                        playerDataBase.Surfboard[3] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Surfboard5"))
+                    {
+                        playerDataBase.Surfboard[4] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Surfboard6"))
+                    {
+                        playerDataBase.Surfboard[5] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Surfboard7"))
+                    {
+                        playerDataBase.Surfboard[6] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Surfboard8"))
+                    {
+                        playerDataBase.Surfboard[7] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella1"))
+                    {
+                        playerDataBase.Umbrella[0] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella2"))
+                    {
+                        playerDataBase.Umbrella[1] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella3"))
+                    {
+                        playerDataBase.Umbrella[2] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella4"))
+                    {
+                        playerDataBase.Umbrella[3] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella5"))
+                    {
+                        playerDataBase.Umbrella[4] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella6"))
+                    {
+                        playerDataBase.Umbrella[5] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella7"))
+                    {
+                        playerDataBase.Umbrella[6] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella8"))
+                    {
+                        playerDataBase.Umbrella[7] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella9"))
+                    {
+                        playerDataBase.Umbrella[8] = 1;
+                    }
+
+                    if (list.ItemId.Equals("Umbrella10"))
+                    {
+                        playerDataBase.Umbrella[9] = 1;
+                    }
                 }
             }
 
@@ -2004,6 +2165,12 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "LockTutorial":
                            playerDataBase.LockTutorial = statistics.Value;
+
+                           if(playerDataBase.LockTutorial == 7)
+                           {
+                               playerDataBase.LockTutorial = 8;
+                               UpdatePlayerStatisticsInsert("LockTutorial", 8);
+                           }
                            break;
                        case "AbilityPoint":
                            playerDataBase.AbilityPoint = statistics.Value;
@@ -2043,48 +2210,123 @@ public class PlayfabManager : MonoBehaviour
                            break;
                        case "Treasure1":
                            playerDataBase.Treasure1 = statistics.Value;
+
+                           if(playerDataBase.Treasure1 > 199)
+                           {
+                               playerDataBase.Treasure1 = 199;
+                           }
                            break;
                        case "Treasure2":
                            playerDataBase.Treasure2 = statistics.Value;
+
+                           if (playerDataBase.Treasure2 > 199)
+                           {
+                               playerDataBase.Treasure2 = 199;
+                           }
                            break;
                        case "Treasure3":
                            playerDataBase.Treasure3 = statistics.Value;
+
+                           if (playerDataBase.Treasure3 > 199)
+                           {
+                               playerDataBase.Treasure3 = 199;
+                           }
                            break;
                        case "Treasure4":
                            playerDataBase.Treasure4 = statistics.Value;
+
+                           if (playerDataBase.Treasure4 > 199)
+                           {
+                               playerDataBase.Treasure4 = 199;
+                           }
                            break;
                        case "Treasure5":
                            playerDataBase.Treasure5 = statistics.Value;
+
+                           if (playerDataBase.Treasure5 > 199)
+                           {
+                               playerDataBase.Treasure5 = 199;
+                           }
                            break;
                        case "Treasure6":
                            playerDataBase.Treasure6 = statistics.Value;
+
+                           if (playerDataBase.Treasure6 > 199)
+                           {
+                               playerDataBase.Treasure6 = 199;
+                           }
                            break;
                        case "Treasure7":
                            playerDataBase.Treasure7 = statistics.Value;
+
+                           if (playerDataBase.Treasure7 > 199)
+                           {
+                               playerDataBase.Treasure7 = 199;
+                           }
                            break;
                        case "Treasure8":
                            playerDataBase.Treasure8 = statistics.Value;
+
+                           if (playerDataBase.Treasure8 > 199)
+                           {
+                               playerDataBase.Treasure8 = 199;
+                           }
                            break;
                        case "Treasure9":
                            playerDataBase.Treasure9 = statistics.Value;
+
+                           if (playerDataBase.Treasure9 > 199)
+                           {
+                               playerDataBase.Treasure9 = 199;
+                           }
                            break;
                        case "Treasure10":
                            playerDataBase.Treasure10 = statistics.Value;
+
+                           if (playerDataBase.Treasure10 > 199)
+                           {
+                               playerDataBase.Treasure10 = 199;
+                           }
                            break;
                        case "Treasure11":
                            playerDataBase.Treasure11 = statistics.Value;
+
+                           if (playerDataBase.Treasure11 > 199)
+                           {
+                               playerDataBase.Treasure11 = 199;
+                           }
                            break;
                        case "Treasure12":
                            playerDataBase.Treasure12 = statistics.Value;
+
+                           if (playerDataBase.Treasure12 > 199)
+                           {
+                               playerDataBase.Treasure12 = 199;
+                           }
                            break;
                        case "Treasure13":
                            playerDataBase.Treasure13 = statistics.Value;
+
+                           if (playerDataBase.Treasure13 > 199)
+                           {
+                               playerDataBase.Treasure13 = 199;
+                           }
                            break;
                        case "Treasure14":
                            playerDataBase.Treasure14 = statistics.Value;
+
+                           if (playerDataBase.Treasure14 > 199)
+                           {
+                               playerDataBase.Treasure14 = 199;
+                           }
                            break;
                        case "Treasure15":
                            playerDataBase.Treasure15 = statistics.Value;
+
+                           if (playerDataBase.Treasure15 > 199)
+                           {
+                               playerDataBase.Treasure15 = 199;
+                           }
                            break;
                        case "Treasure1Count":
                            playerDataBase.Treasure1Count = statistics.Value;
@@ -2185,153 +2427,153 @@ public class PlayfabManager : MonoBehaviour
                        case "Skill1":
                            playerDataBase.Skill1 = statistics.Value;
 
-                           if(playerDataBase.Skill1 >= 500)
+                           if(playerDataBase.Skill1 > 499)
                            {
-                               playerDataBase.Skill1 = 500;
+                               playerDataBase.Skill1 = 499;
                            }
                            break;
                        case "Skill2":
                            playerDataBase.Skill2 = statistics.Value;
 
-                           if (playerDataBase.Skill2 >= 500)
+                           if (playerDataBase.Skill2 > 499)
                            {
-                               playerDataBase.Skill2 = 500;
+                               playerDataBase.Skill2 = 499;
                            }
                            break;
                        case "Skill3":
                            playerDataBase.Skill3 = statistics.Value;
 
-                           if (playerDataBase.Skill3 >= 500)
+                           if (playerDataBase.Skill3 > 499)
                            {
-                               playerDataBase.Skill3 = 500;
+                               playerDataBase.Skill3 = 499;
                            }
                            break;
                        case "Skill4":
                            playerDataBase.Skill4 = statistics.Value;
 
-                           if (playerDataBase.Skill4 >= 500)
+                           if (playerDataBase.Skill4 > 499)
                            {
-                               playerDataBase.Skill4 = 500;
+                               playerDataBase.Skill4 = 499;
                            }
                            break;
                        case "Skill5":
                            playerDataBase.Skill5 = statistics.Value;
 
-                           if (playerDataBase.Skill5 >= 500)
+                           if (playerDataBase.Skill5 > 499)
                            {
-                               playerDataBase.Skill5 = 500;
+                               playerDataBase.Skill5 = 499;
                            }
                            break;
                        case "Skill6":
                            playerDataBase.Skill6 = statistics.Value;
 
-                           if (playerDataBase.Skill6 >= 500)
+                           if (playerDataBase.Skill6 > 499)
                            {
-                               playerDataBase.Skill6 = 500;
+                               playerDataBase.Skill6 = 499;
                            }
                            break;
                        case "Skill7":
                            playerDataBase.Skill7 = statistics.Value;
 
-                           if (playerDataBase.Skill7 >= 500)
+                           if (playerDataBase.Skill7 > 499)
                            {
-                               playerDataBase.Skill7 = 500;
+                               playerDataBase.Skill7 = 499;
                            }
                            break;
                        case "Skill8":
                            playerDataBase.Skill8 = statistics.Value;
 
-                           if (playerDataBase.Skill8 >= 500)
+                           if (playerDataBase.Skill8 > 499)
                            {
-                               playerDataBase.Skill8 = 500;
+                               playerDataBase.Skill8 = 499;
                            }
                            break;
                        case "Skill9":
                            playerDataBase.Skill9 = statistics.Value;
 
-                           if (playerDataBase.Skill9 >= 500)
+                           if (playerDataBase.Skill9 > 499)
                            {
-                               playerDataBase.Skill9 = 500;
+                               playerDataBase.Skill9 = 499;
                            }
                            break;
                        case "Skill10":
                            playerDataBase.Skill10 = statistics.Value;
 
-                           if (playerDataBase.Skill10 >= 100)
+                           if (playerDataBase.Skill10 > 499)
                            {
-                               playerDataBase.Skill10 = 100;
+                               playerDataBase.Skill10 = 499;
                            }
                            break;
                        case "Skill11":
                            playerDataBase.Skill11 = statistics.Value;
 
-                           if (playerDataBase.Skill11 >= 500)
+                           if (playerDataBase.Skill11 > 499)
                            {
-                               playerDataBase.Skill11 = 500;
+                               playerDataBase.Skill11 = 499;
                            }
                            break;
                        case "Skill12":
                            playerDataBase.Skill12 = statistics.Value;
 
-                           if (playerDataBase.Skill12 >= 500)
+                           if (playerDataBase.Skill12 > 499)
                            {
-                               playerDataBase.Skill12 = 500;
+                               playerDataBase.Skill12 = 499;
                            }
                            break;
                        case "Skill13":
                            playerDataBase.Skill13 = statistics.Value;
 
-                           if (playerDataBase.Skill13 >= 500)
+                           if (playerDataBase.Skill13 > 499)
                            {
-                               playerDataBase.Skill13 = 500;
+                               playerDataBase.Skill13 = 499;
                            }
                            break;
                        case "Skill14":
                            playerDataBase.Skill14 = statistics.Value;
 
-                           if (playerDataBase.Skill14 >= 100)
+                           if (playerDataBase.Skill14 > 99)
                            {
-                               playerDataBase.Skill14 = 100;
+                               playerDataBase.Skill14 = 99;
                            }
                            break;
                        case "Skill15":
                            playerDataBase.Skill15 = statistics.Value;
 
-                           if (playerDataBase.Skill15 >= 100)
+                           if (playerDataBase.Skill15 > 99)
                            {
-                               playerDataBase.Skill15 = 100;
+                               playerDataBase.Skill15 = 99;
                            }
                            break;
                        case "Skill16":
                            playerDataBase.Skill16 = statistics.Value;
 
-                           if (playerDataBase.Skill16 >= 100)
+                           if (playerDataBase.Skill16 > 99)
                            {
-                               playerDataBase.Skill16 = 100;
+                               playerDataBase.Skill16 = 99;
                            }
                            break;
                        case "Skill17":
                            playerDataBase.Skill17 = statistics.Value;
 
-                           if (playerDataBase.Skill17 >= 100)
+                           if (playerDataBase.Skill17 > 99)
                            {
-                               playerDataBase.Skill17 = 100;
+                               playerDataBase.Skill17 = 99;
                            }
                            break;
                        case "Skill18":
                            playerDataBase.Skill18 = statistics.Value;
 
-                           if (playerDataBase.Skill18 >= 100)
+                           if (playerDataBase.Skill18 > 99)
                            {
-                               playerDataBase.Skill18 = 100;
+                               playerDataBase.Skill18 = 99;
                            }
                            break;
                        case "Skill19":
                            playerDataBase.Skill19 = statistics.Value;
 
-                           if (playerDataBase.Skill19 >= 100)
+                           if (playerDataBase.Skill19 > 99)
                            {
-                               playerDataBase.Skill19 = 100;
+                               playerDataBase.Skill19 = 99;
                            }
                            break;
                        case "Portion1":

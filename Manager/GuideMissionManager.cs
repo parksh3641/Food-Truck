@@ -239,7 +239,9 @@ public class GuideMissionManager : MonoBehaviour
                 break;
             case 24:
                 now = playerDataBase.GetAnimal_Total_AbilityLevel() + playerDataBase.GetTruck_Total_AbilityLevel() + playerDataBase.GetCharacter_Total_AbilityLevel()
-                    + playerDataBase.GetButterfly_Total_AbilityLevel() + playerDataBase.GetTruck_Total_AbilityLevel();
+                    + playerDataBase.GetButterfly_Total_AbilityLevel() + playerDataBase.GetTotems_Total_AbilityLevel() + playerDataBase.GetBucket_Total_AbilityLevel()
+                    + playerDataBase.GetChair_Total_AbilityLevel() + playerDataBase.GetTube_Total_AbilityLevel() + playerDataBase.GetSurfboard_Total_AbilityLevel()
+                    + playerDataBase.GetUmbrella_Total_AbilityLevel();
                 need = 1;
                 break;
             case 25:

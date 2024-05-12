@@ -23,22 +23,22 @@ public class AnimalDataBase : ScriptableObject
     [Space]
     public PassiveEffect retentionEffect = PassiveEffect.None;
     public float retentionValue = 0f;
-    public int[] retentionPrice = new int[5];
+    public int[] retentionPrice = new int[10];
+
+    AnimalInfo info = new AnimalInfo();
 
     public AnimalInfo GetAnimalInfo(AnimalType type)
     {
-        AnimalInfo animal = new AnimalInfo();
-
         for (int i = 0; i < animalInfoList.Count; i++)
         {
             if (animalInfoList[i].animalType.Equals(type))
             {
-                animal = animalInfoList[i];
+                info = animalInfoList[i];
                 break;
             }
         }
 
-        return animal;
+        return info;
     }
 
     public float GetAnimalEffect(int number)

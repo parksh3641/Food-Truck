@@ -139,6 +139,11 @@ public class UpgradeDataBase : ScriptableObject
 
     public int GetPrice(int level, int value)
     {
+        if(level < 0)
+        {
+            level = 0;
+        }
+
         price = 0;
 
         switch (GameStateManager.instance.GameType)

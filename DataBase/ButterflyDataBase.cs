@@ -23,22 +23,22 @@ public class ButterflyDataBase : ScriptableObject
     [Space]
     public PassiveEffect retentionEffect = PassiveEffect.None;
     public float retentionValue = 0f;
-    public int[] retentionPrice = new int[5];
+    public int[] retentionPrice = new int[10];
+
+    ButterflyInfo info = new ButterflyInfo();
 
     public ButterflyInfo GetButterflyInfo(ButterflyType type)
     {
-        ButterflyInfo butterfly = new ButterflyInfo();
-
         for (int i = 0; i < butterflyInfoList.Count; i++)
         {
             if (butterflyInfoList[i].butterflyType.Equals(type))
             {
-                butterfly = butterflyInfoList[i];
+                info = butterflyInfoList[i];
                 break;
             }
         }
 
-        return butterfly;
+        return info;
     }
 
     public float GetButterflyEffect(int number)

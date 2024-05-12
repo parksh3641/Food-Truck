@@ -201,6 +201,7 @@ public class GameManager : MonoBehaviour
     private float successPlus = 0;
 
     private float successX2 = 0;
+    private float successX3 = 0;
 
     private int goldPerSecond = 0;
 
@@ -331,7 +332,7 @@ public class GameManager : MonoBehaviour
     AnimalDataBase animalDataBase;
     ButterflyDataBase butterflyDataBase;
     TotemsDataBase totemsDataBase;
-    FlowerDataBase flowerDataBase;
+    EtcDataBase etcDataBase;
 
     ImageDataBase imageDataBase;
     LevelDataBase levelDataBase;
@@ -372,7 +373,7 @@ public class GameManager : MonoBehaviour
         if (imageDataBase == null) imageDataBase = Resources.Load("ImageDataBase") as ImageDataBase;
         if (levelDataBase == null) levelDataBase = Resources.Load("LevelDataBase") as LevelDataBase;
         if (totemsDataBase == null) totemsDataBase = Resources.Load("TotemsDataBase") as TotemsDataBase;
-        if (flowerDataBase == null) flowerDataBase = Resources.Load("FlowerDataBase") as FlowerDataBase;
+        if (etcDataBase == null) etcDataBase = Resources.Load("EtcDataBase") as EtcDataBase;
 
         upgradeDataBase.Initialize();
 
@@ -576,6 +577,8 @@ public class GameManager : MonoBehaviour
                     island_Particle[i].SetActive(false);
                 }
 
+                if (GameStateManager.instance.YoutubeVideo) return;
+
                 island_Particle[(int)GameStateManager.instance.IslandType].SetActive(true);
             }
         }
@@ -583,6 +586,8 @@ public class GameManager : MonoBehaviour
 
     public void BackgroundEffect(bool check)
     {
+        if (GameStateManager.instance.YoutubeVideo) return;
+
         if (check)
         {
             if (currentDate >= decemberStart || currentDate <= decemberEnd)
@@ -616,6 +621,8 @@ public class GameManager : MonoBehaviour
         {
             genderView.SetActive(true);
         }
+
+        GameStateManager.instance.ParticleType = ParticleType.Effect1 + Random.Range(0, 4);
 
         isReady = false;
         isDelay_Camera = true;
@@ -891,6 +898,15 @@ public class GameManager : MonoBehaviour
         PlayfabManager.instance.GrantItemsToUser("Flower1", "Flower");
 
         yield return firstSeconds;
+
+        PlayfabManager.instance.GrantItemsToUser("Bucket1", "Bucket");
+        PlayfabManager.instance.GrantItemsToUser("Chair1", "Chair");
+        PlayfabManager.instance.GrantItemsToUser("Tube1", "Tube");
+
+        yield return firstSeconds;
+
+        PlayfabManager.instance.GrantItemsToUser("Surfboard1", "Surfboard");
+        PlayfabManager.instance.GrantItemsToUser("Umbrella1", "Umbrella");
 
         if (Application.systemLanguage == SystemLanguage.Korean)
         {
@@ -1251,6 +1267,7 @@ public class GameManager : MonoBehaviour
 
         successPlus = 0;
         successX2 = 0;
+        successX3 = 0;
         needPricePlus = 0;
         sellPricePlus = 0;
         sellPriceTip = 0;
@@ -1269,7 +1286,8 @@ public class GameManager : MonoBehaviour
         expUp = 20;
         expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
         expUpPlus += playerDataBase.GetAnimal_Total_AbilityLevel() * animalDataBase.retentionValue;
-        expUp = (int)(expUp + (expUp * (expUpPlus / 100)));
+        expUpPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_14);
+        expUp = (int)(expUp + (expUp * (expUpPlus * 0.01f)));
 
         if (playerDataBase.SuperExp)
         {
@@ -1277,6 +1295,8 @@ public class GameManager : MonoBehaviour
         }
 
         itemDropPercent += (playerDataBase.Treasure15 * 1f);
+        itemDropPercent += etcDataBase.GetBucketEffect(playerDataBase.GetBucketHighNumber());
+        itemDropPercent += playerDataBase.GetBucket_Total_AbilityLevel() * etcDataBase.bucketInfoList[0].retentionValue;
         itemDropPercent += playerDataBase.GetEquipValue(EquipType.Equip_Index_7);
 
         recoverTicketPercent += recoverTicketPercent * (itemDropPercent * 0.01f);
@@ -1288,11 +1308,11 @@ public class GameManager : MonoBehaviour
         successPlus += playerDataBase.Skill17 * 0.5f;
         if (playerDataBase.Level > 99)
         {
-            successPlus += 30;
+            successPlus += 50;
         }
         else
         {
-            successPlus += playerDataBase.Level * 0.3f;
+            successPlus += playerDataBase.Level * 0.5f;
         }
         successPlus += playerDataBase.Treasure1 * 1f;
         successPlus += playerDataBase.Advancement * 0.5f;
@@ -1306,11 +1326,20 @@ public class GameManager : MonoBehaviour
             successPlus -= 10;
         }
 
+        if(GameStateManager.instance.GameType == GameType.Rank)
+        {
+            successPlus += etcDataBase.GetTubeEffect(playerDataBase.GetTubeHighNumber());
+            successPlus += playerDataBase.GetTube_Total_AbilityLevel() * etcDataBase.tubeInfoList[0].retentionValue;
+        }
+
         successX2 += playerDataBase.Treasure3 * 0.5f;
         successX2 += playerDataBase.GetEquipValue(EquipType.Equip_Index_3);
         successX2 += playerDataBase.GetTotems_Total_AbilityLevel() * totemsDataBase.retentionValue;
         successX2 += butterflyDataBase.GetButterflyEffect(playerDataBase.GetButterflyHighNumber());
         successX2 += playerDataBase.GetButterfly_Total_AbilityLevel() * butterflyDataBase.retentionValue;
+
+        successX3 += etcDataBase.GetSurfboardEffect(playerDataBase.GetSurfboardHighNumber());
+        successX3 += playerDataBase.GetSurfboard_Total_AbilityLevel() * etcDataBase.surfboardInfoList[0].retentionValue;
 
         sellPricePlus += playerDataBase.Skill8 * 1f;
         sellPricePlus += playerDataBase.Skill18 * 1f;
@@ -1336,17 +1365,6 @@ public class GameManager : MonoBehaviour
         if(sellPriceTip >= 100)
         {
             sellPriceTip = 100;
-        }
-
-        expUp = 20;
-        expUp += (int)animalDataBase.GetAnimalEffect(playerDataBase.GetAnimalHighNumber());
-        expUpPlus += playerDataBase.GetAnimal_Total_AbilityLevel() * animalDataBase.retentionValue;
-        expUpPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_14);
-        expUp = (int)(expUp + (expUp * (expUpPlus * 0.01f)));
-
-        if (playerDataBase.SuperExp)
-        {
-            expUp *= 2;
         }
 
         destoryPercent = islandDataBase.GetDestroy(GameStateManager.instance.IslandType);
@@ -1777,7 +1795,6 @@ public class GameManager : MonoBehaviour
     {
         if (playerDataBase.FirstReward == 0)
         {
-            homeButton.SetActive(false);
             moveArrow1.SetActive(true);
 
             FirebaseAnalytics.LogEvent("New_" + DateTime.Now.ToString("yyyyMMdd"));
@@ -1900,10 +1917,20 @@ public class GameManager : MonoBehaviour
             case GameType.Story:
                 maxLevel = upgradeDataBase.GetFoodMaxLevel(GameStateManager.instance.FoodType);
                 titleText.localizationName = GameStateManager.instance.FoodType.ToString();
+
+                for (int i = 0; i < particleSystemList.Count; i++)
+                {
+                    particleSystemList[i].Initialize(level);
+                }
                 break;
             case GameType.Rank:
                 maxLevel = upgradeDataBase.GetRankFoodMaxLevel(GameStateManager.instance.RankFoodType);
                 titleText.localizationName = GameStateManager.instance.RankFoodType.ToString();
+
+                for (int i = 0; i < particleSystemList.Count; i++)
+                {
+                    particleSystemList[i].Initialize(level / 20);
+                }
                 break;
         }
 
@@ -1912,15 +1939,10 @@ public class GameManager : MonoBehaviour
             level = maxLevel;
         }
 
-        for(int i = 0; i < particleSystemList.Count; i ++)
-        {
-            particleSystemList[i].Initialize(level);
-        }
-
         sellPrice = upgradeDataBase.GetPrice(level, defaultSellPrice);
         sellPrice += (int)(sellPrice * (islandDataBase.GetSellPrice(GameStateManager.instance.IslandType) * 0.01f));
 
-        if(isRareFood)
+        if (isRareFood)
         {
             sellPrice += (int)(sellPrice * 1.5f);
         }
@@ -1939,7 +1961,7 @@ public class GameManager : MonoBehaviour
         {
             needPrice -= Mathf.CeilToInt((needPrice * (0.01f * needPricePlus)));
 
-            if(needPricePlus >= 100)
+            if (needPricePlus >= 100)
             {
                 needPrice = 0;
             }
@@ -1971,14 +1993,7 @@ public class GameManager : MonoBehaviour
                 highLevelText.localizationName = "Best";
                 highLevelText.plusText = "";
 
-                if (level == 0)
-                {
-                    success = 100;
-                }
-                else
-                {
-                    success = 100 - (level * 1);
-                }
+                success = 100 - (islandDataBase.GetSuccess_Rank(GameStateManager.instance.RankFoodType)) - (level * 1);
 
                 switch (GameStateManager.instance.RankFoodType)
                 {
@@ -2098,7 +2113,7 @@ public class GameManager : MonoBehaviour
         {
             titleText.GetText().color = Color.red;
         }
-        else if(level >= 24)
+        else if (level >= 24)
         {
             titleText.GetText().color = Color.green;
         }
@@ -2191,6 +2206,12 @@ public class GameManager : MonoBehaviour
 
         successX2Text.localizationName = "SuccessX2Percent";
         successX2Text.plusText = " : " + successX2.ToString("N1") + "%";
+
+        if (successX3 > 0)
+        {
+            successX2Text.localizationName = "SuccessX3Percent";
+            successX2Text.plusText = " : " + successX3.ToString("N1") + "%";
+        }
 
         sellPriceTipText.localizationName = "SellPriceX2Up";
         sellPriceTipText.plusText += "\n" + sellPriceTip.ToString("N1") + "%";
@@ -2384,22 +2405,22 @@ public class GameManager : MonoBehaviour
                 UseDefTicket();
             }
 
-            if (successX2 > 0)
+            if (successX3 > 0)
             {
-                if (successX2 >= Random.Range(0, 100))
+                if (successX3 >= Random.Range(0, 100))
                 {
-                    if (level + 2 >= maxLevel - 1)
+                    if (level + 3 >= maxLevel - 1)
                     {
                         level += 1;
                     }
                     else
                     {
-                        level += 2;
+                        level += 3;
                     }
 
                     if (!changeFoodManager.changeFoodView.activeInHierarchy)
                     {
-                        NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX2);
+                        NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX3);
                     }
                 }
                 else
@@ -2409,7 +2430,33 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                level += 1;
+                if (successX2 > 0)
+                {
+                    if (successX2 >= Random.Range(0, 100))
+                    {
+                        if (level + 2 >= maxLevel - 1)
+                        {
+                            level += 1;
+                        }
+                        else
+                        {
+                            level += 2;
+                        }
+
+                        if (!changeFoodManager.changeFoodView.activeInHierarchy)
+                        {
+                            NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX2);
+                        }
+                    }
+                    else
+                    {
+                        level += 1;
+                    }
+                }
+                else
+                {
+                    level += 1;
+                }
             }
 
             GameStateManager.instance.UpgradeCount += 1;
@@ -2639,7 +2686,6 @@ public class GameManager : MonoBehaviour
 
         CheckFoodState();
         CheckFoodState_MaxLevel();
-        MaxLevelUpgradeSuccess();
 
         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
 
@@ -2684,6 +2730,8 @@ public class GameManager : MonoBehaviour
         }
 
         inGameUI.SetActive(true);
+
+        MaxLevelUpgradeSuccess();
 
         CheckAuto();
     }
@@ -4287,21 +4335,21 @@ public class GameManager : MonoBehaviour
         playerDataBase.Skill18 = 100;
         playerDataBase.Skill19 = 100;
 
-        playerDataBase.Treasure1 = 300;
-        playerDataBase.Treasure2 = 300;
-        playerDataBase.Treasure3 = 300;
-        playerDataBase.Treasure4 = 300;
-        playerDataBase.Treasure5 = 300;
-        playerDataBase.Treasure6 = 300;
-        playerDataBase.Treasure7 = 300;
-        playerDataBase.Treasure8 = 300;
-        playerDataBase.Treasure9 = 300;
-        playerDataBase.Treasure10 = 300;
-        playerDataBase.Treasure11 = 300;
-        playerDataBase.Treasure12 = 300;
-        playerDataBase.Treasure13 = 300;
-        playerDataBase.Treasure14 = 300;
-        playerDataBase.Treasure15 = 300;
+        playerDataBase.Treasure1 = 200;
+        playerDataBase.Treasure2 = 200;
+        playerDataBase.Treasure3 = 200;
+        playerDataBase.Treasure4 = 200;
+        playerDataBase.Treasure5 = 200;
+        playerDataBase.Treasure6 = 200;
+        playerDataBase.Treasure7 = 200;
+        playerDataBase.Treasure8 = 200;
+        playerDataBase.Treasure9 = 200;
+        playerDataBase.Treasure10 = 200;
+        playerDataBase.Treasure11 = 200;
+        playerDataBase.Treasure12 = 200;
+        playerDataBase.Treasure13 = 200;
+        playerDataBase.Treasure14 = 200;
+        playerDataBase.Treasure15 = 200;
 
         playerDataBase.Level = 300;
         playerDataBase.CastleLevel = 300;
@@ -4428,7 +4476,7 @@ public class GameManager : MonoBehaviour
 
     public void GetUnLocked()
     {
-        lockManager.UnLocked(7);
+        lockManager.UnLocked(8);
     }
 
     public void GetExp()
@@ -4491,6 +4539,9 @@ public class GameManager : MonoBehaviour
             case 3:
                 NotionManager.instance.UseNotion(NotionType.UnLockedNotion4);
                 break;
+            case 4:
+                NotionManager.instance.UseNotion(NotionType.UnLockedNotion5);
+                break;
         }
     }
 
@@ -4507,12 +4558,12 @@ public class GameManager : MonoBehaviour
         rankLocked.SetActive(true);
         inGameRankLocked.SetActive(true);
 
-        if (playerDataBase.Level > 2)
+        if (playerDataBase.Level > 4)
         {
             treasureLocked.SetActive(false);
         }
 
-        if (playerDataBase.Level > 4)
+        if (playerDataBase.Level > 9)
         {
             rankLocked.SetActive(false);
             inGameRankLocked.SetActive(false);
@@ -4630,6 +4681,31 @@ public class GameManager : MonoBehaviour
         playerDataBase.Totems10 = 1;
         playerDataBase.Totems11 = 1;
         playerDataBase.Totems12 = 1;
+
+        for(int i = 0; i < playerDataBase.Bucket.Length; i ++)
+        {
+            playerDataBase.Bucket[i] = 1;
+        }
+
+        for (int i = 0; i < playerDataBase.Chair.Length; i++)
+        {
+            playerDataBase.Chair[i] = 1;
+        }
+
+        for (int i = 0; i < playerDataBase.Tube.Length; i++)
+        {
+            playerDataBase.Tube[i] = 1;
+        }
+
+        for (int i = 0; i < playerDataBase.Surfboard.Length; i++)
+        {
+            playerDataBase.Surfboard[i] = 1;
+        }
+
+        for (int i = 0; i < playerDataBase.Umbrella.Length; i++)
+        {
+            playerDataBase.Umbrella[i] = 1;
+        }
     }
 
     public void GetDisableAllItem()
@@ -4716,6 +4792,31 @@ public class GameManager : MonoBehaviour
         playerDataBase.Totems10 = 0;
         playerDataBase.Totems11 = 0;
         playerDataBase.Totems12 = 0;
+
+        for (int i = 0; i < playerDataBase.Bucket.Length; i++)
+        {
+            playerDataBase.Bucket[i] = 0;
+        }
+
+        for (int i = 0; i < playerDataBase.Chair.Length; i++)
+        {
+            playerDataBase.Chair[i] = 0;
+        }
+
+        for (int i = 0; i < playerDataBase.Tube.Length; i++)
+        {
+            playerDataBase.Tube[i] = 0;
+        }
+
+        for (int i = 0; i < playerDataBase.Surfboard.Length; i++)
+        {
+            playerDataBase.Surfboard[i] = 0;
+        }
+
+        for (int i = 0; i < playerDataBase.Umbrella.Length; i++)
+        {
+            playerDataBase.Umbrella[i] = 0;
+        }
     }
 
     public void DeleteAllItem()

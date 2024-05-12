@@ -54,6 +54,7 @@ public class DungeonManager : MonoBehaviour
     public LocalizationContent titleText;
     public LocalizationContent attackText;
     public LocalizationContent attackPowerText;
+    public LocalizationContent criticalPowerText;
     public LocalizationContent attackSpeedText;
     public LocalizationContent attackX2Text;
     public LocalizationContent inGameTimerText;
@@ -74,12 +75,15 @@ public class DungeonManager : MonoBehaviour
     private int saveTimer = 0;
 
     private float success = 0;
+
     private float attackPower_Low = 0;
     private float attackPower_High = 0;
-
+    private float criticalPower_Low = 0;
+    private float criticalPower_High = 0;
 
     private float attackPlus = 0;
     private float attackPowerPlus = 0;
+    private float criticalPowerPlus = 0;
     private float attackSpeed = 0;
     private float attackX2 = 0;
 
@@ -121,6 +125,7 @@ public class DungeonManager : MonoBehaviour
     LevelDataBase levelDataBase;
     ButterflyDataBase butterflyDataBase;
     TotemsDataBase totemsDataBase;
+    EtcDataBase etcDataBase;
 
 
     private void Awake()
@@ -131,6 +136,7 @@ public class DungeonManager : MonoBehaviour
         if (butterflyDataBase == null) butterflyDataBase = Resources.Load("ButterflyDataBase") as ButterflyDataBase;
         if (levelDataBase == null) levelDataBase = Resources.Load("LevelDataBase") as LevelDataBase;
         if (totemsDataBase == null) totemsDataBase = Resources.Load("TotemsDataBase") as TotemsDataBase;
+        if (etcDataBase == null) etcDataBase = Resources.Load("EtcDataBase") as EtcDataBase;
 
         dungeonView.SetActive(false);
         dungeonInfoView.SetActive(false);
@@ -477,23 +483,35 @@ public class DungeonManager : MonoBehaviour
         attackPlus = 0;
         attackSpeed = 0;
         attackX2 = 0;
-        attackPower_Low = 90.0f;
+        attackPowerPlus = 0;
+        attackPower_Low = 80.0f;
         attackPower_High = 120.0f;
+        criticalPowerPlus = 0;
+        criticalPower_Low = 0;
+        criticalPower_High = 0;
 
-        attackPowerPlus = playerDataBase.GetEquipValue(EquipType.Equip_Index_13) * 0.01f;
+        attackPowerPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_13);
+        attackPowerPlus += etcDataBase.GetChairEffect(playerDataBase.GetChairHighNumber());
+        attackPowerPlus += playerDataBase.GetChair_Total_AbilityLevel() * etcDataBase.chairInfoList[0].retentionValue;
 
-        attackPower_Low += attackPower_Low * attackPowerPlus;
-        attackPower_High += attackPower_High * attackPowerPlus;
+        attackPower_Low += attackPower_Low * (attackPowerPlus * 0.01f);
+        attackPower_High += attackPower_High * (attackPowerPlus * 0.01f);
+
+        criticalPowerPlus += etcDataBase.GetUmbrellaEffect(playerDataBase.GetUmbrellaHighNumber());
+        criticalPowerPlus += playerDataBase.GetUmbrella_Total_AbilityLevel() * etcDataBase.umbrellaInfoList[0].retentionValue;
+
+        criticalPower_Low = attackPower_Low * (1.5f + (1.5f * (criticalPowerPlus * 0.01f)));
+        criticalPower_High = attackPower_High * (1.5f + (1.5f * (criticalPowerPlus * 0.01f)));
 
         attackPlus += playerDataBase.Skill7 * 0.5f;
         attackPlus += playerDataBase.Skill17 * 0.5f;
         if (playerDataBase.Level > 99)
         {
-            attackPlus += 30;
+            attackPlus += 50;
         }
         else
         {
-            attackPlus += playerDataBase.Level * 0.3f;
+            attackPlus += playerDataBase.Level * 0.5f;
         }
         attackPlus += playerDataBase.Treasure1 * 1f;
         attackPlus += playerDataBase.Advancement * 0.5f;
@@ -507,7 +525,8 @@ public class DungeonManager : MonoBehaviour
         }
 
 
-        attackX2 += playerDataBase.Treasure14 * 1f;
+        attackX2 += 5;
+        attackX2 += playerDataBase.Treasure14 * 0.5f;
         attackX2 += playerDataBase.Skill16 * 0.5f;
         attackX2 += playerDataBase.GetEquipValue(EquipType.Equip_Index_6);
 
@@ -539,7 +558,10 @@ public class DungeonManager : MonoBehaviour
         autoAttackSeconds = new WaitForSeconds(attackDelay);
 
         attackPowerText.localizationName = "AttackPower";
-        attackPowerText.plusText = " : " + attackPower_Low.ToString("N1") + " ~ " + attackPower_High.ToString("N1") + "  (+" + (attackPowerPlus * 100).ToString("N1") + "%)";
+        attackPowerText.plusText = " : " + attackPower_Low.ToString() + " ~ " + attackPower_High.ToString() + "  (+" + (attackPowerPlus).ToString("N1") + "%)";
+
+        criticalPowerText.localizationName = "CriticalPower";
+        criticalPowerText.plusText = " : " + (criticalPowerPlus).ToString("N1") + "%";
 
         attackSpeedText.localizationName = "AttackSpeedPercent";
         attackSpeedText.plusText = " : " + attackDelay.ToString("N2") + "/s";
@@ -554,6 +576,7 @@ public class DungeonManager : MonoBehaviour
 
         attackText.ReLoad();
         attackPowerText.ReLoad();
+        criticalPowerText.ReLoad();
         attackSpeedText.ReLoad();
         attackX2Text.ReLoad();
     }
@@ -578,7 +601,7 @@ public class DungeonManager : MonoBehaviour
 
         saveHealth = health;
 
-        healthText.text = health.ToString("N1") + " / " + saveHealth.ToString();
+        healthText.text = health.ToString("N1") + " / " + saveHealth.ToString("N1");
         healthPercent = health * 1.0f / saveHealth * 1.0f;
         healthFillamount.fillAmount = healthPercent;
 
@@ -630,7 +653,7 @@ public class DungeonManager : MonoBehaviour
         {
             if(Random.Range(0, 100f) < attackX2)
             {
-                damage = Random.Range(attackPower_Low, attackPower_High + 1) * 2;
+                damage = Random.Range(criticalPower_Low, criticalPower_High + 1);
 
                 damageNotion.txt.color = Color.red;
 

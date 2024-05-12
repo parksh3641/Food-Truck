@@ -24,22 +24,22 @@ public class TruckDataBase : ScriptableObject
     [Space]
     public PassiveEffect retentionEffect = PassiveEffect.None;
     public float retentionValue = 0f;
-    public int[] retentionPrice = new int[5];
+    public int[] retentionPrice = new int[10];
+
+    TruckInfo info = new TruckInfo();
 
     public TruckInfo GetTruckInfo(TruckType type)
     {
-        TruckInfo truck = new TruckInfo();
-
         for (int i = 0; i < truckInfoList.Count; i++)
         {
             if (truckInfoList[i].truckType.Equals(type))
             {
-                truck = truckInfoList[i];
+                info = truckInfoList[i];
                 break;
             }
         }
 
-        return truck;
+        return info;
     }
 
     public float GetTruckEffect(int number)

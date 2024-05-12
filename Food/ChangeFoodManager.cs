@@ -269,7 +269,7 @@ public class ChangeFoodManager : MonoBehaviour
         }
 
         rankMode.SetActive(false);
-        if(playerDataBase.Level > 4)
+        if(playerDataBase.Level > 9)
         {
             rankMode.SetActive(true);
 

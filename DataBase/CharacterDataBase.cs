@@ -21,22 +21,22 @@ public class CharacterDataBase : ScriptableObject
     [Space]
     public PassiveEffect retentionEffect = PassiveEffect.None;
     public float retentionValue = 0f;
-    public int[] retentionPrice = new int[5];
+    public int[] retentionPrice = new int[10];
+
+    CharacterInfo info = new CharacterInfo();
 
     public CharacterInfo GetCharacterInfo(CharacterType type)
     {
-        CharacterInfo character = new CharacterInfo();
-
         for (int i = 0; i < characterInfoList.Count; i++)
         {
             if (characterInfoList[i].characterType.Equals(type))
             {
-                character = characterInfoList[i];
+                info = characterInfoList[i];
                 break;
             }
         }
 
-        return character;
+        return info;
     }
 
     public float GetCharacterEffect(int number)

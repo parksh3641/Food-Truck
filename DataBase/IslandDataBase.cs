@@ -63,6 +63,24 @@ public class IslandDataBase : ScriptableObject
         return success;
     }
 
+    public float GetSuccess_Rank(RankFoodType type)
+    {
+        number = 0;
+
+        number = islandInfoList[(int)type].success;
+
+        if (number > 0)
+        {
+            success = 100 - number;
+        }
+        else
+        {
+            success = 100 + Mathf.Abs(number);
+        }
+
+        return success;
+    }
+
     public float GetSellPrice(IslandType type)
     {
         float number = 0;

@@ -131,14 +131,44 @@ public class WelcomeManager : MonoBehaviour
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
             attendanceContentArray[i].receiveContent[1].gameObject.SetActive(true);
             attendanceContentArray[i].receiveContent[2].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, (100 * (i + 1)));
-            attendanceContentArray[i].receiveContent[1].Initialize(RewardType.TreasureBox, (i + 1));
-            attendanceContentArray[i].receiveContent[2].Initialize(RewardType.EventTicket, 50);
 
-            if(i == 6)
+            switch(i)
             {
-                attendanceContentArray[i].receiveContent[3].gameObject.SetActive(true);
-                attendanceContentArray[i].receiveContent[3].Initialize(RewardType.Icon_Attendance, 1);
+                case 0:
+                    attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 300);
+                    attendanceContentArray[i].receiveContent[1].Initialize(RewardType.EventTicket, 100);
+                    attendanceContentArray[i].receiveContent[2].gameObject.SetActive(false);
+                    break;
+                case 1:
+                    attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 300);
+                    attendanceContentArray[i].receiveContent[1].Initialize(RewardType.EventTicket, 100);
+                    attendanceContentArray[i].receiveContent[2].gameObject.SetActive(false);
+                    break;
+                case 2:
+                    attendanceContentArray[i].receiveContent[0].Initialize(RewardType.TreasureBox, 5);
+                    attendanceContentArray[i].receiveContent[1].Initialize(RewardType.EventTicket, 100);
+                    attendanceContentArray[i].receiveContent[2].gameObject.SetActive(false);
+                    break;
+                case 3:
+                    attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 500);
+                    attendanceContentArray[i].receiveContent[1].Initialize(RewardType.EventTicket, 100);
+                    attendanceContentArray[i].receiveContent[2].gameObject.SetActive(false);
+                    break;
+                case 4:
+                    attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 500);
+                    attendanceContentArray[i].receiveContent[1].Initialize(RewardType.EventTicket, 100);
+                    attendanceContentArray[i].receiveContent[2].gameObject.SetActive(false);
+                    break;
+                case 5:
+                    attendanceContentArray[i].receiveContent[0].Initialize(RewardType.TreasureBox, 10);
+                    attendanceContentArray[i].receiveContent[1].Initialize(RewardType.EventTicket, 100);
+                    attendanceContentArray[i].receiveContent[2].gameObject.SetActive(false);
+                    break;
+                case 6:
+                    attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Crystal, 1000);
+                    attendanceContentArray[i].receiveContent[1].Initialize(RewardType.EventTicket, 100);
+                    attendanceContentArray[i].receiveContent[2].Initialize(RewardType.Icon_Attendance, 1);
+                    break;
             }
         }
     }
@@ -152,20 +182,46 @@ public class WelcomeManager : MonoBehaviour
             return;
         }
 
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, (100 * (index + 1)));
-        TreasureManager.instance.OpenTreasure(index + 1);
-        PortionManager.instance.GetEventTicket(50);
-
-        if (index == 6)
+        switch(index)
         {
-            if (!playerDataBase.CheckIcon(IconType.Icon_16))
-            {
-                playerDataBase.SetIcon(IconType.Icon_16, 1);
-                PlayfabManager.instance.GrantItemsToUser((IconType.Icon_16).ToString(), "Icon");
-            }
+            case 0:
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+
+                break;
+            case 1:
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+
+                break;
+            case 2:
+                TreasureManager.instance.OpenTreasure(5);
+
+                break;
+            case 3:
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
+
+                break;
+            case 4:
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
+
+                break;
+            case 5:
+                TreasureManager.instance.OpenTreasure(10);
+
+                break;
+            case 6:
+                PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1000);
+
+                if (!playerDataBase.CheckIcon(IconType.Icon_16))
+                {
+                    playerDataBase.SetIcon(IconType.Icon_16, 1);
+                    PlayfabManager.instance.GrantItemsToUser((IconType.Icon_16).ToString(), "Icon");
+                }
+                break;
         }
 
-        playerDataBase.EventTicketCount += 10;
+        PortionManager.instance.GetEventTicket(100);
+
+        playerDataBase.EventTicketCount += 100;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
 
         playerDataBase.WelcomeCount += 1;

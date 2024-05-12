@@ -83,12 +83,31 @@ public class ShopManager : MonoBehaviour
     public GameObject[] mainTotemsArray;
     public GameObject[] shopTotemsArray;
 
-    public GameObject mainFlower;
-    public GameObject[] mainFlowerArray;
-    public GameObject[] shopFlowerArray;
+    public GameObject mainBucket;
+    public GameObject[] mainBucketArray;
+    public GameObject[] shopBucketArray;
+
+    public GameObject mainChair;
+    public GameObject[] mainChairArray;
+    public GameObject[] mainChairArray2;
+    public GameObject[] shopChairArray;
+
+    public GameObject mainTube;
+    public GameObject[] mainTubeArray;
+    public GameObject[] shopTubeArray;
+
+    public GameObject mainSurfboard;
+    public GameObject[] mainSurfboardArray;
+    public GameObject[] shopSurfboardArray;
+
+    public GameObject mainUmbrella;
+    public GameObject[] mainUmbrellaArray;
+    public GameObject[] mainUmbrellaArray2;
+    public GameObject[] shopUmbrellaArray;
 
     public GameObject buyButton;
     public GameObject buySpeical;
+    public Text buySpeicalText;
     public GameObject selectObj;
     public GameObject levelUpObj;
     public GameObject selectCheckMarkObj;
@@ -98,6 +117,7 @@ public class ShopManager : MonoBehaviour
     public Text crystalText;
     public Text levelUpText;
 
+    public GameObject goldButton;
     public GameObject crystalButton;
 
     public Text levelText;
@@ -131,7 +151,11 @@ public class ShopManager : MonoBehaviour
     private int animalIndex = 0;
     private int butterflyIndex = 0;
     private int totemsIndex = 0;
-    private int flowerIndex = 0;
+    private int bucketIndex = 0;
+    private int chairIndex = 0;
+    private int tubeIndex = 0;
+    private int surfboardIndex = 0;
+    private int umbrellaIndex = 0;
 
     bool hold = false;
     bool buy = false;
@@ -154,7 +178,11 @@ public class ShopManager : MonoBehaviour
     AnimalInfo animalInfo = new AnimalInfo();
     ButterflyInfo butterflyInfo = new ButterflyInfo();
     TotemsInfo totemsInfo = new TotemsInfo();
-    FlowerInfo flowerInfo = new FlowerInfo();
+    BucketInfo bucketInfo = new BucketInfo();
+    ChairInfo chairInfo = new ChairInfo();
+    TubeInfo tubeInfo = new TubeInfo();
+    SurfboardInfo surfboardInfo = new SurfboardInfo();
+    UmbrellaInfo umbrellaInfo = new UmbrellaInfo();
 
     List<string> itemList = new List<string>();
 
@@ -185,7 +213,7 @@ public class ShopManager : MonoBehaviour
     AnimalDataBase animalDataBase;
     ButterflyDataBase butterflyDataBase;
     TotemsDataBase totemsDataBase;
-    FlowerDataBase flowerDataBase;
+    EtcDataBase etcDataBase;
 
     Dictionary<string, string> customData = new Dictionary<string, string>();
 
@@ -200,7 +228,7 @@ public class ShopManager : MonoBehaviour
         if (animalDataBase == null) animalDataBase = Resources.Load("AnimalDataBase") as AnimalDataBase;
         if (butterflyDataBase == null) butterflyDataBase = Resources.Load("ButterflyDataBase") as ButterflyDataBase;
         if (totemsDataBase == null) totemsDataBase = Resources.Load("TotemsDataBase") as TotemsDataBase;
-        if (flowerDataBase == null) flowerDataBase = Resources.Load("FlowerDataBase") as FlowerDataBase;
+        if (etcDataBase == null) etcDataBase = Resources.Load("EtcDataBase") as EtcDataBase;
 
         shopView.SetActive(false);
         speicalShopView.SetActive(false);
@@ -209,9 +237,7 @@ public class ShopManager : MonoBehaviour
         dailyShopCountText.text = "";
 
         package.SetActive(false);
-
         shopAlarm.SetActive(true);
-
         martAlarm.SetActive(true);
 
         packageBuyIcon.SetActive(false);
@@ -256,9 +282,31 @@ public class ShopManager : MonoBehaviour
             mainTotemsArray[i].SetActive(false);
         }
 
-        for (int i = 0; i < mainFlowerArray.Length; i++)
+        for (int i = 0; i < mainBucketArray.Length; i++)
         {
-            mainFlowerArray[i].SetActive(false);
+            mainBucketArray[i].SetActive(false);
+        }
+
+        for (int i = 0; i < mainChairArray.Length; i++)
+        {
+            mainChairArray[i].SetActive(false);
+            mainChairArray2[i].SetActive(false);
+        }
+
+        for (int i = 0; i < mainTubeArray.Length; i++)
+        {
+            mainTubeArray[i].SetActive(false);
+        }
+
+        for (int i = 0; i < mainSurfboardArray.Length; i++)
+        {
+            mainSurfboardArray[i].SetActive(false);
+        }
+
+        for (int i = 0; i < mainUmbrellaArray.Length; i++)
+        {
+            mainUmbrellaArray[i].SetActive(false);
+            mainUmbrellaArray2[i].SetActive(false);
         }
     }
 
@@ -270,22 +318,84 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    [Button]
     public void Initialize()
     {
-
         if (GameStateManager.instance.YoutubeVideo)
         {
+            for (int i = 0; i < mainCharacterArray.Length; i++)
+            {
+                mainCharacterArray[i].SetActive(false);
+            }
+
+            for (int i = 0; i < mainTruckArray.Length; i++)
+            {
+                mainTruckArray[i].SetActive(false);
+            }
+
+            for (int i = 0; i < mainAnimalArray.Length; i++)
+            {
+                mainAnimalArray[i].SetActive(false);
+            }
+
+            for (int i = 0; i < mainButterflyArray.Length; i++)
+            {
+                mainButterflyArray[i].SetActive(false);
+            }
+
+            for (int i = 0; i < mainTotemsArray.Length; i++)
+            {
+                mainTotemsArray[i].SetActive(false);
+            }
+
+            for (int i = 0; i < mainBucketArray.Length; i++)
+            {
+                mainBucketArray[i].SetActive(false);
+            }
+
+            for (int i = 0; i < mainChairArray.Length; i++)
+            {
+                mainChairArray[i].SetActive(false);
+                mainChairArray2[i].SetActive(false);
+            }
+
+            for (int i = 0; i < mainTubeArray.Length; i++)
+            {
+                mainTubeArray[i].SetActive(false);
+            }
+
+            for (int i = 0; i < mainSurfboardArray.Length; i++)
+            {
+                mainSurfboardArray[i].SetActive(false);
+            }
+
+            for (int i = 0; i < mainUmbrellaArray.Length; i++)
+            {
+                mainUmbrellaArray[i].SetActive(false);
+                mainUmbrellaArray2[i].SetActive(false);
+            }
+
             int number = Random.Range(0, Enum.GetValues(typeof(CharacterType)).Length - 1);
             int number2 = Random.Range(0, Enum.GetValues(typeof(TruckType)).Length - 1);
             int number3 = Random.Range(0, Enum.GetValues(typeof(AnimalType)).Length - 1);
             int number4 = Random.Range(0, Enum.GetValues(typeof(ButterflyType)).Length - 1);
             int number5 = Random.Range(0, Enum.GetValues(typeof(TotemsType)).Length - 1);
+            int number6 = Random.Range(0, Enum.GetValues(typeof(BucketType)).Length - 1);
+            int number7 = Random.Range(0, Enum.GetValues(typeof(ChairType)).Length - 1);
+            int number8 = Random.Range(0, Enum.GetValues(typeof(TubeType)).Length - 1);
+            int number9 = Random.Range(0, Enum.GetValues(typeof(SurfboardType)).Length - 1);
+            int number10 = Random.Range(0, Enum.GetValues(typeof(UmbrellaType)).Length - 1);
 
             GameStateManager.instance.CharacterType = CharacterType.Character1 + number;
             GameStateManager.instance.TruckType = TruckType.Truck1 + number2;
             GameStateManager.instance.AnimalType = AnimalType.Animal1 + number3;
             GameStateManager.instance.ButterflyType = ButterflyType.Butterfly1 + number4;
             GameStateManager.instance.TotemsType = TotemsType.Totems1 + number5;
+            GameStateManager.instance.BucketType = BucketType.Bucket1 + number6;
+            GameStateManager.instance.ChairType = ChairType.Chair1 + number7;
+            GameStateManager.instance.TubeType = TubeType.Tube1 + number8;
+            GameStateManager.instance.SurfboardType = SurfboardType.Surfboard1 + number9;
+            GameStateManager.instance.UmbrellaType = UmbrellaType.Umbrella1 + number10;
 
             mainCharacterArray[number].SetActive(true);
             mainTruckArray[number2].SetActive(true);
@@ -293,10 +403,23 @@ public class ShopManager : MonoBehaviour
             mainButterflyArray[number4].SetActive(true);
             mainTotemsArray[number5].SetActive(true);
 
+            mainBucketArray[number6].SetActive(true);
+
+            mainChairArray[number7].SetActive(true);
+            mainChairArray2[number7].SetActive(true);
+
+            mainTubeArray[number8].SetActive(true);
+            mainSurfboardArray[number9].SetActive(true);
+
+            mainUmbrellaArray[number10].SetActive(true);
+            mainUmbrellaArray2[number10].SetActive(true);
+
             GameStateManager.instance.IslandType = IslandType.Island1 + Random.Range(1, System.Enum.GetValues(typeof(IslandType)).Length - 1);
             GameStateManager.instance.FoodType = FoodType.Food1 + Random.Range(0, System.Enum.GetValues(typeof(FoodType)).Length - 1);
 
-            GameStateManager.instance.FeverCount = 280;
+            GameStateManager.instance.FeverCount = 28000;
+
+            GameManager.instance.Initialize();
 
             Debug.LogError("유튜브 업로드 세팅");
         }
@@ -307,7 +430,17 @@ public class ShopManager : MonoBehaviour
             mainAnimalArray[(int)GameStateManager.instance.AnimalType].SetActive(true);
             mainButterflyArray[(int)GameStateManager.instance.ButterflyType].SetActive(true);
             mainTotemsArray[(int)GameStateManager.instance.TotemsType].SetActive(true);
-            //mainFlowerArray[(int)GameStateManager.instance.FlowerType].SetActive(true);
+
+            mainBucketArray[(int)GameStateManager.instance.BucketType].SetActive(true);
+
+            mainChairArray[(int)GameStateManager.instance.ChairType].SetActive(true);
+            mainChairArray2[(int)GameStateManager.instance.ChairType].SetActive(true);
+
+            mainTubeArray[(int)GameStateManager.instance.TubeType].SetActive(true);
+            mainSurfboardArray[(int)GameStateManager.instance.SurfboardType].SetActive(true);
+
+            mainUmbrellaArray[(int)GameStateManager.instance.UmbrellaType].SetActive(true);
+            mainUmbrellaArray2[(int)GameStateManager.instance.UmbrellaType].SetActive(true);
         }
 
         if (!playerDataBase.Package5)
@@ -1486,21 +1619,50 @@ public class ShopManager : MonoBehaviour
                     FirebaseAnalytics.LogEvent("Open_Totems");
                     break;
                 case 5:
-                    for (int i = 0; i < shopFlowerArray.Length; i++)
+                    for (int i = 0; i < shopBucketArray.Length; i++)
                     {
-                        shopFlowerArray[i].transform.localRotation = Quaternion.Euler(0, 210, 0);
+                        shopBucketArray[i].transform.localRotation = Quaternion.Euler(-100, 0, 0);
                     }
 
-                    FirebaseAnalytics.LogEvent("Open_Flower");
+                    FirebaseAnalytics.LogEvent("Open_Bucket");
+                    break;
+                case 6:
+                    for (int i = 0; i < shopChairArray.Length; i++)
+                    {
+                        shopChairArray[i].transform.localRotation = Quaternion.Euler(-90, 150, 0);
+                    }
+
+                    FirebaseAnalytics.LogEvent("Open_Chair");
+                    break;
+                case 7:
+                    for (int i = 0; i < shopTubeArray.Length; i++)
+                    {
+                        shopTubeArray[i].transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    }
+
+                    FirebaseAnalytics.LogEvent("Open_Tube");
+                    break;
+                case 8:
+                    for (int i = 0; i < shopSurfboardArray.Length; i++)
+                    {
+                        shopSurfboardArray[i].transform.localRotation = Quaternion.Euler(-90, 0, 150);
+                    }
+
+                    FirebaseAnalytics.LogEvent("Open_Surfboard");
+                    break;
+                case 9:
+                    for (int i = 0; i < shopUmbrellaArray.Length; i++)
+                    {
+                        shopUmbrellaArray[i].transform.localRotation = Quaternion.Euler(-100, 0, 0);
+                    }
+
+                    FirebaseAnalytics.LogEvent("Open_Umbrella");
                     break;
             }
         }
         else
         {
-            if (guideMissionManager.guideMissonView.gameObject.activeInHierarchy)
-            {
-                guideMissionManager.Initialize();
-            }
+            guideMissionManager.Initialize();
 
             GameManager.instance.CheckPercent();
 
@@ -1564,7 +1726,11 @@ public class ShopManager : MonoBehaviour
         mainAnimal.SetActive(false);
         mainButterfly.SetActive(false);
         mainTotems.SetActive(false);
-        mainFlower.SetActive(false);
+        mainBucket.SetActive(false);
+        mainChair.SetActive(false);
+        mainTube.SetActive(false);
+        mainSurfboard.SetActive(false);
+        mainUmbrella.SetActive(false);
 
         yummyButton.SetActive(true);
 
@@ -1645,17 +1811,77 @@ public class ShopManager : MonoBehaviour
             case 5:
                 yummyButton.SetActive(false);
 
-                if (flowerIndex == 0)
+                if (bucketIndex == 0)
                 {
                     leftButton.SetActive(false);
                 }
 
-                if (flowerIndex >= shopFlowerArray.Length - 1)
+                if (bucketIndex >= shopBucketArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
 
-                FlowerInitialize();
+                BucketInitialize();
+                break;
+            case 6:
+                yummyButton.SetActive(false);
+
+                if (chairIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (chairIndex >= shopChairArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                ChairInitialize();
+                break;
+            case 7:
+                yummyButton.SetActive(false);
+
+                if (tubeIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (tubeIndex >= shopTubeArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                TubeInitialize();
+                break;
+            case 8:
+                yummyButton.SetActive(false);
+
+                if (surfboardIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (surfboardIndex >= shopSurfboardArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                SurfboardInitialize();
+                break;
+            case 9:
+                yummyButton.SetActive(false);
+
+                if (umbrellaIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (umbrellaIndex >= shopUmbrellaArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                UmbrellaInitialize();
                 break;
         }
     }
@@ -2045,6 +2271,8 @@ public class ShopManager : MonoBehaviour
             levelUpObj.SetActive(false);
             buyButton.SetActive(true);
             buySpeical.SetActive(false);
+            goldButton.SetActive(true);
+            crystalButton.SetActive(false);
 
             if (!buy)
             {
@@ -2052,12 +2280,11 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(false);
-
             if (characterInfo.characterType == CharacterType.Character21)
             {
                 buyButton.SetActive(false);
                 buySpeical.SetActive(true);
+                buySpeicalText.text = LocalizationManager.instance.GetString("BuyKakoTalk");
             }
         }
     }
@@ -2300,14 +2527,14 @@ public class ShopManager : MonoBehaviour
             levelUpObj.SetActive(false);
             buyButton.SetActive(true);
             buySpeical.SetActive(false);
+            goldButton.SetActive(true);
+            crystalButton.SetActive(false);
 
             if (!buy)
             {
                 priceText.text = LocalizationManager.instance.GetString("NotPurchase");
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
-
-            crystalButton.SetActive(false);
         }
     }
 
@@ -2571,14 +2798,14 @@ public class ShopManager : MonoBehaviour
             levelUpObj.SetActive(false);
             buyButton.SetActive(true);
             buySpeical.SetActive(false);
+            goldButton.SetActive(true);
+            crystalButton.SetActive(false);
 
             if (!buy)
             {
                 priceText.text = LocalizationManager.instance.GetString("NotPurchase");
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
-
-            crystalButton.SetActive(false);
         }
     }
 
@@ -3046,14 +3273,14 @@ public class ShopManager : MonoBehaviour
             levelUpObj.SetActive(false);
             buyButton.SetActive(true);
             buySpeical.SetActive(false);
+            goldButton.SetActive(true);
+            crystalButton.SetActive(false);
 
             if (!buy)
             {
                 priceText.text = LocalizationManager.instance.GetString("NotPurchase");
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
-
-            crystalButton.SetActive(false);
         }
     }
 
@@ -3346,6 +3573,887 @@ public class ShopManager : MonoBehaviour
             levelUpObj.SetActive(false);
             buyButton.SetActive(true);
             buySpeical.SetActive(false);
+            goldButton.SetActive(true);
+            crystalButton.SetActive(false);
+
+            if (!buy)
+            {
+                priceText.text = LocalizationManager.instance.GetString("NotPurchase");
+                crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+        }
+    }
+
+    void BucketInitialize()
+    {
+        mainBucket.SetActive(true);
+
+        for (int i = 0; i < shopBucketArray.Length; i++)
+        {
+            shopBucketArray[i].gameObject.SetActive(false);
+        }
+
+        shopBucketArray[bucketIndex].gameObject.SetActive(true);
+        shopBucketArray[bucketIndex].transform.localRotation = Quaternion.Euler(-100, 0, 0);
+
+        bucketInfo = etcDataBase.GetBucketInfo(BucketType.Bucket1 + bucketIndex);
+
+        nameText.localizationName = (BucketType.Bucket1 + bucketIndex).ToString();
+
+        effectText.localizationName = bucketInfo.passiveEffect.ToString();
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)bucketInfo.effectNumber).ToString() + "%";
+
+        titleText.localizationName = "Bucket";
+        titleText.plusText = "  ( " + (bucketIndex + 1) + " / " + shopBucketArray.Length + " )\n<size=10>"
+            + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetBucketNumber() + 1) * 1.0f) / (shopBucketArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+        titleText.ReLoad();
+
+        infoText.localizationName = " ";
+
+        nameText.ReLoad();
+        effectText.ReLoad();
+        infoText.ReLoad();
+
+        price_Gold = bucketInfo.price;
+        price_Crystal = price_Gold / exchange;
+
+        if (price_Crystal < 100)
+        {
+            price_Crystal = 100;
+        }
+
+        priceText.text = MoneyUnitString.ToCurrencyString(price_Gold);
+        crystalText.text = MoneyUnitString.ToCurrencyString(price_Crystal);
+
+        hold = false;
+        buy = false;
+
+        level = playerDataBase.GetBucket_AbilityLevel((int)bucketInfo.bucketType);
+
+        switch (bucketInfo.bucketType)
+        {
+            case BucketType.Bucket1:
+                hold = true;
+                break;
+            case BucketType.Bucket2:
+                if (playerDataBase.Bucket[1] >= 1)
+                {
+                    hold = true;
+                }
+
+                buy = true;
+                break;
+            case BucketType.Bucket3:
+                if (playerDataBase.Bucket[2] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Bucket[1] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case BucketType.Bucket4:
+                if (playerDataBase.Bucket[3] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Bucket[2] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case BucketType.Bucket5:
+                if (playerDataBase.Bucket[4] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Bucket[3] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case BucketType.Bucket6:
+                if (playerDataBase.Bucket[5] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Bucket[4] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case BucketType.Bucket7:
+                if (playerDataBase.Bucket[6] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Bucket[5] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+        }
+
+#if UNITY_EDITOR
+        buy = true;
+#endif
+
+        passiveText.text = "";
+
+        levelText.text = "☆☆☆☆☆☆☆☆☆";
+        if (hold)
+        {
+            selectObj.SetActive(true);
+            levelUpObj.SetActive(true);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
+            selectCheckMarkObj.SetActive(false);
+
+            if (level > 9)
+            {
+                levelText.text = "★★★★★★★★★★";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 1:
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 2:
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
+                        break;
+                    case 3:
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
+                        break;
+                    case 4:
+                        levelText.text = "★★★★☆☆☆☆☆☆";
+                        break;
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
+
+                }
+
+                price_LevelUp = etcDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(etcDataBase.bucketInfoList[bucketIndex].retentionEffect.ToString()) + " +"
++ (level * etcDataBase.bucketInfoList[bucketIndex].retentionValue).ToString("N1") + "%";
+            }
+
+            if (GameStateManager.instance.BucketType.Equals(bucketInfo.bucketType))
+            {
+                selectText.text = LocalizationManager.instance.GetString("Selected");
+
+                selectCheckMarkObj.SetActive(true);
+            }
+            else
+            {
+                selectText.text = LocalizationManager.instance.GetString("Select");
+            }
+        }
+        else
+        {
+            selectObj.SetActive(false);
+            levelUpObj.SetActive(false);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
+            goldButton.SetActive(true);
+            crystalButton.SetActive(false);
+
+            if (!buy)
+            {
+                priceText.text = LocalizationManager.instance.GetString("NotPurchase");
+                crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+        }
+    }
+
+    void ChairInitialize()
+    {
+        mainChair.SetActive(true);
+
+        for (int i = 0; i < shopChairArray.Length; i++)
+        {
+            shopChairArray[i].gameObject.SetActive(false);
+        }
+
+        shopChairArray[chairIndex].gameObject.SetActive(true);
+        shopChairArray[chairIndex].transform.localRotation = Quaternion.Euler(-90, 150, 0);
+
+        chairInfo = etcDataBase.GetChairInfo(ChairType.Chair1 + chairIndex);
+
+        nameText.localizationName = (ChairType.Chair1 + chairIndex).ToString();
+
+        effectText.localizationName = chairInfo.passiveEffect.ToString();
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)chairInfo.effectNumber).ToString() + "%";
+
+        titleText.localizationName = "Chair";
+        titleText.plusText = "  ( " + (chairIndex + 1) + " / " + shopChairArray.Length + " )\n<size=10>"
+            + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetChairNumber() + 1) * 1.0f) / (shopChairArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+        titleText.ReLoad();
+
+        infoText.localizationName = " ";
+
+        nameText.ReLoad();
+        effectText.ReLoad();
+        infoText.ReLoad();
+
+        //price_Gold = chairInfo.price;
+        price_Crystal = chairInfo.price;
+
+        priceText.text = MoneyUnitString.ToCurrencyString(price_Gold);
+        crystalText.text = MoneyUnitString.ToCurrencyString(price_Crystal);
+
+        hold = false;
+        buy = false;
+
+        level = playerDataBase.GetChair_AbilityLevel((int)chairInfo.chairType);
+
+        switch (chairInfo.chairType)
+        {
+            case ChairType.Chair1:
+                hold = true;
+                break;
+            case ChairType.Chair2:
+                if (playerDataBase.Chair[1] >= 1)
+                {
+                    hold = true;
+                }
+
+                buy = true;
+                break;
+            case ChairType.Chair3:
+                if (playerDataBase.Chair[2] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Chair[1] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ChairType.Chair4:
+                if (playerDataBase.Chair[3] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Chair[2] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ChairType.Chair5:
+                if (playerDataBase.Chair[4] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Chair[3] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ChairType.Chair6:
+                if (playerDataBase.Chair[5] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Chair[4] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ChairType.Chair7:
+                if (playerDataBase.Chair[6] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Chair[5] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case ChairType.Chair8:
+                if (playerDataBase.Chair[7] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Chair[6] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+        }
+
+#if UNITY_EDITOR
+        buy = true;
+#endif
+
+        passiveText.text = "";
+
+        levelText.text = "☆☆☆☆☆☆☆☆☆";
+        if (hold)
+        {
+            selectObj.SetActive(true);
+            levelUpObj.SetActive(true);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
+            selectCheckMarkObj.SetActive(false);
+
+            if (level > 9)
+            {
+                levelText.text = "★★★★★★★★★★";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 1:
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 2:
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
+                        break;
+                    case 3:
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
+                        break;
+                    case 4:
+                        levelText.text = "★★★★☆☆☆☆☆☆";
+                        break;
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
+
+                }
+
+                price_LevelUp = etcDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(etcDataBase.chairInfoList[chairIndex].retentionEffect.ToString()) + " +"
++ (level * etcDataBase.chairInfoList[chairIndex].retentionValue).ToString("N1") + "%";
+            }
+
+            if (GameStateManager.instance.ChairType.Equals(chairInfo.chairType))
+            {
+                selectText.text = LocalizationManager.instance.GetString("Selected");
+
+                selectCheckMarkObj.SetActive(true);
+            }
+            else
+            {
+                selectText.text = LocalizationManager.instance.GetString("Select");
+            }
+        }
+        else
+        {
+            selectObj.SetActive(false);
+            levelUpObj.SetActive(false);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
+            goldButton.SetActive(false);
+            crystalButton.SetActive(true);
+
+            if (!buy)
+            {
+                priceText.text = LocalizationManager.instance.GetString("NotPurchase");
+                crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+        }
+    }
+
+    void TubeInitialize()
+    {
+        mainTube.SetActive(true);
+
+        for (int i = 0; i < shopTubeArray.Length; i++)
+        {
+            shopTubeArray[i].gameObject.SetActive(false);
+        }
+
+        shopTubeArray[tubeIndex].gameObject.SetActive(true);
+        shopTubeArray[tubeIndex].transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        tubeInfo = etcDataBase.GetTubeInfo(TubeType.Tube1 + tubeIndex);
+
+        nameText.localizationName = (TubeType.Tube1 + tubeIndex).ToString();
+
+        effectText.localizationName = tubeInfo.passiveEffect.ToString();
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)tubeInfo.effectNumber).ToString() + "%";
+
+        titleText.localizationName = "Tube";
+        titleText.plusText = "  ( " + (tubeIndex + 1) + " / " + shopTubeArray.Length + " )\n<size=10>"
+            + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetTubeNumber() + 1) * 1.0f) / (shopTubeArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+        titleText.ReLoad();
+
+        infoText.localizationName = " ";
+
+        nameText.ReLoad();
+        effectText.ReLoad();
+        infoText.ReLoad();
+
+        //price_Gold = tubeInfo.price;
+        price_Crystal = tubeInfo.price;
+
+        priceText.text = MoneyUnitString.ToCurrencyString(price_Gold);
+        crystalText.text = MoneyUnitString.ToCurrencyString(price_Crystal);
+
+        hold = false;
+        buy = false;
+
+        level = playerDataBase.GetTube_AbilityLevel((int)tubeInfo.tubeType);
+
+        switch (tubeInfo.tubeType)
+        {
+            case TubeType.Tube1:
+                hold = true;
+                break;
+            case TubeType.Tube2:
+                if (playerDataBase.Tube[1] >= 1)
+                {
+                    hold = true;
+                }
+
+                buy = true;
+                break;
+            case TubeType.Tube3:
+                if (playerDataBase.Tube[2] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Tube[1] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TubeType.Tube4:
+                if (playerDataBase.Tube[3] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Tube[2] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TubeType.Tube5:
+                if (playerDataBase.Tube[4] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Tube[3] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TubeType.Tube6:
+                if (playerDataBase.Tube[5] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Tube[4] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TubeType.Tube7:
+                if (playerDataBase.Tube[6] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Tube[5] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case TubeType.Tube8:
+                if (playerDataBase.Tube[7] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Tube[6] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+        }
+
+#if UNITY_EDITOR
+        buy = true;
+#endif
+
+        passiveText.text = "";
+
+        levelText.text = "☆☆☆☆☆☆☆☆☆";
+        if (hold)
+        {
+            selectObj.SetActive(true);
+            levelUpObj.SetActive(true);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
+            selectCheckMarkObj.SetActive(false);
+
+            if (level > 9)
+            {
+                levelText.text = "★★★★★★★★★★";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 1:
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 2:
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
+                        break;
+                    case 3:
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
+                        break;
+                    case 4:
+                        levelText.text = "★★★★☆☆☆☆☆☆";
+                        break;
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
+
+                }
+
+                price_LevelUp = etcDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(etcDataBase.tubeInfoList[tubeIndex].retentionEffect.ToString()) + " +"
++ (level * etcDataBase.tubeInfoList[tubeIndex].retentionValue).ToString("N1") + "%";
+            }
+
+            if (GameStateManager.instance.TubeType.Equals(tubeInfo.tubeType))
+            {
+                selectText.text = LocalizationManager.instance.GetString("Selected");
+
+                selectCheckMarkObj.SetActive(true);
+            }
+            else
+            {
+                selectText.text = LocalizationManager.instance.GetString("Select");
+            }
+        }
+        else
+        {
+            selectObj.SetActive(false);
+            levelUpObj.SetActive(false);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
+            goldButton.SetActive(false);
+            crystalButton.SetActive(true);
+
+            if (!buy)
+            {
+                priceText.text = LocalizationManager.instance.GetString("NotPurchase");
+                crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+        }
+    }
+
+    void SurfboardInitialize()
+    {
+        mainSurfboard.SetActive(true);
+
+        for (int i = 0; i < shopSurfboardArray.Length; i++)
+        {
+            shopSurfboardArray[i].gameObject.SetActive(false);
+        }
+
+        shopSurfboardArray[surfboardIndex].gameObject.SetActive(true);
+        shopSurfboardArray[surfboardIndex].transform.localRotation = Quaternion.Euler(-90, 0, 150);
+
+        surfboardInfo = etcDataBase.GetSurfboardInfo(SurfboardType.Surfboard1 + surfboardIndex);
+
+        nameText.localizationName = (SurfboardType.Surfboard1 + surfboardIndex).ToString();
+
+        effectText.localizationName = surfboardInfo.passiveEffect.ToString();
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)surfboardInfo.effectNumber).ToString() + "%";
+
+        titleText.localizationName = "Surfboard";
+        titleText.plusText = "  ( " + (surfboardIndex + 1) + " / " + shopSurfboardArray.Length + " )\n<size=10>"
+            + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetSurfboardNumber() + 1) * 1.0f) / (shopSurfboardArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+        titleText.ReLoad();
+
+        infoText.localizationName = " ";
+
+        nameText.ReLoad();
+        effectText.ReLoad();
+        infoText.ReLoad();
+
+        price_Gold = surfboardInfo.price;
+        price_Crystal = price_Gold / exchange;
+
+        if (price_Crystal < 100)
+        {
+            price_Crystal = 100;
+        }
+
+        priceText.text = MoneyUnitString.ToCurrencyString(price_Gold);
+        crystalText.text = MoneyUnitString.ToCurrencyString(price_Crystal);
+
+        hold = false;
+        buy = false;
+
+        level = playerDataBase.GetSurfboard_AbilityLevel((int)surfboardInfo.surfboardType);
+
+        switch (surfboardInfo.surfboardType)
+        {
+            case SurfboardType.Surfboard1:
+                hold = true;
+                break;
+            case SurfboardType.Surfboard2:
+                if (playerDataBase.Surfboard[1] >= 1)
+                {
+                    hold = true;
+                }
+
+                buy = true;
+                break;
+            case SurfboardType.Surfboard3:
+                if (playerDataBase.Surfboard[2] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Surfboard[1] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case SurfboardType.Surfboard4:
+                if (playerDataBase.Surfboard[3] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Surfboard[2] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case SurfboardType.Surfboard5:
+                if (playerDataBase.Surfboard[4] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Surfboard[3] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case SurfboardType.Surfboard6:
+                if (playerDataBase.Surfboard[5] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Surfboard[4] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case SurfboardType.Surfboard7:
+                if (playerDataBase.Surfboard[6] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Surfboard[5] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case SurfboardType.Surfboard8:
+                if (playerDataBase.Surfboard[7] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Surfboard[6] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+        }
+
+#if UNITY_EDITOR
+        buy = true;
+#endif
+
+        passiveText.text = "";
+
+        levelText.text = "☆☆☆☆☆☆☆☆☆";
+        if (hold)
+        {
+            selectObj.SetActive(true);
+            levelUpObj.SetActive(true);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
+            selectCheckMarkObj.SetActive(false);
+
+            if (level > 9)
+            {
+                levelText.text = "★★★★★★★★★★";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 1:
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 2:
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
+                        break;
+                    case 3:
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
+                        break;
+                    case 4:
+                        levelText.text = "★★★★☆☆☆☆☆☆";
+                        break;
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
+
+                }
+
+                price_LevelUp = etcDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(etcDataBase.surfboardInfoList[surfboardIndex].retentionEffect.ToString()) + " +"
++ (level * etcDataBase.surfboardInfoList[surfboardIndex].retentionValue).ToString("N1") + "%";
+            }
+
+            if (GameStateManager.instance.SurfboardType.Equals(surfboardInfo.surfboardType))
+            {
+                selectText.text = LocalizationManager.instance.GetString("Selected");
+
+                selectCheckMarkObj.SetActive(true);
+            }
+            else
+            {
+                selectText.text = LocalizationManager.instance.GetString("Select");
+            }
+        }
+        else
+        {
+            selectObj.SetActive(false);
+            levelUpObj.SetActive(false);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
+            goldButton.SetActive(true);
+            crystalButton.SetActive(false);
 
             if (!buy)
             {
@@ -3353,13 +4461,261 @@ public class ShopManager : MonoBehaviour
                 crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
             }
 
-            crystalButton.SetActive(false);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(true);
+            buySpeicalText.text = LocalizationManager.instance.GetString("BuySpeicalEvent");
         }
     }
 
-    void FlowerInitialize()
+    void UmbrellaInitialize()
     {
+        mainUmbrella.SetActive(true);
 
+        for (int i = 0; i < shopUmbrellaArray.Length; i++)
+        {
+            shopUmbrellaArray[i].gameObject.SetActive(false);
+        }
+
+        shopUmbrellaArray[umbrellaIndex].gameObject.SetActive(true);
+        shopUmbrellaArray[umbrellaIndex].transform.localRotation = Quaternion.Euler(-100, 0, 0);
+
+        umbrellaInfo = etcDataBase.GetUmbrellaInfo(UmbrellaType.Umbrella1 + umbrellaIndex);
+
+        nameText.localizationName = (UmbrellaType.Umbrella1 + umbrellaIndex).ToString();
+
+        effectText.localizationName = umbrellaInfo.passiveEffect.ToString();
+        effectText.plusText = " : +" + MoneyUnitString.ToCurrencyString((long)umbrellaInfo.effectNumber).ToString() + "%";
+
+        titleText.localizationName = "Umbrella";
+        titleText.plusText = "  ( " + (umbrellaIndex + 1) + " / " + shopUmbrellaArray.Length + " )\n<size=10>"
+            + LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetUmbrellaNumber() + 1) * 1.0f) / (shopUmbrellaArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+        titleText.ReLoad();
+
+        infoText.localizationName = " ";
+
+        nameText.ReLoad();
+        effectText.ReLoad();
+        infoText.ReLoad();
+
+        price_Gold = umbrellaInfo.price;
+        price_Crystal = price_Gold / exchange;
+
+        if (price_Crystal < 100)
+        {
+            price_Crystal = 100;
+        }
+
+        priceText.text = MoneyUnitString.ToCurrencyString(price_Gold);
+        crystalText.text = MoneyUnitString.ToCurrencyString(price_Crystal);
+
+        hold = false;
+        buy = false;
+
+        level = playerDataBase.GetUmbrella_AbilityLevel((int)umbrellaInfo.umbrellaType);
+
+        switch (umbrellaInfo.umbrellaType)
+        {
+            case UmbrellaType.Umbrella1:
+                hold = true;
+                break;
+            case UmbrellaType.Umbrella2:
+                if (playerDataBase.Umbrella[1] >= 1)
+                {
+                    hold = true;
+                }
+
+                buy = true;
+                break;
+            case UmbrellaType.Umbrella3:
+                if (playerDataBase.Umbrella[2] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Umbrella[1] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case UmbrellaType.Umbrella4:
+                if (playerDataBase.Umbrella[3] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Umbrella[2] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case UmbrellaType.Umbrella5:
+                if (playerDataBase.Umbrella[4] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Umbrella[3] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case UmbrellaType.Umbrella6:
+                if (playerDataBase.Umbrella[5] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Umbrella[4] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case UmbrellaType.Umbrella7:
+                if (playerDataBase.Umbrella[6] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Umbrella[5] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case UmbrellaType.Umbrella8:
+                if (playerDataBase.Umbrella[7] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Umbrella[6] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case UmbrellaType.Umbrella9:
+                if (playerDataBase.Umbrella[8] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Umbrella[7] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+            case UmbrellaType.Umbrella10:
+                if (playerDataBase.Umbrella[9] >= 1)
+                {
+                    hold = true;
+                }
+
+                if (playerDataBase.Umbrella[8] >= 1)
+                {
+                    buy = true;
+                }
+                break;
+        }
+
+#if UNITY_EDITOR
+        buy = true;
+#endif
+
+        passiveText.text = "";
+
+        levelText.text = "☆☆☆☆☆☆☆☆☆";
+        if (hold)
+        {
+            selectObj.SetActive(true);
+            levelUpObj.SetActive(true);
+            buyButton.SetActive(false);
+            buySpeical.SetActive(false);
+            selectCheckMarkObj.SetActive(false);
+
+            if (level > 9)
+            {
+                levelText.text = "★★★★★★★★★★";
+
+                levelUpObj.SetActive(false);
+            }
+            else
+            {
+                switch (level)
+                {
+                    case 0:
+                        levelText.text = "☆☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 1:
+                        levelText.text = "★☆☆☆☆☆☆☆☆☆";
+                        break;
+                    case 2:
+                        levelText.text = "★★☆☆☆☆☆☆☆☆";
+                        break;
+                    case 3:
+                        levelText.text = "★★★☆☆☆☆☆☆☆";
+                        break;
+                    case 4:
+                        levelText.text = "★★★★☆☆☆☆☆☆";
+                        break;
+                    case 5:
+                        levelText.text = "★★★★★☆☆☆☆☆";
+                        break;
+                    case 6:
+                        levelText.text = "★★★★★★☆☆☆☆";
+                        break;
+                    case 7:
+                        levelText.text = "★★★★★★★☆☆☆";
+                        break;
+                    case 8:
+                        levelText.text = "★★★★★★★★☆☆";
+                        break;
+                    case 9:
+                        levelText.text = "★★★★★★★★★☆";
+                        break;
+
+                }
+
+                price_LevelUp = etcDataBase.GetRetentionPrice(level);
+
+                levelUpText.text = price_LevelUp.ToString();
+            }
+
+            if (level > 0)
+            {
+                passiveText.text = LocalizationManager.instance.GetString("IconEffect") + " : "
++ LocalizationManager.instance.GetString(etcDataBase.umbrellaInfoList[umbrellaIndex].retentionEffect.ToString()) + " +"
++ (level * etcDataBase.umbrellaInfoList[umbrellaIndex].retentionValue).ToString("N1") + "%";
+            }
+
+            if (GameStateManager.instance.UmbrellaType.Equals(umbrellaInfo.umbrellaType))
+            {
+                selectText.text = LocalizationManager.instance.GetString("Selected");
+
+                selectCheckMarkObj.SetActive(true);
+            }
+            else
+            {
+                selectText.text = LocalizationManager.instance.GetString("Select");
+            }
+        }
+        else
+        {
+            selectObj.SetActive(false);
+            levelUpObj.SetActive(false);
+            buyButton.SetActive(true);
+            buySpeical.SetActive(false);
+            goldButton.SetActive(true);
+            crystalButton.SetActive(false);
+
+            if (!buy)
+            {
+                priceText.text = LocalizationManager.instance.GetString("NotPurchase");
+                crystalText.text = LocalizationManager.instance.GetString("NotPurchase");
+            }
+
+            buyButton.SetActive(false);
+            buySpeical.SetActive(true);
+            buySpeicalText.text = LocalizationManager.instance.GetString("BuySeasonPass");
+        }
     }
 
     public void RightButton()
@@ -3464,19 +4820,91 @@ public class ShopManager : MonoBehaviour
                 }
                 break;
             case 5:
-                if (flowerIndex + 1 < shopFlowerArray.Length)
+                if (bucketIndex + 1 < shopBucketArray.Length)
                 {
-                    flowerIndex += 1;
+                    bucketIndex += 1;
 
-                    FlowerInitialize();
+                    BucketInitialize();
                 }
 
-                if (flowerIndex == 0)
+                if (bucketIndex == 0)
                 {
                     leftButton.SetActive(false);
                 }
 
-                if (flowerIndex >= shopFlowerArray.Length - 1)
+                if (bucketIndex >= shopBucketArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+                break;
+            case 6:
+                if (chairIndex + 1 < shopChairArray.Length)
+                {
+                    chairIndex += 1;
+
+                    ChairInitialize();
+                }
+
+                if (chairIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (chairIndex >= shopChairArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+                break;
+            case 7:
+                if (tubeIndex + 1 < shopTubeArray.Length)
+                {
+                    tubeIndex += 1;
+
+                    TubeInitialize();
+                }
+
+                if (tubeIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (tubeIndex >= shopTubeArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+                break;
+            case 8:
+                if (surfboardIndex + 1 < shopSurfboardArray.Length)
+                {
+                    surfboardIndex += 1;
+
+                    SurfboardInitialize();
+                }
+
+                if (surfboardIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (surfboardIndex >= shopSurfboardArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+                break;
+            case 9:
+                if (umbrellaIndex + 1 < shopUmbrellaArray.Length)
+                {
+                    umbrellaIndex += 1;
+
+                    UmbrellaInitialize();
+                }
+
+                if (umbrellaIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (umbrellaIndex >= shopUmbrellaArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
@@ -3587,19 +5015,95 @@ public class ShopManager : MonoBehaviour
 
                 break;
             case 5:
-                if (flowerIndex - 1 >= 0)
+                if (bucketIndex - 1 >= 0)
                 {
-                    flowerIndex -= 1;
+                    bucketIndex -= 1;
 
-                    FlowerInitialize();
+                    BucketInitialize();
                 }
 
-                if (flowerIndex == 0)
+                if (bucketIndex == 0)
                 {
                     leftButton.SetActive(false);
                 }
 
-                if (flowerIndex >= shopFlowerArray.Length - 1)
+                if (bucketIndex >= shopBucketArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                break;
+            case 6:
+                if (chairIndex - 1 >= 0)
+                {
+                    chairIndex -= 1;
+
+                    ChairInitialize();
+                }
+
+                if (chairIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (chairIndex >= shopChairArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                break;
+            case 7:
+                if (tubeIndex - 1 >= 0)
+                {
+                    tubeIndex -= 1;
+
+                    TubeInitialize();
+                }
+
+                if (tubeIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (tubeIndex >= shopTubeArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                break;
+            case 8:
+                if (surfboardIndex - 1 >= 0)
+                {
+                    surfboardIndex -= 1;
+
+                    SurfboardInitialize();
+                }
+
+                if (surfboardIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (surfboardIndex >= shopSurfboardArray.Length - 1)
+                {
+                    rightButton.SetActive(false);
+                }
+
+                break;
+            case 9:
+                if (umbrellaIndex - 1 >= 0)
+                {
+                    umbrellaIndex -= 1;
+
+                    UmbrellaInitialize();
+                }
+
+                if (umbrellaIndex == 0)
+                {
+                    leftButton.SetActive(false);
+                }
+
+                if (umbrellaIndex >= shopUmbrellaArray.Length - 1)
                 {
                     rightButton.SetActive(false);
                 }
@@ -3628,8 +5132,6 @@ public class ShopManager : MonoBehaviour
                 mainAnimalArray[(int)GameStateManager.instance.AnimalType].SetActive(true);
 
                 AnimalInitialize();
-
-                NotionManager.instance.UseNotion(NotionType.ChangeAnimalNotion);
                 break;
             case 1:
                 if (GameStateManager.instance.TruckType == truckInfo.truckType)
@@ -3647,8 +5149,6 @@ public class ShopManager : MonoBehaviour
                 mainTruckArray[(int)GameStateManager.instance.TruckType].SetActive(true);
 
                 TruckInitialize();
-
-                NotionManager.instance.UseNotion(NotionType.ChangeTruckNotion);
                 break;
             case 2:
                 if (GameStateManager.instance.CharacterType == characterInfo.characterType)
@@ -3666,8 +5166,6 @@ public class ShopManager : MonoBehaviour
                 mainCharacterArray[(int)GameStateManager.instance.CharacterType].SetActive(true);
 
                 CharacterInitialize();
-
-                NotionManager.instance.UseNotion(NotionType.ChangeCharacterNotion);
                 break;
             case 3:
                 if (GameStateManager.instance.ButterflyType == butterflyInfo.butterflyType)
@@ -3685,8 +5183,6 @@ public class ShopManager : MonoBehaviour
                 mainButterflyArray[(int)GameStateManager.instance.ButterflyType].SetActive(true);
 
                 ButterflyInitialize();
-
-                NotionManager.instance.UseNotion(NotionType.ChangeButterflyNotion);
                 break;
             case 4:
                 if (GameStateManager.instance.TotemsType == totemsInfo.totemsType)
@@ -3704,28 +5200,89 @@ public class ShopManager : MonoBehaviour
                 mainTotemsArray[(int)GameStateManager.instance.TotemsType].SetActive(true);
 
                 TotemsInitialize();
-
-                NotionManager.instance.UseNotion(NotionType.ChangeTotemsNotion);
                 break;
             case 5:
-                if (GameStateManager.instance.FlowerType == flowerInfo.flowerType)
+                if (GameStateManager.instance.BucketType == bucketInfo.bucketType)
                 {
                     return;
                 }
 
-                GameStateManager.instance.FlowerType = flowerInfo.flowerType;
+                GameStateManager.instance.BucketType = bucketInfo.bucketType;
 
-                for (int i = 0; i < mainFlowerArray.Length; i++)
+                for (int i = 0; i < mainBucketArray.Length; i++)
                 {
-                    mainFlowerArray[i].SetActive(false);
+                    mainBucketArray[i].SetActive(false);
                 }
 
-                mainFlowerArray[(int)GameStateManager.instance.FlowerType].SetActive(true);
+                mainBucketArray[(int)GameStateManager.instance.BucketType].SetActive(true);
+                break;
+            case 6:
+                if (GameStateManager.instance.ChairType == chairInfo.chairType)
+                {
+                    return;
+                }
 
-                NotionManager.instance.UseNotion(NotionType.ChangeFlowerNotion);
+                GameStateManager.instance.ChairType = chairInfo.chairType;
+
+                for (int i = 0; i < mainChairArray.Length; i++)
+                {
+                    mainChairArray[i].SetActive(false);
+                    mainChairArray2[i].SetActive(false);
+                }
+
+                mainChairArray[(int)GameStateManager.instance.ChairType].SetActive(true);
+                mainChairArray2[(int)GameStateManager.instance.ChairType].SetActive(true);
+                break;
+            case 7:
+                if (GameStateManager.instance.TubeType == tubeInfo.tubeType)
+                {
+                    return;
+                }
+
+                GameStateManager.instance.TubeType = tubeInfo.tubeType;
+
+                for (int i = 0; i < mainTubeArray.Length; i++)
+                {
+                    mainTubeArray[i].SetActive(false);
+                }
+
+                mainTubeArray[(int)GameStateManager.instance.TubeType].SetActive(true);
+                break;
+            case 8:
+                if (GameStateManager.instance.SurfboardType == surfboardInfo.surfboardType)
+                {
+                    return;
+                }
+
+                GameStateManager.instance.SurfboardType = surfboardInfo.surfboardType;
+
+                for (int i = 0; i < mainSurfboardArray.Length; i++)
+                {
+                    mainSurfboardArray[i].SetActive(false);
+                }
+
+                mainSurfboardArray[(int)GameStateManager.instance.SurfboardType].SetActive(true);
+                break;
+            case 9:
+                if (GameStateManager.instance.UmbrellaType == umbrellaInfo.umbrellaType)
+                {
+                    return;
+                }
+
+                GameStateManager.instance.UmbrellaType = umbrellaInfo.umbrellaType;
+
+                for (int i = 0; i < mainUmbrellaArray.Length; i++)
+                {
+                    mainUmbrellaArray[i].SetActive(false);
+                    mainUmbrellaArray2[i].SetActive(false);
+                }
+
+                mainUmbrellaArray[(int)GameStateManager.instance.UmbrellaType].SetActive(true);
+                mainUmbrellaArray2[(int)GameStateManager.instance.UmbrellaType].SetActive(true);
                 break;
         }
 
+        NotionManager.instance.UseNotion(NotionType.ChangeNotion);
         SoundManager.instance.PlaySFX(GameSfxType.Success);
 
         selectText.text = LocalizationManager.instance.GetString("Selected");
@@ -4238,7 +5795,244 @@ public class ShopManager : MonoBehaviour
                 titleText.ReLoad();
                 break;
             case 5:
+                switch (number)
+                {
+                    case 0:
+                        GameManager.instance.RenewalVC();
 
+                        if (playerDataBase.Coin < price_Gold)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            LowCoin(price_Gold);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < price_Crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(bucketInfo.bucketType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Bucket", itemList);
+
+                FirebaseAnalytics.LogEvent("Buy_Bucket : " + bucketInfo.bucketType.ToString());
+
+                playerDataBase.Bucket[(int)bucketInfo.bucketType] = 1;
+
+                titleText.plusText = "  ( " + (bucketIndex + 1) + " / " + shopBucketArray.Length + " )\n<size=10>"
++ LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetBucketNumber() + 1) * 1.0f) / (shopBucketArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+                titleText.ReLoad();
+                break;
+            case 6:
+                switch (number)
+                {
+                    case 0:
+                        GameManager.instance.RenewalVC();
+
+                        if (playerDataBase.Coin < price_Gold)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            LowCoin(price_Gold);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < price_Crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(chairInfo.chairType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Chair", itemList);
+
+                FirebaseAnalytics.LogEvent("Buy_Chair : " + chairInfo.chairType.ToString());
+
+                playerDataBase.Chair[(int)chairInfo.chairType] = 1;
+
+                titleText.plusText = "  ( " + (chairIndex + 1) + " / " + shopChairArray.Length + " )\n<size=10>"
++ LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetChairNumber() + 1) * 1.0f) / (shopChairArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+                titleText.ReLoad();
+                break;
+            case 7:
+                switch (number)
+                {
+                    case 0:
+                        GameManager.instance.RenewalVC();
+
+                        if (playerDataBase.Coin < price_Gold)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            LowCoin(price_Gold);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < price_Crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(tubeInfo.tubeType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Tube", itemList);
+
+                FirebaseAnalytics.LogEvent("Buy_Tube : " + tubeInfo.tubeType.ToString());
+
+                playerDataBase.Tube[(int)tubeInfo.tubeType] = 1;
+
+                titleText.plusText = "  ( " + (tubeIndex + 1) + " / " + shopTubeArray.Length + " )\n<size=10>"
++ LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetTubeNumber() + 1) * 1.0f) / (shopTubeArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+                titleText.ReLoad();
+                break;
+            case 8:
+                switch (number)
+                {
+                    case 0:
+                        GameManager.instance.RenewalVC();
+
+                        if (playerDataBase.Coin < price_Gold)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            LowCoin(price_Gold);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < price_Crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(surfboardInfo.surfboardType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Surfboard", itemList);
+
+                FirebaseAnalytics.LogEvent("Buy_Surfboard : " + surfboardInfo.surfboardType.ToString());
+
+                playerDataBase.Surfboard[(int)surfboardInfo.surfboardType] = 1;
+
+                titleText.plusText = "  ( " + (surfboardIndex + 1) + " / " + shopSurfboardArray.Length + " )\n<size=10>"
++ LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetSurfboardNumber() + 1) * 1.0f) / (shopSurfboardArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+                titleText.ReLoad();
+                break;
+            case 9:
+                switch (number)
+                {
+                    case 0:
+                        GameManager.instance.RenewalVC();
+
+                        if (playerDataBase.Coin < price_Gold)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCoin);
+
+                            LowCoin(price_Gold);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractGold(price_Gold);
+                        }
+                        break;
+                    case 1:
+                        if (playerDataBase.Crystal < price_Crystal)
+                        {
+                            SoundManager.instance.PlaySFX(GameSfxType.Wrong);
+                            NotionManager.instance.UseNotion(NotionType.LowCrystal);
+
+                            return;
+                        }
+                        else
+                        {
+                            PlayfabManager.instance.UpdateSubtractCurrency(MoneyType.Crystal, (int)price_Crystal);
+                        }
+                        break;
+                }
+
+                itemList.Clear();
+                itemList.Add(umbrellaInfo.umbrellaType.ToString());
+
+                PlayfabManager.instance.GrantItemToUser("Umbrella", itemList);
+
+                FirebaseAnalytics.LogEvent("Buy_Umbrella : " + umbrellaInfo.umbrellaType.ToString());
+
+                playerDataBase.Umbrella[(int)umbrellaInfo.umbrellaType] = 1;
+
+                titleText.plusText = "  ( " + (umbrellaIndex + 1) + " / " + shopUmbrellaArray.Length + " )\n<size=10>"
++ LocalizationManager.instance.GetString("Collect") + " : " + ((((playerDataBase.GetUmbrellaNumber() + 1) * 1.0f) / (shopUmbrellaArray.Length * 1.0f)) * 100f).ToString("N1") + "%</size>";
+                titleText.ReLoad();
                 break;
         }
 
@@ -4991,6 +6785,66 @@ public class ShopManager : MonoBehaviour
                 PlayfabManager.instance.SetInventoryCustomData(playerDataBase.totemsItemInstance[(int)totemsInfo.totemsType].instanceId, customData);
 
                 TotemsInitialize();
+                break;
+            case 5:
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetBucket_Rare((int)bucketInfo.bucketType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.bucketItemInstance[(int)bucketInfo.bucketType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.bucketItemInstance[(int)bucketInfo.bucketType].instanceId, customData);
+
+                BucketInitialize();
+                break;
+            case 6:
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetChair_Rare((int)chairInfo.chairType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.chairItemInstance[(int)chairInfo.chairType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.chairItemInstance[(int)chairInfo.chairType].instanceId, customData);
+
+                ChairInitialize();
+                break;
+            case 7:
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetTube_Rare((int)tubeInfo.tubeType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.tubeItemInstance[(int)tubeInfo.tubeType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.tubeItemInstance[(int)tubeInfo.tubeType].instanceId, customData);
+
+                TubeInitialize();
+                break;
+            case 8:
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetSurfboard_Rare((int)surfboardInfo.surfboardType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.surfboardItemInstance[(int)surfboardInfo.surfboardType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.surfboardItemInstance[(int)surfboardInfo.surfboardType].instanceId, customData);
+
+                SurfboardInitialize();
+                break;
+            case 9:
+                customData.Clear();
+                customData.Add("AbilityLevel", level.ToString());
+                customData.Add("Rare", playerDataBase.GetUmbrella_Rare((int)umbrellaInfo.umbrellaType).ToString());
+                customData.Add("Level", "0");
+
+                playerDataBase.umbrellaItemInstance[(int)umbrellaInfo.umbrellaType].abilityLevel += 1;
+
+                PlayfabManager.instance.SetInventoryCustomData(playerDataBase.umbrellaItemInstance[(int)umbrellaInfo.umbrellaType].instanceId, customData);
+
+                UmbrellaInitialize();
                 break;
         }
 

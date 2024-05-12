@@ -77,28 +77,22 @@ public class CouponManager : MonoBehaviour
         switch (inputFieldText.text.ToUpper())
         {
             case "YUMMYOPEN":
-                //if (System.DateTime.Now >= new System.DateTime(2023, 10, 1))
-                //{
-                //}
-                //else
-                //{
-                //    SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-                //    NotionManager.instance.UseNotion(NotionType.CouponNotion3);
-                //}
                 if (playerDataBase.Coupon1 == 0)
                 {
                     playerDataBase.Coupon1 = 1;
                     PlayfabManager.instance.UpdatePlayerStatisticsInsert("Coupon1", 1);
 
-                    PlayfabManager.instance.UpdateAddGold(1000000);
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
+                    PlayfabManager.instance.UpdateSellPriceGold(100000);
+                    PlayfabManager.instance.moneyAnimation.PlusMoney(100000);
+
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
 
                     couponRewardView.SetActive(true);
                     receiveContents[0].gameObject.SetActive(true);
                     receiveContents[1].gameObject.SetActive(true);
 
-                    receiveContents[0].Initialize(RewardType.Gold, 1000000);
-                    receiveContents[1].Initialize(RewardType.Crystal, 300);
+                    receiveContents[0].Initialize(RewardType.Gold, 100000);
+                    receiveContents[1].Initialize(RewardType.Crystal, 500);
 
                     FirebaseAnalytics.LogEvent("Clear_WelcomeCoupon");
 
@@ -505,14 +499,14 @@ public class CouponManager : MonoBehaviour
 
     public void GetReward()
     {
-        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal,200);
+        PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
         PortionManager.instance.GetAllPortion(2);
 
         couponRewardView.SetActive(true);
         receiveContents[0].gameObject.SetActive(true);
         receiveContents[1].gameObject.SetActive(true);
 
-        receiveContents[0].Initialize(RewardType.Crystal, 200);
+        receiveContents[0].Initialize(RewardType.Crystal, 300);
         receiveContents[1].Initialize(RewardType.PortionSet, 2);
 
         FirebaseAnalytics.LogEvent("Clear_Coupon");

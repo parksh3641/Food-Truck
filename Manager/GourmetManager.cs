@@ -83,14 +83,23 @@ public class GourmetManager : MonoBehaviour
             value += playerDataBase.GetTruck_Total_AbilityLevel() * 1000;
             value += playerDataBase.GetButterfly_Total_AbilityLevel() * 1000;
             value += playerDataBase.GetTotems_Total_AbilityLevel() * 1000;
-            //value += playerDataBase.GetFlower_Total_AbilityLevel() * 300;
+            value += playerDataBase.GetBucket_Total_AbilityLevel() * 1000;
+            value += playerDataBase.GetChair_Total_AbilityLevel() * 1000;
+            value += playerDataBase.GetTube_Total_AbilityLevel() * 1000;
+            value += playerDataBase.GetSurfboard_Total_AbilityLevel() * 1000;
+            value += playerDataBase.GetUmbrella_Total_AbilityLevel() * 1000;
+
 
             value += playerDataBase.GetCharacterNumber() * 5000;
             value += playerDataBase.GetAnimalNumber() * 5000;
             value += playerDataBase.GetTruckNumber() * 5000;
             value += playerDataBase.GetButterflyNumber() * 5000;
             value += playerDataBase.GetTotemsNumber() * 5000;
-            value += playerDataBase.GetFlowerNumber() * 5000;
+            value += playerDataBase.GetBucketNumber() * 5000;
+            value += playerDataBase.GetChairNumber() * 5000;
+            value += playerDataBase.GetTubeNumber() * 5000;
+            value += playerDataBase.GetSurfboardNumber() * 5000;
+            value += playerDataBase.GetUmbrellaNumber() * 5000;
         }
 
         //Debug.LogError(value);

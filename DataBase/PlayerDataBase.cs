@@ -497,6 +497,31 @@ public class PlayerDataBase : ScriptableObject
     private int flower7 = 0;
 
     [Space]
+    [Title("Bucket")]
+    [SerializeField]
+    private int[] bucket = new int[10];
+
+    [Space]
+    [Title("Chair")]
+    [SerializeField]
+    private int[] chair = new int[10];
+
+    [Space]
+    [Title("Tube")]
+    [SerializeField]
+    private int[] tube = new int[10];
+
+    [Space]
+    [Title("Surfboard")]
+    [SerializeField]
+    private int[] surfboard = new int[10];
+
+    [Space]
+    [Title("Umbrella")]
+    [SerializeField]
+    private int[] umbrella = new int[10];
+
+    [Space]
     [Title("ItemInstance")]
     [SerializeField]
     public List<ShopClass> characterItemInstance = new List<ShopClass>();
@@ -509,7 +534,15 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     public List<ShopClass> totemsItemInstance = new List<ShopClass>();
     [SerializeField]
-    public List<ShopClass> flowerItemInstance = new List<ShopClass>();
+    public List<ShopClass> bucketItemInstance = new List<ShopClass>();
+    [SerializeField]
+    public List<ShopClass> chairItemInstance = new List<ShopClass>();
+    [SerializeField]
+    public List<ShopClass> tubeItemInstance = new List<ShopClass>();
+    [SerializeField]
+    public List<ShopClass> surfboardItemInstance = new List<ShopClass>();
+    [SerializeField]
+    public List<ShopClass> umbrellaItemInstance = new List<ShopClass>();
 
 
     [Space]
@@ -3606,6 +3639,66 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public int[] Bucket
+    {
+        get
+        {
+            return bucket;
+        }
+        set
+        {
+            bucket = value;
+        }
+    }
+
+    public int[] Chair
+    {
+        get
+        {
+            return chair;
+        }
+        set
+        {
+            chair = value;
+        }
+    }
+
+    public int[] Tube
+    {
+        get
+        {
+            return tube;
+        }
+        set
+        {
+            tube = value;
+        }
+    }
+
+    public int[] Surfboard
+    {
+        get
+        {
+            return surfboard;
+        }
+        set
+        {
+            surfboard = value;
+        }
+    }
+
+    public int[] Umbrella
+    {
+        get
+        {
+            return umbrella;
+        }
+        set
+        {
+            umbrella = value;
+        }
+    }
+
     public int Island1
     {
         get
@@ -4682,12 +4775,31 @@ public class PlayerDataBase : ScriptableObject
         flower6 = 0;
         flower7 = 0;
 
+        for(int i = 0; i < 10; i ++)
+        {
+            bucket[i] = 0;
+            chair[i] = 0;
+            tube[i] = 0;
+            surfboard[i] = 0;
+            umbrella[i] = 0;
+        }
+
+        bucket[0] = 1;
+        chair[0] = 1;
+        tube[0] = 1;
+        surfboard[0] = 1;
+        umbrella[0] = 1;
+
         characterItemInstance.Clear();
         truckItemInstance.Clear();
         animalItemInstance.Clear();
         butterflyItemInstance.Clear();
         totemsItemInstance.Clear();
-        flowerItemInstance.Clear();
+        bucketItemInstance.Clear();
+        chairItemInstance.Clear();
+        tubeItemInstance.Clear();
+        surfboardItemInstance.Clear();
+        umbrellaItemInstance.Clear();
 
         for (int i = 0; i < System.Enum.GetValues(typeof(CharacterType)).Length; i++)
         {
@@ -4719,10 +4831,34 @@ public class PlayerDataBase : ScriptableObject
             totemsItemInstance.Add(shopClass);
         }
 
-        for (int i = 0; i < System.Enum.GetValues(typeof(FlowerType)).Length; i++)
+        for (int i = 0; i < System.Enum.GetValues(typeof(BucketType)).Length; i++)
         {
             ShopClass shopClass = new ShopClass();
-            flowerItemInstance.Add(shopClass);
+            bucketItemInstance.Add(shopClass);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(ChairType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            chairItemInstance.Add(shopClass);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(TubeType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            tubeItemInstance.Add(shopClass);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(SurfboardType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            surfboardItemInstance.Add(shopClass);
+        }
+
+        for (int i = 0; i < System.Enum.GetValues(typeof(UmbrellaType)).Length; i++)
+        {
+            ShopClass shopClass = new ShopClass();
+            umbrellaItemInstance.Add(shopClass);
         }
 
         iconList.Clear();
@@ -5333,42 +5469,67 @@ public class PlayerDataBase : ScriptableObject
         return count;
     }
 
-    public int GetFlowerNumber()
+    public int GetBucketNumber()
     {
         int count = 0;
 
-        if (flower2 > 0)
+        for(int i = 0; i < bucket.Length; i++)
         {
-            count += 1;
-        }
-
-        if (flower3 > 0)
-        {
-            count += 1;
-        }
-
-        if (flower4 > 0)
-        {
-            count += 1;
-        }
-
-        if (flower5 > 0)
-        {
-            count += 1;
-        }
-
-        if (flower6 > 0)
-        {
-            count += 1;
-        }
-
-        if (flower7 > 0)
-        {
-            count += 1;
+            count += bucket[i];
         }
 
         return count;
     }
+
+    public int GetChairNumber()
+    {
+        int count = 0;
+
+        for (int i = 0; i < chair.Length; i++)
+        {
+            count += chair[i];
+        }
+
+        return count;
+    }
+
+    public int GetTubeNumber()
+    {
+        int count = 0;
+
+        for (int i = 0; i < tube.Length; i++)
+        {
+            count += chair[i];
+        }
+
+        return count;
+    }
+
+    public int GetSurfboardNumber()
+    {
+        int count = 0;
+
+        for (int i = 0; i < surfboard.Length; i++)
+        {
+            count += chair[i];
+        }
+
+        return count;
+    }
+
+    public int GetUmbrellaNumber()
+    {
+        int count = 0;
+
+        for (int i = 0; i < umbrella.Length; i++)
+        {
+            count += chair[i];
+        }
+
+        return count;
+    }
+
+
 
     public int GetTruck_Total_AbilityLevel()
     {
@@ -5405,6 +5566,7 @@ public class PlayerDataBase : ScriptableObject
 
         return number;
     }
+
     public int GetButterfly_Total_AbilityLevel()
     {
         int number = 0;
@@ -5429,6 +5591,68 @@ public class PlayerDataBase : ScriptableObject
         return number;
     }
 
+    public int GetBucket_Total_AbilityLevel()
+    {
+        int number = 0;
+
+        for (int i = 0; i < bucketItemInstance.Count; i++)
+        {
+            number += bucketItemInstance[i].abilityLevel;
+        }
+
+        return number;
+    }
+
+    public int GetChair_Total_AbilityLevel()
+    {
+        int number = 0;
+
+        for (int i = 0; i < chairItemInstance.Count; i++)
+        {
+            number += chairItemInstance[i].abilityLevel;
+        }
+
+        return number;
+    }
+
+    public int GetTube_Total_AbilityLevel()
+    {
+        int number = 0;
+
+        for (int i = 0; i < tubeItemInstance.Count; i++)
+        {
+            number += tubeItemInstance[i].abilityLevel;
+        }
+
+        return number;
+    }
+
+    public int GetSurfboard_Total_AbilityLevel()
+    {
+        int number = 0;
+
+        for (int i = 0; i < surfboardItemInstance.Count; i++)
+        {
+            number += surfboardItemInstance[i].abilityLevel;
+        }
+
+        return number;
+    }
+
+    public int GetUmbrella_Total_AbilityLevel()
+    {
+        int number = 0;
+
+        for (int i = 0; i < umbrellaItemInstance.Count; i++)
+        {
+            number += umbrellaItemInstance[i].abilityLevel;
+        }
+
+        return number;
+    }
+
+
+
     public int GetTruck_AbilityLevel(int number)
     {
         return truckItemInstance[number].abilityLevel;
@@ -5443,6 +5667,7 @@ public class PlayerDataBase : ScriptableObject
     {
         return characterItemInstance[number].abilityLevel;
     }
+
     public int GetButterfly_AbilityLevel(int number)
     {
         return butterflyItemInstance[number].abilityLevel;
@@ -5452,6 +5677,33 @@ public class PlayerDataBase : ScriptableObject
     {
         return totemsItemInstance[number].abilityLevel;
     }
+
+    public int GetBucket_AbilityLevel(int number)
+    {
+        return bucketItemInstance[number].abilityLevel;
+    }
+
+    public int GetChair_AbilityLevel(int number)
+    {
+        return chairItemInstance[number].abilityLevel;
+    }
+
+    public int GetTube_AbilityLevel(int number)
+    {
+        return tubeItemInstance[number].abilityLevel;
+    }
+
+    public int GetSurfboard_AbilityLevel(int number)
+    {
+        return surfboardItemInstance[number].abilityLevel;
+    }
+
+    public int GetUmbrella_AbilityLevel(int number)
+    {
+        return umbrellaItemInstance[number].abilityLevel;
+    }
+
+
 
     public int GetTruck_Rare(int number)
     {
@@ -5467,6 +5719,7 @@ public class PlayerDataBase : ScriptableObject
     {
         return characterItemInstance[number].rare;
     }
+
     public int GetButterfly_Rare(int number)
     {
         return butterflyItemInstance[number].rare;
@@ -5476,6 +5729,33 @@ public class PlayerDataBase : ScriptableObject
     {
         return totemsItemInstance[number].rare;
     }
+
+    public int GetBucket_Rare(int number)
+    {
+        return bucketItemInstance[number].rare;
+    }
+
+    public int GetChair_Rare(int number)
+    {
+        return chairItemInstance[number].rare;
+    }
+
+    public int GetTube_Rare(int number)
+    {
+        return tubeItemInstance[number].rare;
+    }
+
+    public int GetSurfboard_Rare(int number)
+    {
+        return surfboardItemInstance[number].rare;
+    }
+
+    public int GetUmbrella_Rare(int number)
+    {
+        return umbrellaItemInstance[number].rare;
+    }
+
+
 
     public int GetTruckHighNumber()
     {
@@ -5872,10 +6152,81 @@ public class PlayerDataBase : ScriptableObject
         return count;
     }
 
-    public int GetFlowerHighNumber()
+    public int GetBucketHighNumber()
     {
-        return 0;
+        int count = 0;
+
+        for(int i = 0; i < bucket.Length; i ++)
+        {
+            if(bucket[i] > 0)
+            {
+                count = i;
+            }
+        }
+
+        return count;
     }
+
+    public int GetChairHighNumber()
+    {
+        int count = 0;
+
+        for (int i = 0; i < chair.Length; i++)
+        {
+            if (chair[i] > 0)
+            {
+                count = i;
+            }
+        }
+
+        return count;
+    }
+
+    public int GetTubeHighNumber()
+    {
+        int count = 0;
+
+        for (int i = 0; i < tube.Length; i++)
+        {
+            if (tube[i] > 0)
+            {
+                count = i;
+            }
+        }
+
+        return count;
+    }
+
+    public int GetSurfboardHighNumber()
+    {
+        int count = 0;
+
+        for (int i = 0; i < surfboard.Length; i++)
+        {
+            if (surfboard[i] > 0)
+            {
+                count = i;
+            }
+        }
+
+        return count;
+    }
+
+    public int GetUmbrellaHighNumber()
+    {
+        int count = 0;
+
+        for (int i = 0; i < umbrella.Length; i++)
+        {
+            if (umbrella[i] > 0)
+            {
+                count = i;
+            }
+        }
+
+        return count;
+    }
+
 
     public int GetRecipeUpgradeCount()
     {
@@ -6037,8 +6388,20 @@ public class PlayerDataBase : ScriptableObject
             case 4:
                 totemsItemInstance[number] = shopClass;
                 break;
-            case 5:
-                flowerItemInstance[number] = shopClass;
+            case 6:
+                bucketItemInstance[number] = shopClass;
+                break;
+            case 7:
+                chairItemInstance[number] = shopClass;
+                break;
+            case 8:
+                tubeItemInstance[number] = shopClass;
+                break;
+            case 9:
+                surfboardItemInstance[number] = shopClass;
+                break;
+            case 10:
+                umbrellaItemInstance[number] = shopClass;
                 break;
         }
     }

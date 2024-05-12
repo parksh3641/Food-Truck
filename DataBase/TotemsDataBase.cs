@@ -21,22 +21,22 @@ public class TotemsDataBase : ScriptableObject
     [Space]
     public PassiveEffect retentionEffect = PassiveEffect.None;
     public float retentionValue = 0f;
-    public int[] retentionPrice = new int[5];
+    public int[] retentionPrice = new int[10];
+
+    TotemsInfo info = new TotemsInfo();
 
     public TotemsInfo GetTotemsInfo(TotemsType type)
     {
-        TotemsInfo totems = new TotemsInfo();
-
         for (int i = 0; i < totemsInfoList.Count; i++)
         {
             if (totemsInfoList[i].totemsType.Equals(type))
             {
-                totems = totemsInfoList[i];
+                info = totemsInfoList[i];
                 break;
             }
         }
 
-        return totems;
+        return info;
     }
 
     public float GetTotemsEffect(int number)

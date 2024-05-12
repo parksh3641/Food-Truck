@@ -498,7 +498,6 @@ public class DungeonManager : MonoBehaviour
         attackPower_High += attackPower_High * (attackPowerPlus * 0.01f);
 
         criticalPowerPlus += etcDataBase.GetUmbrellaEffect(playerDataBase.GetUmbrellaHighNumber());
-        criticalPowerPlus += playerDataBase.GetUmbrella_Total_AbilityLevel() * etcDataBase.umbrellaInfoList[0].retentionValue;
 
         criticalPower_Low = attackPower_Low * (1.5f + (1.5f * (criticalPowerPlus * 0.01f)));
         criticalPower_High = attackPower_High * (1.5f + (1.5f * (criticalPowerPlus * 0.01f)));
@@ -558,7 +557,7 @@ public class DungeonManager : MonoBehaviour
         autoAttackSeconds = new WaitForSeconds(attackDelay);
 
         attackPowerText.localizationName = "AttackPower";
-        attackPowerText.plusText = " : " + attackPower_Low.ToString() + " ~ " + attackPower_High.ToString() + "  (+" + (attackPowerPlus).ToString("N1") + "%)";
+        attackPowerText.plusText = " : " + attackPower_Low.ToString("N1") + " ~ " + attackPower_High.ToString("N1") + "  (+" + (attackPowerPlus).ToString("N1") + "%)";
 
         criticalPowerText.localizationName = "CriticalPower";
         criticalPowerText.plusText = " : " + (criticalPowerPlus).ToString("N1") + "%";

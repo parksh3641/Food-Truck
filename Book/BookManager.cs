@@ -108,8 +108,6 @@ public class BookManager : MonoBehaviour
             }
 
             CheckFood(FoodType.Food1, 0);
-
-            FirebaseAnalytics.LogEvent("Open_Book");
         }
         else
         {
@@ -170,6 +168,8 @@ public class BookManager : MonoBehaviour
             plusText.text = LocalizationManager.instance.GetString("SuccessPercent") + " +" + (playerDataBase.GetNormalBookNumber() * reward).ToString() + "%  (+" + reward + "%)";
 
             CheckNormalInitialize();
+
+            FirebaseAnalytics.LogEvent("Open_Book");
         }
         else
         {
@@ -184,6 +184,8 @@ public class BookManager : MonoBehaviour
             plusText.text = LocalizationManager.instance.GetString("DefDestroyPercent") + " +" + (playerDataBase.GetEpicBookNumber() * reward2).ToString() + "%  (+" + reward2 + "%)";
 
             CheckEpicInitialize();
+
+            FirebaseAnalytics.LogEvent("Open_RareBook");
         }
     }
 

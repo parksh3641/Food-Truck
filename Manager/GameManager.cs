@@ -1320,6 +1320,7 @@ public class GameManager : MonoBehaviour
         successPlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_1);
         successPlus += characterDataBase.GetCharacterEffect(playerDataBase.GetCharacterHighNumber());
         successPlus += playerDataBase.GetCharacter_Total_AbilityLevel() * characterDataBase.retentionValue;
+        successPlus += playerDataBase.GetUmbrella_Total_AbilityLevel() * etcDataBase.umbrellaInfoList[0].retentionValue;
 
         if (isRareFood)
         {
@@ -1339,7 +1340,6 @@ public class GameManager : MonoBehaviour
         successX2 += playerDataBase.GetButterfly_Total_AbilityLevel() * butterflyDataBase.retentionValue;
 
         successX3 += etcDataBase.GetSurfboardEffect(playerDataBase.GetSurfboardHighNumber());
-        successX3 += playerDataBase.GetSurfboard_Total_AbilityLevel() * etcDataBase.surfboardInfoList[0].retentionValue;
 
         sellPricePlus += playerDataBase.Skill8 * 1f;
         sellPricePlus += playerDataBase.Skill18 * 1f;
@@ -1350,6 +1350,7 @@ public class GameManager : MonoBehaviour
         sellPricePlus += truckDataBase.GetTruckEffect(playerDataBase.GetTruckHighNumber());
         sellPricePlus += playerDataBase.GetTruck_Total_AbilityLevel() * truckDataBase.retentionValue;
         sellPricePlus += playerDataBase.GetEquipValue(EquipType.Equip_Index_2);
+        sellPricePlus += playerDataBase.GetSurfboard_Total_AbilityLevel() * etcDataBase.surfboardInfoList[0].retentionValue;
 
         if (IsWeekend())
         {

@@ -526,7 +526,7 @@ public class DungeonManager : MonoBehaviour
 
         attackX2 += 5;
         attackX2 += playerDataBase.Treasure14 * 0.5f;
-        attackX2 += playerDataBase.Skill16 * 0.5f;
+        attackX2 += playerDataBase.Skill16 * 0.1f;
         attackX2 += playerDataBase.GetEquipValue(EquipType.Equip_Index_6);
 
         if (attackX2 >= 100)
@@ -535,7 +535,7 @@ public class DungeonManager : MonoBehaviour
         }
 
         attackSpeed += playerDataBase.Treasure13 * 1f;
-        attackSpeed += playerDataBase.Skill15 * 0.5f;
+        attackSpeed += playerDataBase.Skill15 * 0.3f;
         attackSpeed += playerDataBase.GetEquipValue(EquipType.Equip_Index_5);
 
         if (attackSpeed >= 150)

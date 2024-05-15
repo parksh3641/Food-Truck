@@ -257,25 +257,25 @@ public class EquipContent : MonoBehaviour
         if (rangeNumbers.Count >= 1)
         {
             equipInfo.option1 = rangeNumbers[0];
-            equipInfo.option1_Value = equipDataBase.GetRange(EquipType.Equip_Index_1 + equipInfo.option1 - 1, RankType.Normal + equipInfo.rank);
+            equipInfo.option1_Value = float.Parse(equipDataBase.GetRange(EquipType.Equip_Index_1 + equipInfo.option1 - 1, RankType.Normal + equipInfo.rank).ToString("N2"));
         }
 
         if(rangeNumbers.Count >= 2)
         {
             equipInfo.option2 = rangeNumbers[1];
-            equipInfo.option2_Value = equipDataBase.GetRange(EquipType.Equip_Index_1 + equipInfo.option2 - 1, RankType.Normal + equipInfo.rank);
+            equipInfo.option2_Value = float.Parse(equipDataBase.GetRange(EquipType.Equip_Index_1 + equipInfo.option2 - 1, RankType.Normal + equipInfo.rank).ToString("N2"));
         }
 
         if(rangeNumbers.Count >= 3)
         {
             equipInfo.option3 = rangeNumbers[2];
-            equipInfo.option3_Value = equipDataBase.GetRange(EquipType.Equip_Index_1 + equipInfo.option3 - 1, RankType.Normal + equipInfo.rank);
+            equipInfo.option3_Value = float.Parse(equipDataBase.GetRange(EquipType.Equip_Index_1 + equipInfo.option3 - 1, RankType.Normal + equipInfo.rank).ToString("N2"));
         }
 
         if(rangeNumbers.Count >= 4)
         {
             equipInfo.option4 = rangeNumbers[3];
-            equipInfo.option4_Value = equipDataBase.GetRange(EquipType.Equip_Index_1 + equipInfo.option4 - 1, RankType.Normal + equipInfo.rank);
+            equipInfo.option4_Value = float.Parse(equipDataBase.GetRange(EquipType.Equip_Index_1 + equipInfo.option4 - 1, RankType.Normal + equipInfo.rank).ToString("N2"));
         }
 
         SaveOption();

@@ -288,6 +288,18 @@ chefType.ToString().Substring(7, 1) + "</color>";
             case ChefType.Cook15_4:
                 sp = imageDataBase.GetAdvancementArray(4);
                 break;
+            case ChefType.Cook16_1:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook16_2:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook16_3:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
+            case ChefType.Cook16_4:
+                sp = imageDataBase.GetAdvancementArray(4);
+                break;
         }
 
         return sp;

@@ -5478,7 +5478,7 @@ public class PlayerDataBase : ScriptableObject
             count += bucket[i];
         }
 
-        return count;
+        return count - 1;
     }
 
     public int GetChairNumber()
@@ -5490,7 +5490,7 @@ public class PlayerDataBase : ScriptableObject
             count += chair[i];
         }
 
-        return count;
+        return count - 1;
     }
 
     public int GetTubeNumber()
@@ -5499,10 +5499,10 @@ public class PlayerDataBase : ScriptableObject
 
         for (int i = 0; i < tube.Length; i++)
         {
-            count += chair[i];
+            count += tube[i];
         }
 
-        return count;
+        return count - 1;
     }
 
     public int GetSurfboardNumber()
@@ -5511,10 +5511,10 @@ public class PlayerDataBase : ScriptableObject
 
         for (int i = 0; i < surfboard.Length; i++)
         {
-            count += chair[i];
+            count += surfboard[i];
         }
 
-        return count;
+        return count - 1;
     }
 
     public int GetUmbrellaNumber()
@@ -5523,10 +5523,10 @@ public class PlayerDataBase : ScriptableObject
 
         for (int i = 0; i < umbrella.Length; i++)
         {
-            count += chair[i];
+            count += umbrella[i];
         }
 
-        return count;
+        return count - 1;
     }
 
 

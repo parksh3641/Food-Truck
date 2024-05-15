@@ -122,10 +122,6 @@ public class Island_Max_Data
     public int index3 = 0;
     public int index4 = 0;
     public int index5 = 0;
-    public int index6 = 0;
-    public int index7 = 0;
-    public int index8 = 0;
-    public int index9 = 0;
 
     public void Initialize()
     {
@@ -134,15 +130,11 @@ public class Island_Max_Data
         index3 = 0;
         index4 = 0;
         index5 = 0;
-        index6 = 0;
-        index7 = 0;
-        index8 = 0;
-        index9 = 0;
     }
 
-    public void SetValue(FoodType type, int number)
+    public void SetValue(int index, int number)
     {
-        switch ((int)type)
+        switch (index)
         {
             case 0:
                 index1 += number;
@@ -158,18 +150,6 @@ public class Island_Max_Data
                 break;
             case 4:
                 index5 += number;
-                break;
-            case 5:
-                index6 += number;
-                break;
-            case 6:
-                index7 += number;
-                break;
-            case 7:
-                index8 += number;
-                break;
-            case 8:
-                index9 += number;
                 break;
         }
     }
@@ -195,17 +175,31 @@ public class Island_Max_Data
             case 4:
                 number = index5;
                 break;
-            case 5:
-                number = index6;
+        }
+
+        return number;
+    }
+
+    public int GetValue(int index)
+    {
+        int number = 0;
+
+        switch (index)
+        {
+            case 0:
+                number = index1;
                 break;
-            case 6:
-                number = index7;
+            case 1:
+                number = index2;
                 break;
-            case 7:
-                number = index8;
+            case 2:
+                number = index3;
                 break;
-            case 8:
-                number = index9;
+            case 3:
+                number = index4;
+                break;
+            case 4:
+                number = index5;
                 break;
         }
 
@@ -214,7 +208,7 @@ public class Island_Max_Data
 
     public int GetMaxValue()
     {
-        return index1 + index2 + index3 + index4 + index5 + index6 + index7 + index8 + index9;
+        return index1 + index2 + index3 + index4 + index5;
     }
 
     public int GetBookValue()
@@ -246,26 +240,6 @@ public class Island_Max_Data
             number++;
         }
 
-        if (index6 > 0)
-        {
-            number++;
-        }
-
-        if (index7 > 0)
-        {
-            number++;
-        }
-
-        if (index8 > 0)
-        {
-            number++;
-        }
-
-        if (index9 > 0)
-        {
-            number++;
-        }
-
         return number;
     }
 }
@@ -278,10 +252,6 @@ public class Island_Rare_Data
     public int index3 = 0;
     public int index4 = 0;
     public int index5 = 0;
-    public int index6 = 0;
-    public int index7 = 0;
-    public int index8 = 0;
-    public int index9 = 0;
 
     public void Initialize()
     {
@@ -290,15 +260,11 @@ public class Island_Rare_Data
         index3 = 0;
         index4 = 0;
         index5 = 0;
-        index6 = 0;
-        index7 = 0;
-        index8 = 0;
-        index9 = 0;
     }
 
-    public void SetValue(FoodType type, int number)
+    public void SetValue(int index, int number)
     {
-        switch ((int)type)
+        switch (index)
         {
             case 0:
                 index1 += number;
@@ -314,18 +280,6 @@ public class Island_Rare_Data
                 break;
             case 4:
                 index5 += number;
-                break;
-            case 5:
-                index6 += number;
-                break;
-            case 6:
-                index7 += number;
-                break;
-            case 7:
-                index8 += number;
-                break;
-            case 8:
-                index9 += number;
                 break;
         }
     }
@@ -351,19 +305,33 @@ public class Island_Rare_Data
             case 4:
                 number = index5;
                 break;
-            case 5:
-                number = index6;
-                break;
-            case 6:
-                number = index7;
-                break;
-            case 7:
-                number = index8;
-                break;
-            case 8:
-                number = index9;
-                break;
 
+        }
+
+        return number;
+    }
+
+    public int GetValue(int index)
+    {
+        int number = 0;
+
+        switch (index)
+        {
+            case 0:
+                number = index1;
+                break;
+            case 1:
+                number = index2;
+                break;
+            case 2:
+                number = index3;
+                break;
+            case 3:
+                number = index4;
+                break;
+            case 4:
+                number = index5;
+                break;
         }
 
         return number;
@@ -371,7 +339,7 @@ public class Island_Rare_Data
 
     public int GetMaxValue()
     {
-        return index1 + index2 + index3 + index4 + index5 + index6 + index7 + index8 + index9;
+        return index1 + index2 + index3 + index4 + index5;
     }
 
     public int GetBookValue()
@@ -403,26 +371,6 @@ public class Island_Rare_Data
             number++;
         }
 
-        if (index6 > 0)
-        {
-            number++;
-        }
-
-        if (index7 > 0)
-        {
-            number++;
-        }
-
-        if (index8 > 0)
-        {
-            number++;
-        }
-
-        if (index9 > 0)
-        {
-            number++;
-        }
-
         return number;
     }
 }
@@ -435,10 +383,6 @@ public class Island_Equip_Data
     public int index3 = 0;
     public int index4 = 0;
     public int index5 = 0;
-    public int index6 = 0;
-    public int index7 = 0;
-    public int index8 = 0;
-    public int index9 = 0;
 
     public void Initialize()
     {
@@ -447,10 +391,6 @@ public class Island_Equip_Data
         index3 = 0;
         index4 = 0;
         index5 = 0;
-        index6 = 0;
-        index7 = 0;
-        index8 = 0;
-        index9 = 0;
     }
 }
 

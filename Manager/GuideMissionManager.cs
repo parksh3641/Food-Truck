@@ -193,7 +193,7 @@ public class GuideMissionManager : MonoBehaviour
             case 16:
                 if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
                 {
-                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index6;
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[1].index1;
                 }
                 need = 1;
                 break;
@@ -218,14 +218,14 @@ public class GuideMissionManager : MonoBehaviour
             case 20:
                 if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
                 {
-                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index7;
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[1].index2;
                 }
                 need = 1;
                 break;
             case 21:
                 if (playerDataBase.island_Total_Data.island_Max_Datas[0] != null)
                 {
-                    now = playerDataBase.island_Total_Data.island_Max_Datas[0].index8;
+                    now = playerDataBase.island_Total_Data.island_Max_Datas[1].index3;
                 }
                 need = 1;
                 break;

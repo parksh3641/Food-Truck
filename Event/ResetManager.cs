@@ -244,6 +244,7 @@ public class ResetManager : MonoBehaviour
         GameStateManager.instance.YesterdayGold = GameStateManager.instance.TodayGold;
         GameStateManager.instance.TodayGold = 0;
         GameStateManager.instance.TodayQuiz = false;
+        GameStateManager.instance.GetEventTicket = 0;
 
         GameStateManager.instance.Portion1Ad = false;
         GameStateManager.instance.Portion2Ad = false;

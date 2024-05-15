@@ -94,6 +94,7 @@ public class GameStateManager : MonoBehaviour
         public long getSellGold = 0; //판매 후 얻은 골드
         public long todayGold = 0;
         public long yesterdayGold = 0;
+        public int getEventTicket = 0;
 
         [Space]
         [Title("Reset")]
@@ -918,6 +919,19 @@ public class GameStateManager : MonoBehaviour
         set
         {
             gameSettings.yesterdayGold = value;
+            SaveFile();
+        }
+    }
+
+    public int GetEventTicket
+    {
+        get
+        {
+            return gameSettings.getEventTicket;
+        }
+        set
+        {
+            gameSettings.getEventTicket = value;
             SaveFile();
         }
     }

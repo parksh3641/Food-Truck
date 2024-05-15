@@ -438,8 +438,6 @@ public class RankingManager : MonoBehaviour
         isDelay = false;
 
         PlayfabManager.instance.GetLeaderboarder("Advancement", 0, SetTitle);
-
-        rankContentParent.anchoredPosition = new Vector2(0, -9999);
     }
 
     void SetTitle(GetLeaderboardResult result)
@@ -497,6 +495,8 @@ public class RankingManager : MonoBehaviour
 
             myRankContent.IconState((IconType)playerDataBase.Icon);
         }
+
+        rankContentParent.anchoredPosition = new Vector2(0, -9999);
     }
 
     void CheckCountry(string code)

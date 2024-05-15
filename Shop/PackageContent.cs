@@ -129,7 +129,7 @@ public class PackageContent : MonoBehaviour
                 receiveContents[0].Initialize(RewardType.RemoveAds, -1);
                 receiveContents[1].Initialize(RewardType.Crystal, 12000);
                 receiveContents[2].Initialize(RewardType.PortionSet, 10);
-                receiveContents[3].Initialize(RewardType.EventTicket, 10000);
+                receiveContents[3].Initialize(RewardType.EventTicket, 5000);
 
                 break;
             case PackageType.Package7: //서포트 패키지

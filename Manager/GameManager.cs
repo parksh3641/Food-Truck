@@ -259,8 +259,8 @@ public class GameManager : MonoBehaviour
     private int rankTotalLevel = 0;
 
     private float rareFoodPercent = 10.0f;
-    private float recoverTicketPercent = 10.0f;
-    private float eventTicketPercent = 5.0f;
+    private float recoverTicketPercent = 5.0f;
+    private float eventTicketPercent = 2.0f;
     private float itemDropPercent = 0f;
 
     private bool clickDelay = false;
@@ -2934,9 +2934,20 @@ public class GameManager : MonoBehaviour
         {
             playerDataBase.NextFoodNumber = (int)GameStateManager.instance.FoodType + 1;
             PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
+
+#if !UNITY_EDITOR
+            if (playerDataBase.TestAccount == 0)
+            {
+                if (playerDataBase.IslandNumber_Ranking <= playerDataBase.NextFoodNumber)
+                {
+                    playerDataBase.IslandNumber_Ranking = playerDataBase.NextFoodNumber;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber_Ranking", playerDataBase.IslandNumber_Ranking);
+                }
+            }
+#endif
         }
         
-        playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].SetValue(GameStateManager.instance.FoodType, 1);
+        playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].SetValue((int)GameStateManager.instance.FoodType % GameStateManager.instance.Island, 1);
 
         playerData.Clear();
         playerData.Add("Island_Total_Data", JsonUtility.ToJson(playerDataBase.island_Total_Data));
@@ -2948,14 +2959,6 @@ public class GameManager : MonoBehaviour
             {
                 playerDataBase.IslandNumber = (((int)GameStateManager.instance.FoodType + 1) / GameStateManager.instance.Island);
                 PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
-
-#if !UNITY_EDITOR
-                if (playerDataBase.TestAccount == 0)
-                {
-                    playerDataBase.IslandNumber_Ranking = (((int)GameStateManager.instance.FoodType + 1) / GameStateManager.instance.Island);
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber_Ranking", playerDataBase.IslandNumber_Ranking);
-                }
-#endif
 
                 islandManager.NewIsland(playerDataBase.IslandNumber);
 
@@ -3053,11 +3056,11 @@ public class GameManager : MonoBehaviour
             playerDataBase.SellCount += 1;
             GameStateManager.instance.SellCount += 1;
 
-            if (gifticon)
+            if (GameStateManager.instance.GetEventTicket < 300)
             {
                 if (Random.Range(0, 100f) < eventTicketPercent)
                 {
-                    if (playerDataBase.EventTicket >= 1000) return;
+                    GameStateManager.instance.GetEventTicket += 1;
 
                     PortionManager.instance.GetEventTicket(1);
 
@@ -3130,7 +3133,7 @@ public class GameManager : MonoBehaviour
 
     void CheckRareFood()
     {
-        playerDataBase.island_Total_Data.island_Rare_Datas[(int)GameStateManager.instance.IslandType].SetValue(GameStateManager.instance.FoodType, 1);
+        playerDataBase.island_Total_Data.island_Rare_Datas[(int)GameStateManager.instance.IslandType].SetValue((int)GameStateManager.instance.FoodType % GameStateManager.instance.Island, 1);
 
         playerData.Clear();
         playerData.Add("Island_Total_Data", JsonUtility.ToJson(playerDataBase.island_Total_Data));
@@ -4440,6 +4443,7 @@ public class GameManager : MonoBehaviour
 
     public void GetTicket()
     {
+        PortionManager.instance.GetSkillTickets(999);
         PortionManager.instance.GetBuffTickets(999);
         PortionManager.instance.GetDefTickets(999);
         PortionManager.instance.GetRepairTickets(999);
@@ -4460,14 +4464,10 @@ public class GameManager : MonoBehaviour
 
     public void GetPoint()
     {
-        playerDataBase.RankPoint += 100000;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankPoint", playerDataBase.RankPoint);
-
-        playerDataBase.AbilityPoint += 100000;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("AbilityPoint", playerDataBase.AbilityPoint);
-
-        playerDataBase.ChallengePoint += 100000;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("ChallengePoint", playerDataBase.ChallengePoint);
+        PortionManager.instance.GetRankPoint(10000);
+        PortionManager.instance.GetAbilityPoint(10000);
+        PortionManager.instance.GetEventTicket(10000);
+        PortionManager.instance.GetChallengePoint(10000);
     }
 
     public void GetGourmetLevel()

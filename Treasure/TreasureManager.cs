@@ -128,16 +128,16 @@ public class TreasureManager : MonoBehaviour
             treasureInfoView.SetActive(true);
 
             treasureInfoText[0].localizationName = "LegendaryPercent";
-            treasureInfoText[0].plusText = " : 1%";
+            treasureInfoText[0].plusText = " : 3%";
 
             treasureInfoText[1].localizationName = "EpicPercent";
-            treasureInfoText[1].plusText = " : 7%";
+            treasureInfoText[1].plusText = " : 12%";
 
             treasureInfoText[2].localizationName = "RarePercent";
-            treasureInfoText[2].plusText = " : 32%";
+            treasureInfoText[2].plusText = " : 35%";
 
             treasureInfoText[3].localizationName = "NormalPercent";
-            treasureInfoText[3].plusText = " : 60%";
+            treasureInfoText[3].plusText = " : 50%";
 
             treasureInfoText[0].ReLoad();
             treasureInfoText[1].ReLoad();
@@ -297,37 +297,42 @@ public class TreasureManager : MonoBehaviour
             receiveContents[i].gameObject.SetActive(false);
         }
 
+        for (int i = 0; i < indexArray.Length; i ++)
+        {
+            indexArray[i] = -1;
+        }
+
         for (int i = 0; i < count; i++)
         {
             random = Random.Range(0f, 100f);
 
-            if(random >= 40)
+            if(random >= 50)
             {
                 random2 = Random.Range(0, normal.Length);
 
                 indexArray[i] = normal[random2];
-                indexQueue.Enqueue(random2);
+                indexQueue.Enqueue(normal[random2]);
             }
-            else if(random >= 8)
+            else if(random >= 15)
             {
                 random2 = Random.Range(0, rare.Length);
 
                 indexArray[i] = rare[random2];
-                indexQueue.Enqueue(random2);
+                indexQueue.Enqueue(rare[random2]);
             }
-            else if(random >= 1)
+            else if(random >= 3)
             {
                 random2 = Random.Range(0, unique.Length);
 
                 indexArray[i] = unique[random2];
-                indexQueue.Enqueue(random2);
+                indexQueue.Enqueue(unique[random2]);
             }
             else
             {
                 random2 = Random.Range(0, legendary.Length);
 
                 indexArray[i] = legendary[random2];
-                indexQueue.Enqueue(random2);
+                indexQueue.Enqueue(legendary[random2]);
             }
         }
 

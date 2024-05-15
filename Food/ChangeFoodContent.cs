@@ -290,9 +290,6 @@ public class ChangeFoodContent : MonoBehaviour
         moveArrow.SetActive(true);
     }
 
-
-
-
     public void SetLevel(int level, int max)
     {
         if(level + 1 > max)

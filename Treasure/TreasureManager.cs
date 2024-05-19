@@ -39,7 +39,7 @@ public class TreasureManager : MonoBehaviour
     private float random = 0;
     private int random2 = 0;
 
-    private int price = 50;
+    private int price = 30;
     private bool oneMore = false;
 
     private int[] legendary = new int[3] { 0, 2, 6 };

@@ -27,6 +27,8 @@ public class RankingManager : MonoBehaviour
     public GameObject[] rankingRewardCheck;
     public Text rankingRewardDateText;
 
+    public Scrollbar scrollbar;
+
     [Space]
     [Title("TopMenu")]
     public Image[] topMenuImgArray;
@@ -45,7 +47,7 @@ public class RankingManager : MonoBehaviour
     public string country = "";
 
     private int listNumber = 0;
-    private int listMaxNumber = 200;
+    private int listMaxNumber = 300;
 
     [Space]
     List<RankContent> rankContentList = new List<RankContent>();
@@ -75,6 +77,7 @@ public class RankingManager : MonoBehaviour
         rankingView.SetActive(false);
         rankingRewardView.SetActive(false);
 
+        scrollbar.value = 1;
         rankContentParent.anchoredPosition = new Vector2(0, -9999);
         rankingRewardTransform.anchoredPosition = new Vector2(0, -9999);
 
@@ -235,14 +238,17 @@ public class RankingManager : MonoBehaviour
             rankContentList[i].gameObject.SetActive(false);
         }
 
+        rankContentParent.anchoredPosition = new Vector2(0, -9999);
+        scrollbar.value = 1;
+
         switch (number)
         {
             case 0:
                 ChangeRankingView(RankingType.UpgradeCount.ToString());
 
-                infoText.localizationName = "Ranking1_Info";
+                //infoText.localizationName = "Ranking1_Info";
 
-                FirebaseAnalytics.LogEvent("Open_Ranking1");
+                FirebaseAnalytics.LogEvent("Ranking_UpgradeCount");
                 break;
             case 1:
                 if(SeasonManager.instance.CheckSeason_Ranking() == 0)
@@ -260,23 +266,17 @@ public class RankingManager : MonoBehaviour
                     nextSeason.SetActive(true);
                 }
 
-                //infoText.localizationName = "Ranking2_Info";
-
-                FirebaseAnalytics.LogEvent("Open_Ranking2");
+                FirebaseAnalytics.LogEvent("Ranking_TotalLevel");
                 break;
             case 2:
                 ChangeRankingView(RankingType.GourmetLevel.ToString());
 
-                //infoText.localizationName = "Ranking3_Info";
-
-                FirebaseAnalytics.LogEvent("Open_Ranking3");
+                FirebaseAnalytics.LogEvent("Ranking_GourmetLevel");
                 break;
             case 3:
                 ChangeRankingView(RankingType.IslandNumber_Ranking.ToString());
 
-                //infoText.localizationName = "Ranking4_Info";
-
-                FirebaseAnalytics.LogEvent("Open_Ranking4");
+                FirebaseAnalytics.LogEvent("Ranking_IslandNumber_Ranking");
                 break;
         }
 
@@ -353,6 +353,7 @@ public class RankingManager : MonoBehaviour
             }
 
             rankContentParent.anchoredPosition = new Vector2(0, -9999);
+            scrollbar.value = 1;
         }
     }
 
@@ -437,6 +438,9 @@ public class RankingManager : MonoBehaviour
 
         isDelay = false;
 
+        rankContentParent.anchoredPosition = new Vector2(0, -9999);
+        scrollbar.value = 1;
+
         PlayfabManager.instance.GetLeaderboarder("Advancement", 0, SetTitle);
     }
 
@@ -495,8 +499,6 @@ public class RankingManager : MonoBehaviour
 
             myRankContent.IconState((IconType)playerDataBase.Icon);
         }
-
-        rankContentParent.anchoredPosition = new Vector2(0, -9999);
     }
 
     void CheckCountry(string code)

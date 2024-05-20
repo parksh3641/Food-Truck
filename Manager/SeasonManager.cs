@@ -6,6 +6,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class SeasonRewardInfo
+{
+    public List<int> seasonRewardList = new List<int>();
+
+    public void Initialize()
+    {
+        for (int i = 0; i < seasonRewardList.Count; i ++)
+        {
+            seasonRewardList[i] = 0;
+        }
+    }
+
+    public void SaveServerData(SeasonRewardInfo info)
+    {
+        for(int i = 0; i < info.seasonRewardList.Count; i ++)
+        {
+            seasonRewardList[i] = info.seasonRewardList[i];
+        }
+    }
+}
+
 public class SeasonManager : MonoBehaviour
 {
     public static SeasonManager instance;
@@ -31,46 +53,66 @@ public class SeasonManager : MonoBehaviour
     DateTime season2Date_Start = new DateTime(2024, 2, 2);
     DateTime season2Date_End = new DateTime(2024, 2, 14, 23, 59, 59);
 
-
     DateTime season3Date_Start = new DateTime(2024, 2, 16);
     DateTime season3Date_End = new DateTime(2024, 2, 29, 23, 59, 59);
-
 
     DateTime season4Date_Start = new DateTime(2024, 3, 2);
     DateTime season4Date_End = new DateTime(2024, 3, 16, 23, 59, 59);
 
-
     DateTime season5Date_Start = new DateTime(2024, 3, 18);
     DateTime season5Date_End = new DateTime(2024, 3, 31, 23, 59, 59);
-
 
     DateTime season6Date_Start = new DateTime(2024, 4, 2);
     DateTime season6Date_End = new DateTime(2024, 4, 15, 23, 59, 59);
 
-
     DateTime season7Date_Start = new DateTime(2024, 4, 17);
     DateTime season7Date_End = new DateTime(2024, 4, 30, 23, 59, 59);
-
 
     DateTime season8Date_Start = new DateTime(2024, 5, 2);
     DateTime season8Date_End = new DateTime(2024, 5, 16, 23, 59, 59);
 
-
     DateTime season9Date_Start = new DateTime(2024, 5, 18);
     DateTime season9Date_End = new DateTime(2024, 5, 31, 23, 59, 59);
-
 
     DateTime season10Date_Start = new DateTime(2024, 6, 2);
     DateTime season10Date_End = new DateTime(2024, 6, 15, 23, 59, 59);
 
-
     DateTime season11Date_Start = new DateTime(2024, 6, 17);
     DateTime season11Date_End = new DateTime(2024, 6, 30, 23, 59, 59);
+
+    DateTime season12Date_Start = new DateTime(2024, 7, 2);
+    DateTime season12Date_End = new DateTime(2024, 7, 16, 23, 59, 59);
+
+    DateTime season13Date_Start = new DateTime(2024, 7, 18);
+    DateTime season13Date_End = new DateTime(2024, 7, 31, 23, 59, 59);
+
+    DateTime season14Date_Start = new DateTime(2024, 8, 2);
+    DateTime season14Date_End = new DateTime(2024, 8, 16, 23, 59, 59);
+
+    DateTime season15Date_Start = new DateTime(2024, 8, 18);
+    DateTime season15Date_End = new DateTime(2024, 8, 31, 23, 59, 59);
+
+    DateTime season16Date_Start = new DateTime(2024, 9, 2);
+    DateTime season16Date_End = new DateTime(2024, 9, 15, 23, 59, 59);
+
+    DateTime season17Date_Start = new DateTime(2024, 9, 16);
+    DateTime season17Date_End = new DateTime(2024, 9, 30, 23, 59, 59);
+
+    DateTime season18Date_Start = new DateTime(2024, 10, 2);
+    DateTime season18Date_End = new DateTime(2024, 10, 16, 23, 59, 59);
+
+    DateTime season19Date_Start = new DateTime(2024, 10, 18);
+    DateTime season19Date_End = new DateTime(2024, 10, 31, 23, 59, 59);
+
+    DateTime season20Date_Start = new DateTime(2024, 11, 2);
+    DateTime season20Date_End = new DateTime(2024, 11, 15, 23, 59, 59);
 
 
     WaitForSeconds waitForSeconds = new WaitForSeconds(0.5f);
 
     PlayerDataBase playerDataBase;
+
+    private Dictionary<string, string> playerData = new Dictionary<string, string>();
 
 
     private void Awake()
@@ -146,7 +188,7 @@ public class SeasonManager : MonoBehaviour
                 receiveContents[2].gameObject.SetActive(true);
 
                 receiveContents[0].Initialize(RewardType.Crystal, 5000);
-                receiveContents[1].Initialize(RewardType.RankPoint, 15000);
+                receiveContents[1].Initialize(RewardType.RankPoint, 10000);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking1, 1);
 
                 break;
@@ -154,7 +196,7 @@ public class SeasonManager : MonoBehaviour
                 receiveContents[2].gameObject.SetActive(true);
 
                 receiveContents[0].Initialize(RewardType.Crystal, 2500);
-                receiveContents[1].Initialize(RewardType.RankPoint, 7500);
+                receiveContents[1].Initialize(RewardType.RankPoint, 5000);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking2, 1);
 
                 break;
@@ -162,7 +204,7 @@ public class SeasonManager : MonoBehaviour
                 receiveContents[2].gameObject.SetActive(true);
 
                 receiveContents[0].Initialize(RewardType.Crystal, 1500);
-                receiveContents[1].Initialize(RewardType.RankPoint, 4500);
+                receiveContents[1].Initialize(RewardType.RankPoint, 2500);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking3, 1);
 
                 break;
@@ -170,18 +212,18 @@ public class SeasonManager : MonoBehaviour
                 receiveContents[2].gameObject.SetActive(true);
 
                 receiveContents[0].Initialize(RewardType.Crystal, 1000);
-                receiveContents[1].Initialize(RewardType.RankPoint, 3000);
+                receiveContents[1].Initialize(RewardType.RankPoint, 1500);
                 receiveContents[2].Initialize(RewardType.Icon_Ranking4, 1);
 
                 break;
             case 4:
                 receiveContents[0].Initialize(RewardType.Crystal, 750);
-                receiveContents[1].Initialize(RewardType.RankPoint, 2500);
+                receiveContents[1].Initialize(RewardType.RankPoint, 1000);
 
                 break;
             case 5:
                 receiveContents[0].Initialize(RewardType.Crystal, 500);
-                receiveContents[1].Initialize(RewardType.RankPoint, 1500);
+                receiveContents[1].Initialize(RewardType.RankPoint, 750);
 
                 break;
             case 6:
@@ -224,7 +266,7 @@ public class SeasonManager : MonoBehaviour
         {
             case 0:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 5000);
-                PortionManager.instance.GetRankPoint(15000);
+                PortionManager.instance.GetRankPoint(10000);
 
                 if (!playerDataBase.CheckIcon(IconType.Icon_39))
                 {
@@ -234,7 +276,7 @@ public class SeasonManager : MonoBehaviour
                 break;
             case 1:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 2500);
-                PortionManager.instance.GetRankPoint(7500);
+                PortionManager.instance.GetRankPoint(5000);
 
                 if (!playerDataBase.CheckIcon(IconType.Icon_40))
                 {
@@ -244,7 +286,7 @@ public class SeasonManager : MonoBehaviour
                 break;
             case 2:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1500);
-                PortionManager.instance.GetRankPoint(4500);
+                PortionManager.instance.GetRankPoint(2500);
 
                 if (!playerDataBase.CheckIcon(IconType.Icon_41))
                 {
@@ -254,7 +296,7 @@ public class SeasonManager : MonoBehaviour
                 break;
             case 3:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 1000);
-                PortionManager.instance.GetRankPoint(3000);
+                PortionManager.instance.GetRankPoint(1500);
 
                 if (!playerDataBase.CheckIcon(IconType.Icon_42))
                 {
@@ -264,11 +306,11 @@ public class SeasonManager : MonoBehaviour
                 break;
             case 4:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 750);
-                PortionManager.instance.GetRankPoint(2500);
+                PortionManager.instance.GetRankPoint(1000);
                 break;
             case 5:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 500);
-                PortionManager.instance.GetRankPoint(1500);
+                PortionManager.instance.GetRankPoint(750);
                 break;
             case 6:
                 PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 250);
@@ -276,53 +318,12 @@ public class SeasonManager : MonoBehaviour
                 break;
         }
 
-        switch (season)
-        {
-            case 1:
-                playerDataBase.Season1Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season1Reward", playerDataBase.Season1Reward);
-                break;
-            case 2:
-                playerDataBase.Season2Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season2Reward", playerDataBase.Season2Reward);
-                break;
-            case 3:
-                playerDataBase.Season3Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season3Reward", playerDataBase.Season3Reward);
-                break;
-            case 4:
-                playerDataBase.Season4Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season4Reward", playerDataBase.Season4Reward);
-                break;
-            case 5:
-                playerDataBase.Season5Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season5Reward", playerDataBase.Season5Reward);
-                break;
-            case 6:
-                playerDataBase.Season6Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season6Reward", playerDataBase.Season6Reward);
-                break;
-            case 7:
-                playerDataBase.Season7Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season7Reward", playerDataBase.Season7Reward);
-                break;
-            case 8:
-                playerDataBase.Season8Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season8Reward", playerDataBase.Season8Reward);
-                break;
-            case 9:
-                playerDataBase.Season9Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season9Reward", playerDataBase.Season9Reward);
-                break;
-            case 10:
-                playerDataBase.Season10Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season10Reward", playerDataBase.Season10Reward);
-                break;
-            case 11:
-                playerDataBase.Season11Reward = 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("Season11Reward", playerDataBase.Season11Reward);
-                break;
-        }
+        playerDataBase.seasonRewardInfo.seasonRewardList[season] = 1;
+
+        playerData.Clear();
+        playerData.Add("SeasonRewardInfo", JsonUtility.ToJson(playerDataBase.seasonRewardInfo));
+        PlayfabManager.instance.SetPlayerData(playerData);
+
 
         yield return waitForSeconds;
 
@@ -477,6 +478,66 @@ public class SeasonManager : MonoBehaviour
                                 SetReward(6);
                             }
                             break;
+                        case 12:
+                            if (playerDataBase.TotalLevel_11 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
+                        case 13:
+                            if (playerDataBase.TotalLevel_12 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
+                        case 14:
+                            if (playerDataBase.TotalLevel_13 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
+                        case 15:
+                            if (playerDataBase.TotalLevel_14 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
+                        case 16:
+                            if (playerDataBase.TotalLevel_15 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
+                        case 17:
+                            if (playerDataBase.TotalLevel_16 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
+                        case 18:
+                            if (playerDataBase.TotalLevel_17 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
+                        case 19:
+                            if (playerDataBase.TotalLevel_18 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
+                        case 20:
+                            if (playerDataBase.TotalLevel_19 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
+                        case 21:
+                            if (playerDataBase.TotalLevel_20 > 4)
+                            {
+                                SetReward(6);
+                            }
+                            break;
                     }
                 }
 
@@ -545,6 +606,42 @@ public class SeasonManager : MonoBehaviour
         {
             number = 10;
         }
+        else if (currentDate > season12Date_Start && currentDate < season12Date_End)
+        {
+            number = 11;
+        }
+        else if (currentDate > season13Date_Start && currentDate < season13Date_End)
+        {
+            number = 12;
+        }
+        else if (currentDate > season14Date_Start && currentDate < season14Date_End)
+        {
+            number = 13;
+        }
+        else if (currentDate > season15Date_Start && currentDate < season15Date_End)
+        {
+            number = 14;
+        }
+        else if (currentDate > season16Date_Start && currentDate < season16Date_End)
+        {
+            number = 15;
+        }
+        else if (currentDate > season17Date_Start && currentDate < season17Date_End)
+        {
+            number = 16;
+        }
+        else if (currentDate > season18Date_Start && currentDate < season18Date_End)
+        {
+            number = 17;
+        }
+        else if (currentDate > season19Date_Start && currentDate < season19Date_End)
+        {
+            number = 18;
+        }
+        else if (currentDate > season20Date_Start && currentDate < season20Date_End)
+        {
+            number = 19;
+        }
         else
         {
             number = -1;
@@ -566,7 +663,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 1;
 
-            if (playerDataBase.Season1Reward == 0 && playerDataBase.TotalLevel > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel > 0)
             {
                 Initialize();
             }
@@ -575,7 +672,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 2;
 
-            if (playerDataBase.Season2Reward == 0 && playerDataBase.TotalLevel_1 > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_1 > 0)
             {
                 Initialize();
             }
@@ -584,7 +681,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 3;
 
-            if (playerDataBase.Season3Reward == 0 && playerDataBase.TotalLevel_2 > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_2 > 0)
             {
                 Initialize();
             }
@@ -593,7 +690,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 4;
 
-            if (playerDataBase.Season4Reward == 0 && playerDataBase.TotalLevel_3 > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_3 > 0)
             {
                 Initialize();
             }
@@ -602,7 +699,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 5;
 
-            if (playerDataBase.Season5Reward == 0 && playerDataBase.TotalLevel_4 > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_4 > 0)
             {
                 Initialize();
             }
@@ -611,7 +708,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 6;
 
-            if (playerDataBase.Season6Reward == 0 && playerDataBase.TotalLevel_5 > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_5 > 0)
             {
                 Initialize();
             }
@@ -620,7 +717,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 7;
 
-            if (playerDataBase.Season7Reward == 0 && playerDataBase.TotalLevel_6 > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_6 > 0)
             {
                 Initialize();
             }
@@ -629,7 +726,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 8;
 
-            if (playerDataBase.Season8Reward == 0 && playerDataBase.TotalLevel_7 > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_7 > 0)
             {
                 Initialize();
             }
@@ -638,7 +735,7 @@ public class SeasonManager : MonoBehaviour
         {
             season = 9;
 
-            if (playerDataBase.Season9Reward == 0 && playerDataBase.TotalLevel_8 > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_8 > 0)
             {
                 Initialize();
             }
@@ -647,7 +744,88 @@ public class SeasonManager : MonoBehaviour
         {
             season = 10;
 
-            if (playerDataBase.Season10Reward == 0 && playerDataBase.TotalLevel_9 > 0)
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_9 > 0)
+            {
+                Initialize();
+            }
+        }
+        else if (currentDate < season12Date_End)
+        {
+            season = 11;
+
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_10 > 0)
+            {
+                Initialize();
+            }
+        }
+        else if (currentDate < season13Date_End)
+        {
+            season = 12;
+
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_11 > 0)
+            {
+                Initialize();
+            }
+        }
+        else if (currentDate < season14Date_End)
+        {
+            season = 13;
+
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_12 > 0)
+            {
+                Initialize();
+            }
+        }
+        else if (currentDate < season15Date_End)
+        {
+            season = 14;
+
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_13 > 0)
+            {
+                Initialize();
+            }
+        }
+        else if (currentDate < season16Date_End)
+        {
+            season = 15;
+
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_14 > 0)
+            {
+                Initialize();
+            }
+        }
+        else if (currentDate < season17Date_End)
+        {
+            season = 16;
+
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_15 > 0)
+            {
+                Initialize();
+            }
+        }
+        else if (currentDate < season18Date_End)
+        {
+            season = 17;
+
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_16 > 0)
+            {
+                Initialize();
+            }
+        }
+        else if (currentDate < season19Date_End)
+        {
+            season = 18;
+
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_17 > 0)
+            {
+                Initialize();
+            }
+        }
+        else if (currentDate < season20Date_End)
+        {
+            season = 19;
+
+            if (playerDataBase.seasonRewardInfo.seasonRewardList[season] == 0 && playerDataBase.TotalLevel_18 > 0)
             {
                 Initialize();
             }

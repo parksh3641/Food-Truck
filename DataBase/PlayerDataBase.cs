@@ -53,8 +53,6 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int islandNumber_Ranking = 0;
     [SerializeField]
-    public Island_Total_Data island_Total_Data;
-    [SerializeField]
     private int level = 0;
     [SerializeField]
     private int exp = 0;
@@ -152,6 +150,11 @@ public class PlayerDataBase : ScriptableObject
     private int dungeon4Level = 0;
 
     [Space]
+    [Title("Island")]
+    [SerializeField]
+    public Island_Total_Data island_Total_Data;
+
+    [Space]
     [Title("Daily")]
     [SerializeField]
     public ResetInfo resetInfo;
@@ -160,6 +163,16 @@ public class PlayerDataBase : ScriptableObject
     [Title("Equip")]
     [SerializeField]
     public Equip equip;
+
+    [Space]
+    [Title("Season")]
+    [SerializeField]
+    public SeasonRewardInfo seasonRewardInfo;
+
+    [Space]
+    [Title("Coupon")]
+    [SerializeField]
+    public CouponInfo couponInfo;
 
     [Space]
     [Title("Count")]
@@ -214,31 +227,6 @@ public class PlayerDataBase : ScriptableObject
     private int openChestBox = 0;
     [SerializeField]
     private int yummyTimeCount = 0;
-
-    [Space]
-    [Title("Season")]
-    [SerializeField]
-    private int season1Reward = 0;
-    [SerializeField]
-    private int season2Reward = 0;
-    [SerializeField]
-    private int season3Reward = 0;
-    [SerializeField]
-    private int season4Reward = 0;
-    [SerializeField]
-    private int season5Reward = 0;
-    [SerializeField]
-    private int season6Reward = 0;
-    [SerializeField]
-    private int season7Reward = 0;
-    [SerializeField]
-    private int season8Reward = 0;
-    [SerializeField]
-    private int season9Reward = 0;
-    [SerializeField]
-    private int season10Reward = 0;
-    [SerializeField]
-    private int season11Reward = 0;
 
     [Space]
     [Title("Treasure")]
@@ -618,6 +606,24 @@ public class PlayerDataBase : ScriptableObject
     private int totalLevel_10 = 0;
     [SerializeField]
     private int totalLevel_11 = 0;
+    [SerializeField]
+    private int totalLevel_12 = 0;
+    [SerializeField]
+    private int totalLevel_13 = 0;
+    [SerializeField]
+    private int totalLevel_14 = 0;
+    [SerializeField]
+    private int totalLevel_15 = 0;
+    [SerializeField]
+    private int totalLevel_16 = 0;
+    [SerializeField]
+    private int totalLevel_17 = 0;
+    [SerializeField]
+    private int totalLevel_18 = 0;
+    [SerializeField]
+    private int totalLevel_19 = 0;
+    [SerializeField]
+    private int totalLevel_20 = 0;
 
     [Space]
     [Title("Skill")]
@@ -674,64 +680,6 @@ public class PlayerDataBase : ScriptableObject
     private int portion5 = 0;
     [SerializeField]
     private int portion6 = 0;
-
-    [Space]
-    [Title("Coupon")]
-    [SerializeField]
-    private int coupon1 = 0;
-    [SerializeField]
-    private int coupon2 = 0;
-    [SerializeField]
-    private int coupon3 = 0;
-    [SerializeField]
-    private int coupon4 = 0;
-    [SerializeField]
-    private int coupon5 = 0;
-    [SerializeField]
-    private int coupon6 = 0;
-    [SerializeField]
-    private int coupon7 = 0;
-    [SerializeField]
-    private int coupon8 = 0;
-    [SerializeField]
-    private int coupon9 = 0;
-    [SerializeField]
-    private int coupon10 = 0;
-    [SerializeField]
-    private int coupon11 = 0;
-    [SerializeField]
-    private int coupon12 = 0;
-    [SerializeField]
-    private int coupon13 = 0;
-
-    [Space]
-    [Title("Speical Coupon")]
-    [SerializeField]
-    private int spCoupon1 = 0;
-    [SerializeField]
-    private int spCoupon2 = 0;
-    [SerializeField]
-    private int spCoupon3 = 0;
-    [SerializeField]
-    private int spCoupon4 = 0;
-    [SerializeField]
-    private int spCoupon5 = 0;
-    [SerializeField]
-    private int spCoupon6 = 0;
-    [SerializeField]
-    private int spCoupon7 = 0;
-    [SerializeField]
-    private int spCoupon8 = 0;
-    [SerializeField]
-    private int spCoupon9 = 0;
-    [SerializeField]
-    private int spCoupon10 = 0;
-    [SerializeField]
-    private int spCoupon11 = 0;
-    [SerializeField]
-    private int spCoupon12 = 0;
-    [SerializeField]
-    private int spCoupon13 = 0;
 
     [Space]
     [Title("Package")]
@@ -2165,138 +2113,6 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
-    public int Season1Reward
-    {
-        get
-        {
-            return season1Reward;
-        }
-        set
-        {
-            season1Reward = value;
-        }
-    }
-
-    public int Season2Reward
-    {
-        get
-        {
-            return season2Reward;
-        }
-        set
-        {
-            season2Reward = value;
-        }
-    }
-
-    public int Season3Reward
-    {
-        get
-        {
-            return season3Reward;
-        }
-        set
-        {
-            season3Reward = value;
-        }
-    }
-
-    public int Season4Reward
-    {
-        get
-        {
-            return season4Reward;
-        }
-        set
-        {
-            season4Reward = value;
-        }
-    }
-
-    public int Season5Reward
-    {
-        get
-        {
-            return season5Reward;
-        }
-        set
-        {
-            season5Reward = value;
-        }
-    }
-
-    public int Season6Reward
-    {
-        get
-        {
-            return season6Reward;
-        }
-        set
-        {
-            season6Reward = value;
-        }
-    }
-
-    public int Season7Reward
-    {
-        get
-        {
-            return season7Reward;
-        }
-        set
-        {
-            season7Reward = value;
-        }
-    }
-
-    public int Season8Reward
-    {
-        get
-        {
-            return season8Reward;
-        }
-        set
-        {
-            season8Reward = value;
-        }
-    }
-
-    public int Season9Reward
-    {
-        get
-        {
-            return season9Reward;
-        }
-        set
-        {
-            season9Reward = value;
-        }
-    }
-
-    public int Season10Reward
-    {
-        get
-        {
-            return season10Reward;
-        }
-        set
-        {
-            season10Reward = value;
-        }
-    }
-
-    public int Season11Reward
-    {
-        get
-        {
-            return season11Reward;
-        }
-        set
-        {
-            season11Reward = value;
-        }
-    }
-
     public int QuestCount
     {
         get
@@ -2684,6 +2500,114 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             totalLevel_11 = value;
+        }
+    }
+
+    public int TotalLevel_12
+    {
+        get
+        {
+            return totalLevel_12;
+        }
+        set
+        {
+            totalLevel_12 = value;
+        }
+    }
+
+    public int TotalLevel_13
+    {
+        get
+        {
+            return totalLevel_13;
+        }
+        set
+        {
+            totalLevel_13 = value;
+        }
+    }
+
+    public int TotalLevel_14
+    {
+        get
+        {
+            return totalLevel_14;
+        }
+        set
+        {
+            totalLevel_14 = value;
+        }
+    }
+
+    public int TotalLevel_15
+    {
+        get
+        {
+            return totalLevel_15;
+        }
+        set
+        {
+            totalLevel_15 = value;
+        }
+    }
+
+    public int TotalLevel_16
+    {
+        get
+        {
+            return totalLevel_16;
+        }
+        set
+        {
+            totalLevel_16 = value;
+        }
+    }
+
+    public int TotalLevel_17
+    {
+        get
+        {
+            return totalLevel_17;
+        }
+        set
+        {
+            totalLevel_17 = value;
+        }
+    }
+
+    public int TotalLevel_18
+    {
+        get
+        {
+            return totalLevel_18;
+        }
+        set
+        {
+            totalLevel_18 = value;
+        }
+    }
+
+    public int TotalLevel_19
+    {
+        get
+        {
+            return totalLevel_19;
+        }
+        set
+        {
+            totalLevel_19 = value;
+        }
+    }
+
+    public int TotalLevel_20
+    {
+        get
+        {
+            return totalLevel_20;
+        }
+        set
+        {
+            totalLevel_20 = value;
         }
     }
 
@@ -3890,320 +3814,6 @@ public class PlayerDataBase : ScriptableObject
             portion6 = value;
         }
     }
-
-    public int Coupon1
-    {
-        get
-        {
-            return coupon1;
-        }
-        set
-        {
-            coupon1 = value;
-        }
-    }
-
-    public int Coupon2
-    {
-        get
-        {
-            return coupon2;
-        }
-        set
-        {
-            coupon2 = value;
-        }
-    }
-
-    public int Coupon3
-    {
-        get
-        {
-            return coupon3;
-        }
-        set
-        {
-            coupon3 = value;
-        }
-    }
-
-    public int Coupon4
-    {
-        get
-        {
-            return coupon4;
-        }
-        set
-        {
-            coupon4 = value;
-        }
-    }
-
-    public int Coupon5
-    {
-        get
-        {
-            return coupon5;
-        }
-        set
-        {
-            coupon5 = value;
-        }
-    }
-
-    public int Coupon6
-    {
-        get
-        {
-            return coupon6;
-        }
-        set
-        {
-            coupon6 = value;
-        }
-    }
-
-    public int Coupon7
-    {
-        get
-        {
-            return coupon7;
-        }
-        set
-        {
-            coupon7 = value;
-        }
-    }
-
-    public int Coupon8
-    {
-        get
-        {
-            return coupon8;
-        }
-        set
-        {
-            coupon8 = value;
-        }
-    }
-
-    public int Coupon9
-    {
-        get
-        {
-            return coupon9;
-        }
-        set
-        {
-            coupon9 = value;
-        }
-    }
-
-    public int Coupon10
-    {
-        get
-        {
-            return coupon10;
-        }
-        set
-        {
-            coupon10 = value;
-        }
-    }
-
-    public int Coupon11
-    {
-        get
-        {
-            return coupon11;
-        }
-        set
-        {
-            coupon12 = value;
-        }
-    }
-
-    public int Coupon12
-    {
-        get
-        {
-            return coupon12;
-        }
-        set
-        {
-            coupon12 = value;
-        }
-    }
-
-    public int Coupon13
-    {
-        get
-        {
-            return coupon13;
-        }
-        set
-        {
-            coupon13 = value;
-        }
-    }
-
-    public int SpCoupon1
-    {
-        get
-        {
-            return spCoupon1;
-        }
-        set
-        {
-            spCoupon1 = value;
-        }
-    }
-
-    public int SpCoupon2
-    {
-        get
-        {
-            return spCoupon2;
-        }
-        set
-        {
-            spCoupon2 = value;
-        }
-    }
-
-    public int SpCoupon3
-    {
-        get
-        {
-            return spCoupon3;
-        }
-        set
-        {
-            spCoupon3 = value;
-        }
-    }
-
-    public int SpCoupon4
-    {
-        get
-        {
-            return spCoupon4;
-        }
-        set
-        {
-            spCoupon4 = value;
-        }
-    }
-
-    public int SpCoupon5
-    {
-        get
-        {
-            return spCoupon5;
-        }
-        set
-        {
-            spCoupon5 = value;
-        }
-    }
-
-    public int SpCoupon6
-    {
-        get
-        {
-            return spCoupon6;
-        }
-        set
-        {
-            spCoupon6 = value;
-        }
-    }
-
-    public int SpCoupon7
-    {
-        get
-        {
-            return spCoupon7;
-        }
-        set
-        {
-            spCoupon7 = value;
-        }
-    }
-
-    public int SpCoupon8
-    {
-        get
-        {
-            return spCoupon8;
-        }
-        set
-        {
-            spCoupon8 = value;
-        }
-    }
-
-    public int SpCoupon9
-    {
-        get
-        {
-            return spCoupon9;
-        }
-        set
-        {
-            spCoupon9 = value;
-        }
-    }
-
-    public int SpCoupon10
-    {
-        get
-        {
-            return spCoupon10;
-        }
-        set
-        {
-            spCoupon10 = value;
-        }
-    }
-
-    public int SpCoupon11
-    {
-        get
-        {
-            return spCoupon11;
-        }
-        set
-        {
-            spCoupon11 = value;
-        }
-    }
-
-    public int SpCoupon12
-    {
-        get
-        {
-            return spCoupon12;
-        }
-        set
-        {
-            spCoupon12 = value;
-        }
-    }
-
-    public int SpCoupon13
-    {
-        get
-        {
-            return spCoupon13;
-        }
-        set
-        {
-            spCoupon13 = value;
-        }
-    }
-
-
     public bool Package1
     {
         get
@@ -4599,6 +4209,15 @@ public class PlayerDataBase : ScriptableObject
         totalLevel_9 = 0;
         totalLevel_10 = 0;
         totalLevel_11 = 0;
+        totalLevel_12 = 0;
+        totalLevel_13 = 0;
+        totalLevel_14 = 0;
+        totalLevel_15 = 0;
+        totalLevel_16 = 0;
+        totalLevel_17 = 0;
+        totalLevel_18 = 0;
+        totalLevel_19 = 0;
+        totalLevel_20 = 0;
 
         saveCoin = 0;
         coin = 0;
@@ -4648,6 +4267,8 @@ public class PlayerDataBase : ScriptableObject
 
         resetInfo = new ResetInfo();
         equip.Initialize();
+        seasonRewardInfo.Initialize();
+        couponInfo.Initialize();
 
         nextFoodNumber = 0;
 
@@ -4929,18 +4550,6 @@ public class PlayerDataBase : ScriptableObject
         dungeon3Level = 0;
         dungeon4Level = 0;
 
-        season1Reward = 0;
-        season2Reward = 0;
-        season3Reward = 0;
-        season4Reward = 0;
-        season5Reward = 0;
-        season6Reward = 0;
-        season7Reward = 0;
-        season8Reward = 0;
-        season9Reward = 0;
-        season10Reward = 0;
-        season11Reward = 0;
-
         skill1 = 0;
         skill2 = 0;
         skill3 = 0;
@@ -4967,34 +4576,6 @@ public class PlayerDataBase : ScriptableObject
         portion4 = 0;
         portion5 = 0;
         portion6 = 0;
-
-        coupon1 = 0;
-        coupon2 = 0;
-        coupon3 = 0;
-        coupon4 = 0;
-        coupon5 = 0;
-        coupon6 = 0;
-        coupon7 = 0;
-        coupon8 = 0;
-        coupon9 = 0;
-        coupon10 = 0;
-        coupon11 = 0;
-        coupon12 = 0;
-        coupon13 = 0;
-
-        spCoupon1 = 0;
-        spCoupon2 = 0;
-        spCoupon3 = 0;
-        spCoupon4 = 0;
-        spCoupon5 = 0;
-        spCoupon6 = 0;
-        spCoupon7 = 0;
-        spCoupon8 = 0;
-        spCoupon9 = 0;
-        spCoupon10 = 0;
-        spCoupon11 = 0;
-        spCoupon12 = 0;
-        SpCoupon13 = 0;
 
         package1 = false;
         package2 = false;

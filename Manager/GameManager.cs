@@ -236,6 +236,7 @@ public class GameManager : MonoBehaviour
     private int maxLevel = 0;
     private int recoverLevel = 0;
     private int playTime = 0;
+    private int upgradeIndex = 0;
 
     private int supportCount = 0;
     private int supportMaxCount = 499;
@@ -721,6 +722,36 @@ public class GameManager : MonoBehaviour
                 break;
             case 10:
                 bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_10;
+                break;
+            case 11:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_11;
+                break;
+            case 12:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_12;
+                break;
+            case 13:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_13;
+                break;
+            case 14:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_14;
+                break;
+            case 15:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_15;
+                break;
+            case 16:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_16;
+                break;
+            case 17:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_17;
+                break;
+            case 18:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_18;
+                break;
+            case 19:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_19;
+                break;
+            case 20:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_20;
                 break;
         }
 
@@ -1221,6 +1252,36 @@ public class GameManager : MonoBehaviour
             case 10:
                 bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_10;
                 break;
+            case 11:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_11;
+                break;
+            case 12:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_12;
+                break;
+            case 13:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_13;
+                break;
+            case 14:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_14;
+                break;
+            case 15:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_15;
+                break;
+            case 16:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_16;
+                break;
+            case 17:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_17;
+                break;
+            case 18:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_18;
+                break;
+            case 19:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_19;
+                break;
+            case 20:
+                bestRankLevelText.plusText = " : Lv." + playerDataBase.TotalLevel_20;
+                break;
         }
 
         bestRankLevelText.ReLoad();
@@ -1614,170 +1675,252 @@ public class GameManager : MonoBehaviour
 
 #if !UNITY_EDITOR
 
-        if (GameStateManager.instance.GameType == GameType.Rank)
+        if (playerDataBase.TestAccount == 0)
         {
-            if (GameStateManager.instance.RankFoodLevel[0] + 1 > playerDataBase.RankLevel1)
+            if (GameStateManager.instance.GameType == GameType.Rank)
             {
-                playerDataBase.RankLevel1 = GameStateManager.instance.RankFoodLevel[0] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel1", playerDataBase.RankLevel1);
-            }
+                if (GameStateManager.instance.RankFoodLevel[0] + 1 > playerDataBase.RankLevel1)
+                {
+                    playerDataBase.RankLevel1 = GameStateManager.instance.RankFoodLevel[0] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel1", playerDataBase.RankLevel1);
+                }
 
-            if (GameStateManager.instance.RankFoodLevel[1] + 1 > playerDataBase.RankLevel2)
-            {
-                playerDataBase.RankLevel2 = GameStateManager.instance.RankFoodLevel[1] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel2", playerDataBase.RankLevel2);
-            }
+                if (GameStateManager.instance.RankFoodLevel[1] + 1 > playerDataBase.RankLevel2)
+                {
+                    playerDataBase.RankLevel2 = GameStateManager.instance.RankFoodLevel[1] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel2", playerDataBase.RankLevel2);
+                }
 
-            if (GameStateManager.instance.RankFoodLevel[2] + 1 > playerDataBase.RankLevel3)
-            {
-                playerDataBase.RankLevel3 = GameStateManager.instance.RankFoodLevel[2] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel3", playerDataBase.RankLevel3);
-            }
+                if (GameStateManager.instance.RankFoodLevel[2] + 1 > playerDataBase.RankLevel3)
+                {
+                    playerDataBase.RankLevel3 = GameStateManager.instance.RankFoodLevel[2] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel3", playerDataBase.RankLevel3);
+                }
 
-            if (GameStateManager.instance.RankFoodLevel[3] + 1 > playerDataBase.RankLevel4)
-            {
-                playerDataBase.RankLevel4 = GameStateManager.instance.RankFoodLevel[3] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel4", playerDataBase.RankLevel4);
-            }
+                if (GameStateManager.instance.RankFoodLevel[3] + 1 > playerDataBase.RankLevel4)
+                {
+                    playerDataBase.RankLevel4 = GameStateManager.instance.RankFoodLevel[3] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel4", playerDataBase.RankLevel4);
+                }
 
-            yield return serverSeconds;
+                yield return serverSeconds;
 
-            if (GameStateManager.instance.RankFoodLevel[4] + 1 > playerDataBase.RankLevel5)
-            {
-                playerDataBase.RankLevel5 = GameStateManager.instance.RankFoodLevel[4] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel5", playerDataBase.RankLevel5);
-            }
+                if (GameStateManager.instance.RankFoodLevel[4] + 1 > playerDataBase.RankLevel5)
+                {
+                    playerDataBase.RankLevel5 = GameStateManager.instance.RankFoodLevel[4] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel5", playerDataBase.RankLevel5);
+                }
 
-            if (GameStateManager.instance.RankFoodLevel[5] + 1 > playerDataBase.RankLevel6)
-            {
-                playerDataBase.RankLevel6 = GameStateManager.instance.RankFoodLevel[5] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel6", playerDataBase.RankLevel6);
-            }
+                if (GameStateManager.instance.RankFoodLevel[5] + 1 > playerDataBase.RankLevel6)
+                {
+                    playerDataBase.RankLevel6 = GameStateManager.instance.RankFoodLevel[5] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel6", playerDataBase.RankLevel6);
+                }
 
-            if (GameStateManager.instance.RankFoodLevel[6] + 1 > playerDataBase.RankLevel7)
-            {
-                playerDataBase.RankLevel7 = GameStateManager.instance.RankFoodLevel[6] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel7", playerDataBase.RankLevel7);
-            }
+                if (GameStateManager.instance.RankFoodLevel[6] + 1 > playerDataBase.RankLevel7)
+                {
+                    playerDataBase.RankLevel7 = GameStateManager.instance.RankFoodLevel[6] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel7", playerDataBase.RankLevel7);
+                }
 
-            if (GameStateManager.instance.RankFoodLevel[7] + 1 > playerDataBase.RankLevel8)
-            {
-                playerDataBase.RankLevel8 = GameStateManager.instance.RankFoodLevel[7] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel8", playerDataBase.RankLevel8);
-            }
+                if (GameStateManager.instance.RankFoodLevel[7] + 1 > playerDataBase.RankLevel8)
+                {
+                    playerDataBase.RankLevel8 = GameStateManager.instance.RankFoodLevel[7] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel8", playerDataBase.RankLevel8);
+                }
 
-            yield return serverSeconds;
+                yield return serverSeconds;
 
-            if (GameStateManager.instance.RankFoodLevel[8] + 1 > playerDataBase.RankLevel9)
-            {
-                playerDataBase.RankLevel9 = GameStateManager.instance.RankFoodLevel[8] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel9", playerDataBase.RankLevel9);
-            }
+                if (GameStateManager.instance.RankFoodLevel[8] + 1 > playerDataBase.RankLevel9)
+                {
+                    playerDataBase.RankLevel9 = GameStateManager.instance.RankFoodLevel[8] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel9", playerDataBase.RankLevel9);
+                }
 
-            if (GameStateManager.instance.RankFoodLevel[9] + 1 > playerDataBase.RankLevel10)
-            {
-                playerDataBase.RankLevel10 = GameStateManager.instance.RankFoodLevel[9] + 1;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel10", playerDataBase.RankLevel10);
-            }
+                if (GameStateManager.instance.RankFoodLevel[9] + 1 > playerDataBase.RankLevel10)
+                {
+                    playerDataBase.RankLevel10 = GameStateManager.instance.RankFoodLevel[9] + 1;
+                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankLevel10", playerDataBase.RankLevel10);
+                }
 
-            yield return serverSeconds;
+                yield return serverSeconds;
 
-            rankTotalLevel = playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4 + playerDataBase.RankLevel5
-                + playerDataBase.RankLevel6 + playerDataBase.RankLevel7 + playerDataBase.RankLevel8 + playerDataBase.RankLevel9 + playerDataBase.RankLevel10;
+                rankTotalLevel = playerDataBase.RankLevel1 + playerDataBase.RankLevel2 + playerDataBase.RankLevel3 + playerDataBase.RankLevel4 + playerDataBase.RankLevel5
+                    + playerDataBase.RankLevel6 + playerDataBase.RankLevel7 + playerDataBase.RankLevel8 + playerDataBase.RankLevel9 + playerDataBase.RankLevel10;
 
-            switch (season)
-            {
-                case 0:
-                    if (rankTotalLevel > playerDataBase.TotalLevel)
-                    {
-                        playerDataBase.TotalLevel = rankTotalLevel;
+                switch (season)
+                {
+                    case 0:
+                        if (rankTotalLevel > playerDataBase.TotalLevel)
+                        {
+                            playerDataBase.TotalLevel = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
-                    }
-                    break;
-                case 1:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_1)
-                    {
-                        playerDataBase.TotalLevel_1 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel", playerDataBase.TotalLevel);
+                        }
+                        break;
+                    case 1:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_1)
+                        {
+                            playerDataBase.TotalLevel_1 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_1", playerDataBase.TotalLevel_1);
-                    }
-                    break;
-                case 2:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_2)
-                    {
-                        playerDataBase.TotalLevel_2 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_1", playerDataBase.TotalLevel_1);
+                        }
+                        break;
+                    case 2:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_2)
+                        {
+                            playerDataBase.TotalLevel_2 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_2", playerDataBase.TotalLevel_2);
-                    }
-                    break;
-                case 3:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_3)
-                    {
-                        playerDataBase.TotalLevel_3 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_2", playerDataBase.TotalLevel_2);
+                        }
+                        break;
+                    case 3:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_3)
+                        {
+                            playerDataBase.TotalLevel_3 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_3", playerDataBase.TotalLevel_3);
-                    }
-                    break;
-                case 4:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_4)
-                    {
-                        playerDataBase.TotalLevel_4 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_3", playerDataBase.TotalLevel_3);
+                        }
+                        break;
+                    case 4:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_4)
+                        {
+                            playerDataBase.TotalLevel_4 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_4", playerDataBase.TotalLevel_4);
-                    }
-                    break;
-                case 5:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_5)
-                    {
-                        playerDataBase.TotalLevel_5 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_4", playerDataBase.TotalLevel_4);
+                        }
+                        break;
+                    case 5:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_5)
+                        {
+                            playerDataBase.TotalLevel_5 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_5", playerDataBase.TotalLevel_5);
-                    }
-                    break;
-                case 6:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_6)
-                    {
-                        playerDataBase.TotalLevel_6 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_5", playerDataBase.TotalLevel_5);
+                        }
+                        break;
+                    case 6:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_6)
+                        {
+                            playerDataBase.TotalLevel_6 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_6", playerDataBase.TotalLevel_6);
-                    }
-                    break;
-                case 7:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_7)
-                    {
-                        playerDataBase.TotalLevel_7 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_6", playerDataBase.TotalLevel_6);
+                        }
+                        break;
+                    case 7:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_7)
+                        {
+                            playerDataBase.TotalLevel_7 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_7", playerDataBase.TotalLevel_7);
-                    }
-                    break;
-                case 8:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_1)
-                    {
-                        playerDataBase.TotalLevel_8 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_7", playerDataBase.TotalLevel_7);
+                        }
+                        break;
+                    case 8:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_1)
+                        {
+                            playerDataBase.TotalLevel_8 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_8", playerDataBase.TotalLevel_8);
-                    }
-                    break;
-                case 9:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_9)
-                    {
-                        playerDataBase.TotalLevel_9 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_8", playerDataBase.TotalLevel_8);
+                        }
+                        break;
+                    case 9:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_9)
+                        {
+                            playerDataBase.TotalLevel_9 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_9", playerDataBase.TotalLevel_9);
-                    }
-                    break;
-                case 10:
-                    if (rankTotalLevel > playerDataBase.TotalLevel_10)
-                    {
-                        playerDataBase.TotalLevel_10 = rankTotalLevel;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_9", playerDataBase.TotalLevel_9);
+                        }
+                        break;
+                    case 10:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_10)
+                        {
+                            playerDataBase.TotalLevel_10 = rankTotalLevel;
 
-                        PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_10", playerDataBase.TotalLevel_10);
-                    }
-                    break;
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_10", playerDataBase.TotalLevel_10);
+                        }
+                        break;
+                    case 11:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_11)
+                        {
+                            playerDataBase.TotalLevel_11 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_11", playerDataBase.TotalLevel_11);
+                        }
+                        break;
+                    case 12:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_12)
+                        {
+                            playerDataBase.TotalLevel_12 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_12", playerDataBase.TotalLevel_12);
+                        }
+                        break;
+                    case 13:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_13)
+                        {
+                            playerDataBase.TotalLevel_13 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_13", playerDataBase.TotalLevel_13);
+                        }
+                        break;
+                    case 14:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_14)
+                        {
+                            playerDataBase.TotalLevel_14 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_14", playerDataBase.TotalLevel_14);
+                        }
+                        break;
+                    case 15:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_15)
+                        {
+                            playerDataBase.TotalLevel_15 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_15", playerDataBase.TotalLevel_15);
+                        }
+                        break;
+                    case 16:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_16)
+                        {
+                            playerDataBase.TotalLevel_16 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_16", playerDataBase.TotalLevel_16);
+                        }
+                        break;
+                    case 17:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_17)
+                        {
+                            playerDataBase.TotalLevel_17 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_17", playerDataBase.TotalLevel_17);
+                        }
+                        break;
+                    case 18:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_18)
+                        {
+                            playerDataBase.TotalLevel_18 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_18", playerDataBase.TotalLevel_18);
+                        }
+                        break;
+                    case 19:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_19)
+                        {
+                            playerDataBase.TotalLevel_19 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_19", playerDataBase.TotalLevel_19);
+                        }
+                        break;
+                    case 20:
+                        if (rankTotalLevel > playerDataBase.TotalLevel_20)
+                        {
+                            playerDataBase.TotalLevel_20 = rankTotalLevel;
+
+                            PlayfabManager.instance.UpdatePlayerStatisticsInsert("TotalLevel_20", playerDataBase.TotalLevel_20);
+                        }
+                        break;
+                }
             }
         }
-
 #endif
 
         StartCoroutine(ServerDelayCoroution());
@@ -1881,7 +2024,7 @@ public class GameManager : MonoBehaviour
 
         OFFSpeicalFood();
 
-        if (type == FoodType.Food4 && GameStateManager.instance.StoreType != StoreType.OneStore)
+        if (type == FoodType.Food12 && GameStateManager.instance.StoreType != StoreType.OneStore)
         {
             if (!playerDataBase.AppReview)
             {
@@ -2360,7 +2503,11 @@ public class GameManager : MonoBehaviour
             {
                 supportCount = 0;
 
+                supportMaxCount = Random.Range(400, 601);
+
                 OpenSupportPackage();
+
+                GoogleAdsManager.instance.admobReward_All.ShowAd(99);
             }
             else
             {
@@ -2413,10 +2560,14 @@ public class GameManager : MonoBehaviour
                     if (level + 3 >= maxLevel - 1)
                     {
                         level += 1;
+
+                        upgradeIndex = 0;
                     }
                     else
                     {
                         level += 3;
+
+                        upgradeIndex = 1;
                     }
 
                     if (!changeFoodManager.changeFoodView.activeInHierarchy)
@@ -2427,6 +2578,8 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     level += 1;
+
+                    upgradeIndex = 0;
                 }
             }
             else
@@ -2438,10 +2591,14 @@ public class GameManager : MonoBehaviour
                         if (level + 2 >= maxLevel - 1)
                         {
                             level += 1;
+
+                            upgradeIndex = 0;
                         }
                         else
                         {
                             level += 2;
+
+                            upgradeIndex = 1;
                         }
 
                         if (!changeFoodManager.changeFoodView.activeInHierarchy)
@@ -2452,11 +2609,15 @@ public class GameManager : MonoBehaviour
                     else
                     {
                         level += 1;
+
+                        upgradeIndex = 0;
                     }
                 }
                 else
                 {
                     level += 1;
+
+                    upgradeIndex = 0;
                 }
             }
 
@@ -2476,7 +2637,18 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if ((level + 1) % 5 == 0)
+                if (upgradeIndex == 0)
+                {
+                    if (GameStateManager.instance.Effect)
+                    {
+                        level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
+                        level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
+                        level1UpParticle[(int)GameStateManager.instance.ParticleType].Play();
+                    }
+
+                    SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+                }
+                else
                 {
                     SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
 
@@ -2490,17 +2662,6 @@ public class GameManager : MonoBehaviour
                         level5UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
                         level5UpParticle[(int)GameStateManager.instance.ParticleType].Play();
                     }
-                }
-                else
-                {
-                    if (GameStateManager.instance.Effect)
-                    {
-                        level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
-                        level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
-                        level1UpParticle[(int)GameStateManager.instance.ParticleType].Play();
-                    }
-
-                    SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
                 }
 
                 SaveFoodLevel(level);

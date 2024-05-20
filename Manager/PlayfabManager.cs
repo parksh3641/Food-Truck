@@ -2388,39 +2388,6 @@ public class PlayfabManager : MonoBehaviour
                        case "YummyTimeCount":
                            playerDataBase.YummyTimeCount = statistics.Value;
                            break;
-                       case "Season1Reward":
-                           playerDataBase.Season1Reward = statistics.Value;
-                           break;
-                       case "Season2Reward":
-                           playerDataBase.Season2Reward = statistics.Value;
-                           break;
-                       case "Season3Reward":
-                           playerDataBase.Season3Reward = statistics.Value;
-                           break;
-                       case "Season4Reward":
-                           playerDataBase.Season4Reward = statistics.Value;
-                           break;
-                       case "Season5Reward":
-                           playerDataBase.Season5Reward = statistics.Value;
-                           break;
-                       case "Season6Reward":
-                           playerDataBase.Season6Reward = statistics.Value;
-                           break;
-                       case "Season7Reward":
-                           playerDataBase.Season7Reward = statistics.Value;
-                           break;
-                       case "Season8Reward":
-                           playerDataBase.Season8Reward = statistics.Value;
-                           break;
-                       case "Season9Reward":
-                           playerDataBase.Season9Reward = statistics.Value;
-                           break;
-                       case "Season10Reward":
-                           playerDataBase.Season10Reward = statistics.Value;
-                           break;
-                       case "Season11Reward":
-                           playerDataBase.Season11Reward = statistics.Value;
-                           break;
                        case "QuestCount":
                            playerDataBase.QuestCount = statistics.Value;
                            break;
@@ -2594,84 +2561,6 @@ public class PlayfabManager : MonoBehaviour
                        case "Portion6":
                            playerDataBase.Portion6 = statistics.Value;
                            break;
-                       case "Coupon1":
-                           playerDataBase.Coupon1 = statistics.Value;
-                           break;
-                       case "Coupon2":
-                           playerDataBase.Coupon2 = statistics.Value;
-                           break;
-                       case "Coupon3":
-                           playerDataBase.Coupon3 = statistics.Value;
-                           break;
-                       case "Coupon4":
-                           playerDataBase.Coupon4 = statistics.Value;
-                           break;
-                       case "Coupon5":
-                           playerDataBase.Coupon5 = statistics.Value;
-                           break;
-                       case "Coupon6":
-                           playerDataBase.Coupon6 = statistics.Value;
-                           break;
-                       case "Coupon7":
-                           playerDataBase.Coupon7 = statistics.Value;
-                           break;
-                       case "Coupon8":
-                           playerDataBase.Coupon8 = statistics.Value;
-                           break;
-                       case "Coupon9":
-                           playerDataBase.Coupon9 = statistics.Value;
-                           break;
-                       case "Coupon10":
-                           playerDataBase.Coupon10 = statistics.Value;
-                           break;
-                       case "Coupon11":
-                           playerDataBase.Coupon11 = statistics.Value;
-                           break;
-                       case "Coupon12":
-                           playerDataBase.Coupon12 = statistics.Value;
-                           break;
-                       case "Coupon13":
-                           playerDataBase.Coupon13 = statistics.Value;
-                           break;
-                       case "SpCoupon1":
-                           playerDataBase.SpCoupon1 = statistics.Value;
-                           break;
-                       case "SpCoupon2":
-                           playerDataBase.SpCoupon2 = statistics.Value;
-                           break;
-                       case "SpCoupon3":
-                           playerDataBase.SpCoupon3 = statistics.Value;
-                           break;
-                       case "SpCoupon4":
-                           playerDataBase.SpCoupon4 = statistics.Value;
-                           break;
-                       case "SpCoupon5":
-                           playerDataBase.SpCoupon5 = statistics.Value;
-                           break;
-                       case "SpCoupon6":
-                           playerDataBase.SpCoupon6 = statistics.Value;
-                           break;
-                       case "SpCoupon7":
-                           playerDataBase.SpCoupon7 = statistics.Value;
-                           break;
-                       case "SpCoupon8":
-                           playerDataBase.SpCoupon8 = statistics.Value;
-                           break;
-                       case "SpCoupon9":
-                           playerDataBase.SpCoupon9 = statistics.Value;
-                           break;
-                       case "SpCoupon10":
-                           playerDataBase.SpCoupon10 = statistics.Value;
-                           break;
-                       case "SpCoupon11":
-                           playerDataBase.SpCoupon11 = statistics.Value;
-                           break;
-                       case "SpCoupon12":
-                           playerDataBase.SpCoupon12 = statistics.Value;
-                           break;
-                       case "SpCoupon13":
-                           playerDataBase.SpCoupon13 = statistics.Value;
-                           break;
                        case "Package7":
                            playerDataBase.Package7 = statistics.Value;
                            break;
@@ -2806,6 +2695,33 @@ public class PlayfabManager : MonoBehaviour
                        case "TotalLevel_11":
                            playerDataBase.TotalLevel_11 = statistics.Value;
                            break;
+                       case "TotalLevel_12":
+                           playerDataBase.TotalLevel_12 = statistics.Value;
+                           break;
+                       case "TotalLevel_13":
+                           playerDataBase.TotalLevel_13 = statistics.Value;
+                           break;
+                       case "TotalLevel_14":
+                           playerDataBase.TotalLevel_14 = statistics.Value;
+                           break;
+                       case "TotalLevel_15":
+                           playerDataBase.TotalLevel_15 = statistics.Value;
+                           break;
+                       case "TotalLevel_16":
+                           playerDataBase.TotalLevel_16 = statistics.Value;
+                           break;
+                       case "TotalLevel_17":
+                           playerDataBase.TotalLevel_17 = statistics.Value;
+                           break;
+                       case "TotalLevel_18":
+                           playerDataBase.TotalLevel_18 = statistics.Value;
+                           break;
+                       case "TotalLevel_19":
+                           playerDataBase.TotalLevel_19 = statistics.Value;
+                           break;
+                       case "TotalLevel_20":
+                           playerDataBase.TotalLevel_20 = statistics.Value;
+                           break;
                        case "IslandReward":
                            playerDataBase.IslandReward = statistics.Value;
                            break;
@@ -2845,6 +2761,8 @@ public class PlayfabManager : MonoBehaviour
             Island_Total_Data island_Total_Data = new Island_Total_Data();
             ResetInfo resetInfo = new ResetInfo();
             Equip equip = new Equip();
+            SeasonRewardInfo seasonRewardInfo = new SeasonRewardInfo();
+            CouponInfo couponInfo = new CouponInfo();
 
             foreach (var eachData in result.Data)
             {
@@ -2862,8 +2780,17 @@ public class PlayfabManager : MonoBehaviour
                 else if (key.Contains("Island_Total_Data"))
                 {
                     island_Total_Data = JsonUtility.FromJson<Island_Total_Data>(eachData.Value.Value);
-
                     playerDataBase.island_Total_Data.SaveServerData(island_Total_Data);
+                }
+                else if (key.Contains("SeasonRewardInfo"))
+                {
+                    seasonRewardInfo = JsonUtility.FromJson<SeasonRewardInfo>(eachData.Value.Value);
+                    playerDataBase.seasonRewardInfo.SaveServerData(seasonRewardInfo);
+                }
+                else if (key.Contains("CouponInfo"))
+                {
+                    couponInfo = JsonUtility.FromJson<CouponInfo>(eachData.Value.Value);
+                    playerDataBase.couponInfo.SaveServerData(couponInfo);
                 }
             }
 

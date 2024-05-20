@@ -153,6 +153,33 @@ public class RankingManager : MonoBehaviour
                 case 10:
                     rankingRewardDateText.text += "2024.06.17 ~ 2024.06.30";
                     break;
+                case 11:
+                    rankingRewardDateText.text += "2024.07.02 ~ 2024.07.16";
+                    break;
+                case 12:
+                    rankingRewardDateText.text += "2024.07.18 ~ 2024.07.31";
+                    break;
+                case 13:
+                    rankingRewardDateText.text += "2024.08.02 ~ 2024.08.16";
+                    break;
+                case 14:
+                    rankingRewardDateText.text += "2024.08.18 ~ 2024.08.31";
+                    break;
+                case 15:
+                    rankingRewardDateText.text += "2024.09.02 ~ 2024.09.15";
+                    break;
+                case 16:
+                    rankingRewardDateText.text += "2024.09.16 ~ 2024.09.30";
+                    break;
+                case 17:
+                    rankingRewardDateText.text += "2024.10.02 ~ 2024.10.16";
+                    break;
+                case 18:
+                    rankingRewardDateText.text += "2024.10.18 ~ 2024.10.31";
+                    break;
+                case 19:
+                    rankingRewardDateText.text += "2024.11.02 ~ 2024.11.15";
+                    break;
                 default:
                     rankingRewardDateText.text = LocalizationManager.instance.GetString("SeasonWait");
                     break;
@@ -164,26 +191,26 @@ public class RankingManager : MonoBehaviour
             }
 
             receiveContents[0].Initialize(RewardType.Crystal, 5000);
-            receiveContents[1].Initialize(RewardType.RankPoint, 15000);
+            receiveContents[1].Initialize(RewardType.RankPoint, 10000);
             receiveContents[2].Initialize(RewardType.Icon_Ranking1, 1);
 
             receiveContents[3].Initialize(RewardType.Crystal, 2500);
-            receiveContents[4].Initialize(RewardType.RankPoint, 7500);
+            receiveContents[4].Initialize(RewardType.RankPoint, 5000);
             receiveContents[5].Initialize(RewardType.Icon_Ranking2, 1);
 
             receiveContents[6].Initialize(RewardType.Crystal, 1500);
-            receiveContents[7].Initialize(RewardType.RankPoint, 4500);
+            receiveContents[7].Initialize(RewardType.RankPoint, 2500);
             receiveContents[8].Initialize(RewardType.Icon_Ranking3, 1);
 
             receiveContents[9].Initialize(RewardType.Crystal, 1000);
-            receiveContents[10].Initialize(RewardType.RankPoint, 3000);
+            receiveContents[10].Initialize(RewardType.RankPoint, 1500);
             receiveContents[11].Initialize(RewardType.Icon_Ranking4, 1);
 
             receiveContents[12].Initialize(RewardType.Crystal, 750);
-            receiveContents[13].Initialize(RewardType.RankPoint, 2500);
+            receiveContents[13].Initialize(RewardType.RankPoint, 1000);
 
             receiveContents[14].Initialize(RewardType.Crystal, 500);
-            receiveContents[15].Initialize(RewardType.RankPoint, 1500);
+            receiveContents[15].Initialize(RewardType.RankPoint, 750);
 
             receiveContents[16].Initialize(RewardType.Crystal, 250);
             receiveContents[17].Initialize(RewardType.RankPoint, 500);
@@ -548,6 +575,36 @@ public class RankingManager : MonoBehaviour
                         break;
                     case 10:
                         number = playerDataBase.TotalLevel_10;
+                        break;
+                    case 11:
+                        number = playerDataBase.TotalLevel_11;
+                        break;
+                    case 12:
+                        number = playerDataBase.TotalLevel_12;
+                        break;
+                    case 13:
+                        number = playerDataBase.TotalLevel_13;
+                        break;
+                    case 14:
+                        number = playerDataBase.TotalLevel_14;
+                        break;
+                    case 15:
+                        number = playerDataBase.TotalLevel_15;
+                        break;
+                    case 16:
+                        number = playerDataBase.TotalLevel_16;
+                        break;
+                    case 17:
+                        number = playerDataBase.TotalLevel_17;
+                        break;
+                    case 18:
+                        number = playerDataBase.TotalLevel_18;
+                        break;
+                    case 19:
+                        number = playerDataBase.TotalLevel_19;
+                        break;
+                    case 20:
+                        number = playerDataBase.TotalLevel_20;
                         break;
                 }
                 break;

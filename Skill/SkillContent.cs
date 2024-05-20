@@ -60,8 +60,8 @@ public class SkillContent : MonoBehaviour
 
     private int priceGold = 500000;
 
-    private int priceCrystal = 30;
-    private int maxCrystal = 30;
+    private int priceCrystal = 20;
+    private int maxCrystal = 100;
 
     private int priceCP = 10;
     private int addPriceCP = 10;
@@ -394,7 +394,12 @@ public class SkillContent : MonoBehaviour
             case MoneyType.Crystal:
                 value = priceCrystal + (priceCrystal * (level / 20));
 
-                if(skillType == SkillType.Skill10 || skillType == SkillType.Skill14)
+                if (value >= maxCrystal)
+                {
+                    value = maxCrystal;
+                }
+
+                if (skillType == SkillType.Skill10 || skillType == SkillType.Skill14)
                 {
                     levelText.text = "Lv. " + level + " / 100";
                 }

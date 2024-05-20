@@ -20,7 +20,7 @@ public class RankEventManager : MonoBehaviour
 
     private int totalLevel = 0;
     private int level = 50;
-    private int reward = 2;
+    private int reward = 10000;
 
     PlayerDataBase playerDataBase;
 
@@ -92,6 +92,36 @@ public class RankEventManager : MonoBehaviour
                 case 10:
                     totalLevel = playerDataBase.TotalLevel_10;
                     break;
+                case 11:
+                    totalLevel = playerDataBase.TotalLevel_11;
+                    break;
+                case 12:
+                    totalLevel = playerDataBase.TotalLevel_12;
+                    break;
+                case 13:
+                    totalLevel = playerDataBase.TotalLevel_13;
+                    break;
+                case 14:
+                    totalLevel = playerDataBase.TotalLevel_14;
+                    break;
+                case 15:
+                    totalLevel = playerDataBase.TotalLevel_15;
+                    break;
+                case 16:
+                    totalLevel = playerDataBase.TotalLevel_16;
+                    break;
+                case 17:
+                    totalLevel = playerDataBase.TotalLevel_17;
+                    break;
+                case 18:
+                    totalLevel = playerDataBase.TotalLevel_18;
+                    break;
+                case 19:
+                    totalLevel = playerDataBase.TotalLevel_19;
+                    break;
+                case 20:
+                    totalLevel = playerDataBase.TotalLevel_20;
+                    break;
             }
 
             rankEventText.text = LocalizationManager.instance.GetString("Ranking2") + " : " + totalLevel;
@@ -121,7 +151,7 @@ public class RankEventManager : MonoBehaviour
         for (int i = 0; i < attendanceContentArray.Length; i++)
         {
             attendanceContentArray[i].receiveContent[0].gameObject.SetActive(true);
-            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.TreasureBox, reward);
+            attendanceContentArray[i].receiveContent[0].Initialize(RewardType.Exp, reward);
         }
     }
 
@@ -134,7 +164,7 @@ public class RankEventManager : MonoBehaviour
             return;
         }
 
-        TreasureManager.instance.OpenTreasure(reward);
+        PortionManager.instance.GetExp(reward);
 
         playerDataBase.RankEventCount += 1;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("RankEventCount", playerDataBase.RankEventCount);

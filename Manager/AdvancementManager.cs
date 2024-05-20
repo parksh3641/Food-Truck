@@ -43,7 +43,7 @@ public class AdvancementManager : MonoBehaviour
     private int nowNeed3 = 0;
 
     private int need1 = 5;
-    private int need2 = 15000;
+    private int need2 = 50000;
     private int need3 = 3;
 
     private float nowValue1 = 0;
@@ -172,7 +172,7 @@ public class AdvancementManager : MonoBehaviour
             needImg[2].color = Color.green;
         }
 
-        if(playerDataBase.IslandNumber >= 2)
+        if(playerDataBase.IslandNumber >= 3 ||  playerDataBase.island_Total_Data.island_Max_Datas[3].index1 > 0)
         {
             titleLockedObj.SetActive(false);
 

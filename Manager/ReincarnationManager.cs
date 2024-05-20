@@ -105,7 +105,7 @@ public class ReincarnationManager : MonoBehaviour
 
         countText.text = LocalizationManager.instance.GetString("Reincarnation_Count") + " : " + playerDataBase.ReincarnationCount;
 
-        adText.text = "+" + MoneyUnitString.ToCurrencyString((int)point * 2).ToString();
+        adText.text = "+" + MoneyUnitString.ToCurrencyString((int)point * 3).ToString();
 
         if (point > 0 && plus > 0)
         {
@@ -184,7 +184,6 @@ public class ReincarnationManager : MonoBehaviour
 
         playerDataBase.NextFoodNumber = 0;
 
-        playerDataBase.YummyTimeCount = 0;
         GameStateManager.instance.YummyTimeCount = 0;
 
         GameManager.instance.Reincarnation();
@@ -198,16 +197,13 @@ public class ReincarnationManager : MonoBehaviour
         }
         else
         {
-            PortionManager.instance.GetChallengePoint((int)point * 2);
+            PortionManager.instance.GetChallengePoint((int)point * 3);
         }
 
         yield return waitForSeconds;
 
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("IslandNumber", playerDataBase.IslandNumber);
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("ReincarnationCount", playerDataBase.ReincarnationCount);
-
-        yield return waitForSeconds;
-
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("NextFoodNumber", playerDataBase.NextFoodNumber);
     }
 }

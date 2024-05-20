@@ -1131,7 +1131,7 @@ public class ShopManager : MonoBehaviour
 
                 PortionManager.instance.GetDefTicketPiece(1);
 
-                shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
+                shopContents[24].SetLocked(true);
                 shopContents[25].Initialize(ItemType.DefDestroyTicketPiece, BuyType.Free, this);
 
                 SoundManager.instance.PlaySFX(GameSfxType.Success);

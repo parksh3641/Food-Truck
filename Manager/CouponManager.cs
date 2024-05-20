@@ -18,6 +18,17 @@ public class CouponInfo
 
     public void Initialize()
     {
+        if(couponList.Count <= 0)
+        {
+            for (int i = 0; i < 999; i++)
+            {
+                couponList.Add(0);
+                couponList2.Add(0);
+                couponList3.Add(0);
+                spCouponList.Add(0);
+            }
+        }
+
         for (int i = 0; i < couponList.Count; i++)
         {
             couponList[i] = 0;

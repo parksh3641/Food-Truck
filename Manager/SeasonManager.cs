@@ -13,6 +13,14 @@ public class SeasonRewardInfo
 
     public void Initialize()
     {
+        if(seasonRewardList.Count <= 0)
+        {
+            for (int i = 0; i < 999; i++)
+            {
+                seasonRewardList.Add(0);
+            }
+        }
+
         for (int i = 0; i < seasonRewardList.Count; i ++)
         {
             seasonRewardList[i] = 0;

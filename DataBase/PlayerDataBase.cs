@@ -73,6 +73,8 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private int reviewNumber = 0;
     [SerializeField]
+    private int openKakao = 0;
+    [SerializeField]
     private int testAccount = 0;
     [SerializeField]
     private int update = 0;
@@ -1145,6 +1147,18 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             reviewNumber = value;
+        }
+    }
+
+    public int OpenKakao
+    {
+        get
+        {
+            return openKakao;
+        }
+        set
+        {
+            openKakao = value;
         }
     }
 
@@ -4239,6 +4253,7 @@ public class PlayerDataBase : ScriptableObject
         updateNumber = 0;
         friendsNumber = 0;
         reviewNumber = 0;
+        openKakao = 1;
         lockTutorial = 0;
         inGameTutorial = 0;
         icon = 0;

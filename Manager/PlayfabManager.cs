@@ -2163,6 +2163,9 @@ public class PlayfabManager : MonoBehaviour
                        case "ReviewNumber":
                            playerDataBase.ReviewNumber = statistics.Value;
                            break;
+                       case "OpenKakao":
+                           playerDataBase.OpenKakao = statistics.Value;
+                           break;
                        case "LockTutorial":
                            playerDataBase.LockTutorial = statistics.Value;
 

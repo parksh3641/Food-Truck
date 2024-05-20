@@ -19,8 +19,8 @@ public class RankEventManager : MonoBehaviour
     public AttendanceContent[] attendanceContentArray;
 
     private int totalLevel = 0;
-    private int level = 50;
-    private int reward = 10000;
+    private int level = 25;
+    private int reward = 20000;
 
     PlayerDataBase playerDataBase;
 

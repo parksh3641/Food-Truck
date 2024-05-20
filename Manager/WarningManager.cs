@@ -13,12 +13,15 @@ public class WarningManager : MonoBehaviour
 
     public GameObject friendsWarning;
     public GameObject reviewWarning;
+    public GameObject speicalCharacterWarning;
 
     public ReceiveContent receiveContent;
     public ReceiveContent receiveContent2;
     public ReceiveContent receiveContent3;
     public ReceiveContent receiveContent4;
+    public ReceiveContent receiveContent5;
 
+    List<string> itemList = new List<string>();
 
     PlayerDataBase playerDataBase;
 
@@ -32,6 +35,7 @@ public class WarningManager : MonoBehaviour
         accountStopWarning.SetActive(false);
         friendsWarning.SetActive(false);
         reviewWarning.SetActive(false);
+        speicalCharacterWarning.SetActive(false);
     }
 
     public void Initialize()
@@ -67,6 +71,11 @@ public class WarningManager : MonoBehaviour
         if (playerDataBase.ReviewNumber == 1) //리뷰 이벤트
         {
             OpenReviewWarning();
+        }
+
+        if (playerDataBase.OpenKakao == 1) //특별 캐릭터 이벤트
+        {
+            OpenSpeicalCharacterWarning();
         }
     }
 
@@ -226,5 +235,40 @@ public class WarningManager : MonoBehaviour
         }
 
         OpenReviewWarning();
+    }
+
+    public void OpenSpeicalCharacterWarning()
+    {
+        if (!speicalCharacterWarning.activeInHierarchy)
+        {
+            speicalCharacterWarning.SetActive(true);
+
+            receiveContent5.Initialize(RewardType.SpeicalCharacter, -1);
+        }
+        else
+        {
+            speicalCharacterWarning.SetActive(false);
+        }
+    }
+    public void ReceiveButton5()
+    {
+        SoundManager.instance.PlaySFX(GameSfxType.QuestReward);
+        NotionManager.instance.UseNotion(NotionType.SuccessReward);
+
+        playerDataBase.OpenKakao = 2;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("OpenKakao", playerDataBase.OpenKakao);
+
+        if (playerDataBase.Character21 == 0)
+        {
+            playerDataBase.Character21 = 1;
+
+            itemList.Clear();
+            itemList.Add(CharacterType.Character21.ToString());
+
+            PlayfabManager.instance.GrantItemToUser("Character", itemList);
+        }
+
+
+        OpenSpeicalCharacterWarning();
     }
 }

@@ -4253,7 +4253,7 @@ public class PlayerDataBase : ScriptableObject
         updateNumber = 0;
         friendsNumber = 0;
         reviewNumber = 0;
-        openKakao = 1;
+        openKakao = 0;
         lockTutorial = 0;
         inGameTutorial = 0;
         icon = 0;

@@ -16,6 +16,7 @@ public class BookContent : MonoBehaviour
     private bool isStart = false;
 
     public GameObject lockedObj;
+    public GameObject checkMark;
 
     Color speicalColor = new Color(1, 50f / 255f, 1);
 
@@ -73,5 +74,10 @@ public class BookContent : MonoBehaviour
     public void ChangeFood()
     {
         bookManager.CheckFood(foodType, index);
+    }
+
+    public void SetCheckMark(bool check)
+    {
+        checkMark.SetActive(check);
     }
 }

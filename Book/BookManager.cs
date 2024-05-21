@@ -105,6 +105,8 @@ public class BookManager : MonoBehaviour
             if (index == -1)
             {
                 ChangeTopToggle(0);
+
+                bookNormalContentList[0].SetCheckMark(true);
             }
 
             CheckFood(FoodType.Food1, 0);
@@ -240,6 +242,25 @@ public class BookManager : MonoBehaviour
         GameManager.instance.ChangeFood_Book(type, index);
 
         infoText.text = LocalizationManager.instance.GetString(type.ToString() + "_Info");
+
+        if (index == 0)
+        {
+            for (int i = 0; i < bookNormalContentList.Count; i++)
+            {
+                bookNormalContentList[i].SetCheckMark(false);
+            }
+
+            bookNormalContentList[(int)type].SetCheckMark(true);
+        }
+        else
+        {
+            for (int i = 0; i < bookEpicContentList.Count; i++)
+            {
+                bookEpicContentList[i].SetCheckMark(false);
+            }
+
+            bookEpicContentList[(int)type].SetCheckMark(true);
+        }
     }
 
     public void Zoom()

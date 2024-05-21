@@ -932,6 +932,14 @@ public class DungeonManager : MonoBehaviour
                 case RewardType.RankPoint:
                     break;
                 case RewardType.RepairTicket:
+                    if (skip)
+                    {
+                        PortionManager.instance.GetRepairTickets(reward / 2);
+                    }
+                    else
+                    {
+                        PortionManager.instance.GetRepairTickets(reward);
+                    }
                     break;
                 case RewardType.RemoveAds:
                     break;

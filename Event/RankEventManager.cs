@@ -20,7 +20,7 @@ public class RankEventManager : MonoBehaviour
 
     private int totalLevel = 0;
     private int level = 25;
-    private int reward = 20000;
+    private int reward = 50000;
 
     PlayerDataBase playerDataBase;
 

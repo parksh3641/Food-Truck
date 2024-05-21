@@ -155,8 +155,6 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = epicColor;
 
-                effect.SetActive(true);
-
                 break;
             case TreasureType.Treasure3:
                 count = playerDataBase.Treasure3Count;
@@ -438,8 +436,6 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = epicColor;
 
-                effect.SetActive(true);
-
                 break;
             case TreasureType.Treasure14:
                 count = playerDataBase.Treasure14Count;
@@ -464,8 +460,6 @@ public class TreasureContent : MonoBehaviour
                 }
 
                 background.effectColor = epicColor;
-
-                effect.SetActive(true);
 
                 break;
             case TreasureType.Treasure15:
@@ -492,7 +486,6 @@ public class TreasureContent : MonoBehaviour
 
                 background.effectColor = epicColor;
 
-                effect.SetActive(true);
                 break;
         }
 

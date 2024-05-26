@@ -6064,7 +6064,7 @@ public class ShopManager : MonoBehaviour
 
                 yield return waitForSeconds;
 
-                PortionManager.instance.GetDefTickets(50);
+                PortionManager.instance.GetAllPortion(50);
 
                 yield return waitForSeconds;
 

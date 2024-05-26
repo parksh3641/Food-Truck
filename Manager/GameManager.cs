@@ -258,6 +258,7 @@ public class GameManager : MonoBehaviour
     private int gender = 0;
 
     private int rankTotalLevel = 0;
+    private int bankruptcy = 0;
 
     private float rareFoodPercent = 10.0f;
     private float recoverTicketPercent = 5.0f;
@@ -3225,9 +3226,6 @@ public class GameManager : MonoBehaviour
 
                     PortionManager.instance.GetEventTicket(1);
 
-                    playerDataBase.EventTicketCount += 1;
-                    PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
-
                     Debug.LogError("Get Event Ticket");
                 }
             }
@@ -4410,17 +4408,21 @@ public class GameManager : MonoBehaviour
 
     void CheckBankruptcy()
     {
-        if(playerDataBase.Coin < 1000)
+        if(playerDataBase.Coin < 10000)
         {
             bankruptcyView.SetActive(true);
 
             if(GameStateManager.instance.Bankruptcy < 1)
             {
-                bankReceiveContent.Initialize(RewardType.Gold, 100000);
+                bankruptcy = 1000000;
+
+                bankReceiveContent.Initialize(RewardType.Gold, 1000000);
             }
             else
             {
-                bankReceiveContent.Initialize(RewardType.Gold, 10000);
+                bankruptcy = 50000 * (playerDataBase.IslandNumber_Ranking + 1);
+
+                bankReceiveContent.Initialize(RewardType.Gold, 50000 * (playerDataBase.IslandNumber_Ranking + 1));
             }
 
             FirebaseAnalytics.LogEvent("Open_Bankruptcy");
@@ -4431,16 +4433,8 @@ public class GameManager : MonoBehaviour
     {
         bankruptcyView.SetActive(false);
 
-        if (GameStateManager.instance.Bankruptcy < 1)
-        {
-            PlayfabManager.instance.UpdateSellPriceGold(100000);
-            PlayfabManager.instance.moneyAnimation.PlusMoney(100000);
-        }
-        else
-        {
-            PlayfabManager.instance.UpdateSellPriceGold(10000);
-            PlayfabManager.instance.moneyAnimation.PlusMoney(10000);
-        }
+        PlayfabManager.instance.UpdateSellPriceGold(bankruptcy);
+        PlayfabManager.instance.moneyAnimation.PlusMoney(bankruptcy);
 
         FirebaseAnalytics.LogEvent("Clear_Bankruptcy : " + GameStateManager.instance.Bankruptcy);
 

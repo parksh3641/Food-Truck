@@ -62,7 +62,7 @@ public class ChestBoxManager : MonoBehaviour
         chestBoxIcon.SetActive(false);
         chestBoxView.SetActive(false);
 
-        goalCount = 270;
+        goalCount = 300;
 
         if (playerDataBase.AutoPresent)
         {

@@ -203,6 +203,9 @@ public class PortionManager : MonoBehaviour
         playerDataBase.EventTicket += number;
         PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicket", playerDataBase.EventTicket);
 
+        playerDataBase.EventTicketCount += 10;
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
+
         eventTicketAnimation.PlusMoney(number);
 
         equipmentManager.mainAlarm.SetActive(true);

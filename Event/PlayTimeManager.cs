@@ -116,9 +116,6 @@ public class PlayTimeManager : MonoBehaviour
                 break;
             case 4:
                 PortionManager.instance.GetEventTicket(10);
-
-                playerDataBase.EventTicketCount += 5;
-                PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
                 break;
             case 5:
                 TreasureManager.instance.OpenTreasure(1);

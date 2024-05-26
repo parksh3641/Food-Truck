@@ -159,6 +159,8 @@ public class PlayfabManager : MonoBehaviour
             Debug.Log("앱은 알 수 없는 소스에서 설치되었습니다.");
         }
 #endif
+
+        //GameStateManager.instance.StoreType = StoreType.OneStore;
     }
 
     public void Login()

@@ -221,9 +221,6 @@ public class WelcomeManager : MonoBehaviour
 
         PortionManager.instance.GetEventTicket(100);
 
-        playerDataBase.EventTicketCount += 100;
-        PlayfabManager.instance.UpdatePlayerStatisticsInsert("EventTicketCount", playerDataBase.EventTicketCount);
-
         playerDataBase.WelcomeCount += 1;
         playerDataBase.WelcomeCheck = true;
 

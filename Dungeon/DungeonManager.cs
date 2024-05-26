@@ -439,7 +439,7 @@ public class DungeonManager : MonoBehaviour
                 break;
         }
 
-        FirebaseAnalytics.LogEvent("Count_Dungeon : " + dungeonType.ToString());
+        FirebaseAnalytics.LogEvent("Dungeon : " + dungeonType.ToString());
 
         StartCoroutine(EnterDungeonCoroution());
     }
@@ -718,7 +718,7 @@ public class DungeonManager : MonoBehaviour
 
         damageNotion.gameObject.SetActive(false);
 
-        FirebaseAnalytics.LogEvent("Clear_Dungeon : " + dungeonType.ToString());
+        FirebaseAnalytics.LogEvent("Dungeon : " + dungeonType.ToString());
 
         bossFoodContents[(int)dungeonType].gameObject.SetActive(false);
 

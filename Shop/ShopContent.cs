@@ -404,6 +404,13 @@ public class ShopContent : MonoBehaviour
                 effect.SetActive(true);
                 break;
             case ItemType.DefDestroyTicketPiece:
+
+                if (playerDataBase.resetInfo.dailyReward_DefTicket == 1)
+                {
+                    lockedObj.SetActive(true);
+                    return;
+                }
+
                 lockedObj.SetActive(false);
 
                 titleText.plusText = " x1";

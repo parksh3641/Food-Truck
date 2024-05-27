@@ -2292,10 +2292,10 @@ public class GameManager : MonoBehaviour
 
         success += successPlus;
 
-        if (success >= 100)
-        {
-            success = 100;
-        }
+        //if (success >= 100)
+        //{
+        //    success = 100;
+        //}
 
         //if (success < 1f)
         //{
@@ -2568,13 +2568,10 @@ public class GameManager : MonoBehaviour
                     {
                         level += 3;
 
-                        upgradeIndex = 1;
+                        upgradeIndex = 2;
                     }
 
-                    if (!changeFoodManager.changeFoodView.activeInHierarchy)
-                    {
-                        NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX3);
-                    }
+                    NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX3);
                 }
                 else
                 {
@@ -2602,10 +2599,7 @@ public class GameManager : MonoBehaviour
                             upgradeIndex = 1;
                         }
 
-                        if (!changeFoodManager.changeFoodView.activeInHierarchy)
-                        {
-                            NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX2);
-                        }
+                        NotionManager.instance.UseNotion(NotionType.SuccessUpgradeX2);
                     }
                     else
                     {
@@ -2651,8 +2645,6 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
-
                     if (GameStateManager.instance.Effect)
                     {
                         level1UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(false);
@@ -2663,6 +2655,15 @@ public class GameManager : MonoBehaviour
                         level5UpParticle[(int)GameStateManager.instance.ParticleType].gameObject.SetActive(true);
                         level5UpParticle[(int)GameStateManager.instance.ParticleType].Play();
                     }
+
+                    if(upgradeIndex == 1)
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.Upgrade1);
+                    }
+                    else
+                    {
+                        SoundManager.instance.PlaySFX(GameSfxType.Upgrade5);
+                    }
                 }
 
                 SaveFoodLevel(level);
@@ -2672,11 +2673,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if(GameStateManager.instance.GameType == GameType.Story)
+            upgradeIndex = -1;
+
+            if (GameStateManager.instance.GameType == GameType.Story)
             {
                 if (100 - destoryPercent >= Random.Range(0, 100f))
                 {
-                    //ÀÏ¹Ý¸ðµå¿¡¼­ ÆÄ±« ¾ÈµÊ
+                    //ÀÏ¹Ý ¸ðµå¿¡¼­ ÆÄ±« ¾ÈµÊ
                     level -= 1;
                     LevelDown();
 
@@ -2691,7 +2694,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    //ÀÏ¹Ý¸ðµå¿¡¼­ ÆÄ±« µÊ
+                    //¹«ÇÑ ¸ðµå¿¡¼­ ÆÄ±« µÊ
                     if (isDef)
                     {
                         UseDefTicket();
@@ -2735,8 +2738,11 @@ public class GameManager : MonoBehaviour
                     {
                         if (defDestroy >= Random.Range(0, 100))
                         {
-                            level -= 1;
-                            LevelDown();
+                            if (level != 0)
+                            {
+                                level -= 1;
+                                LevelDown();
+                            }
 
                             CheckFoodLevel();
                             CheckFoodState();
@@ -2804,19 +2810,22 @@ public class GameManager : MonoBehaviour
             }
 
             SoundManager.instance.PlaySFX(GameSfxType.UpgradeFail);
-            if (!changeFoodManager.changeFoodView.activeInHierarchy && !GameStateManager.instance.YoutubeVideo)
+            if (!GameStateManager.instance.YoutubeVideo)
             {
                 NotionManager.instance.UseNotion(NotionType.FailUpgrade);
             }
         }
 
-        if (feverFillamount.gameObject.activeInHierarchy)
+        if (upgradeIndex != -1)
         {
-            if (!feverMode && level + 1 < maxLevel)
+            if (feverFillamount.gameObject.activeInHierarchy)
             {
-                feverCount += feverCountPlus;
+                if (!feverMode && level + 1 < maxLevel)
+                {
+                    feverCount += feverCountPlus;
 
-                CheckFever();
+                    CheckFever();
+                }
             }
         }
 
@@ -2851,11 +2860,7 @@ public class GameManager : MonoBehaviour
         CheckFoodState_MaxLevel();
 
         SoundManager.instance.PlaySFX(GameSfxType.UpgradeMax);
-
-        if (!changeFoodManager.changeFoodView.activeInHierarchy)
-        {
-            NotionManager.instance.UseNotion2(NotionType.MaxLevel);
-        }
+        NotionManager.instance.UseNotion2(NotionType.MaxLevel);
 
         if (GameStateManager.instance.Effect)
         {
@@ -3079,7 +3084,7 @@ public class GameManager : MonoBehaviour
             tutorialManager.Next1();
         }
 
-        if (playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].GetValue(GameStateManager.instance.FoodType) == 0)
+        if (playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].GetValue((int)GameStateManager.instance.FoodType % GameStateManager.instance.Island) == 0)
         {
             if(GameStateManager.instance.FoodType != FoodType.Food1)
             {
@@ -3171,25 +3176,16 @@ public class GameManager : MonoBehaviour
             {
                 sellPrice = sellPrice + (int)(sellPrice * 0.15f);
 
-                if (!changeFoodManager.changeFoodView.activeInHierarchy)
-                {
-                    NotionManager.instance.UseNotion(NotionType.SuccessSellX2);
-                }
+                NotionManager.instance.UseNotion(NotionType.SuccessSellX2);
             }
             else
             {
-                if (!changeFoodManager.changeFoodView.activeInHierarchy)
-                {
-                    NotionManager.instance.UseNotion(NotionType.SuccessSell);
-                }
+                NotionManager.instance.UseNotion(NotionType.SuccessSell);
             }
         }
         else
         {
-            if (!changeFoodManager.changeFoodView.activeInHierarchy)
-            {
-                NotionManager.instance.UseNotion(NotionType.SuccessSell);
-            }
+            NotionManager.instance.UseNotion(NotionType.SuccessSell);
         }
 
         if(isRareFood)

@@ -1111,7 +1111,6 @@ public class ShopManager : MonoBehaviour
 
                     PortionManager.instance.GetDefTickets(1);
 
-                    //shopContents[2].Initialize(ItemType.DefDestroyTicket, BuyType.Coin, this);
                     shopContents[24].Initialize(ItemType.DefDestroyTicketSlices, BuyType.Exchange, this);
                     shopContents[25].Initialize(ItemType.DefDestroyTicketPiece, BuyType.Free, this);
 

@@ -270,7 +270,7 @@ public class ChangeFoodContent : MonoBehaviour
 
         if (playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType] != null)
         {
-            exp = playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].GetValue(foodType);
+            exp = playerDataBase.island_Total_Data.island_Max_Datas[(int)GameStateManager.instance.IslandType].GetValue((int)foodType % GameStateManager.instance.Island);
         }
 
         level = proficiencyDataBase.GetLevel(exp);

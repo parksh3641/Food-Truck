@@ -77,7 +77,7 @@ public class Island_Total_Data
 
     public int GetMaxValue(IslandType islandType, FoodType foodType)
     {
-        return island_Max_Datas[(int)islandType].GetValue(foodType);
+        return island_Max_Datas[(int)islandType].GetValue((int)foodType % GameStateManager.instance.Island);
     }
 
     public int GetRareValue(IslandType islandType, FoodType foodType)
@@ -154,31 +154,31 @@ public class Island_Max_Data
         }
     }
 
-    public int GetValue(FoodType type)
-    {
-        int number = 0;
+    //public int GetValue(int index)
+    //{
+    //    int number = 0;
 
-        switch((int)type)
-        {
-            case 0:
-                number = index1;
-                break;
-            case 1:
-                number = index2;
-                break;
-            case 2:
-                number = index3;
-                break;
-            case 3:
-                number = index4;
-                break;
-            case 4:
-                number = index5;
-                break;
-        }
+    //    switch(index)
+    //    {
+    //        case 0:
+    //            number = index1;
+    //            break;
+    //        case 1:
+    //            number = index2;
+    //            break;
+    //        case 2:
+    //            number = index3;
+    //            break;
+    //        case 3:
+    //            number = index4;
+    //            break;
+    //        case 4:
+    //            number = index5;
+    //            break;
+    //    }
 
-        return number;
-    }
+    //    return number;
+    //}
 
     public int GetValue(int index)
     {

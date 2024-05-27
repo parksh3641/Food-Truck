@@ -115,6 +115,8 @@ public class CameraController : MonoBehaviour
 
     public void GoToA()
     {
+        isB = false;
+        isC = false;
         isA = true;
 
         SoundManager.instance.PlaySFX(GameSfxType.Screen_Out);
@@ -124,6 +126,8 @@ public class CameraController : MonoBehaviour
 
     public void GoToB()
     {
+        isA = false;
+        isC = false;
         isB = true;
 
         SoundManager.instance.PlaySFX(GameSfxType.Screen_In);
@@ -133,6 +137,8 @@ public class CameraController : MonoBehaviour
 
     public void GoToC()
     {
+        isA = false;
+        isB = false;
         isC = true;
 
         SoundManager.instance.PlaySFX(GameSfxType.Screen_In);

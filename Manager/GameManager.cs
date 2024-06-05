@@ -2302,7 +2302,12 @@ public class GameManager : MonoBehaviour
         //    success = 1f;
         //}
 
-        if (GameStateManager.instance.Developer) success = 100;
+        if (GameStateManager.instance.Developer)
+        {
+            success = 100;
+            rareFoodPercent = 100;
+            speicalFoodNeedCount = 1;
+        }
 
         successText.localizationName = "SuccessPercent";
         successText.plusText = " : " + success.ToString("N1") + "%";
@@ -3229,11 +3234,16 @@ public class GameManager : MonoBehaviour
 
         OFFSpeicalFood();
 
-        if (!GameStateManager.instance.AutoUpgrade && !buffAutoUpgrade)
+        if (GameStateManager.instance.GameType == GameType.Story)
         {
-            speicalFoodCount += 1;
+            if (level >= 9)
+            {
+                speicalFoodCount += 1;
 
-            if (speicalFoodCount >= speicalFoodNeedCount && level >= 9)
+                Debug.Log("Count Up : Rare Food");
+            }
+
+            if (speicalFoodCount >= speicalFoodNeedCount)
             {
                 if (rareFoodPercent >= Random.Range(0, 100f))
                 {
@@ -3254,7 +3264,7 @@ public class GameManager : MonoBehaviour
 
                     Debug.Log("Open Rare Food");
 
-                    FirebaseAnalytics.LogEvent("Open_RareFood");
+                    FirebaseAnalytics.LogEvent("Open_RareFood : " + GameStateManager.instance.FoodType);
                 }
             }
         }
@@ -3296,7 +3306,7 @@ public class GameManager : MonoBehaviour
 
         FirebaseAnalytics.LogEvent("RareFood_" + GameStateManager.instance.IslandType + " : " + GameStateManager.instance.FoodType);
 
-        Debug.Log("Success Rare Food");
+        Debug.Log("Success Rare Food : " + GameStateManager.instance.FoodType);
     }
 
     public void CheckDefTicket()
@@ -4737,15 +4747,11 @@ public class GameManager : MonoBehaviour
     public void DeveloperON()
     {
         GameStateManager.instance.Developer = true;
-
-        rareFoodPercent = 100;
     }
 
     public void DeveloperOff()
     {
         GameStateManager.instance.Developer = false;
-
-        rareFoodPercent = 10;
     }
 
     [Button]

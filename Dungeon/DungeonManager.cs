@@ -88,6 +88,7 @@ public class DungeonManager : MonoBehaviour
     private float attackX2 = 0;
 
     private float attackDelay = 0.5f;
+    private float attackPersecond = 0f;
 
     private bool delay = false;
     private bool clear = false;
@@ -538,21 +539,25 @@ public class DungeonManager : MonoBehaviour
         attackSpeed += playerDataBase.Skill15 * 0.3f;
         attackSpeed += playerDataBase.GetEquipValue(EquipType.Equip_Index_5);
 
-        if (attackSpeed >= 150)
+        if (attackSpeed >= 200)
         {
-            attackSpeed = 150;
+            attackSpeed = 200;
         }
 
         attackText.localizationName = "AttackPercent";
         attackText.plusText = " : " + success.ToString("N1") + "%";
         attackText.plusText += "  (+" + attackPlus.ToString("N1") + "%)";
 
-        attackDelay = 0.4f - (0.2f * (attackSpeed * 0.01f));
+        attackDelay = 0.5f - (0.25f * (attackSpeed * 0.01f));
 
         if(attackDelay < 0.1f)
         {
             attackDelay = 0.1f;
         }
+
+        Debug.Log(attackDelay);
+
+        attackPersecond = (100 / attackDelay) / 100;
 
         autoAttackSeconds = new WaitForSeconds(attackDelay);
 
@@ -563,7 +568,7 @@ public class DungeonManager : MonoBehaviour
         criticalPowerText.plusText = " : " + (criticalPowerPlus).ToString("N1") + "%";
 
         attackSpeedText.localizationName = "AttackSpeedPercent";
-        attackSpeedText.plusText = " : " + attackDelay.ToString("N2") + "/s";
+        attackSpeedText.plusText = " : " + attackPersecond.ToString("N2") + "/s";
 
         if (attackSpeed > 0)
         {

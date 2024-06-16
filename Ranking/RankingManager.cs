@@ -191,29 +191,29 @@ public class RankingManager : MonoBehaviour
             }
 
             receiveContents[0].Initialize(RewardType.Crystal, 5000);
-            receiveContents[1].Initialize(RewardType.RankPoint, 10000);
+            receiveContents[1].Initialize(RewardType.RankPoint, 5000);
             receiveContents[2].Initialize(RewardType.Icon_Ranking1, 1);
 
             receiveContents[3].Initialize(RewardType.Crystal, 2500);
-            receiveContents[4].Initialize(RewardType.RankPoint, 5000);
+            receiveContents[4].Initialize(RewardType.RankPoint, 2500);
             receiveContents[5].Initialize(RewardType.Icon_Ranking2, 1);
 
             receiveContents[6].Initialize(RewardType.Crystal, 1500);
-            receiveContents[7].Initialize(RewardType.RankPoint, 2500);
+            receiveContents[7].Initialize(RewardType.RankPoint, 1500);
             receiveContents[8].Initialize(RewardType.Icon_Ranking3, 1);
 
             receiveContents[9].Initialize(RewardType.Crystal, 1000);
-            receiveContents[10].Initialize(RewardType.RankPoint, 1500);
+            receiveContents[10].Initialize(RewardType.RankPoint, 1000);
             receiveContents[11].Initialize(RewardType.Icon_Ranking4, 1);
 
             receiveContents[12].Initialize(RewardType.Crystal, 750);
-            receiveContents[13].Initialize(RewardType.RankPoint, 1000);
+            receiveContents[13].Initialize(RewardType.RankPoint, 750);
 
             receiveContents[14].Initialize(RewardType.Crystal, 500);
-            receiveContents[15].Initialize(RewardType.RankPoint, 750);
+            receiveContents[15].Initialize(RewardType.RankPoint, 500);
 
             receiveContents[16].Initialize(RewardType.Crystal, 250);
-            receiveContents[17].Initialize(RewardType.RankPoint, 500);
+            receiveContents[17].Initialize(RewardType.RankPoint, 250);
 
             isDelay = true;
 

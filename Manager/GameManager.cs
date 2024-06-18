@@ -239,7 +239,7 @@ public class GameManager : MonoBehaviour
     private int upgradeIndex = 0;
 
     private int supportCount = 0;
-    private int supportMaxCount = 499;
+    private int supportMaxCount = 299;
 
     public bool isDelay_Camera = false;
     private bool isUpgradeDelay = false;
@@ -2509,7 +2509,7 @@ public class GameManager : MonoBehaviour
             {
                 supportCount = 0;
 
-                supportMaxCount = Random.Range(400, 601);
+                supportMaxCount = Random.Range(200, 301);
 
                 OpenSupportPackage();
 

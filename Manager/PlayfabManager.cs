@@ -3020,7 +3020,7 @@ public class PlayfabManager : MonoBehaviour
             playerDataBase.ConsumeGold += consumeGoldB;
 
             GameStateManager.instance.ConsumeGold = consumeGoldA;
-            //UpdatePlayerStatisticsInsert("ConsumeGold", playerDataBase.ConsumeGold);
+            UpdatePlayerStatisticsInsert("ConsumeGold", (int)playerDataBase.ConsumeGold);
         }
 
         GameManager.instance.RenewalVC();

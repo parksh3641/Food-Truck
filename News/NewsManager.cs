@@ -44,6 +44,8 @@ public class NewsManager : MonoBehaviour
     public List<NewsContent> newsContentList = new List<NewsContent>();
     private List<TitleNewsItem> newsInfoList = new List<TitleNewsItem>();
 
+    List<string> itemList = new List<string>();
+
     public WelcomeManager welcomeManager;
     public AttendanceManager attendanceManager;
 
@@ -226,6 +228,16 @@ public class NewsManager : MonoBehaviour
     public void OpenKakaoTalk()
     {
         Application.OpenURL("https://open.kakao.com/o/gnjyGphg");
+
+        if (playerDataBase.Character21 == 0)
+        {
+            playerDataBase.Character21 = 1;
+
+            itemList.Clear();
+            itemList.Add(CharacterType.Character21.ToString());
+
+            PlayfabManager.instance.GrantItemToUser("Character", itemList);
+        }
 
         FirebaseAnalytics.LogEvent("Open_KakaoTalk");
     }

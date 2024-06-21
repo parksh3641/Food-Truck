@@ -161,16 +161,16 @@ public class EquipContent : MonoBehaviour
         switch(equipInfo.rank)
         {
             case 0:
-                coin = 1000000;
+                coin = 500000;
                 break;
             case 1:
-                coin = 5000000;
+                coin = 1000000;
                 break;
             case 2:
-                coin = 10000000;
+                coin = 5000000;
                 break;
             case 3:
-                coin = 50000000;
+                coin = 10000000;
                 break;
         }
 

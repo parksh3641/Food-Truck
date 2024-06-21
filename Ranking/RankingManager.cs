@@ -96,7 +96,7 @@ public class RankingManager : MonoBehaviour
 
             if (topNumber == -1)
             {
-                ChangeTopToggle(1);
+                ChangeTopToggle(2);
             }
 
             FirebaseAnalytics.LogEvent("Open_Ranking");

@@ -315,7 +315,7 @@ public class IconManager : MonoBehaviour
         }
 
         number++;
-        if (playerDataBase.YummyTimeCount > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        if (playerDataBase.YummyTimeCount > 9 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }
@@ -436,6 +436,84 @@ public class IconManager : MonoBehaviour
 
         number++;
         if (playerDataBase.Treasure15 > 49 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //º¸¹°
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.GetBucketNumber() > 5 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.GetChairNumber() > 6 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.GetTubeNumber() > 6 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.GetSurfboardNumber() > 6 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.GetUmbrellaNumber() > 8 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.ConsumeGold > 9 || playerDataBase.CheckIcon(IconType.Icon_1 + number)) //1000¸¸ °ñµå
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.ConsumeGold > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.ConsumeGold > 999 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.ConsumeGold > 9999 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.YummyTimeCount > 99 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.YummyTimeCount > 999 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.YummyTimeCount > 4999 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
+        {
+            GetIcon(number);
+        }
+
+        number++;
+        if (playerDataBase.YummyTimeCount > 9999 || playerDataBase.CheckIcon(IconType.Icon_1 + number))
         {
             GetIcon(number);
         }

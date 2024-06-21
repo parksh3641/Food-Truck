@@ -786,6 +786,20 @@ public enum IconType
     Icon_47,
     Icon_48,
     Icon_49,
+    Icon_50,
+    Icon_51,
+    Icon_52,
+    Icon_53,
+    Icon_54,
+    Icon_55,
+    Icon_56,
+    Icon_57,
+    Icon_58,
+    Icon_59,
+    Icon_60,
+    Icon_61,
+    Icon_62,
+    Icon_63,
 }
 
 public enum GifticonType

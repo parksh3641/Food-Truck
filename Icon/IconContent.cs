@@ -95,6 +95,9 @@ public class IconContent : MonoBehaviour
                 case IconType.Icon_9:
                     NotionManager.instance.UseNotion(NotionType.Icon_Locked12);
                     break;
+                case IconType.Icon_10:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked8);
+                    break;
                 case IconType.Icon_11:
                     NotionManager.instance.UseNotion(NotionType.Icon_Locked13);
                     break;
@@ -211,6 +214,48 @@ public class IconContent : MonoBehaviour
                     break;
                 case IconType.Icon_49:
                     NotionManager.instance.UseNotion(NotionType.Icon_Locked30);
+                    break;
+                case IconType.Icon_50:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked31);
+                    break;
+                case IconType.Icon_51:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked32);
+                    break;
+                case IconType.Icon_52:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked33);
+                    break;
+                case IconType.Icon_53:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked34);
+                    break;
+                case IconType.Icon_54:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked35);
+                    break;
+                case IconType.Icon_55:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked36);
+                    break;
+                case IconType.Icon_56:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked37);
+                    break;
+                case IconType.Icon_57:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked38);
+                    break;
+                case IconType.Icon_58:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked39);
+                    break;
+                case IconType.Icon_59:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked40);
+                    break;
+                case IconType.Icon_60:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked41);
+                    break;
+                case IconType.Icon_61:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked42);
+                    break;
+                case IconType.Icon_62:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked43);
+                    break;
+                case IconType.Icon_63:
+                    NotionManager.instance.UseNotion(NotionType.Icon_Locked44);
                     break;
                 default:
                     NotionManager.instance.UseNotion(NotionType.Icon_Locked8);

@@ -41,6 +41,19 @@ public class PlayerDataBase : ScriptableObject
     private string firstServerDate = "";
 
     [Space]
+    [Title("SeasonPass")]
+    [SerializeField]
+    private bool seasonPass = false;
+    [SerializeField]
+    private int seasonPassLevel = 0;
+    [SerializeField]
+    private string seasonPassDay = "";
+    [SerializeField]
+    private string freeSeasonPassData = "";
+    [SerializeField]
+    private string passSeasonPassData = "";
+
+    [Space]
     [Title("GuideMisson")]
     [SerializeField]
     private int guideIndex = 0;
@@ -710,7 +723,6 @@ public class PlayerDataBase : ScriptableObject
     [SerializeField]
     private bool package12 = false;
 
-
     [Space]
     [Title("Reset")]
     [SerializeField]
@@ -1207,6 +1219,30 @@ public class PlayerDataBase : ScriptableObject
         set
         {
             firstServerDate = value;
+        }
+    }
+
+    public bool SeasonPass
+    {
+        get
+        {
+            return seasonPass;
+        }
+        set
+        {
+            seasonPass = value;
+        }
+    }
+
+    public int SeasonPassLevel
+    {
+        get
+        {
+            return seasonPassLevel;
+        }
+        set
+        {
+            seasonPassLevel = value;
         }
     }
 
@@ -3972,6 +4008,42 @@ public class PlayerDataBase : ScriptableObject
         }
     }
 
+    public string SeasonPassDay
+    {
+        get
+        {
+            return seasonPassDay;
+        }
+        set
+        {
+            seasonPassDay = value;
+        }
+    }
+
+    public string FreeSeasonPassData
+    {
+        get
+        {
+            return freeSeasonPassData;
+        }
+        set
+        {
+            freeSeasonPassData = value;
+        }
+    }
+
+    public string PassSeasonPassData
+    {
+        get
+        {
+            return passSeasonPassData;
+        }
+        set
+        {
+            passSeasonPassData = value;
+        }
+    }
+
     public string AttendanceDay
     {
         get
@@ -4196,6 +4268,7 @@ public class PlayerDataBase : ScriptableObject
         autoPresent = false;
         superExp = false;
         superKitchen = false;
+        seasonPass = false;
 
         //island_Total_Data = new Island_Total_Data();
         island_Total_Data.Initialize();
@@ -4605,6 +4678,10 @@ public class PlayerDataBase : ScriptableObject
         package11 = false;
         package12 = false;
 
+        seasonPassDay = "";
+        seasonPassLevel = 0;
+        freeSeasonPassData = "000000000000000000000000000000";
+        passSeasonPassData = "000000000000000000000000000000";
         attendanceDay = "";
         attendanceCount = 0;
         attendanceCheck = false;
@@ -6035,4 +6112,47 @@ public class PlayerDataBase : ScriptableObject
         }
         return value;
     }
+
+    #region Progress
+    public void SaveServerToSeasonPass(SeasonPassType type, string str)
+    {
+        switch (type)
+        {
+            case SeasonPassType.Free:
+                freeSeasonPassData = str;
+                break;
+            case SeasonPassType.Pass:
+                passSeasonPassData = str;
+                break;
+        }
+    }
+
+    public bool GetSeasonPass(SeasonPassType type, int number)
+    {
+        bool check = false;
+        switch (type)
+        {
+            case SeasonPassType.Free:
+                if (freeSeasonPassData.Substring(number, 1).Equals("1")) check = true;
+                break;
+            case SeasonPassType.Pass:
+                if (passSeasonPassData.Substring(number, 1).Equals("1")) check = true;
+                break;
+        }
+        return check;
+    }
+
+    public void UpdateSeasonPass(SeasonPassType type, int number)
+    {
+        switch (type)
+        {
+            case SeasonPassType.Free:
+                freeSeasonPassData = freeSeasonPassData.ReplaceAt(number, char.Parse("1"));
+                break;
+            case SeasonPassType.Pass:
+                passSeasonPassData = passSeasonPassData.ReplaceAt(number, char.Parse("1"));
+                break;
+        }
+    }
+    #endregion
 }

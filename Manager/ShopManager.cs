@@ -249,6 +249,57 @@ public class ShopManager : MonoBehaviour
             speicalAlarm[i].SetActive(true);
         }
 
+        if (playerDataBase.GetAnimalNumber() > 6)
+        {
+            speicalAlarm[0].SetActive(false);
+        }
+
+        if (playerDataBase.GetTruckNumber() > 8)
+        {
+            speicalAlarm[1].SetActive(false);
+        }
+
+        if (playerDataBase.GetCharacterNumber() > 18)
+        {
+            speicalAlarm[2].SetActive(false);
+        }
+
+        if (playerDataBase.GetButterflyNumber() > 26)
+        {
+            speicalAlarm[3].SetActive(false);
+        }
+
+        if (playerDataBase.GetTotemsNumber() > 6)
+        {
+            speicalAlarm[4].SetActive(false);
+        }
+
+        if (playerDataBase.GetBucketNumber() > 5)
+        {
+            speicalAlarm[5].SetActive(false);
+        }
+
+        if (playerDataBase.GetChairNumber() > 6)
+        {
+            speicalAlarm[6].SetActive(false);
+        }
+
+        if (playerDataBase.GetTubeNumber() > 6)
+        {
+            speicalAlarm[7].SetActive(false);
+        }
+
+        if (playerDataBase.GetSurfboardNumber() > 6)
+        {
+            speicalAlarm[8].SetActive(false);
+        }
+
+        if (playerDataBase.GetUmbrellaNumber() > 8)
+        {
+            speicalAlarm[9].SetActive(false);
+        }
+
+
         for (int i = 0; i < packageAlarm.Length; i ++)
         {
             packageAlarm[i].SetActive(true);
@@ -1693,25 +1744,6 @@ public class ShopManager : MonoBehaviour
     public void ChangeSpeicalTopToggle(int number)
     {
         if (speicalIndex == number) return;
-
-        //if (number == 3)
-        //{
-        //    if (playerDataBase.Level < 10)
-        //    {
-        //        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-        //        NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("BufferflyLocked"));
-        //        return;
-        //    }
-        //}
-        //else if (number == 4)
-        //{
-        //    if (playerDataBase.Level < 15)
-        //    {
-        //        SoundManager.instance.PlaySFX(GameSfxType.Wrong);
-        //        NotionManager.instance.UseNotion3(Color.yellow, LocalizationManager.instance.GetString("TotemLocked"));
-        //        return;
-        //    }
-        //}
 
         speicalIndex = number;
 

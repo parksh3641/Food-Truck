@@ -904,3 +904,9 @@ public enum UmbrellaType
     Umbrella9,
     Umbrella10,
 }
+
+public enum SeasonPassType
+{
+    Free,
+    Pass
+}

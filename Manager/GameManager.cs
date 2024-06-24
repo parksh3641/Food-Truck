@@ -256,6 +256,7 @@ public class GameManager : MonoBehaviour
     private int defaultSellPrice = 2000;
     private int season = 0;
     private int gender = 0;
+    private int nowSeasonLevel = 0;
 
     private int rankTotalLevel = 0;
     private int bankruptcy = 0;
@@ -661,6 +662,7 @@ public class GameManager : MonoBehaviour
         nowExp = playerDataBase.Exp;
         nowUpgradeCount = playerDataBase.UpgradeCount;
         nowSellCount = playerDataBase.SellCount;
+        nowSeasonLevel = playerDataBase.SeasonPassLevel;
 
         CheckFoodLevel();
         CheckFoodState();
@@ -1658,6 +1660,12 @@ public class GameManager : MonoBehaviour
 
                 isExp = levelManager.CheckMaxLevel();
             }
+        }
+
+        if (playerDataBase.SeasonPassLevel > nowSeasonLevel)
+        {
+            nowSeasonLevel = playerDataBase.SeasonPassLevel;
+            PlayfabManager.instance.UpdatePlayerStatisticsInsert("SeasonPassLevel", playerDataBase.SeasonPassLevel);
         }
 
         if (playerDataBase.UpgradeCount > nowUpgradeCount)
@@ -3284,6 +3292,8 @@ public class GameManager : MonoBehaviour
         myMoneyPlusText.color = Color.green;
         myMoneyPlusText.text = "+" + MoneyUnitString.ToCurrencyString(sellPrice);
 
+        playerDataBase.SeasonPassLevel += level;
+
         FirebaseAnalytics.LogEvent("SellFood : Lv." + level);
 
         DestoryFood();
@@ -4712,6 +4722,13 @@ public class GameManager : MonoBehaviour
         playerDataBase.UpgradeCount += 100000;
 
         //PlayfabManager.instance.UpdatePlayerStatisticsInsert("UpgradeCount", playerDataBase.UpgradeCount);
+    }
+
+    public void GetSeasonPass()
+    {
+        playerDataBase.SeasonPassLevel += 1000;
+
+        PlayfabManager.instance.UpdatePlayerStatisticsInsert("SeasonPassLevel", playerDataBase.SeasonPassLevel);
     }
 
     public void CheckLocked()

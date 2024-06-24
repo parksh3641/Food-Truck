@@ -2093,6 +2093,18 @@ public class PlayfabManager : MonoBehaviour
                                playerDataBase.Package12 = true;
                            }
                            break;
+                       case "SeasonPass":
+                           if (statistics.Value == 1)
+                           {
+                               playerDataBase.SeasonPass = true;
+                           }
+                           break;
+                       case "SeasonPassLevel":
+                           playerDataBase.SeasonPassLevel = statistics.Value;
+                           break;
+                       case "SeasonPassDay":
+                           playerDataBase.SeasonPassDay = statistics.Value.ToString();
+                           break;
                        case "AttendanceDay":
                            playerDataBase.AttendanceDay = statistics.Value.ToString();
                            break;
@@ -2796,6 +2808,14 @@ public class PlayfabManager : MonoBehaviour
                 {
                     couponInfo = JsonUtility.FromJson<CouponInfo>(eachData.Value.Value);
                     playerDataBase.couponInfo.SaveServerData(couponInfo);
+                }
+                else if (key.Contains("SeasonPass_Free"))
+                {
+                    playerDataBase.SaveServerToSeasonPass(SeasonPassType.Free, eachData.Value.Value);
+                }
+                else if (key.Contains("SeasonPass_Pass"))
+                {
+                    playerDataBase.SaveServerToSeasonPass(SeasonPassType.Pass, eachData.Value.Value);
                 }
             }
 
@@ -3609,6 +3629,23 @@ public class PlayfabManager : MonoBehaviour
         GameManager.instance.CheckPurchase();
 
         FirebaseAnalytics.LogEvent("Buy_Purchase : SuperKitchen");
+    }
+
+    public void PurchaseSeasonPass()
+    {
+        if (playerDataBase.SeasonPass) return;
+
+        playerDataBase.SeasonPass = true;
+
+        DateTime now = DateTime.Now;
+        DateTime endOfMonth = new DateTime(now.Year, now.Month, DateTime.DaysInMonth(now.Year, now.Month));
+
+        playerDataBase.SeasonPassDay = endOfMonth.ToString("yyyyMMdd");
+
+        UpdatePlayerStatisticsInsert("SeasonPass", 1);
+        UpdatePlayerStatisticsInsert("SeasonPassDay", int.Parse(playerDataBase.SeasonPassDay));
+
+        FirebaseAnalytics.LogEvent("Buy_Purchase : SeasonPass");
     }
 
     public void RestorePurchases()

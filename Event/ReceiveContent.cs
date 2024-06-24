@@ -13,6 +13,8 @@ public class ReceiveContent : MonoBehaviour
     public GameObject rotateEffect;
     public GameObject effect;
 
+    public GameObject lockedObj;
+
     public bool isEffect = false;
 
     ImageDataBase imageDataBase;
@@ -33,6 +35,8 @@ public class ReceiveContent : MonoBehaviour
             effect.SetActive(false);
             rotateEffect.SetActive(false);
         }
+
+        lockedObj.SetActive(false);
     }
 
     public void Initialize(long count)
@@ -311,5 +315,15 @@ public class ReceiveContent : MonoBehaviour
     public void OpenInfo()
     {
         ReceiveInfoManager.instance.OpenReceiveInfo(rewardType);
+    }
+
+    public void Locked()
+    {
+        lockedObj.SetActive(true);
+    }
+
+    public void UnLock()
+    {
+        lockedObj.SetActive(false);
     }
 }

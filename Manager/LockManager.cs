@@ -133,12 +133,18 @@ public class LockManager : MonoBehaviour
         {
             menuIcon[16].SetActive(false);
             menuIcon[17].SetActive(false);
+            menuIcon[18].SetActive(true);
         }
 
         if (GameStateManager.instance.YoutubeVideo)
         {
             menuIcon[0].SetActive(false);
             menuIcon[10].SetActive(false);
+        }
+
+        if (GameStateManager.instance.StoreType == StoreType.OneStore)
+        {
+            menuIcon[18].SetActive(false);
         }
     }
 

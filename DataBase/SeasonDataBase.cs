@@ -52,17 +52,17 @@ public class SeasonDataBase : ScriptableObject
                     break;
                 case 2:
                     seasonClass.freeRewardType = RewardType.AbilityPoint;
-                    seasonClass.freeCount = 300;
+                    seasonClass.freeCount = 500;
 
                     seasonClass.passRewardType = RewardType.AbilityPoint;
-                    seasonClass.passCount = 1500;
+                    seasonClass.passCount = 5000;
                     break;
                 case 3:
                     seasonClass.freeRewardType = RewardType.Crystal;
                     seasonClass.freeCount = 50;
 
                     seasonClass.passRewardType = RewardType.Crystal;
-                    seasonClass.passCount = 250;
+                    seasonClass.passCount = 300;
                     break;
                 case 4:
                     seasonClass.freeRewardType = RewardType.EventTicket;

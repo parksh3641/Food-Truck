@@ -49,9 +49,7 @@ public class SeasonContent : MonoBehaviour
 
     public void GetFreeReward()
     {
-        if (!freePurchase) return;
-
-        if (playerDataBase.GetSeasonPass(SeasonPassType.Free, index) == false)
+        if (freePurchase && playerDataBase.GetSeasonPass(SeasonPassType.Free, index) == false)
         {
             switch (index % 5)
             {
@@ -62,7 +60,7 @@ public class SeasonContent : MonoBehaviour
                     PortionManager.instance.GetAllPortion(1);
                     break;
                 case 2:
-                    PortionManager.instance.GetAbilityPoint(300);
+                    PortionManager.instance.GetAbilityPoint(500);
                     break;
                 case 3:
                     PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 50);
@@ -76,13 +74,15 @@ public class SeasonContent : MonoBehaviour
             freeSuccess.SetActive(true);
             seasonPassManager.CheckSeasonPass();
         }
+        else
+        {
+            receiveContents[0].OpenInfo();
+        }
     }
 
     public void GetPassReward()
     {
-        if (!passPurchase) return;
-
-        if(playerDataBase.SeasonPass && playerDataBase.GetSeasonPass(SeasonPassType.Pass, index) == false)
+        if(passPurchase && playerDataBase.SeasonPass && playerDataBase.GetSeasonPass(SeasonPassType.Pass, index) == false)
         {
             switch (index % 5)
             {
@@ -93,10 +93,10 @@ public class SeasonContent : MonoBehaviour
                     PortionManager.instance.GetAllPortion(3);
                     break;
                 case 2:
-                    PortionManager.instance.GetAbilityPoint(1500);
+                    PortionManager.instance.GetAbilityPoint(5000);
                     break;
                 case 3:
-                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 250);
+                    PlayfabManager.instance.UpdateAddCurrency(MoneyType.Crystal, 300);
                     break;
                 case 4:
                     PortionManager.instance.GetEventTicket(1000);
@@ -106,6 +106,10 @@ public class SeasonContent : MonoBehaviour
             playerDataBase.UpdateSeasonPass(SeasonPassType.Pass, index);
             passSuccess.SetActive(true);
             seasonPassManager.CheckSeasonPass();
+        }
+        else
+        {
+            receiveContents[1].OpenInfo();
         }
     }
 

@@ -147,8 +147,8 @@ public class SeasonPassManager : MonoBehaviour
         goal = 0;
 
         score = playerDataBase.SeasonPassLevel;
-        level = score / 200;
-        goal = ((level + 1) * 200);
+        level = score / 500;
+        goal = ((level + 1) * 500);
 
         if(level > 29)
         {
